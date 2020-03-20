@@ -31,6 +31,7 @@ wmsDependency <- function() {
 #'   default, it is the data object provided to \code{\link[leaflet]{leaflet}}
 #'   initially, but can be overridden.
 #'
+#' @seealso https://github.com/heigeo/leaflet.wms
 #' @family wms
 #' @importFrom leaflet WMSTileOptions
 #' @export

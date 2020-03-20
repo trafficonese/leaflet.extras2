@@ -1,10 +1,7 @@
+# leaflet.extras2
 
-[![Project Status: Active – The project is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active) [![Last-changedate](https://img.shields.io/badge/last%20change-2018--04--23-green.svg)](/commits/master) [![License: GPL-3](https://img.shields.io/badge/License-GPLv3-yellow.svg)](https://opensource.org/licenses/GPL-3.0) [![keybase verified](https://img.shields.io/badge/keybase-verified-brightgreen.svg)](https://gist.github.com/trafficonese/46fbf2ba7b5713151d7e) [![Travis-CI Build Status](https://travis-ci.org/trafficonese/leaflet.extras2.svg?branch=master)](https://travis-ci.org/trafficonese/leaflet.extras2) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet.extras) [![packageversion](https://img.shields.io/badge/Package%20version-1.0.0-orange.svg?style=flat-square)](commits/master) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/leaflet.extras)](https://cran.r-project.org/package=leaflet.extras) [![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras)](http://cran.rstudio.com/web/packages/leaflet.extras/index.html)
 
-leaflet.extras2
---------------
-
-The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) R package using various [leaflet plugins](http://leafletjs.com/plugins).
+The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).
 
 ### Installation
 
@@ -17,16 +14,22 @@ install.packages('leaflet.extras2')
 For latest development version
 
 ``` r
-# We need latest leaflet package from Github, as CRAN package is too old.
-devtools::install_github('rstudio/leaflet')
-devtools::install_github('trafficonese/leaflet.extras2')
+remotes::install_github('trafficonese/leaflet.extras2')
 ```
 
 ### Progress
 
 Plugins integrated so far ...
 
--   [Pulse Icon](https://github.com/mapshakers/leaflet-icon-pulse):
+-   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
+-   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
+-   [Mapkey Icons](https://github.com/mapshakers/leaflet-icon-mapkey)
+-   [Playback](https://github.com/hallahan/LeafletPlayback)
+-   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
+-   [Side-by-Side](https://github.com/digidem/leaflet-side-by-side)
+-   [Tangram](https://github.com/tangrams/tangram)
+-   [Velocity](https://github.com/danwild/leaflet-velocity)
+-   [WMS](https://github.com/heigeo/leaflet.wms)
 
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
@@ -35,7 +38,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 
 The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation.
 
-Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/trafficonese/leaflet.extras2/tree/master/inst/examples) available. You can see most of these examples in action at [Rpubs:trafficonese](http://rpubs.com/trafficonese).
+Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/trafficonese/leaflet.extras2/tree/master/inst/examples) available.
 
 ### FAQ
 
@@ -55,11 +58,7 @@ This package is being developed purely on a voluntary basis on spare time withou
 -   **Better Solution**: Along with issue submission provide a minimal reproducible code sample.
 -   **Best Solution**: Fix the issue and submit a pull request. This is the fastest way to get a bug fixed.
 
-*I need a plugin which requires 1.x version of the leaflet JavaScript library*
-
-As of version 1.0.0, `leaflet.extras2` supports leaflet.js version 1.x.
-
 
 ### Code of Conduct
 
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.
+Please note that this project is released with a [Contributor Code of Conduct](CODE_OF_CONDUCT.md). By participating in this project you agree to abide by its terms.

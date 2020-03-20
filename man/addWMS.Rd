@@ -27,7 +27,9 @@ purposes)}
 (for clearGroup and addLayersControl purposes). Human-friendly group names
 are permitted–they need not be short, identifier-style names. Any number of
 layers and even different types of layers (e.g. markers and polygons) can
-share the same group name.}
+share the same group name. NOTE: If multiple \code{layers} are included,
+the group argument will be ignored and the the layer-names will serve as
+group names.}
 
 \item{options}{List of further options. See
 \code{\link[leaflet]{WMSTileOptions}}}

@@ -1,6 +1,7 @@
 library(shiny)
 library(leaflet)
 library(leaflet.extras2)
+library(XML)
 
 
 ui <- fluidPage(
@@ -44,7 +45,7 @@ server <- function(input, output, session) {
   observeEvent(input$map_wms_click, {
     print("input$map_wms_click")
     # print(input$map_wms_click)
-    print(XML::readHTMLTable(input$map_wms_click$info))
+    print(readHTMLTable(input$map_wms_click$info))
   })
 
 }

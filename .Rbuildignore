@@ -10,3 +10,4 @@
 ^\_pkgdown\.yaml$
 ^docs$
 ^newfeatures/
+^CODE_OF_CONDUCT\.md$

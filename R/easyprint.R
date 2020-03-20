@@ -13,6 +13,7 @@ easyprintDependency <- function() {
 #' @param map the map to add easyPrint to.
 #' @param options A named list of options. See \code{\link{easyprintOptions}}
 #' @family easyPrint
+#' @seealso https://github.com/rowanwins/leaflet-easyPrint
 #' @export
 addEasyprint <- function(map, options = easyprintOptions()) {
 
