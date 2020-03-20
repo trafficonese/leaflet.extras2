@@ -6,7 +6,6 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options) {
 
   L.wms.Source = L.wms.Source.extend({
     'showFeatureInfo': function(latlng, info) {
-        debugger;
         // Hook to handle displaying parsed AJAX response to the user
         if (!this._map) {
             return;
