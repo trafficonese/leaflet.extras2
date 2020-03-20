@@ -1,0 +1,12 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^inst/examples/.*\.Rmd
+^inst/examples/.*\.html
+^cran-comments\.md$
+^README\.md$
+^README\.Rmd$
+^\.travis\.yml$
+^appveyor\.yml$
+^\_pkgdown\.yaml$
+^docs$
+^newfeatures/

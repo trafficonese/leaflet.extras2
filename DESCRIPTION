@@ -1,0 +1,27 @@
+Package: leaflet.extras2
+Type: Package
+Title: Extra Functionality for 'leaflet' Package
+Version: 1.0.0
+Authors@R: c(
+      person("Gatscha", "Sebastian", email = "sebastian_gatscha@gmax.at", role = c("aut", "cre"))
+    )
+Description: This package serves as an add-on to the 'leaflet' package by 
+    providing extra functionality via 'leaflet' plugins.
+License: GPL-3 | file LICENSE
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 3.1.0),
+    leaflet (>= 2.0.0)
+Imports:
+    htmlwidgets,
+    htmltools,
+    shiny,
+    jsonlite,
+    magrittr
+Suggests:
+    sf,
+    sp
+URL: https://github.com/trafficonese/leaflet.extras2, https://trafficonese.github.io/leaflet.extras2/
+BugReports: https://github.com/trafficonese/leaflet.extras2/issues
+RoxygenNote: 7.0.2
