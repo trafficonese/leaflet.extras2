@@ -5,7 +5,7 @@
 #'
 #' @importFrom magrittr %>%
 #' @import leaflet
-#' @importFrom htmltools htmlDependency
+#' @importFrom htmltools htmlDependency tagGetAttribute tags tagList
 #' @importFrom jsonlite fromJSON toJSON read_json
 #' @importFrom shiny addResourcePath
 #'

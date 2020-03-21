@@ -10,4 +10,5 @@
 ^\_pkgdown\.yaml$
 ^docs$
 ^newfeatures/
+^node_modules/
 ^CODE_OF_CONDUCT\.md$
