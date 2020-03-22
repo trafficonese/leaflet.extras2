@@ -112,7 +112,7 @@ makeMapkeyIcon <- function(
 }
 
 #' Create a list of mapkey icon data see
-#' \url{https://github.com/mapshakers/leaflet-icon-mapkey}
+#' \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #'
 #' An icon can be represented as a list of the form \code{list(color, iconSize,
 #' ...)}. This function is vectorized over its arguments to create a list of

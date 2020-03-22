@@ -22,7 +22,7 @@ Plugins integrated so far ...
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
 -   [Hexbin-D3](https://github.com/Asymmetrik/leaflet-d3#hexbins-api)
--   [Mapkey Icons](https://github.com/mapshakers/leaflet-icon-mapkey)
+-   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Playback](https://github.com/hallahan/LeafletPlayback)
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
 -   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
