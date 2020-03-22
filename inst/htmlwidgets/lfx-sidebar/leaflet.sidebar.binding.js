@@ -12,12 +12,15 @@ LeafletWidget.methods.addSidebar = function(id, options) {
 
     // Change CSS if fit = true.
     if (options && options.fit === true) {
-      var mapheight = map._container.style.height;
+      var mapheight = (parseInt(map._container.style.height.replace(/px/,"")) + 3)+"px";
       $(".sidebar").css("height", mapheight);
-      $(".sidebar").css("top", map._container.offsetTop);
+      $(".sidebar").css("top", map._container.offsetTop - 2);
       if (options.position === "right") {
         var right = 100 - map._container.parentElement.style.width.match(/\d*/im)[0];
-        $(".sidebar").css("right", (right+0.3)+"%");
+        $(".sidebar").css("right", (right)+"%");
+      } else {
+        var left = 100 - map._container.parentElement.style.width.match(/\d*/im)[0];
+        $(".sidebar").css("left", (left)+"%");
       }
     }
 

@@ -7,52 +7,54 @@ data(breweries91, package = "leaflet")
 
 ui <- fluidPage(
   h4("Leaflet Sidebar Plugin"),
-  sidebar_tabs(
-    list(icon("car"), icon("user"), icon("envelope")),
-    sidebar_pane(
-      title = "home", id = "home_id", icon = icon("home"),
-      tagList(
-        sliderInput("obs", "Number of observations:",
-          min = 1, max = 32, value = 10
-        ),
-        dateRangeInput("daterange4", "Date range:",
-          start = Sys.Date() - 10,
-          end = Sys.Date() + 10
-        ),
-        verbatimTextOutput("tab1")
-      )
-    ),
-    sidebar_pane(
-      title = "profile", id = "profile_id", icon = icon("wrench"),
-      tagList(
-        textInput("caption", "Caption", "Data Summary"),
-        selectInput("label", "Label", choices = c("brewery", "address", "zipcode", "village")),
-        passwordInput("password", "Password:"),
-        actionButton("go", "Go"),
-        verbatimTextOutput("value")
-      )
-    ),
-    sidebar_pane(
-      title = "messages", id = "messages_id", icon = icon("person"),
-      tagList(
-        checkboxGroupInput(
-          "variable", "Variables to show:",
-          c(
-            "Cylinders" = "cyl",
-            "Transmission" = "am",
-            "Gears" = "gear"
-          )
-        ),
-        tableOutput("data")
-      )
-    )
-  ),
-  splitLayout(cellWidths = c("70%", "30%"),
-              leafletOutput("map"),
+  splitLayout(cellWidths = c("30%", "70%"),
               tagList(
                 actionButton("open", "Open Sidebar"),
                 actionButton("close", "Close Sidebar"),
                 actionButton("clear", "Clear Sidebar")
+              ),
+              tagList(
+                sidebar_tabs(
+                  list(icon("car"), icon("user"), icon("envelope")),
+                  sidebar_pane(
+                    title = "home", id = "home_id", icon = icon("home"),
+                    tagList(
+                      sliderInput("obs", "Number of observations:",
+                                  min = 1, max = 32, value = 10
+                      ),
+                      dateRangeInput("daterange4", "Date range:",
+                                     start = Sys.Date() - 10,
+                                     end = Sys.Date() + 10
+                      ),
+                      verbatimTextOutput("tab1")
+                    )
+                  ),
+                  sidebar_pane(
+                    title = "profile", id = "profile_id", icon = icon("wrench"),
+                    tagList(
+                      textInput("caption", "Caption", "Data Summary"),
+                      selectInput("label", "Label", choices = c("brewery", "address", "zipcode", "village")),
+                      passwordInput("password", "Password:"),
+                      actionButton("go", "Go"),
+                      verbatimTextOutput("value")
+                    )
+                  ),
+                  sidebar_pane(
+                    title = "messages", id = "messages_id", icon = icon("person"),
+                    tagList(
+                      checkboxGroupInput(
+                        "variable", "Variables to show:",
+                        c(
+                          "Cylinders" = "cyl",
+                          "Transmission" = "am",
+                          "Gears" = "gear"
+                        )
+                      ),
+                      tableOutput("data")
+                    )
+                  )
+                ),
+                leafletOutput("map")
               )
   )
 )
@@ -62,8 +64,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addTiles() %>%
       addSidebar(
-        id = "sidebar", layerId = "sidebar",
-        options = list(position = "right", fit = TRUE)
+        id = "sidebar",
+        options = list(position = "left", fit = TRUE)
       )
   })
   observe({
