@@ -8,7 +8,8 @@ ui <- fluidPage(
   leafletOutput("map", height = "500px"),
   actionButton("group", "Clear Group"),
   actionButton("clear", "Clear WMS"),
-  actionButton("remov", "Remove WMS")
+  actionButton("remov", "Remove WMS"),
+  verbatimTextOutput("txt")
 )
 
 server <- function(input, output, session) {
@@ -42,12 +43,10 @@ server <- function(input, output, session) {
     leafletProxy("map", session) %>%
       removeTiles(layerId = "TOPO-WMS")
   })
-  observeEvent(input$map_wms_click, {
-    print("input$map_wms_click")
-    # print(input$map_wms_click)
-    print(readHTMLTable(input$map_wms_click$info))
+  output$txt <- renderPrint({
+    txt <- req(input$map_wms_click$info)
+    print(readHTMLTable(txt))
   })
-
 }
 shinyApp(ui, server)
 
