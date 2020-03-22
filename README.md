@@ -5,11 +5,9 @@ The goal of `leaflet.extras2` package is to provide extra functionality to the [
 
 ### Installation
 
-For CRAN version
+For CRAN version (Not yet)
 
-``` r
-install.packages('leaflet.extras2')
-```
+~~`install.packages('leaflet.extras2')`~~
 
 For latest development version
 
