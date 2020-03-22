@@ -30,6 +30,7 @@ Plugins integrated so far ...
 -   [Tangram](https://github.com/tangrams/tangram)
 -   [Velocity](https://github.com/danwild/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
+-   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
 
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
