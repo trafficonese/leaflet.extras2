@@ -16,7 +16,7 @@ mapkeyIconDependency <- function() {
 #' Make mapkey-icon set
 #'
 #' @param ... icons created from \code{\link{makeMapkeyIcon}()}
-#' @family mapkeyMarkers
+#' @family Mapkey Plugin
 #' @export
 #' @examples
 #'
@@ -42,7 +42,7 @@ mapkeyIconList = function(...) {
 #' @param x icons
 #' @param i offset
 #' @export
-#' @family mapkeyMarkers
+#' @family Mapkey Plugin
 `[.leaflet_mapkey_icon_set` = function(x, i) {
   if (is.factor(i)) {
     i = as.character(i)
@@ -81,7 +81,7 @@ mapkeyIconSetToMapkeyIcons = function(x) {
 #'
 #' @inheritParams mapkeyIcons
 #' @export
-#' @family mapkeyMarkers
+#' @family Mapkey Plugin
 makeMapkeyIcon <- function(
   icon = 'mapkey',
   color = "#ff0000",
@@ -132,7 +132,7 @@ makeMapkeyIcon <- function(
 #'   See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information
 #' @param boxShadow Should a shadow be visible.
 #' @export
-#' @family mapkeyMarkers
+#' @family Mapkey Plugin
 #' @examples \dontrun{
 #' makeMapkeyIcon(icon = "traffic_signal",
 #'                color = "#0000ff",
@@ -202,7 +202,7 @@ mapkeyIcons <- function(
 #' @param clusterId the id for the marker cluster layer
 #' @param options a list of extra options for tile layers, popups, paths
 #'   (circles, rectangles, polygons, ...), or other map elements
-#' @family mapkeyMarkers
+#' @family Mapkey Plugin
 #' @export
 #' @examples
 #' leaflet() %>%
@@ -250,5 +250,6 @@ addMapkeyMarkers = function(
     map, data, "addMapkeyMarkers", pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,
     clusterOptions, clusterId, leaflet::safeLabel(label, data), labelOptions
-  ) %>% leaflet::expandLimits(pts$lat, pts$lng)
+  ) %>%
+    expandLimits(pts$lat, pts$lng)
 }

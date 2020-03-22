@@ -26,6 +26,7 @@ sidebysideDependencies <- function() {
 #'   \code{\link[leaflet]{addLayersControl}}.
 #' @export
 #' @family Sidebyside Plugin
+#' @seealso https://github.com/digidem/leaflet-side-by-side
 #' @examples \dontrun{
 #' library(shiny)
 #' library(leaflet)

@@ -16,7 +16,7 @@ sidebar_deps <- function(mini = FALSE) {
 #' @param id Id of the sidebar-div
 #' @param options A named list with \code{position} and \code{fit} elements.
 #' @seealso https://github.com/Turbo87/sidebar-v2
-#' @family sidebar-functions
+#' @family Sidebar Plugin
 #' @export
 addSidebar <- function(map, id = "sidebar",
                        options = list(position = "left",
@@ -28,7 +28,7 @@ addSidebar <- function(map, id = "sidebar",
 
 #' Remove the Sidebar
 #' @param map A leaflet map widget
-#' @family sidebar-functions
+#' @family Sidebar Plugin
 #' @export
 removeSidebar <- function(map) {
   invokeMethod(map, NULL, "removeSidebar")
@@ -36,7 +36,7 @@ removeSidebar <- function(map) {
 
 #' Close the Sidebar
 #' @param map A leaflet map widget
-#' @family sidebar-functions
+#' @family Sidebar Plugin
 #' @export
 closeSidebar <- function(map) {
   invokeMethod(map, NULL, "closeSidebar")
@@ -45,7 +45,7 @@ closeSidebar <- function(map) {
 #' Open the Sidebar
 #' @param map A leaflet map widget
 #' @param id The id of the \code{\link{sidebar_pane}} to open.
-#' @family sidebar-functions
+#' @family Sidebar Plugin
 #' @export
 openSidebar <- function(map, id) {
   invokeMethod(map, NULL, "openSidebar", id)
@@ -57,7 +57,7 @@ openSidebar <- function(map, id) {
 #' @param id An id for the sidebar panel
 #' @param icon An icon for the sidebar panel.
 #' @param ... List of elements to include in the panel
-#' @family sidebar-functions
+#' @family Sidebar Plugin
 #' @export
 sidebar_pane <- function(title = "Sidebar Title",
                          id = NULL,
@@ -75,7 +75,7 @@ sidebar_pane <- function(title = "Sidebar Title",
 #' @param iconList A list of icons to be shown, when the sidebar is collapsed.
 #'   The list is required and must match the amount of \code{\link{sidebar_pane}}.
 #' @param ... The individual \code{\link{sidebar_pane}}.
-#' @family sidebar-functions
+#' @family Sidebar Plugin
 #' @export
 sidebar_tabs <- function(iconList = NULL, ...){
   arg <- list(...)

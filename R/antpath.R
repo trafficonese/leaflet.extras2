@@ -18,11 +18,8 @@ antpathDependency <- function() {
 #'
 #' @inheritParams leaflet::addPolylines
 #' @param options A named list of options. See \code{\link{antpathOptions}}
-#' @family antpath
+#' @family Antpath Plugin
 #' @seealso https://github.com/rubenspgcavalcante/leaflet-ant-path
-#'
-#' @importFrom leaflet getMapData labelOptions filterNULL derivePolygons
-#'   safeLabel invokeMethod expandLimitsBbox
 #' @export
 addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
                        stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,
@@ -62,7 +59,7 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL
 #'   acceleration. Default is \code{FALSE}
 #' @param dashArray The size of the animated dashes. Default is \code{c(10, 20)}
 #' @param pulseColor Adds a color to the dashed flux. Default is \code{#ffffff}
-#' @family antpath
+#' @family Antpath Plugin
 #' @export
 antpathOptions = function(
   delay = 400,
@@ -92,7 +89,7 @@ antpathOptions = function(
 
 #' Remove one or more Antpaths from a map, identified by \code{layerId}.
 #' @inheritParams leaflet::removeShape
-#' @family antpath
+#' @family Antpath Plugin
 #' @export
 removeAntpath <- function(map, layerId = NULL) {
   invokeMethod(map, NULL, "removeAntpath", layerId)
@@ -100,7 +97,7 @@ removeAntpath <- function(map, layerId = NULL) {
 
 #' Clear all Antpaths
 #' @inheritParams leaflet::clearShapes
-#' @family antpath
+#' @family Antpath Plugin
 #' @export
 clearAntpath <- function(map) {
   invokeMethod(map, NULL, "clearAntpath")

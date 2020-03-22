@@ -24,6 +24,8 @@ tangram_deps <- function(mini = FALSE) {
 #'   or the \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
 #'   for further information.
 #' @export
+#' @seealso https://github.com/tangrams/tangram
+#' @family Tangram Plugin
 #' @examples \dontrun{
 #' library(shiny)
 #' library(leaflet)

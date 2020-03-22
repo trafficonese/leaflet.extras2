@@ -19,6 +19,7 @@ reachabilityDependencies <- function() {
 #' @description Add Leaflet Reachability Plugin Control. Based on the
 #'  \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
 #' @export
+#' @seealso https://github.com/traffordDataLab/leaflet.reachability
 #' @family Reachability Plugin
 addReachability <- function(map, apiKey = NULL,
                             options = reachabilityOptions()){

@@ -39,6 +39,7 @@ hexbinDependency <- function() {
 #' @note Currently doesn't respect \code{layerId} nor \code{group}
 #'
 #' @seealso https://github.com/Asymmetrik/leaflet-d3#hexbins-api
+#' @family Hexbin-D3 Plugin
 #' @export
 addHexbin <- function(
   map, lng = NULL, lat = NULL, radius = 20,
@@ -75,6 +76,7 @@ addHexbin <- function(
 #'   overridden.
 #' @param colorRange Sets the range of the color scale used to fill the
 #'   hexbins on the layer.
+#' @family Hexbin-D3 Plugin
 #' @export
 updateHexbin <- function(map, data = NULL, lng = NULL, lat = NULL, colorRange = NULL) {
   if (is.null(c(data, lng, lat))) {
@@ -90,6 +92,7 @@ updateHexbin <- function(map, data = NULL, lng = NULL, lat = NULL, colorRange = 
 #' clearHexbin
 #' Clear the hexbinLayer
 #' @param map The map widget
+#' @family Hexbin-D3 Plugin
 #' @export
 clearHexbin <- function(map) {
   invokeMethod(map, NULL, "clearHexbin")
@@ -98,6 +101,7 @@ clearHexbin <- function(map) {
 #' hideHexbin
 #' Hide the hexbinLayer
 #' @param map The map widget
+#' @family Hexbin-D3 Plugin
 #' @export
 hideHexbin <- function(map) {
   invokeMethod(map, NULL, "hideHexbin")
@@ -106,6 +110,7 @@ hideHexbin <- function(map) {
 #' showHexbin
 #' Show the hexbinLayer
 #' @param map The map widget
+#' @family Hexbin-D3 Plugin
 #' @export
 showHexbin <- function(map) {
   invokeMethod(map, NULL, "showHexbin")
@@ -138,6 +143,7 @@ showHexbin <- function(map) {
 #'   append the string before the count. To disable tooltips, please pass
 #'   \code{NULL} or \code{FALSE}. You can also pass a custom
 #'   \code{\link[htmlwidgets]{JS}} function.
+#' @family Hexbin-D3 Plugin
 #' @export
 hexbinOptions = function(
   duration = 200,

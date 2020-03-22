@@ -21,14 +21,15 @@ Plugins integrated so far ...
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
+-   [Hexbin-D3](https://github.com/Asymmetrik/leaflet-d3#hexbins-api)
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-icon-mapkey)
 -   [Playback](https://github.com/hallahan/LeafletPlayback)
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
+-   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
 -   [Side-by-Side](https://github.com/digidem/leaflet-side-by-side)
 -   [Tangram](https://github.com/tangrams/tangram)
 -   [Velocity](https://github.com/danwild/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
--   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
 
 
 If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.

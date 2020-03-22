@@ -32,8 +32,7 @@ wmsDependency <- function() {
 #'   initially, but can be overridden.
 #'
 #' @seealso https://github.com/heigeo/leaflet.wms
-#' @family wms
-#' @importFrom leaflet WMSTileOptions
+#' @family WMS Plugin
 #' @export
 addWMS <- function(map, baseUrl, layers = "", group = NULL,
                    options = WMSTileOptions(), attribution = NULL,
