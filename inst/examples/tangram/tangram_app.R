@@ -2,7 +2,7 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-## Load Tangram-JS in debg mode
+## Load Tangram-JS in debug mode
 options("leaflet.extras2.minified" = FALSE)
 
 ## File is in /www folder. (Enter your API-Key in the global section)

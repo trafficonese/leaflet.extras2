@@ -1,5 +1,5 @@
 global:
-    api_key: 'kWmEXE7uRyioZGbnnGwj1Q' # put your nextzen API key here
+    api_key: '__YOUR__NEXTZEN_API_KEY__' # put your nextzen API key here
     language: en # optional ISO 2-char code
     language_text_source: |
         function() {
