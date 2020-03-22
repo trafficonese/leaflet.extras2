@@ -22,6 +22,6 @@ Imports:
 Suggests:
     sf,
     sp
-URL: https://github.com/trafficonese/leaflet.extras2, https://trafficonese.github.io/leaflet.extras2/
+URL: https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.0.2
