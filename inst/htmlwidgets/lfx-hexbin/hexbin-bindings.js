@@ -1,37 +1,82 @@
-LeafletWidget.methods.addHexbin = function(data, group, options) {
+LeafletWidget.methods.addHexbin = function(data, layerId, group, options) {
+  var map = this;
 
-  debugger;
+  // Create the hexlayer
+  var hexLayer = L.hexbinLayer(options).data(data);
 
-  var options = {
-  	radius : 20,
-  	opacity: 1,
-  	duration: 200,
+  // Add Tooltips
+  if (options.tooltip !== undefined) {
+    var toolcont;
+    if (typeof options.tooltip === "function") {
+      toolcont = options.tooltip;
+    } else {
+      var tooltip = options.tooltip ? options.tooltip : "Count ";
+      toolcont = function(d) {return tooltip + d.length;};
+    }
 
-  	colorScaleExtent: [ 1, undefined ],
-  	radiusScaleExtent: [ 1, undefined ],
-  	colorDomain: null,
-  	radiusDomain: null,
-  	colorRange: [ '#f7fbff', '#08306b' ],
-  	radiusRange: [ 5, 15 ],
+    hexLayer.hoverHandler(
+					L.HexbinHoverHandler.tooltip({
+					   tooltipContent: toolcont
+					})
+		);
+  }
 
-  	pointerEvents: 'all'
-  };
+  // Add resizetoCount method
+  if (options && options.resizetoCount) {
+    if (typeof options.resizetoCount === "function") {
+     hexLayer.radiusValue(options.resizetoCount);
+    } else {
+     hexLayer.radiusValue(function(d) { return d.length; });
+    }
+  }
 
-	// Create the hexlayer
-	var hexLayer = L.hexbinLayer(options).data(data);
+  // Add Click Event for Shiny
+  if (HTMLWidgets.shinyMode) {
+    hexLayer.dispatch()
+    	.on('click', function(d, i) {
+    	   var pts = [];
+    	   d.forEach(x => pts.push(x.o));
+    	   Shiny.setInputValue(map.id+"_hexbin_click", {index: i, pts: pts}, {priority: "event"});
+    });
+  }
 
-  debugger;
+  // Add to map, so we can access it later
+  map.hexLayer = hexLayer;
 
-  hexLayer.dispatch()
-  	.on('mouseover', function(d, i) {
-  		//console.log({ type: 'mouseover', event: d, index: i, context: this });
-  	})
-  	.on('mouseout', function(d, i) {
-  		//console.log({ type: 'mouseout', event: d, index: i, context: this });
-  	})
-  	.on('click', function(d, i) {
-  		console.log({ type: 'click', event: d, index: i, context: this });
-  	});
+  // Add Layer
+  // TODO - layerId and group dont work
+  map.layerManager.addLayer(hexLayer, "hexbin", layerId, group);
+};
 
-	this.layerManager.addLayer(hexLayer, "hexbin", "layerId", "group");
+LeafletWidget.methods.updateHexbin = function(data, colorRange) {
+  // TODO - add radiusRange, etc.. (all options?)
+  if (this.hexLayer) {
+    // Only data() calls redraw().
+    // TODO - How to expose more options without an endless mess of ifelses
+    if (colorRange !== null) {
+      if (data === null) {
+        this.hexLayer
+          .colorRange(colorRange)
+          .redraw();
+      } else {
+        this.hexLayer
+          .colorRange(colorRange)
+          .data(data);
+      }
+    } else {
+      this.hexLayer.data(data);
+    }
+  }
+};
+
+LeafletWidget.methods.hideHexbin = function() {
+  $('.hexbin').fadeOut("slow");
+};
+
+LeafletWidget.methods.showHexbin = function() {
+  $('.hexbin').fadeIn("fast");
+};
+
+LeafletWidget.methods.clearHexbin = function() {
+  this.hexLayer.data([]);
 };

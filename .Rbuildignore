@@ -9,6 +9,12 @@
 ^appveyor\.yml$
 ^\_pkgdown\.yaml$
 ^docs$
-^newfeatures/
 ^CODE_OF_CONDUCT\.md$
+^node_modules/$
 ^node_modules/
+^node_modules/.*
+^newfeatures/$
+^newfeatures/
+^newfeatures/.*
+^package\.json$
+^package-lock\.json$

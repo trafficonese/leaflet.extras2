@@ -7,7 +7,7 @@ LeafletWidget.methods.addEasyprint = function(options) {
       delete map.easyprint;
     }
 
-    map.easyprint =  new L.Control.EasyPrint(options);
+    map.easyprint = new L.Control.EasyPrint(options);
     map.controls.add(map.easyprint);
 
   }).call(this);
