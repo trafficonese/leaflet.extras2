@@ -28,3 +28,12 @@ hexbins on the layer.}
 \description{
 updateHexbin
 }
+\seealso{
+Other Hexbin-D3 Plugin: 
+\code{\link{addHexbin}()},
+\code{\link{clearHexbin}()},
+\code{\link{hexbinOptions}()},
+\code{\link{hideHexbin}()},
+\code{\link{showHexbin}()}
+}
+\concept{Hexbin-D3 Plugin}

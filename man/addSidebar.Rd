@@ -19,11 +19,11 @@ Adds a Sidebar Leaflet Control
 \seealso{
 https://github.com/Turbo87/sidebar-v2
 
-Other sidebar-functions: 
+Other Sidebar Plugin: 
 \code{\link{closeSidebar}()},
 \code{\link{openSidebar}()},
 \code{\link{removeSidebar}()},
 \code{\link{sidebar_pane}()},
 \code{\link{sidebar_tabs}()}
 }
-\concept{sidebar-functions}
+\concept{Sidebar Plugin}

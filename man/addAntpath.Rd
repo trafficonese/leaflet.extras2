@@ -103,9 +103,9 @@ for further details.
 \seealso{
 https://github.com/rubenspgcavalcante/leaflet-ant-path
 
-Other antpath: 
+Other Antpath Plugin: 
 \code{\link{antpathOptions}()},
 \code{\link{clearAntpath}()},
 \code{\link{removeAntpath}()}
 }
-\concept{antpath}
+\concept{Antpath Plugin}

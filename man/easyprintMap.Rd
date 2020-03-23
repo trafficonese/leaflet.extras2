@@ -18,8 +18,9 @@ or a custom size object. Default is \code{A4Portrait}}
 easyprintMap
 }
 \seealso{
-Other easyPrint: 
+Other EasyPrint Plugin: 
 \code{\link{addEasyprint}()},
-\code{\link{easyprintOptions}()}
+\code{\link{easyprintOptions}()},
+\code{\link{removeEasyprint}()}
 }
-\concept{easyPrint}
+\concept{EasyPrint Plugin}

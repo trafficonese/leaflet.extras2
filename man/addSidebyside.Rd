@@ -75,6 +75,8 @@ shinyApp(ui, server)
 }
 }
 \seealso{
+https://github.com/digidem/leaflet-side-by-side
+
 Other Sidebyside Plugin: 
 \code{\link{removeSidebyside}()}
 }

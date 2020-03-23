@@ -14,3 +14,12 @@ clearHexbin(map)
 clearHexbin
 Clear the hexbinLayer
 }
+\seealso{
+Other Hexbin-D3 Plugin: 
+\code{\link{addHexbin}()},
+\code{\link{hexbinOptions}()},
+\code{\link{hideHexbin}()},
+\code{\link{showHexbin}()},
+\code{\link{updateHexbin}()}
+}
+\concept{Hexbin-D3 Plugin}

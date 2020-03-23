@@ -61,8 +61,9 @@ waiting for the print.}
 easyPrint Options
 }
 \seealso{
-Other easyPrint: 
+Other EasyPrint Plugin: 
 \code{\link{addEasyprint}()},
-\code{\link{easyprintMap}()}
+\code{\link{easyprintMap}()},
+\code{\link{removeEasyprint}()}
 }
-\concept{easyPrint}
+\concept{EasyPrint Plugin}

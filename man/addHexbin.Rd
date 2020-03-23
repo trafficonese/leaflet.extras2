@@ -54,4 +54,12 @@ Currently doesn't respect \code{layerId} nor \code{group}
 }
 \seealso{
 https://github.com/Asymmetrik/leaflet-d3#hexbins-api
+
+Other Hexbin-D3 Plugin: 
+\code{\link{clearHexbin}()},
+\code{\link{hexbinOptions}()},
+\code{\link{hideHexbin}()},
+\code{\link{showHexbin}()},
+\code{\link{updateHexbin}()}
 }
+\concept{Hexbin-D3 Plugin}

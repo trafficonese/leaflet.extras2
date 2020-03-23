@@ -53,3 +53,12 @@ append the string before the count. To disable tooltips, please pass
 \description{
 hexbinOptions
 }
+\seealso{
+Other Hexbin-D3 Plugin: 
+\code{\link{addHexbin}()},
+\code{\link{clearHexbin}()},
+\code{\link{hideHexbin}()},
+\code{\link{showHexbin}()},
+\code{\link{updateHexbin}()}
+}
+\concept{Hexbin-D3 Plugin}

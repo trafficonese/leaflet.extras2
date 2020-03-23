@@ -35,7 +35,6 @@ LeafletWidget.methods.addPlayback= function(data, options) {
 
   // Add Mouse Events (Mouseover + Click)
   options.mouseOverCallback = function(el) {
-    console.log("Mouseover Events are exposed to: " + map.id+"_pb_mouseover");
     var obj = {
       lat: el.latlng.lat,
       lng: el.latlng.lng,
@@ -44,7 +43,6 @@ LeafletWidget.methods.addPlayback= function(data, options) {
     Shiny.onInputChange(map.id+"_pb_mouseover", obj);
   };
   options.clickCallback  = function(el) {
-    console.log("Click Events are exposed to: " + map.id+"_pb_click");
     var obj = {
       lat: el.latlng.lat,
       lng: el.latlng.lng,

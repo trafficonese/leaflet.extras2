@@ -46,4 +46,4 @@ Add Queryable WMS Layer
 \seealso{
 https://github.com/heigeo/leaflet.wms
 }
-\concept{wms}
+\concept{WMS Plugin}

@@ -14,3 +14,12 @@ hideHexbin(map)
 hideHexbin
 Hide the hexbinLayer
 }
+\seealso{
+Other Hexbin-D3 Plugin: 
+\code{\link{addHexbin}()},
+\code{\link{clearHexbin}()},
+\code{\link{hexbinOptions}()},
+\code{\link{showHexbin}()},
+\code{\link{updateHexbin}()}
+}
+\concept{Hexbin-D3 Plugin}

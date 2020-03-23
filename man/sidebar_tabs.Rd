@@ -16,11 +16,11 @@ The list is required and must match the amount of \code{\link{sidebar_pane}}.}
 Create a Sidebar
 }
 \seealso{
-Other sidebar-functions: 
+Other Sidebar Plugin: 
 \code{\link{addSidebar}()},
 \code{\link{closeSidebar}()},
 \code{\link{openSidebar}()},
 \code{\link{removeSidebar}()},
 \code{\link{sidebar_pane}()}
 }
-\concept{sidebar-functions}
+\concept{Sidebar Plugin}

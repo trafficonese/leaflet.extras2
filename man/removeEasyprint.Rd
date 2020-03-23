@@ -12,3 +12,10 @@ removeEasyprint(map)
 \description{
 easyprintMapremoveEasyprint
 }
+\seealso{
+Other EasyPrint Plugin: 
+\code{\link{addEasyprint}()},
+\code{\link{easyprintMap}()},
+\code{\link{easyprintOptions}()}
+}
+\concept{EasyPrint Plugin}

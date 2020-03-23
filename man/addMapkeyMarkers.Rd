@@ -85,10 +85,10 @@ leaflet() \%>\%
 # browseURL(system.file("examples/mapkeyIcons.R", package = "leaflet.extras2"))
 }
 \seealso{
-Other mapkeyMarkers: 
+Other Mapkey Plugin: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIconList}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{mapkeyMarkers}
+\concept{Mapkey Plugin}

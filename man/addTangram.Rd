@@ -56,3 +56,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 }
 }
+\seealso{
+https://github.com/tangrams/tangram
+}
+\concept{Tangram Plugin}

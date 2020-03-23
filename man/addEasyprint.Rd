@@ -17,8 +17,9 @@ Add easyPrint Plugin
 \seealso{
 https://github.com/rowanwins/leaflet-easyPrint
 
-Other easyPrint: 
+Other EasyPrint Plugin: 
 \code{\link{easyprintMap}()},
-\code{\link{easyprintOptions}()}
+\code{\link{easyprintOptions}()},
+\code{\link{removeEasyprint}()}
 }
-\concept{easyPrint}
+\concept{EasyPrint Plugin}

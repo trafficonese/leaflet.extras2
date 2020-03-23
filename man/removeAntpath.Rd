@@ -16,9 +16,9 @@ but more likely from \code{\link[leaflet]{leafletProxy}}()}
 Remove one or more Antpaths from a map, identified by \code{layerId}.
 }
 \seealso{
-Other antpath: 
+Other Antpath Plugin: 
 \code{\link{addAntpath}()},
 \code{\link{antpathOptions}()},
 \code{\link{clearAntpath}()}
 }
-\concept{antpath}
+\concept{Antpath Plugin}

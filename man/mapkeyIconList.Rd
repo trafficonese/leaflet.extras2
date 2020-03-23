@@ -23,10 +23,10 @@ iconSet[c("red", "blue")]
 
 }
 \seealso{
-Other mapkeyMarkers: 
+Other Mapkey Plugin: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{mapkeyMarkers}
+\concept{Mapkey Plugin}
