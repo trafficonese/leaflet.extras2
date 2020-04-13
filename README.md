@@ -21,8 +21,10 @@ Plugins integrated so far ...
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
+-   [GIBS](https://github.com/aparshin/leaflet-GIBS)
 -   [Hexbin-D3](https://github.com/Asymmetrik/leaflet-d3#hexbins-api)
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
+-   [OpenWeatherMap](https://github.com/trafficonese/leaflet-openweathermap)
 -   [Playback](https://github.com/hallahan/LeafletPlayback)
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
 -   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
