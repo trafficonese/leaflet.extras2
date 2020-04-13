@@ -97,7 +97,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
     }
     lapply(1:lendf, function(x) {
       ## Check if the `time` column exists. It is required!
-      if (!any(colnames(data[[x]]) == time)) next()
+      if (!any(colnames(data[[x]]) == time)) stop("No column named `", time, "` in data.")
       ## If the `time` column is present but not numeric, convert it
       if (!is.null(data[[x]][,time]) && !is.numeric(data[[x]][,time])) {
         data[[x]]$time <<- as.numeric(data[[x]][,time][[1]]) * 1000
