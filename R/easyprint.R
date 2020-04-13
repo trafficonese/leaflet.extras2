@@ -13,12 +13,10 @@ easyprintDependency <- function() {
 #' @param map the map to add easyPrint to.
 #' @param options A named list of options. See \code{\link{easyprintOptions}}
 #' @family EasyPrint Plugin
-#' @seealso https://github.com/rowanwins/leaflet-easyPrint
+#' @seealso \href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
 #' @export
 addEasyprint <- function(map, options = easyprintOptions()) {
-
   map$dependencies <- c(map$dependencies, easyprintDependency())
-
   leaflet::invokeMethod(map, NULL, "addEasyprint", options)
 }
 
@@ -46,7 +44,7 @@ removeEasyprint <- function(map) {
 #' easyPrint Options
 #' @param title Sets the text which appears as the tooltip of the print/export button
 #' @param position Positions the print button
-#' @param sizeModes Options available include Current, A4Portrait, A4Landscape
+#' @param sizeModes Options available include CurrentSize, A4Portrait, A4Landscape
 #'   or a custom size object
 #' @param defaultSizeTitles button tooltips for the default page sizes
 #' @param exportOnly 	If set to true the map is exported to a png file
@@ -66,6 +64,7 @@ removeEasyprint <- function(map) {
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
 #' @family EasyPrint Plugin
+#' @seealso \href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
 #' @export
 easyprintOptions <- function(title = 'Print map',
                              position = 'topleft',
@@ -81,6 +80,7 @@ easyprintOptions <- function(title = 'Print map',
                              customWindowTitle = NULL,
                              spinnerBgColor = '#0DC5C1',
                              customSpinnerClass = 'epLoader') {
+  if (inherits(sizeModes, "character")) sizeModes <- as.list(sizeModes)
   leaflet::filterNULL(list(
     title = title,
     position = position,

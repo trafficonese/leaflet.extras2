@@ -1,9 +1,9 @@
-tangram_deps <- function(mini = FALSE) {
+tangram_deps <- function() {
   list(
     htmlDependency(
       "tangram", "1.0.0",
       src = system.file("htmlwidgets/lfx-tangram", package = "leaflet.extras2"),
-      script = c(ifelse(mini, "tangram.min.js", "tangram.js"),
+      script = c("tangram.min.js",
                  "leaflet.tangram.binding.js"))
   )
 }
@@ -36,9 +36,6 @@ tangram_deps <- function(mini = FALSE) {
 #'
 #' ui <- fluidPage(leafletOutput("map"))
 #'
-#' ## The JS-source can be loaded in an unminified version with the options command below.
-#' # options("leaflet.extras2.minified" = FALSE)
-#'
 #' server <- function(input, output, session) {
 #'   output$map <- renderLeaflet({
 #'     leaflet() %>%
@@ -56,8 +53,7 @@ tangram_deps <- function(mini = FALSE) {
 addTangram <- function(map, scene = NULL, layerId = NULL, group = NULL,
                        options = NULL) {
 
-  mini <- getOption("leaflet.extras2.minified", default = TRUE)
-  map$dependencies <- c(map$dependencies, tangram_deps(mini))
+  map$dependencies <- c(map$dependencies, tangram_deps())
 
   if ((is.null(scene) || !is.character(scene) || (!gsub(".*\\.", "", scene) %in% c("yaml", "zip")))) {
     stop("The scene must point to a valid .yaml or .zip file.\n",

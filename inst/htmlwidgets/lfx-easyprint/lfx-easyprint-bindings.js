@@ -27,7 +27,8 @@ LeafletWidget.methods.easyprintMap = function(sizeModes, filename) {
   (function(){
     if (this.easyprint) {
       // Hack based on @urakovaliaskar in https://github.com/rowanwins/leaflet-easyPrint/issues/105#issuecomment-550370793_
-      this.easyprint.printMap(sizeModes + " page", filename);
+      var sizemode = sizeModes == "CurrentSize" ? sizeModes : sizeModes  + " page";
+      this.easyprint.printMap(sizemode, filename);
     }
   }).call(this);
 };

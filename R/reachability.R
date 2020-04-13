@@ -13,7 +13,7 @@ reachabilityDependencies <- function() {
 #' Add Isochrones to Leaflet
 #'
 #' @param map a map widget
-#' @param apiKey a valid Openrouteservice API-key. Can be obtained from
+#' @param apikey a valid Openrouteservice API-key. Can be obtained from
 #'   \href{https://openrouteservice.org/dev/#/signup}{Openrouteservice}
 #' @param options see \code{\link{reachabilityOptions}}
 #' @description Add Leaflet Reachability Plugin Control. Based on the
@@ -21,13 +21,17 @@ reachabilityDependencies <- function() {
 #' @export
 #' @seealso https://github.com/traffordDataLab/leaflet.reachability
 #' @family Reachability Plugin
-addReachability <- function(map, apiKey = NULL,
+addReachability <- function(map, apikey = NULL,
                             options = reachabilityOptions()){
-
+  if (is.null(apikey)) {
+    apikey <- Sys.getenv("OPRS")
+    if (apikey == "") {
+      stop("You must either pass an Openrouteservice-`apikey` directly or save it as ",
+           "system variable under `OPRS`.")
+    }
+  }
   map$dependencies <- c(map$dependencies, reachabilityDependencies())
-  if (is.null(apiKey)) stop("You must provide an API Key")
-  options = leaflet::filterNULL(c(apiKey = apiKey, options))
-
+  options = leaflet::filterNULL(c(apiKey = apikey, options))
   invokeMethod(map, NULL, "addReachability", options)
 }
 

@@ -915,7 +915,7 @@ L.OWM.Utils = {
 			, id905: 'Windy'
 			, id906: 'Hail'
 		},
-		
+
 		it: {
 			owmlinktitle: 'Dettagli su OpenWeatherMap'
 			, temperature: 'Temperatura'
@@ -927,7 +927,7 @@ L.OWM.Utils = {
 			, rain_1h: 'Pioggia'
 			, humidity: 'Umidità'
 			, pressure: 'Pressione'
-		
+
 			// condizioni meteorologiche, consultare https://openweathermap.org/weather-conditions
 			// Temporale
 			, id200: 'Tempesta con pioggia debole'
@@ -949,7 +949,7 @@ L.OWM.Utils = {
 			, id311: 'Pioggia / pioviggine'
 			, id312: 'Pioggia / pioviggine forte'
 			, id321: 'Pioviggine intensa'
-	
+
 			// Pioggia
 			, id500: 'Debole pioggia'
 			, id501: 'Pioggia moderata'
@@ -961,7 +961,7 @@ L.OWM.Utils = {
 			, id521: 'Pioggia'
 			, id522: 'Pioggia forte'
 			, id531: 'pioggia irregolare'
-		
+
 			// neve
 			, id600: 'Neve Debole'
 			, id601: 'Neve'
@@ -1016,7 +1016,7 @@ L.OWM.Utils = {
 			, id961: 'Tempesta violenta'
 			, id962: 'Uragano'
 		},
-		
+
 		de: {
 			owmlinktitle: 'Details bei OpenWeatherMap'
 			, temperature: 'Temperatur'

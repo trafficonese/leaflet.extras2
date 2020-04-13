@@ -7,8 +7,10 @@
 #' @import leaflet
 #' @importFrom htmltools htmlDependency tagGetAttribute tags tagList
 #' @importFrom jsonlite fromJSON toJSON read_json
-#' @importFrom shiny addResourcePath
+#' @importFrom utils globalVariables adist
 #'
 #' @name leaflet.extras2
 #' @docType package
 NULL
+
+globalVariables(c("gibs_layers"))

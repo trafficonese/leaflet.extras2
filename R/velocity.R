@@ -15,44 +15,48 @@ velocityDependencies <- function() {
 #' @param map a map widget
 #' @param layerId the layer id
 #' @param group the name of the group the newly created layers should belong to
-#'   (for \code{clearGroup} and \code{addLayersControl} purposes). Human-friendly
-#'   group names are permitted–they need not be short, identifier-style names.
-#'   Any number of layers and even different types of layers (e.g. markers and
-#'   polygons) can share the same group name.
-#' @param content a JSON File respresenting the velocity data or a URL pointing
-#'   to such a JSON file.
+#'   (for \code{clearGroup} and \code{addLayersControl} purposes).
+#'   Human-friendly group names are permitted–they need not be short,
+#'   identifier-style names. Any number of layers and even different types of
+#'   layers (e.g. markers and polygons) can share the same group name.
+#' @param content the path or URL to a JSON file respresenting the velocity data
+#'   or a data.frame which can be transformed to such a JSON file. Please see the
+#'   \href{https://github.com/danwild/leaflet-velocity/tree/master/demo}{demo
+#'   files} for some example data.
 #' @param options see \code{\link{velocityOptions}}
 #' @description Add velocity animated data to leaflet. Based on the
-#'  \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+#'   \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
 #' @export
 #' @family Velocity Plugin
 #' @seealso https://github.com/danwild/leaflet-velocity
 #' @examples \dontrun{
 #' library(leaflet)
 #' library(leaflet.extras2)
-#' content <- system.file("examples/velocity/wind-global.json", package = "leaflet.extras2")
+#' content <- "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json"
 #' leaflet() %>%
 #'   addTiles(group = "base") %>%
-#'   addLayersControl(baseGroups = "base", overlayGroups = "velo") %>%
-#'   addVelocity(content = content, group = "velo", layerId = "veloid")
+#'   setView(145, -20, 4) %>%
+#'   addVelocity(content = content, group = "velo", layerId = "veloid") %>%
+#'   addLayersControl(baseGroups = "base", overlayGroups = "velo")
 #' }
 addVelocity <- function(map, layerId = NULL, group = NULL,
                         content = NULL, options = velocityOptions()) {
 
   ## Check Content
-  if (is.null(content)) stop("The content is empty. Please include a JSON or a URL for a specific JSON")
+  if (is.null(content)) stop("The velocity-content is NULL")
   if (inherits(content, "character")) {
-    # grepl("https:", content) || grepl("http:", content)
     content <- jsonlite::fromJSON(content)
     content <- jsonlite::toJSON(content)
   } else if (inherits(content, "data.frame")) {
     content <- jsonlite::toJSON(content)
   } else if (inherits(content, "json")) {
   } else {
-    stop("Content is does not point to a JSON file nor is it a data.frame")
+    stop("Content does not point to a JSON file nor is it a data.frame")
   }
 
   map$dependencies <- c(map$dependencies, velocityDependencies())
+
+  options <- filterNULL(options)
 
   invokeMethod(
     map, NULL, "addVelocity",
@@ -103,3 +107,18 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
 removeVelocity <- function(map, group){
   invokeMethod(map, NULL, "removeVelocity", group)
 }
+
+#' setOptionsVelocity
+#' @param map the map widget
+#' @param layerId the layer id
+#' @param options see \code{\link{velocityOptions}}
+#' @export
+#' @family Velocity Plugin
+setOptionsVelocity <- function(map, layerId, options){
+  options <- filterNULL(options)
+  invokeMethod(map, NULL, "setOptionsVelocity", layerId, options)
+}
+
+
+
+

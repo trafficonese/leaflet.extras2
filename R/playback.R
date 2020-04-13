@@ -12,15 +12,15 @@ playbackDependencies <- function() {
 #' Add Playback to Leaflet
 #'
 #' @param map a map widget
-#' @param data data can either be a matrix or data.frame with coordinates,
-#'   a POINT Simple Feature or a \code{SpatialPointsDataFrame}.
-#'   It must contain a time column of class \code{POSIXct} or \code{numeric}.
-#'   It can also be a JSON string which must be in a specific form. See the Details
-#'   for further information.
+#' @param data data can either be a matrix or data.frame with coordinates, a
+#'   POINT Simple Feature or a list of POINT Simple Feature's. It can also be a
+#'   JSON string which must be in a specific form. See the Details for further
+#'   information.
 #' @param time The column name of the time column. Default is \code{"time"}.
-#' @param icon an icon which can be created with \code{\link{makeIcon}{leaflet}}
-#' @param pathOptions style the CircleMarker with \code{\link{pathOptions}{leaflet}}
-#' @param options see \code{\link{playbackOptions}}
+#' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
+#' @param pathOptions style the CircleMarker with
+#'   \code{\link[leaflet]{pathOptions}}
+#' @param options Lits of additional options. See \code{\link{playbackOptions}}
 #' @description Add Leaflet Playback Plugin based on the
 #'  \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
 #' @details If data is a JSON string, it must have the following form:
@@ -39,15 +39,21 @@ playbackDependencies <- function() {
 #'   }
 #' }
 #' }
-#' Additional arrays can be inside the properties, but are not required and are not used
-#' by the plugin. If the JSON is stored in a file you can load it to R via:
-#' \code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
-#'
+#' Additional arrays can be inside the properties, but are not required and are
+#' not used by the plugin. If the JSON is stored in a file you can load it to R
+#' via: \code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
+#' @note If used in Shiny, you can listen to 2 events
+#' \itemize{
+#'  \item `map-ID`+"_pb_mouseover"
+#'  \item `map-ID`+"_pb_click"
+#' }
 #' @export
 #' @family Playback Plugin
 addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOptions = pathOptions(),
                         options = playbackOptions()){
+
+  bbox = list(lat = c(-90, 90), lng = c(0, 180))
 
   ## If data is a `data.frame` / `data.table` or `matrix`
   if (inherits(data, "data.frame") || inherits(data, "matrix")) {
@@ -55,7 +61,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
     if (!any(colnames(data) == time)) stop("No column named `", time, "` in data.")
     ## If the `time` column is present but not numeric, convert it
     if (!is.null(data[,time]) && !is.numeric(data[,time])) {
-      data$time <- as.numeric(data[,time][[1]])
+      data$time <- as.numeric(data[,time][[1]]) * 1000
     }
     ## If there is no `geometry` column, check if lat/lng are given as columns
     if (!any(colnames(data) %in% c("geom","geometry"))) {
@@ -65,43 +71,55 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
       has_lat <- tolower(colnames(data)) %in% latnams
       has_lng <- tolower(colnames(data)) %in% lonnams
       if (any(has_lat) && any(has_lng)) {
-        ## If data has lat/lon columns, use `sf` if possible to transform to Simple Feature
-        if (requireNamespace("sf", quietly = TRUE)) {
-          data <- sf::st_as_sf(data.frame(data),  ## Convert to data.frame. Matrix wouldnt work otherwise
-                               coords = c(colnames(data)[which(has_lng)],
-                                          colnames(data)[which(has_lat)]))
-        } else {
-          ## If `sf` is not available, build a list which can be read by the plugin
           data <- list(
-            coordinates = cbind(data[,colnames(data)[which(has_lng)]],
+            geometry = cbind(data[,colnames(data)[which(has_lng)]],
                                 data[,colnames(data)[which(has_lat)]]),
             time = data[,time]
           )
-        }
       } else {
         ## No lat/lng columns in data. Error
         stop("Cannot read Lat/Lon columns. The column names must match either: \n",
              paste(latnams, collapse = ","), " / ", paste(lonnams, collapse = ","))
       }
     }
+    bboxtmp <- matrix(unlist(data$geometry), ncol = 2, byrow = T)
+    bbox$lat <- bboxtmp[,2]
+    bbox$lng <- bboxtmp[,1]
   }
 
-  ## If data is a `SpatialPointsDataFrame`
-  if (inherits(data, "SpatialPointsDataFrame")) {
-    if (requireNamespace("sf", quietly = TRUE)) {
-      ## If `sf` is available, use it to transform to Simple Features
-      data <- sf::st_as_sf(data)
-    } else {
-      ## If `sf` is not available, build a list with coordinates and the time column.
-      coords <- sp::coordinates(data)
-      data <- list(
-        coordinates = cbind(coords[,1], coords[,2]),
-        time = data[,time]
-      )
+  if (inherits(data, "list")) {
+    bboxtmp <- matrix(unlist(do.call(rbind, data)$geometry), ncol = 2, byrow = T)
+    bbox$lat <- bboxtmp[,2]
+    bbox$lng <- bboxtmp[,1]
+    lendf <- length(data)
+    if (length(options$color) != lendf) {
+      options$color <- rep(options$color, lendf)[seq.int(lendf)]
     }
+    lapply(1:lendf, function(x) {
+      ## Check if the `time` column exists. It is required!
+      if (!any(colnames(data[[x]]) == time)) next()
+      ## If the `time` column is present but not numeric, convert it
+      if (!is.null(data[[x]][,time]) && !is.numeric(data[[x]][,time])) {
+        data[[x]]$time <<- as.numeric(data[[x]][,time][[1]]) * 1000
+      }
+      ## If there is no `geometry` column, check if lat/lng are given as columns
+      if (!any(colnames(data[[x]]) %in% c("geom","geometry"))) {
+        ## Check if any column has lat/lon values
+        latnams <- c("y","lat","latitude")
+        lonnams <- c("x","lon","lng","longitude")
+        has_lat <- tolower(colnames(data[[x]])) %in% latnams
+        has_lng <- tolower(colnames(data[[x]])) %in% lonnams
+        if (any(has_lat) && any(has_lng)) {
+          data <<- list(
+            geometry = cbind(data[[x]][,colnames(data)[which(has_lng)]],
+                             data[[x]][,colnames(data)[which(has_lat)]]),
+            time = data[[x]][,time]
+          )
+        }
+      }
+    })
   }
 
-  ## If data is a `character`
   if (inherits(data, "character")) {
     ## Since `basename` does not work, when the string is too long, we count
     ## the number of characters first. 300 is chosen randomly, but I doubt that
@@ -113,19 +131,21 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
         data <- jsonlite::read_json(data)
       }
     }
-    ## Otherwise just pass the string (do nothing)
   }
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
-  options = leaflet::filterNULL(c(icon = list(icon),
+  options <- leaflet::filterNULL(c(icon = list(icon),
                                   pathOptions = list(pathOptions),
                                   options))
-
-  invokeMethod(map, NULL, "addPlayback", data, options)
+  invokeMethod(map, NULL, "addPlayback", data, options) %>%
+    expandLimits(bbox$lat, bbox$lng)
 }
 
 #' playbackOptions
-#'
+#' @description Extra options for \code{\link{addPlayback}}. For a full list
+#'   please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin
+#'   repository}
+#' @param color colors of the CircleMarkers.
 #' @param radius a numeric value for the radius of the CircleMarkers.
 #' @param tickLen Set tick length in miliseconds. Increasing this value, may
 #'   improve performance, at the cost of animation smoothness. Default is 250
@@ -143,11 +163,10 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' @param staleTime Set time before a track is considered stale and faded out.
 #'   Default is 60*60*1000 (1 hour)
 #' @param ... Further arguments passed to `L.Playback`
-#' @description Add extra options to \code{\link{addPlayback}}. For a full list
-#'   please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}
 #' @export
 #' @family Playback Plugin
 playbackOptions = function(
+  color = "blue",
   radius = 5,
   tickLen = 250,
   speed = 1,
@@ -159,6 +178,7 @@ playbackOptions = function(
   staleTime = 60*60*1000,
   ...) {
   leaflet::filterNULL(list(
+    color = color,
     radius = radius,
     tickLen = tickLen,
     speed = speed,

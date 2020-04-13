@@ -33,7 +33,7 @@ server <- function(input, output, session) {
   })
   observeEvent(input$group, {
     leafletProxy("map", session) %>%
-      clearGroup("wmsgroup")
+      clearGroup("TOPO-WMS")
   })
   observeEvent(input$clear, {
     leafletProxy("map", session) %>%

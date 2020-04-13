@@ -38,9 +38,6 @@ scene <- "scene.yaml"
 
 ui <- fluidPage(leafletOutput("map"))
 
-## The JS-source can be loaded in an unminified version with the options command below.
-# options("leaflet.extras2.minified" = FALSE)
-
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() \%>\%

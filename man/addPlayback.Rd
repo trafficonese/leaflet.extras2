@@ -16,19 +16,19 @@ addPlayback(
 \arguments{
 \item{map}{a map widget}
 
-\item{data}{data can either be a matrix or data.frame with coordinates,
-a POINT Simple Feature or a \code{SpatialPointsDataFrame}.
-It must contain a time column of class \code{POSIXct} or \code{numeric}.
-It can also be a JSON string which must be in a specific form. See the Details
-for further information.}
+\item{data}{data can either be a matrix or data.frame with coordinates, a
+POINT Simple Feature or a list of POINT Simple Feature's. It can also be a
+JSON string which must be in a specific form. See the Details for further
+information.}
 
 \item{time}{The column name of the time column. Default is \code{"time"}.}
 
-\item{icon}{an icon which can be created with \code{\link{makeIcon}{leaflet}}}
+\item{icon}{an icon which can be created with \code{\link[leaflet]{makeIcon}}}
 
-\item{pathOptions}{style the CircleMarker with \code{\link{pathOptions}{leaflet}}}
+\item{pathOptions}{style the CircleMarker with
+\code{\link[leaflet]{pathOptions}}}
 
-\item{options}{see \code{\link{playbackOptions}}}
+\item{options}{Lits of additional options. See \code{\link{playbackOptions}}}
 }
 \description{
 Add Leaflet Playback Plugin based on the
@@ -51,9 +51,16 @@ If data is a JSON string, it must have the following form:
   }
 }
 }
-Additional arrays can be inside the properties, but are not required and are not used
-by the plugin. If the JSON is stored in a file you can load it to R via:
-\code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
+Additional arrays can be inside the properties, but are not required and are
+not used by the plugin. If the JSON is stored in a file you can load it to R
+via: \code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
+}
+\note{
+If used in Shiny, you can listen to 2 events
+\itemize{
+ \item `map-ID`+"_pb_mouseover"
+ \item `map-ID`+"_pb_click"
+}
 }
 \seealso{
 Other Playback Plugin: 

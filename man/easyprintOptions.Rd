@@ -26,7 +26,7 @@ easyprintOptions(
 
 \item{position}{Positions the print button}
 
-\item{sizeModes}{Options available include Current, A4Portrait, A4Landscape
+\item{sizeModes}{Options available include CurrentSize, A4Portrait, A4Landscape
 or a custom size object}
 
 \item{defaultSizeTitles}{button tooltips for the default page sizes}
@@ -61,6 +61,8 @@ waiting for the print.}
 easyPrint Options
 }
 \seealso{
+\href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
+
 Other EasyPrint Plugin: 
 \code{\link{addEasyprint}()},
 \code{\link{easyprintMap}()},

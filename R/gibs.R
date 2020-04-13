@@ -24,7 +24,6 @@ gibsDependency <- function() {
 #'   \code{layers} are added, you can add a numeric vector of the same length
 #' @seealso https://github.com/aparshin/leaflet-GIBS
 #' @family GIBS Plugin
-#' @importFrom utils adist
 #' @export
 addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
                     opacity = 0.5, transparent = TRUE) {

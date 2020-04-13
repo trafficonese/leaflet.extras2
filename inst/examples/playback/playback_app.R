@@ -1,54 +1,60 @@
 library(leaflet)
 library(leaflet.extras2)
 library(shiny)
-library(geojsonio)
+library(sf)
+library(mapview)
 
+## Single Trail ##############
+# trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[10,], "LINESTRING"), n = 100)
+# trail_pts <- st_transform(trail_pts, 4326)
+# data <- sf::st_as_sf(st_cast(trail_pts, "POINT"))
+# colnames(data) <- "geometry"
+# st_geometry(data) <- "geometry"
+# data$time = as.POSIXct(
+#   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+# data <- data[, c("time","geometry")]
 
-# drivejson <- system.file("examples/playback/drive.json", package = "leaflet.extras2")
-drivejson <- system.file("examples/playback/drive.json", package = "leaflet.extras2")
-drivejson1 <- system.file("examples/playback/drive1.json", package = "leaflet.extras2")
-csvpath <- system.file("examples/playback/data.csv", package = "leaflet.extras2")
-url = "https://raw.githubusercontent.com/hallahan/LeafletPlayback/master/data/demo/drive.json"
+## Multiple Trails ##############
+n = 150
+trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[c(10, 21),], "LINESTRING"), n = n)
+trail_pts <- st_transform(trail_pts, 4326)
+data <- sf::st_as_sf(st_cast(trail_pts, "POINT"))
+colnames(data) <- "geometry"
+st_geometry(data) <- "geometry"
+data$id <- c(rep(1,n), rep(2,n))
+time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/2))
+data$time <- Sys.time()
+data[data$id == 1, ]$time <- time
+data[data$id == 2, ]$time <- time
+data <- data[, c("id", "time","geometry")]
+data <- split(data, data$id)
 
-asd <- geojson_read(drivejson)                              # "list"
-# asd <- jsonlite::read_json(drivejson)                       # "list"
-# asd <- paste(readLines(drivejson, warn = F), collapse = "") # "character" containing the JSON
-# asd <- read.csv(file = csvpath)                             # "data.frame"
-# asd <- as.matrix(asd)                                       # "matrix"
-# data.table::setDT(asd)                                      # "data.table" "data.frame"
-# sp::coordinates(asd) <- ~x+y                                # "SpatialPointsDataFrame"
-# asd <- sf::st_as_sf(asd)                                    # "sf"         "data.frame"
-# asd <- drivejson                                            # "character" with JSON path
-# asd <- url                                                  # "character" with JSON URL
-
-
-
-
+## Icon #################
 iconship = makeIcon(
   iconUrl = 'https://cdn0.iconfinder.com/data/icons/man-listening-to-music-with-earphone-headphone/247/listern-music-006-512.png',
-  iconWidth = 50, iconHeight = 60, shadowWidth = 55, shadowHeight = 65 ,iconAnchorX = 25, iconAnchorY = 25
+  iconWidth = 30, iconHeight = 35, shadowWidth = 30, shadowHeight = 35,
+  iconAnchorX = 0
 )
 
+## UI #################
 ui <- fluidPage(
-  leafletOutput("map"),
+  leafletOutput("map", height = "700px"),
   h4("Clicks"),
   verbatimTextOutput("click"),
   h4("Mouseover"),
   verbatimTextOutput("mouseover")
 )
 
+## Server ###############
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles() %>%
-      setView(-123.3, 44.53, 11) %>%
-      addPlayback(data = asd, icon = iconship,
+      addPlayback(data = data, icon = iconship,
                   options = playbackOptions(
+                    color = list("red", "green"),
                     radius = 3),
-                  pathOptions = pathOptions(
-                    color = "red", weight = 5,
-                    fillColor = "green"
-                  ))
+                  pathOptions = pathOptions(weight = 5))
   })
   output$click <- renderPrint({
     req(input$map_pb_click)
@@ -61,5 +67,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-
 

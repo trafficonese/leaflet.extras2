@@ -11,30 +11,33 @@ openweatherDependency <- function() {
   )
 }
 
-#' Add OpenWeather Layers
-#'
+#' Add OpenWeatherMap Tiles
 #' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param options List of further options. See \code{\link{hexbinOptions}}
+#' @param apikey a valid Openweathermap-API key. Get one from
+#'   \href{https://openweathermap.org/api}{here}.
+#' @param layers character vector of layers you wish to add to the map
+#' @param group name of the group
+#' @param layerId the layer id
+#' @param opacity opacity of the layer
+#' @param options List of further options. See \code{\link{openweatherOptions}}
 #'
 #' @note Out of the box a legend image is only available for Pressure,
 #'   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
-#'   Wind Speed.
-#' @seealso https://github.com/Asymmetrik/leaflet-d3#hexbins-api
+#'   Wind Speed. Please add your own images if you need some more.
+#'
+#' @seealso https://github.com/trafficonese/leaflet-openweathermap
 #' @family Openweather Plugin
 #' @export
 addOpenweatherTiles <- function(
-  map, apikey = NULL, layers = NULL, addControl = TRUE,
-  group = NULL, opacity = 0.5) {
-
-  # showLegend
-  # legendImagePath
-  # legendPosition <- c('topright', 'topleft', 'bottomright', 'bottomleft')
+  map, apikey = NULL, layers = NULL,
+  group = NULL, layerId = NULL, opacity = 0.5,
+  options = openweatherOptions()) {
 
   if (is.null(apikey)) {
-    apikey <- Sys.getenv("OPENWEATHER")
+    apikey <- Sys.getenv("OPENWEATHERMAP")
     if (apikey == "") {
       stop("You must either pass an `apikey` directly or save it as ",
-           "system variable under `OPENWEATHER`.")
+           "system variable under `OPENWEATHERMAP`.")
     }
   }
 
@@ -55,73 +58,109 @@ addOpenweatherTiles <- function(
     layers <- layers[idx]
   }
 
-  if (length(opacity) == 1)
-    opacity <- rep(opacity, length(layers))
-
-  map$dependencies <- c(map$dependencies, openweatherDependency())
-
-  invokeMethod(map, getMapData(map), "addOpenweather", apikey, layers,
-               addControl, group, opacity)
-}
-
-#' Add OpenWeather Layers
-#'
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param options List of further options. See \code{\link{hexbinOptions}}
-#'
-#' @note Out of the box a legend image is only available for Pressure,
-#'   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
-#'   Wind Speed.
-#' @seealso https://github.com/Asymmetrik/leaflet-d3#hexbins-api
-#' @family Openweather Plugin
-#' @export
-addOpenweatherCurrent <- function(
-  map, apikey = NULL, layers = NULL, addControl = TRUE,
-  group = NULL, opacity = 0.5) {
-
-
-  if (is.null(apikey)) {
-    apikey <- Sys.getenv("OPENWEATHER")
-    if (apikey == "") {
-      stop("You must either pass an `apikey` directly or save it as ",
-           "system variable under `OPENWEATHER`.")
+  if (!is.null(layerId)) {
+    if (length(layerId) != length(layers)) {
+      warning("The length of `layers` and `layerId` does not match.",
+              "The `layers`-names are taken instead.")
+      layerId <- layers
+    }
+  }
+  if (!is.null(group)) {
+    if (length(group) == 1 && length(layers) > 1) {
+      group <- rep(group, length(layers))[seq.int(layers)]
     }
   }
 
+  options <- c(appId = apikey,
+               opacity = opacity,
+               options)
+
   map$dependencies <- c(map$dependencies, openweatherDependency())
 
-  invokeMethod(map, getMapData(map), "addOpenweatherCurrent", apikey, layers,
-               addControl, group, opacity)
+  invokeMethod(map, NULL, "addOpenweather", layers,
+               group, layerId, options)
 }
 
 
-# appId: String ( null ). Please get a free API key (called APPID) if you're using OWM's current weather data regulary.
-# lang: 'en', 'de', 'ru', 'fr', 'es', 'ca'. Language of popup texts. Note: not every translation is finished yet.
-# minZoom: Number ( 7 ). Minimal zoom level for fetching city data. Use smaller values only at your own risk.
-# interval: Number ( 0 ). Time in minutes to reload city data. Please do not use less than 10 minutes. 0 no reload (default)
-# progressControl: true or false. Whether a progress control should be used to tell the user that data is being loaded at the moment.
-# imageLoadingUrl: URL ( 'owmloading.gif' ). URL of the loading image, or a path relative to the HTML document. This is important when the image is not in the same directory as the HTML document!
-# imageLoadingBgUrl: URL ( null ). URL of background image for progress control if you don't like the default one.
-# temperatureUnit: 'C', 'F', 'K'. Display temperature in Celsius, Fahrenheit or Kelvin.
-# temperatureDigits: Number ( 1 ). Number of decimal places for temperature.
-# speedUnit: 'ms', 'kmh' or 'mph'. Unit of wind speed (m/s, km/h or mph).
-# speedDigits: Number ( 0 ). Number of decimal places for wind speed.
-# popup: true or false. Whether to bind a popup to the city marker.
-# keepPopup: true or false. When true it tries to reopen an already open popup on move or reload. Can result in an additional map move (after reopening the popup) with closing and reopening the popup once again.
-# showOwmStationLink: true or false. Whether to link city name to OWM.
-# showWindSpeed: 'speed', 'beaufort' or 'both'. Show wind speed as speed in speedUnit or in beaufort scala or both.
-# showWindDirection: 'deg', 'desc' or 'both'. Show wind direction as degree, as description (e.g. NNE) or both.
-# showTimestamp: true or false. Whether to show the timestamp of the data.
-# showTempMinMax: true or false. Whether to show temperature min/max.
-# useLocalTime: true or false. Whether to use local time or UTC for the timestamp.
-# clusterSize: Number ( 150 ). If some cities are too close to each other, they are hidden. In an area of the size clusterSize pixels * clusterSize pixels only one city is shown. If you zoom in the hidden cities will appear.
-# imageUrlCity: URL ( 'https://openweathermap.org/img/w/{icon}.png' ). URL template for weather condition images of cities. {icon} will be replaced by the icon property of city's data. See http://openweathermap.org/img/w/ for some standard images.
-# imageWidth: Number ( 50 ). Width of city's weather condition image.
-# imageHeight: Number ( 50 ). Height of city's weather condition image.
-# markerFunction: Function ( null ). User defined function for marker creation. Needs one parameter for city data.
-# popupFunction: Function ( null ). User defined function for popup creation. Needs one parameter for city data.
-# caching: true or false. Use caching of current weather data. Cached data is reloaded when it is too old or the new bounding box doesn't fit inside the cached bounding box.
-# cacheMaxAge: Number ( 15 ). Maximum age in minutes for cached data before it is considered as too old.
-# keepOnMinZoom: false or true. Keep or remove markers when zoom < minZoom.
-# baseUrl: Defaults to "https://{s}.tile.openweathermap.org/map/{layername}/{z}/{x}/{y}.png" - only change it when you know what you're doing.
 
+#' OpenWeatherMap Options
+#' @param showLegend If true and option 'legendImagePath' is set there will be a
+#'   legend image on the map.
+#' @param legendImagePath URL (is set to a default image for some layers, null
+#'   for others, see below). URL or relative path to an image which is a legend
+#'   to this layer.
+#' @param legendPosition Position of the legend images on the map. Available are
+#'   standard positions for Leaflet controls
+#' @family Openweather Plugin
+#' @export
+openweatherOptions <-  function(showLegend = TRUE,
+                                legendImagePath = NULL,
+                                legendPosition = c('bottomleft', 'bottomright',
+                                                   'topleft', 'topright')) {
+  legendPosition <- match.arg(legendPosition)
+  leaflet::filterNULL(list(
+    showLegend = showLegend,
+    legendImagePath = legendImagePath,
+    legendPosition = legendPosition
+  ))
+}
+
+
+#' Add current OpenWeatherMap Marker
+#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
+#' @param apikey a valid Openweathermap-API key. Get one from
+#'   \href{https://openweathermap.org/api}{here}.
+#' @param group name of the group
+#' @param layerId the layer id
+#' @param options List of further options. See
+#'   \code{\link{openweatherCurrentOptions}}
+#'
+#' @seealso https://github.com/trafficonese/leaflet-openweathermap
+#' @family Openweather Plugin
+#' @export
+addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
+                                  layerId = NULL,
+                                  options = openweatherCurrentOptions()) {
+
+  if (is.null(apikey)) {
+    apikey <- Sys.getenv("OPENWEATHERMAP")
+    if (apikey == "") {
+      stop("You must either pass an `apikey` directly or save it as ",
+           "system variable under `OPENWEATHERMAP`.")
+    }
+  }
+
+  options <- c(appId = apikey,
+               type = "city",
+               options)
+
+  map$dependencies <- c(map$dependencies, openweatherDependency())
+
+  invokeMethod(map, NULL, "addOpenweatherCurrent", group, layerId, options)
+}
+
+
+#' openweatherCurrentOptions
+#' @param lang 'en', 'de', 'ru', 'fr', 'es', 'ca'. Language of popup texts.
+#'   Note: not every translation is finished yet.
+#' @param minZoom Number (7). Minimal zoom level for fetching city data. Use
+#'   smaller values only at your own risk.
+#' @param interval Number (0). Time in minutes to reload city data. Please do
+#'   not use less than 10 minutes.
+#' @param ... Further options passed to \code{L.OWM.current}. See the
+#'   \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
+#'   list of options}
+#' @family Openweather Plugin
+#' @export
+openweatherCurrentOptions <-  function(lang = "en",
+                                       minZoom = 7,
+                                       interval = 10,
+                                       ...
+                                       ) {
+  leaflet::filterNULL(list(
+    lang = lang,
+    minZoom = minZoom,
+    interval = interval,
+    ...
+  ))
+}

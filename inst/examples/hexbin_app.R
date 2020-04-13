@@ -1,13 +1,8 @@
 library(shiny)
 library(leaflet)
 library(leaflet.extras2)
-library(sf)
 
 ## Data ###################
-# df <- breweries91
-
-# df <- st_as_sf(breweries91)
-
 set.seed(100)
 rand_lng <- function(n = 10) rnorm(n, -93.65, .01)
 rand_lat <- function(n = 10) rnorm(n, 42.0285, .01)
@@ -48,13 +43,13 @@ style <- "
 ui <- fluidPage(
   tags$head(tags$style(style)),
   leafletOutput("map", height = "700px"),
-  verbatimTextOutput("txt"),
   actionButton("update_data", "Update Hexbin Data"),
   actionButton("update_color", "Update Hexbin Colors"),
   actionButton("update_both", "Update Hexbin Data & Colors"),
   actionButton("hide",   "Hide Hexbin"),
   actionButton("show",   "Show Hexbin"),
   actionButton("clear",  "Clear Hexbin Layers"),
+  verbatimTextOutput("txt")
 )
 
 ## SERVER ###################
@@ -62,7 +57,8 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles(group = "base") %>%
-      addHexbin(data = df, opacity = 1, radius = 20,
+      addHexbin(data = df, opacity = 1,
+                # radius = 20,
                 layerId = "hexbin_id", group = "hexbin_group",
                 options = hexbinOptions(
                   duration = 300,
@@ -73,10 +69,10 @@ server <- function(input, output, session) {
                   # colorRange = c('red', 'red', 'orange', 'orange', 'yellow', 'yellow', 'green', 'green', 'blue', 'blue'),
 
                   # radiusScaleExtent = (JS("[40, undefined]")),
-                  # radiusRange = c(10, 20),
+                  radiusRange = c(10, 20),
                   pointerEvents = "all",
-                  # resizetoCount = TRUE,
-                  resizetoCount = JS("function(d) { return (Math.cos(d.length) * 10); }"),
+                  resizetoCount = TRUE,
+                  # resizetoCount = JS("function(d) { return (Math.cos(d.length) * 10); }"),
 
                   tooltip = JS("function(d) {return 'Amount of coordinates: ' + d.length;} ")
                   # tooltip = "Amount of Markers: "

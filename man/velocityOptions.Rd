@@ -34,6 +34,7 @@ Define further options for the velocity layer.
 \seealso{
 Other Velocity Plugin: 
 \code{\link{addVelocity}()},
-\code{\link{removeVelocity}()}
+\code{\link{removeVelocity}()},
+\code{\link{setOptionsVelocity}()}
 }
 \concept{Velocity Plugin}

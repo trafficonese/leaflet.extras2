@@ -4,12 +4,12 @@
 \alias{addReachability}
 \title{Add Isochrones to Leaflet}
 \usage{
-addReachability(map, apiKey = NULL, options = reachabilityOptions())
+addReachability(map, apikey = NULL, options = reachabilityOptions())
 }
 \arguments{
 \item{map}{a map widget}
 
-\item{apiKey}{a valid Openrouteservice API-key. Can be obtained from
+\item{apikey}{a valid Openrouteservice API-key. Can be obtained from
 \href{https://openrouteservice.org/dev/#/signup}{Openrouteservice}}
 
 \item{options}{see \code{\link{reachabilityOptions}}}

@@ -1,9 +1,8 @@
+library(shiny)
 library(leaflet)
 library(leaflet.extras2)
-library(shiny)
 
-## TODO - Include your own Openrouteservice API-key.
-apiKey <- Sys.getenv("OPRS")
+apikey <- Sys.getenv("OPRS")
 
 ui <- fluidPage(
   icon("cars"), ## needed to load FontAwesome Lib
@@ -17,7 +16,7 @@ server <- function(input, output, session) {
       addTiles(group = "base") %>%
       setView(8, 50, 11) %>%
       addLayersControl(baseGroups = "base") %>%
-      addReachability(apiKey = apiKey,
+      addReachability(apikey = apikey,
                       options = reachabilityOptions(
                         collapsed = FALSE,
                         drawButtonContent = as.character(icon("plus")),

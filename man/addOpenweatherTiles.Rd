@@ -2,34 +2,48 @@
 % Please edit documentation in R/openweather.R
 \name{addOpenweatherTiles}
 \alias{addOpenweatherTiles}
-\title{Add OpenWeather Layers}
+\title{Add OpenWeatherMap Tiles}
 \usage{
 addOpenweatherTiles(
   map,
   apikey = NULL,
   layers = NULL,
-  addControl = TRUE,
   group = NULL,
-  opacity = 0.5
+  layerId = NULL,
+  opacity = 0.5,
+  options = openweatherOptions()
 )
 }
 \arguments{
 \item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
 
-\item{options}{List of further options. See \code{\link{hexbinOptions}}}
+\item{apikey}{a valid Openweathermap-API key. Get one from
+\href{https://openweathermap.org/api}{here}.}
+
+\item{layers}{character vector of layers you wish to add to the map}
+
+\item{group}{name of the group}
+
+\item{layerId}{the layer id}
+
+\item{opacity}{opacity of the layer}
+
+\item{options}{List of further options. See \code{\link{openweatherOptions}}}
 }
 \description{
-Add OpenWeather Layers
+Add OpenWeatherMap Tiles
 }
 \note{
 Out of the box a legend image is only available for Pressure,
   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
-  Wind Speed.
+  Wind Speed. Please add your own images if you need some more.
 }
 \seealso{
-https://github.com/Asymmetrik/leaflet-d3#hexbins-api
+https://github.com/trafficonese/leaflet-openweathermap
 
 Other Openweather Plugin: 
-\code{\link{addOpenweatherCurrent}()}
+\code{\link{addOpenweatherCurrent}()},
+\code{\link{openweatherCurrentOptions}()},
+\code{\link{openweatherOptions}()}
 }
 \concept{Openweather Plugin}

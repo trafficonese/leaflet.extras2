@@ -5,6 +5,7 @@
 \title{playbackOptions}
 \usage{
 playbackOptions(
+  color = "blue",
   radius = 5,
   tickLen = 250,
   speed = 1,
@@ -18,6 +19,8 @@ playbackOptions(
 )
 }
 \arguments{
+\item{color}{colors of the CircleMarkers.}
+
 \item{radius}{a numeric value for the radius of the CircleMarkers.}
 
 \item{tickLen}{Set tick length in miliseconds. Increasing this value, may
@@ -46,8 +49,9 @@ Default is 60*60*1000 (1 hour)}
 \item{...}{Further arguments passed to `L.Playback`}
 }
 \description{
-Add extra options to \code{\link{addPlayback}}. For a full list
-  please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}
+Extra options for \code{\link{addPlayback}}. For a full list
+  please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin
+  repository}
 }
 \seealso{
 Other Playback Plugin: 

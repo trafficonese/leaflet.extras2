@@ -3,7 +3,7 @@ Type: Package
 Title: Extra Functionality for 'leaflet' Package
 Version: 1.0.0
 Authors@R: c(
-      person("Gatscha", "Sebastian", email = "sebastian_gatscha@gmax.at", role = c("aut", "cre"))
+      person("Gatscha", "Sebastian", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre"))
     )
 Description: This package serves as an add-on to the 'leaflet' package by 
     providing extra functionality via 'leaflet' plugins.
@@ -16,10 +16,11 @@ Depends:
 Imports:
     htmlwidgets,
     htmltools,
-    shiny,
     jsonlite,
-    magrittr
+    magrittr,
+    utils
 Suggests:
+    shiny,
     sf,
     sp
 URL: https://github.com/trafficonese/leaflet.extras2
