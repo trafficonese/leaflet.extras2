@@ -11,6 +11,7 @@ addWMS(
   group = NULL,
   options = WMSTileOptions(),
   attribution = NULL,
+  popupOptions = NULL,
   data = getMapData(map)
 )
 }
@@ -35,6 +36,9 @@ group names.}
 \code{\link[leaflet]{WMSTileOptions}}}
 
 \item{attribution}{the attribution text of the tile layer (HTML)}
+
+\item{popupOptions}{List of popup options. See
+\code{\link[leaflet]{popupOptions}}. Default is NULL.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the data object provided to \code{\link[leaflet]{leaflet}}

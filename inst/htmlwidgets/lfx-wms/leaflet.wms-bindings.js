@@ -4,14 +4,17 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options) {
     options.crs = LeafletWidget.utils.getCRS(options.crs);
   }
 
+  // Hijacked showFeatureInfo-function to extend for Shiny
   L.wms.Source = L.wms.Source.extend({
     'showFeatureInfo': function(latlng, info) {
         // Hook to handle displaying parsed AJAX response to the user
         if (!this._map) {
             return;
         }
-        if (info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im)[1].trim() !== "") {
-          this._map.openPopup(info, latlng);
+        this._map.openPopup(info, latlng, options.popupOptions);
+        // Adaptation for R/Shiny
+        var parsedinfo = info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im);
+        if (parsedinfo !== null && parsedinfo[1].trim() !== "") {
           latlng.info = info;
           Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
         }
@@ -19,9 +22,6 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options) {
   });
   // Add WMS source
   var source = L.wms.source(baseUrl, options);
-
-  // This works too, but doesn respect the layerId ??
-  //this.layerManager.addLayer(source.getLayer(layers), "tile", layers, group);
 
   // Add layers
   if (typeof(layers) === "string") {

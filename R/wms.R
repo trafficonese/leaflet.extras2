@@ -30,12 +30,15 @@ wmsDependency <- function() {
 #' @param data the data object from which the argument values are derived; by
 #'   default, it is the data object provided to \code{\link[leaflet]{leaflet}}
 #'   initially, but can be overridden.
+#' @param popupOptions List of popup options. See
+#'   \code{\link[leaflet]{popupOptions}}. Default is NULL.
 #'
 #' @seealso https://github.com/heigeo/leaflet.wms
 #' @family WMS Plugin
 #' @export
 addWMS <- function(map, baseUrl, layers = "", group = NULL,
                    options = WMSTileOptions(), attribution = NULL,
+                   popupOptions = NULL,
                    data = getMapData(map)) {
 
   if (identical(layers, "")) {
@@ -43,6 +46,7 @@ addWMS <- function(map, baseUrl, layers = "", group = NULL,
   }
   options$attribution <- attribution
   options$layers <- layers
+  options$popupOptions <- popupOptions
 
   map$dependencies <- c(map$dependencies, wmsDependency())
 

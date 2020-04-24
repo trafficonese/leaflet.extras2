@@ -18,7 +18,6 @@ server <- function(input, output, session) {
       addTiles(group = "base") %>%
       addWMS(baseUrl = "http://ows.terrestris.de/osm/service",
              layers = c("TOPO-WMS","OSM-Overlay-WMS"),
-             # layers = c("OSM-Overlay-WMS"),
              group = "wmsgroup",
              options = leaflet::WMSTileOptions(
                transparent = TRUE,
@@ -27,7 +26,6 @@ server <- function(input, output, session) {
                tiled = FALSE
              )) %>%
       addLayersControl(baseGroups = "base",
-                       # overlayGroups = c("wmsgroup"))
                        overlayGroups = c("TOPO-WMS","OSM-Overlay-WMS"))
 
   })
