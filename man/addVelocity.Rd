@@ -47,7 +47,7 @@ leaflet() \%>\%
 }
 }
 \seealso{
-https://github.com/danwild/leaflet-velocity
+\url{https://github.com/danwild/leaflet-velocity}
 
 Other Velocity Plugin: 
 \code{\link{removeVelocity}()},

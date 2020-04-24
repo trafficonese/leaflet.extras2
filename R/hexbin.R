@@ -38,7 +38,7 @@ hexbinDependency <- function() {
 #'
 #' @note Currently doesn't respect \code{layerId} nor \code{group}
 #'
-#' @seealso https://github.com/Asymmetrik/leaflet-d3#hexbins-api
+#' @seealso \url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
 #' @family Hexbin-D3 Plugin
 #' @export
 addHexbin <- function(

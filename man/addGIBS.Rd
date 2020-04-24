@@ -38,7 +38,7 @@ a Date vector of the same length}
 Add GIBS Layers
 }
 \seealso{
-https://github.com/aparshin/leaflet-GIBS
+\url{https://github.com/aparshin/leaflet-GIBS}
 
 Other GIBS Plugin: 
 \code{\link{setDate}()},

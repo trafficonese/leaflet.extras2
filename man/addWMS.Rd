@@ -48,6 +48,6 @@ initially, but can be overridden.}
 Add Queryable WMS Layer
 }
 \seealso{
-https://github.com/heigeo/leaflet.wms
+\url{https://github.com/heigeo/leaflet.wms}
 }
 \concept{WMS Plugin}

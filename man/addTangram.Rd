@@ -54,6 +54,6 @@ shinyApp(ui, server)
 }
 }
 \seealso{
-https://github.com/tangrams/tangram
+\url{https://github.com/tangrams/tangram}
 }
 \concept{Tangram Plugin}

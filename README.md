@@ -1,7 +1,10 @@
 # leaflet.extras2
 
+<!-- badges: start -->
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build Status](https://travis-ci.org/trafficonese/leaflet.extras2.svg?branch=master)](https://travis-ci.org/trafficonese/leaflet.extras2)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet.extras2)
+<!-- badges: end -->
 
 The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).
 

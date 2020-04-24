@@ -33,7 +33,7 @@ wmsDependency <- function() {
 #' @param popupOptions List of popup options. See
 #'   \code{\link[leaflet]{popupOptions}}. Default is NULL.
 #'
-#' @seealso https://github.com/heigeo/leaflet.wms
+#' @seealso \url{https://github.com/heigeo/leaflet.wms}
 #' @family WMS Plugin
 #' @export
 addWMS <- function(map, baseUrl, layers = "", group = NULL,

@@ -19,7 +19,7 @@ Add Leaflet Reachability Plugin Control. Based on the
  \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
 }
 \seealso{
-https://github.com/traffordDataLab/leaflet.reachability
+\url{https://github.com/traffordDataLab/leaflet.reachability}
 
 Other Reachability Plugin: 
 \code{\link{reachabilityOptions}()},

@@ -25,7 +25,7 @@ openweatherDependency <- function() {
 #'   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
 #'   Wind Speed. Please add your own images if you need some more.
 #'
-#' @seealso https://github.com/trafficonese/leaflet-openweathermap
+#' @seealso \url{https://github.com/trafficonese/leaflet-openweathermap}
 #' @family Openweather Plugin
 #' @export
 addOpenweatherTiles <- function(
@@ -115,7 +115,7 @@ openweatherOptions <-  function(showLegend = TRUE,
 #' @param options List of further options. See
 #'   \code{\link{openweatherCurrentOptions}}
 #'
-#' @seealso https://github.com/trafficonese/leaflet-openweathermap
+#' @seealso \url{https://github.com/trafficonese/leaflet-openweathermap}
 #' @family Openweather Plugin
 #' @export
 addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,

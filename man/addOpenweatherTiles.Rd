@@ -39,7 +39,7 @@ Out of the box a legend image is only available for Pressure,
   Wind Speed. Please add your own images if you need some more.
 }
 \seealso{
-https://github.com/trafficonese/leaflet-openweathermap
+\url{https://github.com/trafficonese/leaflet-openweathermap}
 
 Other Openweather Plugin: 
 \code{\link{addOpenweatherCurrent}()},

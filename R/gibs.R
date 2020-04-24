@@ -22,7 +22,7 @@ gibsDependency <- function() {
 #'   polygons) can share the same group name.
 #' @param opacity numeric value determining the opacity. If multiple
 #'   \code{layers} are added, you can add a numeric vector of the same length
-#' @seealso https://github.com/aparshin/leaflet-GIBS
+#' @seealso \url{https://github.com/aparshin/leaflet-GIBS}
 #' @family GIBS Plugin
 #' @export
 addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,

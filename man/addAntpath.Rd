@@ -101,7 +101,7 @@ Antpath behaviour. See \href{https://github.com/rubenspgcavalcante/leaflet-ant-p
 for further details.
 }
 \seealso{
-https://github.com/rubenspgcavalcante/leaflet-ant-path
+\url{https://github.com/rubenspgcavalcante/leaflet-ant-path}
 
 Other Antpath Plugin: 
 \code{\link{antpathOptions}()},

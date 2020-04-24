@@ -28,7 +28,7 @@ velocityDependencies <- function() {
 #'   \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
 #' @export
 #' @family Velocity Plugin
-#' @seealso https://github.com/danwild/leaflet-velocity
+#' @seealso \url{https://github.com/danwild/leaflet-velocity}
 #' @examples \dontrun{
 #' library(leaflet)
 #' library(leaflet.extras2)

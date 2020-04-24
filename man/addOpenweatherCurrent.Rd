@@ -29,7 +29,7 @@ addOpenweatherCurrent(
 Add current OpenWeatherMap Marker
 }
 \seealso{
-https://github.com/trafficonese/leaflet-openweathermap
+\url{https://github.com/trafficonese/leaflet-openweathermap}
 
 Other Openweather Plugin: 
 \code{\link{addOpenweatherTiles}()},

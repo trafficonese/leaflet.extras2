@@ -19,7 +19,7 @@ antpathDependency <- function() {
 #' @inheritParams leaflet::addPolylines
 #' @param options A named list of options. See \code{\link{antpathOptions}}
 #' @family Antpath Plugin
-#' @seealso https://github.com/rubenspgcavalcante/leaflet-ant-path
+#' @seealso \url{https://github.com/rubenspgcavalcante/leaflet-ant-path}
 #' @export
 addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
                        stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,

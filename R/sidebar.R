@@ -15,7 +15,7 @@ sidebar_deps <- function(mini = FALSE) {
 #' @param map A leaflet map widget
 #' @param id Id of the sidebar-div
 #' @param options A named list with \code{position} and \code{fit} elements.
-#' @seealso https://github.com/Turbo87/sidebar-v2
+#' @seealso \url{https://github.com/Turbo87/sidebar-v2}
 #' @family Sidebar Plugin
 #' @export
 addSidebar <- function(map, id = "sidebar",

@@ -61,7 +61,7 @@ waiting for the print.}
 easyPrint Options
 }
 \seealso{
-\href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
+\url{https://github.com/rowanwins/leaflet-easyPrint}
 
 Other EasyPrint Plugin: 
 \code{\link{addEasyprint}()},

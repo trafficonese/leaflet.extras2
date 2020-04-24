@@ -13,7 +13,7 @@ easyprintDependency <- function() {
 #' @param map the map to add easyPrint to.
 #' @param options A named list of options. See \code{\link{easyprintOptions}}
 #' @family EasyPrint Plugin
-#' @seealso \href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
+#' @seealso \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
 addEasyprint <- function(map, options = easyprintOptions()) {
   map$dependencies <- c(map$dependencies, easyprintDependency())
@@ -64,7 +64,7 @@ removeEasyprint <- function(map) {
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
 #' @family EasyPrint Plugin
-#' @seealso \href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
+#' @seealso \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
 easyprintOptions <- function(title = 'Print map',
                              position = 'topleft',

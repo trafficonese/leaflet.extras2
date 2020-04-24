@@ -17,7 +17,7 @@ addSidebar(map, id = "sidebar", options = list(position = "left", fit = TRUE))
 Adds a Sidebar Leaflet Control
 }
 \seealso{
-https://github.com/Turbo87/sidebar-v2
+\url{https://github.com/Turbo87/sidebar-v2}
 
 Other Sidebar Plugin: 
 \code{\link{closeSidebar}()},

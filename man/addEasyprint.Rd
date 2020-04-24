@@ -15,7 +15,7 @@ addEasyprint(map, options = easyprintOptions())
 Add easyPrint Plugin
 }
 \seealso{
-\href{https://github.com/rowanwins/leaflet-easyPrint}{leaflet-easyPrint}
+\url{https://github.com/rowanwins/leaflet-easyPrint}
 
 Other EasyPrint Plugin: 
 \code{\link{easyprintMap}()},
