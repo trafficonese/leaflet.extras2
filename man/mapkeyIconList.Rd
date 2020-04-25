@@ -13,20 +13,19 @@ mapkeyIconList(...)
 Make mapkey-icon set
 }
 \examples{
-
 iconSet = mapkeyIconList(
   red = makeMapkeyIcon(color = "#ff0000"),
   blue = makeMapkeyIcon(color = "#0000ff")
 )
-
 iconSet[c("red", "blue")]
-
 }
 \seealso{
-Other Mapkey Plugin: 
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
+
+Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

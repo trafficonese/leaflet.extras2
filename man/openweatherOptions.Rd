@@ -25,9 +25,9 @@ standard positions for Leaflet controls}
 OpenWeatherMap Options
 }
 \seealso{
-Other Openweather Plugin: 
+Other Openweathermap Functions: 
 \code{\link{addOpenweatherCurrent}()},
 \code{\link{addOpenweatherTiles}()},
 \code{\link{openweatherCurrentOptions}()}
 }
-\concept{Openweather Plugin}
+\concept{Openweathermap Functions}

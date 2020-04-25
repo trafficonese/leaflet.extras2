@@ -13,8 +13,8 @@ removePlayback(map)
 Remove the reachability controls
 }
 \seealso{
-Other Playback Plugin: 
+Other Playback Functions: 
 \code{\link{addPlayback}()},
 \code{\link{playbackOptions}()}
 }
-\concept{Playback Plugin}
+\concept{Playback Functions}

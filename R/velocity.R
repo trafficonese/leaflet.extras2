@@ -27,7 +27,7 @@ velocityDependencies <- function() {
 #' @description Add velocity animated data to leaflet. Based on the
 #'   \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
 #' @export
-#' @family Velocity Plugin
+#' @family Velocity Functions
 #' @seealso \url{https://github.com/danwild/leaflet-velocity}
 #' @examples \dontrun{
 #' library(leaflet)
@@ -76,7 +76,7 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
 #' @param ... Further arguments passed to the Velocity layer and Windy.js.
 #'   For more information, please visit \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
 #' @export
-#' @family Velocity Plugin
+#' @family Velocity Functions
 velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
                             minVelocity = 0,
                             maxVelocity = 10,
@@ -103,7 +103,7 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
 #' @param map the map widget
 #' @param group the group to remove
 #' @export
-#' @family Velocity Plugin
+#' @family Velocity Functions
 removeVelocity <- function(map, group){
   invokeMethod(map, NULL, "removeVelocity", group)
 }
@@ -113,7 +113,7 @@ removeVelocity <- function(map, group){
 #' @param layerId the layer id
 #' @param options see \code{\link{velocityOptions}}
 #' @export
-#' @family Velocity Plugin
+#' @family Velocity Functions
 setOptionsVelocity <- function(map, layerId, options){
   options <- filterNULL(options)
   invokeMethod(map, NULL, "setOptionsVelocity", layerId, options)

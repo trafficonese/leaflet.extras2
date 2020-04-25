@@ -52,9 +52,9 @@ SVG backend is used}
 Antpath Options
 }
 \seealso{
-Other Antpath Plugin: 
+Other Antpath Functions: 
 \code{\link{addAntpath}()},
 \code{\link{clearAntpath}()},
 \code{\link{removeAntpath}()}
 }
-\concept{Antpath Plugin}
+\concept{Antpath Functions}

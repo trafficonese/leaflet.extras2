@@ -50,4 +50,4 @@ Add Queryable WMS Layer
 \seealso{
 \url{https://github.com/heigeo/leaflet.wms}
 }
-\concept{WMS Plugin}
+\concept{WMS Functions}

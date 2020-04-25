@@ -15,11 +15,11 @@ openSidebar(map, id)
 Open the Sidebar
 }
 \seealso{
-Other Sidebar Plugin: 
+Other Sidebar Functions: 
 \code{\link{addSidebar}()},
 \code{\link{closeSidebar}()},
 \code{\link{removeSidebar}()},
 \code{\link{sidebar_pane}()},
 \code{\link{sidebar_tabs}()}
 }
-\concept{Sidebar Plugin}
+\concept{Sidebar Functions}

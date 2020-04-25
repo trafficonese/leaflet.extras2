@@ -24,11 +24,11 @@ sidebar_pane(
 Create a Sidebar Panel
 }
 \seealso{
-Other Sidebar Plugin: 
+Other Sidebar Functions: 
 \code{\link{addSidebar}()},
 \code{\link{closeSidebar}()},
 \code{\link{openSidebar}()},
 \code{\link{removeSidebar}()},
 \code{\link{sidebar_tabs}()}
 }
-\concept{Sidebar Plugin}
+\concept{Sidebar Functions}

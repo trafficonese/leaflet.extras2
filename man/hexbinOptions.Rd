@@ -54,11 +54,11 @@ append the string before the count. To disable tooltips, please pass
 hexbinOptions
 }
 \seealso{
-Other Hexbin-D3 Plugin: 
+Other Hexbin-D3 Functions: 
 \code{\link{addHexbin}()},
 \code{\link{clearHexbin}()},
 \code{\link{hideHexbin}()},
 \code{\link{showHexbin}()},
 \code{\link{updateHexbin}()}
 }
-\concept{Hexbin-D3 Plugin}
+\concept{Hexbin-D3 Functions}

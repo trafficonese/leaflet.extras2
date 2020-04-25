@@ -7,19 +7,28 @@
 addEasyprint(map, options = easyprintOptions())
 }
 \arguments{
-\item{map}{the map to add easyPrint to.}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}}}
 
 \item{options}{A named list of options. See \code{\link{easyprintOptions}}}
 }
 \description{
-Add easyPrint Plugin
+Print or export a map as .PNG
+}
+\examples{
+library(leaflet)
+leaflet()  \%>\%
+  addTiles() \%>\%
+  addEasyprint(options = easyprintOptions(
+    title = 'Print map',
+    position = 'bottomleft',
+    exportOnly = TRUE))
 }
 \seealso{
 \url{https://github.com/rowanwins/leaflet-easyPrint}
 
-Other EasyPrint Plugin: 
+Other EasyPrint Functions: 
 \code{\link{easyprintMap}()},
 \code{\link{easyprintOptions}()},
 \code{\link{removeEasyprint}()}
 }
-\concept{EasyPrint Plugin}
+\concept{EasyPrint Functions}

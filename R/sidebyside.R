@@ -24,10 +24,12 @@ sidebysideDependencies <- function() {
 #'   The plugin works with Panes, see the example.
 #' @note It is currently not working correctly if the \code{baseGroups} are defined in
 #'   \code{\link[leaflet]{addLayersControl}}.
-#' @export
-#' @family Sidebyside Plugin
+#' @family Sidebyside Functions
 #' @seealso \url{https://github.com/digidem/leaflet-side-by-side}
-#' @examples \dontrun{
+#' @export
+#' @examples
+#' #' ## Only run examples in interactive R sessions
+#' if (interactive()) {
 #' library(shiny)
 #' library(leaflet)
 #' library(leaflet.extras2)
@@ -64,6 +66,7 @@ sidebysideDependencies <- function() {
 #'
 #' shinyApp(ui, server)
 #' }
+#' }
 addSidebyside <- function(map, layerId = NULL,
                           leftId = NULL, rightId = NULL,
                           options = list(thumbSize = 42,
@@ -80,7 +83,7 @@ addSidebyside <- function(map, layerId = NULL,
 #' @export
 #' @param map a map widget
 #' @param layerId the layer id of the \code{\link{addSidebyside}} layer
-#' @family Sidebyside Plugin
+#' @family Sidebyside Functions
 removeSidebyside <- function(map, layerId = NULL){
   invokeMethod(map, NULL, "removeSidebyside", layerId)
 }

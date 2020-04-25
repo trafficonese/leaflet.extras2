@@ -27,8 +27,10 @@ Add extra options. For a full list please visit the
 \href{https://github.com/traffordDataLab/leaflet.reachability}{plugin repository}
 }
 \seealso{
-Other Reachability Plugin: 
+\url{https://github.com/traffordDataLab/leaflet.reachability}
+
+Other Reachability Functions: 
 \code{\link{addReachability}()},
 \code{\link{removeReachability}()}
 }
-\concept{Reachability Plugin}
+\concept{Reachability Functions}

@@ -10,7 +10,7 @@ LeafletWidget.methods.addPlayback= function(data, options) {
   if (data.type === undefined) {
     var kys = Object.keys(data);
     // Single JSON
-    if (kys.indexOf("time") === 0) {
+    if (kys.includes("time")) {
       data = {
           type: "Feature",
           geometry: {
@@ -96,9 +96,7 @@ LeafletWidget.methods.addPlayback= function(data, options) {
             popupAnchor: [icoli.popupAnchorX, icoli.popupAnchorY]
     });
     options.marker = function(featureData) {
-        return {
-            icon: madeIcon
-        };
+        return {icon: madeIcon};
     };
   }
 

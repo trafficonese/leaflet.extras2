@@ -25,7 +25,7 @@ tangram_deps <- function() {
 #'   for further information.
 #' @export
 #' @seealso \url{https://github.com/tangrams/tangram}
-#' @family Tangram Plugin
+#' @family Tangram Functions
 #' @examples \dontrun{
 #' library(shiny)
 #' library(leaflet)

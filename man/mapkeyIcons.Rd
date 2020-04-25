@@ -2,8 +2,7 @@
 % Please edit documentation in R/mapkeyIcon.R
 \name{mapkeyIcons}
 \alias{mapkeyIcons}
-\title{Create a list of mapkey icon data see
-\url{https://github.com/mapshakers/leaflet-mapkey-icon}}
+\title{Create a list of mapkey icon data}
 \usage{
 mapkeyIcons(
   icon = "mapkey",
@@ -51,19 +50,19 @@ icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
 }
 \examples{
-\dontrun{
 makeMapkeyIcon(icon = "traffic_signal",
                color = "#0000ff",
                iconSize = 12,
                boxShadow = FALSE,
                background="transparent")
 }
-}
 \seealso{
-Other Mapkey Plugin: 
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
+
+Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIconList}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

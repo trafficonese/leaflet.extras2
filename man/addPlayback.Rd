@@ -16,10 +16,9 @@ addPlayback(
 \arguments{
 \item{map}{a map widget}
 
-\item{data}{data can either be a matrix or data.frame with coordinates, a
-POINT Simple Feature or a list of POINT Simple Feature's. It can also be a
-JSON string which must be in a specific form. See the Details for further
-information.}
+\item{data}{data must be a POINT Simple Feature or a list of POINT Simple
+Feature's with a time column. It can also be a JSON string which must be in
+a specific form. See the Details for further information.}
 
 \item{time}{The column name of the time column. Default is \code{"time"}.}
 
@@ -62,9 +61,49 @@ If used in Shiny, you can listen to 2 events
  \item `map-ID`+"_pb_click"
 }
 }
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+library(sf)
+
+## Single Elements
+data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+data <- st_cast(data, "POINT")
+data$time = as.POSIXct(
+  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  addPlayback(data = data,
+              options = playbackOptions(radius = 3),
+              pathOptions = pathOptions(weight = 5))
+
+
+## Multiple Elements
+data <- sf::st_as_sf(leaflet::atlStorms2005[1:5,])
+data$Name <- as.character(data$Name)
+data <- st_cast(data, "POINT")
+data <- split(data, f = data$Name)
+lapply(1:length(data), function(x) {
+  data[[x]]$time <<- as.POSIXct(
+    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data[[x]])))
+})
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  addPlayback(data = data,
+              options = playbackOptions(radius = 3,
+                                        color = c("red","green","blue",
+                                                  "orange","yellow")),
+              pathOptions = pathOptions(weight = 5))
+}
+}
 \seealso{
-Other Playback Plugin: 
+\url{https://github.com/hallahan/LeafletPlayback}
+
+Other Playback Functions: 
 \code{\link{playbackOptions}()},
 \code{\link{removePlayback}()}
 }
-\concept{Playback Plugin}
+\concept{Playback Functions}

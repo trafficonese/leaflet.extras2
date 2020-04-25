@@ -11,15 +11,15 @@ setTransparent(map, layers = NULL, transparent = TRUE)
 
 \item{layers}{vector of GIBS-layers. See \code{\link{gibs_layers}}}
 
-\item{transparent}{Should the layer be set `transparent`. If multiple
+\item{transparent}{Should the layer be transparent. If multiple
 \code{layers} are added, you can add a boolean vector of the same length}
 }
 \description{
 Set Transparency for GIBS Layers
 }
 \seealso{
-Other GIBS Plugin: 
+Other GIBS Functions: 
 \code{\link{addGIBS}()},
 \code{\link{setDate}()}
 }
-\concept{GIBS Plugin}
+\concept{GIBS Functions}

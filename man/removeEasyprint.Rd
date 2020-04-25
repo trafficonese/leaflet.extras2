@@ -2,7 +2,7 @@
 % Please edit documentation in R/easyprint.R
 \name{removeEasyprint}
 \alias{removeEasyprint}
-\title{easyprintMapremoveEasyprint}
+\title{removeEasyprint}
 \usage{
 removeEasyprint(map)
 }
@@ -10,12 +10,12 @@ removeEasyprint(map)
 \item{map}{the map widget}
 }
 \description{
-easyprintMapremoveEasyprint
+removeEasyprint
 }
 \seealso{
-Other EasyPrint Plugin: 
+Other EasyPrint Functions: 
 \code{\link{addEasyprint}()},
 \code{\link{easyprintMap}()},
 \code{\link{easyprintOptions}()}
 }
-\concept{EasyPrint Plugin}
+\concept{EasyPrint Functions}

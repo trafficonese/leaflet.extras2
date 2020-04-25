@@ -13,7 +13,7 @@ openweatherDependency <- function() {
 
 #' Add OpenWeatherMap Tiles
 #' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param apikey a valid Openweathermap-API key. Get one from
+#' @param apikey a valid OpenWeatherMap-API key. Get one from
 #'   \href{https://openweathermap.org/api}{here}.
 #' @param layers character vector of layers you wish to add to the map
 #' @param group name of the group
@@ -26,8 +26,18 @@ openweatherDependency <- function() {
 #'   Wind Speed. Please add your own images if you need some more.
 #'
 #' @seealso \url{https://github.com/trafficonese/leaflet-openweathermap}
-#' @family Openweather Plugin
+#' @family Openweathermap Functions
 #' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+#'
+#' leaflet()  %>%
+#'   addTiles() %>% setView(9, 50, 6) %>%
+#'   addOpenweatherTiles(layers = "wind")
+#' }
 addOpenweatherTiles <- function(
   map, apikey = NULL, layers = NULL,
   group = NULL, layerId = NULL, opacity = 0.5,
@@ -64,11 +74,15 @@ addOpenweatherTiles <- function(
               "The `layers`-names are taken instead.")
       layerId <- layers
     }
+  } else {
+    layerId <- layers
   }
   if (!is.null(group)) {
     if (length(group) == 1 && length(layers) > 1) {
       group <- rep(group, length(layers))[seq.int(layers)]
     }
+  } else {
+    group = layers
   }
 
   options <- c(appId = apikey,
@@ -81,8 +95,6 @@ addOpenweatherTiles <- function(
                group, layerId, options)
 }
 
-
-
 #' OpenWeatherMap Options
 #' @param showLegend If true and option 'legendImagePath' is set there will be a
 #'   legend image on the map.
@@ -91,7 +103,7 @@ addOpenweatherTiles <- function(
 #'   to this layer.
 #' @param legendPosition Position of the legend images on the map. Available are
 #'   standard positions for Leaflet controls
-#' @family Openweather Plugin
+#' @family Openweathermap Functions
 #' @export
 openweatherOptions <-  function(showLegend = TRUE,
                                 legendImagePath = NULL,
@@ -105,7 +117,6 @@ openweatherOptions <-  function(showLegend = TRUE,
   ))
 }
 
-
 #' Add current OpenWeatherMap Marker
 #' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
 #' @param apikey a valid Openweathermap-API key. Get one from
@@ -116,8 +127,22 @@ openweatherOptions <-  function(showLegend = TRUE,
 #'   \code{\link{openweatherCurrentOptions}}
 #'
 #' @seealso \url{https://github.com/trafficonese/leaflet-openweathermap}
-#' @family Openweather Plugin
+#' @note The current weather icons will appear beginning with zoom level 9
+#' and if used in Shiny, a click on an icon will update a Shiny input at
+#' \code{input$MAPID_owm_click}.
+#' @family Openweathermap Functions
 #' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+#'
+#' leaflet()  %>%
+#'   addTiles() %>% setView(9, 50, 9) %>%
+#'   addOpenweatherCurrent(options = openweatherCurrentOptions(
+#'     lang = "en", popup = TRUE))
+#' }
 addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
                                   layerId = NULL,
                                   options = openweatherCurrentOptions()) {
@@ -139,7 +164,6 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
   invokeMethod(map, NULL, "addOpenweatherCurrent", group, layerId, options)
 }
 
-
 #' openweatherCurrentOptions
 #' @param lang 'en', 'de', 'ru', 'fr', 'es', 'ca'. Language of popup texts.
 #'   Note: not every translation is finished yet.
@@ -150,13 +174,12 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 #' @param ... Further options passed to \code{L.OWM.current}. See the
 #'   \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
 #'   list of options}
-#' @family Openweather Plugin
+#' @family Openweathermap Functions
 #' @export
 openweatherCurrentOptions <-  function(lang = "en",
                                        minZoom = 7,
                                        interval = 10,
-                                       ...
-                                       ) {
+                                       ...) {
   leaflet::filterNULL(list(
     lang = lang,
     minZoom = minZoom,

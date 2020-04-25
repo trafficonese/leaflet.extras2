@@ -10,47 +10,88 @@ easyprintDependency <- function() {
 }
 
 #' Add easyPrint Plugin
-#' @param map the map to add easyPrint to.
+#'
+#' Print or export a map as .PNG
+#' @param map a map widget object created from \code{\link[leaflet]{leaflet}}
 #' @param options A named list of options. See \code{\link{easyprintOptions}}
-#' @family EasyPrint Plugin
+#' @family EasyPrint Functions
 #' @seealso \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
+#' @examples
+#' library(leaflet)
+#' leaflet()  %>%
+#'   addTiles() %>%
+#'   addEasyprint(options = easyprintOptions(
+#'     title = 'Print map',
+#'     position = 'bottomleft',
+#'     exportOnly = TRUE))
 addEasyprint <- function(map, options = easyprintOptions()) {
   map$dependencies <- c(map$dependencies, easyprintDependency())
   leaflet::invokeMethod(map, NULL, "addEasyprint", options)
 }
 
 #' easyprintMap
+#'
+#' Print a Map programmatically
 #' @param map the map widget
-#' @param sizeModes Options available include Current, A4Portrait, A4Landscape
-#'   or a custom size object. Default is \code{A4Portrait}
-#' @param filename Name of the file if export only option set to TRUE
-#' @family EasyPrint Plugin
+#' @param sizeModes Options available include CurrentSize, A4Portrait,
+#'   A4Landscape or a custom size object. Default is \code{A4Portrait}
+#' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}.
+#' @family EasyPrint Functions
 #' @export
+#' @examples
+#' ## Only run examples in interactive R sessions
+#' if (interactive()) {
+#' library(shiny)
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' ui <- fluidPage(
+#'   leafletOutput("map"),
+#'   selectInput("scene", "Select Scene", choices = c("CurrentSize", "A4Landscape", "A4Portrait")),
+#'   actionButton("print", "Print Map")
+#' )
+#'
+#' server <- function(input, output, session) {
+#'   output$map <- renderLeaflet({
+#'     input$print
+#'     leaflet()  %>%
+#'       addTiles() %>%
+#'       setView(10, 50, 9) %>%
+#'       addEasyprint(options = easyprintOptions(
+#'         exportOnly = TRUE
+#'       ))
+#' })
+#'   observeEvent(input$print, {
+#'     leafletProxy("map") %>%
+#'       easyprintMap(sizeModes = input$scene)
+#' })
+#' }
+#'
+#' shinyApp(ui, server)
+#' }
 easyprintMap <- function(map, sizeModes = "A4Portrait", filename = "map") {
   leaflet::invokeMethod(map, NULL, "easyprintMap", sizeModes, filename)
 }
 
-#' easyprintMapremoveEasyprint
+#' removeEasyprint
 #' @param map the map widget
-#' @family EasyPrint Plugin
+#' @family EasyPrint Functions
 #' @export
 removeEasyprint <- function(map) {
   leaflet::invokeMethod(map, NULL, "removeEasyprint")
 }
 
-
-
 #' easyPrint Options
 #' @param title Sets the text which appears as the tooltip of the print/export button
 #' @param position Positions the print button
-#' @param sizeModes Options available include CurrentSize, A4Portrait, A4Landscape
-#'   or a custom size object
+#' @param sizeModes Options available include CurrentSize, A4Portrait,
+#'   A4Landscape or a custom size object.
 #' @param defaultSizeTitles button tooltips for the default page sizes
 #' @param exportOnly 	If set to true the map is exported to a png file
 #' @param tileLayer A tile layer that you can wait for to draw (helpful when resizing)
 #' @param tileWait How long to wait for the tiles to draw (helpful when resizing)
-#' @param filename Name of the file if export only option set to TRUE
+#' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}
 #' @param hidden Set to true if you don't want to display the toolbar.
 #'   Instead you can create your own buttons or fire print events programmatically.
 #'   You still need to call addTo(map) to set the leaflet map context.
@@ -63,7 +104,7 @@ removeEasyprint <- function(map) {
 #' @param spinnerBgColor A valid css colour for the spinner background color.
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
-#' @family EasyPrint Plugin
+#' @family EasyPrint Functions
 #' @seealso \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
 easyprintOptions <- function(title = 'Print map',

@@ -13,8 +13,8 @@ removeReachability(map)
 Remove the reachability controls
 }
 \seealso{
-Other Reachability Plugin: 
+Other Reachability Functions: 
 \code{\link{addReachability}()},
 \code{\link{reachabilityOptions}()}
 }
-\concept{Reachability Plugin}
+\concept{Reachability Functions}

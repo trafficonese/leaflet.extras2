@@ -32,9 +32,9 @@ For more information, please visit \href{https://github.com/danwild/leaflet-velo
 Define further options for the velocity layer.
 }
 \seealso{
-Other Velocity Plugin: 
+Other Velocity Functions: 
 \code{\link{addVelocity}()},
 \code{\link{removeVelocity}()},
 \code{\link{setOptionsVelocity}()}
 }
-\concept{Velocity Plugin}
+\concept{Velocity Functions}

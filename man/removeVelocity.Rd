@@ -15,9 +15,9 @@ removeVelocity(map, group)
 removeVelocity
 }
 \seealso{
-Other Velocity Plugin: 
+Other Velocity Functions: 
 \code{\link{addVelocity}()},
 \code{\link{setOptionsVelocity}()},
 \code{\link{velocityOptions}()}
 }
-\concept{Velocity Plugin}
+\concept{Velocity Functions}

@@ -18,9 +18,26 @@ reachabilityDependencies <- function() {
 #' @param options see \code{\link{reachabilityOptions}}
 #' @description Add Leaflet Reachability Plugin Control. Based on the
 #'  \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
-#' @export
+#' @note When used in Shiny, 3 events update a certain shiny Input:
+#' \enumerate{
+#'   \item reachability:displayed updates \code{input$MAPID_reachability_displayed}
+#'   \item reachability:delete updates \code{input$MAPID_reachability_delete}
+#'   \item reachability:error updates \code{input$MAPID_reachability_error}
+#' }
+#' @family Reachability Functions
 #' @seealso \url{https://github.com/traffordDataLab/leaflet.reachability}
-#' @family Reachability Plugin
+#' @export
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' Sys.setenv("OPRS" = 'Your_API_Key')
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   setView(8, 50, 10) %>%
+#'   addReachability()
+#' }
 addReachability <- function(map, apikey = NULL,
                             options = reachabilityOptions()){
   if (is.null(apikey)) {
@@ -45,8 +62,9 @@ addReachability <- function(map, apikey = NULL,
 #' @param ... Further arguments passed to `L.Control.Reachability`
 #' @description Add extra options. For a full list please visit the
 #' \href{https://github.com/traffordDataLab/leaflet.reachability}{plugin repository}
+#' @family Reachability Functions
+#' @seealso \url{https://github.com/traffordDataLab/leaflet.reachability}
 #' @export
-#' @family Reachability Plugin
 reachabilityOptions = function(collapsed = TRUE,
                                pane = "overlayPane",
                                position = "topleft",
@@ -63,7 +81,7 @@ reachabilityOptions = function(collapsed = TRUE,
 #' @param map the map widget.
 #' @description Remove the reachability controls
 #' @export
-#' @family Reachability Plugin
+#' @family Reachability Functions
 removeReachability <- function(map){
   invokeMethod(map, NULL, "removeReachability")
 }

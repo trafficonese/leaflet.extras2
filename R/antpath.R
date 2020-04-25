@@ -12,15 +12,20 @@ antpathDependency <- function() {
 #' Add Antpath Lines
 #'
 #' Can be used almost exactly like \code{addPolylines} but instead of
-#' \code{pathOptions} you can use \code{\link{antpathOptions}}, to adapt the
-#' Antpath behaviour. See \href{https://github.com/rubenspgcavalcante/leaflet-ant-path}{leaflet-ant-path}
+#' \code{pathOptions} you can use \code{\link{antpathOptions}} to adapt the
+#' Antpath behaviour. See
+#' \href{https://github.com/rubenspgcavalcante/leaflet-ant-path}{leaflet-ant-path}
 #' for further details.
 #'
 #' @inheritParams leaflet::addPolylines
 #' @param options A named list of options. See \code{\link{antpathOptions}}
-#' @family Antpath Plugin
+#' @family Antpath Functions
 #' @seealso \url{https://github.com/rubenspgcavalcante/leaflet-ant-path}
 #' @export
+#' @examples
+#' library(leaflet)
+#' leaflet() %>%
+#'   addAntpath(data = atlStorms2005)
 addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
                        stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,
                        fill = FALSE, fillColor = color, fillOpacity = 0.2, dashArray = NULL,
@@ -59,7 +64,7 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL
 #'   acceleration. Default is \code{FALSE}
 #' @param dashArray The size of the animated dashes. Default is \code{c(10, 20)}
 #' @param pulseColor Adds a color to the dashed flux. Default is \code{#ffffff}
-#' @family Antpath Plugin
+#' @family Antpath Functions
 #' @export
 antpathOptions = function(
   delay = 400,
@@ -89,7 +94,7 @@ antpathOptions = function(
 
 #' Remove one or more Antpaths from a map, identified by \code{layerId}.
 #' @inheritParams leaflet::removeShape
-#' @family Antpath Plugin
+#' @family Antpath Functions
 #' @export
 removeAntpath <- function(map, layerId = NULL) {
   invokeMethod(map, NULL, "removeAntpath", layerId)
@@ -97,7 +102,7 @@ removeAntpath <- function(map, layerId = NULL) {
 
 #' Clear all Antpaths
 #' @inheritParams leaflet::clearShapes
-#' @family Antpath Plugin
+#' @family Antpath Functions
 #' @export
 clearAntpath <- function(map) {
   invokeMethod(map, NULL, "clearAntpath")

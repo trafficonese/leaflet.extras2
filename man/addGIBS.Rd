@@ -31,17 +31,31 @@ a Date vector of the same length}
 \item{opacity}{numeric value determining the opacity. If multiple
 \code{layers} are added, you can add a numeric vector of the same length}
 
-\item{transparent}{Should the layer be set `transparent`. If multiple
+\item{transparent}{Should the layer be transparent. If multiple
 \code{layers} are added, you can add a boolean vector of the same length}
 }
 \description{
 Add GIBS Layers
 }
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+layers <- gibs_layers$title[c(35, 128, 185)]
+
+leaflet()  \%>\%
+  addTiles() \%>\%
+  setView(9, 50, 4) \%>\%
+  addGIBS(layers = layers,
+          dates = Sys.Date() - 1,
+          group = layers) \%>\%
+  addLayersControl(overlayGroups = layers)
+}
 \seealso{
 \url{https://github.com/aparshin/leaflet-GIBS}
 
-Other GIBS Plugin: 
+Other GIBS Functions: 
 \code{\link{setDate}()},
 \code{\link{setTransparent}()}
 }
-\concept{GIBS Plugin}
+\concept{GIBS Functions}

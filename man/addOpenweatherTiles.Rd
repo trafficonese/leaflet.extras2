@@ -17,7 +17,7 @@ addOpenweatherTiles(
 \arguments{
 \item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
 
-\item{apikey}{a valid Openweathermap-API key. Get one from
+\item{apikey}{a valid OpenWeatherMap-API key. Get one from
 \href{https://openweathermap.org/api}{here}.}
 
 \item{layers}{character vector of layers you wish to add to the map}
@@ -38,12 +38,24 @@ Out of the box a legend image is only available for Pressure,
   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
   Wind Speed. Please add your own images if you need some more.
 }
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+
+leaflet()  \%>\%
+  addTiles() \%>\% setView(9, 50, 6) \%>\%
+  addOpenweatherTiles(layers = "wind")
+}
+}
 \seealso{
 \url{https://github.com/trafficonese/leaflet-openweathermap}
 
-Other Openweather Plugin: 
+Other Openweathermap Functions: 
 \code{\link{addOpenweatherCurrent}()},
 \code{\link{openweatherCurrentOptions}()},
 \code{\link{openweatherOptions}()}
 }
-\concept{Openweather Plugin}
+\concept{Openweathermap Functions}

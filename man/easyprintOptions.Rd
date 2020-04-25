@@ -26,8 +26,8 @@ easyprintOptions(
 
 \item{position}{Positions the print button}
 
-\item{sizeModes}{Options available include CurrentSize, A4Portrait, A4Landscape
-or a custom size object}
+\item{sizeModes}{Options available include CurrentSize, A4Portrait,
+A4Landscape or a custom size object.}
 
 \item{defaultSizeTitles}{button tooltips for the default page sizes}
 
@@ -37,7 +37,7 @@ or a custom size object}
 
 \item{tileWait}{How long to wait for the tiles to draw (helpful when resizing)}
 
-\item{filename}{Name of the file if export only option set to TRUE}
+\item{filename}{Name of the file if \code{exportOnly} option is \code{TRUE}}
 
 \item{hidden}{Set to true if you don't want to display the toolbar.
 Instead you can create your own buttons or fire print events programmatically.
@@ -63,9 +63,9 @@ easyPrint Options
 \seealso{
 \url{https://github.com/rowanwins/leaflet-easyPrint}
 
-Other EasyPrint Plugin: 
+Other EasyPrint Functions: 
 \code{\link{addEasyprint}()},
 \code{\link{easyprintMap}()},
 \code{\link{removeEasyprint}()}
 }
-\concept{EasyPrint Plugin}
+\concept{EasyPrint Functions}

@@ -28,12 +28,30 @@ addOpenweatherCurrent(
 \description{
 Add current OpenWeatherMap Marker
 }
+\note{
+The current weather icons will appear beginning with zoom level 9
+and if used in Shiny, a click on an icon will update a Shiny input at
+\code{input$MAPID_owm_click}.
+}
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+
+leaflet()  \%>\%
+  addTiles() \%>\% setView(9, 50, 9) \%>\%
+  addOpenweatherCurrent(options = openweatherCurrentOptions(
+    lang = "en", popup = TRUE))
+}
+}
 \seealso{
 \url{https://github.com/trafficonese/leaflet-openweathermap}
 
-Other Openweather Plugin: 
+Other Openweathermap Functions: 
 \code{\link{addOpenweatherTiles}()},
 \code{\link{openweatherCurrentOptions}()},
 \code{\link{openweatherOptions}()}
 }
-\concept{Openweather Plugin}
+\concept{Openweathermap Functions}

@@ -18,11 +18,19 @@ addReachability(map, apikey = NULL, options = reachabilityOptions())
 Add Leaflet Reachability Plugin Control. Based on the
  \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
 }
+\note{
+When used in Shiny, 3 events update a certain shiny Input:
+\enumerate{
+  \item reachability:displayed updates \code{input$MAPID_reachability_displayed}
+  \item reachability:delete updates \code{input$MAPID_reachability_delete}
+  \item reachability:error updates \code{input$MAPID_reachability_error}
+}
+}
 \seealso{
 \url{https://github.com/traffordDataLab/leaflet.reachability}
 
-Other Reachability Plugin: 
+Other Reachability Functions: 
 \code{\link{reachabilityOptions}()},
 \code{\link{removeReachability}()}
 }
-\concept{Reachability Plugin}
+\concept{Reachability Functions}

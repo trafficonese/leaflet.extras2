@@ -73,22 +73,28 @@ initially, but can be overridden}
 Add mapkey Markers
 }
 \examples{
-leaflet() \%>\%
+library(leaflet)
+
+leaflet()  \%>\%
   addTiles() \%>\%
-  addMapkeyMarkers(
-    lng = -118.456554, lat = 34.078039,
-    label = "This is a label",
-    icon = makeMapkeyIcon(icon = "school")
-  )
+  addMapkeyMarkers(data = breweries91,
+                icon = makeMapkeyIcon(icon = "mapkey",
+                                      iconSize = 30,
+                                      boxShadow = FALSE,
+                                      background = "transparent"),
+                group = "mapkey",
+                label = ~state, popup = ~village)
 
 ## for more examples see
 # browseURL(system.file("examples/mapkeyIcons.R", package = "leaflet.extras2"))
 }
 \seealso{
-Other Mapkey Plugin: 
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
+
+Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIconList}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

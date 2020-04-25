@@ -24,9 +24,9 @@ list of options}}
 openweatherCurrentOptions
 }
 \seealso{
-Other Openweather Plugin: 
+Other Openweathermap Functions: 
 \code{\link{addOpenweatherCurrent}()},
 \code{\link{addOpenweatherTiles}()},
 \code{\link{openweatherOptions}()}
 }
-\concept{Openweather Plugin}
+\concept{Openweathermap Functions}

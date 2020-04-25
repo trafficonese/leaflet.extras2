@@ -1,6 +1,10 @@
 LeafletWidget.methods.addOpenweather = function(layers, group, layerId, options) {
   var map = this;
   var owm;
+  // If 1 layer only, convert to Array
+  if (typeof layers == "string") {
+    layers = [layers];
+  }
   for (var i = 0; i < layers.length; i++) {
     var name = layers[i];
     owm = L.OWM[name](options);
@@ -23,12 +27,14 @@ LeafletWidget.methods.addOpenweatherCurrent = function(group, layerId, options) 
     					});
     		var marker = L.marker([station.coord.Lat, station.coord.Lon], {icon: icon})
     		              .on("click", function(x) {
-    		                var obj = {
-    		                  lat: x.latlng.lat,
-    		                  lng: x.latlng.lng,
-    		                  content: x.target._popup._content
-    		                };
-    		                Shiny.setInputValue(this._map.id + "_owm_click", obj, {priority: "event"});
+    		                if (HTMLWidgets.shinyMode) {
+      		                var obj = {
+      		                  lat: x.latlng.lat,
+      		                  lng: x.latlng.lng,
+      		                  content: x.target._popup._content
+      		                };
+    		                  Shiny.setInputValue(this._map.id + "_owm_click", obj, {priority: "event"});
+    		                }
     		              });
     		return marker;
     	}

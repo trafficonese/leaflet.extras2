@@ -47,19 +47,35 @@ default, it is the data object provided to leaflet() initially, but can be
 overridden.}
 }
 \description{
-Add a Hexbin layer
+Visualize data with hexbin-based bins
 }
 \note{
 Currently doesn't respect \code{layerId} nor \code{group}
 }
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+n <- 1000
+df <- data.frame(lat = rnorm(n, 42.0285, .01),
+                 lng = rnorm(n, -93.65, .01))
+
+leaflet()  \%>\%
+  addTiles() \%>\%
+  addHexbin(lng = df$lng, lat = df$lat,
+            options = hexbinOptions(
+               colorRange = c("red", "yellow", "blue"),
+               radiusRange = c(10, 20)
+           ))
+}
 \seealso{
 \url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
 
-Other Hexbin-D3 Plugin: 
+Other Hexbin-D3 Functions: 
 \code{\link{clearHexbin}()},
 \code{\link{hexbinOptions}()},
 \code{\link{hideHexbin}()},
 \code{\link{showHexbin}()},
 \code{\link{updateHexbin}()}
 }
-\concept{Hexbin-D3 Plugin}
+\concept{Hexbin-D3 Functions}

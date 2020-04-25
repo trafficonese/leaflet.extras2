@@ -18,8 +18,8 @@ a Date vector of the same length}
 Set Date for GIBS Layers
 }
 \seealso{
-Other GIBS Plugin: 
+Other GIBS Functions: 
 \code{\link{addGIBS}()},
 \code{\link{setTransparent}()}
 }
-\concept{GIBS Plugin}
+\concept{GIBS Functions}

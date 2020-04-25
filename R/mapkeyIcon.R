@@ -1,4 +1,3 @@
-
 mapkeyIconDependency <- function() {
   list(
     htmltools::htmlDependency(
@@ -12,21 +11,17 @@ mapkeyIconDependency <- function() {
   )
 }
 
-
 #' Make mapkey-icon set
-#'
 #' @param ... icons created from \code{\link{makeMapkeyIcon}()}
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #' @export
 #' @examples
-#'
 #' iconSet = mapkeyIconList(
 #'   red = makeMapkeyIcon(color = "#ff0000"),
 #'   blue = makeMapkeyIcon(color = "#0000ff")
 #' )
-#'
 #' iconSet[c("red", "blue")]
-#'
 mapkeyIconList = function(...) {
   res = structure(
     list(...),
@@ -42,7 +37,8 @@ mapkeyIconList = function(...) {
 #' @param x icons
 #' @param i offset
 #' @export
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 `[.leaflet_mapkey_icon_set` = function(x, i) {
   if (is.factor(i)) {
     i = as.character(i)
@@ -78,10 +74,10 @@ mapkeyIconSetToMapkeyIcons = function(x) {
 }
 
 #' Make mapkey Icon
-#'
 #' @inheritParams mapkeyIcons
 #' @export
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 makeMapkeyIcon <- function(
   icon = 'mapkey',
   color = "#ff0000",
@@ -111,8 +107,7 @@ makeMapkeyIcon <- function(
   structure(icon, class = "leaflet_mapkey_icon")
 }
 
-#' Create a list of mapkey icon data see
-#' \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' Create a list of mapkey icon data
 #'
 #' An icon can be represented as a list of the form \code{list(color, iconSize,
 #' ...)}. This function is vectorized over its arguments to create a list of
@@ -132,14 +127,14 @@ makeMapkeyIcon <- function(
 #'   See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information
 #' @param boxShadow Should a shadow be visible.
 #' @export
-#' @family Mapkey Plugin
-#' @examples \dontrun{
+#' @family Mapkey Functions
+#' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' @examples
 #' makeMapkeyIcon(icon = "traffic_signal",
 #'                color = "#0000ff",
 #'                iconSize = 12,
 #'                boxShadow = FALSE,
 #'                background="transparent")
-#' }
 mapkeyIcons <- function(
   icon = 'mapkey',
   color = "#ff0000",
@@ -202,16 +197,21 @@ mapkeyIcons <- function(
 #' @param clusterId the id for the marker cluster layer
 #' @param options a list of extra options for tile layers, popups, paths
 #'   (circles, rectangles, polygons, ...), or other map elements
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #' @export
 #' @examples
-#' leaflet() %>%
+#' library(leaflet)
+#'
+#' leaflet()  %>%
 #'   addTiles() %>%
-#'   addMapkeyMarkers(
-#'     lng = -118.456554, lat = 34.078039,
-#'     label = "This is a label",
-#'     icon = makeMapkeyIcon(icon = "school")
-#'   )
+#'   addMapkeyMarkers(data = breweries91,
+#'                 icon = makeMapkeyIcon(icon = "mapkey",
+#'                                       iconSize = 30,
+#'                                       boxShadow = FALSE,
+#'                                       background = "transparent"),
+#'                 group = "mapkey",
+#'                 label = ~state, popup = ~village)
 #'
 #' ## for more examples see
 #' # browseURL(system.file("examples/mapkeyIcons.R", package = "leaflet.extras2"))

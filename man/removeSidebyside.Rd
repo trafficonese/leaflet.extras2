@@ -15,7 +15,7 @@ removeSidebyside(map, layerId = NULL)
 removeSidebyside
 }
 \seealso{
-Other Sidebyside Plugin: 
+Other Sidebyside Functions: 
 \code{\link{addSidebyside}()}
 }
-\concept{Sidebyside Plugin}
+\concept{Sidebyside Functions}

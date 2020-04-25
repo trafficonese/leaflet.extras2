@@ -12,8 +12,10 @@ gibsDependency <- function() {
 }
 
 #' Add GIBS Layers
-#' @inheritParams setTransparent
-#' @inheritParams setDate
+#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
+#' @param layers vector of GIBS-layers. See \code{\link{gibs_layers}}
+#' @param dates Date object. If multiple \code{layers} are added, you can add
+#'   a Date vector of the same length
 #' @param group the name of the group the newly created layers should belong to
 #'   (for\code{\link[leaflet]{clearGroup}} and
 #'   \code{\link[leaflet]{addLayersControl}} purposes). Human-friendly group
@@ -22,9 +24,24 @@ gibsDependency <- function() {
 #'   polygons) can share the same group name.
 #' @param opacity numeric value determining the opacity. If multiple
 #'   \code{layers} are added, you can add a numeric vector of the same length
+#' @param transparent Should the layer be transparent. If multiple
+#'   \code{layers} are added, you can add a boolean vector of the same length
 #' @seealso \url{https://github.com/aparshin/leaflet-GIBS}
-#' @family GIBS Plugin
+#' @family GIBS Functions
 #' @export
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' layers <- gibs_layers$title[c(35, 128, 185)]
+#'
+#' leaflet()  %>%
+#'   addTiles() %>%
+#'   setView(9, 50, 4) %>%
+#'   addGIBS(layers = layers,
+#'           dates = Sys.Date() - 1,
+#'           group = layers) %>%
+#'   addLayersControl(overlayGroups = layers)
 addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
                     opacity = 0.5, transparent = TRUE) {
 
@@ -33,7 +50,7 @@ addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
     stop("You must define one or multiple `layers`.\n",
          "See `gibs_layers` for a list of all available layers and their attributes.")
   if (is.null(dates))
-    stop("You must define one or multiple `dates`.")
+    stop("You must define one or multiple `dates` for each layer.")
 
   ## Check if layers exist ######################
   if (!all(layers %in% gibs_layers$title)) {
@@ -58,9 +75,6 @@ addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
     if (lenlay != length(transparent)) {
       transparent <- rep(transparent, lenlay)[seqlen]
     }
-    if (lenlay != length(group) || lenlay != length(dates) || lenlay != length(opacity)) {
-      browser()
-    }
   }
 
   ## Add deps ################
@@ -70,13 +84,9 @@ addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
   invokeMethod(map, getMapData(map), "addGIBS", layers, group, dates, opacity, transparent)
 }
 
-
 #' Set Date for GIBS Layers
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param layers vector of GIBS-layers. See \code{\link{gibs_layers}}
-#' @param dates Date object. If multiple \code{layers} are added, you can add
-#'   a Date vector of the same length
-#' @family GIBS Plugin
+#' @inheritParams addGIBS
+#' @family GIBS Functions
 #' @export
 setDate <- function(map, layers = NULL, dates = NULL) {
   ## Check required args ######################
@@ -91,11 +101,8 @@ setDate <- function(map, layers = NULL, dates = NULL) {
 }
 
 #' Set Transparency for GIBS Layers
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param layers vector of GIBS-layers. See \code{\link{gibs_layers}}
-#' @param transparent Should the layer be set `transparent`. If multiple
-#'   \code{layers} are added, you can add a boolean vector of the same length
-#' @family GIBS Plugin
+#' @inheritParams addGIBS
+#' @family GIBS Functions
 #' @export
 setTransparent <- function(map, layers = NULL, transparent = TRUE) {
   ## Check required args ######################

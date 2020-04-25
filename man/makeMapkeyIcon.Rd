@@ -47,10 +47,12 @@ See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
 Make mapkey Icon
 }
 \seealso{
-Other Mapkey Plugin: 
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
+
+Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},
 \code{\link{mapkeyIconList}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

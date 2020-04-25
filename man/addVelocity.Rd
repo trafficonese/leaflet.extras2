@@ -49,9 +49,9 @@ leaflet() \%>\%
 \seealso{
 \url{https://github.com/danwild/leaflet-velocity}
 
-Other Velocity Plugin: 
+Other Velocity Functions: 
 \code{\link{removeVelocity}()},
 \code{\link{setOptionsVelocity}()},
 \code{\link{velocityOptions}()}
 }
-\concept{Velocity Plugin}
+\concept{Velocity Functions}

@@ -12,10 +12,9 @@ playbackDependencies <- function() {
 #' Add Playback to Leaflet
 #'
 #' @param map a map widget
-#' @param data data can either be a matrix or data.frame with coordinates, a
-#'   POINT Simple Feature or a list of POINT Simple Feature's. It can also be a
-#'   JSON string which must be in a specific form. See the Details for further
-#'   information.
+#' @param data data must be a POINT Simple Feature or a list of POINT Simple
+#'   Feature's with a time column. It can also be a JSON string which must be in
+#'   a specific form. See the Details for further information.
 #' @param time The column name of the time column. Default is \code{"time"}.
 #' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
 #' @param pathOptions style the CircleMarker with
@@ -47,15 +46,51 @@ playbackDependencies <- function() {
 #'  \item `map-ID`+"_pb_mouseover"
 #'  \item `map-ID`+"_pb_click"
 #' }
+#' @family Playback Functions
+#' @seealso \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
-#' @family Playback Plugin
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras2)
+#' library(sf)
+#'
+#' ## Single Elements
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+#' data <- st_cast(data, "POINT")
+#' data$time = as.POSIXct(
+#'   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addPlayback(data = data,
+#'               options = playbackOptions(radius = 3),
+#'               pathOptions = pathOptions(weight = 5))
+#'
+#'
+#' ## Multiple Elements
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1:5,])
+#' data$Name <- as.character(data$Name)
+#' data <- st_cast(data, "POINT")
+#' data <- split(data, f = data$Name)
+#' lapply(1:length(data), function(x) {
+#'   data[[x]]$time <<- as.POSIXct(
+#'     seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data[[x]])))
+#' })
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addPlayback(data = data,
+#'               options = playbackOptions(radius = 3,
+#'                                         color = c("red","green","blue",
+#'                                                   "orange","yellow")),
+#'               pathOptions = pathOptions(weight = 5))
+#' }
 addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOptions = pathOptions(),
                         options = playbackOptions()){
 
   bbox = list(lat = c(-90, 90), lng = c(0, 180))
 
-  ## If data is a `data.frame` / `data.table` or `matrix`
   if (inherits(data, "data.frame") || inherits(data, "matrix")) {
     ## Check if the `time` column exists. It is required!
     if (!any(colnames(data) == time)) stop("No column named `", time, "` in data.")
@@ -71,23 +106,26 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
       has_lat <- tolower(colnames(data)) %in% latnams
       has_lng <- tolower(colnames(data)) %in% lonnams
       if (any(has_lat) && any(has_lng)) {
-          data <- list(
-            geometry = cbind(data[,colnames(data)[which(has_lng)]],
-                                data[,colnames(data)[which(has_lat)]]),
-            time = data[,time]
-          )
+        data <- list(
+          geometry = cbind(data[,colnames(data)[which(has_lng)]],
+                           data[,colnames(data)[which(has_lat)]]),
+          time = data[,time]
+        )
       } else {
         ## No lat/lng columns in data. Error
         stop("Cannot read Lat/Lon columns. The column names must match either: \n",
              paste(latnams, collapse = ","), " / ", paste(lonnams, collapse = ","))
       }
     }
-    bboxtmp <- matrix(unlist(data$geometry), ncol = 2, byrow = T)
+    if (inherits(data$geometry, "sfc")) {
+      bboxtmp <- matrix(unlist(data$geometry), ncol = 2, byrow = T)
+    } else {
+      bboxtmp <- matrix(unlist(data$geometry), ncol = 2, byrow = F)
+    }
     bbox$lat <- bboxtmp[,2]
     bbox$lng <- bboxtmp[,1]
   }
-
-  if (inherits(data, "list")) {
+  else if (inherits(data, "list")) {
     bboxtmp <- matrix(unlist(do.call(rbind, data)$geometry), ncol = 2, byrow = T)
     bbox$lat <- bboxtmp[,2]
     bbox$lng <- bboxtmp[,1]
@@ -119,8 +157,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
       }
     })
   }
-
-  if (inherits(data, "character")) {
+  else if (inherits(data, "character")) {
     ## Since `basename` does not work, when the string is too long, we count
     ## the number of characters first. 300 is chosen randomly, but I doubt that
     ## file paths would be that long. If it's longer, we assume that its a JSON string already
@@ -131,12 +168,15 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
         data <- jsonlite::read_json(data)
       }
     }
+  } else {
+    stop("Cannot parse data")
   }
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
   options <- leaflet::filterNULL(c(icon = list(icon),
                                   pathOptions = list(pathOptions),
                                   options))
+
   invokeMethod(map, NULL, "addPlayback", data, options) %>%
     expandLimits(bbox$lat, bbox$lng)
 }
@@ -163,8 +203,9 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' @param staleTime Set time before a track is considered stale and faded out.
 #'   Default is 60*60*1000 (1 hour)
 #' @param ... Further arguments passed to `L.Playback`
+#' @family Playback Functions
+#' @seealso \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
-#' @family Playback Plugin
 playbackOptions = function(
   color = "blue",
   radius = 5,
@@ -196,7 +237,7 @@ playbackOptions = function(
 #' @param map the map widget.
 #' @description Remove the reachability controls
 #' @export
-#' @family Playback Plugin
+#' @family Playback Functions
 removePlayback <- function(map){
   invokeMethod(map, NULL, "removePlayback")
 }

@@ -54,8 +54,10 @@ Extra options for \code{\link{addPlayback}}. For a full list
   repository}
 }
 \seealso{
-Other Playback Plugin: 
+\url{https://github.com/hallahan/LeafletPlayback}
+
+Other Playback Functions: 
 \code{\link{addPlayback}()},
 \code{\link{removePlayback}()}
 }
-\concept{Playback Plugin}
+\concept{Playback Functions}

@@ -17,9 +17,9 @@ setOptionsVelocity(map, layerId, options)
 setOptionsVelocity
 }
 \seealso{
-Other Velocity Plugin: 
+Other Velocity Functions: 
 \code{\link{addVelocity}()},
 \code{\link{removeVelocity}()},
 \code{\link{velocityOptions}()}
 }
-\concept{Velocity Plugin}
+\concept{Velocity Functions}

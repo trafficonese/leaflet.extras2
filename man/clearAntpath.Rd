@@ -14,9 +14,9 @@ but more likely from \code{\link[leaflet]{leafletProxy}}()}
 Clear all Antpaths
 }
 \seealso{
-Other Antpath Plugin: 
+Other Antpath Functions: 
 \code{\link{addAntpath}()},
 \code{\link{antpathOptions}()},
 \code{\link{removeAntpath}()}
 }
-\concept{Antpath Plugin}
+\concept{Antpath Functions}

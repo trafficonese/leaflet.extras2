@@ -15,11 +15,11 @@ showHexbin
 Show the hexbinLayer
 }
 \seealso{
-Other Hexbin-D3 Plugin: 
+Other Hexbin-D3 Functions: 
 \code{\link{addHexbin}()},
 \code{\link{clearHexbin}()},
 \code{\link{hexbinOptions}()},
 \code{\link{hideHexbin}()},
 \code{\link{updateHexbin}()}
 }
-\concept{Hexbin-D3 Plugin}
+\concept{Hexbin-D3 Functions}
