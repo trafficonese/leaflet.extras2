@@ -7,7 +7,7 @@
 addWMS(
   map,
   baseUrl,
-  layers = "",
+  layers = NULL,
   group = NULL,
   options = WMSTileOptions(),
   attribution = NULL,
@@ -46,6 +46,21 @@ initially, but can be overridden.}
 }
 \description{
 Add Queryable WMS Layer
+}
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+leaflet() \%>\%
+  addTiles(group = "base") \%>\%
+  setView(9, 50, 5) \%>\%
+  addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
+         layers = "dwd:BRD_1km_winddaten_10m",
+      popupOptions = popupOptions(maxWidth = 600),
+      options = WMSTileOptions(
+        transparent = TRUE,
+        format = "image/png",
+        info_format = "text/html"))
 }
 \seealso{
 \url{https://github.com/heigeo/leaflet.wms}

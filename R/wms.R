@@ -35,13 +35,27 @@ wmsDependency <- function() {
 #' @seealso \url{https://github.com/heigeo/leaflet.wms}
 #' @family WMS Functions
 #' @export
-addWMS <- function(map, baseUrl, layers = "", group = NULL,
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' leaflet() %>%
+#'   addTiles(group = "base") %>%
+#'   setView(9, 50, 5) %>%
+#'   addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
+#'          layers = "dwd:BRD_1km_winddaten_10m",
+#'       popupOptions = popupOptions(maxWidth = 600),
+#'       options = WMSTileOptions(
+#'         transparent = TRUE,
+#'         format = "image/png",
+#'         info_format = "text/html"))
+addWMS <- function(map, baseUrl, layers = NULL, group = NULL,
                    options = WMSTileOptions(), attribution = NULL,
                    popupOptions = NULL,
                    data = getMapData(map)) {
 
-  if (identical(layers, "")) {
-    stop("layers is a required argument with comma-separated list of WMS layers to show")
+  if (is.null(layers)) {
+    stop("layers is a required argument")
   }
   options$attribution <- attribution
   options$layers <- layers
