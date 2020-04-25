@@ -26,6 +26,19 @@ When used in Shiny, 3 events update a certain shiny Input:
   \item reachability:error updates \code{input$MAPID_reachability_error}
 }
 }
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPRS" = 'Your_API_Key')
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  setView(8, 50, 10) \%>\%
+  addReachability()
+}
+}
 \seealso{
 \url{https://github.com/traffordDataLab/leaflet.reachability}
 

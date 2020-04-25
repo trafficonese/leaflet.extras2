@@ -36,7 +36,8 @@ It is currently not working correctly if the \code{baseGroups} are defined in
   \code{\link[leaflet]{addLayersControl}}.
 }
 \examples{
-\dontrun{
+## Only run examples in interactive R sessions
+if (interactive()) {
 library(shiny)
 library(leaflet)
 library(leaflet.extras2)

@@ -16,11 +16,11 @@ Depends:
 Imports:
     htmlwidgets,
     htmltools,
-    jsonlite,
     magrittr,
     utils
 Suggests:
     shiny,
+    jsonlite,
     sf,
     sp
 URL: https://github.com/trafficonese/leaflet.extras2

@@ -165,6 +165,9 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
       ## Check if it's a path or URL to a json file
       fileext <- gsub(".*\\.", "", basename(data))
       if (fileext == "json" || fileext == "geojson") {
+        if (!requireNamespace("jsonlite")) {
+          stop("Package `jsonlite` must be loaded to parse the `content`")
+        }
         data <- jsonlite::read_json(data)
       }
     }

@@ -28,7 +28,7 @@ sidebysideDependencies <- function() {
 #' @seealso \url{https://github.com/digidem/leaflet-side-by-side}
 #' @export
 #' @examples
-#' #' ## Only run examples in interactive R sessions
+#' ## Only run examples in interactive R sessions
 #' if (interactive()) {
 #' library(shiny)
 #' library(leaflet)
@@ -65,7 +65,6 @@ sidebysideDependencies <- function() {
 #' }
 #'
 #' shinyApp(ui, server)
-#' }
 #' }
 addSidebyside <- function(map, layerId = NULL,
                           leftId = NULL, rightId = NULL,

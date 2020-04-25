@@ -42,6 +42,9 @@ velocityDependencies <- function() {
 addVelocity <- function(map, layerId = NULL, group = NULL,
                         content = NULL, options = velocityOptions()) {
 
+  if (!requireNamespace("jsonlite")) {
+    stop("Package `jsonlite` must be loaded to parse the `content`")
+  }
   ## Check Content
   if (is.null(content)) stop("The velocity-content is NULL")
   if (inherits(content, "character")) {
@@ -63,7 +66,6 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
     layerId, group, content, options
   )
 }
-
 
 #' velocityOptions
 #' @description Define further options for the velocity layer.
@@ -118,7 +120,3 @@ setOptionsVelocity <- function(map, layerId, options){
   options <- filterNULL(options)
   invokeMethod(map, NULL, "setOptionsVelocity", layerId, options)
 }
-
-
-
-

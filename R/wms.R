@@ -9,7 +9,6 @@ wmsDependency <- function() {
   )
 }
 
-
 #' Add Queryable WMS Layer
 #'
 #' @param map a map widget object created from \code{\link[leaflet]{leaflet}}

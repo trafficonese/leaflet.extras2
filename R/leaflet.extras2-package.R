@@ -6,7 +6,6 @@
 #' @importFrom magrittr %>%
 #' @import leaflet
 #' @importFrom htmltools htmlDependency tagGetAttribute tags tagList
-#' @importFrom jsonlite fromJSON toJSON read_json
 #' @importFrom utils globalVariables adist
 #'
 #' @name leaflet.extras2

@@ -9,20 +9,21 @@ addTangram(map, scene = NULL, layerId = NULL, group = NULL, options = NULL)
 \arguments{
 \item{map}{A leaflet map widget}
 
-\item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. The file must be in the
-/www folder of a shinyApp. See the
+\item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. The file
+must be in the /www folder of a shinyApp. See the
 \href{https://github.com/tangrams/tangram}{Tangram repo} or the
-\href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further information
-on how to edit such a .yaml file.}
+\href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
+information on how to edit such a .yaml file.}
 
 \item{layerId}{A layer ID}
 
 \item{group}{The name of the group the newly created layer should belong to
 (for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).}
 
-\item{options}{A list of further options. See the app in the \code{examples/tangram} folder
-or the \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
-for further information.}
+\item{options}{A list of further options. See the app in the
+\code{examples/tangram} folder or the
+\href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
+ for further information.}
 }
 \description{
 Adds a Tangram layer to a Leaflet map in a Shiny App.
@@ -33,7 +34,7 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-## In the /www folder of the ShinyApp. Must contain the Nextzen API-key
+## In the /www folder of a ShinyApp. Must contain the Nextzen API-key
 scene <- "scene.yaml"
 
 ui <- fluidPage(leafletOutput("map"))

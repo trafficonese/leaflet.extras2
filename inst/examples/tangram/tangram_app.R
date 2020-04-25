@@ -2,10 +2,7 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-## Load Tangram-JS in debug mode
-options("leaflet.extras2.minified" = FALSE)
-
-## File is in /www folder. (Enter your API-Key in the global section)
+## File is in /www folder. (Enter your Nextzen API-Key in the global section)
 scene <- "scene.yaml"
 
 ui <- fluidPage(leafletOutput("map"))
@@ -21,9 +18,11 @@ server <- function(input, output, session) {
                                 modifyZoomBehavior = TRUE,
                                 webGLContextOptions = list(
                                   preserveDrawingBuffer = TRUE,
-                                  antialias = FALSE)
-                                # ,postUpdate = htmlwidgets::JS("function(didRender) {console.log('postUpdate!');
-                                #                              if (didRender) {console.log('new frame rendered!');}}")
+                                  antialias = FALSE),
+                                postUpdate = htmlwidgets::JS("function(didRender) {
+                                                                console.log('postUpdate!');
+                                                                if (didRender) {console.log('new frame rendered!');}
+                                                             }")
                                 )) %>%
       addCircleMarkers(data = breweries91, group = "brews") %>%
       setView(11, 49.4, 14) %>%
