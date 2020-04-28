@@ -54,7 +54,7 @@ notifications:
     to:
       - sebastian_gatscha@gmx.at
     subject: 'r-appveyor build {{status}}'
-    message: "https://ci.appveyor.com/project/trafficones/leaflet.extras2"
+    message: "https://ci.appveyor.com/project/trafficonese/leaflet.extras2"
     on_build_success: false
     on_build_failure: true
     on_build_status_changed: true
