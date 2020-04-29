@@ -46,6 +46,13 @@ See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
 \description{
 Make mapkey Icon
 }
+\examples{
+makeMapkeyIcon(icon = "traffic_signal",
+               color = "#0000ff",
+               iconSize = 12,
+               boxShadow = FALSE,
+               background="transparent")
+}
 \seealso{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 

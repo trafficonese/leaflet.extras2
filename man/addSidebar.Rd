@@ -16,6 +16,12 @@ addSidebar(map, id = "sidebar", options = list(position = "left", fit = TRUE))
 \description{
 Adds a Sidebar Leaflet Control
 }
+\examples{
+\dontrun{
+runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+              "/sidebar_app.R"))
+}
+}
 \seealso{
 \url{https://github.com/Turbo87/sidebar-v2}
 

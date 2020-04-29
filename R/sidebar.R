@@ -1,15 +1,14 @@
 sidebar_deps <- function(mini = FALSE) {
   list(
     htmlDependency(
-      "sidebar", "1.0.0",
+      "lfx-sidebar", "1.0.0",
       src = system.file("htmlwidgets/lfx-sidebar", package = "leaflet.extras2"),
       script = c("leaflet-sidebar.js",
-                 "leaflet.sidebar.binding.js"),
+                 "leaflet-sidebar-binding.js"),
       stylesheet = "leaflet-sidebar.css"
       )
   )
 }
-
 
 #' Adds a Sidebar Leaflet Control
 #' @param map A leaflet map widget
@@ -18,6 +17,10 @@ sidebar_deps <- function(mini = FALSE) {
 #' @seealso \url{https://github.com/Turbo87/sidebar-v2}
 #' @family Sidebar Functions
 #' @export
+#' @examples \dontrun{
+#' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+#'               "/sidebar_app.R"))
+#' }
 addSidebar <- function(map, id = "sidebar",
                        options = list(position = "left",
                                       fit = TRUE)) {
@@ -51,7 +54,6 @@ openSidebar <- function(map, id) {
   invokeMethod(map, NULL, "openSidebar", id)
 }
 
-
 #' Create a Sidebar Panel
 #' @param title A title for the sidebar panel
 #' @param id An id for the sidebar panel
@@ -69,7 +71,6 @@ sidebar_pane <- function(title = "Sidebar Title",
                    tags$span(class = "sidebar-close", icon)),
            ...)
 }
-
 
 #' Create a Sidebar
 #' @param iconList A list of icons to be shown, when the sidebar is collapsed.
@@ -94,4 +95,3 @@ sidebar_tabs <- function(iconList = NULL, ...){
                     tagList(arg))
   )
 }
-

@@ -9,7 +9,7 @@ addPlayback(
   data,
   time = "time",
   icon = NULL,
-  pathOptions = pathOptions(),
+  pathOpts = pathOptions(),
   options = playbackOptions()
 )
 }
@@ -24,7 +24,7 @@ a specific form. See the Details for further information.}
 
 \item{icon}{an icon which can be created with \code{\link[leaflet]{makeIcon}}}
 
-\item{pathOptions}{style the CircleMarker with
+\item{pathOpts}{style the CircleMarker with
 \code{\link[leaflet]{pathOptions}}}
 
 \item{options}{Lits of additional options. See \code{\link{playbackOptions}}}
@@ -77,7 +77,7 @@ leaflet() \%>\%
   addTiles() \%>\%
   addPlayback(data = data,
               options = playbackOptions(radius = 3),
-              pathOptions = pathOptions(weight = 5))
+              pathOpts = pathOptions(weight = 5))
 
 
 ## Multiple Elements
@@ -96,7 +96,7 @@ leaflet() \%>\%
               options = playbackOptions(radius = 3,
                                         color = c("red","green","blue",
                                                   "orange","yellow")),
-              pathOptions = pathOptions(weight = 5))
+              pathOpts = pathOptions(weight = 5))
 }
 }
 \seealso{

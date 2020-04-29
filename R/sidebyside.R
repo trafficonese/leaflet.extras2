@@ -1,10 +1,10 @@
 sidebysideDependencies <- function() {
   list(
     htmlDependency(
-      "leaflet.sidebyside", "1.0.0",
+      "lfx-sidebyside", "1.0.0",
       src = system.file("htmlwidgets/lfx-side-by-side", package = "leaflet.extras2"),
       script = c("lfx-side-by-side.js",
-                 "lfx.addSidebyside.bindings.js")
+                 "lfx-side-by-side-bindings.js")
     )
   )
 }

@@ -1,10 +1,10 @@
 reachabilityDependencies <- function() {
   list(
     htmlDependency(
-      "leaflet.reachability", "1.0.0",
+      "lfx-reachability", "1.0.0",
       src = system.file("htmlwidgets/lfx-reachability", package = "leaflet.extras2"),
       script = c("leaflet.reachability.js",
-                 "leaflet.reachability.bindings.js"),
+                 "leaflet.reachability-bindings.js"),
       stylesheet = "leaflet.reachability.css"
     )
   )

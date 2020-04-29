@@ -1,7 +1,7 @@
 velocityDependencies <- function() {
   list(
     htmlDependency(
-      "leaflet.velocity", "1.0.0",
+      "lfx-velocity", "1.0.0",
       src = system.file("htmlwidgets/lfx-velocity", package = "leaflet.extras2"),
       script = c("leaflet-velocity.js",
                  "leaflet-velocity-bindings.js"),

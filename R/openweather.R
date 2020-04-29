@@ -5,7 +5,7 @@ openweatherDependency <- function() {
       src = system.file("htmlwidgets/lfx-openweather", package = "leaflet.extras2"),
       script = c(
         "leaflet-openweathermap.js",
-        "leaflet-openweather-bindings.js"),
+        "leaflet-openweathermap-bindings.js"),
       stylesheet = "leaflet-openweathermap.css"
     )
   )

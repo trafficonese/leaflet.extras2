@@ -1,7 +1,7 @@
 tangram_deps <- function() {
   list(
     htmlDependency(
-      "tangram", "1.0.0",
+      "lfx-tangram", "1.0.0",
       src = system.file("htmlwidgets/lfx-tangram", package = "leaflet.extras2"),
       script = c("tangram.min.js",
                  "leaflet.tangram.binding.js"))

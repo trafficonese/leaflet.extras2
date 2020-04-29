@@ -22,7 +22,9 @@ Suggests:
     shiny,
     jsonlite,
     sf,
-    sp
+    sp,
+    testthat (>= 2.1.0),
+    covr
 URL: https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.0.2

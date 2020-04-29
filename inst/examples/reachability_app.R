@@ -2,6 +2,8 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
+## Include your API-Key
+# Sys.setenv("OPRS" = 'Your_API_Key')
 apikey <- Sys.getenv("OPRS")
 
 ui <- fluidPage(

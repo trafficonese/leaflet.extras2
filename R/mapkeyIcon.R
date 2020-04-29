@@ -78,6 +78,12 @@ mapkeyIconSetToMapkeyIcons = function(x) {
 #' @export
 #' @family Mapkey Functions
 #' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' @examples
+#' makeMapkeyIcon(icon = "traffic_signal",
+#'                color = "#0000ff",
+#'                iconSize = 12,
+#'                boxShadow = FALSE,
+#'                background="transparent")
 makeMapkeyIcon <- function(
   icon = 'mapkey',
   color = "#ff0000",
@@ -130,11 +136,13 @@ makeMapkeyIcon <- function(
 #' @family Mapkey Functions
 #' @seealso \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #' @examples
-#' makeMapkeyIcon(icon = "traffic_signal",
-#'                color = "#0000ff",
-#'                iconSize = 12,
-#'                boxShadow = FALSE,
-#'                background="transparent")
+#' library(leaflet)
+#' leaflet()  %>%
+#'   addMapkeyMarkers(data = breweries91,
+#'                    icon = mapkeyIcons(
+#'                      color = "red",
+#'                      borderRadius = 0,
+#'                      iconSize = 25))
 mapkeyIcons <- function(
   icon = 'mapkey',
   color = "#ff0000",

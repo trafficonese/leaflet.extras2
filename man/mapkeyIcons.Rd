@@ -50,11 +50,13 @@ icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
 }
 \examples{
-makeMapkeyIcon(icon = "traffic_signal",
-               color = "#0000ff",
-               iconSize = 12,
-               boxShadow = FALSE,
-               background="transparent")
+library(leaflet)
+leaflet()  \%>\%
+  addMapkeyMarkers(data = breweries91,
+                   icon = mapkeyIcons(
+                     color = "red",
+                     borderRadius = 0,
+                     iconSize = 25))
 }
 \seealso{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}

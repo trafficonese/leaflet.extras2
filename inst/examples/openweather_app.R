@@ -2,8 +2,9 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
-
+## Include your API-Key
+# Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+apikey <- Sys.getenv("OPENWEATHERMAP")
 
 ui <- fluidPage(
   leafletOutput("map", height = "700px"),
@@ -29,10 +30,12 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles() %>% setView(9, 50, 11) %>%
-      addOpenweatherTiles(layers = owmlayers,
+      addOpenweatherTiles(apikey = apikey,
+                          layers = owmlayers,
                           layerId = owmlayers,
                           group = owmlayers) %>%
-      addOpenweatherCurrent(group = "currentgr", layerId = "currentid",
+      addOpenweatherCurrent(apikey = apikey,
+                            group = "currentgr", layerId = "currentid",
                             options = openweatherCurrentOptions(
                               lang = "de",
                               temperatureUnit = "F",

@@ -1,10 +1,10 @@
 playbackDependencies <- function() {
   list(
     htmlDependency(
-      "leaflet.playback", "1.0.0",
+      "lfx-playback", "1.0.0",
       src = system.file("htmlwidgets/lfx-playback", package = "leaflet.extras2"),
       script = c("leaflet.playback.js",
-                 "leaflet.playback.bindings.js")
+                 "leaflet.playback-bindings.js")
     )
   )
 }
@@ -17,7 +17,7 @@ playbackDependencies <- function() {
 #'   a specific form. See the Details for further information.
 #' @param time The column name of the time column. Default is \code{"time"}.
 #' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
-#' @param pathOptions style the CircleMarker with
+#' @param pathOpts style the CircleMarker with
 #'   \code{\link[leaflet]{pathOptions}}
 #' @param options Lits of additional options. See \code{\link{playbackOptions}}
 #' @description Add Leaflet Playback Plugin based on the
@@ -64,7 +64,7 @@ playbackDependencies <- function() {
 #'   addTiles() %>%
 #'   addPlayback(data = data,
 #'               options = playbackOptions(radius = 3),
-#'               pathOptions = pathOptions(weight = 5))
+#'               pathOpts = pathOptions(weight = 5))
 #'
 #'
 #' ## Multiple Elements
@@ -83,10 +83,10 @@ playbackDependencies <- function() {
 #'               options = playbackOptions(radius = 3,
 #'                                         color = c("red","green","blue",
 #'                                                   "orange","yellow")),
-#'               pathOptions = pathOptions(weight = 5))
+#'               pathOpts = pathOptions(weight = 5))
 #' }
 addPlayback <- function(map, data, time = "time", icon = NULL,
-                        pathOptions = pathOptions(),
+                        pathOpts = pathOptions(),
                         options = playbackOptions()){
 
   bbox = list(lat = c(-90, 90), lng = c(0, 180))
@@ -177,7 +177,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
   options <- leaflet::filterNULL(c(icon = list(icon),
-                                  pathOptions = list(pathOptions),
+                                  pathOptions = list(pathOpts),
                                   options))
 
   invokeMethod(map, NULL, "addPlayback", data, options) %>%

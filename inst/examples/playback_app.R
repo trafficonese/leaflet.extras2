@@ -54,7 +54,7 @@ server <- function(input, output, session) {
                   options = playbackOptions(
                     color = list("red", "green"),
                     radius = 3),
-                  pathOptions = pathOptions(weight = 5))
+                  pathOpts = pathOptions(weight = 5))
   })
   output$click <- renderPrint({
     req(input$map_pb_click)
