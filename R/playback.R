@@ -94,9 +94,10 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
   if (inherits(data, "data.frame") || inherits(data, "matrix")) {
     ## Check if the `time` column exists. It is required!
     if (!any(colnames(data) == time)) stop("No column named `", time, "` in data.")
-    ## If the `time` column is present but not numeric, convert it
-    if (!is.null(data[,time]) && !is.numeric(data[,time])) {
-      data$time <- as.numeric(data[,time][[1]]) * 1000
+    data$time <- data[,time]
+    ## If the `time` column is present but not numeric, convert it to milliseconds
+    if (!is.null(data$time) && !is.numeric(data$time)) {
+      data$time <- as.numeric(data$time) * 1000
     }
     ## If there is no `geometry` column, check if lat/lng are given as columns
     if (!any(colnames(data) %in% c("geom","geometry"))) {
@@ -109,7 +110,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
         data <- list(
           geometry = cbind(data[,colnames(data)[which(has_lng)]],
                            data[,colnames(data)[which(has_lat)]]),
-          time = data[,time]
+          time = data$time
         )
       } else {
         ## No lat/lng columns in data. Error
@@ -136,9 +137,10 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
     lapply(1:lendf, function(x) {
       ## Check if the `time` column exists. It is required!
       if (!any(colnames(data[[x]]) == time)) stop("No column named `", time, "` in data.")
+      data[[x]]$time <- data[[x]][,time]
       ## If the `time` column is present but not numeric, convert it
-      if (!is.null(data[[x]][,time]) && !is.numeric(data[[x]][,time])) {
-        data[[x]]$time <<- as.numeric(data[[x]][,time][[1]]) * 1000
+      if (!is.null(data[[x]]$time) && !is.numeric(data[[x]]$time)) {
+        data[[x]]$time <<- as.numeric(data[[x]]$time) * 1000
       }
       ## If there is no `geometry` column, check if lat/lng are given as columns
       if (!any(colnames(data[[x]]) %in% c("geom","geometry"))) {
@@ -151,7 +153,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
           data <<- list(
             geometry = cbind(data[[x]][,colnames(data)[which(has_lng)]],
                              data[[x]][,colnames(data)[which(has_lat)]]),
-            time = data[[x]][,time]
+            time = data[[x]]$time
           )
         }
       }
@@ -171,7 +173,8 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
         data <- jsonlite::read_json(data)
       }
     }
-  } else {
+  }
+  else {
     stop("Cannot parse data")
   }
 

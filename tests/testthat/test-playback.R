@@ -53,7 +53,7 @@ test_that("playback", {
   #   )
   # }
 
-  ## Fake SF Data - Single ##########################
+  ## Fake SF Data ##########################
   data <- structure(list(
     time = structure(c(1588259759.91989, 1588259770.0209,
                        1588259780.12191, 1588259790.22292, 1588259800.32393, 1588259810.42494,
@@ -190,7 +190,9 @@ test_that("playback", {
     row.names = c(NA, 100L), class = c("data.frame"),
     sf_column = "geometry", agr = structure(c(time = NA_integer_),
                     .Label = c("constant","aggregate", "identity"), class = "factor"))
+  ##############################
 
+  ## Test Single Trail ######################
   data$time <- as.numeric(data$time) * 1000
   m <- leaflet() %>%
     addTiles() %>%
@@ -201,22 +203,34 @@ test_that("playback", {
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
   expect_identical(m$x$calls[[2]]$args[[1]], data)
 
+  ## Other Time Column
+  dataot <- data
+  dataot$othertime <- as.POSIXct(
+    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(dataot)))
+  dataot$time <- NULL
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = dataot, time = "othertime",
+                options = playbackOptions(radius = 3),
+                pathOpts = pathOptions(weight = 5))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
+  dataotverify <- dataot
+  dataotverify$time <- as.numeric(dataotverify$othertime) * 1000
+  dataotverify$othertime <- NULL
+  expect_identical(m$x$calls[[2]]$args[[1]][,c("geometry","time")],
+                   dataotverify[,c("geometry","time")])
 
-  ## TODO - Doenst work and doesnt throw an error
-  # dataot <- data
-  # dataot$othertime <- as.POSIXct(
-  #   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(dataot)))
-  # dataot$time <- NULL
-  # m <- leaflet() %>%
-  #   addTiles() %>%
-  #   addPlayback(data = dataot, time = "othertime",
-  #               options = playbackOptions(radius = 3),
-  #               pathOpts = pathOptions(weight = 5))
-  # expect_is(m, "leaflet")
-  # expect_identical(m$x$calls[[2]]$method, "addPlayback")
-  # expect_identical(m$x$calls[[2]]$args[[1]], data)
+  ## Errors
+  datanotime <- data
+  datanotime$time <- NULL
+  expect_error(leaflet() %>%
+                 addPlayback(data = datanotime,
+                             options = playbackOptions(radius = 3),
+                             pathOpts = pathOptions(weight = 5)))
 
-  ## Fake SF Data - Multiple ##########################
+
+  ## Test Multiple Trail ##########################
   data1 <- data
   data2 <- data
   data1$time <- as.numeric(as.POSIXct(
@@ -234,14 +248,32 @@ test_that("playback", {
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
   expect_identical(m$x$calls[[2]]$args[[1]], datam)
 
+  ## Other Time Column
+  data1 <- data
+  data2 <- data
+  data1$otertime <- as.POSIXct(
+    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data1)))
+  data2$otertime <- as.POSIXct(
+    seq.POSIXt(Sys.time() - 1500, Sys.time(), length.out = nrow(data2)))
+  data2$time <- NULL
+  data1$time <- NULL
 
-  ## Errors ##################
-  datanotime <- data
-  datanotime$time <- NULL
-  expect_error(leaflet() %>%
-    addPlayback(data = datanotime,
+  datam <- list(data1, data2)
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = datam, time = "otertime",
                 options = playbackOptions(radius = 3),
-                pathOpts = pathOptions(weight = 5)))
+                pathOpts = pathOptions(weight = 5))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
+
+  ## Errors
+  datanotime <- datam
+  expect_error(leaflet() %>%
+                 addPlayback(data = datanotime, time = "no",
+                             options = playbackOptions(radius = 3),
+                             pathOpts = pathOptions(weight = 5)))
+
 
 
 })
