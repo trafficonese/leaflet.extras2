@@ -43,11 +43,9 @@ mapkeyIconList = function(...) {
   if (is.factor(i)) {
     i = as.character(i)
   }
-
   if (!is.character(i) && !is.numeric(i) && !is.integer(i)) {
     stop("Invalid subscript type '", typeof(i), "'")
   }
-
   structure(.subset(x, i), class = "leaflet_mapkey_icon_set")
 }
 

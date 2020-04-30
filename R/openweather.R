@@ -15,7 +15,10 @@ openweatherDependency <- function() {
 #' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
 #' @param apikey a valid OpenWeatherMap-API key. Get one from
 #'   \href{https://openweathermap.org/api}{here}.
-#' @param layers character vector of layers you wish to add to the map
+#' @param layers character vector of layers you wish to add to the map. The
+#'   following layers are currently possible \code{c("clouds", "cloudsClassic",
+#'   "precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
+#'   "pressure", "pressureContour", "temperature", "wind")}.
 #' @param group name of the group
 #' @param layerId the layer id
 #' @param opacity opacity of the layer
@@ -70,8 +73,8 @@ addOpenweatherTiles <- function(
 
   if (!is.null(layerId)) {
     if (length(layerId) != length(layers)) {
-      warning("The length of `layers` and `layerId` does not match.",
-              "The `layers`-names are taken instead.")
+      warning("The lengths of `layers` and `layerId` do not match.",
+              "Instead, the `layers` are used as the `layerID`.")
       layerId <- layers
     }
   } else {

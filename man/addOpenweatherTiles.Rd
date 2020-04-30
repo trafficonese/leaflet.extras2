@@ -20,7 +20,10 @@ addOpenweatherTiles(
 \item{apikey}{a valid OpenWeatherMap-API key. Get one from
 \href{https://openweathermap.org/api}{here}.}
 
-\item{layers}{character vector of layers you wish to add to the map}
+\item{layers}{character vector of layers you wish to add to the map. The
+following layers are currently possible \code{c("clouds", "cloudsClassic",
+"precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
+"pressure", "pressureContour", "temperature", "wind")}.}
 
 \item{group}{name of the group}
 
