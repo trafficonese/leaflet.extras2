@@ -18,6 +18,7 @@ Adds a Sidebar Leaflet Control
 }
 \examples{
 \dontrun{
+library(shiny)
 runApp(paste0(system.file("examples", package = "leaflet.extras2"),
               "/sidebar_app.R"))
 }

@@ -14,10 +14,11 @@ sidebar_deps <- function(mini = FALSE) {
 #' @param map A leaflet map widget
 #' @param id Id of the sidebar-div
 #' @param options A named list with \code{position} and \code{fit} elements.
-#' @seealso \url{https://github.com/Turbo87/sidebar-v2}
 #' @family Sidebar Functions
+#' @seealso \url{https://github.com/Turbo87/sidebar-v2}
 #' @export
 #' @examples \dontrun{
+#' library(shiny)
 #' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
 #'               "/sidebar_app.R"))
 #' }
@@ -60,7 +61,14 @@ openSidebar <- function(map, id) {
 #' @param icon An icon for the sidebar panel.
 #' @param ... List of elements to include in the panel
 #' @family Sidebar Functions
+#' @seealso \url{https://github.com/Turbo87/sidebar-v2},
+#'          \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
 #' @export
+#' @examples \dontrun{
+#' library(shiny)
+#' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+#'               "/sidebar_app.R"))
+#' }
 sidebar_pane <- function(title = "Sidebar Title",
                          id = NULL,
                          icon = icon("caret-right"), ...) {
@@ -77,7 +85,14 @@ sidebar_pane <- function(title = "Sidebar Title",
 #'   The list is required and must match the amount of \code{\link{sidebar_pane}}.
 #' @param ... The individual \code{\link{sidebar_pane}}.
 #' @family Sidebar Functions
+#' @seealso \url{https://github.com/Turbo87/sidebar-v2},
+#'          \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
 #' @export
+#' @examples \dontrun{
+#' library(shiny)
+#' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+#'               "/sidebar_app.R"))
+#' }
 sidebar_tabs <- function(iconList = NULL, ...){
   arg <- list(...)
   ids <- lapply(arg, function(x) tagGetAttribute(x, "id"))

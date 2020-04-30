@@ -24,7 +24,7 @@ LeafletWidget.methods.addSidebar = function(id, options) {
       }
     }
 
-    // Extent onClick method to trigger "shown" event, otherwise Shiny-Inputs/Outputs are not reactive
+    // Extend onClick method to trigger "shown" event, otherwise Shiny-Inputs/Outputs are not reactive
     L.Control.Sidebar = L.Control.Sidebar.extend({
       _onClick: function() {
         if (L.DomUtil.hasClass(this, 'active')) {

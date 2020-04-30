@@ -15,7 +15,17 @@ The list is required and must match the amount of \code{\link{sidebar_pane}}.}
 \description{
 Create a Sidebar
 }
+\examples{
+\dontrun{
+library(shiny)
+runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+              "/sidebar_app.R"))
+}
+}
 \seealso{
+\url{https://github.com/Turbo87/sidebar-v2},
+         \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
+
 Other Sidebar Functions: 
 \code{\link{addSidebar}()},
 \code{\link{closeSidebar}()},
