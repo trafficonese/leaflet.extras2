@@ -19,10 +19,8 @@ Imports:
     magrittr,
     utils
 Suggests:
-    shiny,
     jsonlite,
     sf,
-    sp,
     testthat (>= 2.1.0),
     covr
 URL: https://github.com/trafficonese/leaflet.extras2

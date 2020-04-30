@@ -11,8 +11,9 @@ tangram_deps <- function() {
 #' Adds a Tangram layer to a Leaflet map in a Shiny App.
 #'
 #' @param map A leaflet map widget
-#' @param scene Path to a required \bold{.yaml} or \bold{.zip} file. The file
-#'   must be in the /www folder of a shinyApp. See the
+#' @param scene Path to a required \bold{.yaml} or \bold{.zip} file. If the file
+#'   is within the \code{/www} folder of a Shiny-App, only the filename must be
+#'   given, otherwise the full path is needed. See the
 #'   \href{https://github.com/tangrams/tangram}{Tangram repo} or the
 #'   \href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
 #'   information on how to edit such a .yaml file.
@@ -24,6 +25,7 @@ tangram_deps <- function() {
 #'   \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
 #'    for further information.
 #' @export
+#' @note Only works correctly in a Shiny-App environment.
 #' @seealso \url{https://github.com/tangrams/tangram}
 #' @family Tangram Functions
 #' @examples \dontrun{
@@ -53,21 +55,23 @@ tangram_deps <- function() {
 addTangram <- function(map, scene = NULL, layerId = NULL, group = NULL,
                        options = NULL) {
 
-  map$dependencies <- c(map$dependencies, tangram_deps())
-
   if ((is.null(scene) || !is.character(scene) || (!gsub(".*\\.", "", scene) %in% c("yaml", "zip")))) {
     stop("The scene must point to a valid .yaml or .zip file.\n",
          "See the documentation for further information.")
   }
-  if (!requireNamespace("shiny")) {
-    stop("Package `shiny` must be loaded for Tangram")
-  }
-  shiny::addResourcePath("tangram", paste0(getwd(), "/www"))
-  scene <- basename(scene)
 
-  options <- leaflet::filterNULL(c(scene = scene,
-                                   options))
+  tngrscene <- list(
+    htmltools::htmlDependency(
+      name = "tangram_scene",
+      version = 1,
+      src = dirname(scene),
+      attachment = basename(scene)
+    ))
 
-  invokeMethod(map, getMapData(map), "addTangram",
+  map$dependencies <- c(map$dependencies, tngrscene, tangram_deps())
+
+  options <- leaflet::filterNULL(c(list(scene = basename(scene)), options))
+
+  invokeMethod(map, NULL, "addTangram",
                layerId, group, options)
 }

@@ -9,8 +9,9 @@ addTangram(map, scene = NULL, layerId = NULL, group = NULL, options = NULL)
 \arguments{
 \item{map}{A leaflet map widget}
 
-\item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. The file
-must be in the /www folder of a shinyApp. See the
+\item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. If the file
+is within the \code{/www} folder of a Shiny-App, only the filename must be
+given, otherwise the full path is needed. See the
 \href{https://github.com/tangrams/tangram}{Tangram repo} or the
 \href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
 information on how to edit such a .yaml file.}
@@ -27,6 +28,9 @@ information on how to edit such a .yaml file.}
 }
 \description{
 Adds a Tangram layer to a Leaflet map in a Shiny App.
+}
+\note{
+Only works correctly in a Shiny-App environment.
 }
 \examples{
 \dontrun{
