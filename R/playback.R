@@ -94,14 +94,14 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
   if (inherits(data, "list")) {
     data <- lapply(data, function(x) {
       if (inherits(x, "Spatial")) x <- sf::st_as_sf(x)
-      stopifnot(inherits(sf::st_geometry(x), c("sfc_POINT", "sfc_MULTIPOINT")))
+      stopifnot(inherits(sf::st_geometry(x), c("sfc_POINT")))
       to_ms(x, time)
     })
     bounds <- as.numeric(sf::st_bbox(do.call(rbind, data)))
   }
   if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
   if (inherits(data, "sf")) {
-    stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT", "sfc_MULTIPOINT")))
+    stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
     data <- to_ms(data, time)
     bounds <- as.numeric(sf::st_bbox(data))
   }

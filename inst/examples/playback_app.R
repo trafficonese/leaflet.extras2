@@ -16,16 +16,16 @@ library(mapview)
 
 ## Multiple Trails ##############
 n = 150
-trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[c(10, 21),], "LINESTRING"), n = n)
+rows <- c(10, 21)
+trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[rows,], "LINESTRING"), n = n)
 trail_pts <- st_transform(trail_pts, 4326)
 data <- sf::st_as_sf(st_cast(trail_pts, "POINT"))
 colnames(data) <- "geometry"
 st_geometry(data) <- "geometry"
-data$id <- c(rep(1,n), rep(2,n))
-time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/2))
-data$time <- Sys.time()
-data[data$id == 1, ]$time <- time
-data[data$id == 2, ]$time <- time
+nrows <- length(rows)
+data$id <- rep(1:nrows, each = n)
+time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/nrows))
+data$time <- rep(time, nrows)
 data <- data[, c("id", "time","geometry")]
 data <- split(data, data$id)
 
