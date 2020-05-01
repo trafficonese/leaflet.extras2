@@ -2,11 +2,12 @@
 LeafletWidget.methods.addPlayback= function(data, options) {
   var map = this;
 
+  // Make JSON object
   // If data is a string, parse it first
   if (typeof data === "string") {
     data = JSON.parse(data);
   }
-  // Make JSON object
+
   if (data.type === undefined) {
     var kys = Object.keys(data);
     // Single JSON

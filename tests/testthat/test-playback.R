@@ -187,7 +187,7 @@ test_that("playback", {
                        class = "bbox"),
       crs = structure(list(epsg = 4326L, proj4string = "+proj=longlat +datum=WGS84 +no_defs"), class = "crs"),
       n_empty = 0L, class = c("sfc_POINT","sfc"), ids = 100L)),
-    row.names = c(NA, 100L), class = c("data.frame"),
+    row.names = c(NA, 100L), class = c("sf", "data.frame"),
     sf_column = "geometry", agr = structure(c(time = NA_integer_),
                     .Label = c("constant","aggregate", "identity"), class = "factor"))
   ##############################
@@ -202,6 +202,26 @@ test_that("playback", {
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
   expect_identical(m$x$calls[[2]]$args[[1]], data)
+
+  ## Date Time Column
+  datadt <- data
+  datadt$time <- as.Date(
+    seq.Date(Sys.Date() - nrow(datadt), Sys.Date(), length.out = nrow(datadt)))
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = datadt,
+                options = playbackOptions(radius = 3,
+                                          tickLen = 1000000,
+                                          speed = 10000000000,
+                                          fadeMarkersWhenStale = TRUE,
+                                          dateControl = T,
+                                          staleTime = 1,
+                                          maxInterpolationTime = 5*60*1000),
+                pathOpts = pathOptions(weight = 5));m
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
+  datadt$time <- as.numeric(datadt$time) * 86400000
+  expect_identical(m$x$calls[[2]]$args[[1]], datadt)
 
   ## Other Time Column
   dataot <- data
@@ -224,10 +244,12 @@ test_that("playback", {
   ## Errors
   datanotime <- data
   datanotime$time <- NULL
-  expect_error(leaflet() %>%
-                 addPlayback(data = datanotime,
-                             options = playbackOptions(radius = 3),
-                             pathOpts = pathOptions(weight = 5)))
+  expect_error(
+    leaflet() %>%
+      addPlayback(data = datanotime,
+                  options = playbackOptions(radius = 3),
+                  pathOpts = pathOptions(weight = 5))
+  )
 
 
   ## Test Multiple Trail ##########################
@@ -254,7 +276,7 @@ test_that("playback", {
   data1$otertime <- as.POSIXct(
     seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data1)))
   data2$otertime <- as.POSIXct(
-    seq.POSIXt(Sys.time() - 1500, Sys.time(), length.out = nrow(data2)))
+    seq.POSIXt(Sys.time() - 1300, Sys.time(), length.out = nrow(data2)))
   data2$time <- NULL
   data1$time <- NULL
 
@@ -269,11 +291,12 @@ test_that("playback", {
 
   ## Errors
   datanotime <- datam
-  expect_error(leaflet() %>%
+  expect_error(
+    leaflet() %>%
                  addPlayback(data = datanotime, time = "no",
                              options = playbackOptions(radius = 3),
-                             pathOpts = pathOptions(weight = 5)))
-
+                             pathOpts = pathOptions(weight = 5))
+  )
 
 
 })
@@ -282,9 +305,10 @@ test_that("playback-error", {
 
   expect_error(
     leaflet() %>%
-      addPlayback(data = breweries91,
+      addPlayback(data = breweries91, time = "village",
                   options = playbackOptions(radius = 3),
-                  pathOpts = pathOptions(weight = 5)))
+                  pathOpts = pathOptions(weight = 5))
+  )
 
 })
 

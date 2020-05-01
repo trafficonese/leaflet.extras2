@@ -89,93 +89,21 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOpts = pathOptions(),
                         options = playbackOptions()){
 
-  bbox = list(lat = c(-90, 90), lng = c(0, 180))
+  bounds = c(0, -90, 180, 90)
 
-  if (inherits(data, "data.frame") || inherits(data, "matrix")) {
-    ## Check if the `time` column exists. It is required!
-    if (!any(colnames(data) == time)) stop("No column named `", time, "` in data.")
-    data$time <- data[,time]
-    ## If the `time` column is present but not numeric, convert it to milliseconds
-    if (!is.null(data$time) && !is.numeric(data$time)) {
-      data$time <- as.numeric(data$time) * 1000
-    }
-    ## If there is no `geometry` column, check if lat/lng are given as columns
-    if (!any(colnames(data) %in% c("geom","geometry"))) {
-      ## Check if any column has lat/lon values
-      latnams <- c("y","lat","latitude")
-      lonnams <- c("x","lon","lng","longitude")
-      has_lat <- tolower(colnames(data)) %in% latnams
-      has_lng <- tolower(colnames(data)) %in% lonnams
-      if (any(has_lat) && any(has_lng)) {
-        data <- list(
-          geometry = cbind(data[,colnames(data)[which(has_lng)]],
-                           data[,colnames(data)[which(has_lat)]]),
-          time = data$time
-        )
-      } else {
-        ## No lat/lng columns in data. Error
-        stop("Cannot read Lat/Lon columns. The column names must match either: \n",
-             paste(latnams, collapse = ","), " / ", paste(lonnams, collapse = ","))
-      }
-    }
-    if (inherits(data$geometry, "sfc")) {
-      bboxtmp <- matrix(unlist(data$geometry), ncol = 2, byrow = T)
-    } else {
-      bboxtmp <- matrix(unlist(data$geometry), ncol = 2, byrow = F)
-    }
-    bbox$lat <- bboxtmp[,2]
-    bbox$lng <- bboxtmp[,1]
-  }
-  else if (inherits(data, "list")) {
-    bboxtmp <- matrix(unlist(do.call(rbind, data)$geometry), ncol = 2, byrow = T)
-    bbox$lat <- bboxtmp[,2]
-    bbox$lng <- bboxtmp[,1]
-    lendf <- length(data)
-    if (length(options$color) != lendf) {
-      options$color <- rep(options$color, lendf)[seq.int(lendf)]
-    }
-    lapply(1:lendf, function(x) {
-      ## Check if the `time` column exists. It is required!
-      if (!any(colnames(data[[x]]) == time)) stop("No column named `", time, "` in data.")
-      data[[x]]$time <- data[[x]][,time]
-      ## If the `time` column is present but not numeric, convert it
-      if (!is.null(data[[x]]$time) && !is.numeric(data[[x]]$time)) {
-        data[[x]]$time <<- as.numeric(data[[x]]$time) * 1000
-      }
-      ## If there is no `geometry` column, check if lat/lng are given as columns
-      if (!any(colnames(data[[x]]) %in% c("geom","geometry"))) {
-        ## Check if any column has lat/lon values
-        latnams <- c("y","lat","latitude")
-        lonnams <- c("x","lon","lng","longitude")
-        has_lat <- tolower(colnames(data[[x]])) %in% latnams
-        has_lng <- tolower(colnames(data[[x]])) %in% lonnams
-        if (any(has_lat) && any(has_lng)) {
-          data <<- list(
-            geometry = cbind(data[[x]][,colnames(data)[which(has_lng)]],
-                             data[[x]][,colnames(data)[which(has_lat)]]),
-            time = data[[x]]$time
-          )
-        }
-      }
+  if (inherits(data, "list")) {
+    data <- lapply(data, function(x) {
+      if (inherits(x, "Spatial")) x <- sf::st_as_sf(x)
+      stopifnot(inherits(sf::st_geometry(x), c("sfc_POINT", "sfc_MULTIPOINT")))
+      to_ms(x, time)
     })
+    bounds <- as.numeric(sf::st_bbox(do.call(rbind, data)))
   }
-  else if (inherits(data, "character")) {
-    ## Since `basename` does not work, when the string is too long, we count
-    ## the number of characters first. 300 is chosen randomly, but I doubt that
-    ## file paths would be that long. If it's longer, we assume that its a JSON string already
-    if (nchar(data) < 300) {
-      ## Check if it's a path or URL to a json file
-      fileext <- gsub(".*\\.", "", basename(data))
-      if (fileext == "json" || fileext == "geojson") {
-        if (!requireNamespace("jsonlite")) {
-          stop("Package `jsonlite` must be loaded to parse the `content`")
-        }
-        data <- jsonlite::read_json(data)
-      }
-    }
-  }
-  else {
-    stop("Cannot parse data")
+  if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
+  if (inherits(data, "sf")) {
+    stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT", "sfc_MULTIPOINT")))
+    data <- to_ms(data, time)
+    bounds <- as.numeric(sf::st_bbox(data))
   }
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
@@ -184,7 +112,29 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
                                   options))
 
   invokeMethod(map, NULL, "addPlayback", data, options) %>%
-    expandLimits(bbox$lat, bbox$lng)
+    expandLimits(lat = c(bounds[2], bounds[4]),
+                 lng = c(bounds[1], bounds[3]))
+}
+
+#' to_ms
+#' Change POSIX or Date to milliseconds
+#' @param data The data
+#' @param time Columnname of the time column.
+to_ms <- function(data, time) {
+  coln <- colnames(data)
+  if (!any(coln == time)) {
+    stop("No column named `", time, "` found.")
+  }
+  if (time != "time") {
+    colnames(data)[coln == time] <- "time"
+  }
+  stopifnot(inherits(data[["time"]], c("POSIXt", "Date", "numeric")))
+  if (inherits(data[["time"]], "POSIXt")) {
+    data[["time"]] <- as.numeric(data[["time"]]) * 1000
+  } else if (inherits(data[["time"]], "Date")) {
+    data[["time"]] <- as.numeric(data[["time"]]) * 86400000
+  }
+  data
 }
 
 #' playbackOptions
