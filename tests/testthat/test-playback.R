@@ -37,6 +37,7 @@ test_that("playback", {
                "removePlayback")
 
   # data = "https://raw.githubusercontent.com/hallahan/LeafletPlayback/master/data/demo/drive.json"
+  # data <- paste(readLines(data, warn = F), collapse = "")
   # if (requireNamespace("jsonlite", quietly = TRUE)) {
   #   m <- leaflet() %>%
   #     addTiles() %>%
@@ -298,6 +299,36 @@ test_that("playback", {
                              pathOpts = pathOptions(weight = 5))
   )
 
+
+
+  ## Test Example ###############
+  library(sp)
+  crds <- coordinates(leaflet::atlStorms2005[1,])[[1]][[1]]
+  df = data.frame(time = as.POSIXct(
+    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds))))
+  spdf <- SpatialPointsDataFrame(crds, df)
+
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = spdf,
+                options = playbackOptions(radius = 3),
+                pathOpts = pathOptions(weight = 5))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
+
+  crds1 <- coordinates(leaflet::atlStorms2005[10,])[[1]][[1]]
+  df1 = data.frame(time = as.POSIXct(
+    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds1))))
+  spdf1 <- SpatialPointsDataFrame(crds1, df1)
+
+  spdfm <- list(spdf, spdf1)
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = spdfm,
+                options = playbackOptions(radius = 3),
+                pathOpts = pathOptions(weight = 5))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
 
 })
 

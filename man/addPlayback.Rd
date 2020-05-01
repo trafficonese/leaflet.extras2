@@ -50,9 +50,6 @@ If data is a JSON string, it must have the following form:
   }
 }
 }
-Additional arrays can be inside the properties, but are not required and are
-not used by the plugin. If the JSON is stored in a file you can load it to R
-via: \code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
 }
 \note{
 If used in Shiny, you can listen to 2 events
