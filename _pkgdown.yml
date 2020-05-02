@@ -60,6 +60,11 @@ reference:
     contents:
     - matches("WMS")
 
+destination: docs
+
+development:
+  mode: auto
+
 authors:
   Sebastian Gatscha:
   href: https://github.com/trafficonese
