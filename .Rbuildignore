@@ -20,3 +20,5 @@
 ^package-lock\.json$
 ^data-raw$
 ^codecov\.yml$
+^_pkgdown\.yml$
+^pkgdown$

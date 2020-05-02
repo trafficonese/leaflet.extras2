@@ -1,0 +1,65 @@
+title: leaflet.extras2
+
+template:
+  params:
+    bootswatch: yeti
+
+reference:
+  - title: Package Documentation
+    desc: ~
+    contents:
+    - '`leaflet.extras2`'
+  - title: Ant Path
+    contents:
+    - matches("Antpath")
+    - matches("antpath")
+  - title: Easy Print
+    contents:
+    - matches("Easyprint")
+    - matches("easyprint")
+  - title: GIBS
+    contents:
+    - matches("GIBS")
+    - setDate
+    - setTransparent
+  - title: Hexbin-D3
+    contents:
+    - matches("Hexbin")
+    - matches("hexbin")
+  - title: Mapkey Icons
+    contents:
+    - matches("Mapkey")
+    - matches("mapkey")
+  - title: OpenWeatherMap
+    contents:
+    - matches("Openweather")
+    - matches("openweather")
+  - title: Playback
+    contents:
+    - matches("Playback")
+    - matches("playback")
+  - title: Reachability
+    contents:
+    - matches("Reachability")
+    - matches("reachability")
+  - title: Sidebar-v2
+    contents:
+    - matches("Sidebar")
+    - matches("sidebar")
+  - title: Side-by-Side
+    contents:
+    - matches("Sidebyside")
+  - title: Tangram
+    contents:
+    - matches("Tangram")
+  - title: Velocity
+    contents:
+    - matches("Velocity")
+    - matches("velocity")
+  - title: WMS
+    contents:
+    - matches("WMS")
+
+authors:
+  Sebastian Gatscha:
+  href: https://github.com/trafficonese
