@@ -3,7 +3,7 @@
 <!-- badges: start -->
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build Status](https://travis-ci.org/trafficonese/leaflet.extras2.svg?branch=master)](https://travis-ci.org/trafficonese/leaflet.extras2)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet.extras2)
+[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet-extras2)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
 <!-- badges: end -->
 
