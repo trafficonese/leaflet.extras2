@@ -25,6 +25,6 @@ Suggests:
     sp,
     testthat (>= 2.1.0),
     covr
-URL: https://github.com/trafficonese/leaflet.extras2
+URL: https://trafficonese.github.io/leaflet.extras2, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.0.2
