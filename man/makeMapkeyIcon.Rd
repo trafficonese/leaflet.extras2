@@ -30,16 +30,18 @@ makeMapkeyIcon(
 
 \item{borderRadius}{Any number (for circle size/2, for square 0.001)}
 
-\item{hoverScale}{Any real number (best result in range 1 - 2, use 1 for no effect)}
+\item{hoverScale}{Any real number (best result in range 1 - 2, use 1 for no
+effect)}
 
 \item{hoverEffect}{Switch on/off effect on hover}
 
 \item{additionalCSS}{CSS code (e.g. "border:4px solid #aa3838;")}
 
-\item{hoverCSS}{CSS code (e.g. "background-color:#992b00!important; color:#99defc!important;")}
+\item{hoverCSS}{CSS code (e.g. "background-color:#992b00 !important;
+color:#99defc !important;")}
 
-\item{htmlCode}{e.g. '&#57347;&#xe003;'.
-See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
+\item{htmlCode}{e.g. '&#57347;&#xe003;'. See
+\href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
 
 \item{boxShadow}{Should a shadow be visible.}
 }

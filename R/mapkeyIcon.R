@@ -123,12 +123,14 @@ makeMapkeyIcon <- function(
 #' @param iconSize Size of Icon in Pixels. Default is 12
 #' @param background Any CSS color or false for no background
 #' @param borderRadius Any number (for circle size/2, for square 0.001)
-#' @param hoverScale Any real number (best result in range 1 - 2, use 1 for no effect)
+#' @param hoverScale Any real number (best result in range 1 - 2, use 1 for no
+#'   effect)
 #' @param hoverEffect Switch on/off effect on hover
-#' @param hoverCSS CSS code (e.g. "background-color:#992b00!important; color:#99defc!important;")
+#' @param hoverCSS CSS code (e.g. "background-color:#992b00 !important;
+#'   color:#99defc !important;")
 #' @param additionalCSS CSS code (e.g. "border:4px solid #aa3838;")
-#' @param htmlCode e.g. '&#57347;&#xe003;'.
-#'   See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information
+#' @param htmlCode e.g. '&#57347;&#xe003;'. See
+#'   \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information
 #' @param boxShadow Should a shadow be visible.
 #' @export
 #' @family Mapkey Functions

@@ -27,7 +27,7 @@ a specific form. See the Details for further information.}
 \item{pathOpts}{style the CircleMarker with
 \code{\link[leaflet]{pathOptions}}}
 
-\item{options}{Lits of additional options. See \code{\link{playbackOptions}}}
+\item{options}{List of additional options. See \code{\link{playbackOptions}}}
 }
 \description{
 Add Leaflet Playback Plugin based on the

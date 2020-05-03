@@ -5,8 +5,7 @@ Version: 1.0.0
 Authors@R: c(
       person("Gatscha", "Sebastian", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre"))
     )
-Description: This package serves as an add-on to the 'leaflet' package by 
-    providing extra functionality via 'leaflet' plugins.
+Description: Several 'leaflet' plugins are integrated, which are available as add-ons to the 'leaflet' package.
 License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true

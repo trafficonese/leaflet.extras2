@@ -23,7 +23,7 @@ Human-friendly group names are permitted–they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
-\item{content}{the path or URL to a JSON file respresenting the velocity data
+\item{content}{the path or URL to a JSON file representing the velocity data
 or a data.frame which can be transformed to such a JSON file. Please see the
 \href{https://github.com/danwild/leaflet-velocity/tree/master/demo}{demo
 files} for some example data.}

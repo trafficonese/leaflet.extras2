@@ -14,7 +14,7 @@ tangram_deps <- function() {
 #' @param scene Path to a required \bold{.yaml} or \bold{.zip} file. If the file
 #'   is within the \code{/www} folder of a Shiny-App, only the filename must be
 #'   given, otherwise the full path is needed. See the
-#'   \href{https://github.com/tangrams/tangram}{Tangram repo} or the
+#'   \href{https://github.com/tangrams/tangram}{Tangram repository} or the
 #'   \href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
 #'   information on how to edit such a .yaml file.
 #' @param layerId A layer ID

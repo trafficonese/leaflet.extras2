@@ -23,7 +23,7 @@ playbackOptions(
 
 \item{radius}{a numeric value for the radius of the CircleMarkers.}
 
-\item{tickLen}{Set tick length in miliseconds. Increasing this value, may
+\item{tickLen}{Set tick length in milliseconds. Increasing this value, may
 improve performance, at the cost of animation smoothness. Default is 250}
 
 \item{speed}{Set float multiplier for default animation speed. Default is 1}

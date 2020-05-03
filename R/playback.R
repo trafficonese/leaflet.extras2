@@ -19,7 +19,7 @@ playbackDependencies <- function() {
 #' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
 #' @param pathOpts style the CircleMarker with
 #'   \code{\link[leaflet]{pathOptions}}
-#' @param options Lits of additional options. See \code{\link{playbackOptions}}
+#' @param options List of additional options. See \code{\link{playbackOptions}}
 #' @description Add Leaflet Playback Plugin based on the
 #'  \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
 #' @details If data is a JSON string, it must have the following form:
@@ -140,7 +140,7 @@ to_ms <- function(data, time) {
 #'   repository}
 #' @param color colors of the CircleMarkers.
 #' @param radius a numeric value for the radius of the CircleMarkers.
-#' @param tickLen Set tick length in miliseconds. Increasing this value, may
+#' @param tickLen Set tick length in milliseconds. Increasing this value, may
 #'   improve performance, at the cost of animation smoothness. Default is 250
 #' @param speed Set float multiplier for default animation speed. Default is 1
 #' @param maxInterpolationTime Set max interpolation time in seconds.
