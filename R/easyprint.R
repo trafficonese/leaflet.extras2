@@ -11,12 +11,13 @@ easyprintDependency <- function() {
 
 #' Add easyPrint Plugin
 #'
-#' Print or export a map as .PNG
+#' Add a control, which allows to print or export a map as .PNG.
 #' @param map a map widget object created from \code{\link[leaflet]{leaflet}}
 #' @param options A named list of options. See \code{\link{easyprintOptions}}
 #' @family EasyPrint Functions
-#' @seealso \url{https://github.com/rowanwins/leaflet-easyPrint}
+#' @references \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
+#' @return A leaflet map object
 #' @examples
 #' library(leaflet)
 #' leaflet()  %>%
@@ -32,12 +33,13 @@ addEasyprint <- function(map, options = easyprintOptions()) {
 
 #' easyprintMap
 #'
-#' Print a Map programmatically
+#' Print or export a map programmatically (e.g. in a Shiny environment).
 #' @param map the map widget
 #' @param sizeModes Options available include CurrentSize, A4Portrait,
 #'   A4Landscape or a custom size object. Default is \code{A4Portrait}
 #' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}.
 #' @family EasyPrint Functions
+#' @inherit addEasyprint return
 #' @export
 #' @examples
 #' ## Only run examples in interactive R sessions
@@ -75,14 +77,19 @@ easyprintMap <- function(map, sizeModes = "A4Portrait", filename = "map") {
 }
 
 #' removeEasyprint
+#'
+#' Removes the easyprint control from the map.
 #' @param map the map widget
 #' @family EasyPrint Functions
+#' @inherit addEasyprint return
 #' @export
 removeEasyprint <- function(map) {
   leaflet::invokeMethod(map, NULL, "removeEasyprint")
 }
 
-#' easyPrint Options
+#' easyprintOptions
+#'
+#' Create a list of further options for the easyprint plugin.
 #' @param title Sets the text which appears as the tooltip of the print/export button
 #' @param position Positions the print button
 #' @param sizeModes Options available include CurrentSize, A4Portrait,
@@ -105,7 +112,8 @@ removeEasyprint <- function(map) {
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
 #' @family EasyPrint Functions
-#' @seealso \url{https://github.com/rowanwins/leaflet-easyPrint}
+#' @return A list of options for the 'easyprint' control
+#' @references \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
 easyprintOptions <- function(title = 'Print map',
                              position = 'topleft',

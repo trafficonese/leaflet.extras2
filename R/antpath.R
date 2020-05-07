@@ -20,7 +20,8 @@ antpathDependency <- function() {
 #' @inheritParams leaflet::addPolylines
 #' @param options A named list of options. See \code{\link{antpathOptions}}
 #' @family Antpath Functions
-#' @seealso \url{https://github.com/rubenspgcavalcante/leaflet-ant-path}
+#' @references \url{https://github.com/rubenspgcavalcante/leaflet-ant-path}
+#' @return A modified leaflet map, with an 'ant-path' animated polyline
 #' @export
 #' @examples
 #' library(leaflet)
@@ -55,6 +56,7 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL
 
 #' Antpath Options
 #'
+#' Additional list of options for 'ant-path' animated polylines.
 #' @inheritParams leaflet::pathOptions
 #' @param delay Add a delay to the animation flux. Default is \code{400}
 #' @param paused Should the animation be paused. Default is \code{FALSE}
@@ -65,6 +67,7 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL
 #' @param dashArray The size of the animated dashes. Default is \code{c(10, 20)}
 #' @param pulseColor Adds a color to the dashed flux. Default is \code{#ffffff}
 #' @family Antpath Functions
+#' @return A list of options for \code{addAntpath} animated polylines
 #' @export
 antpathOptions = function(
   delay = 400,
@@ -92,17 +95,23 @@ antpathOptions = function(
   ))
 }
 
+#' removeAntpath
+#'
 #' Remove one or more Antpaths from a map, identified by \code{layerId}.
 #' @inheritParams leaflet::removeShape
 #' @family Antpath Functions
+#' @inherit leaflet::removeShape return
 #' @export
 removeAntpath <- function(map, layerId = NULL) {
   invokeMethod(map, NULL, "removeAntpath", layerId)
 }
 
+#' clearAntpath
+#'
 #' Clear all Antpaths
 #' @inheritParams leaflet::clearShapes
 #' @family Antpath Functions
+#' @inherit leaflet::clearShapes return
 #' @export
 clearAntpath <- function(map) {
   invokeMethod(map, NULL, "clearAntpath")

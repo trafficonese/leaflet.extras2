@@ -12,23 +12,22 @@ gibsDependency <- function() {
 }
 
 #' Add GIBS Layers
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param layers vector of GIBS-layers. See \code{\link{gibs_layers}}
-#' @param dates Date object. If multiple \code{layers} are added, you can add
-#'   a Date vector of the same length
-#' @param group the name of the group the newly created layers should belong to
-#'   (for\code{\link[leaflet]{clearGroup}} and
-#'   \code{\link[leaflet]{addLayersControl}} purposes). Human-friendly group
-#'   names are permitted–they need not be short, identifier-style names. Any
-#'   number of layers and even different types of layers (e.g. markers and
-#'   polygons) can share the same group name.
-#' @param opacity numeric value determining the opacity. If multiple
+#'
+#' A leaflet plugin for NASA EOSDIS GIBS imagery integration. 154 products are
+#' available. The date can be set dynamically for multi-temporal products. No-data
+#' pixels of MODIS Multiband Imagery can be made transparent.
+#' @inheritParams leaflet::addWMSTiles
+#' @param layers A character vector of GIBS-layers. See \code{\link{gibs_layers}}
+#' @param dates Date object. If multiple \code{layers} are added, you can add a
+#'   Date vector of the same length
+#' @param opacity Numeric value determining the opacity. If multiple
 #'   \code{layers} are added, you can add a numeric vector of the same length
-#' @param transparent Should the layer be transparent. If multiple
-#'   \code{layers} are added, you can add a boolean vector of the same length
-#' @seealso \url{https://github.com/aparshin/leaflet-GIBS}
+#' @param transparent Should the layer be transparent. If multiple \code{layers}
+#'   are added, you can add a boolean vector of the same length
+#' @references \url{https://github.com/aparshin/leaflet-GIBS}
 #' @family GIBS Functions
 #' @export
+#' @inherit leaflet::addWMSTiles return
 #' @examples
 #' library(leaflet)
 #' library(leaflet.extras2)
@@ -44,7 +43,6 @@ gibsDependency <- function() {
 #'   addLayersControl(overlayGroups = layers)
 addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
                     opacity = 0.5, transparent = TRUE) {
-
   ## Check required args ######################
   if (is.null(layers))
     stop("You must define one or multiple `layers`.\n",
@@ -85,8 +83,11 @@ addGIBS <- function(map, layers = NULL, group = NULL, dates = NULL,
 }
 
 #' Set Date for GIBS Layers
+#'
+#' Set a new date for multi-temporal layers.
 #' @inheritParams addGIBS
 #' @family GIBS Functions
+#' @inherit leaflet::addWMSTiles return
 #' @export
 setDate <- function(map, layers = NULL, dates = NULL) {
   ## Check required args ######################
@@ -101,8 +102,11 @@ setDate <- function(map, layers = NULL, dates = NULL) {
 }
 
 #' Set Transparency for GIBS Layers
+#'
+#' Change the transparency for no-data pixels.
 #' @inheritParams addGIBS
 #' @family GIBS Functions
+#' @inherit leaflet::addWMSTiles return
 #' @export
 setTransparent <- function(map, layers = NULL, transparent = TRUE) {
   ## Check required args ######################

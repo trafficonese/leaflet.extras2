@@ -11,15 +11,18 @@ openweatherOptions(
 )
 }
 \arguments{
-\item{showLegend}{If true and option 'legendImagePath' is set there will be a
-legend image on the map.}
+\item{showLegend}{If \code{TRUE} and option \code{legendImagePath} is set
+there will be a legend image on the map}
 
-\item{legendImagePath}{URL (is set to a default image for some layers, null
+\item{legendImagePath}{A URL (is set to a default image for some layers, null
 for others, see below). URL or relative path to an image which is a legend
-to this layer.}
+to this layer}
 
-\item{legendPosition}{Position of the legend images on the map. Available are
-standard positions for Leaflet controls}
+\item{legendPosition}{Position of the legend images on the map. Must be one
+of \code{'bottomleft', 'bottomright', 'topleft', 'topright'}}
+}
+\value{
+A list of options for \code{addOpenweatherTiles}
 }
 \description{
 OpenWeatherMap Options

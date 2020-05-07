@@ -2,17 +2,20 @@
 % Please edit documentation in R/sidebar.R
 \name{openSidebar}
 \alias{openSidebar}
-\title{Open the Sidebar}
+\title{Open the Sidebar by ID}
 \usage{
 openSidebar(map, id)
 }
 \arguments{
 \item{map}{A leaflet map widget}
 
-\item{id}{The id of the \code{\link{sidebar_pane}} to open.}
+\item{id}{The id of the \code{\link{sidebar_pane}} to open}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Open the Sidebar
+Open the Sidebar by ID
 }
 \seealso{
 Other Sidebar Functions: 

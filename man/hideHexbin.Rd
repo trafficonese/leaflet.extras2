@@ -2,17 +2,18 @@
 % Please edit documentation in R/hexbin.R
 \name{hideHexbin}
 \alias{hideHexbin}
-\title{hideHexbin
-Hide the hexbinLayer}
+\title{hideHexbin}
 \usage{
 hideHexbin(map)
 }
 \arguments{
 \item{map}{The map widget}
 }
+\value{
+the new \code{map} object
+}
 \description{
-hideHexbin
-Hide the hexbinLayer
+Hide the hexbinLayer.
 }
 \seealso{
 Other Hexbin-D3 Functions: 

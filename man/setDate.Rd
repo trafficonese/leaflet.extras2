@@ -7,15 +7,18 @@
 setDate(map, layers = NULL, dates = NULL)
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{layers}{vector of GIBS-layers. See \code{\link{gibs_layers}}}
+\item{layers}{A character vector of GIBS-layers. See \code{\link{gibs_layers}}}
 
-\item{dates}{Date object. If multiple \code{layers} are added, you can add
-a Date vector of the same length}
+\item{dates}{Date object. If multiple \code{layers} are added, you can add a
+Date vector of the same length}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Set Date for GIBS Layers
+Set a new date for multi-temporal layers.
 }
 \seealso{
 Other GIBS Functions: 

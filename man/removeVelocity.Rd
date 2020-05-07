@@ -11,6 +11,9 @@ removeVelocity(map, group)
 
 \item{group}{the group to remove}
 }
+\value{
+the new \code{map} object
+}
 \description{
 removeVelocity
 }

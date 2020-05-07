@@ -20,6 +20,9 @@ not use less than 10 minutes.}
 \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
 list of options}}
 }
+\value{
+A list of options for \code{addOpenweatherCurrent}
+}
 \description{
 openweatherCurrentOptions
 }

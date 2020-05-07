@@ -2,7 +2,7 @@
 % Please edit documentation in R/mapkeyIcon.R
 \name{addMapkeyMarkers}
 \alias{addMapkeyMarkers}
-\title{Add mapkey Markers}
+\title{Add Mapkey Markers}
 \usage{
 addMapkeyMarkers(
   map,
@@ -37,7 +37,7 @@ the latitude column from \code{data})}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
@@ -48,19 +48,19 @@ layers (e.g. markers and polygons) can share the same group name.}
 recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
 for security reasons)}
 
-\item{popupOptions}{options for popup}
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
 \item{label}{a character vector of the HTML content for the labels}
 
-\item{labelOptions}{A Vector of \code{\link{labelOptions}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
-\item{options}{a list of extra options for tile layers, popups, paths
-(circles, rectangles, polygons, ...), or other map elements}
+\item{options}{a list of extra options for markers. See
+\code{\link[leaflet]{markerOptions}}}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
- you can use \code{\link{markerClusterOptions}()} to specify marker cluster
+ you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
 options}
 
 \item{clusterId}{the id for the marker cluster layer}
@@ -69,8 +69,11 @@ options}
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
+\value{
+the new \code{map} object
+}
 \description{
-Add mapkey Markers
+Add Mapkey Markers
 }
 \examples{
 library(leaflet)
@@ -84,13 +87,11 @@ leaflet()  \%>\%
                                       background = "transparent"),
                 group = "mapkey",
                 label = ~state, popup = ~village)
-
-## for more examples see
-# browseURL(system.file("examples/mapkeyIcons.R", package = "leaflet.extras2"))
+}
+\references{
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
 }
 \seealso{
-\url{https://github.com/mapshakers/leaflet-mapkey-icon}
-
 Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{makeMapkeyIcon}()},

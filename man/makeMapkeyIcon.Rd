@@ -2,7 +2,7 @@
 % Please edit documentation in R/mapkeyIcon.R
 \name{makeMapkeyIcon}
 \alias{makeMapkeyIcon}
-\title{Make mapkey Icon}
+\title{Make Mapkey Icon}
 \usage{
 makeMapkeyIcon(
   icon = "mapkey",
@@ -43,10 +43,13 @@ color:#99defc !important;")}
 \item{htmlCode}{e.g. '&#57347;&#xe003;'. See
 \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
 
-\item{boxShadow}{Should a shadow be visible.}
+\item{boxShadow}{Should a shadow be visible}
+}
+\value{
+A list of mapkey-icon data that can be passed to the argument \code{icon}
 }
 \description{
-Make mapkey Icon
+Make Mapkey Icon
 }
 \examples{
 makeMapkeyIcon(icon = "traffic_signal",
@@ -55,9 +58,10 @@ makeMapkeyIcon(icon = "traffic_signal",
                boxShadow = FALSE,
                background="transparent")
 }
-\seealso{
+\references{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}
-
+}
+\seealso{
 Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},

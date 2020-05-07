@@ -12,11 +12,17 @@ addReachability(map, apikey = NULL, options = reachabilityOptions())
 \item{apikey}{a valid Openrouteservice API-key. Can be obtained from
 \href{https://openrouteservice.org/dev/#/signup}{Openrouteservice}}
 
-\item{options}{see \code{\link{reachabilityOptions}}}
+\item{options}{A list of further options. See \code{\link{reachabilityOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add Leaflet Reachability Plugin Control. Based on the
- \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
+A leaflet plugin which shows areas of reachability based on time or distance
+for different modes of travel using the openrouteservice isochrones API.
+Based on the
+\href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability
+plugin}
 }
 \note{
 When used in Shiny, 3 events update a certain shiny Input:
@@ -39,9 +45,10 @@ leaflet() \%>\%
   addReachability()
 }
 }
-\seealso{
+\references{
 \url{https://github.com/traffordDataLab/leaflet.reachability}
-
+}
+\seealso{
 Other Reachability Functions: 
 \code{\link{reachabilityOptions}()},
 \code{\link{removeReachability}()}

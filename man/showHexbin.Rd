@@ -2,17 +2,18 @@
 % Please edit documentation in R/hexbin.R
 \name{showHexbin}
 \alias{showHexbin}
-\title{showHexbin
-Show the hexbinLayer}
+\title{showHexbin}
 \usage{
 showHexbin(map)
 }
 \arguments{
 \item{map}{The map widget}
 }
+\value{
+the new \code{map} object
+}
 \description{
-showHexbin
-Show the hexbinLayer
+Show the hexbinLayer.
 }
 \seealso{
 Other Hexbin-D3 Functions: 

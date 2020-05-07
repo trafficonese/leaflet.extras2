@@ -12,6 +12,9 @@ to_ms(data, time)
 
 \item{time}{Columnname of the time column.}
 }
+\value{
+A data.frame with the time column in milliseconds
+}
 \description{
 to_ms
 Change POSIX or Date to milliseconds

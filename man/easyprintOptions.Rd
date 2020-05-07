@@ -2,7 +2,7 @@
 % Please edit documentation in R/easyprint.R
 \name{easyprintOptions}
 \alias{easyprintOptions}
-\title{easyPrint Options}
+\title{easyprintOptions}
 \usage{
 easyprintOptions(
   title = "Print map",
@@ -57,12 +57,16 @@ added the printed paper.}
 \item{customSpinnerClass}{A class for a custom css spinner to use while
 waiting for the print.}
 }
+\value{
+A list of options for the 'easyprint' control
+}
 \description{
-easyPrint Options
+Create a list of further options for the easyprint plugin.
+}
+\references{
+\url{https://github.com/rowanwins/leaflet-easyPrint}
 }
 \seealso{
-\url{https://github.com/rowanwins/leaflet-easyPrint}
-
 Other EasyPrint Functions: 
 \code{\link{addEasyprint}()},
 \code{\link{easyprintMap}()},

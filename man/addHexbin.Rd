@@ -17,40 +17,46 @@ addHexbin(
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
-~x where x is a variable in data; by default (if not explicitly provided),
-it will be automatically inferred from data by looking for a column named
-lng, long, or longitude (case-insensitively)}
+\code{~x} where \code{x} is a variable in \code{data}; by default (if not
+explicitly provided), it will be automatically inferred from \code{data} by
+looking for a column named \code{lng}, \code{long}, or \code{longitude}
+(case-insensitively)}
 
-\item{lat}{a vector of latitudes or a formula (similar to the lng argument;
-the names lat and latitude are used when guessing the latitude column from
-data)}
+\item{lat}{a vector of latitudes or a formula (similar to the \code{lng}
+argument; the names \code{lat} and \code{latitude} are used when guessing
+the latitude column from \code{data})}
 
 \item{radius}{Radius of the hexbin layer}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for clearGroup and addLayersControl purposes). Human-friendly group names
-are permitted–they need not be short, identifier-style names. Any number of
-layers and even different types of layers (e.g. markers and polygons) can
-share the same group name.}
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
-\item{opacity}{Opacity on the hexbin layer}
+\item{opacity}{Opacity of the hexbin layer}
 
 \item{options}{List of further options. See \code{\link{hexbinOptions}}}
 
 \item{data}{the data object from which the argument values are derived; by
-default, it is the data object provided to leaflet() initially, but can be
-overridden.}
+default, it is the \code{data} object provided to \code{leaflet()}
+initially, but can be overridden}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Visualize data with hexbin-based bins
+Create dynamic hexbin-based heatmaps on Leaflet maps. This plugin leverages
+the data-binding power of d3 to allow you to dynamically update the data and
+visualize the transitions.
 }
 \note{
-Currently doesn't respect \code{layerId} nor \code{group}
+Currently doesn't respect \code{layerId} nor \code{group}.
 }
 \examples{
 library(leaflet)
@@ -68,9 +74,10 @@ leaflet()  \%>\%
                radiusRange = c(10, 20)
            ))
 }
-\seealso{
+\references{
 \url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
-
+}
+\seealso{
 Other Hexbin-D3 Functions: 
 \code{\link{clearHexbin}()},
 \code{\link{hexbinOptions}()},

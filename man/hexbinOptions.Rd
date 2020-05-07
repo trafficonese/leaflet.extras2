@@ -50,8 +50,11 @@ append the string before the count. To disable tooltips, please pass
 \code{NULL} or \code{FALSE}. You can also pass a custom
 \code{\link[htmlwidgets]{JS}} function.}
 }
+\value{
+A list of hexbin-specific options
+}
 \description{
-hexbinOptions
+A list of options for customizing the appearance/behavior of the hexbin layer.
 }
 \seealso{
 Other Hexbin-D3 Functions: 

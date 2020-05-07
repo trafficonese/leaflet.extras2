@@ -14,8 +14,11 @@ A4Landscape or a custom size object. Default is \code{A4Portrait}}
 
 \item{filename}{Name of the file if \code{exportOnly} option is \code{TRUE}.}
 }
+\value{
+A leaflet map object
+}
 \description{
-Print a Map programmatically
+Print or export a map programmatically (e.g. in a Shiny environment).
 }
 \examples{
 ## Only run examples in interactive R sessions

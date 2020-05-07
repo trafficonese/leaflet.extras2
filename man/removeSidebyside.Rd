@@ -11,6 +11,9 @@ removeSidebyside(map, layerId = NULL)
 
 \item{layerId}{the layer id of the \code{\link{addSidebyside}} layer}
 }
+\value{
+the new \code{map} object
+}
 \description{
 removeSidebyside
 }

@@ -15,8 +15,6 @@
 leaflet_mapkey_icon_set
 }
 \seealso{
-\url{https://github.com/mapshakers/leaflet-mapkey-icon}
-
 Other Mapkey Functions: 
 \code{\link{addMapkeyMarkers}()},
 \code{\link{makeMapkeyIcon}()},

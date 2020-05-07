@@ -13,6 +13,9 @@ setOptionsVelocity(map, layerId, options)
 
 \item{options}{see \code{\link{velocityOptions}}}
 }
+\value{
+the new \code{map} object
+}
 \description{
 setOptionsVelocity
 }

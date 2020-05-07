@@ -9,8 +9,11 @@ removeEasyprint(map)
 \arguments{
 \item{map}{the map widget}
 }
+\value{
+A leaflet map object
+}
 \description{
-removeEasyprint
+Removes the easyprint control from the map.
 }
 \seealso{
 Other EasyPrint Functions: 

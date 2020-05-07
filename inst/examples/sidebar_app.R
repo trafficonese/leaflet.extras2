@@ -14,7 +14,7 @@ ui <- fluidPage(
                 actionButton("clear", "Clear Sidebar")
               ),
               tagList(
-                sidebar_tabs(
+                sidebar_tabs(id = "mysidebarid",
                   list(icon("car"), icon("user"), icon("envelope")),
                   sidebar_pane(
                     title = "home", id = "home_id", icon = icon("home"),
@@ -62,7 +62,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       addTiles() %>%
       addSidebar(
-        id = "sidebar",
+        id = "mysidebarid",
         options = list(position = "left", fit = TRUE)
       )
   })

@@ -12,23 +12,18 @@ velocityDependencies <- function() {
 
 #' Add Velocity Animation
 #'
-#' @param map a map widget
-#' @param layerId the layer id
-#' @param group the name of the group the newly created layers should belong to
-#'   (for \code{clearGroup} and \code{addLayersControl} purposes).
-#'   Human-friendly group names are permitted–they need not be short,
-#'   identifier-style names. Any number of layers and even different types of
-#'   layers (e.g. markers and polygons) can share the same group name.
+#' Add velocity animated data to leaflet. Based on the
+#'   \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+#' @inheritParams leaflet::addMarkers
 #' @param content the path or URL to a JSON file representing the velocity data
 #'   or a data.frame which can be transformed to such a JSON file. Please see the
 #'   \href{https://github.com/danwild/leaflet-velocity/tree/master/demo}{demo
 #'   files} for some example data.
-#' @param options see \code{\link{velocityOptions}}
-#' @description Add velocity animated data to leaflet. Based on the
-#'   \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+#' @param options List of further options. See \code{\link{velocityOptions}}
 #' @export
 #' @family Velocity Functions
-#' @seealso \url{https://github.com/danwild/leaflet-velocity}
+#' @references \url{https://github.com/danwild/leaflet-velocity}
+#' @inherit leaflet::addMarkers return
 #' @examples \dontrun{
 #' library(leaflet)
 #' library(leaflet.extras2)
@@ -77,6 +72,7 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
 #' @param colorScale A vector of hex colors or an RGB matrix
 #' @param ... Further arguments passed to the Velocity layer and Windy.js.
 #'   For more information, please visit \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+#' @return A list of further options for \code{addVelocity}
 #' @export
 #' @family Velocity Functions
 velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
@@ -105,6 +101,7 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
 #' @param map the map widget
 #' @param group the group to remove
 #' @export
+#' @inherit leaflet::removeMarker return
 #' @family Velocity Functions
 removeVelocity <- function(map, group){
   invokeMethod(map, NULL, "removeVelocity", group)
@@ -114,6 +111,7 @@ removeVelocity <- function(map, group){
 #' @param map the map widget
 #' @param layerId the layer id
 #' @param options see \code{\link{velocityOptions}}
+#' @inherit leaflet::removeMarker return
 #' @export
 #' @family Velocity Functions
 setOptionsVelocity <- function(map, layerId, options){

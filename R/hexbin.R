@@ -14,32 +14,19 @@ hexbinDependency <- function() {
 
 #' Add a Hexbin layer
 #'
-#' Visualize data with hexbin-based bins
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param lng a numeric vector of longitudes, or a one-sided formula of the form
-#'   ~x where x is a variable in data; by default (if not explicitly provided),
-#'   it will be automatically inferred from data by looking for a column named
-#'   lng, long, or longitude (case-insensitively)
-#' @param lat a vector of latitudes or a formula (similar to the lng argument;
-#'   the names lat and latitude are used when guessing the latitude column from
-#'   data)
+#' Create dynamic hexbin-based heatmaps on Leaflet maps. This plugin leverages
+#' the data-binding power of d3 to allow you to dynamically update the data and
+#' visualize the transitions.
+#' @inheritParams leaflet::addCircleMarkers
 #' @param radius Radius of the hexbin layer
-#' @param layerId the layer id
-#' @param group the name of the group the newly created layers should belong to
-#'   (for clearGroup and addLayersControl purposes). Human-friendly group names
-#'   are permitted–they need not be short, identifier-style names. Any number of
-#'   layers and even different types of layers (e.g. markers and polygons) can
-#'   share the same group name.
-#' @param opacity Opacity on the hexbin layer
+#' @param opacity Opacity of the hexbin layer
 #' @param options List of further options. See \code{\link{hexbinOptions}}
-#' @param data the data object from which the argument values are derived; by
-#'   default, it is the data object provided to leaflet() initially, but can be
-#'   overridden.
 #'
-#' @note Currently doesn't respect \code{layerId} nor \code{group}
+#' @note Currently doesn't respect \code{layerId} nor \code{group}.
 #'
-#' @seealso \url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
+#' @references \url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
 #' @family Hexbin-D3 Functions
+#' @inherit leaflet::addCircleMarkers return
 #' @export
 #' @examples
 #' library(leaflet)
@@ -78,20 +65,13 @@ addHexbin <- function(
 }
 
 #' updateHexbin
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param lng a numeric vector of longitudes, or a one-sided formula of the form
-#'   ~x where x is a variable in data; by default (if not explicitly provided),
-#'   it will be automatically inferred from data by looking for a column named
-#'   lng, long, or longitude (case-insensitively)
-#' @param lat a vector of latitudes or a formula (similar to the lng argument;
-#'   the names lat and latitude are used when guessing the latitude column from
-#'   data)
-#' @param data the data object from which the argument values are derived; by
-#'   default, it is the data object provided to leaflet() initially, but can be
-#'   overridden.
-#' @param colorRange Sets the range of the color scale used to fill the
-#'   hexbins on the layer.
+#'
+#' Dynamically change the \code{data} and/or the \code{colorRange}.
+#' @inheritParams leaflet::addCircleMarkers
+#' @param colorRange The range of the color scale used to fill the
+#'   hexbins
 #' @family Hexbin-D3 Functions
+#' @inherit leaflet::addCircleMarkers return
 #' @export
 updateHexbin <- function(map, data = NULL, lng = NULL, lat = NULL, colorRange = NULL) {
   if (is.null(c(data, lng, lat))) {
@@ -105,33 +85,41 @@ updateHexbin <- function(map, data = NULL, lng = NULL, lat = NULL, colorRange = 
 }
 
 #' clearHexbin
-#' Clear the hexbinLayer
+#'
+#' Clears the data of the hexbinLayer.
 #' @param map The map widget
 #' @family Hexbin-D3 Functions
+#' @inherit leaflet::addCircleMarkers return
 #' @export
 clearHexbin <- function(map) {
   invokeMethod(map, NULL, "clearHexbin")
 }
 
 #' hideHexbin
-#' Hide the hexbinLayer
+#'
+#' Hide the hexbinLayer.
 #' @param map The map widget
 #' @family Hexbin-D3 Functions
+#' @inherit leaflet::addCircleMarkers return
 #' @export
 hideHexbin <- function(map) {
   invokeMethod(map, NULL, "hideHexbin")
 }
 
 #' showHexbin
-#' Show the hexbinLayer
+#'
+#' Show the hexbinLayer.
 #' @param map The map widget
 #' @family Hexbin-D3 Functions
+#' @inherit leaflet::addCircleMarkers return
 #' @export
 showHexbin <- function(map) {
   invokeMethod(map, NULL, "showHexbin")
 }
 
 #' hexbinOptions
+#'
+#' A list of options for customizing the appearance/behavior of the hexbin layer.
 #' @param duration Transition duration for the hexbin layer
 #' @param colorScaleExtent extent of the color scale for the hexbin layer. This
 #'   is used to override the derived extent of the color values and is specified
@@ -159,6 +147,7 @@ showHexbin <- function(map) {
 #'   \code{NULL} or \code{FALSE}. You can also pass a custom
 #'   \code{\link[htmlwidgets]{JS}} function.
 #' @family Hexbin-D3 Functions
+#' @return A list of hexbin-specific options
 #' @export
 hexbinOptions = function(
   duration = 200,

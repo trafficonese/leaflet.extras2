@@ -24,10 +24,11 @@ tangram_deps <- function() {
 #'   \code{examples/tangram} folder or the
 #'   \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
 #'    for further information.
-#' @export
 #' @note Only works correctly in a Shiny-App environment.
-#' @seealso \url{https://github.com/tangrams/tangram}
+#' @references \url{https://github.com/tangrams/tangram}
 #' @family Tangram Functions
+#' @inherit leaflet::addWMSTiles return
+#' @export
 #' @examples \dontrun{
 #' library(shiny)
 #' library(leaflet)

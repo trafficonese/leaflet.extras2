@@ -14,28 +14,32 @@ addGIBS(
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{layers}{vector of GIBS-layers. See \code{\link{gibs_layers}}}
+\item{layers}{A character vector of GIBS-layers. See \code{\link{gibs_layers}}}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for\code{\link[leaflet]{clearGroup}} and
-\code{\link[leaflet]{addLayersControl}} purposes). Human-friendly group
-names are permitted–they need not be short, identifier-style names. Any
-number of layers and even different types of layers (e.g. markers and
-polygons) can share the same group name.}
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
-\item{dates}{Date object. If multiple \code{layers} are added, you can add
-a Date vector of the same length}
+\item{dates}{Date object. If multiple \code{layers} are added, you can add a
+Date vector of the same length}
 
-\item{opacity}{numeric value determining the opacity. If multiple
+\item{opacity}{Numeric value determining the opacity. If multiple
 \code{layers} are added, you can add a numeric vector of the same length}
 
-\item{transparent}{Should the layer be transparent. If multiple
-\code{layers} are added, you can add a boolean vector of the same length}
+\item{transparent}{Should the layer be transparent. If multiple \code{layers}
+are added, you can add a boolean vector of the same length}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add GIBS Layers
+A leaflet plugin for NASA EOSDIS GIBS imagery integration. 154 products are
+available. The date can be set dynamically for multi-temporal products. No-data
+pixels of MODIS Multiband Imagery can be made transparent.
 }
 \examples{
 library(leaflet)
@@ -51,9 +55,10 @@ leaflet()  \%>\%
           group = layers) \%>\%
   addLayersControl(overlayGroups = layers)
 }
-\seealso{
+\references{
 \url{https://github.com/aparshin/leaflet-GIBS}
-
+}
+\seealso{
 Other GIBS Functions: 
 \code{\link{setDate}()},
 \code{\link{setTransparent}()}

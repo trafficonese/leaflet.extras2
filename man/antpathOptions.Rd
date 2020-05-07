@@ -48,8 +48,11 @@ SVG backend is used}
 
 \item{className}{a CSS class name set on an element}
 }
+\value{
+A list of options for \code{addAntpath} animated polylines
+}
 \description{
-Antpath Options
+Additional list of options for 'ant-path' animated polylines.
 }
 \seealso{
 Other Antpath Functions: 

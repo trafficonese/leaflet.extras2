@@ -2,7 +2,7 @@
 % Please edit documentation in R/sidebar.R
 \name{sidebar_pane}
 \alias{sidebar_pane}
-\title{Create a Sidebar Panel}
+\title{Create a Sidebar Pane}
 \usage{
 sidebar_pane(
   title = "Sidebar Title",
@@ -16,24 +16,27 @@ sidebar_pane(
 
 \item{id}{An id for the sidebar panel}
 
-\item{icon}{An icon for the sidebar panel.}
+\item{icon}{An icon for the sidebar panel}
 
 \item{...}{List of elements to include in the panel}
 }
+\value{
+A \code{shiny.tag} with sidebar-specific HTML classes
+}
 \description{
-Create a Sidebar Panel
+Create a Sidebar Pane
 }
 \examples{
 \dontrun{
 library(shiny)
-runApp(paste0(system.file("examples", package = "leaflet.extras2"),
-              "/sidebar_app.R"))
+sidebar_pane(id = "id", icon = icon("cars"), tags$div())
 }
 }
-\seealso{
+\references{
 \url{https://github.com/Turbo87/sidebar-v2},
          \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}
-
+}
+\seealso{
 Other Sidebar Functions: 
 \code{\link{addSidebar}()},
 \code{\link{closeSidebar}()},

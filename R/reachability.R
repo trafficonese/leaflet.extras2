@@ -12,12 +12,15 @@ reachabilityDependencies <- function() {
 
 #' Add Isochrones to Leaflet
 #'
+#' A leaflet plugin which shows areas of reachability based on time or distance
+#' for different modes of travel using the openrouteservice isochrones API.
+#' Based on the
+#' \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability
+#' plugin}
 #' @param map a map widget
 #' @param apikey a valid Openrouteservice API-key. Can be obtained from
 #'   \href{https://openrouteservice.org/dev/#/signup}{Openrouteservice}
-#' @param options see \code{\link{reachabilityOptions}}
-#' @description Add Leaflet Reachability Plugin Control. Based on the
-#'  \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
+#' @param options A list of further options. See \code{\link{reachabilityOptions}}
 #' @note When used in Shiny, 3 events update a certain shiny Input:
 #' \enumerate{
 #'   \item reachability:displayed updates \code{input$MAPID_reachability_displayed}
@@ -25,7 +28,8 @@ reachabilityDependencies <- function() {
 #'   \item reachability:error updates \code{input$MAPID_reachability_error}
 #' }
 #' @family Reachability Functions
-#' @seealso \url{https://github.com/traffordDataLab/leaflet.reachability}
+#' @references \url{https://github.com/traffordDataLab/leaflet.reachability}
+#' @inherit leaflet::addControl return
 #' @export
 #' @examples \dontrun{
 #' library(leaflet)
@@ -54,16 +58,17 @@ addReachability <- function(map, apikey = NULL,
 
 #' reachabilityOptions
 #'
+#' Add extra options. For a full list please visit the
+#' \href{https://github.com/traffordDataLab/leaflet.reachability}{plugin repository}.
 #' @param collapsed Should the control widget start in a collapsed mode.
 #'   Default is \code{TRUE}
 #' @param pane Leaflet pane to add the isolines GeoJSON to.
 #'   Default is \code{overlayPane}
 #' @param position Leaflet control pane position. Default is \code{topleft}
 #' @param ... Further arguments passed to `L.Control.Reachability`
-#' @description Add extra options. For a full list please visit the
-#' \href{https://github.com/traffordDataLab/leaflet.reachability}{plugin repository}
 #' @family Reachability Functions
-#' @seealso \url{https://github.com/traffordDataLab/leaflet.reachability}
+#' @references \url{https://github.com/traffordDataLab/leaflet.reachability}
+#' @return A list of options for \code{addReachability}
 #' @export
 reachabilityOptions = function(collapsed = TRUE,
                                pane = "overlayPane",
@@ -78,8 +83,10 @@ reachabilityOptions = function(collapsed = TRUE,
 }
 
 #' removeReachability
+#'
+#' Remove the reachability controls.
 #' @param map the map widget.
-#' @description Remove the reachability controls
+#' @inherit leaflet::addControl return
 #' @export
 #' @family Reachability Functions
 removeReachability <- function(map){

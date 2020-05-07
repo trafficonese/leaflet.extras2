@@ -16,7 +16,7 @@ addWMS(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{baseUrl}{a base URL of the WMS service}
 
@@ -25,12 +25,10 @@ used as the \code{layerId} (for \code{\link[leaflet]{removeTiles}}
 purposes)}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for clearGroup and addLayersControl purposes). Human-friendly group names
-are permitted–they need not be short, identifier-style names. Any number of
-layers and even different types of layers (e.g. markers and polygons) can
-share the same group name. NOTE: If multiple \code{layers} are included,
-the group argument will be ignored and the the layer-names will serve as
-group names.}
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{options}{List of further options. See
 \code{\link[leaflet]{WMSTileOptions}}}
@@ -41,11 +39,16 @@ group names.}
 \code{\link[leaflet]{popupOptions}}. Default is NULL.}
 
 \item{data}{the data object from which the argument values are derived; by
-default, it is the data object provided to \code{\link[leaflet]{leaflet}}
-initially, but can be overridden.}
+default, it is the \code{data} object provided to \code{leaflet()}
+initially, but can be overridden}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add Queryable WMS Layer
+A Leaflet plugin for working with Web Map services, providing:
+single-tile/untiled/nontiled layers, shared WMS sources, and
+GetFeatureInfo-powered identify.
 }
 \examples{
 library(leaflet)
@@ -62,7 +65,7 @@ leaflet() \%>\%
         format = "image/png",
         info_format = "text/html"))
 }
-\seealso{
+\references{
 \url{https://github.com/heigeo/leaflet.wms}
 }
 \concept{WMS Functions}

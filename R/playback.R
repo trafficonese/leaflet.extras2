@@ -11,6 +11,12 @@ playbackDependencies <- function() {
 
 #' Add Playback to Leaflet
 #'
+#' The \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
+#' provides the ability to replay GPS Points in the form of
+#' POINT Simple Features. Rather than simply animating a marker along a
+#' polyline, the speed of the animation is synchroized to a clock. The playback
+#' functionality is similar to a video player; you can start and stop playback or
+#' change the playback speed.
 #' @param map a map widget
 #' @param data data must be a POINT Simple Feature or a list of POINT Simple
 #'   Feature's with a time column. It can also be a JSON string which must be in
@@ -20,8 +26,6 @@ playbackDependencies <- function() {
 #' @param pathOpts style the CircleMarker with
 #'   \code{\link[leaflet]{pathOptions}}
 #' @param options List of additional options. See \code{\link{playbackOptions}}
-#' @description Add Leaflet Playback Plugin based on the
-#'  \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
 #' @details If data is a JSON string, it must have the following form:
 #' \preformatted{
 #' {
@@ -44,8 +48,9 @@ playbackDependencies <- function() {
 #'  \item `map-ID`+"_pb_click"
 #' }
 #' @family Playback Functions
-#' @seealso \url{https://github.com/hallahan/LeafletPlayback}
+#' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
+#' @inherit leaflet::addMarkers return
 #' @examples \dontrun{
 #' library(leaflet)
 #' library(leaflet.extras2)
@@ -117,6 +122,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' Change POSIX or Date to milliseconds
 #' @param data The data
 #' @param time Columnname of the time column.
+#' @return A data.frame with the time column in milliseconds
 to_ms <- function(data, time) {
   coln <- colnames(data)
   if (!any(coln == time)) {
@@ -135,9 +141,9 @@ to_ms <- function(data, time) {
 }
 
 #' playbackOptions
-#' @description Extra options for \code{\link{addPlayback}}. For a full list
-#'   please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin
-#'   repository}
+#'
+#' A list options for \code{\link{addPlayback}}. For a full list please visit
+#' the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}.
 #' @param color colors of the CircleMarkers.
 #' @param radius a numeric value for the radius of the CircleMarkers.
 #' @param tickLen Set tick length in milliseconds. Increasing this value, may
@@ -157,7 +163,8 @@ to_ms <- function(data, time) {
 #'   Default is 60*60*1000 (1 hour)
 #' @param ... Further arguments passed to `L.Playback`
 #' @family Playback Functions
-#' @seealso \url{https://github.com/hallahan/LeafletPlayback}
+#' @return A list of options for \code{addPlayback}
+#' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
 playbackOptions = function(
   color = "blue",
@@ -187,9 +194,11 @@ playbackOptions = function(
 }
 
 #' removePlayback
-#' @param map the map widget.
-#' @description Remove the reachability controls
+#'
+#' Remove the Playback controls and markers.
+#' @param map the map widget
 #' @export
+#' @inherit leaflet::addMarkers return
 #' @family Playback Functions
 removePlayback <- function(map){
   invokeMethod(map, NULL, "removePlayback")

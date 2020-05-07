@@ -11,8 +11,11 @@ addEasyprint(map, options = easyprintOptions())
 
 \item{options}{A named list of options. See \code{\link{easyprintOptions}}}
 }
+\value{
+A leaflet map object
+}
 \description{
-Print or export a map as .PNG
+Add a control, which allows to print or export a map as .PNG.
 }
 \examples{
 library(leaflet)
@@ -23,9 +26,10 @@ leaflet()  \%>\%
     position = 'bottomleft',
     exportOnly = TRUE))
 }
-\seealso{
+\references{
 \url{https://github.com/rowanwins/leaflet-easyPrint}
-
+}
+\seealso{
 Other EasyPrint Functions: 
 \code{\link{easyprintMap}()},
 \code{\link{easyprintOptions}()},

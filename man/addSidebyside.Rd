@@ -26,14 +26,16 @@ visible on the \strong{right} side}
 \item{options}{A list of options. Currently only \code{thumbSize} and
 \code{padding} can be changed.}
 }
+\value{
+the new \code{map} object
+}
 \description{
-Add Leaflet Sidebyside View. Based on the plugin
-  \href{https://github.com/digidem/leaflet-side-by-side}{leaflet-side-by-side}.
-  The plugin works with Panes, see the example.
+A Leaflet control to add a split screen to compare two map overlays.
+The plugin works with Panes, see the example.
 }
 \note{
-It is currently not working correctly if the \code{baseGroups} are defined in
-  \code{\link[leaflet]{addLayersControl}}.
+It is currently not working correctly if the \code{baseGroups} are
+  defined in \code{\link[leaflet]{addLayersControl}}.
 }
 \examples{
 library(leaflet)
@@ -56,9 +58,10 @@ leaflet(quakes) \%>\%
                 rightId = "baseid",
                 leftId = "cartoid")
 }
-\seealso{
+\references{
 \url{https://github.com/digidem/leaflet-side-by-side}
-
+}
+\seealso{
 Other Sidebyside Functions: 
 \code{\link{removeSidebyside}()}
 }

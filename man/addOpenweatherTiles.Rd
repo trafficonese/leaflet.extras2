@@ -15,7 +15,7 @@ addOpenweatherTiles(
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{apikey}{a valid OpenWeatherMap-API key. Get one from
 \href{https://openweathermap.org/api}{here}.}
@@ -25,13 +25,20 @@ following layers are currently possible \code{c("clouds", "cloudsClassic",
 "precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
 "pressure", "pressureContour", "temperature", "wind")}.}
 
-\item{group}{name of the group}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{layerId}{the layer id}
 
 \item{opacity}{opacity of the layer}
 
 \item{options}{List of further options. See \code{\link{openweatherOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Add OpenWeatherMap Tiles
@@ -53,9 +60,10 @@ leaflet()  \%>\%
   addOpenweatherTiles(layers = "wind")
 }
 }
-\seealso{
+\references{
 \url{https://github.com/trafficonese/leaflet-openweathermap}
-
+}
+\seealso{
 Other Openweathermap Functions: 
 \code{\link{addOpenweatherCurrent}()},
 \code{\link{openweatherCurrentOptions}()},

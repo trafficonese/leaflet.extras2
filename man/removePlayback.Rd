@@ -7,10 +7,13 @@
 removePlayback(map)
 }
 \arguments{
-\item{map}{the map widget.}
+\item{map}{the map widget}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Remove the reachability controls
+Remove the Playback controls and markers.
 }
 \seealso{
 Other Playback Functions: 

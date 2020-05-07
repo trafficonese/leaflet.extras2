@@ -7,15 +7,18 @@
 setTransparent(map, layers = NULL, transparent = TRUE)
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{layers}{vector of GIBS-layers. See \code{\link{gibs_layers}}}
+\item{layers}{A character vector of GIBS-layers. See \code{\link{gibs_layers}}}
 
-\item{transparent}{Should the layer be transparent. If multiple
-\code{layers} are added, you can add a boolean vector of the same length}
+\item{transparent}{Should the layer be transparent. If multiple \code{layers}
+are added, you can add a boolean vector of the same length}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Set Transparency for GIBS Layers
+Change the transparency for no-data pixels.
 }
 \seealso{
 Other GIBS Functions: 

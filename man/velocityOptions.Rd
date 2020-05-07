@@ -28,6 +28,9 @@ per hour or 'kt' for knots}
 \item{...}{Further arguments passed to the Velocity layer and Windy.js.
 For more information, please visit \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}}
 }
+\value{
+A list of further options for \code{addVelocity}
+}
 \description{
 Define further options for the velocity layer.
 }

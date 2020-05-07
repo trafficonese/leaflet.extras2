@@ -48,14 +48,17 @@ Default is 60*60*1000 (1 hour)}
 
 \item{...}{Further arguments passed to `L.Playback`}
 }
+\value{
+A list of options for \code{addPlayback}
+}
 \description{
-Extra options for \code{\link{addPlayback}}. For a full list
-  please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin
-  repository}
+A list options for \code{\link{addPlayback}}. For a full list please visit
+the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}.
+}
+\references{
+\url{https://github.com/hallahan/LeafletPlayback}
 }
 \seealso{
-\url{https://github.com/hallahan/LeafletPlayback}
-
 Other Playback Functions: 
 \code{\link{addPlayback}()},
 \code{\link{removePlayback}()}

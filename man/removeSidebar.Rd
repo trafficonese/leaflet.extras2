@@ -9,6 +9,9 @@ removeSidebar(map)
 \arguments{
 \item{map}{A leaflet map widget}
 }
+\value{
+the new \code{map} object
+}
 \description{
 Remove the Sidebar
 }

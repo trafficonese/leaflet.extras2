@@ -2,19 +2,26 @@
 % Please edit documentation in R/sidebar.R
 \name{addSidebar}
 \alias{addSidebar}
-\title{Adds a Sidebar Leaflet Control}
+\title{Add a Sidebar Leaflet Control}
 \usage{
 addSidebar(map, id = "sidebar", options = list(position = "left", fit = TRUE))
 }
 \arguments{
 \item{map}{A leaflet map widget}
 
-\item{id}{Id of the sidebar-div}
+\item{id}{Id of the sidebar-div. Must match with the \code{id} of
+\code{\link{sidebar_tabs}}}
 
 \item{options}{A named list with \code{position} and \code{fit} elements.}
 }
+\value{
+the new \code{map} object
+}
 \description{
-Adds a Sidebar Leaflet Control
+The sidebar plugin only works in a reactive environment (e.g Shiny), as the
+HTML must be created by using \code{\link{sidebar_tabs}} and
+\code{\link{sidebar_pane}} and it must be created before
+\code{\link[leaflet]{leafletOutput}}.
 }
 \examples{
 \dontrun{
@@ -23,9 +30,10 @@ runApp(paste0(system.file("examples", package = "leaflet.extras2"),
               "/sidebar_app.R"))
 }
 }
-\seealso{
+\references{
 \url{https://github.com/Turbo87/sidebar-v2}
-
+}
+\seealso{
 Other Sidebar Functions: 
 \code{\link{closeSidebar}()},
 \code{\link{openSidebar}()},

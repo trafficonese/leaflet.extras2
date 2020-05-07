@@ -11,6 +11,8 @@ sidebysideDependencies <- function() {
 
 #' Add Side by Side View
 #'
+#' A Leaflet control to add a split screen to compare two map overlays.
+#' The plugin works with Panes, see the example.
 #' @param map a map widget
 #' @param layerId the layer id, needed for \code{\link{removeSidebyside}}
 #' @param leftId the \code{layerId} of the Tile layer that should be
@@ -19,13 +21,11 @@ sidebysideDependencies <- function() {
 #'   visible on the \strong{right} side
 #' @param options A list of options. Currently only \code{thumbSize} and
 #'   \code{padding} can be changed.
-#' @description Add Leaflet Sidebyside View. Based on the plugin
-#'   \href{https://github.com/digidem/leaflet-side-by-side}{leaflet-side-by-side}.
-#'   The plugin works with Panes, see the example.
-#' @note It is currently not working correctly if the \code{baseGroups} are defined in
-#'   \code{\link[leaflet]{addLayersControl}}.
+#' @note It is currently not working correctly if the \code{baseGroups} are
+#'   defined in \code{\link[leaflet]{addLayersControl}}.
 #' @family Sidebyside Functions
-#' @seealso \url{https://github.com/digidem/leaflet-side-by-side}
+#' @references \url{https://github.com/digidem/leaflet-side-by-side}
+#' @inherit leaflet::addControl return
 #' @export
 #' @examples
 #' library(leaflet)
@@ -63,6 +63,7 @@ addSidebyside <- function(map, layerId = NULL,
 #' @export
 #' @param map a map widget
 #' @param layerId the layer id of the \code{\link{addSidebyside}} layer
+#' @inherit leaflet::addControl return
 #' @family Sidebyside Functions
 removeSidebyside <- function(map, layerId = NULL){
   invokeMethod(map, NULL, "removeSidebyside", layerId)

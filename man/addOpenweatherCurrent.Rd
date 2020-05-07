@@ -13,17 +13,24 @@ addOpenweatherCurrent(
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{apikey}{a valid Openweathermap-API key. Get one from
 \href{https://openweathermap.org/api}{here}.}
 
-\item{group}{name of the group}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{layerId}{the layer id}
 
 \item{options}{List of further options. See
 \code{\link{openweatherCurrentOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Add current OpenWeatherMap Marker
@@ -46,9 +53,10 @@ leaflet()  \%>\%
     lang = "en", popup = TRUE))
 }
 }
-\seealso{
+\references{
 \url{https://github.com/trafficonese/leaflet-openweathermap}
-
+}
+\seealso{
 Other Openweathermap Functions: 
 \code{\link{addOpenweatherTiles}()},
 \code{\link{openweatherCurrentOptions}()},

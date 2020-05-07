@@ -94,6 +94,9 @@ options for each label. Default \code{NULL}}
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
+\value{
+A modified leaflet map, with an 'ant-path' animated polyline
+}
 \description{
 Can be used almost exactly like \code{addPolylines} but instead of
 \code{pathOptions} you can use \code{\link{antpathOptions}} to adapt the
@@ -106,9 +109,10 @@ library(leaflet)
 leaflet() \%>\%
   addAntpath(data = atlStorms2005)
 }
-\seealso{
+\references{
 \url{https://github.com/rubenspgcavalcante/leaflet-ant-path}
-
+}
+\seealso{
 Other Antpath Functions: 
 \code{\link{antpathOptions}()},
 \code{\link{clearAntpath}()},

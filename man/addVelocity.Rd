@@ -13,13 +13,13 @@ addVelocity(
 )
 }
 \arguments{
-\item{map}{a map widget}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{clearGroup} and \code{addLayersControl} purposes).
-Human-friendly group names are permitted–they need not be short,
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
@@ -28,7 +28,10 @@ or a data.frame which can be transformed to such a JSON file. Please see the
 \href{https://github.com/danwild/leaflet-velocity/tree/master/demo}{demo
 files} for some example data.}
 
-\item{options}{see \code{\link{velocityOptions}}}
+\item{options}{List of further options. See \code{\link{velocityOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Add velocity animated data to leaflet. Based on the
@@ -46,9 +49,10 @@ leaflet() \%>\%
   addLayersControl(baseGroups = "base", overlayGroups = "velo")
 }
 }
-\seealso{
+\references{
 \url{https://github.com/danwild/leaflet-velocity}
-
+}
+\seealso{
 Other Velocity Functions: 
 \code{\link{removeVelocity}()},
 \code{\link{setOptionsVelocity}()},

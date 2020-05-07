@@ -29,9 +29,16 @@ a specific form. See the Details for further information.}
 
 \item{options}{List of additional options. See \code{\link{playbackOptions}}}
 }
+\value{
+the new \code{map} object
+}
 \description{
-Add Leaflet Playback Plugin based on the
- \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
+The \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
+provides the ability to replay GPS Points in the form of
+POINT Simple Features. Rather than simply animating a marker along a
+polyline, the speed of the animation is synchroized to a clock. The playback
+functionality is similar to a video player; you can start and stop playback or
+change the playback speed.
 }
 \details{
 If data is a JSON string, it must have the following form:
@@ -96,9 +103,10 @@ leaflet() \%>\%
               pathOpts = pathOptions(weight = 5))
 }
 }
-\seealso{
+\references{
 \url{https://github.com/hallahan/LeafletPlayback}
-
+}
+\seealso{
 Other Playback Functions: 
 \code{\link{playbackOptions}()},
 \code{\link{removePlayback}()}

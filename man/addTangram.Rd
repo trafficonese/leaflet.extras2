@@ -26,6 +26,9 @@ information on how to edit such a .yaml file.}
 \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
  for further information.}
 }
+\value{
+the new \code{map} object
+}
 \description{
 Adds a Tangram layer to a Leaflet map in a Shiny App.
 }
@@ -58,7 +61,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 }
 }
-\seealso{
+\references{
 \url{https://github.com/tangrams/tangram}
 }
 \concept{Tangram Functions}

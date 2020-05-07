@@ -12,15 +12,13 @@ openweatherDependency <- function() {
 }
 
 #' Add OpenWeatherMap Tiles
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
+#' @inheritParams leaflet::addWMSTiles
 #' @param apikey a valid OpenWeatherMap-API key. Get one from
 #'   \href{https://openweathermap.org/api}{here}.
 #' @param layers character vector of layers you wish to add to the map. The
 #'   following layers are currently possible \code{c("clouds", "cloudsClassic",
 #'   "precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
 #'   "pressure", "pressureContour", "temperature", "wind")}.
-#' @param group name of the group
-#' @param layerId the layer id
 #' @param opacity opacity of the layer
 #' @param options List of further options. See \code{\link{openweatherOptions}}
 #'
@@ -28,8 +26,9 @@ openweatherDependency <- function() {
 #'   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
 #'   Wind Speed. Please add your own images if you need some more.
 #'
-#' @seealso \url{https://github.com/trafficonese/leaflet-openweathermap}
+#' @references \url{https://github.com/trafficonese/leaflet-openweathermap}
 #' @family Openweathermap Functions
+#' @inherit leaflet::addWMSTiles return
 #' @export
 #' @examples \dontrun{
 #' library(leaflet)
@@ -99,13 +98,14 @@ addOpenweatherTiles <- function(
 }
 
 #' OpenWeatherMap Options
-#' @param showLegend If true and option 'legendImagePath' is set there will be a
-#'   legend image on the map.
-#' @param legendImagePath URL (is set to a default image for some layers, null
+#' @param showLegend If \code{TRUE} and option \code{legendImagePath} is set
+#'   there will be a legend image on the map
+#' @param legendImagePath A URL (is set to a default image for some layers, null
 #'   for others, see below). URL or relative path to an image which is a legend
-#'   to this layer.
-#' @param legendPosition Position of the legend images on the map. Available are
-#'   standard positions for Leaflet controls
+#'   to this layer
+#' @param legendPosition Position of the legend images on the map. Must be one
+#'   of \code{'bottomleft', 'bottomright', 'topleft', 'topright'}
+#' @return A list of options for \code{addOpenweatherTiles}
 #' @family Openweathermap Functions
 #' @export
 openweatherOptions <-  function(showLegend = TRUE,
@@ -121,19 +121,18 @@ openweatherOptions <-  function(showLegend = TRUE,
 }
 
 #' Add current OpenWeatherMap Marker
-#' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
+#' @inheritParams leaflet::addMarkers
 #' @param apikey a valid Openweathermap-API key. Get one from
 #'   \href{https://openweathermap.org/api}{here}.
-#' @param group name of the group
-#' @param layerId the layer id
 #' @param options List of further options. See
 #'   \code{\link{openweatherCurrentOptions}}
 #'
-#' @seealso \url{https://github.com/trafficonese/leaflet-openweathermap}
+#' @references \url{https://github.com/trafficonese/leaflet-openweathermap}
 #' @note The current weather icons will appear beginning with zoom level 9
 #' and if used in Shiny, a click on an icon will update a Shiny input at
 #' \code{input$MAPID_owm_click}.
 #' @family Openweathermap Functions
+#' @inherit leaflet::addMarkers return
 #' @export
 #' @examples \dontrun{
 #' library(leaflet)
@@ -178,6 +177,7 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 #'   \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
 #'   list of options}
 #' @family Openweathermap Functions
+#' @return A list of options for \code{addOpenweatherCurrent}
 #' @export
 openweatherCurrentOptions <-  function(lang = "en",
                                        minZoom = 7,

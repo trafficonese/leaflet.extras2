@@ -2,13 +2,16 @@
 % Please edit documentation in R/antpath.R
 \name{clearAntpath}
 \alias{clearAntpath}
-\title{Clear all Antpaths}
+\title{clearAntpath}
 \usage{
 clearAntpath(map)
 }
 \arguments{
 \item{map}{a map widget object, possibly created from \code{\link[leaflet]{leaflet}}()
 but more likely from \code{\link[leaflet]{leafletProxy}}()}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Clear all Antpaths
