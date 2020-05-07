@@ -8,7 +8,7 @@ test_that("sidebar", {
   )
   expect_is(m, "shiny.tag")
 
-  m <- sidebar_tabs(
+  m <- sidebar_tabs(id = "sidebar",
     list(tags$i(class="car"), tags$i(class="user"), tags$i(class="car")),
     sidebar_pane(
       title = "home", id = "home_id", icon = tags$i(class="home"),
