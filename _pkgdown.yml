@@ -22,10 +22,19 @@ reference:
     - matches("GIBS")
     - setDate
     - setTransparent
+  - title: Heightgraph
+    contents:
+    - matches("Heightgraph")
+    - matches("heightgraph")
   - title: Hexbin-D3
     contents:
     - matches("Hexbin")
     - matches("hexbin")
+  - title: History
+    contents:
+    - matches("History")
+    - matches("history")
+    - clearFuture
   - title: Mapkey Icons
     contents:
     - matches("Mapkey")
