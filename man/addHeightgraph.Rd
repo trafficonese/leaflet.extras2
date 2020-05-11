@@ -25,7 +25,8 @@ addHeightgraph(
 
 \item{data}{A Simple Feature LINESTRING with Z dimension.}
 
-\item{columns}{the columns you want to include in the heightgraph control.}
+\item{columns}{A character vector of the columns you want to include in the
+heightgraph control}
 
 \item{layerId}{the layer id}
 
@@ -56,13 +57,17 @@ pattern}}
 \item{options}{List of further plugin options. See
 \code{\link{heightgraphOptions}}}
 }
+\value{
+the new \code{map} object
+}
 \description{
-The data must be a Simple Feature LINESTRING Z and is transformed to GeoJSON.
-The function therefore inherits arguments from
+Visualize height information and road attributes of linestring segments.
+The linestrings must be a Simple Feature LINESTRING Z and are transformed to
+GeoJSON. The function therefore inherits arguments from
 \code{\link[leaflet]{addGeoJSON}}.
 }
 \note{
-When used in Shiny, 3 events update a certain shiny Input:
+When used in Shiny, 3 events update a certain Shiny Input:
 \enumerate{
   \item A click updates \code{input$MAPID_heightgraph_click}
   \item A mouseover updates \code{input$MAPID_heightgraph_mouseover}
@@ -84,6 +89,9 @@ data$elev <-  runif(nrow(data), 10, 500)
 data$L1 <- NULL
 L1 <- round(seq.int(1, 4, length.out = nrow(data)))
 data <- st_as_sf(st_sfc(lapply(split(data, L1), sfg_linestring)))
+data <- st_as_sf(st_sfc(lapply(split(data, L1), function(x) {
+    st_linestring(as.matrix(x))
+})))
 data$steepness <- 1:nrow(data)
 data$suitability <- nrow(data):1
 data$popup <- apply(data, 1, function(x) {
@@ -91,15 +99,16 @@ data$popup <- apply(data, 1, function(x) {
 })
 
 leaflet() \%>\%
- addTiles(group = "base") \%>\%
- addHeightgraph(color = "red", columns = c("steepness", "suitability"),
-                opacity = 1, data = data, group = "heightgraph",
-                options = heightgraphOptions(width = 400))
+  addTiles(group = "base") \%>\%
+  addHeightgraph(color = "red", columns = c("steepness", "suitability"),
+                 opacity = 1, data = data, group = "heightgraph",
+                 options = heightgraphOptions(width = 400))
 }
+}
+\references{
+\url{https://github.com/GIScience/Leaflet.Heightgraph}
 }
 \seealso{
-\url{https://github.com/GIScience/Leaflet.Heightgraph}
-
 Other Heightgraph Functions: 
 \code{\link{heightgraphOptions}()}
 }

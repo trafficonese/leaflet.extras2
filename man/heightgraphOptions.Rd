@@ -65,8 +65,11 @@ Corresponds approximately to 2 to the power of value ticks. Default is
 Corresponds approximately to 2 to the power of value ticks. Default is
 \code{3}.}
 }
+\value{
+A list of further options for \code{addHeightgraph}
+}
 \description{
-heightgraphOptions
+Customize the heightgraph with the following additional options.
 }
 \seealso{
 Other Heightgraph Functions: 

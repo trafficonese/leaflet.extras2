@@ -1,7 +1,7 @@
 heightgraphDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-heightgraph", version = "2.1.0",
+      "lfx-heightgraph", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-heightgraph", package = "leaflet.extras2"),
       script = c(
         "d3.js",
@@ -14,19 +14,21 @@ heightgraphDependency <- function() {
 
 #' Add a Heightgraph layer
 #'
-#' The data must be a Simple Feature LINESTRING Z and is transformed to GeoJSON.
-#' The function therefore inherits arguments from
+#' Visualize height information and road attributes of linestring segments.
+#' The linestrings must be a Simple Feature LINESTRING Z and are transformed to
+#' GeoJSON. The function therefore inherits arguments from
 #' \code{\link[leaflet]{addGeoJSON}}.
 #'
 #' @inheritParams leaflet::addGeoJSON
 #' @param data A Simple Feature LINESTRING with Z dimension.
-#' @param columns the columns you want to include in the heightgraph control.
+#' @param columns A character vector of the columns you want to include in the
+#'   heightgraph control
 #' @param pathOpts List of further options for the path. See
 #'   \code{\link[leaflet]{pathOptions}}
 #' @param options List of further plugin options. See
 #'   \code{\link{heightgraphOptions}}
 #'
-#' @note When used in Shiny, 3 events update a certain shiny Input:
+#' @note When used in Shiny, 3 events update a certain Shiny Input:
 #' \enumerate{
 #'   \item A click updates \code{input$MAPID_heightgraph_click}
 #'   \item A mouseover updates \code{input$MAPID_heightgraph_mouseover}
@@ -34,32 +36,36 @@ heightgraphDependency <- function() {
 #' }
 #' If you want to explicitly remove the Heightgraph control, please use
 #' \code{\link[leaflet]{removeControl}} with the \code{layerId = "hg_control"}.
-#' @seealso \url{https://github.com/GIScience/Leaflet.Heightgraph}
+#' @references \url{https://github.com/GIScience/Leaflet.Heightgraph}
 #' @family Heightgraph Functions
+#' @inherit leaflet::addGeoJSON return
 #' @export
 #' @examples \dontrun{
 #' library(leaflet)
 #' library(leaflet.extras2)
 #' library(sf)
 #'
-#'data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
-#'data <- st_transform(data, 4326)
-#'data <- data.frame(st_coordinates(data))
-#'data$elev <-  runif(nrow(data), 10, 500)
-#'data$L1 <- NULL
-#'L1 <- round(seq.int(1, 4, length.out = nrow(data)))
-#'data <- st_as_sf(st_sfc(lapply(split(data, L1), sfg_linestring)))
-#'data$steepness <- 1:nrow(data)
-#'data$suitability <- nrow(data):1
-#'data$popup <- apply(data, 1, function(x) {
+#' data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
+#' data <- st_transform(data, 4326)
+#' data <- data.frame(st_coordinates(data))
+#' data$elev <-  runif(nrow(data), 10, 500)
+#' data$L1 <- NULL
+#' L1 <- round(seq.int(1, 4, length.out = nrow(data)))
+#' data <- st_as_sf(st_sfc(lapply(split(data, L1), sfg_linestring)))
+#' data <- st_as_sf(st_sfc(lapply(split(data, L1), function(x) {
+#'     st_linestring(as.matrix(x))
+#' })))
+#' data$steepness <- 1:nrow(data)
+#' data$suitability <- nrow(data):1
+#' data$popup <- apply(data, 1, function(x) {
 #'  sprintf("Steepness: %s<br>Suitability: %s", x$steepness, x$suitability)
-#'})
+#' })
 #'
-#'leaflet() %>%
-#'  addTiles(group = "base") %>%
-#'  addHeightgraph(color = "red", columns = c("steepness", "suitability"),
-#'                 opacity = 1, data = data, group = "heightgraph",
-#'                 options = heightgraphOptions(width = 400))
+#' leaflet() %>%
+#'   addTiles(group = "base") %>%
+#'   addHeightgraph(color = "red", columns = c("steepness", "suitability"),
+#'                  opacity = 1, data = data, group = "heightgraph",
+#'                  options = heightgraphOptions(width = 400))
 #' }
 addHeightgraph <- function(
   map, data = NULL, columns = NULL, layerId = NULL, group = NULL,
@@ -108,6 +114,8 @@ addHeightgraph <- function(
 }
 
 #' heightgraphOptions
+#'
+#' Customize the heightgraph with the following additional options.
 #' @param position position of control: "topleft", "topright", "bottomleft", or
 #'   "bottomright". Default is \code{bottomright}.
 #' @param width The width of the expanded heightgraph display in pixels. Default
@@ -144,6 +152,7 @@ addHeightgraph <- function(
 #'   Corresponds approximately to 2 to the power of value ticks. Default is
 #'   \code{3}.
 #' @family Heightgraph Functions
+#' @return A list of further options for \code{addHeightgraph}
 #' @export
 heightgraphOptions = function(
   position = c("bottomright", "topleft", "topright", "bottomleft"),

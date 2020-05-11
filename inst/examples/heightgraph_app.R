@@ -3,7 +3,6 @@ library(leaflet)
 library(leaflet.extras2)
 library(sf)
 library(sfheaders)
-library(geojsonsf)
 
 data <- st_cast(st_as_sf(leaflet::atlStorms2005[1,]), "LINESTRING")
 data <- st_transform(data, 4326)
