@@ -21,6 +21,7 @@ Suggests:
     jsonlite,
     shiny,
     sf,
+    geojsonsf,
     sp,
     testthat (>= 2.1.0),
     covr
