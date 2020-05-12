@@ -7,7 +7,7 @@ historyDependency <- function() {
       stylesheet = c("css/all.min.css", "css/v4-shims.min.css")
     ),
     htmlDependency(
-      "lfx-history", version = "2.1.0",
+      "lfx-history", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-history", package = "leaflet.extras2"),
       script = c("zoomCenter.js",
                  "lfx-history.js",

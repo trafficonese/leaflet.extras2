@@ -1,7 +1,7 @@
 hexbinDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-hexbin", version = "2.1.0",
+      "lfx-hexbin", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-hexbin", package = "leaflet.extras2"),
       script = c(
         "d3.js",

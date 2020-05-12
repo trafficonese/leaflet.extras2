@@ -1,7 +1,7 @@
 easyprintDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-easyprint", version = "2.1.0",
+      "lfx-easyprint", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-easyprint", package = "leaflet.extras2"),
       script = c("lfx-easyprint.js",
                  "lfx-easyprint-bindings.js")
@@ -92,23 +92,22 @@ removeEasyprint <- function(map) {
 #' Create a list of further options for the easyprint plugin.
 #' @param title Sets the text which appears as the tooltip of the print/export button
 #' @param position Positions the print button
-#' @param sizeModes Options available include CurrentSize, A4Portrait,
-#'   A4Landscape or a custom size object.
-#' @param defaultSizeTitles button tooltips for the default page sizes
-#' @param exportOnly 	If set to true the map is exported to a png file
+#' @param sizeModes Options available include \code{CurrentSize}, \code{A4Portrait},
+#'   \code{A4Landscape} or a custom size object
+#' @param defaultSizeTitles Button tooltips for the default page sizes
+#' @param exportOnly 	If set to \code{TRUE} the map is exported to a .png file
 #' @param tileLayer A tile layer that you can wait for to draw (helpful when resizing)
 #' @param tileWait How long to wait for the tiles to draw (helpful when resizing)
 #' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}
-#' @param hidden Set to true if you don't want to display the toolbar.
+#' @param hidden Set to \code{TRUE} if you don't want to display the toolbar.
 #'   Instead you can create your own buttons or fire print events programmatically.
-#'   You still need to call addTo(map) to set the leaflet map context.
 #' @param hideControlContainer Hides the leaflet controls like the zoom buttons
-#'   and the attribution on the print out.
+#'   and the attribution on the print out
 #' @param hideClasses Hides classes on the print out. Use a list of strings as
 #'   follow : list('div1', 'div2')
 #' @param customWindowTitle A title for the print window which will get
-#'   added the printed paper.
-#' @param spinnerBgColor A valid css colour for the spinner background color.
+#'   added the printed paper
+#' @param spinnerBgColor A valid css colour for the spinner background color
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
 #' @family EasyPrint Functions

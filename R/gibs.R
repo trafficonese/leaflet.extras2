@@ -1,7 +1,7 @@
 gibsDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-gibs", version = "2.1.0",
+      "lfx-gibs", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-gibs", package = "leaflet.extras2"),
       script = c(
         "GIBSLayer.js",

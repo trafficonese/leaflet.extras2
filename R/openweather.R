@@ -1,7 +1,7 @@
 openweatherDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-openweather", version = "2.1.0",
+      "lfx-openweather", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-openweather", package = "leaflet.extras2"),
       script = c(
         "leaflet-openweathermap.js",

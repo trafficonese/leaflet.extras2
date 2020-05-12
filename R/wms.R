@@ -1,7 +1,7 @@
 wmsDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-wms", version = "2.1.0",
+      "lfx-wms", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-wms", package = "leaflet.extras2"),
       script = c("leaflet.wms.js",
                  "leaflet.wms-bindings.js")

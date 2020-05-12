@@ -14,7 +14,7 @@ playbackDependencies <- function() {
 #' The \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
 #' provides the ability to replay GPS Points in the form of
 #' POINT Simple Features. Rather than simply animating a marker along a
-#' polyline, the speed of the animation is synchroized to a clock. The playback
+#' polyline, the speed of the animation is synchronized to a clock. The playback
 #' functionality is similar to a video player; you can start and stop playback or
 #' change the playback speed.
 #' @param map a map widget
@@ -23,7 +23,7 @@ playbackDependencies <- function() {
 #'   a specific form. See the Details for further information.
 #' @param time The column name of the time column. Default is \code{"time"}.
 #' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
-#' @param pathOpts style the CircleMarker with
+#' @param pathOpts style the CircleMarkers with
 #'   \code{\link[leaflet]{pathOptions}}
 #' @param options List of additional options. See \code{\link{playbackOptions}}
 #' @details If data is a JSON string, it must have the following form:

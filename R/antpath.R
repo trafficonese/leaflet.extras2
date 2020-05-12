@@ -1,7 +1,7 @@
 antpathDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-antpath", version = "2.1.0",
+      "lfx-antpath", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-antpath", package = "leaflet.extras2"),
       script = c("lfx-ant-path.js",
                  "lfx-ant-path-bindings.js")
