@@ -24,7 +24,7 @@ a specific form. See the Details for further information.}
 
 \item{icon}{an icon which can be created with \code{\link[leaflet]{makeIcon}}}
 
-\item{pathOpts}{style the CircleMarker with
+\item{pathOpts}{style the CircleMarkers with
 \code{\link[leaflet]{pathOptions}}}
 
 \item{options}{List of additional options. See \code{\link{playbackOptions}}}
@@ -36,7 +36,7 @@ the new \code{map} object
 The \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
 provides the ability to replay GPS Points in the form of
 POINT Simple Features. Rather than simply animating a marker along a
-polyline, the speed of the animation is synchroized to a clock. The playback
+polyline, the speed of the animation is synchronized to a clock. The playback
 functionality is similar to a video player; you can start and stop playback or
 change the playback speed.
 }

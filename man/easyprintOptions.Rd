@@ -26,12 +26,12 @@ easyprintOptions(
 
 \item{position}{Positions the print button}
 
-\item{sizeModes}{Options available include CurrentSize, A4Portrait,
-A4Landscape or a custom size object.}
+\item{sizeModes}{Options available include \code{CurrentSize}, \code{A4Portrait},
+\code{A4Landscape} or a custom size object}
 
-\item{defaultSizeTitles}{button tooltips for the default page sizes}
+\item{defaultSizeTitles}{Button tooltips for the default page sizes}
 
-\item{exportOnly}{If set to true the map is exported to a png file}
+\item{exportOnly}{If set to \code{TRUE} the map is exported to a .png file}
 
 \item{tileLayer}{A tile layer that you can wait for to draw (helpful when resizing)}
 
@@ -39,20 +39,19 @@ A4Landscape or a custom size object.}
 
 \item{filename}{Name of the file if \code{exportOnly} option is \code{TRUE}}
 
-\item{hidden}{Set to true if you don't want to display the toolbar.
-Instead you can create your own buttons or fire print events programmatically.
-You still need to call addTo(map) to set the leaflet map context.}
+\item{hidden}{Set to \code{TRUE} if you don't want to display the toolbar.
+Instead you can create your own buttons or fire print events programmatically.}
 
 \item{hideControlContainer}{Hides the leaflet controls like the zoom buttons
-and the attribution on the print out.}
+and the attribution on the print out}
 
 \item{hideClasses}{Hides classes on the print out. Use a list of strings as
 follow : list('div1', 'div2')}
 
 \item{customWindowTitle}{A title for the print window which will get
-added the printed paper.}
+added the printed paper}
 
-\item{spinnerBgColor}{A valid css colour for the spinner background color.}
+\item{spinnerBgColor}{A valid css colour for the spinner background color}
 
 \item{customSpinnerClass}{A class for a custom css spinner to use while
 waiting for the print.}
