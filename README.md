@@ -1,6 +1,10 @@
 # leaflet.extras2
 
 <!-- badges: start -->
+[![](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://www.r-pkg.org/pkg/leaflet.extras2)
+[![cran checks](https://cranchecks.info/badges/worst/leaflet.extras2)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
+[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/leaflet.extras2?color=brightgreen)](https://www.r-pkg.org/pkg/leaflet.extras2)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://www.rpackages.io/package/leaflet.extras2)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Build Status](https://travis-ci.org/trafficonese/leaflet.extras2.svg?branch=master)](https://travis-ci.org/trafficonese/leaflet.extras2)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet-extras2)
@@ -11,9 +15,9 @@ The goal of `leaflet.extras2` package is to provide extra functionality to the [
 
 ### Installation
 
-For CRAN version (Not yet)
+For CRAN version
 
-~~`install.packages('leaflet.extras2')`~~
+`install.packages('leaflet.extras2')`
 
 For latest development version
 
