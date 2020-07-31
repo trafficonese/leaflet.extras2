@@ -50,10 +50,9 @@ addWMS <- function(map, baseUrl, layers = NULL, group = NULL,
   }
   options$attribution <- attribution
   options$layers <- layers
-  options$popupOptions <- popupOptions
 
   map$dependencies <- c(map$dependencies, wmsDependency())
 
   invokeMethod(map, data, "addWMS", baseUrl, layers,
-               group, options)
+               group, options, popupOptions)
 }

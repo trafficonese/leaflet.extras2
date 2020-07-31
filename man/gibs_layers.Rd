@@ -4,7 +4,9 @@
 \name{gibs_layers}
 \alias{gibs_layers}
 \title{The available GIBS layers with attributes}
-\format{An object of class \code{data.frame} with 276 rows and 4 columns.}
+\format{
+An object of class \code{data.frame} with 276 rows and 4 columns.
+}
 \usage{
 gibs_layers
 }

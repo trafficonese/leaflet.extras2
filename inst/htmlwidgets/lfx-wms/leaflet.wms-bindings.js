@@ -1,4 +1,4 @@
-LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options) {
+LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options, popupOptions) {
 
   if(options && options.crs) {
     options.crs = LeafletWidget.utils.getCRS(options.crs);
@@ -11,15 +11,18 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options) {
         if (!this._map) {
             return;
         }
-        this._map.openPopup(info, latlng, options.popupOptions);
+        this._map.openPopup(info, latlng, popupOptions);
+
         // Adaptation for R/Shiny
-        var parsedinfo = info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im);
-        if (parsedinfo !== null && parsedinfo[1].trim() !== "") {
-          latlng.info = info;
-          Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
-        }
+        //var parsedinfo = info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im);
+        //if (parsedinfo !== null && parsedinfo[1].trim() !== "") {
+        latlng.info = info;
+        Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
+        //}
     }
   });
+
+
   // Add WMS source
   var source = L.wms.source(baseUrl, options);
 
