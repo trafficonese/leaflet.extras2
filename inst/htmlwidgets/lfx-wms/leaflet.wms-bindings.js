@@ -14,11 +14,10 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options, popupOp
         this._map.openPopup(info, latlng, popupOptions);
 
         // Adaptation for R/Shiny
-        //var parsedinfo = info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im);
-        //if (parsedinfo !== null && parsedinfo[1].trim() !== "") {
-        latlng.info = info;
-        Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
-        //}
+        if (HTMLWidgets && HTMLWidgets.shinyMode) {
+          latlng.info = info;
+          Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
+        }
     }
   });
 
