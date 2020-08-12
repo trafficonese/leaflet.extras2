@@ -61,6 +61,10 @@ reference:
   - title: Tangram
     contents:
     - matches("Tangram")
+  - title: Timeslider
+    contents:
+    - matches("Timeslider")
+    - matches("timeslider")
   - title: Velocity
     contents:
     - matches("Velocity")

@@ -52,7 +52,7 @@ Default is 60*60*1000 (1 hour)}
 A list of options for \code{addPlayback}
 }
 \description{
-A list options for \code{\link{addPlayback}}. For a full list please visit
+A list of options for \code{\link{addPlayback}}. For a full list please visit
 the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}.
 }
 \references{
