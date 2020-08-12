@@ -142,7 +142,7 @@ to_ms <- function(data, time) {
 
 #' playbackOptions
 #'
-#' A list options for \code{\link{addPlayback}}. For a full list please visit
+#' A list of options for \code{\link{addPlayback}}. For a full list please visit
 #' the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}.
 #' @param color colors of the CircleMarkers.
 #' @param radius a numeric value for the radius of the CircleMarkers.
