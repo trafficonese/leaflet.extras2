@@ -17,4 +17,9 @@ test_that("timeslider", {
   expect_identical(m$x$calls[[1]]$method, "addTimeslider")
   expect_is(m$x$calls[[1]]$args[[1]], "geojson")
   expect_identical(m$x$calls[[1]]$args[[1]], sf_geojson(data))
+
+  m <- m %>%
+    removeTimeslider()
+  expect_identical(m$x$calls[[length(m$x$calls)]]$method, "removeTimeslider")
+
 })
