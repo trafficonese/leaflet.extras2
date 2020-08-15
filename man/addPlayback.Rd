@@ -17,8 +17,7 @@ addPlayback(
 \item{map}{a map widget}
 
 \item{data}{data must be a POINT Simple Feature or a list of POINT Simple
-Feature's with a time column. It can also be a JSON string which must be in
-a specific form. See the Details for further information.}
+Feature's with a time column.}
 
 \item{time}{The column name of the time column. Default is \code{"time"}.}
 
@@ -39,24 +38,6 @@ POINT Simple Features. Rather than simply animating a marker along a
 polyline, the speed of the animation is synchronized to a clock. The playback
 functionality is similar to a video player; you can start and stop playback or
 change the playback speed.
-}
-\details{
-If data is a JSON string, it must have the following form:
-\preformatted{
-{
-  "type": "Feature",
-  "geometry": {
-    "type": "MultiPoint",
-    "coordinates": [
-      [-123.2653968, 44.54962188],
-      [-123.26542599, 44.54951009]
-    ]
-},
-  "properties": {
-    "time": [1366067072000, 1366067074000]
-  }
-}
-}
 }
 \note{
 If used in Shiny, you can listen to 2 events

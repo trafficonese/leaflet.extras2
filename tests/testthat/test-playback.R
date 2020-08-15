@@ -1,59 +1,6 @@
 
 test_that("playback", {
 
-  ## Character (JSON) Data #####################
-  data <- '{
-    "type": "Feature",
-    "geometry": {
-      "type": "MultiPoint",
-      "coordinates": [
-        [-123.2653968, 44.54962188],
-        [-123.2653999, 44.54961188],
-        [-123.2654000, 44.54960188],
-        [-123.2654259, 44.54951009]
-      ]
-  },
-    "properties": {
-      "time": [1366067072000, 1366067074000, 1366067076000, 1366067078000]
-    }
-  }'
-
-  m <- leaflet() %>%
-    addTiles() %>%
-    addPlayback(data = data,
-                options = playbackOptions(radius = 3),
-                pathOpts = pathOptions(weight = 5))
-  expect_is(m, "leaflet")
-  expect_identical(m$x$calls[[2]]$method, "addPlayback")
-  expect_identical(m$x$calls[[2]]$args[[1]], data)
-
-  deps <- findDependencies(m)
-  expect_equal(deps[[length(deps)]]$name, "lfx-playback")
-
-  m <- m %>%
-    removePlayback()
-  expect_is(m, "leaflet")
-  expect_equal(m$x$calls[[length(m$x$calls)]]$method,
-               "removePlayback")
-
-  # data = "https://raw.githubusercontent.com/hallahan/LeafletPlayback/master/data/demo/drive.json"
-  # data <- paste(readLines(data, warn = F), collapse = "")
-  # if (requireNamespace("jsonlite", quietly = TRUE)) {
-  #   m <- leaflet() %>%
-  #     addTiles() %>%
-  #     addPlayback(data = data,
-  #                 options = playbackOptions(radius = 3),
-  #                 pathOpts = pathOptions(weight = 5))
-  #   expect_is(m, "leaflet")
-  #   expect_identical(m$x$calls[[2]]$method, "addPlayback")
-  # } else {
-  #   expect_error(
-  #     leaflet() %>%
-  #       addTiles() %>%
-  #       addPlayback(data = data)
-  #   )
-  # }
-
   ## Fake SF Data ##########################
   data <- structure(list(
     time = structure(c(1588259759.91989, 1588259770.0209,
@@ -202,7 +149,8 @@ test_that("playback", {
                 pathOpts = pathOptions(weight = 5))
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
-  expect_identical(m$x$calls[[2]]$args[[1]], data)
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   leaflet.extras2:::to_jsonformat(data, "time"))
 
   ## Date Time Column
   datadt <- data
@@ -218,11 +166,12 @@ test_that("playback", {
                                           dateControl = T,
                                           staleTime = 1,
                                           maxInterpolationTime = 5*60*1000),
-                pathOpts = pathOptions(weight = 5));m
+                pathOpts = pathOptions(weight = 5));
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
   datadt$time <- as.numeric(datadt$time) * 86400000
-  expect_identical(m$x$calls[[2]]$args[[1]], datadt)
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   leaflet.extras2:::to_jsonformat(datadt, "time"))
 
   ## Other Time Column
   dataot <- data
@@ -239,8 +188,9 @@ test_that("playback", {
   dataotverify <- dataot
   dataotverify$time <- as.numeric(dataotverify$othertime) * 1000
   dataotverify$othertime <- NULL
-  expect_identical(m$x$calls[[2]]$args[[1]][,c("geometry","time")],
-                   dataotverify[,c("geometry","time")])
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   leaflet.extras2:::to_jsonformat(dataotverify, "time"))
+
 
   ## Errors
   datanotime <- data
@@ -269,7 +219,8 @@ test_that("playback", {
                 pathOpts = pathOptions(weight = 5))
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
-  expect_identical(m$x$calls[[2]]$args[[1]], datam)
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   lapply(datam, function(x) {leaflet.extras2:::to_jsonformat(x, "time")}))
 
   ## Other Time Column
   data1 <- data
@@ -289,6 +240,8 @@ test_that("playback", {
                 pathOpts = pathOptions(weight = 5))
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   lapply(datam, function(x) {leaflet.extras2:::to_jsonformat(x, "otertime")}))
 
   ## Errors
   datanotime <- datam
@@ -315,6 +268,9 @@ test_that("playback", {
                 pathOpts = pathOptions(weight = 5))
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   leaflet.extras2:::to_jsonformat(spdf, "time"))
+
 
   crds1 <- coordinates(leaflet::atlStorms2005[10,])[[1]][[1]]
   df1 = data.frame(time = as.POSIXct(

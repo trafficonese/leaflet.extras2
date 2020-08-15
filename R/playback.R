@@ -19,29 +19,12 @@ playbackDependencies <- function() {
 #' change the playback speed.
 #' @param map a map widget
 #' @param data data must be a POINT Simple Feature or a list of POINT Simple
-#'   Feature's with a time column. It can also be a JSON string which must be in
-#'   a specific form. See the Details for further information.
+#'   Feature's with a time column.
 #' @param time The column name of the time column. Default is \code{"time"}.
 #' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
 #' @param pathOpts style the CircleMarkers with
 #'   \code{\link[leaflet]{pathOptions}}
 #' @param options List of additional options. See \code{\link{playbackOptions}}
-#' @details If data is a JSON string, it must have the following form:
-#' \preformatted{
-#' {
-#'   "type": "Feature",
-#'   "geometry": {
-#'     "type": "MultiPoint",
-#'     "coordinates": [
-#'       [-123.2653968, 44.54962188],
-#'       [-123.26542599, 44.54951009]
-#'     ]
-#' },
-#'   "properties": {
-#'     "time": [1366067072000, 1366067074000]
-#'   }
-#' }
-#' }
 #' @note If used in Shiny, you can listen to 2 events
 #' \itemize{
 #'  \item `map-ID`+"_pb_mouseover"
@@ -91,21 +74,19 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOpts = pathOptions(),
                         options = playbackOptions()){
 
-  bounds = c(0, -90, 180, 90)
+  if (!requireNamespace("sf")) {
+    stop("The package `sf` is needed for this plugin. ",
+         "Please install it with:\ninstall.packages('sf')")
+  }
 
   if (inherits(data, "list")) {
     data <- lapply(data, function(x) {
-      if (inherits(x, "Spatial")) x <- sf::st_as_sf(x)
-      stopifnot(inherits(sf::st_geometry(x), c("sfc_POINT")))
-      to_ms(x, time)
+      to_jsonformat(x, time)
     })
-    bounds <- as.numeric(sf::st_bbox(do.call(rbind, data)))
-  }
-  if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
-  if (inherits(data, "sf")) {
-    stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
-    data <- to_ms(data, time)
-    bounds <- as.numeric(sf::st_bbox(data))
+    bounds <- do.call(rbind, lapply(data, function(x) x$geometry$coordinates))
+  } else {
+    data <- to_jsonformat(data, time)
+    bounds <- data$geometry$coordinates
   }
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
@@ -114,30 +95,8 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
                                   options))
 
   invokeMethod(map, NULL, "addPlayback", data, options) %>%
-    expandLimits(lat = c(bounds[2], bounds[4]),
-                 lng = c(bounds[1], bounds[3]))
-}
-
-#' to_ms
-#' Change POSIX or Date to milliseconds
-#' @param data The data
-#' @param time Columnname of the time column.
-#' @return A data.frame with the time column in milliseconds
-to_ms <- function(data, time) {
-  coln <- colnames(data)
-  if (!any(coln == time)) {
-    stop("No column named `", time, "` found.")
-  }
-  if (time != "time") {
-    colnames(data)[coln == time] <- "time"
-  }
-  stopifnot(inherits(data[["time"]], c("POSIXt", "Date", "numeric")))
-  if (inherits(data[["time"]], "POSIXt")) {
-    data[["time"]] <- as.numeric(data[["time"]]) * 1000
-  } else if (inherits(data[["time"]], "Date")) {
-    data[["time"]] <- as.numeric(data[["time"]]) * 86400000
-  }
-  data
+    expandLimits(lat = as.numeric(bounds[,"Y"]),
+                 lng = as.numeric(bounds[,"X"]))
 }
 
 #' playbackOptions
@@ -202,4 +161,50 @@ playbackOptions = function(
 #' @family Playback Functions
 removePlayback <- function(map){
   invokeMethod(map, NULL, "removePlayback")
+}
+
+
+
+
+#' to_jsonformat
+#' Transform object to JSON expected format
+#' @param data The data
+#' @param time Columnname of the time column.
+#' @return A list that is transformed to the expected JSON format
+to_jsonformat <- function(data, time) {
+  if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
+  if (inherits(data, "sf")) {
+    stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
+    data <- to_ms(data, time)
+    data <- list("type"="Feature",
+                 "geometry"=list(
+                   "type"="MultiPoint",
+                   "coordinates"=sf::st_coordinates(data)
+                 ),
+                 "properties"=list(
+                   "time"=data$time
+                 ))
+  }
+  data
+}
+
+#' to_ms
+#' Change POSIX or Date to milliseconds
+#' @inheritParams to_jsonformat
+#' @return A data.frame with the time column in milliseconds
+to_ms <- function(data, time) {
+  coln <- colnames(data)
+  if (!any(coln == time)) {
+    stop("No column named `", time, "` found.")
+  }
+  if (time != "time") {
+    colnames(data)[coln == time] <- "time"
+  }
+  stopifnot(inherits(data[["time"]], c("POSIXt", "Date", "numeric")))
+  if (inherits(data[["time"]], "POSIXt")) {
+    data[["time"]] <- as.numeric(data[["time"]]) * 1000
+  } else if (inherits(data[["time"]], "Date")) {
+    data[["time"]] <- as.numeric(data[["time"]]) * 86400000
+  }
+  data
 }

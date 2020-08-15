@@ -2,57 +2,28 @@
 LeafletWidget.methods.addPlayback= function(data, options) {
   var map = this;
 
-  // Make JSON object
-  // If data is a string, parse it first
-  if (typeof data === "string") {
-    data = JSON.parse(data);
+  // If mutliple Features, transform the Object to an Array and add path_options+radius
+  if (data.type !== "Feature" && Object.keys(data).length > 1) {
+    data = Object.values(data);
+    for (var i = 0; i < data.length; i++) {
+      data[i].properties.path_options = Object.assign({}, options.pathOptions);
+      data[i].properties.radius = options.radius ? options.radius: 5;
+    }
+  } else {
+    // Add path_options+radius to single Feature
+    data.properties.path_options = options.pathOptions;
+    data.properties.radius = options.radius ? options.radius: 5;
   }
 
-  if (data.type === undefined) {
-    var kys = Object.keys(data);
-    // Single JSON
-    if (kys.includes("time")) {
-      data = {
-          type: "Feature",
-          geometry: {
-            type: "MultiPoint",
-            coordinates: data.geometry
-          },
-          properties: {
-              time: data.time
-          }
-      };
-      data.properties.path_options = options.pathOptions;
-      data.properties.radius = options.radius ? options.radius: 5;
-    }
-    // Array of JSONs
-    else {
-      var dattmp = [];
-      for (kys in data) {
-        var tmp = {
-          type: "Feature",
-          geometry: {
-            type: "MultiPoint",
-            coordinates: data[kys].geometry
-          },
-          properties: {
-              time: data[kys].time,
-              path_options: Object.assign({}, options.pathOptions),
-              radius: options.radius ? options.radius: 5
-          }
-        };
-        dattmp.push(tmp);
-      }
-
-      if (options.color) {
-        if (Array.isArray(options.color) && options.color.length > 1) {
-          for (var i = 0; i < options.color.length; i++) {
-            dattmp[i].properties.path_options.color = options.color[i];
+  // Add Color to path_options
+  if (options.color) {
+      if (Array.isArray(options.color) && options.color.length > 1) {
+        for (var j = 0; j < options.color.length; j++) {
+          if (data[j]) {
+            data[j].properties.path_options.color = options.color[j];
           }
         }
       }
-      data = dattmp;
-    }
   }
 
   // Add Mouse Events (Mouseover + Click)
