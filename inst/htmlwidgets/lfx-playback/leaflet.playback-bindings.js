@@ -1,6 +1,10 @@
 /* global LeafletWidget, $, L, toGeoJSON */
 LeafletWidget.methods.addPlayback= function(data, options) {
   var map = this;
+  if (map.playback) {
+      map.playback.destroy();
+      delete map.playback;
+  }
 
   // If mutliple Features, transform the Object to an Array and add path_options+radius
   if (data.type !== "Feature" && Object.keys(data).length > 1) {
@@ -72,11 +76,15 @@ LeafletWidget.methods.addPlayback= function(data, options) {
     };
   }
 
-  var playback = new L.Playback(map, data, null, options);
+  map.playback = new L.Playback(map, data, null, options);
 };
 
 
 LeafletWidget.methods.removePlayback= function() {
-  this.controls.clear();
+  var map = this;
+  if (map.playback) {
+    map.playback.destroy();
+    delete map.playback;
+  }
 };
 

@@ -152,6 +152,10 @@ test_that("playback", {
   expect_identical(m$x$calls[[2]]$args[[1]],
                    leaflet.extras2:::to_jsonformat(data, "time"))
 
+  m <- m %>% removePlayback()
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[3]]$method, "removePlayback")
+
   ## Date Time Column
   datadt <- data
   datadt$time <- as.Date(

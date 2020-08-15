@@ -24,14 +24,12 @@ addWMS(
 used as the \code{layerId} (for \code{\link[leaflet]{removeTiles}}
 purposes)}
 
-\item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
-Human-friendly group names are permitted--they need not be short,
-identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+\item{group}{the name of the group the newly created layers should belong to.
+If \code{layers} contains multiple elements, the \code{layers} names are
+used as group-names.}
 
-\item{options}{List of further options. See
-\code{\link[leaflet]{WMSTileOptions}}}
+\item{options}{a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements}
 
 \item{attribution}{the attribution text of the tile layer (HTML)}
 

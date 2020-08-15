@@ -18,8 +18,9 @@ wmsDependency <- function() {
 #' @param layers vector or list of WMS layers to show. The name of the layer is
 #'   used as the \code{layerId} (for \code{\link[leaflet]{removeTiles}}
 #'   purposes)
-#' @param options List of further options. See
-#'   \code{\link[leaflet]{WMSTileOptions}}
+#' @param group the name of the group the newly created layers should belong to.
+#'   If \code{layers} contains multiple elements, the \code{layers} names are
+#'   used as group-names.
 #' @param popupOptions List of popup options. See
 #'   \code{\link[leaflet]{popupOptions}}. Default is NULL.
 #' @inherit leaflet::addWMSTiles return
@@ -49,7 +50,7 @@ addWMS <- function(map, baseUrl, layers = NULL, group = NULL,
     stop("layers is a required argument")
   }
   options$attribution <- attribution
-  options$layers <- layers
+  # options$layers <- layers
 
   map$dependencies <- c(map$dependencies, wmsDependency())
 

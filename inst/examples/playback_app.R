@@ -39,6 +39,7 @@ iconship = makeIcon(
 ## UI #################
 ui <- fluidPage(
   leafletOutput("map", height = "700px"),
+  actionButton("rm","Remove Playback"),
   h4("Clicks"),
   verbatimTextOutput("click"),
   h4("Mouseover"),
@@ -63,6 +64,10 @@ server <- function(input, output, session) {
   output$mouseover <- renderPrint({
     req(input$map_pb_mouseover)
     input$map_pb_mouseover
+  })
+  observeEvent(input$rm, {
+    leafletProxy("map", session) %>%
+      removePlayback()
   })
 }
 
