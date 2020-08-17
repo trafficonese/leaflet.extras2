@@ -381,7 +381,16 @@ wms.Overlay = L.Layer.extend({
         // Keep current image overlay in place until new one loads
         // (inspired by esri.leaflet)
         var bounds = this._map.getBounds();
-        var overlay = L.imageOverlay(url, bounds, {'opacity': 0});
+
+        // Update - Included PR 58 - (Update leaflet.wms.js)
+        // https://github.com/heigeo/leaflet.wms/pull/58/commits/3508426a7c20f13c6bbce0ba0fedfb21b2d90f5a
+        var opt= {'opacity': 0};
+        if (this.options.zIndex)
+            opt.zIndex=this.options.zIndex;
+        if (this.options.pane)
+            opt.pane=this.options.pane;
+        var overlay = L.imageOverlay(url, bounds, opt);
+
         overlay.addTo(this._map);
         overlay.once('load', _swap, this);
         function _swap() {
