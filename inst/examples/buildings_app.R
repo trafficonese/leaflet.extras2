@@ -8,8 +8,9 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles() %>%
-      addBuildings() %>%
-      addMarkers(data = breweries91)
+      addBuildings(apikey = "asd") %>%
+      addMarkers(data = breweries91) %>%
+      setView(lng = 13.40438, lat = 52.51836, zoom = 16)
   })
 }
 shinyApp(ui, server)

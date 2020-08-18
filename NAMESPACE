@@ -2,6 +2,7 @@
 
 S3method("[",leaflet_mapkey_icon_set)
 export(addAntpath)
+export(addBuildings)
 export(addEasyprint)
 export(addHexbin)
 export(addMapkeyMarkers)

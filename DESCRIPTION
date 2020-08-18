@@ -24,4 +24,4 @@ Suggests:
     sp
 URL: https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1

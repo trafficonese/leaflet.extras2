@@ -5,8 +5,7 @@ buildingsDependency <- function() {
       src = system.file("htmlwidgets/lfx-building", package = "leaflet.extras2"),
       script = c(
         "osm-buildings.js",
-        "osm-buildings-bindings.js"),
-      stylesheet = "osm-buildings.css"
+        "osm-buildings-bindings.js")
     )
   )
 }
