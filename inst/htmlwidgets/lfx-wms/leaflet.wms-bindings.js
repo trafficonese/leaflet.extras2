@@ -1,4 +1,4 @@
-LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options, popupOptions) {
+LeafletWidget.methods.addWMS = function(baseUrl, layerId, group, options, popupOptions) {
 
   if(options && options.crs) {
     options.crs = LeafletWidget.utils.getCRS(options.crs);
@@ -11,6 +11,8 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options, popupOp
         if (!this._map) {
             return;
         }
+
+        // TODO - Check if body is empty?
         this._map.openPopup(info, latlng, popupOptions);
 
         // Adaptation for R/Shiny
@@ -21,16 +23,7 @@ LeafletWidget.methods.addWMS = function(baseUrl, layers, group, options, popupOp
     }
   });
 
-
   // Add WMS source
   var source = L.wms.source(baseUrl, options);
-
-  // Add layers
-  if (typeof(layers) === "string") {
-    var layer = source.getLayer(layers);
-    this.layerManager.addLayer(layer, "tile", layers, group);
-  } else {
-    layers.forEach(e => this.layerManager.addLayer(
-      source.getLayer(e), "tile", e, e));
-  }
+  this.layerManager.addLayer(source.getLayer(options.layers), "tile", layerId, group);
 };

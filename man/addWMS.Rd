@@ -7,10 +7,11 @@
 addWMS(
   map,
   baseUrl,
-  layers = NULL,
+  layerId = NULL,
   group = NULL,
   options = WMSTileOptions(),
   attribution = NULL,
+  layers = NULL,
   popupOptions = NULL,
   data = getMapData(map)
 )
@@ -20,18 +21,20 @@ addWMS(
 
 \item{baseUrl}{a base URL of the WMS service}
 
-\item{layers}{vector or list of WMS layers to show. The name of the layer is
-used as the \code{layerId} (for \code{\link[leaflet]{removeTiles}}
-purposes)}
+\item{layerId}{the layer id}
 
-\item{group}{the name of the group the newly created layers should belong to.
-If \code{layers} contains multiple elements, the \code{layers} names are
-used as group-names.}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{options}{a list of extra options for tile layers, popups, paths
 (circles, rectangles, polygons, ...), or other map elements}
 
 \item{attribution}{the attribution text of the tile layer (HTML)}
+
+\item{layers}{comma-separated list of WMS layers to show}
 
 \item{popupOptions}{List of popup options. See
 \code{\link[leaflet]{popupOptions}}. Default is NULL.}

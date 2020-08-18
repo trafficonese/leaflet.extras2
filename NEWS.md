@@ -1,7 +1,8 @@
 # leaflet.extras2 (development version)
 
 * Included [Leaflet TimeSlider](https://github.com/dwilhelm89/LeafletSlider) plugin
-* `addWMS` gained the `popupOptions` parameter
+* `addWMS` gained the `layerId` argument and works like `leaflet::addWMSTiles` except for the `popupOptions`
+* `Side-by-Side` doesn't propagate click events when dragging. Thanks to `f905a47` of [#23](https://github.com/digidem/leaflet-side-by-side/pull/23) 
 
 # leaflet.extras2 1.0.0
 
