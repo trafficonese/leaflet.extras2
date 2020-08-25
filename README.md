@@ -30,6 +30,7 @@ remotes::install_github('trafficonese/leaflet.extras2')
 Plugins integrated so far ...
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
+-   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
 -   [GIBS](https://github.com/aparshin/leaflet-GIBS)
 -   [Heightgraph](https://github.com/GIScience/Leaflet.Heightgraph)
