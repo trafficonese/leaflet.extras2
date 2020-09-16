@@ -335,7 +335,9 @@ L.Map.ContextMenu = L.Handler.extend({
                 me._hide();
             }
 
-            if (func) {
+            debugger;
+            console.log("func"); console.log(func);
+            if (func && typeof(func) !== "string") {
                 func.call(context || map, data);
             }
 
@@ -487,6 +489,7 @@ L.Map.addInitHook('addHandler', 'contextmenu', L.Map.ContextMenu);
 L.Mixin.ContextMenu = {
     bindContextMenu: function (options) {
         L.setOptions(this, options);
+        //this.unbindContextMenu();
         this._initContextMenu();
 
         return this;
@@ -571,7 +574,7 @@ L.Mixin.ContextMenu = {
     }
 };
 
-var classes = [L.Marker, L.Path],
+var classes = [L.Marker, L.Path, L.ImageOverlay],
     defaultOptions = {
         contextmenu: false,
         contextmenuItems: [],
