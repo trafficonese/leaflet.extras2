@@ -29,6 +29,7 @@ reference:
     - matches("GIBS")
     - setDate
     - setTransparent
+    - gibs_layers
   - title: Heightgraph
     contents:
     - matches("Heightgraph")
@@ -54,6 +55,8 @@ reference:
     contents:
     - matches("Playback")
     - matches("playback")
+    - to_jsonformat
+    - to_ms
   - title: Reachability
     contents:
     - matches("Reachability")
