@@ -1,4 +1,4 @@
-# leaflet.extras2 (development version)
+# leaflet.extras2 1.1.0
 
 * Included [Leaflet Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu) plugin
 * Included [Leaflet TimeSlider](https://github.com/dwilhelm89/LeafletSlider) plugin

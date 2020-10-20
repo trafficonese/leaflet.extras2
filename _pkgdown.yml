@@ -13,6 +13,13 @@ reference:
     contents:
     - matches("Antpath")
     - matches("antpath")
+  - title: Contextmenu
+    contents:
+    - matches("Contextmenu")
+    - matches("contextmenu")
+    - menuItem
+    - mapmenuItems
+    - markermenuItems
   - title: Easy Print
     contents:
     - matches("Easyprint")
