@@ -23,6 +23,7 @@ timesliderDependencies <- function() {
 #' @family Timeslider Functions
 #' @references \url{https://github.com/dwilhelm89/LeafletSlider}
 #' @export
+#' @inheritParams leaflet::addCircleMarkers
 #' @inherit leaflet::addMarkers return
 #' @examples \dontrun{
 #' library(leaflet)
@@ -44,18 +45,47 @@ timesliderDependencies <- function() {
 #'                range = TRUE)) %>%
 #'   setView(-72, 22, 4)
 #' }
-addTimeslider <- function(map, data, options = timesliderOptions()){
+addTimeslider <- function(map, data, radius = 10,
+                          stroke = TRUE, color = "#03F",
+                          weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+                          fillOpacity = 0.2, dashArray = NULL,
+                          popup = NULL, popupOptions = NULL,
+                          options = timesliderOptions()){
 
+  ## Style Options
+  data$radius = leaflet::evalFormula(radius, data)
+  data$stroke = leaflet::evalFormula(stroke, data)
+  data$color = leaflet::evalFormula(color, data)
+  data$weight = leaflet::evalFormula(weight, data)
+  data$fillColor = leaflet::evalFormula(fillColor, data)
+  data$opacity = leaflet::evalFormula(opacity, data)
+  data$fill = leaflet::evalFormula(fill, data)
+  data$dashArray = leaflet::evalFormula(dashArray, data)
+  data$fillOpacity = leaflet::evalFormula(fillOpacity, data)
+
+  ## Popup
+  if (!is.null(popup) && !isFALSE(popup)) {
+    data$popup = leaflet::evalFormula(popup, data)
+  }
+
+  ## BBOX
+  if (!requireNamespace("sf")) {
+    stop("The package `sf` is needed for this plugin. ",
+         "Please install it with:\ninstall.packages('sf')")
+  }
+  bbox <- sf::st_bbox(data)
+
+  ## Make GeoJSON
   if (!requireNamespace("geojsonsf")) {
     stop("The package `geojsonsf` is needed for this plugin. ",
          "Please install it with:\ninstall.packages('geojsonsf')")
   }
-
   data <- geojsonsf::sf_geojson(data)
 
+  ## Add Deps and invoke Leaflet
   map$dependencies <- c(map$dependencies, timesliderDependencies())
-
-  invokeMethod(map, NULL, "addTimeslider", data, options)
+  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions) %>%
+    expandLimits(bbox[c(2,4)], bbox[c(1,3)])
 }
 
 #' timesliderOptions
@@ -69,8 +99,8 @@ addTimeslider <- function(map, data, options = timesliderOptions()){
 #'   Default is \code{FALSE}
 #' @param startTimeIdx where to start looking for a timestring
 #'   Default is \code{0}
-#' @param timeStrLength the size of yyyy-mm-dd hh:mm:ss - if milliseconds are present this will be larger
-#'   Default is \code{19}
+#' @param timeStrLength the size of yyyy-mm-dd hh:mm:ss - if milliseconds are
+#'   present this will be larger. Default is \code{19}
 #' @param maxValue Set the maximum value of the slider. Default is \code{-1}
 #' @param minValue Set the minimum value of the slider. Default is \code{0}
 #' @param showAllOnStart Specify whether all markers should be initially visible.

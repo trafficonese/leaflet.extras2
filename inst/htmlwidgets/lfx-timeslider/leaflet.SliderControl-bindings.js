@@ -1,31 +1,77 @@
 /* global LeafletWidget, $, L */
-LeafletWidget.methods.addTimeslider = function(data, options) {
+LeafletWidget.methods.addTimeslider = function(data, options, popupOptions) {
   var map = this;
-  if (map.sliderControl) {
-    map.sliderControl.remove();
-    delete map.sliderControl;
+  if (map.sliderCntr) {
+    map.sliderCntr.remove();
+    delete map.sliderCntr;
   }
 
+  // Add popups
+  function onEachFeature(feature, layer) {
+    var content = feature.properties.popup;
+    if (content) layer.bindPopup(content, popupOptions);
+  };
+
   //Create a marker layer
-  var layer = L.geoJson(data);
+  var layer = L.geoJson(data, {
+    pointToLayer: function (feature, latlng) {
+        var geojsonMarkerOptions = {
+            radius: feature.properties.radius,
+            fillColor: feature.properties.fillColor,
+            color: feature.properties.color,
+            opacity: feature.properties.opacity,
+            weight: feature.properties.weight,
+            stroke: feature.properties.stroke,
+            fill: feature.properties.fill,
+            dashArray: feature.properties.dashArray,
+            fillOpacity: feature.properties.fillOpacity
+        };
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    },
+    onEachFeature: onEachFeature
+  });
+
+  /*
+  // Multi Layer in layerGroup
+  var layer1 = L.geoJson(data, {
+    pointToLayer: function (feature, latlng) {
+        var geojsonMarkerOptions = {
+            radius: feature.properties.radius,
+            fillColor: feature.properties.fillColor,
+            color: feature.properties.color,
+            opacity: feature.properties.opacity,
+            weight: feature.properties.weight,
+            stroke: feature.properties.stroke,
+            fill: feature.properties.fill,
+            dashArray: feature.properties.dashArray,
+            fillOpacity: feature.properties.fillOpacity
+        };
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    },
+    onEachFeature: onEachFeature
+  });
+  var times = []
+  data.features.forEach(e=> times.push(e.properties.time))
+  layer.options.time = "1992";
+  layer1.options.time = "1993";
+  layer = L.layerGroup([layer, layer1]);
+  */
   options.layer = layer;
 
-  map.sliderControl = L.control.sliderControl(options);
-
-  //Make sure to add the slider to the map ;-)
-  map.addControl(map.sliderControl);
-
-  //And initialize the slider
-  map.sliderControl.startSlider();
-
+  // Init the slider
+  map.sliderCntr = L.control.sliderControl(options);
+  // Add the slider to the map
+  map.addControl(map.sliderCntr);
+  // Initialize the slider
+  map.sliderCntr.startSlider();
 };
 
 
 LeafletWidget.methods.removeTimeslider = function() {
   var map = this;
-  if (map.sliderControl) {
-    map.sliderControl.remove();
-    delete map.sliderControl;
+  if (map.sliderCntr) {
+    map.sliderCntr.remove();
+    delete map.sliderCntr;
   }
 };
 
