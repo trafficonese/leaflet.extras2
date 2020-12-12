@@ -9,7 +9,7 @@ LeafletWidget.methods.addTimeslider = function(data, options, popupOptions) {
   // Add popups
   function onEachFeature(feature, layer) {
     var content = feature.properties.popup;
-    layer.bindPopup(content, popupOptions);
+    if (content) layer.bindPopup(content, popupOptions);
   };
 
   //Create a marker layer
@@ -30,10 +30,35 @@ LeafletWidget.methods.addTimeslider = function(data, options, popupOptions) {
     },
     onEachFeature: onEachFeature
   });
+
+  /*
+  // Multi Layer in layerGroup
+  var layer1 = L.geoJson(data, {
+    pointToLayer: function (feature, latlng) {
+        var geojsonMarkerOptions = {
+            radius: feature.properties.radius,
+            fillColor: feature.properties.fillColor,
+            color: feature.properties.color,
+            opacity: feature.properties.opacity,
+            weight: feature.properties.weight,
+            stroke: feature.properties.stroke,
+            fill: feature.properties.fill,
+            dashArray: feature.properties.dashArray,
+            fillOpacity: feature.properties.fillOpacity
+        };
+        return L.circleMarker(latlng, geojsonMarkerOptions);
+    },
+    onEachFeature: onEachFeature
+  });
+  var times = []
+  data.features.forEach(e=> times.push(e.properties.time))
+  layer.options.time = "1992";
+  layer1.options.time = "1993";
+  layer = L.layerGroup([layer, layer1]);
+  */
   options.layer = layer;
 
   // Init the slider
-  //debugger;
   map.sliderCntr = L.control.sliderControl(options);
   // Add the slider to the map
   map.addControl(map.sliderCntr);
