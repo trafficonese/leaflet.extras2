@@ -19,6 +19,9 @@ timesliderDependencies <- function() {
 #' JQuery UI slider.
 #' @param map a map widget
 #' @param data data must be a POINT Simple Feature with a time column.
+#' @param ordertime boolean value, indicating wether to order the data by the
+#'    time column. The slider will adopt the order of the timestamps.
+#'    The default is \code{TRUE}.
 #' @param options List of additional options. See \code{\link{timesliderOptions}}
 #' @family Timeslider Functions
 #' @references \url{https://github.com/dwilhelm89/LeafletSlider}
@@ -50,6 +53,7 @@ addTimeslider <- function(map, data, radius = 10,
                           weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
                           fillOpacity = 0.2, dashArray = NULL,
                           popup = NULL, popupOptions = NULL,
+                          ordertime = TRUE,
                           options = timesliderOptions()){
 
   ## Style Options
@@ -62,6 +66,11 @@ addTimeslider <- function(map, data, radius = 10,
   data$fill = leaflet::evalFormula(fill, data)
   data$dashArray = leaflet::evalFormula(dashArray, data)
   data$fillOpacity = leaflet::evalFormula(fillOpacity, data)
+
+  ## Order by time
+  if (ordertime) {
+    data <- data[order(data[[options$timeAttribute]]),]
+  }
 
   ## Popup
   if (!is.null(popup) && !isFALSE(popup)) {
@@ -115,6 +124,8 @@ addTimeslider <- function(map, data, radius = 10,
 #' @param alwaysShowDate Should the Date always be visible. Default is \code{FALSE}
 #' @param rezoom Use the rezoom property to ensure the markers being displayed
 #'   remain in view. Default is \code{NULL}
+#' @param sameDate Show only data with the current selected time.
+#'   Default is \code{FALSE}
 #' @family Timeslider Functions
 #' @return A list of options for \code{addTimeslider}
 #' @references \url{https://github.com/dwilhelm89/LeafletSlider}
@@ -131,7 +142,8 @@ timesliderOptions = function(
   range = FALSE,
   follow = FALSE,
   alwaysShowDate = FALSE,
-  rezoom = NULL) {
+  rezoom = NULL,
+  sameDate = FALSE) {
 
   leaflet::filterNULL(list(
     position = match.arg(position),
@@ -145,7 +157,8 @@ timesliderOptions = function(
     range = range,
     follow = follow,
     alwaysShowDate = alwaysShowDate,
-    rezoom = rezoom
+    rezoom = rezoom,
+    sameDate = sameDate
   ))
 }
 

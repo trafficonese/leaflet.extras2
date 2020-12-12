@@ -16,7 +16,8 @@ timesliderOptions(
   range = FALSE,
   follow = FALSE,
   alwaysShowDate = FALSE,
-  rezoom = NULL
+  rezoom = NULL,
+  sameDate = FALSE
 )
 }
 \arguments{
@@ -55,6 +56,9 @@ Default is \code{FALSE}}
 
 \item{rezoom}{Use the rezoom property to ensure the markers being displayed
 remain in view. Default is \code{NULL}}
+
+\item{sameDate}{Show only data with the current selected time.
+Default is \code{FALSE}}
 }
 \value{
 A list of options for \code{addTimeslider}

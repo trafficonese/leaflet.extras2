@@ -16,7 +16,8 @@ test_that("timeslider", {
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[1]]$method, "addTimeslider")
   expect_is(m$x$calls[[1]]$args[[1]], "geojson")
-  expect_identical(m$x$calls[[1]]$args[[1]], sf_geojson(data))
+  # expect_identical(m$x$calls[[1]]$args[[1]], sf_geojson(data))
+  expect_true(inherits(m$x$calls[[1]]$args[[1]], "geojson"))
 
   m <- m %>%
     removeTimeslider()

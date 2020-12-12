@@ -6,8 +6,13 @@ library(shiny)
 
 data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
 data <- st_cast(data, "POINT")
-data$time = as.POSIXct(seq.POSIXt(as.POSIXct("2010-01-01"), as.POSIXct("2020-01-01"), by = "year"))
-
+data$time = as.POSIXct(seq.POSIXt(as.POSIXct(paste0(2020-nrow(data)+1,"-01-01")),
+                                  as.POSIXct("2020-01-01"), by = "year"))
+data1 <- sf::st_as_sf(leaflet::atlStorms2005[2,])
+data1 <- st_cast(data1, "POINT")
+data1$time = as.POSIXct(seq.POSIXt(as.POSIXct(paste0(2020-nrow(data1)+1,"-01-01")),
+                                   as.POSIXct("2020-01-01"), by = "year"))
+data <- rbind(data, data1)
 
 ui <- fluidPage(leafletOutput("map", height = "600px"))
 server <- function(input, output, session) {
@@ -23,9 +28,8 @@ server <- function(input, output, session) {
                     popup = ~sprintf("Time: %s<br>Name: %s<br>MaxWind: %s<br>MinPress: %s",
                                      time, Name, MaxWind, MinPress),
                     options = timesliderOptions(
-                      startTimeIdx = 2,
-                      follow = 3,
                       alwaysShowDate = TRUE,
+                      sameDate = TRUE,
                       range = FALSE))
   })
 }

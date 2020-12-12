@@ -18,6 +18,7 @@ addTimeslider(
   dashArray = NULL,
   popup = NULL,
   popupOptions = NULL,
+  ordertime = TRUE,
   options = timesliderOptions()
 )
 }
@@ -55,6 +56,10 @@ recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
 for security reasons)}
 
 \item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
+
+\item{ordertime}{boolean value, indicating wether to order the data by the
+time column. The slider will adopt the order of the timestamps.
+The default is \code{TRUE}.}
 
 \item{options}{List of additional options. See \code{\link{timesliderOptions}}}
 }
