@@ -15,10 +15,11 @@ timesliderDependencies <- function() {
 #' Add Time Slider to Leaflet
 #'
 #' The \href{https://github.com/dwilhelm89/LeafletSlider}{LeafletSlider plugin}
-#' enables you to dynamically add and remove Markers on a map by using a
+#' enables you to dynamically add and remove Markers/Lines on a map by using a
 #' JQuery UI slider.
 #' @param map a map widget
-#' @param data data must be a POINT Simple Feature with a time column.
+#' @param data data must be a Simple Feature collection of type POINT or LINESTRING
+#'    with a column of class Date or POSIXct.
 #' @param ordertime boolean value, indicating wether to order the data by the
 #'    time column. The slider will adopt the order of the timestamps.
 #'    The default is \code{TRUE}.

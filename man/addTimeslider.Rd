@@ -25,7 +25,8 @@ addTimeslider(
 \arguments{
 \item{map}{a map widget}
 
-\item{data}{data must be a POINT Simple Feature with a time column.}
+\item{data}{data must be a Simple Feature collection of type POINT or LINESTRING
+with a column of class Date or POSIXct.}
 
 \item{radius}{a numeric vector of radii for the circles; it can also be a
 one-sided formula, in which case the radius values are derived from the
@@ -68,7 +69,7 @@ the new \code{map} object
 }
 \description{
 The \href{https://github.com/dwilhelm89/LeafletSlider}{LeafletSlider plugin}
-enables you to dynamically add and remove Markers on a map by using a
+enables you to dynamically add and remove Markers/Lines on a map by using a
 JQuery UI slider.
 }
 \examples{
