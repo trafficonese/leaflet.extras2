@@ -14,19 +14,32 @@ LeafletWidget.methods.addTimeslider = function(data, options, popupOptions) {
 
   //Create a marker layer
   var layer = L.geoJson(data, {
+    style: function(feature) {
+      return {
+        radius: feature.properties.radius,
+        fillColor: feature.properties.fillColor,
+        color: feature.properties.color,
+        opacity: feature.properties.opacity,
+        weight: feature.properties.weight,
+        stroke: feature.properties.stroke,
+        fill: feature.properties.fill,
+        dashArray: feature.properties.dashArray,
+        fillOpacity: feature.properties.fillOpacity
+      }
+    },
     pointToLayer: function (feature, latlng) {
-        var geojsonMarkerOptions = {
-            radius: feature.properties.radius,
-            fillColor: feature.properties.fillColor,
-            color: feature.properties.color,
-            opacity: feature.properties.opacity,
-            weight: feature.properties.weight,
-            stroke: feature.properties.stroke,
-            fill: feature.properties.fill,
-            dashArray: feature.properties.dashArray,
-            fillOpacity: feature.properties.fillOpacity
-        };
-        return L.circleMarker(latlng, geojsonMarkerOptions);
+      var geojsonMarkerOptions = {
+          radius: feature.properties.radius,
+          fillColor: feature.properties.fillColor,
+          color: feature.properties.color,
+          opacity: feature.properties.opacity,
+          weight: feature.properties.weight,
+          stroke: feature.properties.stroke,
+          fill: feature.properties.fill,
+          dashArray: feature.properties.dashArray,
+          fillOpacity: feature.properties.fillOpacity
+      };
+      return L.circleMarker(latlng, geojsonMarkerOptions);
     },
     onEachFeature: onEachFeature
   });
