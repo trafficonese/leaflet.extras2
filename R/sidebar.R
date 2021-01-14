@@ -13,9 +13,9 @@ sidebar_deps <- function(mini = FALSE) {
 #' Add a Sidebar Leaflet Control
 #'
 #' The sidebar plugin only works in a reactive environment (e.g Shiny), as the
-#' HTML must be created by using \code{\link{sidebar_tabs}} and
-#' \code{\link{sidebar_pane}} and it must be created before
-#' \code{\link[leaflet]{leafletOutput}}.
+#' HTML must be created with \code{\link{sidebar_tabs}} and
+#' \code{\link{sidebar_pane}} before
+#' \code{\link[leaflet]{leafletOutput}} is called.
 #'
 #' @param map A leaflet map widget
 #' @param id Id of the sidebar-div. Must match with the \code{id} of
@@ -33,7 +33,6 @@ sidebar_deps <- function(mini = FALSE) {
 addSidebar <- function(map, id = "sidebar",
                        options = list(position = "left",
                                       fit = TRUE)) {
-
   map$dependencies <- c(map$dependencies, sidebar_deps())
   invokeMethod(map, NULL, "addSidebar", id, options)
 }
@@ -96,7 +95,7 @@ sidebar_pane <- function(title = "Sidebar Title",
 #'   \code{\link{addSidebar}}. Default is \code{"sidebar"}
 #' @param iconList A list of icons to be shown, when the sidebar is collapsed.
 #'   The list is required and must match the amount of \code{\link{sidebar_pane}}.
-#' @param ... The individual \code{\link{sidebar_pane}}.
+#' @param ... The individual \code{\link{sidebar_pane}}'s.
 #' @family Sidebar Functions
 #' @references \url{https://github.com/Turbo87/sidebar-v2},
 #'          \url{https://github.com/Turbo87/sidebar-v2/blob/master/doc/usage.md}

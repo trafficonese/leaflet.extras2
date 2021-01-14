@@ -51,9 +51,15 @@ LeafletWidget.methods.removeSidebar = function() {
 };
 
 LeafletWidget.methods.closeSidebar = function() {
-  this.sidebar.close();
+  var map = this;
+  if (map.sidebar) {
+    map.sidebar.close();
+  }
 };
 
 LeafletWidget.methods.openSidebar = function(id) {
-  this.sidebar.open(id);
+  var map = this;
+  if (map.sidebar) {
+    map.sidebar.open(id);
+  }
 };
