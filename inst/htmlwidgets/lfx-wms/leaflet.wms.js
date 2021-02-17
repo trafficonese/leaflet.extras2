@@ -491,7 +491,7 @@ function ajax(url, callback) {
 
     function change() {
         if (request.readyState === 4) {
-            if (request.status === 200) {
+            if (request.status === 200 || request.status === 301) {
                 callback.call(context, request.responseText);
             } else {
                 callback.call(context, "error");
