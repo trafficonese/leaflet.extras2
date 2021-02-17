@@ -13,7 +13,7 @@ sidebar_tabs(id = "sidebar", iconList = NULL, ...)
 \item{iconList}{A list of icons to be shown, when the sidebar is collapsed.
 The list is required and must match the amount of \code{\link{sidebar_pane}}.}
 
-\item{...}{The individual \code{\link{sidebar_pane}}.}
+\item{...}{The individual \code{\link{sidebar_pane}}'s.}
 }
 \value{
 A \code{shiny.tag} with individual sidebar panes

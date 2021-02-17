@@ -19,9 +19,9 @@ the new \code{map} object
 }
 \description{
 The sidebar plugin only works in a reactive environment (e.g Shiny), as the
-HTML must be created by using \code{\link{sidebar_tabs}} and
-\code{\link{sidebar_pane}} and it must be created before
-\code{\link[leaflet]{leafletOutput}}.
+HTML must be created with \code{\link{sidebar_tabs}} and
+\code{\link{sidebar_pane}} before
+\code{\link[leaflet]{leafletOutput}} is called.
 }
 \examples{
 \dontrun{
