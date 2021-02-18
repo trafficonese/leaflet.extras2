@@ -10,7 +10,7 @@ addMovingMarker(
   lat = NULL,
   layerId = NULL,
   group = NULL,
-  duration = 1000,
+  duration = 2000,
   icon = NULL,
   popup = NULL,
   popupOptions = NULL,
@@ -58,6 +58,9 @@ for security reasons)}
 \item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
+\item{movingOptions}{a list of extra options for moving markers.
+See \code{\link{movingMarkerOptions}}}
+
 \item{options}{a list of extra options for markers. See
 \code{\link[leaflet]{markerOptions}}}
 
@@ -69,20 +72,23 @@ initially, but can be overridden}
 the new \code{map} object
 }
 \description{
-Add Moving Markers
+The function expects either line or point data as spatial data or as Simple Feature.
+Alternatively, coordinates can also be passed as numeric vectors.
 }
 \examples{
+library(sf)
 library(leaflet)
+library(leaflet.extras2)
 
+df <- sf::st_as_sf(atlStorms2005)[1,]
 leaflet()  \%>\%
   addTiles() \%>\%
-  addMapkeyMarkers(data = breweries91,
-                icon = makeMapkeyIcon(icon = "mapkey",
-                                      iconSize = 30,
-                                      boxShadow = FALSE,
-                                      background = "transparent"),
-                group = "mapkey",
-                label = ~state, popup = ~village)
+  addPolylines(data = df) \%>\%
+  addMovingMarker(data = df,
+                  movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+                  label="I am a pirate!",
+                  popup="Arrr")
+
 }
 \references{
 \url{https://github.com/ewoken/Leaflet.MovingMarker}

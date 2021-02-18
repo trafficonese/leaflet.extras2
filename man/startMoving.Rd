@@ -27,11 +27,15 @@ addStationMoving(map, pointIndex, duration)
 \arguments{
 \item{map}{The leafletProxy object}
 
-\item{latlng}{Coordinates as matrix}
+\item{latlng}{Coordinates as list (e.g.: \code{list(33, -67)} or
+\code{list(lng=-65, lat=33)})}
 
 \item{duration}{Duration in milliseconds}
 
 \item{pointIndex}{Index of a certain point}
+}
+\value{
+the new \code{map} object
 }
 \description{
 The marker begins its path or resumes if it is paused.

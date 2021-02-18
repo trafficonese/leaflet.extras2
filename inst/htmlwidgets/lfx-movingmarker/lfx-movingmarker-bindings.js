@@ -8,8 +8,6 @@ LeafletWidget.methods.addMovingMarker = function(
       delete map.movingmarker;
     }
 
-    //debugger;
-
     if (icon) {
       if (!icon.iconUrl) {
         options.icon = L.Icon.Default();
@@ -33,9 +31,27 @@ LeafletWidget.methods.addMovingMarker = function(
     }
 
     map.movingmarker = L.Marker.movingMarker(data, duration, options).addTo(this);
-    map.movingmarker.bindPopup(popup, popupOptions);
 
-    map.movingmarker.on("click", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "movingmarker_click", null), map);
+    map.movingmarker.bindPopup(popup, popupOptions);
+    if (label !== null) {
+      if (labelOptions !== null) {
+        if(labelOptions.permanent) {
+          map.movingmarker.bindTooltip(label, labelOptions).openTooltip();
+        } else {
+          map.movingmarker.bindTooltip(label, labelOptions);
+        }
+      } else {
+        map.movingmarker.bindTooltip(label);
+      }
+    }
+
+    if (HTMLWidgets.shinyMode) {
+      map.movingmarker.on("click", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "movingmarker_click", null), map);
+      map.movingmarker.on("mouseover", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "movingmarker_mouseover", null), map);
+    }
+
+    map.layerManager.addLayer(map.movingmarker, "marker", layerId, group);
+
     map.movingmarker.start();
 };
 

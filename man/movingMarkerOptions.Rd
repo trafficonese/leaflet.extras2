@@ -14,6 +14,9 @@ is added to map. Default is \code{FALSE}}
 beginning of the polyline when the it arrives at the end.
 Default is \code{FALSE}}
 }
+\value{
+A list of extra options for moving markers
+}
 \description{
 Set options for Moving Markers
 }

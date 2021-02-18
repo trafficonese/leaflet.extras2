@@ -11,10 +11,15 @@ movingmarkerDependency <- function() {
 }
 
 #' Add Moving Markers
+#'
+#' The function expects either line or point data as spatial data or as Simple Feature.
+#' Alternatively, coordinates can also be passed as numeric vectors.
 #' @param map the map to add mapkey Markers to.
 #' @inheritParams leaflet::addAwesomeMarkers
 #' @param duration Duration in milliseconds per line segment between 2 points.
 #'   Can be a vector or a single number. Default is \code{1000}
+#' @param movingOptions a list of extra options for moving markers.
+#'   See \code{\link{movingMarkerOptions}}
 #' @param options a list of extra options for markers. See
 #'   \code{\link[leaflet]{markerOptions}}
 #' @family MovingMarker Functions
@@ -22,45 +27,59 @@ movingmarkerDependency <- function() {
 #' @inherit leaflet::addMarkers return
 #' @export
 #' @examples
+#' library(sf)
 #' library(leaflet)
+#' library(leaflet.extras2)
 #'
+#' df <- sf::st_as_sf(atlStorms2005)[1,]
 #' leaflet()  %>%
 #'   addTiles() %>%
-#'   addMapkeyMarkers(data = breweries91,
-#'                 icon = makeMapkeyIcon(icon = "mapkey",
-#'                                       iconSize = 30,
-#'                                       boxShadow = FALSE,
-#'                                       background = "transparent"),
-#'                 group = "mapkey",
-#'                 label = ~state, popup = ~village)
+#'   addPolylines(data = df) %>%
+#'   addMovingMarker(data = df,
+#'                   movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+#'                   label="I am a pirate!",
+#'                   popup="Arrr")
+#'
 addMovingMarker = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-  duration = 1000,
+  duration = 2000,
   icon = NULL,
-  popup = NULL,
-  popupOptions = NULL,
-  label = NULL,
-  labelOptions = NULL,
+  popup = NULL, popupOptions = NULL,
+  label = NULL, labelOptions = NULL,
   movingOptions = movingMarkerOptions(),
   options = leaflet::markerOptions(),
-  data = leaflet::getMapData(map)
-) {
+  data = leaflet::getMapData(map)) {
+
+  if (missing(labelOptions))
+    labelOptions <- labelOptions()
+
+  if (!is.null(data)) {
+    if (!requireNamespace("sf")) {
+      stop("The package `sf` is needed for this plugin. ",
+           "Please install it with:\ninstall.packages('sf')")
+    }
+    if (inherits(data, "Spatial")) {
+      data <- sf::st_as_sf(data)
+    }
+    if (!inherits(sf::st_geometry(data), "sfc_POINT")) {
+      data <- sf::st_cast(data, "POINT")
+    }
+  }
+
+  pts <- derivePoints(data, lng, lat, missing(lng), missing(lat), "addMovingMarker")
+
+  duration <- evalFormula(duration, data)
+  options <- filterNULL(c(options, movingOptions))
+
   map$dependencies <- c(map$dependencies,
                         movingmarkerDependency())
 
-  df <- st_coordinates(data)
-
-  duration <- evalFormula(duration, data)
-
-  options <- filterNULL(c(options, movingOptions))
-
   leaflet::invokeMethod(
-    map, data, "addMovingMarker", df[,c(2,1)],
+    map, data, "addMovingMarker", cbind(pts$lat, pts$lng),
     duration, icon, layerId,
     group, options, popup, popupOptions,
-    leaflet::safeLabel(label, data), labelOptions
-  ) %>%
-    expandLimits(df[,2], df[,1])
+    leaflet::safeLabel(label, data), labelOptions) %>%
+    expandLimits(pts$lat, pts$lng)
 }
 
 
@@ -72,6 +91,7 @@ addMovingMarker = function(
 #'   Default is \code{FALSE}
 #' @family MovingMarker Functions
 #' @references \url{https://github.com/ewoken/Leaflet.MovingMarker}
+#' @return A list of extra options for moving markers
 #' @export
 movingMarkerOptions <- function(autostart = FALSE, loop = FALSE) {
   list(
@@ -85,11 +105,14 @@ movingMarkerOptions <- function(autostart = FALSE, loop = FALSE) {
 #'
 #' The marker begins its path or resumes if it is paused.
 #' @param map The leafletProxy object
-#' @param latlng Coordinates as matrix
+#' @param latlng Coordinates as list (e.g.: \code{list(33, -67)} or
+#'   \code{list(lng=-65, lat=33)})
 #' @param duration Duration in milliseconds
 #' @param pointIndex Index of a certain point
 #' @family MovingMarker Functions
 #' @references \url{https://github.com/ewoken/Leaflet.MovingMarker}
+#' @aliases startMoving
+#' @return the new \code{map} object
 #' @export
 startMoving <- function(map) {
   leaflet::invokeMethod(map, NULL, "startMoving")
@@ -104,12 +127,14 @@ stopMoving <- function(map) {
 }
 
 #' @describeIn startMoving Pauses the marker
+#' @aliases pauseMoving
 #' @export
 pauseMoving <- function(map) {
   leaflet::invokeMethod(map, NULL, "pauseMoving")
 }
 
 #' @describeIn startMoving The marker resumes its animation
+#' @aliases resumeMoving
 #' @export
 resumeMoving <- function(map) {
   leaflet::invokeMethod(map, NULL, "resumeMoving")
@@ -117,6 +142,7 @@ resumeMoving <- function(map) {
 
 #' @describeIn startMoving Adds a point to the polyline.
 #'   Useful, if we have to set the path one by one.
+#' @aliases addLatLngMoving
 #' @export
 addLatLngMoving <- function(map, latlng, duration) {
   leaflet::invokeMethod(map, NULL, "addLatLngMoving", latlng, duration)
@@ -124,6 +150,7 @@ addLatLngMoving <- function(map, latlng, duration) {
 
 #' @describeIn startMoving Stop the current animation and make the marker move
 #'   to \code{latlng} in \code{duration} ms.
+#' @aliases moveToMoving
 #' @export
 moveToMoving <- function(map, latlng, duration) {
   leaflet::invokeMethod(map, NULL, "moveToMoving", latlng, duration)
@@ -132,6 +159,7 @@ moveToMoving <- function(map, latlng, duration) {
 #' @describeIn startMoving The marker will stop at the \code{pointIndex} point
 #'   of the polyline for \code{duration} milliseconds. You can't add a station
 #'   at the first or last point of the polyline.
+#' @aliases addStationMoving
 #' @export
 addStationMoving <- function(map, pointIndex, duration) {
   leaflet::invokeMethod(map, NULL, "addStationMoving", pointIndex, duration)

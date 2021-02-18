@@ -2,6 +2,7 @@ library(sf)
 library(geojsonsf)
 
 test_that("heightgraph", {
+
   data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
   data <- st_transform(data, 4326)
   data <- data.frame(st_coordinates(data))
@@ -22,7 +23,6 @@ test_that("heightgraph", {
     addHeightgraph(color = "red", columns = c("steepness", "suitability"),
                    opacity = 1, data = data, group = "heightgraph",
                    options = heightgraphOptions(width = 400))
-
   expect_is(m, "leaflet")
 
   deps <- findDependencies(m)
