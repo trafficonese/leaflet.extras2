@@ -47,6 +47,10 @@ reference:
     contents:
     - matches("Mapkey")
     - matches("mapkey")
+  - title: Moving Markers
+    contents:
+    - matches("movingMarker")
+    - matches("Moving")
   - title: OpenWeatherMap
     contents:
     - matches("Openweather")
