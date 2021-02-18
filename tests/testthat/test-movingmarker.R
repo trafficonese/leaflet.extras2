@@ -4,11 +4,11 @@ test_that("movingmarker", {
 
   ## Data is a SpatialLinesDataFrame
   df <- atlStorms2005[1,]
-  m <- expect_warning(leaflet()  %>%
+  m <- leaflet()  %>%
     addMovingMarker(data = df,
                     movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                     label="I am a pirate!",
-                    popup="Arrr"))
+                    popup="Arrr")
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
 
@@ -25,12 +25,11 @@ test_that("movingmarker", {
 
   ## Data is Simple Feature LINESTRING
   df <- sf::st_as_sf(atlStorms2005)[1,]
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df,
                       movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                       label="I am a pirate!",
-                      popup="Arrr"))
+                      popup="Arrr")
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
   deps <- findDependencies(m)
@@ -38,75 +37,66 @@ test_that("movingmarker", {
 
   ## Data is Simple Feature POINT
   df <- sf::st_as_sf(atlStorms2005)[1,]
-  df <- expect_warning(sf::st_cast(df, "POINT"))
-  m <- expect_warning(
-    leaflet() %>%
+  df <- sf::st_cast(df, "POINT")
+  m <- leaflet() %>%
       addMovingMarker(data = df,
                       movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                       label="I am a pirate!",
-                      popup="Arrr"))
+                      popup="Arrr")
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
 
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      startMoving())
+      startMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "startMoving")
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      startMoving())
+      startMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "startMoving")
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      stopMoving())
+      stopMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "stopMoving")
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      pauseMoving())
+      pauseMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "pauseMoving")
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      resumeMoving())
+      resumeMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "resumeMoving")
 
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      addLatLngMoving(list(33, -67), 2000))
+      addLatLngMoving(list(33, -67), 2000)
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "addLatLngMoving")
   expect_length(m$x$calls[[length(m$x$calls)]]$args[[1]], 2)
   expect_equal(m$x$calls[[length(m$x$calls)]]$args[[2]], 2000)
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      moveToMoving(list(33, -67), 2000))
+      moveToMoving(list(33, -67), 2000)
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "moveToMoving")
   expect_length(m$x$calls[[length(m$x$calls)]]$args[[1]], 2)
   expect_equal(m$x$calls[[length(m$x$calls)]]$args[[2]], 2000)
 
-  m <- expect_warning(
-    leaflet()  %>%
+  m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      addStationMoving(2, 5000))
+      addStationMoving(2, 5000)
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "addStationMoving")
   expect_equal(m$x$calls[[length(m$x$calls)]]$args[[1]], 2)
