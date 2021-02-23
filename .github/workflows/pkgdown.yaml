@@ -27,13 +27,25 @@ jobs:
           key: macOS-r-4.0-1-${{ hashFiles('.github/depends.Rds') }}
           restore-keys: macOS-r-4.0-1-
 
-      - name: "Install spatial libraries"
+      - name: "[Custom block] [linux] Install spatial libraries"
         if: runner.os == 'Linux'
         run: sudo apt-get install libgdal-dev libproj-dev libgeos-dev libudunits2-dev
 
-      - name: "Install pkgdown libraries"
+      - name: "[Custom block] [linux] Install pkgdown libraries"
         if: runner.os == 'Linux'
         run: sudo apt-get install libharfbuzz-dev libfribidi-dev
+
+      - name: "[Custom block] [macOS] Install spatial libraries"
+        if: runner.os == 'macOS'
+        run: |
+          # conflicts with gfortran from r-lib/actions when linking gcc
+          rm '/usr/local/bin/gfortran'
+          brew install pkg-config gdal proj geos
+
+      - name: "[Custom block] [macOS] Install spatial libraries"
+        if: runner.os == 'macOS'
+        run: |
+          brew install pkg-config harfbuzz fribidi
 
       - name: Install dependencies
         run: |
