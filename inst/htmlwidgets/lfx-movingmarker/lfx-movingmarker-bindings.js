@@ -32,7 +32,9 @@ LeafletWidget.methods.addMovingMarker = function(
 
     map.movingmarker = L.Marker.movingMarker(data, duration, options).addTo(this);
 
-    map.movingmarker.bindPopup(popup, popupOptions);
+    if (popup !== null) {
+      map.movingmarker.bindPopup(popup, popupOptions);
+    }
     if (label !== null) {
       if (labelOptions !== null) {
         if(labelOptions.permanent) {
