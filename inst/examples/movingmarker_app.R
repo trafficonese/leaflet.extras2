@@ -14,7 +14,7 @@ shipIcon <- makeIcon(
 )
 
 ui <- fluidPage(
-  leafletOutput("map"),
+  leafletOutput("map", height = 650),
   actionButton("start", "Start"),
   actionButton("stop", "Stop"),
   actionButton("pause", "Pause"),
@@ -41,14 +41,17 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles() %>%
-      addPolylines(data = df, group = "mapkey") %>%
+      addPolylines(data = df) %>%
       addMovingMarker(data = dfp,
                       duration = ~duratios,
                       icon = shipIcon,
-                      movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
-                      label="I am a pirate!",
-                      popup="Arrr",
-                      group = "movingmarker", layerId = "myid"
+                      movingOptions = movingMarkerOptions(autostart = TRUE,
+                                                          loop = TRUE,
+                                                          pauseOnZoom = TRUE),
+                      label = "I am a pirate!",
+                      popup = "Arrr",
+                      group = "movingmarker",
+                      layerId = "myid"
                       )
   })
 

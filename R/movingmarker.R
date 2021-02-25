@@ -89,14 +89,20 @@ addMovingMarker = function(
 #' @param loop if \code{TRUE} the marker will start automatically at the
 #'   beginning of the polyline when the it arrives at the end.
 #'   Default is \code{FALSE}
+#' @param pauseOnZoom Pause the marker while zooming. While this improves the
+#'   animation, it is not recommended because the animation time is lost and
+#'   the marker will not appear at the correct time at the next station.
+#'   Default is \code{FALSE}
 #' @family MovingMarker Functions
 #' @references \url{https://github.com/ewoken/Leaflet.MovingMarker}
 #' @return A list of extra options for moving markers
 #' @export
-movingMarkerOptions <- function(autostart = FALSE, loop = FALSE) {
+movingMarkerOptions <- function(autostart = FALSE, loop = FALSE,
+                                pauseOnZoom = FALSE) {
   list(
     autostart = autostart,
-    loop = loop
+    loop = loop,
+    pauseOnZoom = pauseOnZoom
   )
 }
 

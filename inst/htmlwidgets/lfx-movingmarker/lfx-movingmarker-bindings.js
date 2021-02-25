@@ -32,6 +32,15 @@ LeafletWidget.methods.addMovingMarker = function(
 
     map.movingmarker = L.Marker.movingMarker(data, duration, options).addTo(this);
 
+    if (options.pauseOnZoom && options.pauseOnZoom === true) {
+      map.on('zoomstart', function() {
+        map.movingmarker.pause();
+      });
+      map.on('zoomend', function() {
+          map.movingmarker.start();
+      });
+    }
+
     if (popup !== null) {
       map.movingmarker.bindPopup(popup, popupOptions);
     }

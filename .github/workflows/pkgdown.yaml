@@ -45,7 +45,7 @@ jobs:
       - name: "[Custom block] [macOS] Install spatial libraries"
         if: runner.os == 'macOS'
         run: |
-          brew install pkg-config harfbuzz fribidi
+          brew install harfbuzz fribidi
 
       - name: Install dependencies
         run: |
