@@ -80,27 +80,27 @@ test_that("movingmarker", {
 
   m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      addLatLngMoving(list(33, -67), 2000)
+      addLatLngMoving(latlng = list(33, -67), duration = 2000)
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "addLatLngMoving")
-  expect_length(m$x$calls[[length(m$x$calls)]]$args[[1]], 2)
-  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[2]], 2000)
+  expect_length(m$x$calls[[length(m$x$calls)]]$args[[2]], 2)
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[3]], 2000)
 
   m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      moveToMoving(list(33, -67), 2000)
+      moveToMoving(latlng = list(33, -67), duration = 2000)
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "moveToMoving")
-  expect_length(m$x$calls[[length(m$x$calls)]]$args[[1]], 2)
-  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[2]], 2000)
+  expect_length(m$x$calls[[length(m$x$calls)]]$args[[2]], 2)
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[3]], 2000)
 
   m <- leaflet()  %>%
       addMovingMarker(data = df) %>%
-      addStationMoving(2, 5000)
+      addStationMoving(pointIndex = 2, duration = 5000)
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "addStationMoving")
-  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[1]], 2)
-  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[2]], 5000)
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[2]], 2)
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[3]], 5000)
 
 })
 
