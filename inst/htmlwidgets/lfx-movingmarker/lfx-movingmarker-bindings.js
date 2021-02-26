@@ -37,7 +37,7 @@ LeafletWidget.methods.addMovingMarker = function(
         map.movingmarker.pause();
       });
       map.on('zoomend', function() {
-          map.movingmarker.start();
+          map.movingmarker.resume();
       });
     }
 
