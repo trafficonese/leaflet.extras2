@@ -14,12 +14,15 @@ movingmarkerDependency <- function() {
 #'
 #' The function expects either line or point data as spatial data or as Simple Feature.
 #' Alternatively, coordinates can also be passed as numeric vectors.
-#' @param map the map to add mapkey Markers to.
+#' @param map the map to add moving markers
 #' @inheritParams leaflet::addAwesomeMarkers
 #' @param duration Duration in milliseconds per line segment between 2 points.
 #'   Can be a vector or a single number. Default is \code{1000}
 #' @param movingOptions a list of extra options for moving markers.
 #'   See \code{\link{movingMarkerOptions}}
+#' @param layerId In order to be able to address the moving markings
+#'   individually, a layerId is required. If none is specified, one is created
+#'   that is derived from the current timestamp.
 #' @param options a list of extra options for markers. See
 #'   \code{\link[leaflet]{markerOptions}}
 #' @family MovingMarker Functions
@@ -66,6 +69,9 @@ addMovingMarker = function(
     }
   }
 
+  if (is.null(layerId))
+    layerId <- paste0("_", as.numeric(Sys.time()))
+
   pts <- derivePoints(data, lng, lat, missing(lng), missing(lat), "addMovingMarker")
 
   duration <- evalFormula(duration, data)
@@ -111,6 +117,9 @@ movingMarkerOptions <- function(autostart = FALSE, loop = FALSE,
 #'
 #' The marker begins its path or resumes if it is paused.
 #' @param map The leafletProxy object
+#' @param layerId You can pass a string or a vector of strings for the moving
+#'   markers that you want to address. If none is specified, the action will be
+#'   applied to all moving markers.
 #' @param latlng Coordinates as list (e.g.: \code{list(33, -67)} or
 #'   \code{list(lng=-65, lat=33)})
 #' @param duration Duration in milliseconds
@@ -120,46 +129,46 @@ movingMarkerOptions <- function(autostart = FALSE, loop = FALSE,
 #' @aliases startMoving
 #' @return the new \code{map} object
 #' @export
-startMoving <- function(map) {
-  leaflet::invokeMethod(map, NULL, "startMoving")
+startMoving <- function(map, layerId = NULL) {
+  leaflet::invokeMethod(map, NULL, "startMoving", layerId)
 }
 
 #' @describeIn startMoving Manually stops the marker, if you call \code{start}
 #'   after, the marker starts again the polyline at the beginning.
 #' @aliases stopMoving
 #' @export
-stopMoving <- function(map) {
-  leaflet::invokeMethod(map, NULL, "stopMoving")
+stopMoving <- function(map, layerId = NULL) {
+  leaflet::invokeMethod(map, NULL, "stopMoving", layerId)
 }
 
 #' @describeIn startMoving Pauses the marker
 #' @aliases pauseMoving
 #' @export
-pauseMoving <- function(map) {
-  leaflet::invokeMethod(map, NULL, "pauseMoving")
+pauseMoving <- function(map, layerId = NULL) {
+  leaflet::invokeMethod(map, NULL, "pauseMoving", layerId)
 }
 
 #' @describeIn startMoving The marker resumes its animation
 #' @aliases resumeMoving
 #' @export
-resumeMoving <- function(map) {
-  leaflet::invokeMethod(map, NULL, "resumeMoving")
+resumeMoving <- function(map, layerId = NULL) {
+  leaflet::invokeMethod(map, NULL, "resumeMoving", layerId)
 }
 
 #' @describeIn startMoving Adds a point to the polyline.
 #'   Useful, if we have to set the path one by one.
 #' @aliases addLatLngMoving
 #' @export
-addLatLngMoving <- function(map, latlng, duration) {
-  leaflet::invokeMethod(map, NULL, "addLatLngMoving", latlng, duration)
+addLatLngMoving <- function(map, layerId = NULL, latlng, duration) {
+  leaflet::invokeMethod(map, NULL, "addLatLngMoving", layerId, latlng, duration)
 }
 
 #' @describeIn startMoving Stop the current animation and make the marker move
 #'   to \code{latlng} in \code{duration} ms.
 #' @aliases moveToMoving
 #' @export
-moveToMoving <- function(map, latlng, duration) {
-  leaflet::invokeMethod(map, NULL, "moveToMoving", latlng, duration)
+moveToMoving <- function(map, layerId = NULL, latlng, duration) {
+  leaflet::invokeMethod(map, NULL, "moveToMoving", layerId, latlng, duration)
 }
 
 #' @describeIn startMoving The marker will stop at the \code{pointIndex} point
@@ -167,7 +176,7 @@ moveToMoving <- function(map, latlng, duration) {
 #'   at the first or last point of the polyline.
 #' @aliases addStationMoving
 #' @export
-addStationMoving <- function(map, pointIndex, duration) {
-  leaflet::invokeMethod(map, NULL, "addStationMoving", pointIndex, duration)
+addStationMoving <- function(map, layerId = NULL, pointIndex, duration) {
+  leaflet::invokeMethod(map, NULL, "addStationMoving", layerId, pointIndex, duration)
 }
 

@@ -42,7 +42,7 @@ jobs:
           rm '/usr/local/bin/gfortran'
           brew install pkg-config udunits gdal proj geos
 
-      - name: "[Custom block] [macOS] Install spatial libraries"
+      - name: "[Custom block] [macOS] Install graphic libraries"
         if: runner.os == 'macOS'
         run: |
           brew install harfbuzz fribidi

@@ -10,22 +10,26 @@
 \alias{addStationMoving}
 \title{Interact with the moving markers}
 \usage{
-startMoving(map)
+startMoving(map, layerId = NULL)
 
-stopMoving(map)
+stopMoving(map, layerId = NULL)
 
-pauseMoving(map)
+pauseMoving(map, layerId = NULL)
 
-resumeMoving(map)
+resumeMoving(map, layerId = NULL)
 
-addLatLngMoving(map, latlng, duration)
+addLatLngMoving(map, layerId = NULL, latlng, duration)
 
-moveToMoving(map, latlng, duration)
+moveToMoving(map, layerId = NULL, latlng, duration)
 
-addStationMoving(map, pointIndex, duration)
+addStationMoving(map, layerId = NULL, pointIndex, duration)
 }
 \arguments{
 \item{map}{The leafletProxy object}
+
+\item{layerId}{You can pass a string or a vector of strings for the moving
+markers that you want to address. If none is specified, the action will be
+applied to all moving markers.}
 
 \item{latlng}{Coordinates as list (e.g.: \code{list(33, -67)} or
 \code{list(lng=-65, lat=33)})}

@@ -22,7 +22,7 @@ addMovingMarker(
 )
 }
 \arguments{
-\item{map}{the map to add mapkey Markers to.}
+\item{map}{the map to add moving markers}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -34,7 +34,9 @@ looking for a column named \code{lng}, \code{long}, or \code{longitude}
 argument; the names \code{lat} and \code{latitude} are used when guessing
 the latitude column from \code{data})}
 
-\item{layerId}{the layer id}
+\item{layerId}{In order to be able to address the moving markings
+individually, a layerId is required. If none is specified, one is created
+that is derived from the current timestamp.}
 
 \item{group}{the name of the group the newly created layers should belong to
 (for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
