@@ -3,6 +3,7 @@
 S3method("[",leaflet_mapkey_icon_set)
 export(addAntpath)
 export(addContextmenu)
+export(addDivicon)
 export(addEasyprint)
 export(addGIBS)
 export(addHeightgraph)
