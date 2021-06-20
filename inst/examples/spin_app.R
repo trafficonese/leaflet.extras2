@@ -22,7 +22,6 @@ server <- function(input, output, session) {
 
   observeEvent(input$plotbutton, {
     n <- ceiling(runif(1) * 10000)
-    n <- 10000
     leafletProxy("map") %>%
       startSpinner(list("lines" = 7, "length" = 40, "width" = 20, "radius" = 10)) %>%
       clearShapes() %>%
