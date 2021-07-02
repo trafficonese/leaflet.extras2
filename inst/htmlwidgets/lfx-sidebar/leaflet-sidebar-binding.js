@@ -46,21 +46,23 @@ LeafletWidget.methods.addSidebar = function(id, options) {
   }).call(this);
 };
 
-LeafletWidget.methods.removeSidebar = function(tab_id) {
+LeafletWidget.methods.removeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
-    // if no tab_id specified, then use the first sidebar
-    var tid = tab_id === undefined ? Object.keys(map.sidebar)[0] : tab_id;
+    // if no sidebar_id specified, then use the first sidebar
+    var tid =
+      sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
     $(`#${tid}`).remove();
     delete map.sidebar[tid];
   }
 };
 
-LeafletWidget.methods.closeSidebar = function(tab_id) {
+LeafletWidget.methods.closeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
-    // if no tab_id specified, then use the first sidebar
-    var tid = tab_id === undefined ? Object.keys(map.sidebar)[0] : tab_id;
+    // if no sidebar_id specified, then use the first sidebar
+    var tid =
+      sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
     map.sidebar[tid].close();
   }
 };
@@ -68,14 +70,9 @@ LeafletWidget.methods.closeSidebar = function(tab_id) {
 LeafletWidget.methods.openSidebar = function(x) {
   var map = this;
   if (map.sidebar) {
-    // if no tab_id specified, then use the first sidebar
-    var tid = x.tab_id === undefined ? Object.keys(map.sidebar)[0] : x.tab_id;
-
-    console.log('x');
-    console.log(x);
-    console.log('tid');
-    console.log(tid);
-
+    // if no sidebar_id specified, then use the first sidebar
+    var tid =
+      x.sidebar_id === undefined ? Object.keys(map.sidebar)[0] : x.sidebar_id;
     map.sidebar[tid].open(x.id);
   }
 };
