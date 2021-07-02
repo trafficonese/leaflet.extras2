@@ -39,30 +39,36 @@ addSidebar <- function(map, id = "sidebar",
 
 #' Remove the Sidebar
 #' @param map A leaflet map widget
+#' @param tab_id The id of the sidebar defined in \code{\link{sidebar_tabs}}.
+#'  Defaults to \code{NULL} such that the first sidebar is opened.
 #' @family Sidebar Functions
 #' @inherit leaflet::addControl return
 #' @export
-removeSidebar <- function(map) {
-  invokeMethod(map, NULL, "removeSidebar")
+removeSidebar <- function(map, tab_id = NULL) {
+  invokeMethod(map, NULL, "removeSidebar", tab_id)
 }
 
 #' Close the Sidebar
 #' @param map A leaflet map widget
+#' @param tab_id The id of the sidebar defined in \code{\link{sidebar_tabs}}.
+#'  Defaults to \code{NULL} such that the first sidebar is opened.
 #' @family Sidebar Functions
 #' @inherit leaflet::addControl return
 #' @export
-closeSidebar <- function(map) {
-  invokeMethod(map, NULL, "closeSidebar")
+closeSidebar <- function(map, tab_id = NULL) {
+  invokeMethod(map, NULL, "closeSidebar", tab_id)
 }
 
 #' Open the Sidebar by ID
 #' @param map A leaflet map widget
-#' @param id The id of the \code{\link{sidebar_pane}} to open
+#' @param id The id of the \code{\link{sidebar_pane}} to open.
+#' @param tab_id The id of the sidebar defined in \code{\link{sidebar_tabs}}.
+#'  Defaults to \code{NULL} such that the first sidebar is opened.
 #' @family Sidebar Functions
 #' @inherit leaflet::addControl return
 #' @export
-openSidebar <- function(map, id) {
-  invokeMethod(map, NULL, "openSidebar", id)
+openSidebar <- function(map, id, tab_id = NULL) {
+  invokeMethod(map, NULL, "openSidebar", list(id = id, tab_id = tab_id))
 }
 
 #' Create a Sidebar Pane

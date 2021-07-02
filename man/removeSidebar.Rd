@@ -4,10 +4,13 @@
 \alias{removeSidebar}
 \title{Remove the Sidebar}
 \usage{
-removeSidebar(map)
+removeSidebar(map, tab_id = NULL)
 }
 \arguments{
 \item{map}{A leaflet map widget}
+
+\item{tab_id}{The id of the sidebar defined in \code{\link{sidebar_tabs}}.
+Defaults to \code{NULL} such that the first sidebar is opened.}
 }
 \value{
 the new \code{map} object
