@@ -25,11 +25,7 @@ sidebar_deps <- function(mini = FALSE) {
 #' @references \url{https://github.com/Turbo87/sidebar-v2}
 #' @export
 #' @inherit leaflet::addControl return
-#' @examples \dontrun{
-#' library(shiny)
-#' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
-#'               "/sidebar_app.R"))
-#' }
+#' @inherit sidebar_tabs examples
 addSidebar <- function(map, id = "sidebar",
                        options = list(position = "left",
                                       fit = TRUE)) {
@@ -109,8 +105,14 @@ sidebar_pane <- function(title = "Sidebar Title",
 #' @export
 #' @examples \dontrun{
 #' library(shiny)
+#'
+#' # run example app showing a single sidebar
 #' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
 #'               "/sidebar_app.R"))
+#'
+#' # run example app showing two sidebars
+#' runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+#'               "/multi_sidebar_app.R"))
 #' }
 sidebar_tabs <- function(id = "sidebar", iconList = NULL, ...){
   arg <- list(...)

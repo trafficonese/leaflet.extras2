@@ -4,12 +4,12 @@
 \alias{closeSidebar}
 \title{Close the Sidebar}
 \usage{
-closeSidebar(map, tab_id = NULL)
+closeSidebar(map, sidebar_id = NULL)
 }
 \arguments{
 \item{map}{A leaflet map widget}
 
-\item{tab_id}{The id of the sidebar defined in \code{\link{sidebar_tabs}}.
+\item{sidebar_id}{The id of the sidebar (per \code{\link{sidebar_tabs}}).
 Defaults to \code{NULL} such that the first sidebar is opened.}
 }
 \value{
