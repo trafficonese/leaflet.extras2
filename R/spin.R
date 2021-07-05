@@ -37,9 +37,7 @@ spinDependency <- function() {
 #'   startSpinner(options = list("lines" = 7, "length" = 20)) %>%
 #'   addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag)) %>%
 #'   stopSpinner()
-addSpinner <- function(
-  map
-) {
+addSpinner <- function(map) {
   map$dependencies <- c(map$dependencies, spinDependency())
   map
 }
@@ -47,17 +45,13 @@ addSpinner <- function(
 #' @export
 #'
 #' @rdname addSpinner
-startSpinner <- function(
-  map, options = NULL
-) {
+startSpinner <- function(map, options = NULL) {
   invokeMethod(map, NULL, 'spinner', TRUE, options)
 }
 
 #' @export
 #'
 #' @rdname addSpinner
-stopSpinner <- function(
-  map
-) {
+stopSpinner <- function(map) {
   invokeMethod(map, NULL, 'spinner', FALSE)
 }
