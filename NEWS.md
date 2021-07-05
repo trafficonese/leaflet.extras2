@@ -2,6 +2,7 @@
 
 * Included [Leaflet MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
 * `addTimeslider` gained styling options and the arguments `sameDate` and `ordertime` and works for Point / Linestring Simple Feature Collections
+* Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
 
 
 # leaflet.extras2 1.1.0
