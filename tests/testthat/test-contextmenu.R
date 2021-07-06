@@ -4,10 +4,10 @@ test_that("contextmenu", {
     contextmenu = TRUE,
     contextmenuWidth = 200,
     contextmenuItems =
-      mapmenuItems(
-        menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
+      context_mapmenuItems(
+        context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
         "-",
-        menuItem("Zoom In", "function(e) {this.zoomIn()}")))) %>%
+        context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) %>%
     addTiles(group = "base") %>%
     addContextmenu() %>%
     addMarkers(data = breweries91, label = ~brewery,
@@ -16,8 +16,8 @@ test_that("contextmenu", {
                  contextmenu = TRUE,
                  contextmenuWidth = 200,
                  contextmenuItems =
-                   markermenuItems(
-                     menuItem(text = "Show Marker Coords",
+                   context_markermenuItems(
+                     context_menuItem(text = "Show Marker Coords",
                               callback = "function(e) {alert(e.latlng);}",
                               index = 1)
                    )
@@ -49,7 +49,7 @@ test_that("contextmenu", {
   if (packageVersion("leaflet") < "2.0.4") {
     m <- expect_warning(
       m %>% addItemContextmenu(
-      menuItem(text = "Added Menu Item",
+        context_menuItem(text = "Added Menu Item",
                callback = ("function(e) {alert('I am a new menuItem!');
                                              console.log('e');console.log(e);}")))
     )
@@ -58,7 +58,7 @@ test_that("contextmenu", {
 
     m <- expect_warning(
       m %>% insertItemContextmenu(index = 1,
-        menuItem(text = "Inserted Menu Item",
+          context_menuItem(text = "Inserted Menu Item",
                  callback = ("function(e) {alert('I am an inserted menuItem!');}")))
     )
     expect_equal(m$x$calls[[length(m$x$calls)]]$method,
@@ -66,14 +66,14 @@ test_that("contextmenu", {
 
   } else {
     m <- m %>% addItemContextmenu(
-        menuItem(text = "Added Menu Item",
+      context_menuItem(text = "Added Menu Item",
                  callback = ("function(e) {alert('I am a new menuItem!');
                                              console.log('e');console.log(e);}")))
     expect_equal(m$x$calls[[length(m$x$calls)]]$method,
                  "addItemContextmenu")
 
     m <- m %>% insertItemContextmenu(index = 2,
-        menuItem(text = "Added Menu Item",
+           context_menuItem(text = "Added Menu Item",
                  callback = ("function(e) {alert('I am an inserted menuItem!');}")))
     expect_equal(m$x$calls[[length(m$x$calls)]]$method,
                  "insertItemContextmenu")
@@ -101,28 +101,52 @@ test_that("contextmenu", {
                "removeallItemsContextmenu")
 
 
-  mn <- menuItem("some text", "my callback", id="myid")
+  mn <- context_menuItem("some text", "my callback", id="myid")
   expect_is(mn, "list")
   expect_is(mn$callback, "JS_EVAL")
 
-  mn1 <- menuItem(id="myid", "some text", "my callback")
-  expect_is(mn, "list")
-  expect_is(mn$callback, "JS_EVAL")
+  mn1 <- context_menuItem(id="myid", "some text", "my callback")
   expect_identical(mn1, mn)
 
-  mn <- mapmenuItems(
-    menuItem("some text", "my callback", id="myid"),
-    menuItem("some other text", "my callback", id="myid2")
+  mn <- context_mapmenuItems(
+    context_menuItem("some text", "my callback", id="myid"),
+    context_menuItem("some other text", "my callback", id="myid2")
   )
   expect_is(mn, "list")
   expect_length(mn, 2)
 
-  mn <- markermenuItems(
-    menuItem("some text", "my callback", id="myid"),
-    menuItem("some other text", "my callback", id="myid2")
+  mn <- context_markermenuItems(
+    context_menuItem("some text", "my callback", id="myid"),
+    context_menuItem("some other text", "my callback", id="myid2")
   )
   expect_is(mn, "list")
   expect_length(mn, 1)
-
 })
+
+
+
+test_that("contextmenu-deprecation", {
+  mn <- expect_warning(menuItem("some text", "my callback", id="myid"))
+  expect_is(mn, "list")
+  expect_is(mn$callback, "JS_EVAL")
+
+  mn1 <- expect_warning(menuItem(id="myid", "some text", "my callback"))
+  expect_identical(mn1, mn)
+
+  mn <- expect_warning(markermenuItems(
+    menuItem("some text", "my callback", id="myid"),
+    menuItem("some other text", "my callback", id="myid2")
+  ))
+  expect_is(mn, "list")
+  expect_length(mn, 1)
+
+  cnt <- expect_warning(mapmenuItems(
+    context_menuItem("Zoom In", "function(e) {this.zoomIn()}"))
+  )
+  expect_is(cnt, "list")
+  expect_length(cnt, 1)
+  expect_identical(cnt[[1]]$text, "Zoom In")
+  expect_is(cnt[[1]]$callback, "JS_EVAL")
+})
+
 
