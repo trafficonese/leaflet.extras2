@@ -4,7 +4,8 @@ Title: Extra Functionality for 'leaflet' Package
 Version: 1.1.0.9000
 Authors@R: c(
       person("Gatscha", "Sebastian", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre")),
-      person("Ricardo Rodrigo", "Basa", email = "radbasa@gmail.com", role = c("ctb"))
+      person("Ricardo Rodrigo", "Basa", email = "radbasa@gmail.com", role = c("ctb")),
+      person(c("Jeffrey", "O"), "Hanson", email = "jeffrey.hanson@uqconnect.edu.au", role = c("ctb"), comment = c(ORCID = "0000-0002-4716-6134"))
     )
 Description: Several 'leaflet' plugins are integrated, which are available as extension to the 'leaflet' package.
 License: GPL-3 | file LICENSE
