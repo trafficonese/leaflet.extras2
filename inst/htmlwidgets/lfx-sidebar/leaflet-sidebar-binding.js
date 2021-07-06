@@ -60,17 +60,19 @@ LeafletWidget.methods.removeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
     // if no sidebar_id specified, then use the first sidebar
-    var tid = sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
-    var sidbar = $(`#${tid}`);
-    if (sidbar[0]) {
+    var tid =
+      typeof(sidebar_id) === "string" ?
+        sidebar_id : Object.keys(map.sidebar)[0];
+    var sidebar = $(`#${tid}`);
+    if (sidebar[0]) {
       // Remove left/right CSS
-      if (L.DomUtil.hasClass(sidbar[0], 'sidebar-left')) {
+      if (L.DomUtil.hasClass(sidebar[0], 'sidebar-left')) {
         $('.leaflet-left').css('left', 0);
       } else {
         $('.leaflet-right').css('right', 0);
       }
       // Remove Sidebar and Delete from map
-      sidbar.remove();
+      sidebar.remove();
       delete map.sidebar[tid];
     }
   }
@@ -80,7 +82,9 @@ LeafletWidget.methods.closeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
     // if no sidebar_id specified, then use the first sidebar
-    var tid = sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
+    var tid =
+      typeof(sidebar_id) === "string" ?
+        sidebar_id : Object.keys(map.sidebar)[0];
     if (map.sidebar[tid]) {
       map.sidebar[tid].close();
     }
@@ -91,7 +95,9 @@ LeafletWidget.methods.openSidebar = function(x) {
   var map = this;
   if (map.sidebar) {
     // if no sidebar_id specified, then use the first sidebar
-    var tid = x.sidebar_id === undefined ? Object.keys(map.sidebar)[0] : x.sidebar_id;
+    var tid =
+      typeof(x.sidebar_id) === "string" ?
+        x.sidebar_id : Object.keys(map.sidebar)[0];
     if (map.sidebar[tid]) {
       map.sidebar[tid].open(x.id);
     }
