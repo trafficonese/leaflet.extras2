@@ -2,7 +2,7 @@
 % Please edit documentation in R/contextmenu.R
 \name{context_markermenuItems}
 \alias{context_markermenuItems}
-\title{markermenuItems}
+\title{context_markermenuItems}
 \usage{
 context_markermenuItems(...)
 }
@@ -13,7 +13,7 @@ context_markermenuItems(...)
 A list of \code{context_menuItem} for markers
 }
 \description{
-markermenuItems
+context_markermenuItems
 }
 \seealso{
 Other Contextmenu Functions: 

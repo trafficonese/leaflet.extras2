@@ -2,7 +2,7 @@
 % Please edit documentation in R/contextmenu.R
 \name{context_mapmenuItems}
 \alias{context_mapmenuItems}
-\title{mapmenuItems}
+\title{context_mapmenuItems}
 \usage{
 context_mapmenuItems(...)
 }
@@ -13,7 +13,7 @@ context_mapmenuItems(...)
 A list of \code{context_menuItem} for the map
 }
 \description{
-mapmenuItems
+context_mapmenuItems
 }
 \seealso{
 Other Contextmenu Functions: 

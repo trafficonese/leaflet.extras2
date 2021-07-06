@@ -187,7 +187,7 @@ context_menuItem <- function(text, callback=NULL, ...) {
        ...)
 }
 
-#' mapmenuItems
+#' context_mapmenuItems
 #' @param ... contextmenu item/s
 #' @family Contextmenu Functions
 #' @return A list of \code{context_menuItem} for the map
@@ -196,7 +196,7 @@ context_mapmenuItems <- function(...) {
   list(...)
 }
 
-#' markermenuItems
+#' context_markermenuItems
 #' @param ... contextmenu item/s
 #' @family Contextmenu Functions
 #' @return A list of \code{context_menuItem} for markers
