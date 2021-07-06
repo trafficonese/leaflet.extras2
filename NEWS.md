@@ -2,7 +2,8 @@
 
 * Included [Leaflet MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
 * `addTimeslider` gained styling options and the arguments `sameDate` and `ordertime` and works for Point / Linestring Simple Feature Collections
-* Enable multiple sidebars (Thanks to @jeffreyhanson)
+* Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
+* Enable multiple sidebars. Thanks to @jeffreyhanson
 * Option `fit` removed for sidebars as plugin CSS/JS was adapted
 
 # leaflet.extras2 1.1.0

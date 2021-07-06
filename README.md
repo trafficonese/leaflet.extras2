@@ -43,6 +43,7 @@ Plugins integrated so far ...
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
 -   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
 -   [Side-by-Side](https://github.com/digidem/leaflet-side-by-side)
+-   [Spin](https://github.com/makinacorpus/Leaflet.Spin)
 -   [Timeslider](https://github.com/dwilhelm89/LeafletSlider)
 -   [Tangram](https://github.com/tangrams/tangram)
 -   [Velocity](https://github.com/danwild/leaflet-velocity)
