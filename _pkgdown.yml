@@ -18,6 +18,9 @@ reference:
     - matches("Contextmenu")
     - matches("contextmenu")
     - matches("context_")
+    - menuItem
+    - mapmenuItems
+    - markermenuItems
   - title: Easy Print
     contents:
     - matches("Easyprint")
