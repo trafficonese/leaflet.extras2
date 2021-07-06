@@ -12,7 +12,8 @@ addSidebar(map, id = "sidebar", options = list(position = "left"))
 \item{id}{Id of the sidebar-div. Must match with the \code{id} of
 \code{\link{sidebar_tabs}}}
 
-\item{options}{A named list with the only option \code{position}}
+\item{options}{A named list with the only option \code{position}, which should
+be either \code{left} or \code{right}.}
 }
 \value{
 the new \code{map} object
