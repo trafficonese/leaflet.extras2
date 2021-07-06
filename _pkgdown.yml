@@ -17,6 +17,7 @@ reference:
     contents:
     - matches("Contextmenu")
     - matches("contextmenu")
+    - matches("context_")
     - menuItem
     - mapmenuItems
     - markermenuItems
@@ -72,6 +73,9 @@ reference:
   - title: Side-by-Side
     contents:
     - matches("Sidebyside")
+  - title: Spinner
+    contents:
+    - matches("Spinner")
   - title: Tangram
     contents:
     - matches("Tangram")

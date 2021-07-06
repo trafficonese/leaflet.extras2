@@ -5,6 +5,8 @@
 * Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
 * Enable multiple sidebars. Thanks to @jeffreyhanson
 * Option `fit` removed for sidebars as plugin CSS/JS was adapted
+* Deprecated `menuItem`/`mapmenuItems`/`markermenuItems` and renamed with prefix `context_`. Fixes #10 and #17
+
 
 # leaflet.extras2 1.1.0
 

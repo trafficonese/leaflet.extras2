@@ -19,6 +19,7 @@ LeafletWidget.methods.addContextmenu = function() {
       }
       Shiny.setInputValue(map.id + "_contextmenu_select", obj, {priority: "event"});
     });
+    /*
     map.on("contextmenu.show", function(e) {
       //console.log("contextmenu.show!!!!");
       //console.log("e"); console.log(e);
@@ -35,6 +36,7 @@ LeafletWidget.methods.addContextmenu = function() {
       //console.log("contextmenu.removeitem!!!!");
       //console.log(e);
     });
+    */
   }
 };
 

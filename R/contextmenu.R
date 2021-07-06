@@ -52,10 +52,10 @@ contextmenuDependency <- function() {
 #'     contextmenu = TRUE,
 #'     contextmenuWidth = 200,
 #'     contextmenuItems =
-#'      mapmenuItems(
-#'        menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
+#'      context_mapmenuItems(
+#'        context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
 #'        "-",
-#'        menuItem("Zoom In", "function(e) {this.zoomIn()}")))) %>%
+#'        context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) %>%
 #'   addTiles(group = "base") %>%
 #'   addContextmenu() %>%
 #'   addMarkers(data = breweries91, label = ~brewery,
@@ -64,8 +64,8 @@ contextmenuDependency <- function() {
 #'             contextmenu = TRUE,
 #'             contextmenuWidth = 200,
 #'             contextmenuItems =
-#'               markermenuItems(
-#'                 menuItem(text = "Show Marker Coords",
+#'               context_markermenuItems(
+#'                 context_menuItem(text = "Show Marker Coords",
 #'                          callback = "function(e) {alert(e.latlng);}",
 #'                          index = 1)
 #'               )
@@ -170,6 +170,43 @@ removeallItemsContextmenu <- function(map) {
 
 
 
+#' context_menuItem
+#' @param text The label to use for the menu item
+#' @param callback A callback function to be invoked when the menu item is
+#' clicked. The callback is passed an object with properties identifying the
+#' location the menu was opened at: \code{latlng}, \code{layerPoint} and \code{containerPoint}.
+#' The callback-function must be valid JavaScript and will be wrapped in
+#' \code{\link[leaflet]{JS}}.
+#' @param ... For further options please visit \url{https://github.com/aratcliffe/Leaflet.contextmenu}
+#' @family Contextmenu Functions
+#' @return A contextmenu item list
+#' @export
+context_menuItem <- function(text, callback=NULL, ...) {
+  list(text=text,
+       callback=leaflet::JS(callback),
+       ...)
+}
+
+#' context_mapmenuItems
+#' @param ... contextmenu item/s
+#' @family Contextmenu Functions
+#' @return A list of \code{context_menuItem} for the map
+#' @export
+context_mapmenuItems <- function(...) {
+  list(...)
+}
+
+#' context_markermenuItems
+#' @param ... contextmenu item/s
+#' @family Contextmenu Functions
+#' @return A list of \code{context_menuItem} for markers
+#' @export
+context_markermenuItems <- function(...) {
+  list(list(...))
+}
+
+
+## Deprecated ###########
 #' menuItem
 #' @param text The label to use for the menu item
 #' @param callback A callback function to be invoked when the menu item is
@@ -182,6 +219,7 @@ removeallItemsContextmenu <- function(map) {
 #' @return A contextmenu item list
 #' @export
 menuItem <- function(text, callback=NULL, ...) {
+  .Deprecated("context_menuItem")
   list(text=text,
        callback=leaflet::JS(callback),
        ...)
@@ -193,6 +231,7 @@ menuItem <- function(text, callback=NULL, ...) {
 #' @return A list of \code{menuItem} for the map
 #' @export
 mapmenuItems <- function(...) {
+  .Deprecated("context_mapmenuItems")
   list(...)
 }
 
@@ -202,7 +241,6 @@ mapmenuItems <- function(...) {
 #' @return A list of \code{menuItem} for markers
 #' @export
 markermenuItems <- function(...) {
+  .Deprecated("context_markermenuItems")
   list(list(...))
 }
-
-
