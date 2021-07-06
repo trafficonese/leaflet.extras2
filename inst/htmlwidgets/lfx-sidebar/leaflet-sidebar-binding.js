@@ -3,35 +3,45 @@ LeafletWidget.methods.addSidebar = function(id, options) {
   (function(){
     var map = this;
 
-    // Add css class ("sidebar-map") to map
-    if (!map._container.classList.contains("sidebar-map")) {
-      map._container.classList.add("sidebar-map");
+    // Add css class ('sidebar-map') to map
+    if (!map._container.classList.contains('sidebar-map')) {
+      map._container.classList.add('sidebar-map');
     }
 
-    // Change CSS if fit = true.
+    // Move Sidebar inside Map-Div
     if (options && options.fit === true) {
-      var mapheight = (parseInt(map._container.style.height.replace(/px/,"")) + 3)+"px";
-      $(`#${id}`).css("height", mapheight);
-      $(`#${id}`).css("top", map._container.offsetTop - 2);
-      if (options.position === "right") {
-        var right =
-          100 - map._container.parentElement.style.width.match(/\d*/im)[0];
-        $(`#${id}`).css("right", (right)+"%");
-      } else {
-        var left =
-          100 - map._container.parentElement.style.width.match(/\d*/im)[0];
-        $(`#${id}`).css("left", (left)+"%");
+      // Append sidebar container to map div
+      if ($('.leaflet-sidebar-container').length === 0) {
+        var mapdiv = document.createElement('div');
+        mapdiv.className = 'leaflet-sidebar-container';
+        $(mapdiv).appendTo($('.leaflet.html-widget-output'));
       }
+      $('.sidebar.collapsed').appendTo('.leaflet-sidebar-container');
+
+      // Disable/Re-enable dragging+scrolling when user's cursor enters/exits the element
+      var content = $('.sidebar-content');
+      content.on('mouseover', function () {
+          map.dragging.disable();
+          content.on('mousewheel', L.DomEvent.stopPropagation);
+      });
+      content.on('mouseout', function () {
+          map.dragging.enable();
+      });
     }
 
-    // Extend onClick method to trigger "shown" event, otherwise Shiny-Inputs/Outputs are not reactive
+    // Show Sidebar & content
+    setTimeout(function(){
+      $('.sidebar.collapsed .sidebar-tabs, .sidebar.collapsed .sidebar-content').css('display','block');
+    }, 400);
+
+    // Extend onClick method to trigger 'shown' event, otherwise Shiny-Inputs/Outputs are not reactive
     L.Control.Sidebar = L.Control.Sidebar.extend({
       _onClick: function() {
         if (L.DomUtil.hasClass(this, 'active')) {
           this._sidebar.close();
         } else if (!L.DomUtil.hasClass(this, 'disabled')) {
           this._sidebar.open(this.querySelector('a').hash.slice(1));
-          $(this.firstElementChild.attributes.href.nodeValue).trigger("shown");
+          $(this.firstElementChild.attributes.href.nodeValue).trigger('shown');
         }
       }
     });
@@ -50,10 +60,19 @@ LeafletWidget.methods.removeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
     // if no sidebar_id specified, then use the first sidebar
-    var tid =
-      sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
-    $(`#${tid}`).remove();
-    delete map.sidebar[tid];
+    var tid = sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
+    var sidbar = $(`#${tid}`);
+    if (sidbar[0]) {
+      // Remove left/right CSS
+      if (L.DomUtil.hasClass(sidbar[0], 'sidebar-left')) {
+        $('.leaflet-left').css('left', 0);
+      } else {
+        $('.leaflet-right').css('right', 0);
+      }
+      // Remove Sidebar and Delete from map
+      sidbar.remove();
+      delete map.sidebar[tid];
+    }
   }
 };
 
@@ -61,9 +80,10 @@ LeafletWidget.methods.closeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
     // if no sidebar_id specified, then use the first sidebar
-    var tid =
-      sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
-    map.sidebar[tid].close();
+    var tid = sidebar_id === undefined ? Object.keys(map.sidebar)[0] : sidebar_id;
+    if (map.sidebar[tid]) {
+      map.sidebar[tid].close();
+    }
   }
 };
 
@@ -71,8 +91,9 @@ LeafletWidget.methods.openSidebar = function(x) {
   var map = this;
   if (map.sidebar) {
     // if no sidebar_id specified, then use the first sidebar
-    var tid =
-      x.sidebar_id === undefined ? Object.keys(map.sidebar)[0] : x.sidebar_id;
-    map.sidebar[tid].open(x.id);
+    var tid = x.sidebar_id === undefined ? Object.keys(map.sidebar)[0] : x.sidebar_id;
+    if (map.sidebar[tid]) {
+      map.sidebar[tid].open(x.id);
+    }
   }
 };

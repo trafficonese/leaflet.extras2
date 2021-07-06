@@ -63,7 +63,7 @@ server <- function(input, output, session) {
       addTiles() %>%
       addSidebar(
         id = "mysidebarid",
-        options = list(position = "left", fit = TRUE)
+        options = list(position = "left")
       )
   })
   observe({

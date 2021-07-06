@@ -20,16 +20,17 @@ sidebar_deps <- function(mini = FALSE) {
 #' @param map A leaflet map widget
 #' @param id Id of the sidebar-div. Must match with the \code{id} of
 #'   \code{\link{sidebar_tabs}}
-#' @param options A named list with \code{position} and \code{fit} elements.
+#' @param options A named list with the only option \code{position}, which should
+#'   be either \code{left} or \code{right}.
 #' @family Sidebar Functions
 #' @references \url{https://github.com/Turbo87/sidebar-v2}
 #' @export
 #' @inherit leaflet::addControl return
 #' @inherit sidebar_tabs examples
 addSidebar <- function(map, id = "sidebar",
-                       options = list(position = "left",
-                                      fit = TRUE)) {
+                       options = list(position = "left")) {
   map$dependencies <- c(map$dependencies, sidebar_deps())
+  options$fit = TRUE
   invokeMethod(map, NULL, "addSidebar", id, options)
 }
 
@@ -120,14 +121,14 @@ sidebar_tabs <- function(id = "sidebar", iconList = NULL, ...){
   if (length(ids) != length(iconList))
     stop("The number of icons needs to match the number of sidebar panes.")
   tags$div(id = id, class = "sidebar collapsed",
-           tags$div(class = "sidebar-tabs",
+           tags$div(class = "sidebar-tabs", style = "display: none",
                     tags$ul(role = "tablist",
                             tagList(lapply(1:length(ids), function(x) {
                               tags$li(tags$a(href = paste0("#", ids[[x]]), role = "tab", iconList[[x]]))
                             }))
                             )
            ),
-           tags$div(class = "sidebar-content",
+           tags$div(class = "sidebar-content", style = "display: none",
                     tagList(arg))
   )
 }

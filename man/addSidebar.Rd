@@ -4,7 +4,7 @@
 \alias{addSidebar}
 \title{Add a Sidebar Leaflet Control}
 \usage{
-addSidebar(map, id = "sidebar", options = list(position = "left", fit = TRUE))
+addSidebar(map, id = "sidebar", options = list(position = "left"))
 }
 \arguments{
 \item{map}{A leaflet map widget}
@@ -12,7 +12,7 @@ addSidebar(map, id = "sidebar", options = list(position = "left", fit = TRUE))
 \item{id}{Id of the sidebar-div. Must match with the \code{id} of
 \code{\link{sidebar_tabs}}}
 
-\item{options}{A named list with \code{position} and \code{fit} elements.}
+\item{options}{A named list with the only option \code{position}}
 }
 \value{
 the new \code{map} object

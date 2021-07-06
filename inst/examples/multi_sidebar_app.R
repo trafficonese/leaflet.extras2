@@ -8,7 +8,7 @@ data(breweries91, package = "leaflet")
 ui <- fluidPage(
   h4("Leaflet Sidebar Plugin"),
   splitLayout(
-    cellWidths = c("20%", "80%"),
+    cellWidths = c("27%", "73%"),
     tagList(
       actionButton("open", "Open Sidebar"),
       actionButton("close", "Close Sidebar"),
@@ -16,8 +16,10 @@ ui <- fluidPage(
    ),
     tagList(
       leafletOutput("map", height = "700px", width = "100%"),
+      ## Sidebar 1 #############
       sidebar_tabs(id = "mysidebarid",
         list(icon("car"), icon("user"), icon("envelope")),
+        ## Sidebar 1 - Pane #############
         sidebar_pane(
           title = "home", id = "home_id", icon = icon("home"),
           tagList(
@@ -33,6 +35,7 @@ ui <- fluidPage(
             verbatimTextOutput("tab1")
           )
         ),
+        ## Sidebar 1 - Pane #############
         sidebar_pane(
           title = "profile", id = "profile_id", icon = icon("wrench"),
           tagList(
@@ -43,6 +46,7 @@ ui <- fluidPage(
             verbatimTextOutput("value")
           )
         ),
+        ## Sidebar 1 - Pane #############
         sidebar_pane(
           title = "messages", id = "messages_id", icon = icon("person"),
           tagList(
@@ -54,36 +58,54 @@ ui <- fluidPage(
           )
         )
       ),
+      ## Sidebar 2 #############
       sidebar_tabs(id = "animalsidebar",
-        list(icon("kiwi-bird"), icon("frog")),
-        sidebar_pane(
-          title = "kwi", id = "kiwi_id", icon = icon("kiwi-bird"),
-          tagList(
-            p("Kiwi birds are awesome.")
-          )
-        ),
-        sidebar_pane(
-          title = "frog", id = "frog_id", icon = icon("frog"),
-          tagList(
-            p("No frogs are better.")
-          )
-        )
+                   list(icon("kiwi-bird"), icon("frog")),
+                   ## Sidebar 2 - Pane #############
+                   sidebar_pane(
+                     title = "kwi", id = "kiwi_id", icon = icon("kiwi-bird"),
+                     tagList(
+                       p("Kiwi birds are awesome.")
+                     )
+                   ),
+                   ## Sidebar 2 - Pane #############
+                   sidebar_pane(
+                     title = "frog", id = "frog_id", icon = icon("frog"),
+                     tagList(
+                       p("No frogs are better.")
+                     )
+                   )
       )
     )
   )
 )
 
+## Server ############
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
       addTiles() %>%
+      ## Add Controls on all sides #########
+      addEasyButton(easyButton(position = "topleft",
+        icon = htmltools::span(class = "star", htmltools::HTML("&starf;")),
+        onClick = JS("function(btn, map){ map.setZoom(1);}"))) %>%
+      addEasyButton(easyButton(position = "topright",
+        icon = htmltools::span(class = "star", htmltools::HTML("&starf;")),
+        onClick = JS("function(btn, map){ map.setZoom(2);}"))) %>%
+      addEasyButton(easyButton(position = "bottomright",
+        icon = htmltools::span(class = "star", htmltools::HTML("&starf;")),
+        onClick = JS("function(btn, map){ map.setZoom(3);}"))) %>%
+      addEasyButton(easyButton(position = "bottomleft",
+        icon = htmltools::span(class = "star", htmltools::HTML("&starf;")),
+        onClick = JS("function(btn, map){ map.setZoom(4);}"))) %>%
+      ## Add Sidebar ##########
       addSidebar(
         id = "mysidebarid",
-        options = list(position = "left", fit = TRUE)
+        options = list(position = "left")
       ) %>%
       addSidebar(
         id = "animalsidebar",
-        options = list(position = "right", fit = TRUE)
+        options = list(position = "right")
       )
   })
   observe({
@@ -118,17 +140,13 @@ server <- function(input, output, session) {
     leafletProxy("map", session) %>%
       openSidebar(pane_ids[idx], tab_ids[idx])
   })
-
   observeEvent(input$close, {
     leafletProxy("map", session) %>%
-      closeSidebar(
-        sample(c("mysidebarid", "animalsidebar"), 1))
+      closeSidebar(sample(c("mysidebarid", "animalsidebar"), 1))
   })
-
   observeEvent(input$clear, {
     leafletProxy("map", session) %>%
-      removeSidebar(
-        sample(c("mysidebarid", "animalsidebar"), 1))
+      removeSidebar(sample(c("mysidebarid", "animalsidebar"), 1))
   })
 }
 shinyApp(ui, server)

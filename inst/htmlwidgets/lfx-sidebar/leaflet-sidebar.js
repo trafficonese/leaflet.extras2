@@ -156,6 +156,8 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         // open sidebar (if necessary)
         if (L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('opening');
+            var pos = L.DomUtil.hasClass(this._sidebar, 'sidebar-left') ? '.leaflet-left' : '.leaflet-right';
+            $(pos).addClass('extended');
             L.DomUtil.removeClass(this._sidebar, 'collapsed');
         }
 
@@ -176,6 +178,8 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         // close sidebar
         if (!L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('closing');
+            var pos = L.DomUtil.hasClass(this._sidebar, 'sidebar-left') ? '.leaflet-left' : '.leaflet-right';
+            $(pos).removeClass('extended');
             L.DomUtil.addClass(this._sidebar, 'collapsed');
         }
 
