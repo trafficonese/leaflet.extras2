@@ -24,6 +24,9 @@ Insert a new contextmenu menu item at a specific index
 Other Contextmenu Functions: 
 \code{\link{addContextmenu}()},
 \code{\link{addItemContextmenu}()},
+\code{\link{context_mapmenuItems}()},
+\code{\link{context_markermenuItems}()},
+\code{\link{context_menuItem}()},
 \code{\link{hideContextmenu}()},
 \code{\link{mapmenuItems}()},
 \code{\link{markermenuItems}()},

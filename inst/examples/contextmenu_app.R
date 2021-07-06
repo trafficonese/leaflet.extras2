@@ -35,18 +35,18 @@ server <- function(input, output, session) {
       contextmenu=TRUE,
       contextmenuWidth = 200,
       contextmenuItems =
-        mapmenuItems(
-          menuItem("Zoom Out", "function(e) {this.zoomOut();}", disabled=TRUE),
-          menuItem("Zoom In", "function(e) {this.zoomIn();}"),
+        context_mapmenuItems(
+          context_menuItem("Zoom Out", "function(e) {this.zoomOut();}", disabled=TRUE),
+          context_menuItem("Zoom In", "function(e) {this.zoomIn();}"),
           "-",
-          menuItem("Disable index 0",
+          context_menuItem("Disable index 0",
                    "function(e) {this.contextmenu.setDisabled(0, true)}",
                    hideOnSelect = TRUE),
-          menuItem("Enable index 0",
+          context_menuItem("Enable index 0",
                    "function(e) {this.contextmenu.setDisabled(0, false)}",
                    hideOnSelect = FALSE),
           "-",
-          menuItem(text="Center Map",
+          context_menuItem(text="Center Map",
                callback="function(e) {this.panTo(e.latlng);}",
                icon="https://cdn3.iconfinder.com/data/icons/web-15/128/RSSvgLink-2-512.png"),
           list(text="Console Log",
@@ -62,9 +62,9 @@ server <- function(input, output, session) {
                    contextmenu=TRUE,
                    contextmenuWidth = 200,
                    contextmenuItems =
-                     markermenuItems(
-                       menuItem(text = "Show Marker Coords",
-                                "function(e) {debugger;
+                     context_markermenuItems(
+                       context_menuItem(text = "Show Marker Coords",
+                                "function(e) {
                                               Shiny.setInputValue(map.id + '_mymarkertrigger', {
                                                       menuid: e.relatedTarget.options.contextmenuItems[0].id,
                                                       layerId: e.relatedTarget.options.layerId,
@@ -87,28 +87,28 @@ server <- function(input, output, session) {
                      contextmenuWidth = 400,
                      contextmenuInheritItems = FALSE,
                      contextmenuItems =
-                       markermenuItems(
-                         menuItem(text = "Get Line Data",
+                       context_markermenuItems(
+                         context_menuItem(text = "Get Line Data",
                                   NULL,
                                   index=0),
-                         menuItem(text = "Delete Line",
+                         context_menuItem(text = "Delete Line",
                                   "function(e) {e.relatedTarget.remove()}",
                                   icon="https://image.flaticon.com/icons/png/512/1175/1175343.png",
                                   index=1),
-                         menuItem(text = "Change Color/Weight",
+                         context_menuItem(text = "Change Color/Weight",
                                   "function(e) {e.relatedTarget.setStyle({color: '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
                                                                           weight: Math.round(Math.random()*10)});}",
                                   icon = "https://cdn3.iconfinder.com/data/icons/ui-glynh-blue-02-of-5/100/UI_Blue_2_of_3_30-512.png",
                                   index = 2),
-                         menuItem(text = "Add Centroid",
+                         context_menuItem(text = "Add Centroid",
                                   "function(e) {L.marker(Object.values(e.relatedTarget.getCenter())).addTo(this);}",
                                   icon = "https://bodylab.ch/wp-content/uploads/2015/11/map-marker-icon.png",
                                   index = 3),
-                         menuItem(text = "Log GeoJSON",
+                         context_menuItem(text = "Log GeoJSON",
                                   "function(e) {console.log(e.relatedTarget.toGeoJSON());}",
                                   icon = "https://cdn0.iconfinder.com/data/icons/outlinecons-filetypes/512/log-512.png",
                                   index = 4),
-                         menuItem(text = "-", separator=TRUE,
+                         context_menuItem(text = "-", separator=TRUE,
                                   index = 5)
                        )
                    )) %>%
@@ -119,25 +119,25 @@ server <- function(input, output, session) {
                     contextmenu=TRUE,
                     contextmenuWidth = 200,
                     contextmenuItems =
-                      markermenuItems(
-                        menuItem(text = "Get Polygon Coords",
+                      context_markermenuItems(
+                        context_menuItem(text = "Get Polygon Coords",
                                  "function(e) {console.log(e.latlng);}",
                                  index = 0),
-                        menuItem(text = "Delete Polygon",
+                        context_menuItem(text = "Delete Polygon",
                                  "function(e) {e.relatedTarget.remove()}",
                                  index = 1),
-                        menuItem(text = "Change Color",
+                        context_menuItem(text = "Change Color",
                                  "function(e) {e.relatedTarget.setStyle({color: '#4B1BDE',
                                                                          fillColor : '#'+(0x1000000+(Math.random())*0xffffff).toString(16).substr(1,6),
                                                                          fillOpacity: 1});}",
                                  index = 2),
-                        menuItem(text = "Add Centroid",
+                        context_menuItem(text = "Add Centroid",
                                  "function(e) {L.marker(Object.values(e.relatedTarget.getCenter())).addTo(this);}",
                                  index = 3),
-                        menuItem(text = "Log GeoJSON",
+                        context_menuItem(text = "Log GeoJSON",
                                  "function(e) {console.log(e.relatedTarget.toGeoJSON());}",
                                  index = 4),
-                        menuItem(text = "-", NULL, separator=TRUE,
+                        context_menuItem(text = "-", NULL, separator=TRUE,
                                  index = 5)
                       )
                   ))
@@ -167,7 +167,7 @@ server <- function(input, output, session) {
     ## Requires https://github.com/rstudio/leaflet/pull/696 to be merged!
     leafletProxy("map") %>%
       addItemContextmenu(
-        menuItem(text = "Added Menu Item",
+        context_menuItem(text = "Added Menu Item",
                  callback = ("function(e) {alert('I am a new menuItem!');
                                            console.log('e');console.log(e);}")))
   })
@@ -175,7 +175,7 @@ server <- function(input, output, session) {
     ## Requires https://github.com/rstudio/leaflet/pull/696 to be merged!
     leafletProxy("map") %>%
       addItemContextmenu(
-        menuItem(text = "Inserted Menu Item at Index 2",
+        context_menuItem(text = "Inserted Menu Item at Index 2",
                  callback = ("function(e) {alert('I am an inserted menuItem!');
                                            console.log('e');console.log(e);}")))
   })

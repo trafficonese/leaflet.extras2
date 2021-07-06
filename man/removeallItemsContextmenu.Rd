@@ -19,6 +19,9 @@ Remove all contextmenu items from the map.
 Other Contextmenu Functions: 
 \code{\link{addContextmenu}()},
 \code{\link{addItemContextmenu}()},
+\code{\link{context_mapmenuItems}()},
+\code{\link{context_markermenuItems}()},
+\code{\link{context_menuItem}()},
 \code{\link{hideContextmenu}()},
 \code{\link{insertItemContextmenu}()},
 \code{\link{mapmenuItems}()},

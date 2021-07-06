@@ -20,6 +20,9 @@ Add a new contextmenu menu item
 \seealso{
 Other Contextmenu Functions: 
 \code{\link{addContextmenu}()},
+\code{\link{context_mapmenuItems}()},
+\code{\link{context_markermenuItems}()},
+\code{\link{context_menuItem}()},
 \code{\link{hideContextmenu}()},
 \code{\link{insertItemContextmenu}()},
 \code{\link{mapmenuItems}()},
