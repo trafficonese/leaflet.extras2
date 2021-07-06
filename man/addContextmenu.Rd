@@ -48,10 +48,10 @@ leaflet(options = leafletOptions(
     contextmenu = TRUE,
     contextmenuWidth = 200,
     contextmenuItems =
-     mapmenuItems(
-       menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
+     context_mapmenuItems(
+       context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
        "-",
-       menuItem("Zoom In", "function(e) {this.zoomIn()}")))) \%>\%
+       context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) \%>\%
   addTiles(group = "base") \%>\%
   addContextmenu() \%>\%
   addMarkers(data = breweries91, label = ~brewery,
@@ -60,8 +60,8 @@ leaflet(options = leafletOptions(
             contextmenu = TRUE,
             contextmenuWidth = 200,
             contextmenuItems =
-              markermenuItems(
-                menuItem(text = "Show Marker Coords",
+              context_markermenuItems(
+                context_menuItem(text = "Show Marker Coords",
                          callback = "function(e) {alert(e.latlng);}",
                          index = 1)
               )

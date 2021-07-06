@@ -3,7 +3,7 @@
 * Included [Leaflet MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
 * `addTimeslider` gained styling options and the arguments `sameDate` and `ordertime` and works for Point / Linestring Simple Feature Collections
 * Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
-* Deprecate `menuItem`/`mapmenuItems`/`markermenuItems` and rename with prefix `context_`. Fixes #10 and #17
+* Deprecated `menuItem`/`mapmenuItems`/`markermenuItems` and renamed with prefix `context_`. Fixes #10 and #17
 
 # leaflet.extras2 1.1.0
 
