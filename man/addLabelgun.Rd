@@ -4,22 +4,35 @@
 \alias{addLabelgun}
 \title{Add addLabelgun Plugin}
 \usage{
-addLabelgun(map, group, entries, weight)
+addLabelgun(map, group = NULL, weight = NULL, entries = NULL)
 }
 \arguments{
 \item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
 
-\item{group}{a group name}
+\item{group}{The group name of the layer/s for which label collisions are
+to be avoided.
+To see the effects of this plugin the \code{labelOptions} of the markers must be
+configured with either \code{permanent = TRUE} or \code{noHide = TRUE}.}
 
-\item{entries}{Higher value relates to faster insertion and slower search, and vice versa}
+\item{weight}{An optional weight for markers. If a vector is given, the
+length should match the number of all markers in the corresponding groups.
+If a numeric value is specified, it is used for each marker and thus no
+prioritization of the labels takes place.
+In all other cases a random integer is calculated.}
 
-\item{weight}{the weight}
+\item{entries}{A numeric value, a higher value relates to faster insertion
+and slower search, and vice versa. The default is 10}
 }
 \value{
 A leaflet map object
 }
 \description{
-Add addLabelgun Plugin
+The plugin allows to avoid cluttering in marker labels and gives priority
+to labels of your choice (with heigher weight).
+}
+\note{
+It is important to invoke the function after the markers have been
+  added to the map. Otherwise nothing will happen.
 }
 \references{
 \url{https://github.com/Geovation/labelgun}

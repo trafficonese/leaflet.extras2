@@ -13,10 +13,24 @@ labelgunDependency <- function() {
 
 #' Add addLabelgun Plugin
 #'
+#' The plugin allows to avoid cluttering in marker labels and gives priority
+#' to labels of your choice (with heigher weight).
+#'
+#' @note It is important to invoke the function after the markers have been
+#'   added to the map. Otherwise nothing will happen.
+#'
 #' @param map A map widget object created from \code{\link[leaflet]{leaflet}}
-#' @param group a group name
-#' @param entries Higher value relates to faster insertion and slower search, and vice versa
-#' @param weight the weight
+#' @param group The group name of the layer/s for which label collisions are
+#'   to be avoided.
+#'   To see the effects of this plugin the \code{labelOptions} of the markers must be
+#'   configured with either \code{permanent = TRUE} or \code{noHide = TRUE}.
+#' @param weight An optional weight for markers. If a vector is given, the
+#'   length should match the number of all markers in the corresponding groups.
+#'   If a numeric value is specified, it is used for each marker and thus no
+#'   prioritization of the labels takes place.
+#'   In all other cases a random integer is calculated.
+#' @param entries A numeric value, a higher value relates to faster insertion
+#'   and slower search, and vice versa. The default is 10
 #'
 #' @return A leaflet map object
 #' @export
@@ -24,7 +38,8 @@ labelgunDependency <- function() {
 #' @references \url{https://github.com/Geovation/labelgun}
 #'
 #' @name addLabelgun
-addLabelgun <- function(map, group, entries, weight) {
+addLabelgun <- function(map, group=NULL, weight=NULL, entries=NULL) {
+  stopifnot("The group argument is NULL. Please define a valid group." = !is.null(group))
   map$dependencies <- c(map$dependencies, labelgunDependency())
-  invokeMethod(map, NULL, "addLabelgun", group, entries, weight)
+  invokeMethod(map, NULL, "addLabelgun", group, weight, entries[1])
 }
