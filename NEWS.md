@@ -1,8 +1,9 @@
 # leaflet.extras2 (development version)
 
 * Included [Leaflet MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
-* `addTimeslider` gained styling options and the arguments `sameDate` and `ordertime` and works for Point / Linestring Simple Feature Collections
 * Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
+* Included [Labelgun](https://github.com/Geovation/labelgun) plugin.
+* `addTimeslider` gained styling options and the arguments `sameDate` and `ordertime` and works for Point / Linestring Simple Feature Collections
 * Enable multiple sidebars. Thanks to @jeffreyhanson
 * Option `fit` removed for sidebars as plugin CSS/JS was adapted
 * Deprecated `menuItem`/`mapmenuItems`/`markermenuItems` and renamed with prefix `context_`. Fixes #10 and #17

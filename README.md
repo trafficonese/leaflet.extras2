@@ -36,6 +36,7 @@ Plugins integrated so far ...
 -   [Heightgraph](https://github.com/GIScience/Leaflet.Heightgraph)
 -   [Hexbin-D3](https://github.com/Asymmetrik/leaflet-d3#hexbins-api)
 -   [History](https://github.com/cscott530/leaflet-history)
+-   [Labelgun](https://github.com/Geovation/labelgun)
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Moving Markers](https://github.com/ewoken/Leaflet.MovingMarker)
 -   [OpenWeatherMap](https://github.com/trafficonese/leaflet-openweathermap)

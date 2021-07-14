@@ -14,6 +14,7 @@
   "dependencies": {
     "d3": "^5.15.0",
     "d3-hexbin": "^0.2.2",
+    "labelgun": "^6.1.0",
     "leaflet": "^1.6.0",
     "leaflet.heightgraph": "^0.4.1"
   }
