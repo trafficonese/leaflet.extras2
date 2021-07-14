@@ -44,6 +44,10 @@ reference:
     - matches("History")
     - matches("history")
     - clearFuture
+  - title: Labelgun
+    contents:
+    - matches("Labelgun")
+  - title: Moving Markers
   - title: Mapkey Icons
     contents:
     - matches("Mapkey")
