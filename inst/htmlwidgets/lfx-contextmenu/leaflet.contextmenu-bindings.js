@@ -16,6 +16,8 @@ LeafletWidget.methods.addContextmenu = function() {
           label: e.data.relatedTarget.options.label
         };
         obj = Object.assign(obj, data);
+      } else {
+        obj = Object.assign(obj, e.data.latlng);
       }
       Shiny.setInputValue(map.id + "_contextmenu_select", obj, {priority: "event"});
     });
