@@ -57,10 +57,24 @@ LeafletWidget.methods.insertItemContextmenu = function(options, index) {
   this.contextmenu.insertItem(options, index);
 };
 LeafletWidget.methods.removeItemContextmenu = function(index) {
-  this.contextmenu.removeItem(index);
+  var map = this;
+  if (Array.isArray(index)) {
+    index.forEach(function(i) {
+      map.contextmenu.removeItem(index);
+    })
+  } else {
+    map.contextmenu.removeItem(index);
+  }
 };
 LeafletWidget.methods.setDisabledContextmenu = function(index, disabled) {
-  this.contextmenu.setDisabled(index, disabled);
+  var map = this;
+  if (Array.isArray(index)) {
+    index.forEach(function(i) {
+      map.contextmenu.setDisabled(i, disabled);
+    })
+  } else {
+    map.contextmenu.setDisabled(index, disabled);
+  }
 };
 LeafletWidget.methods.removeallItemsContextmenu = function() {
   this.contextmenu.removeAllItems();
