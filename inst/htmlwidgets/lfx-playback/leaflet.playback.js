@@ -83,21 +83,20 @@ L.Playback.MoveableMarker = L.Marker.extend({
         this.tooltipContent = '';
 
         if (this.marker_options.getPopup){
-          console.log("getPopup exists")
-            this.getPopupContent = this.marker_options.getPopup;
+          console.log("getPopup exists - Replace Function")
+          this.getPopupContent = this.marker_options.getPopup;
         }
 
         // Adds popups to the Markers
         if (options.popups) {
-          console.log("Bind Popups")
+          console.log("popups is TRUE - Bind Popups")
           this.bindPopup(this.getPopupContent(), options.popupOptions)
         }
 
         // Adds tooltips to the Markers
         /*
         if (options.labels) {
-          console.log("Bind Tooltips")
-          debugger;
+          console.log("labels is TRUE - Bind Tooltips")
           this.bindTooltip(this.getTooltipContent(), options.labelOptions)
         }
         */
@@ -129,15 +128,18 @@ L.Playback.MoveableMarker = L.Marker.extend({
                 this._shadow.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
             }
         }
-
+/*
         console.log("this._popup.getLatLng()")
         console.log(this._popup.getLatLng())
+        */
         this.setLatLng(latLng);
+        /*
         console.log("this._popup.getLatLng()")
         console.log(this._popup.getLatLng())
         console.log("\n")
 
         console.log("move to index: " + index)
+        */
         if (this._popup) {
           /*debugger;*/
           this._popup.setContent(
@@ -793,13 +795,6 @@ L.Playback.SliderControl = L.Control.extend({
         this._slider.max = playback.getEndTime();
         this._slider.value = playback.getTime();
 
-/*
-        L.DomEvent.disableClickPropagation(this._slider);
-        L.DomEvent
-          .on(this._slider, 'change', onSliderChange, this)
-          .on(this._slider, 'mousemove', onSliderChange, this);
-*/
-
         var stop = L.DomEvent.stopPropagation;
         L.DomEvent
           .on(this._slider, 'click', stop)
@@ -807,16 +802,27 @@ L.Playback.SliderControl = L.Control.extend({
           .on(this._slider, 'dblclick', stop)
           .on(this._slider, 'click', L.DomEvent.preventDefault)
           .on(this._slider, 'change', onSliderChange, this)
-          .on(this._slider, 'mousemove', onSliderMove, this)
-          .on(this._slider, 'mousemove', onSliderChange, this);
+          .on(this._slider, 'mousedown', L.DomEvent.stopPropagation)
+
+        mouseMoveWhilstDown(this._slider, onSliderChange)
 
         function onSliderChange(e) {
-            var val = Number(e.target.value);
-            playback.setCursor(val);
+          var val = Number(e.target.value);
+          playback.setCursor(val);
         }
-        function onSliderMove(e) {
-          L.DomEvent.stopPropagation
-          map.dragging.disable()
+        function mouseMoveWhilstDown(target, whileMove) {
+            var endMove = function () {
+              map.dragging.enable();
+              window.removeEventListener('mousemove', whileMove);
+              window.removeEventListener('mouseup', endMove);
+            };
+
+            target.addEventListener('mousedown', function (event) {
+                map.dragging.disable()
+                event.stopPropagation(); // remove if you do want it to propagate ..
+                window.addEventListener('mousemove', whileMove);
+                window.addEventListener('mouseup', endMove);
+            });
         }
 
         playback.addCallback(function (ms) {
