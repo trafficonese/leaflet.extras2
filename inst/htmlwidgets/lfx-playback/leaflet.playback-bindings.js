@@ -79,11 +79,13 @@ LeafletWidget.methods.addPlayback= function(data, options) {
     });
     options.marker = function(featureData) {
         return {
-          icon: madeIcon,
+          icon: madeIcon
+          /*
           getPopup: function (feature) {
-            /*debugger;*/
+            debugger;
             return this.feature.popupContent[this.index]
           }
+          */
         };
     };
   }

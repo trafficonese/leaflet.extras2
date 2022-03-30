@@ -27,8 +27,8 @@ data$id <- rep(1:nrows, each = n)
 time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/nrows))
 data$time <- rep(time, nrows)
 data <- data[, c("id", "time","geometry")]
-data$popup <- paste("This is a popup for Track ID: ",data$id," and time:", data$time)
-data$label <- paste("This is a label for Track ID: ",data$id," and time:", data$time)
+data$popup <- paste("This is a <b>popup</b> for Track ID: <em>",data$id,"</em> and <em>time:", data$time,"</em>")
+data$label <- paste("Track ID: ",data$id,"<br>", data$time)
 data <- split(data, data$id)
 
 ## Icon #################
@@ -41,11 +41,17 @@ iconship = makeIcon(
 ## UI #################
 ui <- fluidPage(
   tags$head(
+    # tags$style("
+    # .leaflet-popup {
+    #   position: initial !important;
+    #   width: 100% !important;
+    #   left: 40% !important;
+    # }
+    # ")
     tags$style("
-    .leaflet-popup {
-      position: initial !important;
-      width: 100% !important;
-      left: 40% !important;
+    .leaflet-popup.playback {
+      left: 999px !important;
+      bottom: -60px !important;
     }
     ")
     #, tags$link(href="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label.css"),
@@ -53,10 +59,10 @@ ui <- fluidPage(
     # tags$script(src="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label-src.js")
   ),
   # br(),
+      leafletOutput("map", height = "800px"),
   splitLayout(
     cellWidths = c("60%","40%"),
     div(
-      leafletOutput("map", height = "800px"),
       actionButton("rm","Remove Playback")
     ),
     div(
@@ -97,8 +103,10 @@ server <- function(input, output, session) {
                     radius = 3),
                   popupOptions = popupOptions(
                     maxWidth = 700,
-                    # minWidth = 50, autoPan = TRUE, keepInView = TRUE, closeButton = TRUE,
-                    className = ""
+                    # minWidth = 50,
+                    autoPan = TRUE, keepInView = TRUE, closeButton = TRUE,
+                    closeOnClick = TRUE,
+                    className = "playback"
                   ),
                   labelOptions = labelOptions(
                     interactive = FALSE, clickable = NULL,
