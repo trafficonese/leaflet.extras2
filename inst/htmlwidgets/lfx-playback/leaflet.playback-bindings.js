@@ -33,18 +33,24 @@ LeafletWidget.methods.addPlayback= function(data, options) {
   // Add Mouse Events (Mouseover + Click)
   if (HTMLWidgets.shinyMode === true) {
     options.mouseOverCallback = function(el) {
+      var ind = el.target.index
       var obj = {
         lat: el.latlng.lat,
         lng: el.latlng.lng,
-        popup: el.popupContent
+        index: ind,
+        timestamp: new Date(el.target.feature.properties.time[ind]),
+        content: el.target.tooltipContent
       };
       Shiny.onInputChange(map.id+"_pb_mouseover", obj);
     };
     options.clickCallback  = function(el) {
+      var ind = el.target.index
       var obj = {
         lat: el.latlng.lat,
         lng: el.latlng.lng,
-        popup: el.popupContent
+        index: el.target.index,
+        timestamp: new Date(el.target.feature.properties.time[ind]),
+        content: el.target.popupContent
       };
       Shiny.onInputChange(map.id+"_pb_click", obj);
     };
@@ -72,7 +78,13 @@ LeafletWidget.methods.addPlayback= function(data, options) {
             popupAnchor: [icoli.popupAnchorX, icoli.popupAnchorY]
     });
     options.marker = function(featureData) {
-        return {icon: madeIcon};
+        return {
+          icon: madeIcon,
+          getPopup: function (feature) {
+            /*debugger;*/
+            return this.feature.popupContent[this.index]
+          }
+        };
     };
   }
 

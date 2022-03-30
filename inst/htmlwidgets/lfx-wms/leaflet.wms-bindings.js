@@ -13,10 +13,25 @@ LeafletWidget.methods.addWMS = function(baseUrl, layerId, group, options, popupO
         }
 
         // TODO - Check if body is empty?
-        this._map.openPopup(info, latlng, popupOptions);
+        var openpopup = true;
+        if (options.checkempty) {
+          var psdinf = info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im);
+          console.log(psdinf)
+          if (psdinf[1]) {
+            debugger;
+            if (psdinf[1].trim() == "") {
+              openpopup = false
+            }
+          } else {
+            openpopup = false
+          }
+        }
+        if (openpopup) {
+          this._map.openPopup(info, latlng, popupOptions);
+        }
 
         // Adaptation for R/Shiny
-        if (HTMLWidgets && HTMLWidgets.shinyMode) {
+        if (HTMLWidgets && HTMLWidgets.shinyMode && openpopup) {
           latlng.info = info;
           Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
         }

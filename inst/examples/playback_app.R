@@ -27,34 +27,87 @@ data$id <- rep(1:nrows, each = n)
 time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/nrows))
 data$time <- rep(time, nrows)
 data <- data[, c("id", "time","geometry")]
+data$popup <- paste("This is a popup for Track ID: ",data$id," and time:", data$time)
+data$label <- paste("This is a label for Track ID: ",data$id," and time:", data$time)
 data <- split(data, data$id)
 
 ## Icon #################
 iconship = makeIcon(
   iconUrl = 'https://cdn0.iconfinder.com/data/icons/man-listening-to-music-with-earphone-headphone/247/listern-music-006-512.png',
   iconWidth = 30, iconHeight = 35, shadowWidth = 30, shadowHeight = 35,
-  iconAnchorX = 0
+  iconAnchorX = 0, iconAnchorY = 0
 )
 
 ## UI #################
 ui <- fluidPage(
-  leafletOutput("map", height = "700px"),
-  actionButton("rm","Remove Playback"),
-  h4("Clicks"),
-  verbatimTextOutput("click"),
-  h4("Mouseover"),
-  verbatimTextOutput("mouseover")
+  tags$head(
+    tags$style("
+    .leaflet-popup {
+      position: initial !important;
+      width: 100% !important;
+      left: 40% !important;
+    }
+    ")
+    #, tags$link(href="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label.css"),
+    # tags$script(src="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label.js"),
+    # tags$script(src="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label-src.js")
+  ),
+  # br(),
+  splitLayout(
+    cellWidths = c("60%","40%"),
+    div(
+      leafletOutput("map", height = "800px"),
+      actionButton("rm","Remove Playback")
+    ),
+    div(
+      h4("Clicks"),
+      verbatimTextOutput("click"),
+      h4("Mouseover"),
+      verbatimTextOutput("mouseover")
+    )
+  )
 )
 
 ## Server ###############
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
-    leaflet() %>%
-      addTiles() %>%
+    leaflet(options = list(closePopupOnClick = FALSE)) %>%
+      addProviderTiles("CartoDB.Positron", group = "CartoDB") %>%
+      addCircleMarkers(data=sf::st_as_sf(breweries), radius = 1, popup="I am a regular Popup") %>%
+      leafem::addMouseCoordinates() %>%
       addPlayback(data = data, icon = iconship,
                   options = playbackOptions(
+                    maxInterpolationTime = 6,
                     color = list("red", "green"),
+                    orientIcons = TRUE,
+                    speed = 250,
+                    playCommand = "Start",
+                    stopCommand = "Stop",
+                    # locale=list(
+                    #   locale="de-DE",
+                    #   options = list(
+                    #     weekday = 'long',
+                    #     year = 'numeric',
+                    #     month = 'long',
+                    #     day = 'numeric',
+                    #     timeZone = 'UTC',
+                    #     timeZoneName = 'short'
+                    #   )
+                    # ),
                     radius = 3),
+                  popupOptions = popupOptions(
+                    maxWidth = 700,
+                    # minWidth = 50, autoPan = TRUE, keepInView = TRUE, closeButton = TRUE,
+                    className = ""
+                  ),
+                  labelOptions = labelOptions(
+                    interactive = FALSE, clickable = NULL,
+                    noHide = TRUE, permanent = TRUE,
+                    className = "", direction = "auto",
+                    offset = c(0, 0), opacity = 1,
+                    textsize = "10px", textOnly = FALSE,
+                    style = NULL, sticky = TRUE
+                    ),
                   pathOpts = pathOptions(weight = 5))
   })
   output$click <- renderPrint({

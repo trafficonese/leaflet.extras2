@@ -10,6 +10,8 @@ addPlayback(
   time = "time",
   icon = NULL,
   pathOpts = pathOptions(),
+  popupOptions = NULL,
+  labelOptions = NULL,
   options = playbackOptions()
 )
 }
@@ -25,6 +27,11 @@ Feature's with a time column.}
 
 \item{pathOpts}{style the CircleMarkers with
 \code{\link[leaflet]{pathOptions}}}
+
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
+
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
+options for each label. Default \code{NULL}}
 
 \item{options}{List of additional options. See \code{\link{playbackOptions}}}
 }

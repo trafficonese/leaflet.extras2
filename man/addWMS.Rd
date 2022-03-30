@@ -13,6 +13,7 @@ addWMS(
   attribution = NULL,
   layers = NULL,
   popupOptions = NULL,
+  checkempty = FALSE,
   data = getMapData(map)
 )
 }

@@ -33,6 +33,7 @@ playbackDependencies <- function() {
 #' @family Playback Functions
 #' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
+#' @inheritParams leaflet::addMarkers
 #' @inherit leaflet::addMarkers return
 #' @examples \dontrun{
 #' library(leaflet)
@@ -72,6 +73,8 @@ playbackDependencies <- function() {
 #' }
 addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOpts = pathOptions(),
+                        popupOptions = NULL,
+                        labelOptions = NULL,
                         options = playbackOptions()){
 
   if (!requireNamespace("sf")) {
@@ -92,6 +95,8 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
   map$dependencies <- c(map$dependencies, playbackDependencies())
   options <- leaflet::filterNULL(c(icon = list(icon),
                                   pathOptions = list(pathOpts),
+                                  popupOptions = list(popupOptions),
+                                  labelOptions = list(labelOptions),
                                   options))
 
   invokeMethod(map, NULL, "addPlayback", data, options) %>%
@@ -107,7 +112,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' @param radius a numeric value for the radius of the CircleMarkers.
 #' @param tickLen Set tick length in milliseconds. Increasing this value, may
 #'   improve performance, at the cost of animation smoothness. Default is 250
-#' @param speed Set float multiplier for default animation speed. Default is 1
+#' @param speed Set float multiplier for default animation speed. Default is 50
 #' @param maxInterpolationTime Set max interpolation time in seconds.
 #'   Default is 5*60*1000 (5 minutes).
 #' @param tracksLayer Set \code{TRUE} if you want to show layer control on the
@@ -118,6 +123,8 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #'   Default is \code{TRUE}
 #' @param sliderControl Set \code{TRUE} if slider control is needed.
 #'   Default is \code{TRUE}
+#' @param orientIcons Set \code{TRUE} if you want icons to orient themselves on each
+#'   tick based on the bearing towards their next location. Default: \code{FALSE}
 #' @param staleTime Set time before a track is considered stale and faded out.
 #'   Default is 60*60*1000 (1 hour)
 #' @param ... Further arguments passed to `L.Playback`
@@ -129,12 +136,13 @@ playbackOptions = function(
   color = "blue",
   radius = 5,
   tickLen = 250,
-  speed = 1,
+  speed = 50,
   maxInterpolationTime = 5*60*1000,
   tracksLayer = TRUE,
   playControl = TRUE,
   dateControl = TRUE,
   sliderControl = TRUE,
+  orientIcons = FALSE,
   staleTime = 60*60*1000,
   ...) {
   leaflet::filterNULL(list(
@@ -147,7 +155,10 @@ playbackOptions = function(
     playControl = playControl,
     dateControl = dateControl,
     sliderControl = sliderControl,
+    orientIcons = orientIcons,
     staleTime = staleTime,
+    popups = TRUE,
+    labels = TRUE,
     ...
   ))
 }
@@ -174,6 +185,7 @@ removePlayback <- function(map){
 to_jsonformat <- function(data, time) {
   if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
   if (inherits(data, "sf")) {
+    # browser()
     stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
     data <- to_ms(data, time)
     data <- list("type"="Feature",
@@ -183,7 +195,10 @@ to_jsonformat <- function(data, time) {
                  ),
                  "properties"=list(
                    "time"=data$time
-                 ))
+                 ),
+                 "popupContent"=data[["popup"]],
+                 "tooltipContent"=data[["label"]]
+                 )
   }
   data
 }
