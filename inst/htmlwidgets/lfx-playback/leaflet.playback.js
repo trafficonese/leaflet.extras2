@@ -576,17 +576,18 @@ L.Playback.Clock = L.Class.extend({
     L.setOptions(this, options);
     this._speed = this.options.speed;
     this._tickLen = this.options.tickLen;
-    this._cursor = trackController.getStartTime();
+    this._cursor = this._trackController.getStartTime();
     this._transitionTime = this._tickLen / this._speed;
   },
   _tick: function (self) {
-    if (self._cursor > self._trackController.getEndTime()) {
-      clearInterval(self._intervalID);
-      return;
-    }
     self._trackController.tock(self._cursor, self._transitionTime);
+    if (self._cursor >= self._trackController.getEndTime()) {
+      self.setCursor(self._trackController.getEndTime());
+      self.stop();
+    } else {
+      self._cursor += self._tickLen;
+    }
     self._callbacks(self._cursor);
-    self._cursor += self._tickLen;
   },
   _callbacks: function(cursor) {
     var arry = this._callbacksArry;
@@ -599,16 +600,20 @@ L.Playback.Clock = L.Class.extend({
     this._callbacksArry.push(fn);
   },
   start: function () {
-    if (this._intervalID) return;
+    if (this.isPlaying()) return;
+    if (this._cursor >= this._trackController.getEndTime())
+        this.setCursor(this._trackController.getStartTime());
+    this.playControl._button.innerHTML = this.options.stopCommand;
     this._intervalID = window.setInterval(
       this._tick,
       this._transitionTime,
       this);
   },
   stop: function () {
-    if (!this._intervalID) return;
+    if (!this.isPlaying()) return;
     clearInterval(this._intervalID);
     this._intervalID = null;
+    this.playControl._button.innerHTML = this.options.playCommand;
   },
   getSpeed: function() {
     return this._speed;
@@ -619,7 +624,7 @@ L.Playback.Clock = L.Class.extend({
   setSpeed: function (speed) {
     this._speed = speed;
     this._transitionTime = this._tickLen / speed;
-    if (this._intervalID) {
+    if (this.isPlaying()) {
       this.stop();
       this.start();
     }
@@ -764,11 +769,11 @@ L.Playback.PlayControl = L.Control.extend({
         function play(){
             if (playback.isPlaying()) {
                 playback.stop();
-                self._button.innerHTML = this.options.playCommand;
+                //self._button.innerHTML = this.options.playCommand;
             }
             else {
                 playback.start();
-                self._button.innerHTML = this.options.stopCommand;
+                //self._button.innerHTML = this.options.stopCommand;
             }
         }
 
