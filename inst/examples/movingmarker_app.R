@@ -8,7 +8,7 @@ dfp <- st_cast(df, "POINT")
 dfp$duratios = sample(c(1000, 1500, 2000, 2500, 3000), nrow(dfp), TRUE)
 
 shipIcon <- makeIcon(
-  iconUrl = "https://image.flaticon.com/icons/png/512/905/905567.png",
+  iconUrl = "https://cdn-icons-png.flaticon.com/512/1355/1355883.png",
   iconWidth = 40, iconHeight = 50,
   iconAnchorX = 0, iconAnchorY = 0
 )

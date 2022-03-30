@@ -65,8 +65,6 @@ LeafletWidget.methods.addMovingMarker = function(
     }
 
     map.layerManager.addLayer(map.movingmarker[layerId], "marker", layerId, group);
-
-    map.movingmarker[layerId].start();
 };
 
 
