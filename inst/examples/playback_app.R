@@ -54,12 +54,8 @@ ui <- fluidPage(
       bottom: -60px !important;
     }
     ")
-    #, tags$link(href="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label.css"),
-    # tags$script(src="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label.js"),
-    # tags$script(src="https://raw.githubusercontent.com/Leaflet/Leaflet.label/master/dist/leaflet.label-src.js")
   ),
-  # br(),
-      leafletOutput("map", height = "800px"),
+  leafletOutput("map", height = "800px"),
   splitLayout(
     cellWidths = c("60%","40%"),
     div(
@@ -79,38 +75,25 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet(options = list(closePopupOnClick = FALSE)) %>%
       addProviderTiles("CartoDB.Positron", group = "CartoDB") %>%
-      addCircleMarkers(data=sf::st_as_sf(breweries), radius = 1, popup="I am a regular Popup") %>%
+      # addCircleMarkers(data=sf::st_as_sf(breweries), radius = 1, popup="I am a regular Popup") %>%
       leafem::addMouseCoordinates() %>%
       addPlayback(data = data, icon = iconship,
                   options = playbackOptions(
-                    maxInterpolationTime = 6,
-                    color = list("red", "green"),
+                    maxInterpolationTime = 6, color = list("red", "green"), speed = 250,
                     orientIcons = TRUE,
-                    speed = 250,
-                    playCommand = "Start",
-                    stopCommand = "Stop",
-                    # locale=list(
-                    #   locale="de-DE",
-                    #   options = list(
-                    #     weekday = 'long',
-                    #     year = 'numeric',
-                    #     month = 'long',
-                    #     day = 'numeric',
-                    #     timeZone = 'UTC',
-                    #     timeZoneName = 'short'
-                    #   )
-                    # ),
+                    playCommand = "Let's go", stopCommand = "Stop it!",
+                    locale = list(locale="de-DE",
+                                  options = list(weekday = 'long',year = 'numeric',
+                                                 month = 'long',day = 'numeric',
+                                                 timeZone = 'UTC',timeZoneName = 'short')),
                     radius = 3),
                   popupOptions = popupOptions(
-                    maxWidth = 700,
-                    # minWidth = 50,
-                    autoPan = TRUE, keepInView = TRUE, closeButton = TRUE,
-                    closeOnClick = TRUE,
-                    className = "playback"
+                    maxWidth = 700, closeOnClick = TRUE, className = "playback",
+                    autoPan = TRUE, keepInView = TRUE, closeButton = TRUE
                   ),
                   labelOptions = labelOptions(
                     interactive = FALSE, clickable = NULL,
-                    noHide = TRUE, permanent = TRUE,
+                    noHide = F, permanent = F,
                     className = "", direction = "auto",
                     offset = c(0, 0), opacity = 1,
                     textsize = "10px", textOnly = FALSE,

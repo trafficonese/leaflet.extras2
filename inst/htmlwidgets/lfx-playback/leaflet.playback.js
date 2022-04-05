@@ -97,12 +97,12 @@ L.Playback.MoveableMarker = L.Marker.extend({
 
       // Adds tooltips to the Markers
       /*
+      */
       if (options.labels) {
         console.log("labels is TRUE - Bind Tooltips")
         debugger
         this.bindTooltip(this.getTooltipContent(), options.labelOptions)
       }
-      */
     },
     getPopupContent: function() {
       if (this.feature.popupContent && this.feature.popupContent[this.index] !== '') {
@@ -134,15 +134,15 @@ L.Playback.MoveableMarker = L.Marker.extend({
 
         this.setLatLng(latLng);
 
+        if (this._tooltip) {
+          this._tooltip.setContent(
+            this.getTooltipContent()
+          )
+        }
         if (this._popup) {
           //debugger;
           this._popup.setContent(
             this.getPopupContent()
-          )
-        }
-        if (this._tooltip) {
-          this._tooltip.setContent(
-            this.getTooltipContent()
           )
         }
     },
