@@ -114,8 +114,6 @@ L.Control.EasyPrint = L.Control.extend({
     }
     var sizeMode = typeof event !== 'string' ? event.target.className : event;
     if (sizeMode === 'CurrentSize') {
-      debugger;
-      console.log("printMap: sizeMode is CurrentSize")
       return this._printOpertion(sizeMode);
     }
     this.outerContainer = this._createOuterContainer(this.mapContainer)

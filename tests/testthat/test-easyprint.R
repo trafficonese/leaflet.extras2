@@ -18,6 +18,15 @@ test_that("easyprint", {
       exportOnly = TRUE))
   expect_is(m, "leaflet")
 
+  cl <- c("class1", "class2")
+  opts <- easyprintOptions(hideClasses = cl)
+  expect_is(opts$hideClasses, "list")
+  expect_equal(unlist(opts$hideClasses), cl)
+  opts <- easyprintOptions(hideClasses = as.list(cl))
+  expect_is(opts$hideClasses, "list")
+  expect_equal(unlist(opts$hideClasses), cl)
+  expect_false("hideClasses" %in% names(easyprintOptions(hideClasses = NULL)))
+
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "lfx-easyprint")
 
