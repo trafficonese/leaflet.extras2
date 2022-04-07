@@ -7,7 +7,7 @@
 easyprintOptions(
   title = "Print map",
   position = "topleft",
-  sizeModes = list("A4Portrait", "A4Landscape", "Current"),
+  sizeModes = list("A4Portrait", "A4Landscape", "CurrentSize"),
   defaultSizeTitles = NULL,
   exportOnly = FALSE,
   tileLayer = NULL,
@@ -15,7 +15,7 @@ easyprintOptions(
   filename = "map",
   hidden = FALSE,
   hideControlContainer = TRUE,
-  hideClasses = list(),
+  hideClasses = NULL,
   customWindowTitle = NULL,
   spinnerBgColor = "#0DC5C1",
   customSpinnerClass = "epLoader"
@@ -26,14 +26,19 @@ easyprintOptions(
 
 \item{position}{Positions the print button}
 
-\item{sizeModes}{Options available include \code{CurrentSize}, \code{A4Portrait},
-\code{A4Landscape} or a custom size object}
+\item{sizeModes}{Either a character vector with one of the following options:
+\code{CurrentSize}, \code{A4Portrait}, \code{A4Landscape}. If you want to
+include a \code{Custom} size mode you need to pass a named list, with
+\code{width}, \code{height}, \code{name} and \code{className} and assign a
+background-image in CSS.
+See the example in \code{./inst/examples/easyprint_app.R}.}
 
 \item{defaultSizeTitles}{Button tooltips for the default page sizes}
 
 \item{exportOnly}{If set to \code{TRUE} the map is exported to a .png file}
 
-\item{tileLayer}{A tile layer that you can wait for to draw (helpful when resizing)}
+\item{tileLayer}{The group name of one tile layer that you can wait for to draw
+(helpful when resizing)}
 
 \item{tileWait}{How long to wait for the tiles to draw (helpful when resizing)}
 
@@ -45,11 +50,11 @@ Instead you can create your own buttons or fire print events programmatically.}
 \item{hideControlContainer}{Hides the leaflet controls like the zoom buttons
 and the attribution on the print out}
 
-\item{hideClasses}{Hides classes on the print out. Use a list of strings as
-follow : list('div1', 'div2')}
+\item{hideClasses}{Use a character vector or list of CSS-classes to hide on
+the output image.}
 
 \item{customWindowTitle}{A title for the print window which will get
-added the printed paper}
+added to the printed paper}
 
 \item{spinnerBgColor}{A valid css colour for the spinner background color}
 

@@ -16,6 +16,7 @@
     "d3-hexbin": "^0.2.2",
     "labelgun": "^6.1.0",
     "leaflet": "^1.6.0",
+    "leaflet-easyprint": "^2.1.9",
     "leaflet.heightgraph": "^0.4.1"
   }
 }

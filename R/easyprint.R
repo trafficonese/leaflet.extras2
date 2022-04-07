@@ -3,8 +3,12 @@ easyprintDependency <- function() {
     htmltools::htmlDependency(
       "lfx-easyprint", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-easyprint", package = "leaflet.extras2"),
-      script = c("lfx-easyprint.js",
-                 "lfx-easyprint-bindings.js")
+      script = c(
+        "dom-to-image.js",
+        "FileSaver.js",
+        # "lfx-easyprint.js",
+        "lfx-easyprint_full.js",
+        "lfx-easyprint-bindings.js")
     )
   )
 }
@@ -35,8 +39,11 @@ addEasyprint <- function(map, options = easyprintOptions()) {
 #'
 #' Print or export a map programmatically (e.g. in a Shiny environment).
 #' @param map the map widget
-#' @param sizeModes Options available include CurrentSize, A4Portrait,
-#'   A4Landscape or a custom size object. Default is \code{A4Portrait}
+#' @param sizeModes Must match one of the given \code{sizeMode} names in
+#'   \code{\link{easyprintOptions}}. The options are:
+#'   \code{CurrentSize}, \code{A4Portrait} or \code{A4Landscape}. If you want to
+#'   print the map with a \code{Custom} sizeMode you need to pass the Custom className.
+#'   Default is \code{A4Portrait}
 #' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}.
 #' @family EasyPrint Functions
 #' @inherit addEasyprint return
@@ -92,21 +99,26 @@ removeEasyprint <- function(map) {
 #' Create a list of further options for the easyprint plugin.
 #' @param title Sets the text which appears as the tooltip of the print/export button
 #' @param position Positions the print button
-#' @param sizeModes Options available include \code{CurrentSize}, \code{A4Portrait},
-#'   \code{A4Landscape} or a custom size object
+#' @param sizeModes Either a character vector with one of the following options:
+#'   \code{CurrentSize}, \code{A4Portrait}, \code{A4Landscape}. If you want to
+#'   include a \code{Custom} size mode you need to pass a named list, with
+#'   \code{width}, \code{height}, \code{name} and \code{className} and assign a
+#'   background-image in CSS.
+#'   See the example in \code{./inst/examples/easyprint_app.R}.
 #' @param defaultSizeTitles Button tooltips for the default page sizes
 #' @param exportOnly 	If set to \code{TRUE} the map is exported to a .png file
-#' @param tileLayer A tile layer that you can wait for to draw (helpful when resizing)
+#' @param tileLayer The group name of one tile layer that you can wait for to draw
+#'   (helpful when resizing)
 #' @param tileWait How long to wait for the tiles to draw (helpful when resizing)
 #' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}
 #' @param hidden Set to \code{TRUE} if you don't want to display the toolbar.
 #'   Instead you can create your own buttons or fire print events programmatically.
 #' @param hideControlContainer Hides the leaflet controls like the zoom buttons
 #'   and the attribution on the print out
-#' @param hideClasses Hides classes on the print out. Use a list of strings as
-#'   follow : list('div1', 'div2')
+#' @param hideClasses Use a character vector or list of CSS-classes to hide on
+#'   the output image.
 #' @param customWindowTitle A title for the print window which will get
-#'   added the printed paper
+#'   added to the printed paper
 #' @param spinnerBgColor A valid css colour for the spinner background color
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
@@ -116,7 +128,7 @@ removeEasyprint <- function(map) {
 #' @export
 easyprintOptions <- function(title = 'Print map',
                              position = 'topleft',
-                             sizeModes = list("A4Portrait", "A4Landscape", "Current"),
+                             sizeModes = list("A4Portrait", "A4Landscape", "CurrentSize"),
                              defaultSizeTitles = NULL,
                              exportOnly = FALSE,
                              tileLayer = NULL,
@@ -124,11 +136,16 @@ easyprintOptions <- function(title = 'Print map',
                              filename = 'map',
                              hidden = FALSE,
                              hideControlContainer = TRUE,
-                             hideClasses = list(),
+                             hideClasses = NULL,
                              customWindowTitle = NULL,
                              spinnerBgColor = '#0DC5C1',
                              customSpinnerClass = 'epLoader') {
   if (inherits(sizeModes, "character")) sizeModes <- as.list(sizeModes)
+  if (inherits(hideClasses, "character")) hideClasses <- as.list(hideClasses)
+  if (length(sizeModes) == 0 || (is.null(sizeModes) || all(is.na(sizeModes)) || all(sizeModes == ""))) {
+    stop("The 'sizeModes' argument cannot be empty.\nUse one of the following ",
+         "options: 'A4Portrait', 'A4Landscape', 'CurrentSize' or define a 'Custom' sizeMode.")
+  }
   leaflet::filterNULL(list(
     title = title,
     position = position,

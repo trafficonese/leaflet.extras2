@@ -1,7 +1,7 @@
-library(sf)
-library(geojsonsf)
 
 test_that("heightgraph", {
+  library(sf)
+  library(geojsonsf)
 
   data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
   data <- st_transform(data, 4326)

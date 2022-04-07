@@ -1,7 +1,7 @@
 
 test_that("easyprint", {
 
-  m <- leaflet()  %>%
+  m <- leaflet() %>%
     addTiles() %>%
     addEasyprint(options = easyprintOptions(
       title = 'Print map',
@@ -28,6 +28,10 @@ test_that("easyprint", {
   m <- m %>% easyprintMap()
   expect_equal(m$x$calls[[length(m$x$calls)]]$method,
                "easyprintMap")
+
+  expect_error(easyprintOptions(sizeModes = NULL))
+  expect_error(easyprintOptions(sizeModes = NA))
+  expect_error(easyprintOptions(sizeModes = ""))
 
 })
 

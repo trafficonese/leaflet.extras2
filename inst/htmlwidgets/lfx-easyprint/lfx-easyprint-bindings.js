@@ -7,7 +7,22 @@ LeafletWidget.methods.addEasyprint = function(options) {
       delete map.easyprint;
     }
 
-    map.easyprint = new L.Control.EasyPrint(options);
+    // If a group name of a tilelayer is given, get the layer (the method isLoading will be used)
+    if (options.tileLayer !== undefined) {
+      // If multiple group names are given, take only the first layer
+      if (Array.isArray(options.tileLayer)) {
+        options.tileLayer = options.tileLayer[0];
+      }
+      var layers = map.layerManager._byGroup[options.tileLayer]
+      if (layers !== undefined) {
+        options.tileLayer = layers[Object.keys(layers)];
+      } else {
+        options.tileLayer = undefined;
+      }
+    }
+
+    options.sizeModes = Object.values(options.sizeModes)
+    map.easyprint = L.easyPrint(options);
     map.controls.add(map.easyprint);
 
   }).call(this);
@@ -26,9 +41,10 @@ LeafletWidget.methods.removeEasyprint = function() {
 LeafletWidget.methods.easyprintMap = function(sizeModes, filename) {
   (function(){
     if (this.easyprint) {
-      // Hack based on @urakovaliaskar in https://github.com/rowanwins/leaflet-easyPrint/issues/105#issuecomment-550370793_
-      var sizemode = sizeModes == "CurrentSize" ? sizeModes : sizeModes  + " page";
-      this.easyprint.printMap(sizemode, filename);
+      if (typeof sizeModes === "object" && sizeModes.className) {
+        sizeModes.target = {className: sizeModes.className}
+      }
+      this.easyprint.printMap(sizeModes, filename);
     }
   }).call(this);
 };
