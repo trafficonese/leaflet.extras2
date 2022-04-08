@@ -127,10 +127,10 @@ makeMapkeyIcon <- function(
 #' @param hoverScale Any real number (best result in range 1 - 2, use 1 for no
 #'   effect)
 #' @param hoverEffect Switch on/off effect on hover
-#' @param hoverCSS CSS code (e.g. "background-color:#992b00 !important;
-#'   color:#99defc !important;")
-#' @param additionalCSS CSS code (e.g. "border:4px solid #aa3838;")
-#' @param htmlCode e.g. '&#57347;&#xe003;'. See
+#' @param hoverCSS CSS code (e.g. \code{"background-color:#992b00 !important;
+#'   color:#99defc !important;"})
+#' @param additionalCSS CSS code (e.g. \code{"border:4px solid #aa3838;"})
+#' @param htmlCode e.g. \code{'&#57347;&#xe003;'}. See
 #'   \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information
 #' @param boxShadow Should a shadow be visible
 #' @export

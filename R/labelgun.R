@@ -14,7 +14,7 @@ labelgunDependency <- function() {
 #' Add addLabelgun Plugin
 #'
 #' The plugin allows to avoid cluttering in marker labels and gives priority
-#' to labels of your choice (with heigher weight).
+#' to labels of your choice (with higher weight).
 #'
 #' @note It is important to invoke the function after the markers have been
 #'   added to the map. Otherwise nothing will happen.

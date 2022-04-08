@@ -34,7 +34,7 @@ is set (`MAPID` refers to the map's id).
 
 If the selected contextmenu item is triggered from:
 \itemize{
-  \item {the \strong{map}, the returned list containts the \code{text} of the item.}
+  \item {the \strong{map}, the returned list contains the \code{text} of the item.}
   \item {the \strong{markers}, the returned list also contains the
          \code{layerId}, \code{group}, \code{lat}, \code{lng} and \code{label}.}
   \item {the \strong{vector layers}, the returned list also contains the

@@ -65,7 +65,7 @@ for security reasons)}
 \item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
-\item{ordertime}{boolean value, indicating wether to order the data by the
+\item{ordertime}{boolean value indicating whether to order the data by the
 time column. The slider will adopt the order of the timestamps.
 The default is \code{TRUE}.}
 

@@ -20,3 +20,4 @@
 ^pkgdown$
 ^\.github$
 ^CRAN-RELEASE$
+^revdep$

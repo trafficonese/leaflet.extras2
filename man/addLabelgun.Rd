@@ -28,7 +28,7 @@ A leaflet map object
 }
 \description{
 The plugin allows to avoid cluttering in marker labels and gives priority
-to labels of your choice (with heigher weight).
+to labels of your choice (with higher weight).
 }
 \note{
 It is important to invoke the function after the markers have been

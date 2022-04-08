@@ -10,7 +10,7 @@
 * Some improvement for the `easyprint` plugin: (Fixes #31)
   - It is now possible to include multiple custom `sizeModes` in `easyprintOptions`. The example [easyprint_app.R](./inst/examples/easyprint_app.R) has been extended to demonstrate the new functionalities. **Unfortunately** the `CurrentSize` option via `easyprintMap` always returns a gray background, although via the control button it works just fine. 
   - The `tileLayer` option now accepts a group name for a tilelayer for which printing will wait until the layer is fully loaded.
-* The `addPlayback` is now capable of displaying labels and popups for every timestep. The transition of labels and popups can be controled with `transitionpopup` and `transitionlabel`.
+* The `addPlayback` is now capable of displaying labels and popups for every timestep. The transition of labels and popups can be controlled with `transitionpopup` and `transitionlabel`.
 * The function `addHistory` now requires the *fontawesome* package, since the dependency is not included in shiny's shared directory anymore.
 * The function `addWMS` gained the argument `checkempty`, which will check the returning HTML-body tag. If the body is empty, no popup is opened.
 
