@@ -8,8 +8,10 @@
 * Option `fit` removed for sidebars as plugin CSS/JS was adapted
 * Deprecated `menuItem`/`mapmenuItems`/`markermenuItems` and renamed with prefix `context_`. Fixes #10 and #17
 * Some improvement for the `easyprint` plugin: (Fixes #31)
-  - It is now possible to include multiple custom `sizeModes` in `easyprintOptions`. The example [easyprint_app.R](./inst/examples/easyprint_app.R) has been extended to demonstrate the new functionalities. **Unfortunately** the `CurrentSize` option via `easyprintMap` always returns a gray background, although via the control buttons it works fine. 
+  - It is now possible to include multiple custom `sizeModes` in `easyprintOptions`. The example [easyprint_app.R](./inst/examples/easyprint_app.R) has been extended to demonstrate the new functionalities. **Unfortunately** the `CurrentSize` option via `easyprintMap` always returns a gray background, although via the control button it works just fine. 
   - The `tileLayer` option now accepts a group name for a tilelayer for which printing will wait until the layer is fully loaded.
+  
+* The `addPlayback` is now capable of displaying labels and popups for every timestep. The transition of labels and popups can be controled with `transitionpopup` and `transitionlabel`.
 
 
 # leaflet.extras2 1.1.0
