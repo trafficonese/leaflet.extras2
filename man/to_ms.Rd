@@ -10,7 +10,7 @@ to_ms(data, time)
 \arguments{
 \item{data}{The data}
 
-\item{time}{Columnname of the time column.}
+\item{time}{Name of the time column.}
 }
 \value{
 A data.frame with the time column in milliseconds

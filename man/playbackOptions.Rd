@@ -8,13 +8,16 @@ playbackOptions(
   color = "blue",
   radius = 5,
   tickLen = 250,
-  speed = 1,
+  speed = 50,
   maxInterpolationTime = 5 * 60 * 1000,
   tracksLayer = TRUE,
   playControl = TRUE,
   dateControl = TRUE,
   sliderControl = TRUE,
+  orientIcons = FALSE,
   staleTime = 60 * 60 * 1000,
+  transitionpopup = TRUE,
+  transitionlabel = TRUE,
   ...
 )
 }
@@ -26,7 +29,7 @@ playbackOptions(
 \item{tickLen}{Set tick length in milliseconds. Increasing this value, may
 improve performance, at the cost of animation smoothness. Default is 250}
 
-\item{speed}{Set float multiplier for default animation speed. Default is 1}
+\item{speed}{Set float multiplier for default animation speed. Default is 50}
 
 \item{maxInterpolationTime}{Set max interpolation time in seconds.
 Default is 5*60*1000 (5 minutes).}
@@ -43,8 +46,17 @@ Default is \code{TRUE}}
 \item{sliderControl}{Set \code{TRUE} if slider control is needed.
 Default is \code{TRUE}}
 
+\item{orientIcons}{Set \code{TRUE} if you want icons to orient themselves on each
+tick based on the bearing towards their next location. Default: \code{FALSE}}
+
 \item{staleTime}{Set time before a track is considered stale and faded out.
 Default is 60*60*1000 (1 hour)}
+
+\item{transitionpopup}{Should the position of the popup move smoothly,
+like the marker icon? Default: \code{TRUE}}
+
+\item{transitionlabel}{Should the position of the label move smoothly,
+like the marker icon? Default: \code{TRUE}}
 
 \item{...}{Further arguments passed to `L.Playback`}
 }
