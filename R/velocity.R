@@ -13,21 +13,21 @@ velocityDependencies <- function() {
 #' Add Velocity Animation
 #'
 #' Add velocity animated data to leaflet. Based on the
-#'   \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+#'   \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 #' @inheritParams leaflet::addMarkers
 #' @param content the path or URL to a JSON file representing the velocity data
 #'   or a data.frame which can be transformed to such a JSON file. Please see the
-#'   \href{https://github.com/danwild/leaflet-velocity/tree/master/demo}{demo
+#'   \href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
 #'   files} for some example data.
 #' @param options List of further options. See \code{\link{velocityOptions}}
 #' @export
 #' @family Velocity Functions
-#' @references \url{https://github.com/danwild/leaflet-velocity}
+#' @references \url{https://github.com/onaci/leaflet-velocity}
 #' @inherit leaflet::addMarkers return
 #' @examples \dontrun{
 #' library(leaflet)
 #' library(leaflet.extras2)
-#' content <- "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json"
+#' content <- "https://raw.githubusercontent.com/onaci/leaflet-velocity/master/demo/water-gbr.json"
 #' leaflet() %>%
 #'   addTiles(group = "base") %>%
 #'   setView(145, -20, 4) %>%
@@ -71,7 +71,7 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
 #' @param velocityScale scale for wind velocity
 #' @param colorScale A vector of hex colors or an RGB matrix
 #' @param ... Further arguments passed to the Velocity layer and Windy.js.
-#'   For more information, please visit \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+#'   For more information, please visit \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 #' @return A list of further options for \code{addVelocity}
 #' @export
 #' @family Velocity Functions

@@ -25,7 +25,7 @@ layers (e.g. markers and polygons) can share the same group name.}
 
 \item{content}{the path or URL to a JSON file representing the velocity data
 or a data.frame which can be transformed to such a JSON file. Please see the
-\href{https://github.com/danwild/leaflet-velocity/tree/master/demo}{demo
+\href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
 files} for some example data.}
 
 \item{options}{List of further options. See \code{\link{velocityOptions}}}
@@ -35,13 +35,13 @@ the new \code{map} object
 }
 \description{
 Add velocity animated data to leaflet. Based on the
-  \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+  \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 }
 \examples{
 \dontrun{
 library(leaflet)
 library(leaflet.extras2)
-content <- "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json"
+content <- "https://raw.githubusercontent.com/onaci/leaflet-velocity/master/demo/water-gbr.json"
 leaflet() \%>\%
   addTiles(group = "base") \%>\%
   setView(145, -20, 4) \%>\%
@@ -50,7 +50,7 @@ leaflet() \%>\%
 }
 }
 \references{
-\url{https://github.com/danwild/leaflet-velocity}
+\url{https://github.com/onaci/leaflet-velocity}
 }
 \seealso{
 Other Velocity Functions: 

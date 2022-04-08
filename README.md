@@ -4,14 +4,14 @@
 [![](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://www.r-pkg.org/pkg/leaflet.extras2)
 [![cran checks](https://cranchecks.info/badges/worst/leaflet.extras2)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/leaflet.extras2?color=brightgreen)](https://www.r-pkg.org/pkg/leaflet.extras2)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://www.rpackages.io/package/leaflet.extras2)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://rdrr.io/cran/leaflet.extras2/)
+[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
 [![R build status](https://github.com/trafficonese/leaflet.extras2/workflows/R-CMD-check/badge.svg)](https://github.com/trafficonese/leaflet.extras2/actions)
 [![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet-extras2)
-[![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
+[![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
 <!-- badges: end -->
 
-The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).
+The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/package=leaflet) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various leaflet plugins.
 
 ### Installation
 
@@ -49,7 +49,7 @@ Plugins integrated so far ...
 -   [Spin](https://github.com/makinacorpus/Leaflet.Spin)
 -   [Timeslider](https://github.com/dwilhelm89/LeafletSlider)
 -   [Tangram](https://github.com/tangrams/tangram)
--   [Velocity](https://github.com/danwild/leaflet-velocity)
+-   [Velocity](https://github.com/onaci/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
 
 

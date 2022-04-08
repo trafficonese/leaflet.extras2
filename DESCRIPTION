@@ -28,6 +28,6 @@ Suggests:
     fontawesome,
     htmlwidgets,
     covr
-URL: https://trafficonese.github.io/leaflet.extras2, https://github.com/trafficonese/leaflet.extras2
+URL: https://trafficonese.github.io/leaflet.extras2/, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.1.1
