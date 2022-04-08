@@ -25,6 +25,8 @@ Suggests:
     geojsonsf,
     sp,
     testthat (>= 2.1.0),
+    fontawesome,
+    htmlwidgets,
     covr
 URL: https://trafficonese.github.io/leaflet.extras2, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues

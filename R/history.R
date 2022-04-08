@@ -1,9 +1,10 @@
 historyDependency <- function() {
-  # icondeps
   list(
-    htmlDependency(
-      "font-awesome",
-      "5.3.1", "www/shared/fontawesome", package = "shiny",
+    htmltools::htmlDependency(
+      name = "font-awesome",
+      version = fontawesome::fa_metadata()$version,
+      src = "fontawesome",
+      package = "fontawesome",
       stylesheet = c("css/all.min.css", "css/v4-shims.min.css")
     ),
     htmlDependency(
@@ -34,6 +35,10 @@ historyDependency <- function() {
 #'   addTiles() %>%
 #'   addHistory()
 addHistory <- function(map, layerId = NULL, options = historyOptions()) {
+  if (!requireNamespace("fontawesome")) {
+    stop("The package `fontawesome` is needed for this plugin. ",
+         "Please install it with:\ninstall.packages('fontawesome')")
+  }
   ## Check Icon options. Is it character or shiny.tag. Adapt htmlDeps
   map$dependencies <- c(map$dependencies, historyDependency())
   leaflet::invokeMethod(map, NULL, "addHistory", layerId, options)

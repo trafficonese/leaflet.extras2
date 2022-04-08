@@ -54,6 +54,7 @@ addTimeslider <- function(map, data, radius = 10,
                           weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
                           fillOpacity = 0.2, dashArray = NULL,
                           popup = NULL, popupOptions = NULL,
+                          label = NULL, labelOptions = NULL,
                           ordertime = TRUE,
                           options = timesliderOptions()){
 
@@ -78,6 +79,11 @@ addTimeslider <- function(map, data, radius = 10,
     data$popup = leaflet::evalFormula(popup, data)
   }
 
+  ## Label
+  if (!is.null(label) && !isFALSE(label)) {
+    data$label = leaflet::evalFormula(label, data)
+  }
+
   ## BBOX
   if (!requireNamespace("sf")) {
     stop("The package `sf` is needed for this plugin. ",
@@ -94,7 +100,7 @@ addTimeslider <- function(map, data, radius = 10,
 
   ## Add Deps and invoke Leaflet
   map$dependencies <- c(map$dependencies, timesliderDependencies())
-  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions) %>%
+  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions, labelOptions) %>%
     expandLimits(bbox[c(2,4)], bbox[c(1,3)])
 }
 

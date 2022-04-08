@@ -156,6 +156,37 @@ test_that("playback", {
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[3]]$method, "removePlayback")
 
+
+  data$time <- as.numeric(data$time) * 1000
+  data$popup1 <- paste0("This is a popup for ", data$time)
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = data,
+                popup = ~popup1,
+                options = playbackOptions(radius = 3),
+                pathOpts = pathOptions(weight = 5))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   leaflet.extras2:::to_jsonformat(data, "time", popup = data$popup1))
+
+  data$time <- as.numeric(data$time) * 1000
+  data$label1 <- paste0("This is a popup for ", data$time)
+  m <- leaflet() %>%
+    addTiles() %>%
+    addPlayback(data = data,
+                label = ~label1,
+                options = playbackOptions(radius = 3),
+                pathOpts = pathOptions(weight = 5))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[2]]$method, "addPlayback")
+  expect_identical(m$x$calls[[2]]$args[[1]],
+                   leaflet.extras2:::to_jsonformat(data, "time", label = data$label1))
+
+  m <- m %>% removePlayback()
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[3]]$method, "removePlayback")
+
   ## Date Time Column
   datadt <- data
   datadt$time <- as.Date(

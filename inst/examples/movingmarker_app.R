@@ -4,7 +4,7 @@ library(leaflet)
 library(leaflet.extras2)
 
 df <- sf::st_as_sf(atlStorms2005)[1,]
-dfp <- st_cast(df, "POINT")
+dfp <- suppressWarnings(st_cast(df, "POINT"))
 dfp$duratios = sample(c(1000, 1500, 2000, 2500, 3000), nrow(dfp), TRUE)
 
 shipIcon <- makeIcon(
@@ -14,7 +14,15 @@ shipIcon <- makeIcon(
 )
 
 ui <- fluidPage(
-  leafletOutput("map", height = 650),
+  splitLayout(cellWidths = c("50%","49%"),
+    leafletOutput("map", height = 800),
+    splitLayout(cellWidths = c("49%","49%"),
+      div(h5("Click Events"),
+          verbatimTextOutput("click")),
+      div(h5("Mouseover Events"),
+          verbatimTextOutput("mouseover"))
+    )
+  ),
   actionButton("start", "Start"),
   actionButton("stop", "Stop"),
   actionButton("pause", "Pause"),
@@ -24,17 +32,7 @@ ui <- fluidPage(
   actionButton("addStation", "addStation"),
   actionButton("clear", "Clear Group"),
   actionButton("clearmark", "Clear Marker"),
-  actionButton("remove", "Remove Marker"),
-  splitLayout(
-    div(
-      h5("Click Events"),
-      verbatimTextOutput("click")
-    ),
-    div(
-      h5("Mouseover Events"),
-      verbatimTextOutput("mouseover")
-    )
-  )
+  actionButton("remove", "Remove Marker")
 )
 
 server <- function(input, output, session) {
@@ -82,12 +80,18 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$addLatLng, {
+    latlng <- list(lat=runif(1,30,35),lng=runif(1,-70,-65))
     leafletProxy("map", session) %>%
-      addLatLngMoving(list(33, -67), 2000)
+      addCircleMarkers(lng = latlng$lng,lat = latlng$lat,
+                       label = paste("input$addLatLng:", input$addLatLng)) %>%
+      addLatLngMoving(latlng = latlng, duration = 2000)
   })
   observeEvent(input$moveTo, {
+    latlng <- list(lat=runif(1,30,35),lng=runif(1,-70,-65))
     leafletProxy("map", session) %>%
-      moveToMoving(list(lng=-65, lat=33), 2000)
+      addCircleMarkers(lng = latlng$lng,lat = latlng$lat,
+                       label=paste("input$moveTo:", input$addLatLng)) %>%
+      moveToMoving(latlng = latlng, duration = 2000)
   })
   observeEvent(input$addStation, {
     pti <- sample(seq.int(nrow(dfp)), 1, TRUE)
