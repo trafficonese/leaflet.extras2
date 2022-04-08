@@ -83,24 +83,24 @@ L.Playback.MoveableMarker = L.Marker.extend({
       this.tooltipContent = '';
 
       if (this.marker_options.getPopup) {
-          console.log("getPopup exists - Replace Function")
           this.getPopupContent = this.marker_options.getPopup;
-        }
+      }
 
       // Adds popups to the Markers
       if (options.popups) {
-        console.log("popups is TRUE - Bind Popups")
-        debugger;
-        this.bindPopup(this.getPopupContent(), options.popupOptions)
-        // translate3d(1656px, 400px, 0px)
+        this.options.transitionpopup = options.transitionpopup;
+        // This shows marker-popups at wrong locations
+        // this.bindPopup(this.getPopupContent(), options.popupOptions)
+
+        // So we use this method and open the popup in the bindings in the clickCallback
+        this._popup = L.popup(options.popupOptions)
+                        .setLatLng(startLatLng)
+                        .setContent(this.getPopupContent())
       }
 
       // Adds tooltips to the Markers
-      /*
-      */
       if (options.labels) {
-        console.log("labels is TRUE - Bind Tooltips")
-        debugger
+        this.options.transitionlabel = options.transitionlabel;
         this.bindTooltip(this.getTooltipContent(), options.labelOptions)
       }
     },
@@ -122,13 +122,21 @@ L.Playback.MoveableMarker = L.Marker.extend({
         if (L.DomUtil.TRANSITION) {
             if (this._icon) {
                 this._icon.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
-                if (this._popup && this._popup._wrapper)
-                    this._popup._wrapper.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
-                if (this._tooltip && this._tooltip._wrapper)
-                    this._tooltip._wrapper.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
             }
             if (this._shadow) {
                 this._shadow.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
+            }
+
+            if (this.options.transitionpopup) {
+              if (this._popup && this._popup._wrapper) {
+                  this._popup._wrapper.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
+                  this._popup._wrapper.parentNode.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
+              }
+            }
+            if (this.options.transitionlabel) {
+              if (this._tooltip && this._tooltip._container && $(this._tooltip._container).is(":visible")) {
+                  this._tooltip._container.style[L.DomUtil.TRANSITION] = 'all ' + transitionTime + 'ms linear';
+              }
             }
         }
 
@@ -140,13 +148,12 @@ L.Playback.MoveableMarker = L.Marker.extend({
           )
         }
         if (this._popup) {
-          //debugger;
-          this._popup.setContent(
-            this.getPopupContent()
+          this._popup.setLatLng(latLng).setContent(
+              this.getPopupContent()
           )
         }
     },
-    // modify leaflet markers to add our roration code
+    // modify leaflet markers to add our rotation code
     /*
      * Based on comments by @runanet and @coomsie
      * https://github.com/CloudMade/Leaflet/issues/386
@@ -164,9 +171,6 @@ L.Playback.MoveableMarker = L.Marker.extend({
         transform += ' translate(' + a.x + 'px, ' + a.y + 'px)';
         i.style.transformOrigin = '50% 50% 0';
         i.style[L.DomUtil.TRANSFORM] += transform;
-        // leaflet-popup
-        // transform: translate3d(1533px, 381px, 0px);
-
     },
     setIconAngle: function (iconAngle) {
         this.options.iconAngle = iconAngle;
@@ -189,14 +193,12 @@ L.Playback.MoveableMarker = L.Marker.extend({
                 i = this._icon;
                 this._updateImg(i, a, s);
             }
-
             if (this._shadow) {
                 // Rotate around the icons anchor.
                 s = this.options.icon.options.shadowSize;
                 i = this._shadow;
                 this._updateImg(i, a, s);
             }
-
         }
     }
 });
@@ -443,7 +445,7 @@ L.Playback.Track = L.Class.extend({
         }
         return this._marker;
     },
-    moveMarker: function(latLng, transitionTime,timestamp) {
+    moveMarker: function(latLng, transitionTime, timestamp) {
         if (this._marker) {
             if (this._fadeMarkersWhenStale) {
                 //show the marker if its now present
@@ -598,7 +600,7 @@ L.Playback.Clock = L.Class.extend({
     if (this.isPlaying()) return;
     if (this._cursor >= this._trackController.getEndTime())
         this.setCursor(this._trackController.getStartTime());
-    this.playControl._button.innerHTML = this.options.stopCommand;
+    this.playControl._button.innerHTML = this.options.stopCommand ? this.options.stopCommand : this.playControl.options.stopCommand;
     this._intervalID = window.setInterval(
       this._tick,
       this._transitionTime,
@@ -608,7 +610,7 @@ L.Playback.Clock = L.Class.extend({
     if (!this.isPlaying()) return;
     clearInterval(this._intervalID);
     this._intervalID = null;
-    this.playControl._button.innerHTML = this.options.playCommand;
+    this.playControl._button.innerHTML = this.options.playCommand ? this.options.playCommand : this.playControl.options.playCommand;
   },
   getSpeed: function() {
     return this._speed;

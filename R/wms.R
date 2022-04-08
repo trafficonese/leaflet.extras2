@@ -40,7 +40,6 @@ addWMS <- function(map, baseUrl, layerId = NULL, group = NULL,
                    attribution = NULL,
                    layers = NULL,
                    popupOptions = NULL,
-                   checkempty = FALSE,
                    data = getMapData(map)) {
 
   if (is.null(layers)) {
@@ -48,7 +47,6 @@ addWMS <- function(map, baseUrl, layerId = NULL, group = NULL,
   }
   options$attribution <- attribution
   options$layers <- layers
-  options$checkempty <- checkempty
 
   map$dependencies <- c(map$dependencies, wmsDependency())
 

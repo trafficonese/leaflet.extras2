@@ -43,7 +43,13 @@ LeafletWidget.methods.addPlayback= function(data, options) {
       };
       Shiny.onInputChange(map.id+"_pb_mouseover", obj);
     };
-    options.clickCallback  = function(el) {
+  }
+  options.clickCallback  = function(el) {
+    // Workaround since bindPopup doesnt show popups at the correct location
+    if (el.target._popup) {
+      el.target._popup.setLatLng(el.latlng).openOn(map);
+    }
+    if (HTMLWidgets.shinyMode === true) {
       var ind = el.target.index
       var obj = {
         lat: el.latlng.lat,
@@ -53,8 +59,8 @@ LeafletWidget.methods.addPlayback= function(data, options) {
         content: el.target.popupContent
       };
       Shiny.onInputChange(map.id+"_pb_click", obj);
-    };
-  }
+    }
+  };
 
   // Add playbackoptions and Icon
   options.layer = {
@@ -90,7 +96,7 @@ LeafletWidget.methods.addPlayback= function(data, options) {
     };
   }
 
-  map.playback = new L.Playback(map, data, null, options);
+  map.playback = L.playback(map, data, null, options);
 };
 
 

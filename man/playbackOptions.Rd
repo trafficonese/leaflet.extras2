@@ -16,6 +16,8 @@ playbackOptions(
   sliderControl = TRUE,
   orientIcons = FALSE,
   staleTime = 60 * 60 * 1000,
+  transitionpopup = TRUE,
+  transitionlabel = TRUE,
   ...
 )
 }
@@ -49,6 +51,12 @@ tick based on the bearing towards their next location. Default: \code{FALSE}}
 
 \item{staleTime}{Set time before a track is considered stale and faded out.
 Default is 60*60*1000 (1 hour)}
+
+\item{transitionpopup}{Should the position of the popup move smoothly,
+like the marker icon? Default: \code{TRUE}}
+
+\item{transitionlabel}{Should the position of the label move smoothly,
+like the marker icon? Default: \code{TRUE}}
 
 \item{...}{Further arguments passed to `L.Playback`}
 }

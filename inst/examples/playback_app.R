@@ -13,6 +13,8 @@ library(mapview)
 # data$time = as.POSIXct(
 #   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
 # data <- data[, c("time","geometry")]
+# data$popup1 <- paste("This is a <b>popup</b> for <em>time:", data$time,"</em>")
+# data$label1 <- paste("Time: ", data$time)
 
 ## Multiple Trails ##############
 n = 150
@@ -27,8 +29,8 @@ data$id <- rep(1:nrows, each = n)
 time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/nrows))
 data$time <- rep(time, nrows)
 data <- data[, c("id", "time","geometry")]
-data$popup <- paste("This is a <b>popup</b> for Track ID: <em>",data$id,"</em> and <em>time:", data$time,"</em>")
-data$label <- paste("Track ID: ",data$id,"<br>", data$time)
+data$popup1 <- paste("This is a <b>popup</b> for Track ID: <em>",data$id,"</em> and <em>time:", data$time,"</em>")
+data$label1 <- paste("Track ID: ",data$id,"<br>", data$time)
 data <- split(data, data$id)
 
 ## Icon #################
@@ -40,34 +42,17 @@ iconship = makeIcon(
 
 ## UI #################
 ui <- fluidPage(
-  tags$head(
-    # tags$style("
-    # .leaflet-popup {
-    #   position: initial !important;
-    #   width: 100% !important;
-    #   left: 40% !important;
-    # }
-    # ")
-    tags$style("
-    .leaflet-popup.playback {
-      left: 999px !important;
-      bottom: -60px !important;
-    }
-    ")
-  ),
-  leafletOutput("map", height = "800px"),
   splitLayout(
     cellWidths = c("60%","40%"),
-    div(
-      actionButton("rm","Remove Playback")
-    ),
-    div(
-      h4("Clicks"),
-      verbatimTextOutput("click"),
-      h4("Mouseover"),
-      verbatimTextOutput("mouseover")
-    )
-  )
+      leafletOutput("map", height = "800px"),
+      div(
+        h4("Clicks"),
+        verbatimTextOutput("click"),
+        h4("Mouseover"),
+        verbatimTextOutput("mouseover")
+      )
+  ),
+  actionButton("rm","Remove Playback")
 )
 
 ## Server ###############
@@ -78,22 +63,23 @@ server <- function(input, output, session) {
       # addCircleMarkers(data=sf::st_as_sf(breweries), radius = 1, popup="I am a regular Popup") %>%
       leafem::addMouseCoordinates() %>%
       addPlayback(data = data, icon = iconship,
+                  popup = ~popup1,
+                  # popup = ~sprintf("this popup is created with sprintf:<br> %s", popup1),
+                  label = ~label1,
                   options = playbackOptions(
                     maxInterpolationTime = 6, color = list("red", "green"), speed = 250,
-                    orientIcons = TRUE,
+                    orientIcons = FALSE,
                     playCommand = "Let's go", stopCommand = "Stop it!",
+                    transitionpopup = TRUE, transitionlabel = TRUE,
                     locale = list(locale="de-DE",
                                   options = list(weekday = 'long',year = 'numeric',
                                                  month = 'long',day = 'numeric',
                                                  timeZone = 'UTC',timeZoneName = 'short')),
                     radius = 3),
-                  popupOptions = popupOptions(
-                    maxWidth = 700, closeOnClick = TRUE, className = "playback",
-                    autoPan = TRUE, keepInView = TRUE, closeButton = TRUE
-                  ),
+                  popupOptions = popupOptions(maxWidth = 700, closeOnClick = TRUE),
                   labelOptions = labelOptions(
                     interactive = FALSE, clickable = NULL,
-                    noHide = F, permanent = F,
+                    noHide = TRUE, permanent = FALSE,
                     className = "", direction = "auto",
                     offset = c(0, 0), opacity = 1,
                     textsize = "10px", textOnly = FALSE,
@@ -103,7 +89,11 @@ server <- function(input, output, session) {
   })
   output$click <- renderPrint({
     req(input$map_pb_click)
-    input$map_pb_click
+    inp <- input$map_pb_click
+    # leafletProxy("map",session) %>%
+    #   clearGroup("popup") %>%
+    #   addPopups(lng = inp$lng, lat = inp$lat, popup = inp$content, group="popup")
+    print(inp)
   })
   output$mouseover <- renderPrint({
     req(input$map_pb_mouseover)
