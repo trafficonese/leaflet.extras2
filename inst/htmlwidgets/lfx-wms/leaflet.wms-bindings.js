@@ -12,14 +12,26 @@ LeafletWidget.methods.addWMS = function(baseUrl, layerId, group, options, popupO
             return;
         }
 
-        // TODO - Check if body is empty?
-        this._map.openPopup(info, latlng, popupOptions);
-
-        // Adaptation for R/Shiny
-        if (HTMLWidgets && HTMLWidgets.shinyMode) {
-          latlng.info = info;
-          Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
+        // Check if body is empty?
+        var openpopup = true;
+        if (options.checkempty) {
+          var psdinf = info.match(/<body[^>]*>((.|[\n\r])*)<\/body>/im);
+          if (psdinf && psdinf[1]) {
+            if (psdinf[1].trim() == "") {
+              openpopup = false
+            }
+          } else {
+            openpopup = false
+          }
         }
+        if (openpopup) {
+          this._map.openPopup(info, latlng, popupOptions);
+        }
+
+      if (HTMLWidgets && HTMLWidgets.shinyMode) {
+        latlng.info = info;
+        Shiny.setInputValue(this._map.id+"_wms_click", latlng, {priority: "event"});
+      }
     }
   });
 

@@ -12,7 +12,7 @@
   - The `tileLayer` option now accepts a group name for a tilelayer for which printing will wait until the layer is fully loaded.
 * The `addPlayback` is now capable of displaying labels and popups for every timestep. The transition of labels and popups can be controled with `transitionpopup` and `transitionlabel`.
 * The function `addHistory` now requires the *fontawesome* package, since the dependency is not included in shiny's shared directory anymore.
-
+* The function `addWMS` gained the argument `checkempty`, which will check the returning HTML-body tag. If the body is empty, no popup is opened.
 
 # leaflet.extras2 1.1.0
 
