@@ -15,11 +15,12 @@ ui <- fluidPage(
             ),
   # leafletOutput("map", height = 700, width = 1800),
   leafletOutput("map", height = 700, width = "100%"),
-  selectInput("scene", "Select Scene", choices = c("CurrentSize"="CurrentSize",
-                                                   "A4Landscape"="A4Landscape",
-                                                   "A4Portrait"="A4Portrait",
-                                                   "Custom Landscape"="customCssClass",
-                                                   "Custom Portrait"="customCssClass1")),
+  selectInput("scene", "Select Scene",
+              choices = c("CurrentSize"="CurrentSize",
+                          "A4Landscape"="A4Landscape",
+                          "A4Portrait"="A4Portrait",
+                          "Custom Landscape"="customCssClass",
+                          "Custom Portrait"="customCssClass1")),
   textInput("fn", "Filename", value = "map"),
   actionButton("print", "Print Map"),
   actionButton("rem", "removeEasyprint"),
@@ -31,8 +32,10 @@ server <- function(input, output, session) {
     input$print
     leaflet()  %>%
       addTiles(group = "basemap") %>%
-      addCircleMarkers(data=leaflet::breweries91, group = "markers", popup = ~brewery, label=~brewery) %>%
-      addPopups(data=leaflet::breweries91[1:5,], group = "popups", popup = ~brewery) %>%
+      addCircleMarkers(data=leaflet::breweries91,
+                       group = "markers", popup = ~brewery, label=~brewery) %>%
+      addPopups(data=leaflet::breweries91[1:5,],
+                group = "popups", popup = ~brewery) %>%
       addEasyprint(options = easyprintOptions(
         title = 'Give me that map',
         position = 'bottomleft',

@@ -45,15 +45,19 @@ server <- function(input, output, session) {
                         popup=~paste0(weight, " - ", brewery),
                         group = "hidemarkers_3",
                         labelOptions = labelOptions(permanent = TRUE)) %>%
-      addLabelgun(c("hidemarkers_1","hidemarkers_2","hidemarkers_3"), rep(df$weight, 3)) %>%
+      addLabelgun(c("hidemarkers_1","hidemarkers_2","hidemarkers_3"),
+                  rep(df$weight, 3)) %>%
       # addLabelgun("hidemarkers_1") %>%
       # addLabelgun(c("hidemarkers_1","hidemarkers_2"), rep(df$weight, 2)) %>%
       # addLabelgun("hidemarkers_1", rep(df$weight, 3)) %>%
       # addLabelgun("hidemarkers_2", rev(df$weight)) %>%
-      # addLabelgun("hidemarkers_1", entries = 50, weight = c(df$weight, rev(df$weight))) %>%
+      # addLabelgun("hidemarkers_1", entries = 50,
+      #             weight = c(df$weight, rev(df$weight))) %>%
       # addLabelgun(c("hidemarkers_1","hidemarkers_2"), df$weight) %>%
       # addLabelgun(c("hidemarkers_1","hidemarkers_2")) %>%
-      addLayersControl(overlayGroups = c("hidemarkers_1", "hidemarkers_2","hidemarkers_3"))
+      addLayersControl(overlayGroups = c("hidemarkers_1",
+                                         "hidemarkers_2",
+                                         "hidemarkers_3"))
   })
 }
 shinyApp(ui, server)

@@ -63,19 +63,20 @@ server <- function(input, output, session) {
                    contextmenuWidth = 200,
                    contextmenuItems =
                      context_markermenuItems(
-                       context_menuItem(text = "Show Marker Coords",
-                                "function(e) {
-                                              Shiny.setInputValue(map.id + '_mymarkertrigger', {
-                                                      menuid: e.relatedTarget.options.contextmenuItems[0].id,
-                                                      layerId: e.relatedTarget.options.layerId,
-                                                      lat: e.relatedTarget.options.lat,
-                                                      lng: e.relatedTarget.options.lng,
-                                                      opacity: e.relatedTarget.options.opacity
-                                                    });
-                                              alert(e.latlng);}",
-                                id = "somemarkerid",
-                                icon="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Person_icon_BLACK-01.svg/1200px-Person_icon_BLACK-01.svg.png",
-                                index=0)
+                       context_menuItem(
+                         text = "Show Marker Coords",
+                         "function(e) {
+                            Shiny.setInputValue(map.id + '_mymarkertrigger', {
+                                    menuid: e.relatedTarget.options.contextmenuItems[0].id,
+                                    layerId: e.relatedTarget.options.layerId,
+                                    lat: e.relatedTarget.options.lat,
+                                    lng: e.relatedTarget.options.lng,
+                                    opacity: e.relatedTarget.options.opacity
+                                  });
+                            alert(e.latlng);}",
+                         id = "somemarkerid",
+                         icon="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Person_icon_BLACK-01.svg/1200px-Person_icon_BLACK-01.svg.png",
+                         index=0)
                      )
                  )) %>%
       ## Lines ###############################

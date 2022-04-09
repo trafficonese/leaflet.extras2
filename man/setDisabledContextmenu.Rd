@@ -9,8 +9,8 @@ setDisabledContextmenu(map, index, disabled = TRUE)
 \arguments{
 \item{map}{a map widget object created from \code{\link[leaflet]{leaflet}}}
 
-\item{index}{Index of the contextmenu. (NOTE: Since the index is passed to JavaScript,
-it is zero-based)}
+\item{index}{Index of the contextmenu. (NOTE: Since the index is passed
+to JavaScript, it is zero-based)}
 
 \item{disabled}{Set to \code{TRUE} to disable the element and \code{FALSE}
 to enable it. Default is \code{TRUE}}

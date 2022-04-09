@@ -19,10 +19,13 @@ server <- function(input, output, session) {
                                 webGLContextOptions = list(
                                   preserveDrawingBuffer = TRUE,
                                   antialias = FALSE),
-                                postUpdate = htmlwidgets::JS("function(didRender) {
-                                                                console.log('postUpdate!');
-                                                                if (didRender) {console.log('new frame rendered!');}
-                                                             }")
+                                postUpdate = htmlwidgets::JS("
+                                function(didRender) {
+                                  console.log('postUpdate!');
+                                  if (didRender) {
+                                    console.log('New frame rendered!');
+                                  }
+                                }")
                                 )) %>%
       addCircleMarkers(data = breweries91, group = "brews") %>%
       setView(11, 49.4, 14) %>%

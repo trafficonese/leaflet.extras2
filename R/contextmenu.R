@@ -2,7 +2,8 @@ contextmenuDependency <- function() {
   list(
     htmltools::htmlDependency(
       "lfx-contextmenu", version = "1.0.0",
-      src = system.file("htmlwidgets/lfx-contextmenu", package = "leaflet.extras2"),
+      src = system.file("htmlwidgets/lfx-contextmenu",
+                        package = "leaflet.extras2"),
       script = c("leaflet.contextmenu.js",
                  "leaflet.contextmenu-bindings.js"),
       stylesheet = "leaflet.contextmenu.css"
@@ -26,21 +27,25 @@ contextmenuDependency <- function() {
 #' \subsection{Contextmenu initialization}{
 #' The contextmenu for
 #' \itemize{
-#'  \item {the \strong{map} must be defined in \code{\link[leaflet]{leafletOptions}}.}
-#'  \item {the \strong{markers/vector layers} must be defined in \code{\link[leaflet]{markerOptions}}
-#'         or \code{\link[leaflet]{pathOptions}}.}
+#'  \item {the \strong{map} must be defined in
+#'         \code{\link[leaflet]{leafletOptions}}.}
+#'  \item {the \strong{markers/vector layers} must be defined
+#'         in \code{\link[leaflet]{markerOptions}} or
+#'         \code{\link[leaflet]{pathOptions}}.}
 #' }
 #' }
 #'
 #' \subsection{Contextmenu selection}{
-#' When a contextmenu is selected, a Shiny input with the ID \code{"MAPID_contextmenu_select"}
-#' is set (`MAPID` refers to the map's id).
+#' When a contextmenu is selected, a Shiny input with the
+#' ID \code{"MAPID_contextmenu_select"} is set (`MAPID` refers to the map's id).
 #'
 #' If the selected contextmenu item is triggered from:
 #' \itemize{
-#'   \item {the \strong{map}, the returned list contains the \code{text} of the item.}
+#'   \item {the \strong{map}, the returned list contains the \code{text} of
+#'          the item.}
 #'   \item {the \strong{markers}, the returned list also contains the
-#'          \code{layerId}, \code{group}, \code{lat}, \code{lng} and \code{label}.}
+#'          \code{layerId}, \code{group}, \code{lat},
+#'          \code{lng} and \code{label}.}
 #'   \item {the \strong{vector layers}, the returned list also contains the
 #'          \code{layerId}, \code{group} and \code{label}.}
 #' }
@@ -83,8 +88,10 @@ addContextmenu <- function(map) {
 #' @inheritParams leaflet::addMarkers
 #' @return A leaflet map object
 #' @export
-showContextmenu <- function(map, lat=NULL, lng=NULL, data=leaflet::getMapData(map)) {
-  pts <- leaflet::derivePoints(data, lng, lat, missing(lng), missing(lat), "showContextmenu")
+showContextmenu <- function(map, lat = NULL, lng = NULL,
+                            data = leaflet::getMapData(map)) {
+  pts <- leaflet::derivePoints(data, lng, lat,
+                               missing(lng), missing(lat), "showContextmenu")
   leaflet::invokeMethod(map, NULL, "showContextmenu", pts)
 }
 
@@ -136,8 +143,8 @@ insertItemContextmenu <- function(map, option, index) {
 #' Remove a contextmenu item by index.
 #' @family Contextmenu Functions
 #' @inheritParams addContextmenu
-#' @param index Index of the contextmenu. (NOTE: Since the index is passed to JavaScript,
-#' it is zero-based)
+#' @param index Index of the contextmenu. (NOTE: Since the index is passed
+#'   to JavaScript, it is zero-based)
 #' @return A leaflet map object
 #' @export
 removeItemContextmenu <- function(map, index) {
@@ -174,16 +181,17 @@ removeallItemsContextmenu <- function(map) {
 #' @param text The label to use for the menu item
 #' @param callback A callback function to be invoked when the menu item is
 #' clicked. The callback is passed an object with properties identifying the
-#' location the menu was opened at: \code{latlng}, \code{layerPoint} and \code{containerPoint}.
-#' The callback-function must be valid JavaScript and will be wrapped in
-#' \code{\link[leaflet]{JS}}.
-#' @param ... For further options please visit \url{https://github.com/aratcliffe/Leaflet.contextmenu}
+#' location the menu was opened at: \code{latlng}, \code{layerPoint}
+#' and \code{containerPoint}. The callback-function must be valid JavaScript
+#' and will be wrapped in \code{\link[leaflet]{JS}}.
+#' @param ... For further options please visit
+#'   \url{https://github.com/aratcliffe/Leaflet.contextmenu}
 #' @family Contextmenu Functions
 #' @return A contextmenu item list
 #' @export
-context_menuItem <- function(text, callback=NULL, ...) {
-  list(text=text,
-       callback=leaflet::JS(callback),
+context_menuItem <- function(text, callback = NULL, ...) {
+  list(text = text,
+       callback = leaflet::JS(callback),
        ...)
 }
 
@@ -211,16 +219,17 @@ context_markermenuItems <- function(...) {
 #' @param text The label to use for the menu item
 #' @param callback A callback function to be invoked when the menu item is
 #' clicked. The callback is passed an object with properties identifying the
-#' location the menu was opened at: \code{latlng}, \code{layerPoint} and \code{containerPoint}.
-#' The callback-function must be valid JavaScript and will be wrapped in
-#' \code{\link[leaflet]{JS}}.
-#' @param ... For further options please visit \url{https://github.com/aratcliffe/Leaflet.contextmenu}
+#' location the menu was opened at: \code{latlng}, \code{layerPoint}
+#' and \code{containerPoint}. The callback-function must be valid JavaScript
+#' and will be wrapped in \code{\link[leaflet]{JS}}.
+#' @param ... For further options please visit
+#'   \url{https://github.com/aratcliffe/Leaflet.contextmenu}
 #' @family Contextmenu Functions
 #' @return A contextmenu item list
 #' @export
-menuItem <- function(text, callback=NULL, ...) {
+menuItem <- function(text, callback = NULL, ...) {
   .Deprecated("context_menuItem")
-  list(text=text,
+  list(text = text,
        callback=leaflet::JS(callback),
        ...)
 }

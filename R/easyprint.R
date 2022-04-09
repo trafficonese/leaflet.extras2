@@ -2,7 +2,8 @@ easyprintDependency <- function() {
   list(
     htmltools::htmlDependency(
       "lfx-easyprint", version = "1.0.0",
-      src = system.file("htmlwidgets/lfx-easyprint", package = "leaflet.extras2"),
+      src = system.file("htmlwidgets/lfx-easyprint",
+                        package = "leaflet.extras2"),
       script = c(
         "dom-to-image.js",
         "FileSaver.js",

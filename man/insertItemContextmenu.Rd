@@ -11,8 +11,8 @@ insertItemContextmenu(map, option, index)
 
 \item{option}{new menu item to add}
 
-\item{index}{Index of the contextmenu. (NOTE: Since the index is passed to JavaScript,
-it is zero-based)}
+\item{index}{Index of the contextmenu. (NOTE: Since the index is passed
+to JavaScript, it is zero-based)}
 }
 \value{
 A leaflet map object

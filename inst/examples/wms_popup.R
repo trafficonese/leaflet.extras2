@@ -13,7 +13,8 @@ server <- function(input, output, session) {
     leaflet() %>%
       addTiles(group = "base") %>%
       setView(9, 50, 5) %>%
-      addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms", layers = "dwd:BRD_1km_winddaten_10m",
+      addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
+             layers = "dwd:BRD_1km_winddaten_10m",
              popupOptions = popupOptions(maxWidth = 600),
              checkempty = TRUE,
              options = WMSTileOptions(

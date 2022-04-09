@@ -26,10 +26,12 @@ colnames(data) <- "geometry"
 st_geometry(data) <- "geometry"
 nrows <- length(rows)
 data$id <- rep(1:nrows, each = n)
-time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)/nrows))
+time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(),
+                              length.out = nrow(data)/nrows))
 data$time <- rep(time, nrows)
 data <- data[, c("id", "time","geometry")]
-data$popup1 <- paste("This is a <b>popup</b> for Track ID: <em>",data$id,"</em> and <em>time:", data$time,"</em>")
+data$popup1 <- paste("This is a <b>popup</b> for Track ID: <em>",
+                     data$id,"</em> and <em>time:", data$time,"</em>")
 data$label1 <- paste("Track ID: ",data$id,"<br>", data$time)
 data <- split(data, data$id)
 
@@ -60,23 +62,28 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet(options = list(closePopupOnClick = FALSE)) %>%
       addProviderTiles("CartoDB.Positron", group = "CartoDB") %>%
-      # addCircleMarkers(data=sf::st_as_sf(breweries), radius = 1, popup="I am a regular Popup") %>%
+      # addCircleMarkers(data=sf::st_as_sf(breweries), radius = 1,
+      #                  popup="I am a regular Popup") %>%
       leafem::addMouseCoordinates() %>%
       addPlayback(data = data, icon = iconship,
                   popup = ~popup1,
-                  # popup = ~sprintf("this popup is created with sprintf:<br> %s", popup1),
+                  # popup = ~sprintf("this popup is created with sprintf:<br> %s",popup1),
                   label = ~label1,
                   options = playbackOptions(
-                    maxInterpolationTime = 6, color = list("red", "green"), speed = 250,
-                    orientIcons = FALSE,
+                    maxInterpolationTime = 6, color = list("red", "green"),
+                    speed = 250, orientIcons = FALSE,
                     playCommand = "Let's go", stopCommand = "Stop it!",
                     transitionpopup = TRUE, transitionlabel = TRUE,
                     locale = list(locale="de-DE",
-                                  options = list(weekday = 'long',year = 'numeric',
-                                                 month = 'long',day = 'numeric',
-                                                 timeZone = 'UTC',timeZoneName = 'short')),
+                                  options = list(weekday = 'long',
+                                                 year = 'numeric',
+                                                 month = 'long',
+                                                 day = 'numeric',
+                                                 timeZone = 'UTC',
+                                                 timeZoneName = 'short')),
                     radius = 3),
-                  popupOptions = popupOptions(maxWidth = 700, closeOnClick = TRUE),
+                  popupOptions = popupOptions(maxWidth = 700,
+                                              closeOnClick = TRUE),
                   labelOptions = labelOptions(
                     interactive = FALSE, clickable = NULL,
                     noHide = TRUE, permanent = FALSE,
@@ -88,11 +95,7 @@ server <- function(input, output, session) {
                   pathOpts = pathOptions(weight = 5))
   })
   output$click <- renderPrint({
-    req(input$map_pb_click)
-    inp <- input$map_pb_click
-    # leafletProxy("map",session) %>%
-    #   clearGroup("popup") %>%
-    #   addPopups(lng = inp$lng, lat = inp$lat, popup = inp$content, group="popup")
+    inp <- req(input$map_pb_click)
     print(inp)
   })
   output$mouseover <- renderPrint({

@@ -22,21 +22,25 @@ bindings and to set up some Shiny event handlers.
 \subsection{Contextmenu initialization}{
 The contextmenu for
 \itemize{
- \item {the \strong{map} must be defined in \code{\link[leaflet]{leafletOptions}}.}
- \item {the \strong{markers/vector layers} must be defined in \code{\link[leaflet]{markerOptions}}
-        or \code{\link[leaflet]{pathOptions}}.}
+ \item {the \strong{map} must be defined in
+        \code{\link[leaflet]{leafletOptions}}.}
+ \item {the \strong{markers/vector layers} must be defined
+        in \code{\link[leaflet]{markerOptions}} or
+        \code{\link[leaflet]{pathOptions}}.}
 }
 }
 
 \subsection{Contextmenu selection}{
-When a contextmenu is selected, a Shiny input with the ID \code{"MAPID_contextmenu_select"}
-is set (`MAPID` refers to the map's id).
+When a contextmenu is selected, a Shiny input with the
+ID \code{"MAPID_contextmenu_select"} is set (`MAPID` refers to the map's id).
 
 If the selected contextmenu item is triggered from:
 \itemize{
-  \item {the \strong{map}, the returned list contains the \code{text} of the item.}
+  \item {the \strong{map}, the returned list contains the \code{text} of
+         the item.}
   \item {the \strong{markers}, the returned list also contains the
-         \code{layerId}, \code{group}, \code{lat}, \code{lng} and \code{label}.}
+         \code{layerId}, \code{group}, \code{lat},
+         \code{lng} and \code{label}.}
   \item {the \strong{vector layers}, the returned list also contains the
          \code{layerId}, \code{group} and \code{label}.}
 }

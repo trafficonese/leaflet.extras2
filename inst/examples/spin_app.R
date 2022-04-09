@@ -2,8 +2,6 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-# From https://stackoverflow.com/questions/61532955/cant-get-leaflet-spin-plugin-working-in-r-shiny/
-
 dlat <- 1 / 111000 * 100 # degrees per metre
 
 ui <- fluidRow(
@@ -23,7 +21,8 @@ server <- function(input, output, session) {
   observeEvent(input$plotbutton, {
     n <- ceiling(runif(1) * 10000)
     leafletProxy("map") %>%
-      startSpinner(list("lines" = 7, "length" = 40, "width" = 20, "radius" = 10)) %>%
+      startSpinner(list("lines" = 7, "length" = 40,
+                        "width" = 20, "radius" = 10)) %>%
       clearShapes() %>%
       addCircles(
         lng = 175.322 + (runif(n) * 2 - 1) * dlat * 6,

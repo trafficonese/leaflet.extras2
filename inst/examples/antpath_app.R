@@ -30,7 +30,8 @@ server <- function(input, output, session) {
                  popup = ~FGN,
                  opacity = 1,
                  options = antpathOptions(
-                   pulseColor = colorNumeric("Reds", domain = as.numeric(coords$FKN))(as.numeric(coords$FKN)),
+                   pulseColor = colorNumeric("Reds",
+                     domain = as.numeric(coords$FKN))(as.numeric(coords$FKN)),
                    delay = c(rep(300, 50), rep(3000, 50)),
                    paused = FALSE,
                    reverse = TRUE,

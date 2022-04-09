@@ -40,7 +40,8 @@ ui <- fluidPage(
           title = "profile", id = "profile_id", icon = icon("wrench"),
           tagList(
             textInput("caption", "Caption", "Data Summary"),
-            selectInput("label", "Label", choices = c("brewery", "address", "zipcode", "village")),
+            selectInput("label", "Label",
+                        choices = c("brewery","address", "zipcode", "village")),
             passwordInput("password", "Password:"),
             actionButton("go", "Go"),
             verbatimTextOutput("value")

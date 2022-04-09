@@ -11,11 +11,12 @@ menuItem(text, callback = NULL, ...)
 
 \item{callback}{A callback function to be invoked when the menu item is
 clicked. The callback is passed an object with properties identifying the
-location the menu was opened at: \code{latlng}, \code{layerPoint} and \code{containerPoint}.
-The callback-function must be valid JavaScript and will be wrapped in
-\code{\link[leaflet]{JS}}.}
+location the menu was opened at: \code{latlng}, \code{layerPoint}
+and \code{containerPoint}. The callback-function must be valid JavaScript
+and will be wrapped in \code{\link[leaflet]{JS}}.}
 
-\item{...}{For further options please visit \url{https://github.com/aratcliffe/Leaflet.contextmenu}}
+\item{...}{For further options please visit
+\url{https://github.com/aratcliffe/Leaflet.contextmenu}}
 }
 \value{
 A contextmenu item list
