@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add a Heightgraph layer</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addHeightgraph {leaflet.extras2}"><tr><td>addHeightgraph {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add a Heightgraph layer</h2>
+
+<h3>Description</h3>
+
+<p>Visualize height information and road attributes of linestring segments.
+The linestrings must be a Simple Feature LINESTRING Z and are transformed to
+GeoJSON. The function therefore inherits arguments from
+<code><a href="../../leaflet/html/addGeoJSON.html">addGeoJSON</a></code>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addHeightgraph(
+  map,
+  data = NULL,
+  columns = NULL,
+  layerId = NULL,
+  group = NULL,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  dashArray = NULL,
+  smoothFactor = 1,
+  noClip = FALSE,
+  pathOpts = leaflet::pathOptions(),
+  options = heightgraphOptions()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/html/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>A Simple Feature LINESTRING with Z dimension.</p>
+</td></tr>
+<tr valign="top"><td><code>columns</code></td>
+<td>
+<p>A character vector of the columns you want to include in the
+heightgraph control</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/html/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/html/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>stroke color</p>
+</td></tr>
+<tr valign="top"><td><code>weight</code></td>
+<td>
+<p>stroke width in pixels</p>
+</td></tr>
+<tr valign="top"><td><code>opacity</code></td>
+<td>
+<p>stroke opacity (or layer opacity for tile layers)</p>
+</td></tr>
+<tr valign="top"><td><code>dashArray</code></td>
+<td>
+<p>a string that defines the stroke
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray">dash
+pattern</a></p>
+</td></tr>
+<tr valign="top"><td><code>smoothFactor</code></td>
+<td>
+<p>how much to simplify the polyline on each zoom level
+(more means better performance and less accurate representation)</p>
+</td></tr>
+<tr valign="top"><td><code>noClip</code></td>
+<td>
+<p>whether to disable polyline clipping</p>
+</td></tr>
+<tr valign="top"><td><code>pathOpts</code></td>
+<td>
+<p>List of further options for the path. See
+<code><a href="../../leaflet/html/pathOptions.html">pathOptions</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>List of further plugin options. See
+<code><a href="heightgraphOptions.html">heightgraphOptions</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>Note</h3>
+
+<p>When used in Shiny, 3 events update a certain Shiny Input:
+</p>
+
+<ol>
+<li><p> A click updates <code>input$MAPID_heightgraph_click</code>
+</p>
+</li>
+<li><p> A mouseover updates <code>input$MAPID_heightgraph_mouseover</code>
+</p>
+</li>
+<li><p> A mouseout updates <code>input$MAPID_heightgraph_mouseout</code>
+</p>
+</li></ol>
+
+<p>If you want to explicitly remove the Heightgraph control, please use
+<code><a href="../../leaflet/html/removeControl.html">removeControl</a></code> with the <code>layerId = "hg_control"</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/GIScience/Leaflet.Heightgraph">https://github.com/GIScience/Leaflet.Heightgraph</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Heightgraph Functions: 
+<code><a href="heightgraphOptions.html">heightgraphOptions</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(leaflet)
+library(leaflet.extras2)
+library(sf)
+
+data &lt;- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
+data &lt;- st_transform(data, 4326)
+data &lt;- data.frame(st_coordinates(data))
+data$elev &lt;-  runif(nrow(data), 10, 500)
+data$L1 &lt;- NULL
+L1 &lt;- round(seq.int(1, 4, length.out = nrow(data)))
+data &lt;- st_as_sf(st_sfc(lapply(split(data, L1), sfg_linestring)))
+data &lt;- st_as_sf(st_sfc(lapply(split(data, L1), function(x) {
+    st_linestring(as.matrix(x))
+})))
+data$steepness &lt;- 1:nrow(data)
+data$suitability &lt;- nrow(data):1
+data$popup &lt;- apply(data, 1, function(x) {
+ sprintf("Steepness: %s&lt;br&gt;Suitability: %s", x$steepness, x$suitability)
+})
+
+leaflet() %&gt;%
+  addTiles(group = "base") %&gt;%
+  addHeightgraph(color = "red", columns = c("steepness", "suitability"),
+                 opacity = 1, data = data, group = "heightgraph",
+                 options = heightgraphOptions(width = 400))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

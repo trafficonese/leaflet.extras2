@@ -1,0 +1,2436 @@
+pkgname <- "rgee"
+source(file.path(R.home("share"), "R", "examples-header.R"))
+options(warn = 1)
+options(pager = "console")
+library('rgee')
+
+base::assign(".oldSearch", base::search(), pos = 'CheckExEnv')
+base::assign(".old_wd", base::getwd(), pos = 'CheckExEnv')
+cleanEx()
+nameEx("Map")
+### * Map
+
+flush(stderr()); flush(stdout())
+
+### Name: Map
+### Title: R6 object (Map) to display Earth Engine (EE) spatial objects
+### Aliases: Map
+### Keywords: datasets
+
+### ** Examples
+
+## Not run: 
+##D library(rgeeExtra)
+##D library(rgee)
+##D library(sf)
+##D 
+##D ee_Initialize()
+##D 
+##D # Case 1: Geometry*
+##D geom1 <- ee$Geometry$Point(list(-73.53, -15.75))
+##D Map$centerObject(geom1, zoom = 8)
+##D m1 <- Map$addLayer(
+##D   eeObject = geom1,
+##D   visParams = list(
+##D     pointRadius = 10,
+##D     color = "FF0000"
+##D   ),
+##D   name = "Geometry-Arequipa"
+##D )
+##D 
+##D # Case 2: Feature
+##D feature_arq <- ee$Feature(ee$Geometry$Point(list(-72.53, -15.75)))
+##D m2 <- Map$addLayer(
+##D   eeObject = feature_arq,
+##D   name = "Feature-Arequipa"
+##D )
+##D m2 + m1
+##D 
+##D # Case 4: Image
+##D image <- ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318")
+##D Map$centerObject(image)
+##D m4 <- Map$addLayer(
+##D   eeObject = image,
+##D   visParams = list(
+##D     bands = c("B4", "B3", "B2"),
+##D     max = 10000
+##D   ),
+##D   name = "SF"
+##D )
+##D 
+##D # Case 5: ImageCollection
+##D nc <- st_read(system.file("shape/nc.shp", package = "sf")) %>%
+##D   st_transform(4326) %>%
+##D   sf_as_ee()
+##D 
+##D ee_s2 <- ee$ImageCollection("COPERNICUS/S2")$
+##D   filterDate("2016-01-01", "2016-01-31")$
+##D   filterBounds(nc) %>%
+##D   ee_get(0:4)
+##D Map$centerObject(nc$geometry())
+##D m5 <- Map$addLayers(ee_s2)
+##D m5
+##D 
+##D # Case 6: Map comparison
+##D image <- ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318")
+##D Map$centerObject(image)
+##D m_ndvi <- Map$addLayer(
+##D   eeObject = image$normalizedDifference(list("B5", "B4")),
+##D   visParams = list(min = 0, max = 0.7),
+##D   name = "SF_NDVI"
+##D ) + Map$addLegend(list(min = 0, max = 0.7), name = "NDVI", position = "bottomright", bins = 4)
+##D m6 <- m4 | m_ndvi
+##D m6
+##D 
+##D # Case 7: digging up the metadata
+##D m6$rgee$tokens
+##D m5$rgee$tokens
+##D 
+##D # Case 8: COG support
+##D # See parameters here: https://api.cogeo.xyz/docs
+##D 
+##D server <- "https://storage.googleapis.com/pdd-stac/disasters/"
+##D file <- "hurricane-harvey/0831/20170831_172754_101c_3B_AnalyticMS.tif"
+##D resource <- paste0(server, file)
+##D visParams <- list(bands = c("B3", "B2", "B1"), min = 3000, max = 13500, nodata = 0)
+##D Map$centerObject(resource)
+##D Map$addLayer(resource, visParams = visParams, shown = TRUE)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("R6Map")
+### * R6Map
+
+flush(stderr()); flush(stdout())
+
+### Name: R6Map
+### Title: R6 class to display Earth Engine (EE) spatial objects
+### Aliases: R6Map
+
+### ** Examples
+
+
+## ------------------------------------------------
+## Method `R6Map$reset`
+## ------------------------------------------------
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D # Load an Image
+##D image <- ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318")
+##D 
+##D # Create
+##D Map <- R6Map$new()
+##D Map$centerObject(image)
+##D 
+##D # Simple display: Map just will
+##D Map$addLayer(
+##D   eeObject = image,
+##D   visParams = list(min=0, max = 10000, bands = c("B4", "B3", "B2")),
+##D   name = "l8_01"
+##D )
+##D Map # display map
+##D 
+##D Map$reset() # Reset arguments
+##D Map
+## End(Not run)
+
+## ------------------------------------------------
+## Method `R6Map$setCenter`
+## ------------------------------------------------
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D 
+##D Map <- R6Map$new()
+##D Map$setCenter(lon = -76, lat = 0, zoom = 5)
+##D Map
+##D 
+##D # Map$lat
+##D # Map$lon
+##D # Map$zoom
+## End(Not run)
+
+## ------------------------------------------------
+## Method `R6Map$setZoom`
+## ------------------------------------------------
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D 
+##D Map <- R6Map$new()
+##D Map$setZoom(zoom = 4)
+##D Map
+##D 
+##D # Map$lat
+##D # Map$lon
+##D # Map$zoom
+## End(Not run)
+
+## ------------------------------------------------
+## Method `R6Map$centerObject`
+## ------------------------------------------------
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D 
+##D Map <- R6Map$new()
+##D image <- ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318")
+##D Map$centerObject(image)
+##D Map
+## End(Not run)
+
+## ------------------------------------------------
+## Method `R6Map$addLayer`
+## ------------------------------------------------
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D # Load an Image
+##D image <- ee$Image("LANDSAT/LC08/C01/T1/LC08_044034_20140318")
+##D 
+##D # Create
+##D Map <- R6Map$new()
+##D Map$centerObject(image)
+##D 
+##D # Simple display: Map just will
+##D Map$addLayer(
+##D   eeObject = image,
+##D   visParams = list(min=0, max = 10000, bands = c("B4", "B3", "B2")),
+##D   name = "l8_01"
+##D )
+##D 
+##D Map$addLayer(
+##D   eeObject = image,
+##D   visParams = list(min=0, max = 20000, bands = c("B4", "B3", "B2")),
+##D   name = "l8_02"
+##D )
+##D 
+##D # Simple display: Map just will (if the position is not specified it will
+##D # be saved on the right side)
+##D Map$reset() # Reset Map to the initial arguments.
+##D Map$centerObject(image)
+##D Map$addLayer(
+##D   eeObject = image,
+##D   visParams = list(min=0, max=10000, bands = c("B4", "B3", "B2")),
+##D   name = "l8_left",
+##D   position = "left"
+##D )
+##D 
+##D Map$addLayer(
+##D   eeObject = image,
+##D   visParams = list(min=0, max=20000, bands = c("B4", "B3", "B2")),
+##D   name = "l8_right"
+##D )
+##D 
+##D Map$reset()
+## End(Not run)
+
+## ------------------------------------------------
+## Method `R6Map$addLayers`
+## ------------------------------------------------
+
+## Not run: 
+##D library(sf)
+##D library(rgee)
+##D library(rgeeExtra)
+##D 
+##D ee_Initialize()
+##D 
+##D Map <- R6Map$new()
+##D 
+##D nc <- st_read(system.file("shape/nc.shp", package = "sf")) %>%
+##D   st_transform(4326) %>%
+##D   sf_as_ee()
+##D 
+##D ee_s2 <- ee$ImageCollection("COPERNICUS/S2")$
+##D   filterDate("2016-01-01", "2016-01-31")$
+##D   filterBounds(nc) %>%
+##D   ee_get(0:2)
+##D 
+##D Map$centerObject(nc$geometry())
+##D Map$addLayers(eeObject = ee_s2,position = "right")
+##D 
+##D # digging up the metadata
+##D Map$previous_map_right$rgee$tokens
+##D 
+##D Map$reset()
+## End(Not run)
+
+## ------------------------------------------------
+## Method `R6Map$addLegend`
+## ------------------------------------------------
+
+## Not run: 
+##D library(leaflet)
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D Map$reset()
+##D 
+##D # Load MODIS ImageCollection
+##D imgcol <- ee$ImageCollection$Dataset$MODIS_006_MOD13Q1
+##D 
+##D # Parameters for visualization
+##D labels <- c("good", "marginal", "snow", "cloud")
+##D cols   <- c("#999999", "#00BFC4", "#F8766D", "#C77CFF")
+##D vis_qc <- list(min = 0, max = 3, palette = cols, bands = "SummaryQA", values = labels)
+##D 
+##D # Create interactive map
+##D m_qc <- Map$addLayer(imgcol$median(), vis_qc, "QC")
+##D 
+##D # continous palette
+##D Map$addLegend(vis_qc)
+##D 
+##D # categorical palette
+##D Map$addLegend(vis_qc, name = "Legend1", color_mapping = "discrete")
+##D 
+##D # character palette
+##D Map$addLegend(vis_qc, name = "Legend2", color_mapping = "character")
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee")
+### * ee
+
+flush(stderr()); flush(stdout())
+
+### Name: ee
+### Title: Main Earth Engine module
+### Aliases: ee
+### Keywords: datasets
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D 
+##D ee_img <- ee$Image(0)
+##D ee_ic <- ee$ImageCollection(ee_img)
+##D 
+##D print(ee_img$getInfo())
+##D print(ee_ic$getInfo())
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_Initialize")
+### * ee_Initialize
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_Initialize
+### Title: Authenticate and Initialize Earth Engine
+### Aliases: ee_Initialize
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D # Simple init - Load just the Earth Engine credential
+##D ee_Initialize()
+##D ee_user_info()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_as_raster")
+### * ee_as_raster
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_as_raster
+### Title: Convert an Earth Engine (EE) image in a raster object
+### Aliases: ee_as_raster
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize(drive = TRUE, gcs = TRUE)
+##D ee_user_info()
+##D 
+##D # Define an image.
+##D img <- ee$Image("LANDSAT/LC08/C01/T1_SR/LC08_038029_20180810")$
+##D   select(c("B4", "B3", "B2"))$
+##D   divide(10000)
+##D 
+##D # OPTIONAL display it using Map
+##D Map$centerObject(eeObject = img)
+##D Map$addLayer(eeObject = img, visParams = list(max = 0.4,gamma=0.1))
+##D 
+##D # Define an area of interest.
+##D geometry <- ee$Geometry$Rectangle(
+##D   coords = c(-110.8, 44.6, -110.6, 44.7),
+##D   proj = "EPSG:4326",
+##D   geodesic = FALSE
+##D )
+##D 
+##D ## drive - Method 01
+##D # Simple
+##D img_02 <- ee_as_raster(
+##D   image = img,
+##D   region = geometry,
+##D   via = "drive"
+##D )
+##D 
+##D # Lazy
+##D img_02 <- ee_as_raster(
+##D   image = img,
+##D   region = geometry,
+##D   via = "drive",
+##D   lazy = TRUE
+##D )
+##D 
+##D img_02_result <- img_02 %>% ee_utils_future_value()
+##D img_02_result@history$metadata # metadata
+##D 
+##D ## gcs - Method 02
+##D # Simple
+##D img_03 <- ee_as_raster(
+##D  image = img,
+##D  region = geometry,
+##D  container = "rgee_dev",
+##D  via = "gcs"
+##D )
+##D 
+##D # Lazy
+##D img_03 <- ee_as_raster(
+##D  image = img,
+##D  region = geometry,
+##D  container = "rgee_dev",
+##D  lazy = TRUE,
+##D  via = "gcs"
+##D )
+##D 
+##D img_03_result <- img_03 %>% ee_utils_future_value()
+##D img_03_result@history$metadata # metadata
+##D 
+##D # OPTIONAL: clean containers
+##D # ee_clean_container(name = "rgee_backup", type = "drive")
+##D # ee_clean_container(name = "rgee_dev", type = "gcs")
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_as_sf")
+### * ee_as_sf
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_as_sf
+### Title: Convert an Earth Engine table into a sf object
+### Aliases: ee_as_sf
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize(drive = TRUE, gcs = TRUE)
+##D 
+##D # Region of interest
+##D roi <- ee$Geometry$Polygon(list(
+##D   c(-122.275, 37.891),
+##D   c(-122.275, 37.868),
+##D   c(-122.240, 37.868),
+##D   c(-122.240, 37.891)
+##D ))
+##D 
+##D # TIGER: US Census Blocks Dataset
+##D blocks <- ee$FeatureCollection("TIGER/2010/Blocks")
+##D subset <- blocks$filterBounds(roi)
+##D sf_subset <- ee_as_sf(x = subset)
+##D plot(sf_subset)
+##D 
+##D # Create Random points in Earth Engine
+##D region <- ee$Geometry$Rectangle(-119.224, 34.669, -99.536, 50.064)
+##D ee_help(ee$FeatureCollection$randomPoints)
+##D ee_randomPoints <- ee$FeatureCollection$randomPoints(region, 100)
+##D 
+##D # Download via GetInfo
+##D sf_randomPoints <- ee_as_sf(ee_randomPoints)
+##D plot(sf_randomPoints)
+##D 
+##D # Download via drive
+##D sf_randomPoints_drive <- ee_as_sf(
+##D   x = ee_randomPoints,
+##D   via = 'drive'
+##D )
+##D 
+##D # Download via GCS
+##D sf_randomPoints_gcs <- ee_as_sf(
+##D  x = subset,
+##D  via = 'gcs',
+##D  container = 'rgee_dev' #GCS bucket name
+##D )
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_as_stars")
+### * ee_as_stars
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_as_stars
+### Title: Convert an Earth Engine (EE) image in a stars object
+### Aliases: ee_as_stars
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize(drive = TRUE, gcs = TRUE)
+##D ee_user_info()
+##D 
+##D # Define an image.
+##D img <- ee$Image("LANDSAT/LC08/C01/T1_SR/LC08_038029_20180810")$
+##D   select(c("B4", "B3", "B2"))$
+##D   divide(10000)
+##D 
+##D # OPTIONAL display it using Map
+##D Map$centerObject(eeObject = img)
+##D Map$addLayer(eeObject = img, visParams = list(max = 0.4,gamma=0.1))
+##D 
+##D # Define an area of interest.
+##D geometry <- ee$Geometry$Rectangle(
+##D   coords = c(-110.8, 44.6, -110.6, 44.7),
+##D   proj = "EPSG:4326",
+##D   geodesic = FALSE
+##D )
+##D 
+##D ## drive - Method 01
+##D # Simple
+##D img_02 <- ee_as_stars(
+##D   image = img,
+##D   region = geometry,
+##D   via = "drive"
+##D )
+##D 
+##D # Lazy
+##D img_02 <- ee_as_stars(
+##D   image = img,
+##D   region = geometry,
+##D   via = "drive",
+##D   lazy = TRUE
+##D )
+##D 
+##D img_02_result <- img_02 %>% ee_utils_future_value()
+##D attr(img_02_result, "metadata") # metadata
+##D 
+##D ## gcs - Method 02
+##D # Simple
+##D img_03 <- ee_as_stars(
+##D   image = img,
+##D   region = geometry,
+##D   container = "rgee_dev",
+##D   via = "gcs"
+##D )
+##D 
+##D # Lazy
+##D img_03 <- ee_as_stars(
+##D   image = img,
+##D   region = geometry,
+##D   container = "rgee_dev",
+##D   lazy = TRUE,
+##D   via = "gcs"
+##D )
+##D 
+##D img_03_result <- img_03 %>% ee_utils_future_value()
+##D attr(img_03_result, "metadata") # metadata
+##D 
+##D # OPTIONAL: clean containers
+##D # ee_clean_container(name = "rgee_backup", type = "drive")
+##D # ee_clean_container(name = "rgee_dev", type = "gcs")
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_as_thumbnail")
+### * ee_as_thumbnail
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_as_thumbnail
+### Title: Create an R spatial gridded object from an EE thumbnail image
+### Aliases: ee_as_thumbnail
+
+### ** Examples
+
+## Not run: 
+##D library(raster)
+##D library(stars)
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D 
+##D nc <- st_read(system.file("shp/arequipa.shp", package = "rgee"))
+##D dem_palette <- c(
+##D   "#008435", "#1CAC17", "#48D00C", "#B3E34B", "#F4E467",
+##D   "#F4C84E", "#D59F3C", "#A36D2D", "#C6A889", "#FFFFFF"
+##D )
+##D 
+##D ## DEM data -SRTM v4.0
+##D image <- ee$Image("CGIAR/SRTM90_V4")
+##D world_region <- ee$Geometry$Rectangle(
+##D   coords = c(-180,-60,180,60),
+##D   proj = "EPSG:4326",
+##D   geodesic = FALSE
+##D )
+##D 
+##D ## world - elevation
+##D world_dem <- ee_as_thumbnail(
+##D   image = image,
+##D   region = world_region,
+##D   dimensions = 1024,
+##D   vizparams = list(min = 0, max = 5000)
+##D )
+##D 
+##D world_dem[world_dem <= 0] <- NA
+##D world_dem <- world_dem * 5000
+##D 
+##D plot(
+##D   x = world_dem, col = dem_palette, breaks = "equal",
+##D   reset = FALSE, main = "SRTM - World"
+##D )
+##D 
+##D ## Arequipa-Peru
+##D arequipa_region <- nc %>%
+##D   st_bbox() %>%
+##D   st_as_sfc() %>%
+##D   sf_as_ee()
+##D 
+##D arequipa_dem <- ee_as_thumbnail(
+##D   image = image,
+##D   region = arequipa_region$buffer(1000)$bounds(),
+##D   dimensions = 512,
+##D   vizparams = list(min = 0, max = 5000)
+##D )
+##D 
+##D arequipa_dem <- arequipa_dem * 5000
+##D st_crs(arequipa_dem) <- 4326
+##D plot(
+##D   x = arequipa_dem[nc], col = dem_palette, breaks = "equal",
+##D   reset = FALSE, main = "SRTM - Arequipa"
+##D )
+##D 
+##D suppressWarnings(plot(
+##D   x = nc, col = NA, border = "black", add = TRUE,
+##D   lwd = 1.5
+##D ))
+##D dev.off()
+##D 
+##D ## LANDSAT 8
+##D img <- ee$Image("LANDSAT/LC08/C01/T1_SR/LC08_038029_20180810")$
+##D   select(c("B4", "B3", "B2"))
+##D Map$centerObject(img)
+##D Map$addLayer(img, list(min = 0, max = 5000, gamma = 1.5))
+##D 
+##D ## Teton Wilderness
+##D l8_img <- ee_as_thumbnail(
+##D   image = img,
+##D   region = img$geometry()$bounds(),
+##D   dimensions = 1024,
+##D   vizparams = list(min = 0, max = 5000, gamma = 1.5),
+##D   raster = TRUE
+##D )
+##D crs(l8_img) <- "+proj=longlat +datum=WGS84 +no_defs"
+##D plotRGB(l8_img, stretch = "lin")
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_check-tools")
+### * ee_check-tools
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_check-tools
+### Title: Interface to check Python and non-R dependencies
+### Aliases: ee_check-tools ee_check ee_check_python
+###   ee_check_python_packages ee_check_credentials
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_check_python()
+##D ee_check_python_packages()
+##D ee_check_credentials()
+##D ee_check() # put them all together
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_drive_to_local")
+### * ee_drive_to_local
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_drive_to_local
+### Title: Move results from Google Drive to a local directory
+### Aliases: ee_drive_to_local
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize(drive = TRUE)
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D 
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D 
+##D # Get the mean annual NDVI for 2011
+##D cloudMaskL457 <- function(image) {
+##D   qa <- image$select("pixel_qa")
+##D   cloud <- qa$bitwiseAnd(32L)$
+##D     And(qa$bitwiseAnd(128L))$
+##D     Or(qa$bitwiseAnd(8L))
+##D   mask2 <- image$mask()$reduce(ee$Reducer$min())
+##D   image <- image$updateMask(cloud$Not())$updateMask(mask2)
+##D   image$normalizedDifference(list("B4", "B3"))
+##D }
+##D 
+##D ic_l5 <- ee$ImageCollection("LANDSAT/LT05/C01/T1_SR")$
+##D   filterBounds(ee$FeatureCollection(ee_ROI))$
+##D   filterDate("2011-01-01", "2011-12-31")$
+##D   map(cloudMaskL457)
+##D 
+##D # Create simple composite
+##D mean_l5 <- ic_l5$mean()$rename("NDVI")
+##D mean_l5 <- mean_l5$reproject(crs = "EPSG:4326", scale = 500)
+##D mean_l5_Amarakaeri <- mean_l5$clip(ee_ROI)
+##D 
+##D # Move results from Earth Engine to Drive
+##D task_img <- ee_image_to_drive(
+##D   image = mean_l5_Amarakaeri,
+##D   folder = "Amarakaeri",
+##D   fileFormat = "GEO_TIFF",
+##D   region = ee_ROI,
+##D   fileNamePrefix = "my_image_demo"
+##D )
+##D 
+##D task_img$start()
+##D ee_monitoring(task_img)
+##D 
+##D # Move results from Drive to local
+##D img <- ee_drive_to_local(task = task_img)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_extract")
+### * ee_extract
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_extract
+### Title: Extract values from EE Images or ImageCollections objects
+### Aliases: ee_extract
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(sf)
+##D 
+##D ee_Initialize(gcs = TRUE, drive = TRUE)
+##D 
+##D # Define a Image or ImageCollection: Terraclimate
+##D terraclimate <- ee$ImageCollection("IDAHO_EPSCOR/TERRACLIMATE") %>%
+##D  ee$ImageCollection$filterDate("2001-01-01", "2002-01-01") %>%
+##D ee$ImageCollection$map(
+##D    function(x) {
+##D      date <- ee$Date(x$get("system:time_start"))$format('YYYY_MM_dd')
+##D      name <- ee$String$cat("Terraclimate_pp_", date)
+##D      x$select("pr")$rename(name)
+##D    }
+##D  )
+##D 
+##D # Define a geometry
+##D nc <- st_read(
+##D  dsn = system.file("shape/nc.shp", package = "sf"),
+##D  stringsAsFactors = FALSE,
+##D  quiet = TRUE
+##D )
+##D 
+##D 
+##D #Extract values - getInfo
+##D ee_nc_rain <- ee_extract(
+##D  x = terraclimate,
+##D  y = nc["NAME"],
+##D  scale = 250,
+##D  fun = ee$Reducer$mean(),
+##D  sf = TRUE
+##D )
+##D 
+##D # Extract values - drive (lazy = TRUE)
+##D ee_nc_rain <- ee_extract(
+##D  x = terraclimate,
+##D  y = nc["NAME"],
+##D  scale = 250,
+##D  fun = ee$Reducer$mean(),
+##D  via = "drive",
+##D  lazy = TRUE,
+##D  sf = TRUE
+##D )
+##D ee_nc_rain <- ee_nc_rain %>% ee_utils_future_value()
+##D 
+##D # Extract values - gcs (lazy = FALSE)
+##D ee_nc_rain <- ee_extract(
+##D  x = terraclimate,
+##D  y = nc["NAME"],
+##D  scale = 250,
+##D  fun = ee$Reducer$mean(),
+##D  via = "gcs",
+##D  container = "rgee_dev",
+##D  sf = TRUE
+##D )
+##D 
+##D # Spatial plot
+##D plot(
+##D  ee_nc_rain["X200101_Terraclimate_pp_2001_01_01"],
+##D  main = "2001 Jan Precipitation - Terraclimate",
+##D  reset = FALSE
+##D )
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_gcs_to_local")
+### * ee_gcs_to_local
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_gcs_to_local
+### Title: Move results from Google Cloud Storage to a local directory
+### Aliases: ee_gcs_to_local
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D 
+##D # Get the mean annual NDVI for 2011
+##D cloudMaskL457 <- function(image) {
+##D   qa <- image$select("pixel_qa")
+##D   cloud <- qa$bitwiseAnd(32L)$
+##D     And(qa$bitwiseAnd(128L))$
+##D     Or(qa$bitwiseAnd(8L))
+##D   mask2 <- image$mask()$reduce(ee$Reducer$min())
+##D   image <- image$updateMask(cloud$Not())$updateMask(mask2)
+##D   image$normalizedDifference(list("B4", "B3"))
+##D }
+##D 
+##D ic_l5 <- ee$ImageCollection("LANDSAT/LT05/C01/T1_SR")$
+##D   filterBounds(ee$FeatureCollection(ee_ROI))$
+##D   filterDate("2011-01-01", "2011-12-31")$
+##D   map(cloudMaskL457)
+##D 
+##D # Create simple composite
+##D mean_l5 <- ic_l5$mean()$rename("NDVI")
+##D mean_l5 <- mean_l5$reproject(crs = "EPSG:4326", scale = 500)
+##D mean_l5_Amarakaeri <- mean_l5$clip(ee_ROI)
+##D 
+##D # Move results from Earth Engine to Drive
+##D task_img <- ee_image_to_gcs(
+##D    image = mean_l5_Amarakaeri,
+##D    bucket = "rgee_dev",
+##D    fileFormat = "GEO_TIFF",
+##D    region = ee_ROI,
+##D    fileNamePrefix = "my_image_demo"
+##D )
+##D 
+##D task_img$start()
+##D ee_monitoring(task_img)
+##D 
+##D # Move results from Drive to local
+##D img <- ee_gcs_to_local(task = task_img)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_get_assethome")
+### * ee_get_assethome
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_get_assethome
+### Title: Get the Asset home name
+### Aliases: ee_get_assethome
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D ee_get_assethome()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_get_date_ic")
+### * ee_get_date_ic
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_get_date_ic
+### Title: Get the date of a EE ImageCollection
+### Aliases: ee_get_date_ic
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(sf)
+##D ee_Initialize()
+##D 
+##D nc <- st_read(system.file("shape/nc.shp", package = "sf")) %>%
+##D   st_transform(4326) %>%
+##D   sf_as_ee()
+##D 
+##D ee_s2 <- ee$ImageCollection("COPERNICUS/S2")$
+##D   filterDate("2016-01-01", "2016-01-31")$
+##D   filterBounds(nc)
+##D 
+##D ee_get_date_ic(ee_s2)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_get_date_img")
+### * ee_get_date_img
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_get_date_img
+### Title: Get the date of a EE Image
+### Aliases: ee_get_date_img
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D l8 <- ee$Image('LANDSAT/LC08/C01/T1_TOA/LC08_044034_20140318')
+##D ee_get_date_img(l8)
+##D srtm <- ee$Image('CGIAR/SRTM90_V4')
+##D ee_get_date_img(srtm, time_end = TRUE)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_help")
+### * ee_help
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_help
+### Title: Documentation for Earth Engine Objects
+### Aliases: ee_help
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D ee$Image()$geometry()$centroid %>% ee_help()
+##D ee$Image()$geometry() %>% ee_help()
+##D ee$Geometry$Rectangle(c(-110.8, 44.6, -110.6, 44.7)) %>% ee_help()
+##D ee$Image %>% ee_help()
+##D ee$Image %>% ee_help(browser = TRUE)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_image_info")
+### * ee_image_info
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_image_info
+### Title: Approximate size of an EE Image object
+### Aliases: ee_image_info
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D # World SRTM
+##D srtm <- ee$Image("CGIAR/SRTM90_V4")
+##D ee_image_info(srtm)
+##D 
+##D # Landast8
+##D l8 <- ee$Image("LANDSAT/LC08/C01/T1_SR/LC08_038029_20180810")$select("B4")
+##D ee_image_info(l8)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_image_to_asset")
+### * ee_image_to_asset
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_image_to_asset
+### Title: Creates a task to export an EE Image to their EE Assets.
+### Aliases: ee_image_to_asset
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize()
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D 
+##D # Get the mean annual NDVI for 2011
+##D cloudMaskL457 <- function(image) {
+##D   qa <- image$select("pixel_qa")
+##D   cloud <- qa$bitwiseAnd(32L)$
+##D     And(qa$bitwiseAnd(128L))$
+##D     Or(qa$bitwiseAnd(8L))
+##D   mask2 <- image$mask()$reduce(ee$Reducer$min())
+##D   image <- image$updateMask(cloud$Not())$updateMask(mask2)
+##D   image$normalizedDifference(list("B4", "B3"))
+##D }
+##D 
+##D ic_l5 <- ee$ImageCollection("LANDSAT/LT05/C01/T1_SR")$
+##D   filterBounds(ee$FeatureCollection(ee_ROI))$
+##D   filterDate("2011-01-01", "2011-12-31")$
+##D   map(cloudMaskL457)
+##D 
+##D # Create simple composite
+##D mean_l5 <- ic_l5$mean()$rename("NDVI")
+##D mean_l5 <- mean_l5$reproject(crs = "EPSG:4326", scale = 500)
+##D mean_l5_Amarakaeri <- mean_l5$clip(ee_ROI)
+##D 
+##D # Move results from Earth Engine to Drive
+##D assetid <- paste0(ee_get_assethome(), '/l5_Amarakaeri')
+##D task_img <- ee_image_to_asset(
+##D   image = mean_l5_Amarakaeri,
+##D   assetId = assetid,
+##D   overwrite = TRUE,
+##D   scale = 500,
+##D   region = ee_ROI
+##D )
+##D 
+##D task_img$start()
+##D ee_monitoring(task_img)
+##D 
+##D ee_l5 <- ee$Image(assetid)
+##D Map$centerObject(ee_l5)
+##D Map$addLayer(ee_l5)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_image_to_drive")
+### * ee_image_to_drive
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_image_to_drive
+### Title: Creates a task to export an EE Image to Drive.
+### Aliases: ee_image_to_drive
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize(drive = TRUE)
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D 
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D 
+##D # Get the mean annual NDVI for 2011
+##D cloudMaskL457 <- function(image) {
+##D   qa <- image$select("pixel_qa")
+##D   cloud <- qa$bitwiseAnd(32L)$
+##D     And(qa$bitwiseAnd(128L))$
+##D     Or(qa$bitwiseAnd(8L))
+##D   mask2 <- image$mask()$reduce(ee$Reducer$min())
+##D   image <- image$updateMask(cloud$Not())$updateMask(mask2)
+##D   image$normalizedDifference(list("B4", "B3"))
+##D }
+##D 
+##D ic_l5 <- ee$ImageCollection("LANDSAT/LT05/C01/T1_SR")$
+##D   filterBounds(ee$FeatureCollection(ee_ROI))$
+##D   filterDate("2011-01-01", "2011-12-31")$
+##D   map(cloudMaskL457)
+##D 
+##D # Create simple composite
+##D mean_l5 <- ic_l5$mean()$rename("NDVI")
+##D mean_l5 <- mean_l5$reproject(crs = "EPSG:4326", scale = 500)
+##D mean_l5_Amarakaeri <- mean_l5$clip(ee_ROI)
+##D 
+##D # Move results from Earth Engine to Drive
+##D task_img <- ee_image_to_drive(
+##D   image = mean_l5_Amarakaeri,
+##D   fileFormat = "GEO_TIFF",
+##D   region = ee_ROI,
+##D   fileNamePrefix = "my_image_demo"
+##D )
+##D 
+##D task_img$start()
+##D ee_monitoring(task_img)
+##D 
+##D # Move results from Drive to local
+##D ee_drive_to_local(task = task_img)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_image_to_gcs")
+### * ee_image_to_gcs
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_image_to_gcs
+### Title: Creates a task to export an EE Image to Google Cloud Storage.
+### Aliases: ee_image_to_gcs
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D 
+##D # Get the mean annual NDVI for 2011
+##D cloudMaskL457 <- function(image) {
+##D   qa <- image$select("pixel_qa")
+##D   cloud <- qa$bitwiseAnd(32L)$
+##D     And(qa$bitwiseAnd(128L))$
+##D     Or(qa$bitwiseAnd(8L))
+##D   mask2 <- image$mask()$reduce(ee$Reducer$min())
+##D   image <- image$updateMask(cloud$Not())$updateMask(mask2)
+##D   image$normalizedDifference(list("B4", "B3"))
+##D }
+##D 
+##D ic_l5 <- ee$ImageCollection("LANDSAT/LT05/C01/T1_SR")$
+##D   filterBounds(ee$FeatureCollection(ee_ROI))$
+##D   filterDate("2011-01-01", "2011-12-31")$
+##D   map(cloudMaskL457)
+##D 
+##D # Create simple composite
+##D mean_l5 <- ic_l5$mean()$rename("NDVI")
+##D mean_l5 <- mean_l5$reproject(crs = "EPSG:4326", scale = 500)
+##D mean_l5_Amarakaeri <- mean_l5$clip(ee_ROI)
+##D 
+##D # Move results from Earth Engine to GCS
+##D task_img <- ee_image_to_gcs(
+##D  image = mean_l5_Amarakaeri,
+##D  bucket = "rgee_dev",
+##D  fileFormat = "GEO_TIFF",
+##D  region = ee_ROI,
+##D  fileNamePrefix = "my_image_demo"
+##D )
+##D 
+##D task_img$start()
+##D ee_monitoring(task_img)
+##D 
+##D # Move results from GCS to local
+##D ee_gcs_to_local(task = task_img)
+##D 
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_imagecollection_to_local")
+### * ee_imagecollection_to_local
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_imagecollection_to_local
+### Title: Save an EE ImageCollection in their local system
+### Aliases: ee_imagecollection_to_local
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(raster)
+##D ee_Initialize(drive = TRUE, gcs = TRUE)
+##D 
+##D # USDA example
+##D loc <- ee$Geometry$Point(-99.2222, 46.7816)
+##D collection <- ee$ImageCollection('USDA/NAIP/DOQQ')$
+##D   filterBounds(loc)$
+##D   filterDate('2008-01-01', '2020-01-01')$
+##D   filter(ee$Filter$listContains("system:band_names", "N"))
+##D 
+##D # From ImageCollection to local directory
+##D ee_crs <- collection$first()$projection()$getInfo()$crs
+##D geometry <- collection$first()$geometry(proj = ee_crs)$bounds()
+##D tmp <- tempdir()
+##D 
+##D ## Using drive
+##D # one by once
+##D ic_drive_files_1 <- ee_imagecollection_to_local(
+##D   ic = collection,
+##D   region = geometry,
+##D   scale = 250,
+##D   dsn = file.path(tmp, "drive_")
+##D )
+##D 
+##D # all at once
+##D ic_drive_files_2 <- ee_imagecollection_to_local(
+##D   ic = collection,
+##D   region = geometry,
+##D   scale = 250,
+##D   lazy = TRUE,
+##D   dsn = file.path(tmp, "drive_")
+##D )
+##D 
+##D # From Google Drive to client-side
+##D doqq_dsn <- ic_drive_files_2 %>% ee_utils_future_value()
+##D sapply(doqq_dsn, '[[', 1)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_install")
+### * ee_install
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_install
+### Title: Create an isolated Python virtual environment with all rgee
+###   dependencies.
+### Aliases: ee_install
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D # ee_install()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_install_set_pyenv")
+### * ee_install_set_pyenv
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_install_set_pyenv
+### Title: Specify a Python environment for rgee
+### Aliases: ee_install_set_pyenv
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ## IMPORTANT: Change 'py_path' argument according to your own Python PATH
+##D ## For Anaconda users - Windows OS
+##D ## OBS: Anaconda Python PATH can vary, run “where anaconda” in console.
+##D # win_py_path = paste0(
+##D #    "C:/Users/UNICORN/AppData/Local/Programs/Python/",
+##D #    "Python37/python.exe"
+##D # )
+##D # ee_install_set_pyenv(
+##D #   py_path = win_py_path,
+##D #   py_env = "rgee" # Change it for your own Python ENV
+##D # )
+##D 
+##D ## For Anaconda users - MacOS users
+##D # ee_install_set_pyenv(
+##D #   py_path = "/Users/UNICORN/opt/anaconda3/bin/python",
+##D #   py_env = "rgee" # Change it for your own Python ENV
+##D # )
+##D #
+##D ## For Miniconda users - Windows OS
+##D # win_py_path = paste0(
+##D #   "C:/Users/UNICORN/AppData/Local/r-miniconda/envs/rgee/",
+##D #   "python.exe"
+##D # )
+##D # ee_install_set_pyenv(
+##D #   py_path = win_py_path,
+##D #   py_env = "rgee" # Change it for your own Python ENV
+##D # )
+##D 
+##D ## For Miniconda users - Linux/MacOS users
+##D # unix_py_path = paste0(
+##D #   "/home/UNICORN/.local/share/r-miniconda/envs/",
+##D #   "rgee/bin/python3"
+##D # )
+##D # ee_install_set_pyenv(
+##D #   py_path = unix_py_path,
+##D #   py_env = "rgee" # Change it for your own Python ENV
+##D # )
+##D 
+##D ## For virtualenv users - Linux/MacOS users
+##D # ee_install_set_pyenv(
+##D #   py_path = "/home/UNICORN/.virtualenvs/rgee/bin/python",
+##D #   py_env = "rgee" # Change it for your own Python ENV
+##D # )
+##D 
+##D ## For Python root user - Linux/MacOS users
+##D # ee_install_set_pyenv(
+##D #   py_path = "/usr/bin/python3",
+##D #   py_env = NULL,
+##D #   Renviron = "global" # Save ENV variables in the global .Renv file
+##D # )
+##D 
+##D # ee_install_set_pyenv(
+##D #   py_path = "/usr/bin/python3",
+##D #   py_env = NULL,
+##D #   Renviron = "local" # Save ENV variables in a local .Renv file
+##D # )
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_install_upgrade")
+### * ee_install_upgrade
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_install_upgrade
+### Title: Upgrade the Earth Engine Python API
+### Aliases: ee_install_upgrade
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D # ee_install_upgrade()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_manage-tools")
+### * ee_manage-tools
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_manage-tools
+### Title: Interface to manage the Earth Engine Asset
+### Aliases: ee_manage-tools ee_manage_create ee_manage_delete
+###   ee_manage_assetlist ee_manage_quota ee_manage_copy ee_manage_move
+###   ee_manage_set_properties ee_manage_delete_properties
+###   ee_manage_asset_access ee_manage_task
+###   ee_manage_cancel_all_running_task ee_manage_asset_size
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D ee_user_info()
+##D 
+##D # Change datacolecfbf by your EE user to be able to reproduce
+##D user <- ee_get_assethome()
+##D addm <- function(x) sprintf("%s/%s",user, x)
+##D # 1. Create a folder or Image Collection
+##D # Change path asset according to your specific user
+##D ee_manage_create(addm("rgee"))
+##D 
+##D # 1. List all the elements inside a folder or a ImageCollection
+##D ee_manage_assetlist(path_asset = addm("rgee"))
+##D 
+##D # 2. Create a Folder or a ImageCollection
+##D ee_manage_create(
+##D   path_asset = addm("rgee/rgee_folder"),
+##D   asset_type = "Folder"
+##D )
+##D 
+##D ee_manage_create(
+##D   path_asset = addm("rgee/rgee_ic"),
+##D   asset_type = "ImageCollection"
+##D )
+##D 
+##D ee_manage_assetlist(path_asset = addm("rgee"))
+##D 
+##D # 3. Shows Earth Engine quota
+##D ee_manage_quota()
+##D 
+##D # 4. Move an EE object to another folder
+##D ee_manage_move(
+##D   path_asset = addm("rgee/rgee_ic"),
+##D   final_path = addm("rgee/rgee_folder/rgee_ic_moved")
+##D )
+##D 
+##D ee_manage_assetlist(path_asset = addm("rgee/rgee_folder"))
+##D 
+##D # 5. Set properties to an EE object.
+##D ee_manage_set_properties(
+##D   path_asset = addm("rgee/rgee_folder/rgee_ic_moved"),
+##D   add_properties = list(message = "hello-world", language = "R")
+##D )
+##D 
+##D ic_id <- addm("rgee/rgee_folder/rgee_ic_moved")
+##D test_ic <- ee$ImageCollection(ic_id)
+##D test_ic$getInfo()
+##D 
+##D # 6. Delete properties
+##D ee_manage_delete_properties(
+##D   path_asset = addm("rgee/rgee_folder/rgee_ic_moved"),
+##D   del_properties = c("message", "language")
+##D )
+##D test_ic$getInfo()
+##D 
+##D # 7. Create a report based on all the tasks
+##D # that are running or have already been completed.
+##D ee_manage_task()
+##D 
+##D # 8. Cancel all the running task
+##D ee_manage_cancel_all_running_task()
+##D 
+##D # 9. Delete EE objects or folders
+##D ee_manage_delete(addm("rgee/"))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_monitoring")
+### * ee_monitoring
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_monitoring
+### Title: Monitoring Earth Engine task progress
+### Aliases: ee_monitoring ee_check_task_status
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D ee_monitoring(eeTaskList = TRUE)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_print")
+### * ee_print
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_print
+### Title: Print and return metadata about Spatial Earth Engine Objects
+### Aliases: ee_print ee_print.ee.geometry.Geometry
+###   ee_print.ee.feature.Feature
+###   ee_print.ee.featurecollection.FeatureCollection
+###   ee_print.ee.image.Image ee_print.ee.imagecollection.ImageCollection
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D # Geometry
+##D geom <- ee$Geometry$Rectangle(-10,-10,10,10)
+##D Map$addLayer(geom)
+##D ee_print(geom)
+##D 
+##D # Feature
+##D feature <- ee$Feature(geom, list(rgee = "ee_print", data = TRUE))
+##D ee_print(feature)
+##D 
+##D # FeatureCollection
+##D featurecollection <- ee$FeatureCollection(feature)
+##D ee_print(featurecollection)
+##D 
+##D # Image
+##D srtm <- ee$Image("CGIAR/SRTM90_V4")
+##D ee_print(srtm)
+##D 
+##D srtm_clip <- ee$Image("CGIAR/SRTM90_V4")$clip(geom)
+##D srtm_metadata <- ee_print(srtm_clip)
+##D srtm_metadata$img_bands_names
+##D 
+##D # ImageCollection
+##D object <- ee$ImageCollection("LANDSAT/LC08/C01/T1_TOA")$
+##D   filter(ee$Filter()$eq("WRS_PATH", 44))$
+##D   filter(ee$Filter()$eq("WRS_ROW", 34))$
+##D   filterDate("2014-03-01", "2014-08-01")$
+##D   aside(ee_print)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_table_to_asset")
+### * ee_table_to_asset
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_table_to_asset
+### Title: Creates a task to export a FeatureCollection to an EE table
+###   asset.
+### Aliases: ee_table_to_asset
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize()
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D amk_fc <- ee$FeatureCollection(
+##D   list(ee$Feature(ee_ROI, list(name = "Amarakaeri")))
+##D )
+##D 
+##D assetid <- paste0(ee_get_assethome(), '/geom_Amarakaeri')
+##D task_vector <- ee_table_to_asset(
+##D   collection = amk_fc,
+##D   overwrite = TRUE,
+##D   assetId = assetid
+##D )
+##D task_vector$start()
+##D ee_monitoring(task_vector) # optional
+##D 
+##D ee_fc <- ee$FeatureCollection(assetid)
+##D Map$centerObject(ee_fc)
+##D Map$addLayer(ee_fc)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_table_to_drive")
+### * ee_table_to_drive
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_table_to_drive
+### Title: Creates a task to export a FeatureCollection to Google Drive.
+### Aliases: ee_table_to_drive
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize(drive = TRUE)
+##D 
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D amk_fc <- ee$FeatureCollection(
+##D   list(ee$Feature(ee_ROI, list(name = "Amarakaeri")))
+##D )
+##D 
+##D task_vector <- ee_table_to_drive(
+##D   collection = amk_fc,
+##D   fileFormat = "GEO_JSON",
+##D   fileNamePrefix = "geom_Amarakaeri"
+##D )
+##D task_vector$start()
+##D ee_monitoring(task_vector) # optional
+##D ee_drive_to_local(task = task_vector)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_table_to_gcs")
+### * ee_table_to_gcs
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_table_to_gcs
+### Title: Creates a task to export a FeatureCollection to Google Cloud
+###   Storage.
+### Aliases: ee_table_to_gcs
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D library(sf)
+##D 
+##D ee_users()
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Define study area (local -> earth engine)
+##D # Communal Reserve Amarakaeri - Peru
+##D rlist <- list(xmin = -71.13, xmax = -70.95,ymin = -12.89, ymax = -12.73)
+##D ROI <- c(rlist$xmin, rlist$ymin,
+##D          rlist$xmax, rlist$ymin,
+##D          rlist$xmax, rlist$ymax,
+##D          rlist$xmin, rlist$ymax,
+##D          rlist$xmin, rlist$ymin)
+##D ee_ROI <- matrix(ROI, ncol = 2, byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon() %>%
+##D   st_sfc() %>%
+##D   st_set_crs(4326) %>%
+##D   sf_as_ee()
+##D 
+##D amk_fc <- ee$FeatureCollection(
+##D   list(ee$Feature(ee_ROI, list(name = "Amarakaeri")))
+##D )
+##D 
+##D task_vector <- ee_table_to_gcs(
+##D   collection = amk_fc,
+##D   bucket = "rgee_dev",
+##D   fileFormat = "SHP",
+##D   fileNamePrefix = "geom_Amarakaeri"
+##D )
+##D task_vector$start()
+##D ee_monitoring(task_vector) # optional
+##D amk_geom <- ee_gcs_to_local(task = task_vector)
+##D plot(sf::read_sf(amk_geom[3]), border = "red", lwd = 10)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_user_info")
+### * ee_user_info
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_user_info
+### Title: Display the credentials and general info of the initialized user
+### Aliases: ee_user_info
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D ee_user_info()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_users")
+### * ee_users
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_users
+### Title: Display the credentials of all users as a table
+### Aliases: ee_users
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_users()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_cog_metadata")
+### * ee_utils_cog_metadata
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_cog_metadata
+### Title: Return metadata of a COG tile server
+### Aliases: ee_utils_cog_metadata
+
+### ** Examples
+
+## Not run: 
+##D  library(rgee)
+##D 
+##D server <- "https://s3-us-west-2.amazonaws.com/planet-disaster-data/hurricane-harvey/"
+##D file <- "SkySat_Freeport_s03_20170831T162740Z3.tif"
+##D resource <- paste0(server, file)
+##D visParams <- list(nodata = 0, expression = "B3, B2, B1", rescale = "3000, 13500")
+##D ee_utils_cog_metadata(resource, visParams)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_create_json")
+### * ee_utils_create_json
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_create_json
+### Title: Convert an R list into a JSON file in the temp() file
+### Aliases: ee_utils_create_json
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_utils_create_json(list(a=10,b=10))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_create_manifest_image")
+### * ee_utils_create_manifest_image
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_create_manifest_image
+### Title: Create a manifest to upload an image
+### Aliases: ee_utils_create_manifest_image
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D tif <- system.file("tif/L7_ETMs.tif", package = "stars")
+##D 
+##D # Return a JSON file
+##D ee_utils_create_manifest_image(
+##D   gs_uri = "gs://rgee_dev/l8.tif",
+##D   assetId = "users/datacolecfbf/l8"
+##D )
+##D 
+##D # Return a list
+##D ee_utils_create_manifest_image(
+##D   gs_uri = "gs://rgee_dev/l8.tif",
+##D   assetId = "users/datacolecfbf/l8",
+##D   returnList = TRUE
+##D )
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_create_manifest_table")
+### * ee_utils_create_manifest_table
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_create_manifest_table
+### Title: Create a manifest to upload a table
+### Aliases: ee_utils_create_manifest_table
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(sf)
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D x <- st_read(system.file("shape/nc.shp", package = "sf"))
+##D shp_dir <- sprintf("%s.shp", tempfile())
+##D geozip_dir <- ee_utils_shp_to_zip(x, shp_dir)
+##D 
+##D # Return a JSON file
+##D manifest <- ee_utils_create_manifest_table(
+##D   gs_uri = "gs://rgee_dev/nc.zip",
+##D   assetId = "users/datacolecfbf/nc"
+##D )
+##D 
+##D # Return a list
+##D ee_utils_create_manifest_table(
+##D   gs_uri = "gs://rgee_dev/nc.zip",
+##D   assetId = "users/datacolecfbf/nc",
+##D   returnList = TRUE
+##D )
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_dataset_display")
+### * ee_utils_dataset_display
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_dataset_display
+### Title: Search into the Earth Engine Data Catalog
+### Aliases: ee_utils_dataset_display
+
+### ** Examples
+
+## Not run: 
+##D  library(rgee)
+##D 
+##D  ee_datasets <- c("WWF/HydroSHEDS/15DIR", "WWF/HydroSHEDS/03DIR")
+##D  ee_utils_dataset_display(ee_datasets)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_get_crs")
+### * ee_utils_get_crs
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_get_crs
+### Title: Convert EPSG, ESRI or SR-ORG code into a OGC WKT
+### Aliases: ee_utils_get_crs
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_utils_get_crs("SR-ORG:6864")
+##D ee_utils_get_crs("EPSG:4326")
+##D ee_utils_get_crs("ESRI:37002")
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_pyfunc")
+### * ee_utils_pyfunc
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_pyfunc
+### Title: Wrap an R function in a Python function with the same signature.
+### Aliases: ee_utils_pyfunc
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D # Earth Engine List
+##D ee_SimpleList <- ee$List$sequence(0, 12)
+##D ee_NewList <- ee_SimpleList$map(
+##D   ee_utils_pyfunc(
+##D     function(x) {
+##D       ee$Number(x)$add(x)
+##D     }
+##D   )
+##D )
+##D 
+##D ee_NewList$getInfo()
+##D 
+##D # Earth Engine ImageCollection
+##D constant1 <- ee$Image(1)
+##D constant2 <- ee$Image(2)
+##D ee_ic <- ee$ImageCollection(c(constant2, constant1))
+##D ee_newic <- ee_ic$map(
+##D   ee_utils_pyfunc(
+##D     function(x) ee$Image(x)$add(x)
+##D   )
+##D )
+##D ee_newic$mean()$getInfo()$type
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_sak_copy")
+### * ee_utils_sak_copy
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_sak_copy
+### Title: Stores a Service account key (SaK) inside the EE folder
+### Aliases: ee_utils_sak_copy
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize()
+##D 
+##D # sakfile <- "/home/rgee_dev/sak_file.json"
+##D ## Copy sakfile to the users 'csaybar' and 'ndef'
+##D # ee_utils_sak_copy(sakfile = sakfile, users = c("csaybar", "ndef"))
+##D 
+##D # # Copy the sakfile of the user1 to the user2 and user3.
+##D # ee_utils_sak_copy(users = c("csaybar", "ndef", "ryali93"))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_sak_validate")
+### * ee_utils_sak_validate
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_sak_validate
+### Title: Validate a Service account key (SaK)
+### Aliases: ee_utils_sak_validate
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D 
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Check a specific SaK
+##D sakfile <- "/home/rgee_dev/sak_file.json"
+##D ee_utils_sak_validate(sakfile, bucket = "rgee_dev")
+##D 
+##D # Check the SaK for the current user
+##D ee_utils_sak_validate()
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("ee_utils_shp_to_zip")
+### * ee_utils_shp_to_zip
+
+flush(stderr()); flush(stdout())
+
+### Name: ee_utils_shp_to_zip
+### Title: Create a zip file from an sf object
+### Aliases: ee_utils_shp_to_zip
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(sf)
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Create sf object
+##D nc <- st_read(system.file("shape/nc.shp", package="sf"))
+##D zipfile <- ee_utils_shp_to_zip(nc)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("eedate_to_rdate")
+### * eedate_to_rdate
+
+flush(stderr()); flush(stdout())
+
+### Name: eedate_to_rdate
+### Title: Pass an Earth Engine date object to R
+### Aliases: eedate_to_rdate
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D 
+##D eeDate <- ee$Date$fromYMD(2010,1,1)
+##D eedate_to_rdate(eeDate,timestamp = TRUE) # good
+##D eeDate$getInfo()$value # bad
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("gcs_to_ee_image")
+### * gcs_to_ee_image
+
+flush(stderr()); flush(stdout())
+
+### Name: gcs_to_ee_image
+### Title: Move a GeoTIFF image from GCS to their EE assets
+### Aliases: gcs_to_ee_image
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D ee_Initialize("csaybar", gcs = TRUE)
+##D 
+##D # 1. Read GeoTIFF file and create a output filename
+##D tif <- system.file("tif/L7_ETMs.tif", package = "stars")
+##D x <- read_stars(tif)
+##D assetId <- sprintf("%s/%s",ee_get_assethome(),'stars_l7')
+##D 
+##D # 2. From local to gcs
+##D gs_uri <- local_to_gcs(
+##D   x = tif,
+##D   bucket = 'rgee_dev' # Insert your own bucket here!
+##D )
+##D 
+##D # 3. Create an Image Manifest
+##D manifest <- ee_utils_create_manifest_image(gs_uri, assetId)
+##D 
+##D # 4. From GCS to Earth Engine
+##D gcs_to_ee_image(
+##D   manifest = manifest,
+##D   overwrite = TRUE
+##D )
+##D 
+##D # OPTIONAL: Monitoring progress
+##D ee_monitoring()
+##D 
+##D # OPTIONAL: Display results
+##D ee_stars_01 <- ee$Image(assetId)
+##D ee_stars_01$bandNames()$getInfo()
+##D 
+##D Map$centerObject(ee_stars_01)
+##D Map$addLayer(ee_stars_01, list(min = 0, max = 255, bands = c("b3", "b2", "b1")))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("gcs_to_ee_table")
+### * gcs_to_ee_table
+
+flush(stderr()); flush(stdout())
+
+### Name: gcs_to_ee_table
+### Title: Move a zipped shapefile from GCS to their EE Assets
+### Aliases: gcs_to_ee_table
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(sf)
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # 1. Read dataset and create a output filename
+##D x <- st_read(system.file("shape/nc.shp", package = "sf"))
+##D assetId <- sprintf("%s/%s", ee_get_assethome(), 'toy_poly_gcs')
+##D 
+##D # 2. From sf to .shp
+##D shp_dir <- sprintf("%s.shp", tempfile())
+##D geozip_dir <- ee_utils_shp_to_zip(x, shp_dir)
+##D 
+##D # 3. From local to gcs
+##D gcs_filename <- local_to_gcs(
+##D  x = geozip_dir,
+##D  bucket = "rgee_dev" # Insert your own bucket here!
+##D )
+##D 
+##D # 4. Create Table Manifest
+##D manifest <- ee_utils_create_manifest_table(
+##D  gs_uri = gcs_filename,
+##D  assetId = assetId
+##D )
+##D 
+##D # 5. From GCS to Earth Engine
+##D ee_nc <- gcs_to_ee_table(manifest, overwrite = TRUE)
+##D ee_monitoring()
+##D Map$addLayer(ee$FeatureCollection(ee_nc))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("local_to_gcs")
+### * local_to_gcs
+
+flush(stderr()); flush(stdout())
+
+### Name: local_to_gcs
+### Title: Upload local files to Google Cloud Storage
+### Aliases: local_to_gcs
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D 
+##D # Initialize a specific Earth Engine account and
+##D # Google Cloud Storage credentials
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # # Define an image.
+##D tif <- system.file("tif/L7_ETMs.tif", package = "stars")
+##D local_to_gcs(x = tif, bucket = 'rgee_dev')
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("raster_as_ee")
+### * raster_as_ee
+
+flush(stderr()); flush(stdout())
+
+### Name: raster_as_ee
+### Title: Convert a Raster* object into an EE Image object
+### Aliases: raster_as_ee
+
+### ** Examples
+
+## Not run: 
+##D library(raster)
+##D library(stars)
+##D library(rgee)
+##D 
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Get the filename of a image
+##D tif <- system.file("tif/L7_ETMs.tif", package = "stars")
+##D x <- stack(tif)
+##D assetId <- sprintf("%s/%s",ee_get_assethome(),'raster_l7')
+##D 
+##D # Method 1
+##D # 1. Move from local to gcs
+##D gs_uri <- local_to_gcs(x = tif, bucket = 'rgee_dev')
+##D 
+##D # 2. Create a manifest
+##D manifest <- ee_utils_create_manifest_image(gs_uri, assetId)
+##D 
+##D # 3. Pass from gcs to asset
+##D gcs_to_ee_image(
+##D  manifest = manifest,
+##D  overwrite = TRUE
+##D )
+##D 
+##D # OPTIONAL: Monitoring progress
+##D ee_monitoring(max_attempts = Inf)
+##D 
+##D # OPTIONAL: Display results
+##D ee_stars_01 <- ee$Image(assetId)
+##D Map$centerObject(ee_stars_01)
+##D Map$addLayer(ee_stars_01, list(min = 0, max = 255))
+##D 
+##D # Method 2
+##D ee_stars_02 <- raster_as_ee(
+##D  x = x,
+##D  overwrite = TRUE,
+##D  assetId = assetId,
+##D  bucket = "rgee_dev"
+##D )
+##D Map$centerObject(ee_stars_02)
+##D Map$addLayer(ee_stars_02, list(min = 0, max = 255))
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("rdate_to_eedate")
+### * rdate_to_eedate
+
+flush(stderr()); flush(stdout())
+
+### Name: rdate_to_eedate
+### Title: Pass an R date object to Earth Engine
+### Aliases: rdate_to_eedate
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D ee_Initialize()
+##D rdate_to_eedate('2000-01-01')
+##D rdate_to_eedate(315532800000) # float number
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("sf_as_ee")
+### * sf_as_ee
+
+flush(stderr()); flush(stdout())
+
+### Name: sf_as_ee
+### Title: Convert an sf object to an EE object
+### Aliases: sf_as_ee
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(sf)
+##D ee_Initialize()
+##D 
+##D # 1. Handling geometry parameters
+##D # Simple
+##D ee_x <- st_read(system.file("shape/nc.shp", package = "sf")) %>%
+##D   sf_as_ee()
+##D 
+##D Map$centerObject(eeObject = ee_x)
+##D Map$addLayer(ee_x)
+##D 
+##D # Create a right-inside polygon.
+##D toy_poly <- matrix(data = c(-35,-10,-35,10,35,10,35,-10,-35,-10),
+##D                    ncol = 2,
+##D                    byrow = TRUE) %>%
+##D   list() %>%
+##D   st_polygon()
+##D 
+##D holePoly <- sf_as_ee(x = toy_poly, evenOdd = FALSE)
+##D 
+##D # Create an even-odd version of the polygon.
+##D evenOddPoly <- sf_as_ee(toy_poly, evenOdd = TRUE)
+##D 
+##D # Create a point to test the insideness of the polygon.
+##D pt <- ee$Geometry$Point(c(1.5, 1.5))
+##D 
+##D # Check insideness with a contains operator.
+##D print(holePoly$contains(pt)$getInfo() %>% ee_utils_py_to_r())
+##D print(evenOddPoly$contains(pt)$getInfo() %>% ee_utils_py_to_r())
+##D 
+##D # 2. Upload small geometries to EE asset
+##D assetId <- sprintf("%s/%s", ee_get_assethome(), 'toy_poly')
+##D eex <- sf_as_ee(
+##D  x = toy_poly,
+##D  overwrite = TRUE,
+##D  assetId = assetId,
+##D  via = "getInfo_to_asset")
+##D # 3. Upload large geometries to EE asset
+##D ee_Initialize(gcs = TRUE)
+##D assetId <- sprintf("%s/%s", ee_get_assethome(), 'toy_poly_gcs')
+##D eex <- sf_as_ee(
+##D   x = toy_poly,
+##D   overwrite = TRUE,
+##D   assetId = assetId,
+##D   bucket = 'rgee_dev',
+##D   monitoring = FALSE,
+##D   via = 'gcs_to_asset'
+##D )
+##D ee_monitoring(max_attempts = Inf)
+## End(Not run)
+
+
+
+cleanEx()
+nameEx("stars_as_ee")
+### * stars_as_ee
+
+flush(stderr()); flush(stdout())
+
+### Name: stars_as_ee
+### Title: Convert a stars or stars-proxy object into an EE Image object
+### Aliases: stars_as_ee
+
+### ** Examples
+
+## Not run: 
+##D library(rgee)
+##D library(stars)
+##D ee_Initialize(gcs = TRUE)
+##D 
+##D # Get the filename of a image
+##D tif <- system.file("tif/L7_ETMs.tif", package = "stars")
+##D x <- read_stars(tif)
+##D assetId <- sprintf("%s/%s",ee_get_assethome(),'stars_l7')
+##D 
+##D # # Method 1
+##D # 1. Move from local to gcs
+##D gs_uri <- local_to_gcs(x = tif, bucket = 'rgee_dev')
+##D 
+##D # 2. Create a manifest
+##D manifest <- ee_utils_create_manifest_image(gs_uri, assetId)
+##D 
+##D # 3. Pass from gcs to asset
+##D gcs_to_ee_image(
+##D   manifest = manifest,
+##D   overwrite = TRUE
+##D )
+##D 
+##D # OPTIONAL: Monitoring progress
+##D ee_monitoring(max_attempts = Inf)
+##D 
+##D # OPTIONAL: Display results
+##D ee_stars_01 <- ee$Image(assetId)
+##D Map$centerObject(ee_stars_01)
+##D Map$addLayer(ee_stars_01, list(min = 0, max = 255))
+##D 
+##D # Method 2
+##D ee_stars_02 <- stars_as_ee(
+##D  x = x,
+##D  overwrite = TRUE,
+##D  assetId = assetId,
+##D  bucket = "rgee_dev"
+##D )
+##D Map$centerObject(ee_stars_02)
+##D Map$addLayer(ee_stars_02, list(min = 0, max = 255))
+## End(Not run)
+
+
+
+### * <FOOTER>
+###
+cleanEx()
+options(digits = 7L)
+base::cat("Time elapsed: ", proc.time() - base::get("ptime", pos = 'CheckExEnv'),"\n")
+grDevices::dev.off()
+###
+### Local variables: ***
+### mode: outline-minor ***
+### outline-regexp: "\\(> \\)?### [*]+" ***
+### End: ***
+quit('no')

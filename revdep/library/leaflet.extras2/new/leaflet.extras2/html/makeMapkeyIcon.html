@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Make Mapkey Icon</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for makeMapkeyIcon {leaflet.extras2}"><tr><td>makeMapkeyIcon {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Make Mapkey Icon</h2>
+
+<h3>Description</h3>
+
+<p>Make Mapkey Icon
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+makeMapkeyIcon(
+  icon = "mapkey",
+  color = "#ff0000",
+  iconSize = 12,
+  background = "#1F7499",
+  borderRadius = "100%",
+  hoverScale = 1.4,
+  hoverEffect = TRUE,
+  additionalCSS = NULL,
+  hoverCSS = NULL,
+  htmlCode = NULL,
+  boxShadow = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>icon</code></td>
+<td>
+<p>ID of the mapkey Icon you want to use. See
+<a href="http://mapkeyicons.com/">mapkeyicons.com</a> for a full list.</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>Any CSS color (e.g. 'red','rgba(20,160,90,0.5)', '#686868', ...)</p>
+</td></tr>
+<tr valign="top"><td><code>iconSize</code></td>
+<td>
+<p>Size of Icon in Pixels. Default is 12</p>
+</td></tr>
+<tr valign="top"><td><code>background</code></td>
+<td>
+<p>Any CSS color or false for no background</p>
+</td></tr>
+<tr valign="top"><td><code>borderRadius</code></td>
+<td>
+<p>Any number (for circle size/2, for square 0.001)</p>
+</td></tr>
+<tr valign="top"><td><code>hoverScale</code></td>
+<td>
+<p>Any real number (best result in range 1 - 2, use 1 for no
+effect)</p>
+</td></tr>
+<tr valign="top"><td><code>hoverEffect</code></td>
+<td>
+<p>Switch on/off effect on hover</p>
+</td></tr>
+<tr valign="top"><td><code>additionalCSS</code></td>
+<td>
+<p>CSS code (e.g. <code>"border:4px solid #aa3838;"</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>hoverCSS</code></td>
+<td>
+<p>CSS code (e.g. <code>"background-color:#992b00 !important;
+color:#99defc !important;"</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>htmlCode</code></td>
+<td>
+<p>e.g. <code>'&amp;#57347;&amp;#xe003;'</code>. See
+<a href="http://mapkeyicons.com/">mapkeyicons.com</a> for further information</p>
+</td></tr>
+<tr valign="top"><td><code>boxShadow</code></td>
+<td>
+<p>Should a shadow be visible</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of mapkey-icon data that can be passed to the argument <code>icon</code>
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/mapshakers/leaflet-mapkey-icon">https://github.com/mapshakers/leaflet-mapkey-icon</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Mapkey Functions: 
+<code><a href="sub-.leaflet_mapkey_icon_set.html">[.leaflet_mapkey_icon_set</a>()</code>,
+<code><a href="addMapkeyMarkers.html">addMapkeyMarkers</a>()</code>,
+<code><a href="mapkeyIconList.html">mapkeyIconList</a>()</code>,
+<code><a href="mapkeyIcons.html">mapkeyIcons</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+makeMapkeyIcon(icon = "traffic_signal",
+               color = "#0000ff",
+               iconSize = 12,
+               boxShadow = FALSE,
+               background="transparent")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: velocityOptions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for velocityOptions {leaflet.extras2}"><tr><td>velocityOptions {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>velocityOptions</h2>
+
+<h3>Description</h3>
+
+<p>Define further options for the velocity layer.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+velocityOptions(
+  speedUnit = c("m/s", "k/h", "kt"),
+  minVelocity = 0,
+  maxVelocity = 10,
+  velocityScale = 0.005,
+  colorScale = NULL,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>speedUnit</code></td>
+<td>
+<p>Could be 'm/s' for meter per second, 'k/h' for kilometer
+per hour or 'kt' for knots</p>
+</td></tr>
+<tr valign="top"><td><code>minVelocity</code></td>
+<td>
+<p>velocity at which particle intensity is minimum</p>
+</td></tr>
+<tr valign="top"><td><code>maxVelocity</code></td>
+<td>
+<p>velocity at which particle intensity is maximum</p>
+</td></tr>
+<tr valign="top"><td><code>velocityScale</code></td>
+<td>
+<p>scale for wind velocity</p>
+</td></tr>
+<tr valign="top"><td><code>colorScale</code></td>
+<td>
+<p>A vector of hex colors or an RGB matrix</p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to the Velocity layer and Windy.js.
+For more information, please visit <a href="https://github.com/onaci/leaflet-velocity">leaflet-velocity plugin</a></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of further options for <code>addVelocity</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Velocity Functions: 
+<code><a href="addVelocity.html">addVelocity</a>()</code>,
+<code><a href="removeVelocity.html">removeVelocity</a>()</code>,
+<code><a href="setOptionsVelocity.html">setOptionsVelocity</a>()</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

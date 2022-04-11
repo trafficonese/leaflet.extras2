@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add Velocity Animation</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addVelocity {leaflet.extras2}"><tr><td>addVelocity {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add Velocity Animation</h2>
+
+<h3>Description</h3>
+
+<p>Add velocity animated data to leaflet. Based on the
+<a href="https://github.com/onaci/leaflet-velocity">leaflet-velocity plugin</a>
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addVelocity(
+  map,
+  layerId = NULL,
+  group = NULL,
+  content = NULL,
+  options = velocityOptions()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/html/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/html/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/html/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</p>
+</td></tr>
+<tr valign="top"><td><code>content</code></td>
+<td>
+<p>the path or URL to a JSON file representing the velocity data
+or a data.frame which can be transformed to such a JSON file. Please see the
+<a href="https://github.com/onaci/leaflet-velocity/tree/master/demo">demo
+files</a> for some example data.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>List of further options. See <code><a href="velocityOptions.html">velocityOptions</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/onaci/leaflet-velocity">https://github.com/onaci/leaflet-velocity</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Velocity Functions: 
+<code><a href="removeVelocity.html">removeVelocity</a>()</code>,
+<code><a href="setOptionsVelocity.html">setOptionsVelocity</a>()</code>,
+<code><a href="velocityOptions.html">velocityOptions</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(leaflet)
+library(leaflet.extras2)
+content &lt;- "https://raw.githubusercontent.com/onaci/leaflet-velocity/master/demo/water-gbr.json"
+leaflet() %&gt;%
+  addTiles(group = "base") %&gt;%
+  setView(145, -20, 4) %&gt;%
+  addVelocity(content = content, group = "velo", layerId = "veloid") %&gt;%
+  addLayersControl(baseGroups = "base", overlayGroups = "velo")
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

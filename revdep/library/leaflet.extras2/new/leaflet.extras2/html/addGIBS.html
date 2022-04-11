@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add GIBS Layers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addGIBS {leaflet.extras2}"><tr><td>addGIBS {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add GIBS Layers</h2>
+
+<h3>Description</h3>
+
+<p>A leaflet plugin for NASA EOSDIS GIBS imagery integration. 154 products are
+available. The date can be set dynamically for multi-temporal products. No-data
+pixels of MODIS Multiband Imagery can be made transparent.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addGIBS(
+  map,
+  layers = NULL,
+  group = NULL,
+  dates = NULL,
+  opacity = 0.5,
+  transparent = TRUE
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/html/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>layers</code></td>
+<td>
+<p>A character vector of GIBS-layers. See <code><a href="gibs_layers.html">gibs_layers</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/html/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/html/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</p>
+</td></tr>
+<tr valign="top"><td><code>dates</code></td>
+<td>
+<p>Date object. If multiple <code>layers</code> are added, you can add a
+Date vector of the same length</p>
+</td></tr>
+<tr valign="top"><td><code>opacity</code></td>
+<td>
+<p>Numeric value determining the opacity. If multiple
+<code>layers</code> are added, you can add a numeric vector of the same length</p>
+</td></tr>
+<tr valign="top"><td><code>transparent</code></td>
+<td>
+<p>Should the layer be transparent. If multiple <code>layers</code>
+are added, you can add a boolean vector of the same length</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/aparshin/leaflet-GIBS">https://github.com/aparshin/leaflet-GIBS</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other GIBS Functions: 
+<code><a href="setDate.html">setDate</a>()</code>,
+<code><a href="setTransparent.html">setTransparent</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(leaflet)
+library(leaflet.extras2)
+
+layers &lt;- gibs_layers$title[c(35, 128, 185)]
+
+leaflet()  %&gt;%
+  addTiles() %&gt;%
+  setView(9, 50, 4) %&gt;%
+  addGIBS(layers = layers,
+          dates = Sys.Date() - 1,
+          group = layers) %&gt;%
+  addLayersControl(overlayGroups = layers)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

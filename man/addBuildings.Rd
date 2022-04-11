@@ -4,7 +4,14 @@
 \alias{addBuildings}
 \title{Add OSM-Buildings}
 \usage{
-addBuildings(map, apikey = NULL, layerId = NULL, group = NULL, opacity = 0.5)
+addBuildings(
+  map,
+  apikey = NULL,
+  layerId = NULL,
+  group = NULL,
+  opacity = 0.5,
+  attribution = "Â© Map tiles <a href=\\"https://mapbox.com\\">Mapbox</a>"
+)
 }
 \arguments{
 \item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}

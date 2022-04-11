@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add current OpenWeatherMap Marker</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addOpenweatherCurrent {leaflet.extras2}"><tr><td>addOpenweatherCurrent {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add current OpenWeatherMap Marker</h2>
+
+<h3>Description</h3>
+
+<p>Add current OpenWeatherMap Marker
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addOpenweatherCurrent(
+  map,
+  apikey = NULL,
+  group = NULL,
+  layerId = NULL,
+  options = openweatherCurrentOptions()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/html/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>apikey</code></td>
+<td>
+<p>a valid Openweathermap-API key. Get one from
+<a href="https://openweathermap.org/api">here</a>.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/html/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/html/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>the layer id</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>List of further options. See
+<code><a href="openweatherCurrentOptions.html">openweatherCurrentOptions</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>Note</h3>
+
+<p>The current weather icons will appear beginning with zoom level 9
+and if used in Shiny, a click on an icon will update a Shiny input at
+<code>input$MAPID_owm_click</code>.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/trafficonese/leaflet-openweathermap">https://github.com/trafficonese/leaflet-openweathermap</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Openweathermap Functions: 
+<code><a href="addOpenweatherTiles.html">addOpenweatherTiles</a>()</code>,
+<code><a href="openweatherCurrentOptions.html">openweatherCurrentOptions</a>()</code>,
+<code><a href="openweatherOptions.html">openweatherOptions</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+
+leaflet()  %&gt;%
+  addTiles() %&gt;% setView(9, 50, 9) %&gt;%
+  addOpenweatherCurrent(options = openweatherCurrentOptions(
+    lang = "en", popup = TRUE))
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

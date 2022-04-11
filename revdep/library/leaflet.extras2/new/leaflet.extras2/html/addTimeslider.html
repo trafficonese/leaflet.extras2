@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add Time Slider to Leaflet</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addTimeslider {leaflet.extras2}"><tr><td>addTimeslider {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add Time Slider to Leaflet</h2>
+
+<h3>Description</h3>
+
+<p>The <a href="https://github.com/dwilhelm89/LeafletSlider">LeafletSlider plugin</a>
+enables you to dynamically add and remove Markers/Lines on a map by using a
+JQuery UI slider.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addTimeslider(
+  map,
+  data,
+  radius = 10,
+  stroke = TRUE,
+  color = "#03F",
+  weight = 5,
+  opacity = 0.5,
+  fill = TRUE,
+  fillColor = color,
+  fillOpacity = 0.2,
+  dashArray = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  ordertime = TRUE,
+  options = timesliderOptions()
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>data must be a Simple Feature collection of type POINT or LINESTRING
+with a column of class Date or POSIXct.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>a numeric vector of radii for the circles; it can also be a
+one-sided formula, in which case the radius values are derived from the
+<code>data</code> (units in meters for circles, and pixels for circle markers)</p>
+</td></tr>
+<tr valign="top"><td><code>stroke</code></td>
+<td>
+<p>whether to draw stroke along the path (e.g. the borders of
+polygons or circles)</p>
+</td></tr>
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>stroke color</p>
+</td></tr>
+<tr valign="top"><td><code>weight</code></td>
+<td>
+<p>stroke width in pixels</p>
+</td></tr>
+<tr valign="top"><td><code>opacity</code></td>
+<td>
+<p>stroke opacity (or layer opacity for tile layers)</p>
+</td></tr>
+<tr valign="top"><td><code>fill</code></td>
+<td>
+<p>whether to fill the path with color (e.g. filling on polygons or
+circles)</p>
+</td></tr>
+<tr valign="top"><td><code>fillColor</code></td>
+<td>
+<p>fill color</p>
+</td></tr>
+<tr valign="top"><td><code>fillOpacity</code></td>
+<td>
+<p>fill opacity</p>
+</td></tr>
+<tr valign="top"><td><code>dashArray</code></td>
+<td>
+<p>a string that defines the stroke
+<a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray">dash
+pattern</a></p>
+</td></tr>
+<tr valign="top"><td><code>popup</code></td>
+<td>
+<p>a character vector of the HTML content for the popups (you are
+recommended to escape the text using <code><a href="../../htmltools/html/htmlEscape.html">htmlEscape</a>()</code>
+for security reasons)</p>
+</td></tr>
+<tr valign="top"><td><code>popupOptions</code></td>
+<td>
+<p>A Vector of <code><a href="../../leaflet/html/popupOptions.html">popupOptions</a></code> to provide popups</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a character vector of the HTML content for the labels</p>
+</td></tr>
+<tr valign="top"><td><code>labelOptions</code></td>
+<td>
+<p>A Vector of <code><a href="../../leaflet/html/labelOptions.html">labelOptions</a></code> to provide label
+options for each label. Default <code>NULL</code></p>
+</td></tr>
+<tr valign="top"><td><code>ordertime</code></td>
+<td>
+<p>boolean value indicating whether to order the data by the
+time column. The slider will adopt the order of the timestamps.
+The default is <code>TRUE</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>List of additional options. See <code><a href="timesliderOptions.html">timesliderOptions</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/dwilhelm89/LeafletSlider">https://github.com/dwilhelm89/LeafletSlider</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Timeslider Functions: 
+<code><a href="removeTimeslider.html">removeTimeslider</a>()</code>,
+<code><a href="timesliderOptions.html">timesliderOptions</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(leaflet)
+library(leaflet.extras2)
+library(sf)
+library(geojsonsf)
+
+data &lt;- sf::st_as_sf(leaflet::atlStorms2005[1,])
+data &lt;- st_cast(data, "POINT")
+data$time = as.POSIXct(
+  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+
+leaflet() %&gt;%
+  addTiles() %&gt;%
+  addTimeslider(data = data,
+             options = timesliderOptions(
+               position = "topright",
+               timeAttribute = "time",
+               range = TRUE)) %&gt;%
+  setView(-72, 22, 4)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

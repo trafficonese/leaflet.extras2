@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: heightgraphOptions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for heightgraphOptions {leaflet.extras2}"><tr><td>heightgraphOptions {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>heightgraphOptions</h2>
+
+<h3>Description</h3>
+
+<p>Customize the heightgraph with the following additional options.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+heightgraphOptions(
+  position = c("bottomright", "topleft", "topright", "bottomleft"),
+  width = 800,
+  height = 200,
+  margins = list(top = 10, right = 30, bottom = 55, left = 50),
+  expand = TRUE,
+  expandCallback = NULL,
+  mappings = NULL,
+  highlightStyle = list(color = "red"),
+  translation = NULL,
+  xTicks = 3,
+  yTicks = 3
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>position</code></td>
+<td>
+<p>position of control: &quot;topleft&quot;, &quot;topright&quot;, &quot;bottomleft&quot;, or
+&quot;bottomright&quot;. Default is <code>bottomright</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>width</code></td>
+<td>
+<p>The width of the expanded heightgraph display in pixels. Default
+is <code>800</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>height</code></td>
+<td>
+<p>The height of the expanded heightgraph display in pixels.
+Default is <code>200</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>margins</code></td>
+<td>
+<p>The margins define the distance between the border of the
+heightgraph and the actual graph inside. You are able to specify margins
+for top, right, bottom and left in pixels. Default is <code>list(top = 10,
+right = 30, bottom = 55, left = 50)</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>expand</code></td>
+<td>
+<p>Boolean value that defines if the heightgraph should be
+expanded on creation. Default is <code>200</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>expandCallback</code></td>
+<td>
+<p>Function to be called if the heightgraph is expanded or
+reduced. The state of the heightgraph is passed as an argument. It is
+<code>TRUE</code> when expanded and <code>FALSE</code> when reduced. Default is
+<code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>mappings</code></td>
+<td>
+<p>You may add a mappings object to customize the colors and
+labels in the height graph. Without adding custom mappings the segments and
+labels within the graph will be displayed in random colors. Each key of the
+object must correspond to the <code>summary</code> key in <code>properties</code>
+within the <code>FeatureCollection</code>. Default is <code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>highlightStyle</code></td>
+<td>
+<p>You can customize the highlight style when using the
+horizontal line to find parts of the route above an elevation value. Use
+any Leaflet Path options as value of the highlightStyle parameter. Default
+is <code>list(color = "red")</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>translation</code></td>
+<td>
+<p>You can change the labels of the heightgraph info field by
+passing translations for <code>distance</code>, <code>elevation</code>,
+<code>segment_length</code>, <code>type</code> and <code>legend</code>. Default is
+<code>NULL</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>xTicks</code></td>
+<td>
+<p>Specify the tick frequency in the x axis of the graph.
+Corresponds approximately to 2 to the power of value ticks. Default is
+<code>3</code>.</p>
+</td></tr>
+<tr valign="top"><td><code>yTicks</code></td>
+<td>
+<p>Specify the tick frequency in the y axis of the graph.
+Corresponds approximately to 2 to the power of value ticks. Default is
+<code>3</code>.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of further options for <code>addHeightgraph</code>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Heightgraph Functions: 
+<code><a href="addHeightgraph.html">addHeightgraph</a>()</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

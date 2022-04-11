@@ -3,8 +3,10 @@ buildingsDependency <- function() {
     htmltools::htmlDependency(
       "lfx-building", version = "2.1.0",
       src = system.file("htmlwidgets/lfx-building", package = "leaflet.extras2"),
+      stylesheet = "osm-buildings.css",
       script = c(
         "osm-buildings.js",
+        "OSMBuildings.js",
         "osm-buildings-bindings.js")
     )
   )
@@ -22,7 +24,8 @@ buildingsDependency <- function() {
 #' @family OSM-Buildings Plugin
 #' @export
 addBuildings <- function(
-  map, apikey = NULL, layerId = NULL, group = NULL, opacity = 0.5) {
+  map, apikey = NULL, layerId = NULL, group = NULL, opacity = 0.5,
+  attribution = '© Map tiles <a href="https://mapbox.com">Mapbox</a>') {
 
   if (is.null(apikey)) {
     apikey <- Sys.getenv("MAPBOX")
@@ -34,5 +37,6 @@ addBuildings <- function(
 
   map$dependencies <- c(map$dependencies, buildingsDependency())
 
-  invokeMethod(map, getMapData(map), "addBuilding", apikey, layerId, group, opacity)
+  invokeMethod(map, getMapData(map), "addBuilding", apikey, layerId, group,
+               opacity, attribution)
 }

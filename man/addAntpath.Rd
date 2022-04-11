@@ -67,7 +67,7 @@ circles)}
 \item{fillOpacity}{fill opacity}
 
 \item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray}{dash
+\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
 pattern}}
 
 \item{smoothFactor}{how much to simplify the polyline on each zoom level
