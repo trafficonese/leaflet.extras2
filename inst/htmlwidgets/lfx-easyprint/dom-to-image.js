@@ -11,7 +11,8 @@
         // Default is to fail on error, no placeholder
         imagePlaceholder: undefined,
         // Default cache bust is false, it will use the cache
-        cacheBust: false
+        cacheBust: false,
+        dpi: 300
     };
 
     var domtoimage = {
@@ -43,6 +44,7 @@
      * @param {String} options.bgcolor - color for the background, any valid CSS color value.
      * @param {Number} options.width - width to be applied to node before rendering.
      * @param {Number} options.height - height to be applied to node before rendering.
+     * @param {Number} options.dpi - dots per inch to be used when rasterizing image.
      * @param {Object} options.style - an object whose properties to be copied to node's style before rendering.
      * @param {Number} options.quality - a Number between 0 and 1 indicating image quality (applicable to JPEG only),
                 defaults to 1.0.
@@ -163,9 +165,18 @@
             var canvas = document.createElement('canvas');
             canvas.width = options.width || util.width(domNode);
             canvas.height = options.height || util.height(domNode);
+            var ctx = canvas.getContext('2d');
+
+            if (options.dpi != null) {
+                //console.log("DPI"); console.log(options.dpi)
+                var scaleFactor = options.dpi / 96;
+                canvas.width = Math.ceil(canvas.width * scaleFactor);
+                canvas.height = Math.ceil(canvas.height * scaleFactor);
+                ctx.scale(scaleFactor, scaleFactor);
+            }
 
             if (options.bgcolor) {
-                var ctx = canvas.getContext('2d');
+                //var ctx = canvas.getContext('2d');
                 ctx.fillStyle = options.bgcolor;
                 ctx.fillRect(0, 0, canvas.width, canvas.height);
             }

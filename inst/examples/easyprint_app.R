@@ -15,10 +15,11 @@ ui <- fluidPage(
             ),
   # leafletOutput("map", height = 700, width = 1800),
   leafletOutput("map", height = 700, width = "100%"),
+  numericInput("dpi", "DPI", 96, min = 1, max = 1000, step = 1),
   selectInput("scene", "Select Scene",
-              choices = c("CurrentSize"="CurrentSize",
-                          "A4Landscape"="A4Landscape",
+              choices = c("A4Landscape"="A4Landscape",
                           "A4Portrait"="A4Portrait",
+                          "CurrentSize"="CurrentSize",
                           "Custom Landscape"="customCssClass",
                           "Custom Portrait"="customCssClass1")),
   textInput("fn", "Filename", value = "map"),
@@ -37,6 +38,7 @@ server <- function(input, output, session) {
       addPopups(data=leaflet::breweries91[1:5,],
                 group = "popups", popup = ~brewery) %>%
       addEasyprint(options = easyprintOptions(
+        # dpi = 350,
         title = 'Give me that map',
         position = 'bottomleft',
         exportOnly = TRUE,
@@ -71,9 +73,10 @@ server <- function(input, output, session) {
   })
   observeEvent(input$print, {
     scene <- input$scene
+    dpi <- input$dpi
     leafletProxy("map") %>%
-      easyprintMap(sizeModes = scene, filename = input$fn)
-      # easyprintMap(sizeModes = scene, filename = scene)
+      # easyprintMap(sizeModes = scene, filename = input$fn)
+      easyprintMap(sizeModes = scene, filename = paste0(scene, "_", dpi), dpi)
   })
   observeEvent(input$rem, {
     leafletProxy("map") %>%

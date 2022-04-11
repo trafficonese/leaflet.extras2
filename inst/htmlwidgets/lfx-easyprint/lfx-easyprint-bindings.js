@@ -38,13 +38,13 @@ LeafletWidget.methods.removeEasyprint = function() {
   }).call(this);
 };
 
-LeafletWidget.methods.easyprintMap = function(sizeModes, filename) {
+LeafletWidget.methods.easyprintMap = function(sizeModes, filename, dpi) {
   (function(){
     if (this.easyprint) {
       if (typeof sizeModes === "object" && sizeModes.className) {
         sizeModes.target = {className: sizeModes.className}
       }
-      this.easyprint.printMap(sizeModes, filename);
+      this.easyprint.printMap(sizeModes, filename, dpi);
     }
   }).call(this);
 };

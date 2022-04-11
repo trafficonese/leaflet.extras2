@@ -46,6 +46,8 @@ addEasyprint <- function(map, options = easyprintOptions()) {
 #'   print the map with a \code{Custom} sizeMode you need to pass the Custom className.
 #'   Default is \code{A4Portrait}
 #' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}.
+#' @param dpi Integer value indicating the dpi for the resulting image.
+#'   Default is \code{96}
 #' @family EasyPrint Functions
 #' @inherit addEasyprint return
 #' @export
@@ -80,8 +82,8 @@ addEasyprint <- function(map, options = easyprintOptions()) {
 #'
 #' shinyApp(ui, server)
 #' }
-easyprintMap <- function(map, sizeModes = "A4Portrait", filename = "map") {
-  leaflet::invokeMethod(map, NULL, "easyprintMap", sizeModes, filename)
+easyprintMap <- function(map, sizeModes = "A4Portrait", filename = "map", dpi=96) {
+  leaflet::invokeMethod(map, NULL, "easyprintMap", sizeModes, filename, dpi)
 }
 
 #' removeEasyprint
@@ -123,6 +125,8 @@ removeEasyprint <- function(map) {
 #' @param spinnerBgColor A valid css colour for the spinner background color
 #' @param customSpinnerClass A class for a custom css spinner to use while
 #'   waiting for the print.
+#' @param dpi Integer value indicating the dpi for the resulting image.
+#'   Default is \code{96}
 #' @family EasyPrint Functions
 #' @return A list of options for the 'easyprint' control
 #' @references \url{https://github.com/rowanwins/leaflet-easyPrint}
@@ -140,7 +144,8 @@ easyprintOptions <- function(title = 'Print map',
                              hideClasses = NULL,
                              customWindowTitle = NULL,
                              spinnerBgColor = '#0DC5C1',
-                             customSpinnerClass = 'epLoader') {
+                             customSpinnerClass = 'epLoader',
+                             dpi = 96) {
   if (inherits(sizeModes, "character")) sizeModes <- as.list(sizeModes)
   if (inherits(hideClasses, "character")) hideClasses <- as.list(hideClasses)
   if (length(sizeModes) == 0 || (is.null(sizeModes) || all(is.na(sizeModes)) || all(sizeModes == ""))) {
@@ -161,6 +166,7 @@ easyprintOptions <- function(title = 'Print map',
     hideClasses = hideClasses,
     customWindowTitle = customWindowTitle,
     spinnerBgColor = spinnerBgColor,
-    customSpinnerClass = customSpinnerClass
+    customSpinnerClass = customSpinnerClass,
+    dpi = dpi
   ))
 }

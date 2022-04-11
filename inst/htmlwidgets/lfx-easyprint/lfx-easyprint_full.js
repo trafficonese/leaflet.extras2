@@ -75,9 +75,12 @@ L.Control.EasyPrint = L.Control.extend({
     return container;
   },
 
-  printMap: function (event, filename) {
+  printMap: function (event, filename, dpi) {
     if (filename) {
       this.options.filename = filename
+    }
+    if (dpi) {
+      this.options.dpi = dpi
     }
     if (!this.options.exportOnly) {
       this._page = window.open("", "_blank", 'toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10, top=10, width=200, height=250, visible=none');
@@ -188,8 +191,7 @@ L.Control.EasyPrint = L.Control.extend({
   _printOpertion: function (sizemode) {
     var plugin = this;
     var widthForExport = this.mapContainer.style.width
-    if (this.originalState.widthWasAuto && sizemode === 'CurrentSize' ||
-        this.originalState.widthWasPercentage && sizemode === 'CurrentSize') {
+    if (this.originalState.widthWasAuto && sizemode === 'CurrentSize' || this.originalState.widthWasPercentage && sizemode === 'CurrentSize') {
       widthForExport = this.originalState.mapWidth
     }
 
@@ -215,7 +217,8 @@ L.Control.EasyPrint = L.Control.extend({
     }
     domtoimage.toPng(plugin.mapContainer, {
       width: parseInt(widthForExport),
-      height: parseInt(plugin.mapContainer.style.height.replace('px'))
+      height: parseInt(plugin.mapContainer.style.height.replace('px')),
+      dpi: plugin.options.dpi
     })
     .then(function (dataUrl) {
       var blob = plugin._dataURItoBlob(dataUrl);

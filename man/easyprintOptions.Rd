@@ -18,7 +18,8 @@ easyprintOptions(
   hideClasses = NULL,
   customWindowTitle = NULL,
   spinnerBgColor = "#0DC5C1",
-  customSpinnerClass = "epLoader"
+  customSpinnerClass = "epLoader",
+  dpi = 96
 )
 }
 \arguments{
@@ -60,6 +61,9 @@ added to the printed paper}
 
 \item{customSpinnerClass}{A class for a custom css spinner to use while
 waiting for the print.}
+
+\item{dpi}{Integer value indicating the dpi for the resulting image.
+Default is \code{96}}
 }
 \value{
 A list of options for the 'easyprint' control

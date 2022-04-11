@@ -4,7 +4,7 @@
 \alias{easyprintMap}
 \title{easyprintMap}
 \usage{
-easyprintMap(map, sizeModes = "A4Portrait", filename = "map")
+easyprintMap(map, sizeModes = "A4Portrait", filename = "map", dpi = 96)
 }
 \arguments{
 \item{map}{the map widget}
@@ -16,6 +16,9 @@ print the map with a \code{Custom} sizeMode you need to pass the Custom classNam
 Default is \code{A4Portrait}}
 
 \item{filename}{Name of the file if \code{exportOnly} option is \code{TRUE}.}
+
+\item{dpi}{Integer value indicating the dpi for the resulting image.
+Default is \code{96}}
 }
 \value{
 A leaflet map object
