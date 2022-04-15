@@ -64,7 +64,6 @@ addEasyprint <- function(map, options = easyprintOptions()) {
 #'
 #' server <- function(input, output, session) {
 #'   output$map <- renderLeaflet({
-#'     input$print
 #'     leaflet()  %>%
 #'       addTiles() %>%
 #'       setView(10, 50, 9) %>%
