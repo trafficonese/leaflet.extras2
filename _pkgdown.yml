@@ -80,6 +80,10 @@ reference:
   - title: Spinner
     contents:
     - matches("Spinner")
+  - title: Sync
+    contents:
+    - matches("sync")
+    - matches("Sync")
   - title: Tangram
     contents:
     - matches("Tangram")

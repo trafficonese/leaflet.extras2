@@ -1,5 +1,6 @@
 # leaflet.extras2 (development version)
 
+* Included [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync) plugin
 * Included [Leaflet MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
 * Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
 * Included [Labelgun](https://github.com/Geovation/labelgun) plugin.
