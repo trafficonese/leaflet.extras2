@@ -12,25 +12,32 @@ LeafletWidget.methods.addMovingMarker = function(
     }
 
     if (icon) {
-      if (!icon.iconUrl) {
-        options.icon = L.Icon.Default();
+      if (icon.class == "awesome" && L.AwesomeMarkers) {
+        if (icon.squareMarker) {
+          icon.className = "awesome-marker awesome-marker-square";
+        }
+        options.icon = new L.AwesomeMarkers.icon(icon);
+      } else {
+        if (!icon.iconUrl) {
+          options.icon = L.Icon.Default();
+        }
+        if (icon.iconWidth) {
+          icon.iconSize = [icon.iconWidth, icon.iconHeight];
+        }
+        if (icon.shadowWidth) {
+          icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
+        }
+        if (icon.iconAnchorX) {
+          icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
+        }
+        if (icon.shadowAnchorX) {
+          icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
+        }
+        if (icon.popupAnchorX) {
+          icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
+        }
+        options.icon = new L.Icon(icon);
       }
-      if (icon.iconWidth) {
-        icon.iconSize = [icon.iconWidth, icon.iconHeight];
-      }
-      if (icon.shadowWidth) {
-        icon.shadowSize = [icon.shadowWidth, icon.shadowHeight];
-      }
-      if (icon.iconAnchorX) {
-        icon.iconAnchor = [icon.iconAnchorX, icon.iconAnchorY];
-      }
-      if (icon.shadowAnchorX) {
-        icon.shadowAnchor = [icon.shadowAnchorX, icon.shadowAnchorY];
-      }
-      if (icon.popupAnchorX) {
-        icon.popupAnchor = [icon.popupAnchorX, icon.popupAnchorY];
-      }
-      options.icon = new L.Icon(icon);
     }
 
     map.movingmarker[layerId] = L.Marker.movingMarker(data, duration, options).addTo(this);

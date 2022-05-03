@@ -9,6 +9,13 @@ movingmarkerDependency <- function() {
     )
   )
 }
+leafletAwesomeMarkersDependencies1 <- function() {
+  list(htmltools::htmlDependency("leaflet-awesomemarkers",
+                                 "2.0.3", "htmlwidgets/plugins/Leaflet.awesome-markers",
+                                 package = "leaflet", script = c("leaflet.awesome-markers.min.js"),
+                                 stylesheet = c("leaflet.awesome-markers.css")))
+}
+
 
 #' Add Moving Markers
 #'
@@ -79,6 +86,12 @@ addMovingMarker = function(
 
   map$dependencies <- c(map$dependencies,
                         movingmarkerDependency())
+
+  if (class(icon) == "leaflet_awesome_icon") {
+    icon$class = "awesome"
+    map$dependencies <- c(map$dependencies,
+                          leafletAwesomeMarkersDependencies1())
+  }
 
   leaflet::invokeMethod(
     map, data, "addMovingMarker", cbind(pts$lat, pts$lng),

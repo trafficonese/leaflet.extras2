@@ -23,6 +23,18 @@ test_that("movingmarker", {
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
 
+  ## Use awesomeIcon
+  shipIcon2 <- makeAwesomeIcon(icon = "arrow-up", markerColor = "black")
+  m <- leaflet()  %>%
+    addMovingMarker(lng = df[,1], lat = df[,2], icon = shipIcon2,
+                    movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+                    label="I am a pirate!",
+                    popup="Arrr")
+  expect_is(m, "leaflet")
+  expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
+  expect_equal(m$dependencies[[1]]$name, "lfx-movingmarker")
+  expect_equal(m$dependencies[[2]]$name, "leaflet-awesomemarkers")
+
   ## Data is Simple Feature LINESTRING
   df <- sf::st_as_sf(atlStorms2005)[1,]
   m <- leaflet()  %>%
