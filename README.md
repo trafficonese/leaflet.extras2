@@ -32,6 +32,7 @@ remotes::install_github('trafficonese/leaflet.extras2')
 Plugins integrated so far ...
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
+-   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
 -   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
 -   [GIBS](https://github.com/aparshin/leaflet-GIBS)
@@ -68,7 +69,7 @@ Currently there are no vignettes (contributions welcome), but there are plenty o
 
 -   **Good Solution**: Create issues for plugins you wish incorporated but before that search the existing issues to see if issue already exists and if so comment on that issue instead of creating duplicates.
 -   **Better Solution**: It would help in prioritizing if you can include additional details like why you need the plugin, how helpful will it be to everyone etc.
--   **Best Solution**: Code it yourself and submit a pull request. This is the fastest way to get a plugin into the package.
+-   **Best Solution**: Code it yourself and submit a pull request. This is the fastest way to get a plugin into the package. Checkout this little [tutorial](https://github.com/trafficonese/leaflet.extras2/tree/master/HowTo.md)
 
 *I submitted an issue for a plugin long time ago but it is still not available.*
 
