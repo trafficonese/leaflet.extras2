@@ -13,6 +13,10 @@ reference:
     contents:
     - matches("Antpath")
     - matches("antpath")
+  - title: Arrowhead
+    contents:
+    - matches("Arrowhead")
+    - matches("arrowhead")
   - title: Contextmenu
     contents:
     - matches("Contextmenu")

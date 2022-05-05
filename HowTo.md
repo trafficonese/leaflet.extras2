@@ -32,9 +32,11 @@ You can also check the coverage of just one file with `devtools::test_coverage_f
 
 8. Add a short description in the **NEWS.md** file that this plugin is now available.
 
-9. If everything works correctly, push it to your fork and **open a PR**. I will be happy to merge it as soon as possible! 💚     
+9. Add the plugin in the `_pkgdown.yml` file and make sure it matches all functions.
+
+10. If everything works correctly, push it to your fork and **open a PR**. I will be happy to merge it as soon as possible! 💚     
 🤷 If you're stuck somewhere in the process and you just can't get it to work, you can still open a PR and explain what the problem is. I will look into it.
 
-10. 🎉 Celebrate and use it 🏆
+11. 🎉 Celebrate and use it 🏆
 
 
