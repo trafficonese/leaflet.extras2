@@ -1,5 +1,6 @@
 # leaflet.extras2 (development version)
 
+* Included [Arrowheads](https://github.com/slutske22/leaflet-arrowheads) plugin
 * Included [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync) plugin
 * Included [Leaflet MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
 * Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin) plugin. Thanks to @radbasa
@@ -9,7 +10,7 @@
 * Option `fit` removed for sidebars as plugin CSS/JS was adapted
 * Deprecated `menuItem`/`mapmenuItems`/`markermenuItems` and renamed with prefix `context_`. Fixes #10 and #17
 * Some improvement for the `easyprint` plugin: (Fixes #31)
-  - It is now possible to include multiple custom `sizeModes` in `easyprintOptions`. The example [easyprint_app.R](./inst/examples/easyprint_app.R) has been extended to demonstrate the new functionalities. **Unfortunately** the `CurrentSize` option via `easyprintMap` always returns a gray background, although via the control button it works just fine. 
+  - It is now possible to include multiple custom `sizeModes` in `easyprintOptions`. The example [easyprint_app.R](./inst/examples/easyprint_app.R) has been extended to demonstrate the new functionalities. 
   - The `tileLayer` option now accepts a group name for a tilelayer for which printing will wait until the layer is fully loaded.
 * The `addPlayback` is now capable of displaying labels and popups for every timestep. The transition of labels and popups can be controlled with `transitionpopup` and `transitionlabel`.
 * The function `addHistory` now requires the *fontawesome* package, since the dependency is not included in shiny's shared directory anymore.

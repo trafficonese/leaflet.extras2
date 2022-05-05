@@ -21,3 +21,6 @@
 ^\.github$
 ^CRAN-RELEASE$
 ^revdep$
+^HowTo\.html$
+^HowTo\.md$
+^HowTo\.rmd$

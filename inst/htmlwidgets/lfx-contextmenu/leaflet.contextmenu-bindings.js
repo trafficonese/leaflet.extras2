@@ -21,24 +21,6 @@ LeafletWidget.methods.addContextmenu = function() {
       }
       Shiny.setInputValue(map.id + "_contextmenu_select", obj, {priority: "event"});
     });
-    /*
-    map.on("contextmenu.show", function(e) {
-      //console.log("contextmenu.show!!!!");
-      //console.log("e"); console.log(e);
-    });
-    map.on("contextmenu.hide", function(e) {
-      //console.log("contextmenu.hide!!!!");
-      //console.log("e"); console.log(e);
-    });
-    map.on("contextmenu.additem", function(e) {
-      //console.log("contextmenu.additem!!!!");
-      //console.log("e"); console.log(e);
-    });
-    map.on("contextmenu.removeitem", function(e) {
-      //console.log("contextmenu.removeitem!!!!");
-      //console.log(e);
-    });
-    */
   }
 };
 
