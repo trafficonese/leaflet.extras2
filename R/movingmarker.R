@@ -87,7 +87,7 @@ addMovingMarker = function(
   map$dependencies <- c(map$dependencies,
                         movingmarkerDependency())
 
-  if (class(icon) == "leaflet_awesome_icon") {
+  if (inherits(icon, "leaflet_awesome_icon")) {
     icon$class = "awesome"
     map$dependencies <- c(map$dependencies,
                           leafletAwesomeMarkersDependencies1())
