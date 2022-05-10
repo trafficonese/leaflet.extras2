@@ -1,4 +1,5 @@
-# leaflet.extras2 (development version)
+
+# leaflet.extras2 1.2.0
 
 * Included [Arrowheads](https://github.com/slutske22/leaflet-arrowheads) plugin
 * Included [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync) plugin
