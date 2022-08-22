@@ -11,9 +11,15 @@ wmsDependency <- function() {
 
 #' Add Queryable WMS Layer
 #'
+#' @description
 #' A Leaflet plugin for working with Web Map services, providing:
 #' single-tile/untiled/nontiled layers, shared WMS sources, and
-#' GetFeatureInfo-powered identify.
+#' \bold{GetFeatureInfo}-powered identify.
+#'
+#' You can also use \bold{CQL-Filters} by appending a string to the \code{'baseUrl'}.
+#'
+#' Something like \code{'http://server/wms?cql_filter=attribute=value'}
+#'
 #' @inheritParams leaflet::addWMSTiles
 #' @param checkempty Should the returned HTML-content be checked for emptiness?
 #'   If the HTML-body is empty no popup is opened. Default is \code{FALSE}
