@@ -1,4 +1,4 @@
-.sidebar {
+.leafsidebar {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -8,39 +8,39 @@
   transition: width 500ms;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
 }
-.sidebar.collapsed {
+.leafsidebar.collapsed {
   width: 40px;
 }
 
-.sidebar-left {
+.leafsidebar-left {
   left: 0;
 }
-.sidebar-right {
+.leafsidebar-right {
   right: 0;
 }
 
-.sidebar-tabs {
+.leafsidebar-tabs {
   top: 0;
   bottom: 0;
   height: inherit;
   background-color: #fff;
 }
-.sidebar-left .sidebar-tabs {
+.leafsidebar-left .leafsidebar-tabs {
   left: 0;
 }
-.sidebar-right .sidebar-tabs {
+.leafsidebar-right .leafsidebar-tabs {
   right: 0;
 }
-.sidebar-tabs,
-.sidebar-tabs > ul {
+.leafsidebar-tabs,
+.leafsidebar-tabs > ul {
   position: absolute;
   width: 40px;
   margin: 0;
   padding: 0;
   list-style-type: none;
 }
-.sidebar-tabs > li,
-.sidebar-tabs > ul > li {
+.leafsidebar-tabs > li,
+.leafsidebar-tabs > ul > li {
   width: 100%;
   height: 40px;
   color: #333;
@@ -48,30 +48,30 @@
   overflow: hidden;
   transition: all 80ms;
 }
-.sidebar-tabs > li:hover,
-.sidebar-tabs > ul > li:hover {
+.leafsidebar-tabs > li:hover,
+.leafsidebar-tabs > ul > li:hover {
   color: #000;
     background-color: #eee;
 }
-.sidebar-tabs > li.active,
-.sidebar-tabs > ul > li.active {
+.leafsidebar-tabs > li.active,
+.leafsidebar-tabs > ul > li.active {
   color: #fff;
     background-color: #0074d9;
 }
-.sidebar-tabs > li.disabled,
-.sidebar-tabs > ul > li.disabled {
+.leafsidebar-tabs > li.disabled,
+.leafsidebar-tabs > ul > li.disabled {
   color: rgba(51, 51, 51, 0.4);
 }
-.sidebar-tabs > li.disabled:hover,
-.sidebar-tabs > ul > li.disabled:hover {
+.leafsidebar-tabs > li.disabled:hover,
+.leafsidebar-tabs > ul > li.disabled:hover {
   background: transparent;
 }
-.sidebar-tabs > li.disabled > a,
-.sidebar-tabs > ul > li.disabled > a {
+.leafsidebar-tabs > li.disabled > a,
+.leafsidebar-tabs > ul > li.disabled > a {
   cursor: default;
 }
-.sidebar-tabs > li > a,
-.sidebar-tabs > ul > li > a {
+.leafsidebar-tabs > li > a,
+.leafsidebar-tabs > ul > li > a {
   display: block;
   width: 100%;
   height: 100%;
@@ -80,11 +80,11 @@
   text-decoration: none;
   text-align: center;
 }
-.sidebar-tabs > ul + ul {
+.leafsidebar-tabs > ul + ul {
   bottom: 0;
 }
 
-.sidebar-content {
+.leafsidebar-content {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -92,30 +92,30 @@
   overflow-x: hidden;
   overflow-y: auto;
 }
-.sidebar-left .sidebar-content {
+.leafsidebar-left .leafsidebar-content {
   left: 40px;
   right: 0;
 }
-.sidebar-right .sidebar-content {
+.leafsidebar-right .leafsidebar-content {
   left: 0;
   right: 40px;
 }
-.sidebar.collapsed > .sidebar-content {
+.leafsidebar.collapsed > .leafsidebar-content {
   overflow-y: hidden;
 }
 
-.sidebar-pane {
+.leafsidebar-pane {
   display: none;
   left: 0;
   right: 0;
   box-sizing: border-box;
   padding: 10px 20px;
 }
-.sidebar-pane.active {
+.leafsidebar-pane.active {
   display: block;
 }
 
-.sidebar-header {
+.leafsidebar-header {
   margin: -10px -20px 0;
   height: 40px;
   padding: 0 20px;
@@ -124,11 +124,11 @@
   color: #fff;
     background-color: #0074d9;
 }
-.sidebar-right .sidebar-header {
+.leafsidebar-right .leafsidebar-header {
   padding-left: 40px;
 }
 
-.sidebar-close {
+.leafsidebar-close {
   position: absolute;
   top: 0;
   width: 40px;
@@ -136,10 +136,10 @@
   text-align: center;
   cursor: pointer;
 }
-.sidebar-left .sidebar-close {
+.leafsidebar-left .leafsidebar-close {
   right: 0;
 }
-.sidebar-right .sidebar-close {
+.leafsidebar-right .leafsidebar-close {
   left: 0;
 }
 
@@ -150,49 +150,48 @@
   right: 40px;
 }
 
-.sidebar.leaflet-touch {
+.leafsidebar.leaflet-touch {
   box-shadow: none;
-
 }
 
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .sidebar {
+  .leafsidebar {
     width: 305px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  .sidebar {
+  .leafsidebar {
     width: 390px;
   }
 }
 @media (min-width: 1200px) {
-  .sidebar {
+  .leafsidebar {
     width: 460px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .sidebar-pane {
+  .leafsidebar-pane {
     min-width: 265px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  .sidebar-pane {
+  .leafsidebar-pane {
     min-width: 350px;
   }
 }
 @media (min-width: 1200px) {
-  .sidebar-pane {
+  .leafsidebar-pane {
     min-width: 420px;
   }
 }
 
 @media (min-width: 768px) {
-  .sidebar {
+  .leafsidebar {
     border-radius: 4px;
   }
-  .sidebar.leaflet-touch {
+  .leafsidebar.leaflet-touch {
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
 
