@@ -143,10 +143,10 @@
   left: 0;
 }
 
-.leaflet-left {
+.sidebar-map .leaflet-left {
   left: 40px;
 }
-.leaflet-right {
+.sidebar-map .leaflet-right {
   right: 40px;
 }
 
@@ -195,41 +195,41 @@
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
 
-  .leaflet-control-container .leaflet-left {
+  .sidebar-map .leaflet-control-container .leaflet-left {
     transition: left 500ms;
   }
-  .leaflet-control-container .leaflet-right {
+  .sidebar-map .leaflet-control-container .leaflet-right {
     transition: right 500ms;
   }
 
-  .leaflet-left.extended {
+  .sidebar-map .leaflet-left.extended {
     left: 460px;
   }
-  .leaflet-right.extended {
+  .sidebar-map .leaflet-right.extended {
     right: 460px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
-  .leaflet-left.extended {
+  .sidebar-map .leaflet-left.extended {
     left: 305px;
   }
-  .leaflet-right.extended {
+  .sidebar-map .leaflet-right.extended {
     right: 305px;
   }
 }
 @media (min-width: 992px) and (max-width: 1199px) {
-  .leaflet-left.extended {
+  .sidebar-map .leaflet-left.extended {
     left: 390px;
   }
-  .leaflet-right.extended {
+  .sidebar-map .leaflet-right.extended {
     right: 390px;
   }
 }
 @media (min-width: 1200px) {
-  .leaflet-left.extended {
+  .sidebar-map .leaflet-left.extended {
     left: 460px;
   }
-  .leaflet-right.extended {
+  .sidebar-map .leaflet-right.extended {
     right: 460px;
   }
 }

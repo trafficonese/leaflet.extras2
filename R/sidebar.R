@@ -22,15 +22,18 @@ sidebar_deps <- function(mini = FALSE) {
 #'   \code{\link{sidebar_tabs}}
 #' @param options A named list with the only option \code{position}, which should
 #'   be either \code{left} or \code{right}.
+#' @param ns The namespace function, if used in Shiny modules.
 #' @family Sidebar Functions
 #' @references \url{https://github.com/Turbo87/sidebar-v2}
 #' @export
 #' @inherit leaflet::addControl return
 #' @inherit sidebar_tabs examples
 addSidebar <- function(map, id = "sidebar",
-                       options = list(position = "left")) {
+                       options = list(position = "left"),
+                       ns = NULL) {
   map$dependencies <- c(map$dependencies, sidebar_deps())
   options$fit = TRUE
+  if (!is.null(ns)) id <- ns(id)
   invokeMethod(map, NULL, "addSidebar", id, options)
 }
 
@@ -57,14 +60,14 @@ closeSidebar <- function(map, sidebar_id = NULL) {
 }
 
 #' Open the Sidebar by ID
-#' @param map A leaflet map widget
 #' @param id The id of the \code{\link{sidebar_pane}} to open.
-#' @param sidebar_id The id of the sidebar (per \code{\link{sidebar_tabs}}).
-#'  Defaults to \code{NULL} such that the first sidebar is opened.
 #' @family Sidebar Functions
+#' @param ns The namespace function, if used in Shiny modules.
+#' @inheritParams closeSidebar
 #' @inherit leaflet::addControl return
 #' @export
-openSidebar <- function(map, id, sidebar_id = NULL) {
+openSidebar <- function(map, id, sidebar_id = NULL, ns = NULL) {
+  if (!is.null(ns)) id <- ns(id)
   invokeMethod(map, NULL, "openSidebar", list(id = id, sidebar_id = sidebar_id))
 }
 
