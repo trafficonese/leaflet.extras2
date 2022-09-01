@@ -1,6 +1,8 @@
 
 test_that("sidebar", {
 
+
+
   ## Check HTML ####################
   m <- sidebar_pane(
     title = "messages", id = "messages_id", icon = tags$i(class="person"),
@@ -47,6 +49,20 @@ test_that("sidebar", {
     closeSidebar()
   expect_equal(m$x$calls[[length(m$x$calls)]]$method,
                "closeSidebar")
+
+  ## Check For Modules ##########
+  m <- leaflet() %>%
+    addSidebar(ns = shiny::NS("modul"))
+  expect_is(m, "leaflet")
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[1]],
+               "modul-sidebar")
+
+  m <- leaflet() %>%
+    addSidebar(ns = shiny::NS("modul")) %>%
+    openSidebar(id = "sidebar", ns = shiny::NS("modul"))
+  expect_is(m, "leaflet")
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[1]]$id,
+               "modul-sidebar")
 
 })
 
