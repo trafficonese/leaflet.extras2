@@ -3,23 +3,30 @@ LeafletWidget.methods.addSidebar = function(id, options) {
   (function(){
     var map = this;
 
+    // Check if run in Shiny
+    if (!HTMLWidgets.shinyMode) {
+      console.error("The sidebar-plugin is not called within a Shiny application and therefore does not work.")
+      return(0)
+    }
+
     // Add css class ('sidebar-map') to map
     if (!map._container.classList.contains('sidebar-map')) {
       map._container.classList.add('sidebar-map');
     }
 
     // Move Sidebar inside Map-Div
+    var mapid = "#"+map.id
     if (options && options.fit === true) {
       // Append sidebar container to map div
-      if ($('.leaflet-sidebar-container').length === 0) {
+      if ($(mapid + ' .leaflet-sidebar-container').length === 0) {
         var mapdiv = document.createElement('div');
         mapdiv.className = 'leaflet-sidebar-container';
-        $(mapdiv).appendTo($('.leaflet.html-widget-output'));
+        $(mapdiv).appendTo($(mapid));
       }
-      $('.sidebar.collapsed').appendTo('.leaflet-sidebar-container');
+      $('.leafsidebar.collapsed').appendTo(mapid + ' .leaflet-sidebar-container');
 
       // Disable/Re-enable dragging+scrolling when user's cursor enters/exits the element
-      var content = $('.sidebar-content');
+      var content = $('.leafsidebar-content');
       content.on('mouseover', function () {
           map.dragging.disable();
           content.on('mousewheel', L.DomEvent.stopPropagation);
@@ -31,7 +38,7 @@ LeafletWidget.methods.addSidebar = function(id, options) {
 
     // Show Sidebar & content
     setTimeout(function(){
-      $('.sidebar.collapsed .sidebar-tabs, .sidebar.collapsed .sidebar-content').css('display','block');
+      $('.leafsidebar.collapsed .leafsidebar-tabs, .leafsidebar.collapsed .leafsidebar-content').css('display','block');
     }, 400);
 
     // Extend onClick method to trigger 'shown' event, otherwise Shiny-Inputs/Outputs are not reactive
@@ -66,10 +73,10 @@ LeafletWidget.methods.removeSidebar = function(sidebar_id) {
     var sidebar = $(`#${tid}`);
     if (sidebar[0]) {
       // Remove left/right CSS
-      if (L.DomUtil.hasClass(sidebar[0], 'sidebar-left')) {
-        $('.leaflet-left').css('left', 0);
+      if (L.DomUtil.hasClass(sidebar[0], 'leafsidebar-left')) {
+        $('.sidebar-map .leaflet-left').css('left', 0);
       } else {
-        $('.leaflet-right').css('right', 0);
+        $('.sidebar-map .leaflet-right').css('right', 0);
       }
       // Remove Sidebar and Delete from map
       sidebar.remove();

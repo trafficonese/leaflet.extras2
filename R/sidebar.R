@@ -22,15 +22,18 @@ sidebar_deps <- function(mini = FALSE) {
 #'   \code{\link{sidebar_tabs}}
 #' @param options A named list with the only option \code{position}, which should
 #'   be either \code{left} or \code{right}.
+#' @param ns The namespace function, if used in Shiny modules.
 #' @family Sidebar Functions
 #' @references \url{https://github.com/Turbo87/sidebar-v2}
 #' @export
 #' @inherit leaflet::addControl return
 #' @inherit sidebar_tabs examples
 addSidebar <- function(map, id = "sidebar",
-                       options = list(position = "left")) {
+                       options = list(position = "left"),
+                       ns = NULL) {
   map$dependencies <- c(map$dependencies, sidebar_deps())
   options$fit = TRUE
+  if (!is.null(ns)) id <- ns(id)
   invokeMethod(map, NULL, "addSidebar", id, options)
 }
 
@@ -57,14 +60,14 @@ closeSidebar <- function(map, sidebar_id = NULL) {
 }
 
 #' Open the Sidebar by ID
-#' @param map A leaflet map widget
 #' @param id The id of the \code{\link{sidebar_pane}} to open.
-#' @param sidebar_id The id of the sidebar (per \code{\link{sidebar_tabs}}).
-#'  Defaults to \code{NULL} such that the first sidebar is opened.
 #' @family Sidebar Functions
+#' @param ns The namespace function, if used in Shiny modules.
+#' @inheritParams closeSidebar
 #' @inherit leaflet::addControl return
 #' @export
-openSidebar <- function(map, id, sidebar_id = NULL) {
+openSidebar <- function(map, id, sidebar_id = NULL, ns = NULL) {
+  if (!is.null(ns)) id <- ns(id)
   invokeMethod(map, NULL, "openSidebar", list(id = id, sidebar_id = sidebar_id))
 }
 
@@ -87,9 +90,9 @@ sidebar_pane <- function(title = "Sidebar Title",
                          icon = icon("caret-right"), ...) {
   if (is.null(id))
     stop("The sidebar pane needs an `id`.")
-  tags$div(class = "sidebar-pane", id = id,
-           tags$h3(class = "sidebar-header", title,
-                   tags$span(class = "sidebar-close", icon)),
+  tags$div(class = "leafsidebar-pane", id = id,
+           tags$h3(class = "leafsidebar-header", title,
+                   tags$span(class = "leafsidebar-close", icon)),
            ...)
 }
 
@@ -120,15 +123,15 @@ sidebar_tabs <- function(id = "sidebar", iconList = NULL, ...){
   ids <- lapply(arg, function(x) tagGetAttribute(x, "id"))
   if (length(ids) != length(iconList))
     stop("The number of icons needs to match the number of sidebar panes.")
-  tags$div(id = id, class = "sidebar collapsed",
-           tags$div(class = "sidebar-tabs", style = "display: none",
+  tags$div(id = id, class = "leafsidebar collapsed",
+           tags$div(class = "leafsidebar-tabs", style = "display: none",
                     tags$ul(role = "tablist",
                             tagList(lapply(1:length(ids), function(x) {
                               tags$li(tags$a(href = paste0("#", ids[[x]]), role = "tab", iconList[[x]]))
                             }))
                             )
            ),
-           tags$div(class = "sidebar-content", style = "display: none",
+           tags$div(class = "leafsidebar-content", style = "display: none",
                     tagList(arg))
   )
 }
