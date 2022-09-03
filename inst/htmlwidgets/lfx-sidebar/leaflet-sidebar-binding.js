@@ -4,10 +4,12 @@ LeafletWidget.methods.addSidebar = function(id, options) {
     var map = this;
 
     // Check if run in Shiny
+    /*
     if (!HTMLWidgets.shinyMode) {
       console.error("The sidebar-plugin is not called within a Shiny application and therefore does not work.")
       return(0)
     }
+    */
 
     // Add css class ('sidebar-map') to map
     if (!map._container.classList.contains('sidebar-map')) {
@@ -15,7 +17,8 @@ LeafletWidget.methods.addSidebar = function(id, options) {
     }
 
     // Move Sidebar inside Map-Div
-    var mapid = "#"+map.id
+    /*var mapid = "#"+map.id*/
+    var mapid = "#" + (map.id ? map.id : map._container.id);
     if (options && options.fit === true) {
       // Append sidebar container to map div
       if ($(mapid + ' .leaflet-sidebar-container').length === 0) {
