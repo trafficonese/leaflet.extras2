@@ -21,8 +21,7 @@ be either \code{left} or \code{right}.}
 the new \code{map} object
 }
 \description{
-The sidebar plugin only works in a reactive environment (e.g Shiny), as the
-HTML must be created with \code{\link{sidebar_tabs}} and
+The sidebar HTML must be created with \code{\link{sidebar_tabs}} and
 \code{\link{sidebar_pane}} before
 \code{\link[leaflet]{leafletOutput}} is called.
 }

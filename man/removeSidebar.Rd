@@ -10,7 +10,7 @@ removeSidebar(map, sidebar_id = NULL)
 \item{map}{A leaflet map widget}
 
 \item{sidebar_id}{The id of the sidebar (per \code{\link{sidebar_tabs}}).
-Defaults to \code{NULL} such that the first sidebar is opened.}
+Defaults to \code{NULL} such that the first sidebar is removed.}
 }
 \value{
 the new \code{map} object

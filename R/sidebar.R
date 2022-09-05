@@ -12,8 +12,7 @@ sidebar_deps <- function(mini = FALSE) {
 
 #' Add a Sidebar Leaflet Control
 #'
-#' The sidebar plugin only works in a reactive environment (e.g Shiny), as the
-#' HTML must be created with \code{\link{sidebar_tabs}} and
+#' The sidebar HTML must be created with \code{\link{sidebar_tabs}} and
 #' \code{\link{sidebar_pane}} before
 #' \code{\link[leaflet]{leafletOutput}} is called.
 #'
@@ -40,7 +39,7 @@ addSidebar <- function(map, id = "sidebar",
 #' Remove the Sidebar
 #' @param map A leaflet map widget
 #' @param sidebar_id The id of the sidebar (per \code{\link{sidebar_tabs}}).
-#'  Defaults to \code{NULL} such that the first sidebar is opened.
+#'  Defaults to \code{NULL} such that the first sidebar is removed.
 #' @family Sidebar Functions
 #' @inherit leaflet::addControl return
 #' @export
@@ -51,7 +50,7 @@ removeSidebar <- function(map, sidebar_id = NULL) {
 #' Close the Sidebar
 #' @param map A leaflet map widget
 #' @param sidebar_id The id of the sidebar (per \code{\link{sidebar_tabs}}).
-#'  Defaults to \code{NULL} such that the first sidebar is opened.
+#'  Defaults to \code{NULL} such that the first sidebar is used.
 #' @family Sidebar Functions
 #' @inherit leaflet::addControl return
 #' @export

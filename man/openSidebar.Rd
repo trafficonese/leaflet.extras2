@@ -12,7 +12,7 @@ openSidebar(map, id, sidebar_id = NULL, ns = NULL)
 \item{id}{The id of the \code{\link{sidebar_pane}} to open.}
 
 \item{sidebar_id}{The id of the sidebar (per \code{\link{sidebar_tabs}}).
-Defaults to \code{NULL} such that the first sidebar is opened.}
+Defaults to \code{NULL} such that the first sidebar is used.}
 
 \item{ns}{The namespace function, if used in Shiny modules.}
 }
