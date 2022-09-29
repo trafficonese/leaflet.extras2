@@ -1,6 +1,7 @@
 # leaflet.extras2 (development version)
 
 * Fixed bugs when Sidebar is used inside Shiny modules. The sidebar functions `addSidebar` and `openSidebar` now have an argument `ns`, where Shiny's namespacing function (e.g: session$ns) can be included.
+* Arrowheads now passes all options in `arrowheadOptions` to `L.polyline`
 
 
 # leaflet.extras2 1.2.0

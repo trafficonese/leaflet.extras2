@@ -41,10 +41,11 @@ addArrowhead <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 
   arrowheadOptions <- options
   options <- filterNULL(
-    list(stroke = stroke, color = color, weight = weight,
+    c(list(stroke = stroke, color = color, weight = weight,
          opacity = opacity, fill = fill, fillColor = fillColor,
          fillOpacity = fillOpacity, dashArray = dashArray,
-         smoothFactor = smoothFactor, noClip = noClip))
+         smoothFactor = smoothFactor, noClip = noClip),
+      arrowheadOptions))
 
 
   pgons <- derivePolygons(data, lng, lat, missing(lng), missing(lat),
