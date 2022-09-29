@@ -12,13 +12,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "d3": "^5.15.0",
+    "d3": "^7.6.1",
     "d3-hexbin": "^0.2.2",
     "labelgun": "^6.1.0",
     "leaflet": "^1.6.0",
     "leaflet-arrowheads": "^1.4.0",
     "leaflet-easyprint": "^2.1.9",
     "leaflet-geometryutil": "^0.10.1",
-    "leaflet.heightgraph": "^0.4.1"
+    "leaflet.heightgraph": "^1.4.0"
   }
 }
