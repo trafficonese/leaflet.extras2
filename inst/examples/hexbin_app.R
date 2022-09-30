@@ -92,6 +92,7 @@ server <- function(input, output, session) {
     pts <- do.call(rbind, lapply(pts$pts, function(x) do.call("cbind", x)))
     colnames(pts) <- c("lng","lat")
     clicked <- df[which(round(df$lng, 10) %in% round(pts[,"lng"], 10)),]
+    req(nrow(clicked) != 0)
 
     leafletProxy("map", session)  %>%
       clearGroup("clicked_markers") %>%
@@ -99,7 +100,8 @@ server <- function(input, output, session) {
                  label = ~category)
   })
   observeEvent(input$update_data, {
-    df <- data.frame(lat = rand_lat(n), lng = rand_lng(n))
+    df <<- data.frame(lat = rand_lat(n), lng = rand_lng(n),
+                      category = factor(sample(categories, n, replace = TRUE), levels = categories))
     leafletProxy("map", session) %>%
       updateHexbin(data = df)
   })
