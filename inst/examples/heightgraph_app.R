@@ -4,6 +4,8 @@ library(leaflet.extras2)
 library(sf)
 library(sfheaders)
 
+# data(atlStorms2005)
+
 data <- st_cast(st_as_sf(leaflet::atlStorms2005[1,]), "LINESTRING")
 data <- st_transform(data, 4326)
 data <- data.frame(st_coordinates(data))
