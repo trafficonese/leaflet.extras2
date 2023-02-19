@@ -73,7 +73,10 @@ LeafletWidget.methods.addPlayback= function(data, options) {
         return new L.CircleMarker(latlng, result);
     }
   };
-  if (options && options.icon) {
+
+  if (options && options.marker && options.icon == undefined) {
+    options.marker = options.marker;
+  } else if (options && options.icon) {
     var icoli = options.icon;
     var madeIcon = L.icon({
             iconUrl: icoli.iconUrl,

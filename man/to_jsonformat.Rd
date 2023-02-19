@@ -5,7 +5,7 @@
 \title{to_jsonformat
 Transform object to JSON expected format}
 \usage{
-to_jsonformat(data, time, popup = NULL, label = NULL)
+to_jsonformat(data, time, popup = NULL, label = NULL, name = NULL)
 }
 \arguments{
 \item{data}{The data}
@@ -15,6 +15,8 @@ to_jsonformat(data, time, popup = NULL, label = NULL)
 \item{popup}{Name of the popup column.}
 
 \item{label}{Name of the label column.}
+
+\item{name}{Name of the name column.}
 }
 \value{
 A list that is transformed to the expected JSON format

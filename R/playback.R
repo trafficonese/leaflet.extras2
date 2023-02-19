@@ -22,6 +22,7 @@ playbackDependencies <- function() {
 #'   Feature's with a time column.
 #' @param popup A formula with the column names for the popup content
 #' @param label A formula with the column names for the label content
+#' @param name A formula with the column names for the feature name
 #' @param time The column name of the time column. Default is \code{"time"}.
 #' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
 #' @param pathOpts style the CircleMarkers with
@@ -100,7 +101,8 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
                         label = NULL,
                         popupOptions = NULL,
                         labelOptions = NULL,
-                        options = playbackOptions()){
+                        options = playbackOptions(),
+                        name = NULL){
 
   if (!requireNamespace("sf")) {
     stop("The package `sf` is needed for this plugin. ",
@@ -109,11 +111,11 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 
   if (inherits(data, "list")) {
     data <- lapply(data, function(x) {
-      to_jsonformat(x, time, popup, label)
+      to_jsonformat(x, time, popup, label, name)
     })
     bounds <- do.call(rbind, lapply(data, function(x) x$geometry$coordinates))
   } else {
-    data <- to_jsonformat(data, time, popup, label)
+    data <- to_jsonformat(data, time, popup, label, name)
     bounds <- data$geometry$coordinates
   }
 
@@ -216,14 +218,16 @@ removePlayback <- function(map){
 #' @param time Name of the time column.
 #' @param popup Name of the popup column.
 #' @param label Name of the label column.
+#' @param name Name of the name column.
 #' @return A list that is transformed to the expected JSON format
-to_jsonformat <- function(data, time, popup=NULL, label=NULL) {
+to_jsonformat <- function(data, time, popup=NULL, label=NULL, name=NULL) {
   if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
   if (inherits(data, "sf")) {
     stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
     data <- to_ms(data, time)
     dataorig <- data
     data <- list("type"="Feature",
+                 "name"=evalFormula(name, dataorig)[1],
                  "geometry"=list(
                    "type"="MultiPoint",
                    "coordinates"=sf::st_coordinates(data)

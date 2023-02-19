@@ -14,7 +14,8 @@ addPlayback(
   label = NULL,
   popupOptions = NULL,
   labelOptions = NULL,
-  options = playbackOptions()
+  options = playbackOptions(),
+  name = NULL
 )
 }
 \arguments{
@@ -40,6 +41,8 @@ Feature's with a time column.}
 options for each label. Default \code{NULL}}
 
 \item{options}{List of additional options. See \code{\link{playbackOptions}}}
+
+\item{name}{A formula with the column names for the feature name}
 }
 \value{
 the new \code{map} object
