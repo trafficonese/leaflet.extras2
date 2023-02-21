@@ -18,54 +18,83 @@ data <- split(data, f = data$Name)
 
 
 ui <- fluidPage(
+  tags$head(tags$style("
+                       .leaflet-div-icon {
+                           background: transparent !important;
+                           border: unset !important;
+                       }
+                       .divicon {
+                          border: 1px solid #666;
+                          border-radius: 50%;
+                          font-size: 14px;
+                          color: black;
+                          text-align: center;
+                          width: 30px !important;
+                          height: 30px !important;
+                          padding-top: 3px;
+                          font-weight: 800;
+                       }
+                       .red {
+                         background-color: #db0a0a;
+                       }
+                       .green {
+                         background-color: #1fdb0a;
+                       }
+                       .blue {
+                         background-color: #0a34db;
+                       }
+                       .orange {
+                         background-color: #f4ba27;
+                       }
+                       .purple {
+                         background-color: #f127f4;
+                       }
+                       ")),
   leafletOutput("map", height=800)
 )
 
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
-    map <- leaflet() %>%
-      addTiles()
-    map$dependencies <- c(map$dependencies,
-                          leaflet:::leafletAwesomeMarkersDependencies())
-    map %>%
+    leaflet() %>%
+      addTiles() %>%
       addPlayback(data = data,
                   popup = ~popup,
                   label = ~label,
                   name = ~Name,
-                  popupOptions = popupOptions(offset=c(0,-35)),
+                  popupOptions = popupOptions(offset=c(8,0)),
+                  labelOptions  = labelOptions(offset=c(8,-10)),
                   options = playbackOptions(radius = 3, tickLen = 1000000,
                                             speed = 5000,
                                             marker =  htmlwidgets::JS("
                                                function(feature) {
-                                                 var color = 'blue';
-                                                 var icon = null;
+                                                 var CssClass = 'blue';
+                                                 var text = null;
                                                  switch (feature.name) {
                                                         case 'ALPHA':
-                                                            color = 'red';
-                                                            icon = 'glass';
+                                                            CssClass = 'red';
+                                                            text = 'A';
                                                             break;
                                                         case 'ARLENE':
-                                                            color = 'green';
-                                                            icon = 'flag';
+                                                            CssClass = 'green';
+                                                            text = 'B';
                                                             break;
                                                         case 'BRET':
-                                                            color = 'blue';
-                                                            icon = 'star';
+                                                            CssClass = 'blue';
+                                                            text = 'C';
                                                             break;
                                                         case 'CINDY':
-                                                            color = 'orange';
-                                                            icon = 'home';
+                                                            CssClass = 'orange';
+                                                            text = 'D';
                                                             break;
                                                         case 'DELTA':
-                                                            color = 'purple';
-                                                            icon = 'bookmark';
+                                                            CssClass = 'purple';
+                                                            text = 'E';
                                                             break;
                                                  }
                                                  return {
-                                                  icon: L.AwesomeMarkers.icon({
-                                                             icon: icon,
-                                                             markerColor: color
-                                                             })
+                                                  icon: L.divIcon({
+                                                     html: '<div class= \"divicon ' + CssClass + '\">' + text + '</div>'
+                                                   })
                                                   }
                                                 }"),
                                             maxInterpolationTime = 10000,
