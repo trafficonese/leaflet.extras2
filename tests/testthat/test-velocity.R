@@ -1,8 +1,9 @@
 library(jsonlite)
+library(curl)
 
 test_that("velocity", {
 
-  skip_if_offline(host = "https://raw.githubusercontent.com")
+  skip_if(!curl::has_internet())
 
   content <- "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json"
 
