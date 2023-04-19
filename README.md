@@ -2,7 +2,7 @@
 
 <!-- badges: start -->
 [![](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://www.r-pkg.org/pkg/leaflet.extras2)
-[![cran checks](https://cranchecks.info/badges/worst/leaflet.extras2)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
+[![cran checks](https://badges.cranchecks.info/worst/leaflet.extras2.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
 [![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/leaflet.extras2?color=brightgreen)](https://www.r-pkg.org/pkg/leaflet.extras2)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://rdrr.io/cran/leaflet.extras2/)
 [![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html#maturing)
