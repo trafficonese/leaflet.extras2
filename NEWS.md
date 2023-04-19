@@ -3,6 +3,7 @@
 * Fixed bugs when Sidebar is used inside Shiny modules. The sidebar functions `addSidebar` and `openSidebar` now have an argument `ns`, where Shiny's namespacing function (e.g: session$ns) can be included.
 * Arrowheads now passes all options in `arrowheadOptions` to `L.polyline`
 * Update `leaflet.heightgraph` to [1.3.2](https://github.com/GIScience/Leaflet.Heightgraph/releases/tag/v1.3.2). Has no dependency to `d3` anymore.
+* Skip tests which use an internet connection
 
 # leaflet.extras2 1.2.0
 
