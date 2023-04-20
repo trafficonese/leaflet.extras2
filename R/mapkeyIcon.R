@@ -135,7 +135,7 @@ makeMapkeyIcon <- function(
 #' @family Mapkey Functions
 #' @references \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #' @return A list of mapkey-icon data that can be passed to the argument \code{icon}
-#' @examples
+#' @examples \dontrun{
 #' library(leaflet)
 #' leaflet()  %>%
 #'   addMapkeyMarkers(data = breweries91,
@@ -143,6 +143,7 @@ makeMapkeyIcon <- function(
 #'                      color = "red",
 #'                      borderRadius = 0,
 #'                      iconSize = 25))
+#' }
 mapkeyIcons <- function(
   icon = 'mapkey',
   color = "#ff0000",
