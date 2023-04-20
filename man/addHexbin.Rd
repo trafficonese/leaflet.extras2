@@ -75,7 +75,7 @@ leaflet()  \%>\%
            ))
 }
 \references{
-\url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
+\url{https://github.com/bluehalo/leaflet-d3#hexbins-api}
 }
 \seealso{
 Other Hexbin-D3 Functions: 

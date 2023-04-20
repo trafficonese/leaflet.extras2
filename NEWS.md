@@ -4,6 +4,7 @@
 * Arrowheads now passes all options in `arrowheadOptions` to `L.polyline`
 * Update `leaflet.heightgraph` to [1.3.2](https://github.com/GIScience/Leaflet.Heightgraph/releases/tag/v1.3.2). Has no dependency to `d3` anymore.
 * Skip tests which use an internet connection
+# Adapted URLs and deleted old Mapkey URL
 
 # leaflet.extras2 1.2.0
 

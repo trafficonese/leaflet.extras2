@@ -66,7 +66,7 @@ account for \code{frequency} or \code{proportionalToTotal} from within the
 \code{perArrowheadOptions} callback. See the example for details.}
 
 \item{...}{Additional options for arrowheads, inherited from
-\href{https://leafletjs.com/reference-1.6.0.html#path}{L.Path}}
+\href{https://leafletjs.com/reference.html#path}{L.Path}}
 }
 \value{
 A list of options for \code{addArrowhead} polylines
@@ -74,7 +74,7 @@ A list of options for \code{addArrowhead} polylines
 \description{
 Additional list of options for polylines with arrowheads. You can also pass
 options inherited from
-\href{https://leafletjs.com/reference-1.6.0.html#path}{L.Path}
+\href{https://leafletjs.com/reference.html#path}{L.Path}
 }
 \references{
 \url{https://github.com/slutske22/leaflet-arrowheads#options}
