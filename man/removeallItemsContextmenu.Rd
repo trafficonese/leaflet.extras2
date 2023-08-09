@@ -22,6 +22,8 @@ Other Contextmenu Functions:
 \code{\link{context_mapmenuItems}()},
 \code{\link{context_markermenuItems}()},
 \code{\link{context_menuItem}()},
+\code{\link{disableContextmenu}()},
+\code{\link{enableContextmenu}()},
 \code{\link{hideContextmenu}()},
 \code{\link{insertItemContextmenu}()},
 \code{\link{mapmenuItems}()},

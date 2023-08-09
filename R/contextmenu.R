@@ -95,6 +95,28 @@ showContextmenu <- function(map, lat = NULL, lng = NULL,
   leaflet::invokeMethod(map, NULL, "showContextmenu", pts)
 }
 
+#' enableContextmenu
+#'
+#' Enable the contextmenu
+#' @family Contextmenu Functions
+#' @inheritParams addContextmenu
+#' @return A leaflet map object
+#' @export
+enableContextmenu <- function(map) {
+  leaflet::invokeMethod(map, NULL, "enableContextmenu")
+}
+
+#' disableContextmenu
+#'
+#' Disable the contextmenu
+#' @family Contextmenu Functions
+#' @inheritParams addContextmenu
+#' @return A leaflet map object
+#' @export
+disableContextmenu <- function(map) {
+  leaflet::invokeMethod(map, NULL, "disableContextmenu")
+}
+
 #' hideContextmenu
 #'
 #' Hide the contextmenu

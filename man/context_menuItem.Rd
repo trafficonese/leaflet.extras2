@@ -30,6 +30,8 @@ Other Contextmenu Functions:
 \code{\link{addItemContextmenu}()},
 \code{\link{context_mapmenuItems}()},
 \code{\link{context_markermenuItems}()},
+\code{\link{disableContextmenu}()},
+\code{\link{enableContextmenu}()},
 \code{\link{hideContextmenu}()},
 \code{\link{insertItemContextmenu}()},
 \code{\link{mapmenuItems}()},

@@ -11,6 +11,8 @@ ui <- fluidPage(
   actionButton("rm", "Remove Option 2"),
   actionButton("disable", "Disable Contextmenu Item 1"),
   actionButton("enable", "Enable Contextmenu Item 1"),
+  actionButton("disable_all", "Disable Contextmenu"),
+  actionButton("enable_all", "Enable Contextmenu"),
   actionButton("rmall", "Remove All Map Items"),
   splitLayout(
     div(
@@ -163,6 +165,14 @@ server <- function(input, output, session) {
   observeEvent(input$hide, {
     leafletProxy("map") %>%
       hideContextmenu()
+  })
+  observeEvent(input$disable_all, {
+    leafletProxy("map") %>%
+      disableContextmenu()
+  })
+  observeEvent(input$enable_all, {
+    leafletProxy("map") %>%
+      enableContextmenu()
   })
   observeEvent(input$add, {
     ## Requires https://github.com/rstudio/leaflet/pull/696 to be merged!

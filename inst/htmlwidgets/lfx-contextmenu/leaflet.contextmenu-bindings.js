@@ -30,6 +30,12 @@ LeafletWidget.methods.showContextmenu = function(coords) {
 LeafletWidget.methods.hideContextmenu = function() {
   this.contextmenu.hide();
 };
+LeafletWidget.methods.enableContextmenu = function() {
+  this.contextmenu.enable();
+};
+LeafletWidget.methods.disableContextmenu = function() {
+  this.contextmenu.disable();
+};
 LeafletWidget.methods.addItemContextmenu = function(options) {
   // Requires https://github.com/rstudio/leaflet/pull/696 to be merged!
   this.contextmenu.addItem(options);
