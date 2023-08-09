@@ -19,8 +19,7 @@ makeMapkeyIcon(
 )
 }
 \arguments{
-\item{icon}{ID of the mapkey Icon you want to use. See
-\href{http://mapkeyicons.com/}{mapkeyicons.com} for a full list.}
+\item{icon}{ID of the mapkey Icon you want to use.}
 
 \item{color}{Any CSS color (e.g. 'red','rgba(20,160,90,0.5)', '#686868', ...)}
 
@@ -40,8 +39,7 @@ effect)}
 \item{hoverCSS}{CSS code (e.g. \code{"background-color:#992b00 !important;
 color:#99defc !important;"})}
 
-\item{htmlCode}{e.g. \code{'&#57347;&#xe003;'}. See
-\href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
+\item{htmlCode}{e.g. \code{'&#57347;&#xe003;'}.}
 
 \item{boxShadow}{Should a shadow be visible}
 }

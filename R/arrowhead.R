@@ -63,7 +63,7 @@ addArrowhead <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 #'
 #' Additional list of options for polylines with arrowheads. You can also pass
 #' options inherited from
-#' \href{https://leafletjs.com/reference-1.6.0.html#path}{L.Path}
+#' \href{https://leafletjs.com/reference.html#path}{L.Path}
 #'
 #' @param yawn Defines the width of the opening of the arrowhead, given in
 #'   degrees. The larger the angle, the wider the arrowhead.
@@ -110,7 +110,7 @@ addArrowhead <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 #'   account for \code{frequency} or \code{proportionalToTotal} from within the
 #'   \code{perArrowheadOptions} callback. See the example for details.
 #' @param ... Additional options for arrowheads, inherited from
-#'   \href{https://leafletjs.com/reference-1.6.0.html#path}{L.Path}
+#'   \href{https://leafletjs.com/reference.html#path}{L.Path}
 #' @references \url{https://github.com/slutske22/leaflet-arrowheads#options}
 #' @family Arrowhead Functions
 #' @return A list of options for \code{addArrowhead} polylines

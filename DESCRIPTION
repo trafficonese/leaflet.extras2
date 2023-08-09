@@ -1,7 +1,7 @@
 Package: leaflet.extras2
 Type: Package
 Title: Extra Functionality for 'leaflet' Package
-Version: 1.2.0.9000
+Version: 1.2.1.9000
 Authors@R: c(
       person("Gatscha", "Sebastian", email = "sebastian_gatscha@gmx.at", role = c("aut", "cre")),
       person("Ricardo Rodrigo", "Basa", email = "radbasa@gmail.com", role = c("ctb")),
@@ -27,7 +27,8 @@ Suggests:
     testthat (>= 2.1.0),
     fontawesome,
     htmlwidgets,
-    covr
+    covr,
+    curl
 URL: https://trafficonese.github.io/leaflet.extras2/, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.2.0
