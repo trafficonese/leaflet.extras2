@@ -32,8 +32,10 @@ test_that("movingmarker", {
                     popup="Arrr")
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
-  expect_equal(m$dependencies[[1]]$name, "lfx-movingmarker")
-  expect_equal(m$dependencies[[2]]$name, "leaflet-awesomemarkers")
+  expect_contains(
+    vapply(m$dependencies, function(x) x$name, character(1)),
+    c("lfx-movingmarker", "leaflet-awesomemarkers")
+  )
 
   ## Data is Simple Feature LINESTRING
   df <- sf::st_as_sf(atlStorms2005)[1,]
