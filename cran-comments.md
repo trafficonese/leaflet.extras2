@@ -2,4 +2,4 @@
 
 0 errors v | 0 warnings v | 0 notes v
 
-* This is a patch release. Tests that use an internet connection fail silently & URLs were adapted.
+* This is a patch release for the leaflet 2.2.0 release.
