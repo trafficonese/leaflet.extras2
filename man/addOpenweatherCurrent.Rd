@@ -15,8 +15,7 @@ addOpenweatherCurrent(
 \arguments{
 \item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{apikey}{a valid Openweathermap-API key. Get one from
-\href{https://openweathermap.org/api}{here}.}
+\item{apikey}{a valid Openweathermap-API key.}
 
 \item{group}{the name of the group the newly created layers should belong to
 (for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
