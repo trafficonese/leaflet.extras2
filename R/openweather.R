@@ -14,7 +14,7 @@ openweatherDependency <- function() {
 #' Add OpenWeatherMap Tiles
 #' @inheritParams leaflet::addWMSTiles
 #' @param apikey a valid OpenWeatherMap-API key. Get one from
-#'   \href{https://openweathermap.org/api}{here}.
+#'   \href{https://openweathermap.org}{here}.
 #' @param layers character vector of layers you wish to add to the map. The
 #'   following layers are currently possible \code{c("clouds", "cloudsClassic",
 #'   "precipitation", "precipitationClassic", "rain", "rainClassic", "snow",

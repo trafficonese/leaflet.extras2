@@ -53,6 +53,7 @@ icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
 }
 \examples{
+\dontrun{
 library(leaflet)
 leaflet()  \%>\%
   addMapkeyMarkers(data = breweries91,
@@ -60,6 +61,7 @@ leaflet()  \%>\%
                      color = "red",
                      borderRadius = 0,
                      iconSize = 25))
+}
 }
 \references{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}

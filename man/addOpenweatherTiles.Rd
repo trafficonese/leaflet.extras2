@@ -18,7 +18,7 @@ addOpenweatherTiles(
 \item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{apikey}{a valid OpenWeatherMap-API key. Get one from
-\href{https://openweathermap.org/api}{here}.}
+\href{https://openweathermap.org}{here}.}
 
 \item{layers}{character vector of layers you wish to add to the map. The
 following layers are currently possible \code{c("clouds", "cloudsClassic",
