@@ -1,4 +1,4 @@
-# leaflet.extras2 (development version)
+# leaflet.extras2 1.2.2
 
 * Added `enableContextmenu` and `disableContextmenu`
 * Fixed tests for leaflet v2.2.0. Thanks to @gadenbuie (#60)
