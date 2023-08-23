@@ -1,5 +1,7 @@
 # leaflet.extras2 (development version)
 
+* Fix for roxygen2 > 7.0.0. #1491
+
 # leaflet.extras2 1.2.2
 
 * Added `enableContextmenu` and `disableContextmenu`
