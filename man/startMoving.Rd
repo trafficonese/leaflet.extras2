@@ -46,24 +46,24 @@ The marker begins its path or resumes if it is paused.
 }
 \section{Functions}{
 \itemize{
-\item \code{stopMoving}: Manually stops the marker, if you call \code{start}
+\item \code{stopMoving()}: Manually stops the marker, if you call \code{start}
 after, the marker starts again the polyline at the beginning.
 
-\item \code{pauseMoving}: Pauses the marker
+\item \code{pauseMoving()}: Pauses the marker
 
-\item \code{resumeMoving}: The marker resumes its animation
+\item \code{resumeMoving()}: The marker resumes its animation
 
-\item \code{addLatLngMoving}: Adds a point to the polyline.
+\item \code{addLatLngMoving()}: Adds a point to the polyline.
 Useful, if we have to set the path one by one.
 
-\item \code{moveToMoving}: Stop the current animation and make the marker move
+\item \code{moveToMoving()}: Stop the current animation and make the marker move
 to \code{latlng} in \code{duration} ms.
 
-\item \code{addStationMoving}: The marker will stop at the \code{pointIndex} point
+\item \code{addStationMoving()}: The marker will stop at the \code{pointIndex} point
 of the polyline for \code{duration} milliseconds. You can't add a station
 at the first or last point of the polyline.
-}}
 
+}}
 \references{
 \url{https://github.com/ewoken/Leaflet.MovingMarker}
 }

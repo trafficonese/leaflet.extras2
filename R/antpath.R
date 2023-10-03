@@ -80,7 +80,8 @@ antpathOptions = function(
   pulseColor = "#ffffff",
   lineCap = NULL, lineJoin = NULL,
   interactive = TRUE, pointerEvents = NULL,
-  className = "") {
+  className = "",
+  ...) {
 
   filterNULL(list(
     delay = delay,
@@ -93,7 +94,8 @@ antpathOptions = function(
     lineJoin = lineJoin,
     interactive = interactive,
     pointerEvents = pointerEvents,
-    className = className
+    className = className,
+    ...
   ))
 }
 
