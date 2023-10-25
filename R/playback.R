@@ -142,7 +142,7 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' @param tickLen Set tick length in milliseconds. Increasing this value, may
 #'   improve performance, at the cost of animation smoothness. Default is 250
 #' @param speed Set float multiplier for default animation speed. Default is 50
-#' @param maxInterpolationTime Set max interpolation time in seconds.
+#' @param maxInterpolationTime Set max interpolation time in milliseconds.
 #'   Default is 5*60*1000 (5 minutes).
 #' @param tracksLayer Set \code{TRUE} if you want to show layer control on the
 #'   map. Default is \code{TRUE}
