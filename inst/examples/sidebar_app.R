@@ -20,7 +20,8 @@ ui <- fluidPage(
               tagList(
                 actionButton("open", "Open Sidebar"),
                 actionButton("close", "Close Sidebar"),
-                actionButton("clear", "Clear Sidebar")
+                actionButton("clear", "Clear Sidebar"),
+                verbatimTextOutput("whichtab")
               ),
               tagList(
                 sidebar_tabs(id = "mysidebarid",
@@ -78,9 +79,11 @@ server <- function(input, output, session) {
         options = list(position = "left")
       )
   })
+  output$whichtab <- renderPrint({
+    paste0(req(input$mysidebarid), " is open")
+  })
 
   observe({
-
     req(input$obs)
 
     df <- breweries_data |>

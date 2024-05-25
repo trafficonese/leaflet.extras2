@@ -1,6 +1,7 @@
 # leaflet.extras2 (development version)
 
 * Fix for roxygen2 > 7.0.0. #1491
+* The opened sidebar tab is returned as Shiny input using the `sidebar_tabs` ID.
 
 # leaflet.extras2 1.2.2
 

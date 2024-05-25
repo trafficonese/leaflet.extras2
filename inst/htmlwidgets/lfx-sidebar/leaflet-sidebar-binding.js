@@ -49,8 +49,11 @@ LeafletWidget.methods.addSidebar = function(id, options) {
       _onClick: function() {
         if (L.DomUtil.hasClass(this, 'active')) {
           this._sidebar.close();
+          Shiny.setInputValue(id, null);
         } else if (!L.DomUtil.hasClass(this, 'disabled')) {
-          this._sidebar.open(this.querySelector('a').hash.slice(1));
+          const openid = this.querySelector('a').hash.slice(1);
+          this._sidebar.open(openid);
+          Shiny.setInputValue(id, openid);
           $(this.firstElementChild.attributes.href.nodeValue).trigger('shown');
         }
       }
@@ -73,6 +76,9 @@ LeafletWidget.methods.removeSidebar = function(sidebar_id) {
     var tid =
       typeof(sidebar_id) === "string" ?
         sidebar_id : Object.keys(map.sidebar)[0];
+
+    Shiny.setInputValue(tid, null);
+
     var sidebar = $(`#${tid}`);
     if (sidebar[0]) {
       // Remove left/right CSS
@@ -95,6 +101,9 @@ LeafletWidget.methods.closeSidebar = function(sidebar_id) {
     var tid =
       typeof(sidebar_id) === "string" ?
         sidebar_id : Object.keys(map.sidebar)[0];
+
+    Shiny.setInputValue(tid, null);
+
     if (map.sidebar[tid]) {
       map.sidebar[tid].close();
     }
@@ -108,6 +117,9 @@ LeafletWidget.methods.openSidebar = function(x) {
     var tid =
       typeof(x.sidebar_id) === "string" ?
         x.sidebar_id : Object.keys(map.sidebar)[0];
+
+    Shiny.setInputValue(tid, x.id);
+
     if (map.sidebar[tid]) {
       map.sidebar[tid].open(x.id);
     }
