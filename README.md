@@ -25,9 +25,9 @@ For latest development version
 remotes::install_github('trafficonese/leaflet.extras2')
 ```
 
-### Progress
+### Integrated Plugins
 
-Plugins integrated so far ...
+If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
@@ -53,13 +53,9 @@ Plugins integrated so far ...
 -   [WMS](https://github.com/heigeo/leaflet.wms)
 
 
-If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
-
 ### Documentation
 
-The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation.
-
-Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/trafficonese/leaflet.extras2/tree/master/inst/examples) available.
+The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation and the [examples](https://github.com/trafficonese/leaflet.extras2/tree/master/inst/examples).
 
 ### FAQ
 
