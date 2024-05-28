@@ -12,7 +12,7 @@ License: GPL-3 | file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 3.1.0),
+    R (>= 3.5.0),
     leaflet (>= 2.0.0)
 Imports:
     htmltools,
