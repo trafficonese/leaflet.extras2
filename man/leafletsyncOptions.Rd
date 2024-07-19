@@ -27,8 +27,8 @@ Additional list of options.
 }
 \seealso{
 Other leafletsync Functions: 
-\code{\link{addLeafletsyncDependency}()},
 \code{\link{addLeafletsync}()},
+\code{\link{addLeafletsyncDependency}()},
 \code{\link{isSynced}()},
 \code{\link{unsync}()}
 }

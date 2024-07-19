@@ -21,8 +21,8 @@ Removes the synchronization of multiple maps from a specific map.
 }
 \seealso{
 Other leafletsync Functions: 
-\code{\link{addLeafletsyncDependency}()},
 \code{\link{addLeafletsync}()},
+\code{\link{addLeafletsyncDependency}()},
 \code{\link{isSynced}()},
 \code{\link{leafletsyncOptions}()}
 }

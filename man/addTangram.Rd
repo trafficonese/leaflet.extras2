@@ -7,7 +7,7 @@
 addTangram(map, scene = NULL, layerId = NULL, group = NULL, options = NULL)
 }
 \arguments{
-\item{map}{A leaflet map widget}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. If the file
 is within the \code{/www} folder of a Shiny-App, only the filename must be
@@ -16,10 +16,13 @@ given, otherwise the full path is needed. See the
 \href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
 information on how to edit such a .yaml file.}
 
-\item{layerId}{A layer ID}
+\item{layerId}{the layer id}
 
-\item{group}{The name of the group the newly created layer should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{options}{A list of further options. See the app in the
 \code{examples/tangram} folder or the

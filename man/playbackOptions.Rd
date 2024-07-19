@@ -31,7 +31,7 @@ improve performance, at the cost of animation smoothness. Default is 250}
 
 \item{speed}{Set float multiplier for default animation speed. Default is 50}
 
-\item{maxInterpolationTime}{Set max interpolation time in seconds.
+\item{maxInterpolationTime}{Set max interpolation time in milliseconds.
 Default is 5*60*1000 (5 minutes).}
 
 \item{tracksLayer}{Set \code{TRUE} if you want to show layer control on the

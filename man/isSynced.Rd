@@ -30,8 +30,8 @@ For a map with id \code{map1} the input can be retrieved with
 }
 \seealso{
 Other leafletsync Functions: 
-\code{\link{addLeafletsyncDependency}()},
 \code{\link{addLeafletsync}()},
+\code{\link{addLeafletsyncDependency}()},
 \code{\link{leafletsyncOptions}()},
 \code{\link{unsync}()}
 }

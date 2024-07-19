@@ -31,4 +31,4 @@ Suggests:
     curl
 URL: https://trafficonese.github.io/leaflet.extras2/, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
