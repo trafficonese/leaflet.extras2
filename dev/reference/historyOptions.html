@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet"><script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet"><script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet"><script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><link href="libs/font-awesome-6.4.2/css/all.min.css" rel="stylesheet"><link href="libs/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet"><link href="libs/lfx-history-1.0.0/lfx-history.css" rel="stylesheet"><script src="libs/lfx-history-1.0.0/zoomCenter.js"></script><script src="libs/lfx-history-1.0.0/lfx-history.js"></script><script src="libs/lfx-history-1.0.0/lfx-history-bindings.js"></script></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>History Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/history.R" class="external-link"><code>R/history.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/history.R" class="external-link"><code>R/history.R</code></a></small>
     <div class="hidden name"><code>historyOptions.Rd</code></div>
     </div>
 
@@ -71,72 +71,70 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>position</dt>
+
+
+<dl><dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
 <dd><p>Set the position of the History control. Default is
 <code>topright</code>.</p></dd>
 
 
-<dt>maxMovesToSave</dt>
+<dt id="arg-maxmovestosave">maxMovesToSave<a class="anchor" aria-label="anchor" href="#arg-maxmovestosave"></a></dt>
 <dd><p>Number of moves in the history to save before clearing
 out the oldest. Default value is 10, use 0 or a negative number to make
 unlimited.</p></dd>
 
 
-<dt>backImage</dt>
+<dt id="arg-backimage">backImage<a class="anchor" aria-label="anchor" href="#arg-backimage"></a></dt>
 <dd><p>The class for the `back` button icon. Default is
 <code>"fa fa-caret-left"</code>.</p></dd>
 
 
-<dt>forwardImage</dt>
+<dt id="arg-forwardimage">forwardImage<a class="anchor" aria-label="anchor" href="#arg-forwardimage"></a></dt>
 <dd><p>The class for the `forward` button icon. Default is
 <code>"fa fa-caret-right"</code>.</p></dd>
 
 
-<dt>backText</dt>
-<dd><p>The text in the buttons. Default is ''.</p></dd>
+<dt id="arg-backtext">backText<a class="anchor" aria-label="anchor" href="#arg-backtext"></a></dt>
+<dd><p>The text in the buttons. Default is ”.</p></dd>
 
 
-<dt>forwardText</dt>
-<dd><p>The text in the buttons. Default is ''.</p></dd>
+<dt id="arg-forwardtext">forwardText<a class="anchor" aria-label="anchor" href="#arg-forwardtext"></a></dt>
+<dd><p>The text in the buttons. Default is ”.</p></dd>
 
 
-<dt>backTooltip</dt>
+<dt id="arg-backtooltip">backTooltip<a class="anchor" aria-label="anchor" href="#arg-backtooltip"></a></dt>
 <dd><p>Tooltip content. Default is <code>"Go to Previous Extent"</code>.</p></dd>
 
 
-<dt>forwardTooltip</dt>
+<dt id="arg-forwardtooltip">forwardTooltip<a class="anchor" aria-label="anchor" href="#arg-forwardtooltip"></a></dt>
 <dd><p>Tooltip content. Default is <code>"Go to Next Extent"</code>.</p></dd>
 
 
-<dt>backImageBeforeText</dt>
+<dt id="arg-backimagebeforetext">backImageBeforeText<a class="anchor" aria-label="anchor" href="#arg-backimagebeforetext"></a></dt>
 <dd><p>When both text and image are present, whether to
 show the image first or the text first (left to right). Default is
 <code>TRUE</code></p></dd>
 
 
-<dt>forwardImageBeforeText</dt>
+<dt id="arg-forwardimagebeforetext">forwardImageBeforeText<a class="anchor" aria-label="anchor" href="#arg-forwardimagebeforetext"></a></dt>
 <dd><p>When both text and image are present, whether
 to show the image first or the text first (left to right). Default is
 <code>FALSE</code></p></dd>
 
 
-<dt>orientation</dt>
+<dt id="arg-orientation">orientation<a class="anchor" aria-label="anchor" href="#arg-orientation"></a></dt>
 <dd><p>Whether to position the buttons on top of one another or
 side-by-side. Default is <code>horizontal</code></p></dd>
 
 
-<dt>shouldSaveMoveInHistory</dt>
+<dt id="arg-shouldsavemoveinhistory">shouldSaveMoveInHistory<a class="anchor" aria-label="anchor" href="#arg-shouldsavemoveinhistory"></a></dt>
 <dd><p>A JS callback you can provide that gets called
 with every move. return false to not save a move.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of further options for <code>addHistory</code></p>
-
-
+    <p>A list of further options for <code>addHistory</code></p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -144,7 +142,7 @@ with every move. return false to not save a move.</p></dd>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other History Functions: 
+    <div class="dont-index"><p>Other History Functions:
 <code><a href="addHistory.html">addHistory</a>()</code>,
 <code><a href="clearFuture.html">clearFuture</a>()</code>,
 <code><a href="clearHistory.html">clearHistory</a>()</code>,
@@ -178,15 +176,15 @@ with every move. return false to not save a move.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

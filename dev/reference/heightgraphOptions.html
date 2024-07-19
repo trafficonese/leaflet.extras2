@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>heightgraphOptions</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/heightgraph.R" class="external-link"><code>R/heightgraph.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/heightgraph.R" class="external-link"><code>R/heightgraph.R</code></a></small>
     <div class="hidden name"><code>heightgraphOptions.Rd</code></div>
     </div>
 
@@ -70,41 +70,43 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>position</dt>
+
+
+<dl><dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
 <dd><p>position of control: "topleft", "topright", "bottomleft", or
 "bottomright". Default is <code>bottomright</code>.</p></dd>
 
 
-<dt>width</dt>
+<dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
 <dd><p>The width of the expanded heightgraph display in pixels. Default
 is <code>800</code>.</p></dd>
 
 
-<dt>height</dt>
+<dt id="arg-height">height<a class="anchor" aria-label="anchor" href="#arg-height"></a></dt>
 <dd><p>The height of the expanded heightgraph display in pixels.
 Default is <code>200</code>.</p></dd>
 
 
-<dt>margins</dt>
+<dt id="arg-margins">margins<a class="anchor" aria-label="anchor" href="#arg-margins"></a></dt>
 <dd><p>The margins define the distance between the border of the
 heightgraph and the actual graph inside. You are able to specify margins
 for top, right, bottom and left in pixels. Default is <code>list(top = 10,
 right = 30, bottom = 55, left = 50)</code>.</p></dd>
 
 
-<dt>expand</dt>
+<dt id="arg-expand">expand<a class="anchor" aria-label="anchor" href="#arg-expand"></a></dt>
 <dd><p>Boolean value that defines if the heightgraph should be
 expanded on creation. Default is <code>200</code>.</p></dd>
 
 
-<dt>expandCallback</dt>
+<dt id="arg-expandcallback">expandCallback<a class="anchor" aria-label="anchor" href="#arg-expandcallback"></a></dt>
 <dd><p>Function to be called if the heightgraph is expanded or
 reduced. The state of the heightgraph is passed as an argument. It is
 <code>TRUE</code> when expanded and <code>FALSE</code> when reduced. Default is
 <code>NULL</code>.</p></dd>
 
 
-<dt>mappings</dt>
+<dt id="arg-mappings">mappings<a class="anchor" aria-label="anchor" href="#arg-mappings"></a></dt>
 <dd><p>You may add a mappings object to customize the colors and
 labels in the height graph. Without adding custom mappings the segments and
 labels within the graph will be displayed in random colors. Each key of the
@@ -112,27 +114,27 @@ object must correspond to the <code>summary</code> key in <code>properties</code
 within the <code>FeatureCollection</code>. Default is <code>NULL</code>.</p></dd>
 
 
-<dt>highlightStyle</dt>
+<dt id="arg-highlightstyle">highlightStyle<a class="anchor" aria-label="anchor" href="#arg-highlightstyle"></a></dt>
 <dd><p>You can customize the highlight style when using the
 horizontal line to find parts of the route above an elevation value. Use
 any Leaflet Path options as value of the highlightStyle parameter. Default
 is <code>list(color = "red")</code>.</p></dd>
 
 
-<dt>translation</dt>
+<dt id="arg-translation">translation<a class="anchor" aria-label="anchor" href="#arg-translation"></a></dt>
 <dd><p>You can change the labels of the heightgraph info field by
 passing translations for <code>distance</code>, <code>elevation</code>,
 <code>segment_length</code>, <code>type</code> and <code>legend</code>. Default is
 <code>NULL</code>.</p></dd>
 
 
-<dt>xTicks</dt>
+<dt id="arg-xticks">xTicks<a class="anchor" aria-label="anchor" href="#arg-xticks"></a></dt>
 <dd><p>Specify the tick frequency in the x axis of the graph.
 Corresponds approximately to 2 to the power of value ticks. Default is
 <code>3</code>.</p></dd>
 
 
-<dt>yTicks</dt>
+<dt id="arg-yticks">yTicks<a class="anchor" aria-label="anchor" href="#arg-yticks"></a></dt>
 <dd><p>Specify the tick frequency in the y axis of the graph.
 Corresponds approximately to 2 to the power of value ticks. Default is
 <code>3</code>.</p></dd>
@@ -140,15 +142,11 @@ Corresponds approximately to 2 to the power of value ticks. Default is
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of further options for <code>addHeightgraph</code></p>
-
-
+    <p>A list of further options for <code>addHeightgraph</code></p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Heightgraph Functions: 
+    <div class="dont-index"><p>Other Heightgraph Functions:
 <code><a href="addHeightgraph.html">addHeightgraph</a>()</code></p></div>
     </div>
 
@@ -164,15 +162,15 @@ Corresponds approximately to 2 to the power of value ticks. Default is
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

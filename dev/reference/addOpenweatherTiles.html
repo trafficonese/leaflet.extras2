@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add OpenWeatherMap Tiles</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/openweather.R" class="external-link"><code>R/openweather.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/openweather.R" class="external-link"><code>R/openweather.R</code></a></small>
     <div class="hidden name"><code>addOpenweatherTiles.Rd</code></div>
     </div>
 
@@ -66,46 +66,46 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>map</dt>
+
+
+<dl><dt id="arg-map">map<a class="anchor" aria-label="anchor" href="#arg-map"></a></dt>
 <dd><p>a map widget object created from <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a>()</code></p></dd>
 
 
-<dt>apikey</dt>
+<dt id="arg-apikey">apikey<a class="anchor" aria-label="anchor" href="#arg-apikey"></a></dt>
 <dd><p>a valid OpenWeatherMap-API key.</p></dd>
 
 
-<dt>layers</dt>
+<dt id="arg-layers">layers<a class="anchor" aria-label="anchor" href="#arg-layers"></a></dt>
 <dd><p>character vector of layers you wish to add to the map. The
 following layers are currently possible <code>c("clouds", "cloudsClassic",
 "precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
 "pressure", "pressureContour", "temperature", "wind")</code>.</p></dd>
 
 
-<dt>group</dt>
+<dt id="arg-group">group<a class="anchor" aria-label="anchor" href="#arg-group"></a></dt>
 <dd><p>the name of the group the newly created layers should belong to
 (for <code><a href="https://rstudio.github.io/leaflet/reference/remove.html" class="external-link">clearGroup</a></code> and <code><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html" class="external-link">addLayersControl</a></code> purposes).
-Human-friendly group names are permitted--they need not be short,
+Human-friendly group names are permitted–they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.</p></dd>
 
 
-<dt>layerId</dt>
+<dt id="arg-layerid">layerId<a class="anchor" aria-label="anchor" href="#arg-layerid"></a></dt>
 <dd><p>the layer id</p></dd>
 
 
-<dt>opacity</dt>
+<dt id="arg-opacity">opacity<a class="anchor" aria-label="anchor" href="#arg-opacity"></a></dt>
 <dd><p>opacity of the layer</p></dd>
 
 
-<dt>options</dt>
+<dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
 <dd><p>List of further options. See <code><a href="openweatherOptions.html">openweatherOptions</a></code></p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>the new <code>map</code> object</p>
+    <p>the new <code>map</code> object</p>
     </div>
     <div id="note">
     <h2>Note</h2>
@@ -119,7 +119,7 @@ layers (e.g. markers and polygons) can share the same group name.</p></dd>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Openweathermap Functions: 
+    <div class="dont-index"><p>Other Openweathermap Functions:
 <code><a href="addOpenweatherCurrent.html">addOpenweatherCurrent</a>()</code>,
 <code><a href="openweatherCurrentOptions.html">openweatherCurrentOptions</a>()</code>,
 <code><a href="openweatherOptions.html">openweatherOptions</a>()</code></p></div>
@@ -127,7 +127,7 @@ layers (e.g. markers and polygons) can share the same group name.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rstudio.github.io/leaflet/" class="external-link">leaflet</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://trafficonese.github.io/leaflet.extras2/" class="external-link">leaflet.extras2</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
@@ -136,7 +136,7 @@ layers (e.g. markers and polygons) can share the same group name.</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet</a></span><span class="op">(</span><span class="op">)</span>  <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addTiles</a></span><span class="op">(</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/map-methods.html" class="external-link">setView</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">50</span>, <span class="fl">6</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span></span>
 <span class="r-in"><span>  <span class="fu">addOpenweatherTiles</span><span class="op">(</span>layers <span class="op">=</span> <span class="st">"wind"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -151,15 +151,15 @@ layers (e.g. markers and polygons) can share the same group name.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

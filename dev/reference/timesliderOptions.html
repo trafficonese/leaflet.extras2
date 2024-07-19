@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>timesliderOptions</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/timeslider.R" class="external-link"><code>R/timeslider.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/timeslider.R" class="external-link"><code>R/timeslider.R</code></a></small>
     <div class="hidden name"><code>timesliderOptions.Rd</code></div>
     </div>
 
@@ -72,50 +72,52 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>position</dt>
+
+
+<dl><dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
 <dd><p>position of control: "topleft", "topright", "bottomleft", or
 "bottomright". Default is <code>topright</code>.</p></dd>
 
 
-<dt>timeAttribute</dt>
+<dt id="arg-timeattribute">timeAttribute<a class="anchor" aria-label="anchor" href="#arg-timeattribute"></a></dt>
 <dd><p>The column name of the time property.
 Default is <code>"time"</code></p></dd>
 
 
-<dt>isEpoch</dt>
+<dt id="arg-isepoch">isEpoch<a class="anchor" aria-label="anchor" href="#arg-isepoch"></a></dt>
 <dd><p>whether the time attribute is seconds elapsed from epoch.
 Default is <code>FALSE</code></p></dd>
 
 
-<dt>startTimeIdx</dt>
+<dt id="arg-starttimeidx">startTimeIdx<a class="anchor" aria-label="anchor" href="#arg-starttimeidx"></a></dt>
 <dd><p>where to start looking for a timestring
 Default is <code>0</code></p></dd>
 
 
-<dt>timeStrLength</dt>
+<dt id="arg-timestrlength">timeStrLength<a class="anchor" aria-label="anchor" href="#arg-timestrlength"></a></dt>
 <dd><p>the size of <code>yyyy-mm-dd hh:mm:ss</code> - if milliseconds are
 present this will be larger. Default is <code>19</code></p></dd>
 
 
-<dt>maxValue</dt>
+<dt id="arg-maxvalue">maxValue<a class="anchor" aria-label="anchor" href="#arg-maxvalue"></a></dt>
 <dd><p>Set the maximum value of the slider. Default is <code>-1</code></p></dd>
 
 
-<dt>minValue</dt>
+<dt id="arg-minvalue">minValue<a class="anchor" aria-label="anchor" href="#arg-minvalue"></a></dt>
 <dd><p>Set the minimum value of the slider. Default is <code>0</code></p></dd>
 
 
-<dt>showAllOnStart</dt>
+<dt id="arg-showallonstart">showAllOnStart<a class="anchor" aria-label="anchor" href="#arg-showallonstart"></a></dt>
 <dd><p>Specify whether all markers should be initially visible.
 Default is <code>FALSE</code></p></dd>
 
 
-<dt>range</dt>
+<dt id="arg-range">range<a class="anchor" aria-label="anchor" href="#arg-range"></a></dt>
 <dd><p>To use a range-slider, set to <code>TRUE.</code> Default is <code>FALSE</code>
 Default is <code>FALSE</code></p></dd>
 
 
-<dt>follow</dt>
+<dt id="arg-follow">follow<a class="anchor" aria-label="anchor" href="#arg-follow"></a></dt>
 <dd><p>To display only the markers at the specific timestamp specified
 by the slider. Specify a value of 1 (or true) to display only a single data
 point at a time, and a value of null (or false) to display the current marker
@@ -123,27 +125,23 @@ and all previous markers. The range property overrides the follow property.
 Default is <code>FALSE</code></p></dd>
 
 
-<dt>alwaysShowDate</dt>
+<dt id="arg-alwaysshowdate">alwaysShowDate<a class="anchor" aria-label="anchor" href="#arg-alwaysshowdate"></a></dt>
 <dd><p>Should the Date always be visible. Default is <code>FALSE</code></p></dd>
 
 
-<dt>rezoom</dt>
+<dt id="arg-rezoom">rezoom<a class="anchor" aria-label="anchor" href="#arg-rezoom"></a></dt>
 <dd><p>Use the rezoom property to ensure the markers being displayed
 remain in view. Default is <code>NULL</code></p></dd>
 
 
-<dt>sameDate</dt>
+<dt id="arg-samedate">sameDate<a class="anchor" aria-label="anchor" href="#arg-samedate"></a></dt>
 <dd><p>Show only data with the current selected time.
 Default is <code>FALSE</code></p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of options for <code>addTimeslider</code></p>
-
-
+    <p>A list of options for <code>addTimeslider</code></p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -151,7 +149,7 @@ Default is <code>FALSE</code></p></dd>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Timeslider Functions: 
+    <div class="dont-index"><p>Other Timeslider Functions:
 <code><a href="addTimeslider.html">addTimeslider</a>()</code>,
 <code><a href="removeTimeslider.html">removeTimeslider</a>()</code></p></div>
     </div>
@@ -168,15 +166,15 @@ Default is <code>FALSE</code></p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

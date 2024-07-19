@@ -1,297 +1,101 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/CODE_OF_CONDUCT.html</loc>
-  </url>
-  <url>
-    <loc>/HowTo.html</loc>
-  </url>
-  <url>
-    <loc>/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addAntpath.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addArrowhead.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addEasyprint.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addGIBS.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addHeightgraph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addHexbin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addHistory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addItemContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addLabelgun.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addLeafletsync.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addLeafletsyncDependency.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addMapkeyMarkers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addMovingMarker.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addOpenweatherCurrent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addOpenweatherTiles.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addPlayback.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addReachability.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addSidebar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addSidebyside.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addSpinner.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addTangram.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addTimeslider.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addVelocity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/addWMS.html</loc>
-  </url>
-  <url>
-    <loc>/reference/antpathOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/arrowheadOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clearAntpath.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clearArrowhead.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clearFuture.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clearHexbin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clearHistory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/closeSidebar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/context_mapmenuItems.html</loc>
-  </url>
-  <url>
-    <loc>/reference/context_markermenuItems.html</loc>
-  </url>
-  <url>
-    <loc>/reference/context_menuItem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/disableContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/easyprintMap.html</loc>
-  </url>
-  <url>
-    <loc>/reference/easyprintOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/enableContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gibs_layers.html</loc>
-  </url>
-  <url>
-    <loc>/reference/goBackHistory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/goForwardHistory.html</loc>
-  </url>
-  <url>
-    <loc>/reference/heightgraphOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hexbinOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hideContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/hideHexbin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/historyOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/insertItemContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/isSynced.html</loc>
-  </url>
-  <url>
-    <loc>/reference/leaflet.extras2-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/leafletsyncOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/makeMapkeyIcon.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mapkeyIconList.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mapkeyIcons.html</loc>
-  </url>
-  <url>
-    <loc>/reference/mapmenuItems.html</loc>
-  </url>
-  <url>
-    <loc>/reference/markermenuItems.html</loc>
-  </url>
-  <url>
-    <loc>/reference/menuItem.html</loc>
-  </url>
-  <url>
-    <loc>/reference/movingMarkerOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/openSidebar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/openweatherCurrentOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/openweatherOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/playbackOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/reachabilityOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeAntpath.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeArrowhead.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeEasyprint.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeItemContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removePlayback.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeReachability.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeSidebar.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeSidebyside.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeTimeslider.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeVelocity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/removeallItemsContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setDate.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setDisabledContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setOptionsVelocity.html</loc>
-  </url>
-  <url>
-    <loc>/reference/setTransparent.html</loc>
-  </url>
-  <url>
-    <loc>/reference/showContextmenu.html</loc>
-  </url>
-  <url>
-    <loc>/reference/showHexbin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sidebar_pane.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sidebar_tabs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/startMoving.html</loc>
-  </url>
-  <url>
-    <loc>/reference/sub-.leaflet_mapkey_icon_set.html</loc>
-  </url>
-  <url>
-    <loc>/reference/timesliderOptions.html</loc>
-  </url>
-  <url>
-    <loc>/reference/to_jsonformat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/to_ms.html</loc>
-  </url>
-  <url>
-    <loc>/reference/unsync.html</loc>
-  </url>
-  <url>
-    <loc>/reference/updateHexbin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/velocityOptions.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/CODE_OF_CONDUCT.html</loc></url>
+<url><loc>/HowTo.html</loc></url>
+<url><loc>/LICENSE-text.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/addAntpath.html</loc></url>
+<url><loc>/reference/addArrowhead.html</loc></url>
+<url><loc>/reference/addContextmenu.html</loc></url>
+<url><loc>/reference/addEasyprint.html</loc></url>
+<url><loc>/reference/addGIBS.html</loc></url>
+<url><loc>/reference/addHeightgraph.html</loc></url>
+<url><loc>/reference/addHexbin.html</loc></url>
+<url><loc>/reference/addHistory.html</loc></url>
+<url><loc>/reference/addItemContextmenu.html</loc></url>
+<url><loc>/reference/addLabelgun.html</loc></url>
+<url><loc>/reference/addLeafletsync.html</loc></url>
+<url><loc>/reference/addLeafletsyncDependency.html</loc></url>
+<url><loc>/reference/addMapkeyMarkers.html</loc></url>
+<url><loc>/reference/addMovingMarker.html</loc></url>
+<url><loc>/reference/addOpenweatherCurrent.html</loc></url>
+<url><loc>/reference/addOpenweatherTiles.html</loc></url>
+<url><loc>/reference/addPlayback.html</loc></url>
+<url><loc>/reference/addReachability.html</loc></url>
+<url><loc>/reference/addSidebar.html</loc></url>
+<url><loc>/reference/addSidebyside.html</loc></url>
+<url><loc>/reference/addSpinner.html</loc></url>
+<url><loc>/reference/addTangram.html</loc></url>
+<url><loc>/reference/addTimeslider.html</loc></url>
+<url><loc>/reference/addVelocity.html</loc></url>
+<url><loc>/reference/addWMS.html</loc></url>
+<url><loc>/reference/antpathOptions.html</loc></url>
+<url><loc>/reference/arrowheadOptions.html</loc></url>
+<url><loc>/reference/clearAntpath.html</loc></url>
+<url><loc>/reference/clearArrowhead.html</loc></url>
+<url><loc>/reference/clearFuture.html</loc></url>
+<url><loc>/reference/clearHexbin.html</loc></url>
+<url><loc>/reference/clearHistory.html</loc></url>
+<url><loc>/reference/closeSidebar.html</loc></url>
+<url><loc>/reference/context_mapmenuItems.html</loc></url>
+<url><loc>/reference/context_markermenuItems.html</loc></url>
+<url><loc>/reference/context_menuItem.html</loc></url>
+<url><loc>/reference/disableContextmenu.html</loc></url>
+<url><loc>/reference/easyprintMap.html</loc></url>
+<url><loc>/reference/easyprintOptions.html</loc></url>
+<url><loc>/reference/enableContextmenu.html</loc></url>
+<url><loc>/reference/gibs_layers.html</loc></url>
+<url><loc>/reference/goBackHistory.html</loc></url>
+<url><loc>/reference/goForwardHistory.html</loc></url>
+<url><loc>/reference/heightgraphOptions.html</loc></url>
+<url><loc>/reference/hexbinOptions.html</loc></url>
+<url><loc>/reference/hideContextmenu.html</loc></url>
+<url><loc>/reference/hideHexbin.html</loc></url>
+<url><loc>/reference/historyOptions.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/insertItemContextmenu.html</loc></url>
+<url><loc>/reference/isSynced.html</loc></url>
+<url><loc>/reference/leaflet.extras2-package.html</loc></url>
+<url><loc>/reference/leafletsyncOptions.html</loc></url>
+<url><loc>/reference/makeMapkeyIcon.html</loc></url>
+<url><loc>/reference/mapkeyIconList.html</loc></url>
+<url><loc>/reference/mapkeyIcons.html</loc></url>
+<url><loc>/reference/mapmenuItems.html</loc></url>
+<url><loc>/reference/markermenuItems.html</loc></url>
+<url><loc>/reference/menuItem.html</loc></url>
+<url><loc>/reference/movingMarkerOptions.html</loc></url>
+<url><loc>/reference/openSidebar.html</loc></url>
+<url><loc>/reference/openweatherCurrentOptions.html</loc></url>
+<url><loc>/reference/openweatherOptions.html</loc></url>
+<url><loc>/reference/playbackOptions.html</loc></url>
+<url><loc>/reference/reachabilityOptions.html</loc></url>
+<url><loc>/reference/removeAntpath.html</loc></url>
+<url><loc>/reference/removeArrowhead.html</loc></url>
+<url><loc>/reference/removeEasyprint.html</loc></url>
+<url><loc>/reference/removeItemContextmenu.html</loc></url>
+<url><loc>/reference/removePlayback.html</loc></url>
+<url><loc>/reference/removeReachability.html</loc></url>
+<url><loc>/reference/removeSidebar.html</loc></url>
+<url><loc>/reference/removeSidebyside.html</loc></url>
+<url><loc>/reference/removeTimeslider.html</loc></url>
+<url><loc>/reference/removeVelocity.html</loc></url>
+<url><loc>/reference/removeallItemsContextmenu.html</loc></url>
+<url><loc>/reference/setDate.html</loc></url>
+<url><loc>/reference/setDisabledContextmenu.html</loc></url>
+<url><loc>/reference/setOptionsVelocity.html</loc></url>
+<url><loc>/reference/setTransparent.html</loc></url>
+<url><loc>/reference/showContextmenu.html</loc></url>
+<url><loc>/reference/showHexbin.html</loc></url>
+<url><loc>/reference/sidebar_pane.html</loc></url>
+<url><loc>/reference/sidebar_tabs.html</loc></url>
+<url><loc>/reference/startMoving.html</loc></url>
+<url><loc>/reference/sub-.leaflet_mapkey_icon_set.html</loc></url>
+<url><loc>/reference/timesliderOptions.html</loc></url>
+<url><loc>/reference/to_jsonformat.html</loc></url>
+<url><loc>/reference/to_ms.html</loc></url>
+<url><loc>/reference/unsync.html</loc></url>
+<url><loc>/reference/updateHexbin.html</loc></url>
+<url><loc>/reference/velocityOptions.html</loc></url>
 </urlset>
+

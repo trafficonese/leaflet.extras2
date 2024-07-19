@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>hexbinOptions</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/hexbin.R" class="external-link"><code>R/hexbin.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/hexbin.R" class="external-link"><code>R/hexbin.R</code></a></small>
     <div class="hidden name"><code>hexbinOptions.Rd</code></div>
     </div>
 
@@ -67,11 +67,13 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>duration</dt>
+
+
+<dl><dt id="arg-duration">duration<a class="anchor" aria-label="anchor" href="#arg-duration"></a></dt>
 <dd><p>Transition duration for the hexbin layer</p></dd>
 
 
-<dt>colorScaleExtent</dt>
+<dt id="arg-colorscaleextent">colorScaleExtent<a class="anchor" aria-label="anchor" href="#arg-colorscaleextent"></a></dt>
 <dd><p>extent of the color scale for the hexbin layer. This
 is used to override the derived extent of the color values and is specified
 as a vector of the form c(min= numeric, max= numeric). Can be a numeric
@@ -79,22 +81,22 @@ vector or a custom <code><a href="https://rdrr.io/pkg/htmlwidgets/man/JS.html" c
 (<code>JS("[40, undefined]")</code>)</p></dd>
 
 
-<dt>radiusScaleExtent</dt>
+<dt id="arg-radiusscaleextent">radiusScaleExtent<a class="anchor" aria-label="anchor" href="#arg-radiusscaleextent"></a></dt>
 <dd><p>This is the same exact configuration option as
 colorScaleExtent, only applied to the radius extent.</p></dd>
 
 
-<dt>colorRange</dt>
+<dt id="arg-colorrange">colorRange<a class="anchor" aria-label="anchor" href="#arg-colorrange"></a></dt>
 <dd><p>Sets the range of the color scale used to fill the hexbins
 on the layer.</p></dd>
 
 
-<dt>radiusRange</dt>
+<dt id="arg-radiusrange">radiusRange<a class="anchor" aria-label="anchor" href="#arg-radiusrange"></a></dt>
 <dd><p>Sets the range of the radius scale used to size the
 hexbins on the layer.</p></dd>
 
 
-<dt>pointerEvents</dt>
+<dt id="arg-pointerevents">pointerEvents<a class="anchor" aria-label="anchor" href="#arg-pointerevents"></a></dt>
 <dd><p>This value is passed directly to an element-level css
 style for pointer-events. You should only modify this config option if you
 want to change the mouse event behavior on hexbins. This will modify when
@@ -102,14 +104,14 @@ the events are propagated based on the visibility state and/or part of the
 hexbin being hovered.</p></dd>
 
 
-<dt>resizetoCount</dt>
+<dt id="arg-resizetocount">resizetoCount<a class="anchor" aria-label="anchor" href="#arg-resizetocount"></a></dt>
 <dd><p>Resizes the hexbin to the count. Default is
 <code>FALSE</code>. If set to <code>TRUE</code> it will resize based on the amount of
 underlying elements. You can also pass a custom
 <code><a href="https://rdrr.io/pkg/htmlwidgets/man/JS.html" class="external-link">JS</a></code> function.</p></dd>
 
 
-<dt>tooltip</dt>
+<dt id="arg-tooltip">tooltip<a class="anchor" aria-label="anchor" href="#arg-tooltip"></a></dt>
 <dd><p>Should tooltips be displayed? If set to <code>TRUE</code>, it will
 show the amount of underlying elements. If a string is given, it will
 append the string before the count. To disable tooltips, please pass
@@ -119,13 +121,11 @@ append the string before the count. To disable tooltips, please pass
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of hexbin-specific options</p>
+    <p>A list of hexbin-specific options</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Hexbin-D3 Functions: 
+    <div class="dont-index"><p>Other Hexbin-D3 Functions:
 <code><a href="addHexbin.html">addHexbin</a>()</code>,
 <code><a href="clearHexbin.html">clearHexbin</a>()</code>,
 <code><a href="hideHexbin.html">hideHexbin</a>()</code>,
@@ -145,15 +145,15 @@ append the string before the count. To disable tooltips, please pass
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

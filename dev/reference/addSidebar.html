@@ -5,7 +5,7 @@ leafletOutput is called."><meta name="robots" content="noindex"><!-- mathjax -->
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -33,20 +33,20 @@ leafletOutput is called."><meta name="robots" content="noindex"><!-- mathjax -->
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add a Sidebar Leaflet Control</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/sidebar.R" class="external-link"><code>R/sidebar.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/sidebar.R" class="external-link"><code>R/sidebar.R</code></a></small>
     <div class="hidden name"><code>addSidebar.Rd</code></div>
     </div>
 
@@ -62,29 +62,29 @@ leafletOutput is called."><meta name="robots" content="noindex"><!-- mathjax -->
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>map</dt>
+
+
+<dl><dt id="arg-map">map<a class="anchor" aria-label="anchor" href="#arg-map"></a></dt>
 <dd><p>A leaflet map widget</p></dd>
 
 
-<dt>id</dt>
+<dt id="arg-id">id<a class="anchor" aria-label="anchor" href="#arg-id"></a></dt>
 <dd><p>Id of the sidebar-div. Must match with the <code>id</code> of
 <code><a href="sidebar_tabs.html">sidebar_tabs</a></code></p></dd>
 
 
-<dt>options</dt>
+<dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
 <dd><p>A named list with the only option <code>position</code>, which should
 be either <code>left</code> or <code>right</code>.</p></dd>
 
 
-<dt>ns</dt>
+<dt id="arg-ns">ns<a class="anchor" aria-label="anchor" href="#arg-ns"></a></dt>
 <dd><p>The namespace function, if used in Shiny modules.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>the new <code>map</code> object</p>
+    <p>the new <code>map</code> object</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -92,7 +92,7 @@ be either <code>left</code> or <code>right</code>.</p></dd>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Sidebar Functions: 
+    <div class="dont-index"><p>Other Sidebar Functions:
 <code><a href="closeSidebar.html">closeSidebar</a>()</code>,
 <code><a href="openSidebar.html">openSidebar</a>()</code>,
 <code><a href="removeSidebar.html">removeSidebar</a>()</code>,
@@ -102,7 +102,7 @@ be either <code>left</code> or <code>right</code>.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://shiny.posit.co/" class="external-link">shiny</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># run example app showing a single sidebar</span></span></span>
@@ -112,7 +112,7 @@ be either <code>left</code> or <code>right</code>.</p></dd>
 <span class="r-in"><span><span class="co"># run example app showing two sidebars</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runApp.html" class="external-link">runApp</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"examples"</span>, package <span class="op">=</span> <span class="st">"leaflet.extras2"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>              <span class="st">"/multi_sidebar_app.R"</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -127,15 +127,15 @@ be either <code>left</code> or <code>right</code>.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

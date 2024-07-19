@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>easyprintOptions</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/easyprint.R" class="external-link"><code>R/easyprint.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/easyprint.R" class="external-link"><code>R/easyprint.R</code></a></small>
     <div class="hidden name"><code>easyprintOptions.Rd</code></div>
     </div>
 
@@ -73,15 +73,17 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>title</dt>
+
+
+<dl><dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
 <dd><p>Sets the text which appears as the tooltip of the print/export button</p></dd>
 
 
-<dt>position</dt>
+<dt id="arg-position">position<a class="anchor" aria-label="anchor" href="#arg-position"></a></dt>
 <dd><p>Positions the print button</p></dd>
 
 
-<dt>sizeModes</dt>
+<dt id="arg-sizemodes">sizeModes<a class="anchor" aria-label="anchor" href="#arg-sizemodes"></a></dt>
 <dd><p>Either a character vector with one of the following options:
 <code>CurrentSize</code>, <code>A4Portrait</code>, <code>A4Landscape</code>. If you want to
 include a <code>Custom</code> size mode you need to pass a named list, with
@@ -90,61 +92,59 @@ background-image in CSS.
 See the example in <code>./inst/examples/easyprint_app.R</code>.</p></dd>
 
 
-<dt>defaultSizeTitles</dt>
+<dt id="arg-defaultsizetitles">defaultSizeTitles<a class="anchor" aria-label="anchor" href="#arg-defaultsizetitles"></a></dt>
 <dd><p>Button tooltips for the default page sizes</p></dd>
 
 
-<dt>exportOnly</dt>
+<dt id="arg-exportonly">exportOnly<a class="anchor" aria-label="anchor" href="#arg-exportonly"></a></dt>
 <dd><p>If set to <code>TRUE</code> the map is exported to a .png file</p></dd>
 
 
-<dt>tileLayer</dt>
+<dt id="arg-tilelayer">tileLayer<a class="anchor" aria-label="anchor" href="#arg-tilelayer"></a></dt>
 <dd><p>The group name of one tile layer that you can wait for to draw
 (helpful when resizing)</p></dd>
 
 
-<dt>tileWait</dt>
+<dt id="arg-tilewait">tileWait<a class="anchor" aria-label="anchor" href="#arg-tilewait"></a></dt>
 <dd><p>How long to wait for the tiles to draw (helpful when resizing)</p></dd>
 
 
-<dt>filename</dt>
+<dt id="arg-filename">filename<a class="anchor" aria-label="anchor" href="#arg-filename"></a></dt>
 <dd><p>Name of the file if <code>exportOnly</code> option is <code>TRUE</code></p></dd>
 
 
-<dt>hidden</dt>
+<dt id="arg-hidden">hidden<a class="anchor" aria-label="anchor" href="#arg-hidden"></a></dt>
 <dd><p>Set to <code>TRUE</code> if you don't want to display the toolbar.
 Instead you can create your own buttons or fire print events programmatically.</p></dd>
 
 
-<dt>hideControlContainer</dt>
+<dt id="arg-hidecontrolcontainer">hideControlContainer<a class="anchor" aria-label="anchor" href="#arg-hidecontrolcontainer"></a></dt>
 <dd><p>Hides the leaflet controls like the zoom buttons
 and the attribution on the print out</p></dd>
 
 
-<dt>hideClasses</dt>
+<dt id="arg-hideclasses">hideClasses<a class="anchor" aria-label="anchor" href="#arg-hideclasses"></a></dt>
 <dd><p>Use a character vector or list of CSS-classes to hide on
 the output image.</p></dd>
 
 
-<dt>customWindowTitle</dt>
+<dt id="arg-customwindowtitle">customWindowTitle<a class="anchor" aria-label="anchor" href="#arg-customwindowtitle"></a></dt>
 <dd><p>A title for the print window which will get
 added to the printed paper</p></dd>
 
 
-<dt>spinnerBgColor</dt>
+<dt id="arg-spinnerbgcolor">spinnerBgColor<a class="anchor" aria-label="anchor" href="#arg-spinnerbgcolor"></a></dt>
 <dd><p>A valid css colour for the spinner background color</p></dd>
 
 
-<dt>customSpinnerClass</dt>
+<dt id="arg-customspinnerclass">customSpinnerClass<a class="anchor" aria-label="anchor" href="#arg-customspinnerclass"></a></dt>
 <dd><p>A class for a custom css spinner to use while
 waiting for the print.</p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of options for the 'easyprint' control</p>
+    <p>A list of options for the 'easyprint' control</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -152,7 +152,7 @@ waiting for the print.</p></dd>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other EasyPrint Functions: 
+    <div class="dont-index"><p>Other EasyPrint Functions:
 <code><a href="addEasyprint.html">addEasyprint</a>()</code>,
 <code><a href="easyprintMap.html">easyprintMap</a>()</code>,
 <code><a href="removeEasyprint.html">removeEasyprint</a>()</code></p></div>
@@ -170,15 +170,15 @@ waiting for the print.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

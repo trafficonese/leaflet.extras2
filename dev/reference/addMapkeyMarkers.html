@@ -3,7 +3,7 @@
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet"><script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet"><script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet"><script src="libs/leaflet-binding-2.2.2/leaflet.js"></script><link href="libs/lfx-mapkeyicon-1.0.0/L.Icon.Mapkey.css" rel="stylesheet"><script src="libs/lfx-mapkeyicon-1.0.0/L.Icon.Mapkey.js"></script><script src="libs/lfx-mapkeyicon-1.0.0/lfx-mapkeyicon-bindings.js"></script></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -31,20 +31,20 @@
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add Mapkey Markers</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/mapkeyIcon.R" class="external-link"><code>R/mapkeyIcon.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/mapkeyIcon.R" class="external-link"><code>R/mapkeyIcon.R</code></a></small>
     <div class="hidden name"><code>addMapkeyMarkers.Rd</code></div>
     </div>
 
@@ -73,11 +73,13 @@
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>map</dt>
+
+
+<dl><dt id="arg-map">map<a class="anchor" aria-label="anchor" href="#arg-map"></a></dt>
 <dd><p>the map to add mapkey Markers to.</p></dd>
 
 
-<dt>lng</dt>
+<dt id="arg-lng">lng<a class="anchor" aria-label="anchor" href="#arg-lng"></a></dt>
 <dd><p>a numeric vector of longitudes, or a one-sided formula of the form
 <code>~x</code> where <code>x</code> is a variable in <code>data</code>; by default (if not
 explicitly provided), it will be automatically inferred from <code>data</code> by
@@ -85,64 +87,64 @@ looking for a column named <code>lng</code>, <code>long</code>, or <code>longitu
 (case-insensitively)</p></dd>
 
 
-<dt>lat</dt>
+<dt id="arg-lat">lat<a class="anchor" aria-label="anchor" href="#arg-lat"></a></dt>
 <dd><p>a vector of latitudes or a formula (similar to the <code>lng</code>
 argument; the names <code>lat</code> and <code>latitude</code> are used when guessing
 the latitude column from <code>data</code>)</p></dd>
 
 
-<dt>layerId</dt>
+<dt id="arg-layerid">layerId<a class="anchor" aria-label="anchor" href="#arg-layerid"></a></dt>
 <dd><p>the layer id</p></dd>
 
 
-<dt>group</dt>
+<dt id="arg-group">group<a class="anchor" aria-label="anchor" href="#arg-group"></a></dt>
 <dd><p>the name of the group the newly created layers should belong to
 (for <code><a href="https://rstudio.github.io/leaflet/reference/remove.html" class="external-link">clearGroup</a></code> and <code><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html" class="external-link">addLayersControl</a></code> purposes).
-Human-friendly group names are permitted--they need not be short,
+Human-friendly group names are permitted–they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.</p></dd>
 
 
-<dt>icon</dt>
+<dt id="arg-icon">icon<a class="anchor" aria-label="anchor" href="#arg-icon"></a></dt>
 <dd><p>the icon(s) for markers;</p></dd>
 
 
-<dt>popup</dt>
+<dt id="arg-popup">popup<a class="anchor" aria-label="anchor" href="#arg-popup"></a></dt>
 <dd><p>a character vector of the HTML content for the popups (you are
 recommended to escape the text using <code><a href="https://rstudio.github.io/htmltools/reference/htmlEscape.html" class="external-link">htmlEscape</a>()</code>
 for security reasons)</p></dd>
 
 
-<dt>popupOptions</dt>
+<dt id="arg-popupoptions">popupOptions<a class="anchor" aria-label="anchor" href="#arg-popupoptions"></a></dt>
 <dd><p>A Vector of <code><a href="https://rstudio.github.io/leaflet/reference/map-options.html" class="external-link">popupOptions</a></code> to provide popups</p></dd>
 
 
-<dt>label</dt>
+<dt id="arg-label">label<a class="anchor" aria-label="anchor" href="#arg-label"></a></dt>
 <dd><p>a character vector of the HTML content for the labels</p></dd>
 
 
-<dt>labelOptions</dt>
+<dt id="arg-labeloptions">labelOptions<a class="anchor" aria-label="anchor" href="#arg-labeloptions"></a></dt>
 <dd><p>A Vector of <code><a href="https://rstudio.github.io/leaflet/reference/map-options.html" class="external-link">labelOptions</a></code> to provide label
 options for each label. Default <code>NULL</code></p></dd>
 
 
-<dt>options</dt>
+<dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
 <dd><p>a list of extra options for markers. See
 <code><a href="https://rstudio.github.io/leaflet/reference/map-options.html" class="external-link">markerOptions</a></code></p></dd>
 
 
-<dt>clusterOptions</dt>
+<dt id="arg-clusteroptions">clusterOptions<a class="anchor" aria-label="anchor" href="#arg-clusteroptions"></a></dt>
 <dd><p>if not <code>NULL</code>, markers will be clustered using
 <a href="https://github.com/Leaflet/Leaflet.markercluster" class="external-link">Leaflet.markercluster</a>;
  you can use <code><a href="https://rstudio.github.io/leaflet/reference/map-options.html" class="external-link">markerClusterOptions</a>()</code> to specify marker cluster
 options</p></dd>
 
 
-<dt>clusterId</dt>
+<dt id="arg-clusterid">clusterId<a class="anchor" aria-label="anchor" href="#arg-clusterid"></a></dt>
 <dd><p>the id for the marker cluster layer</p></dd>
 
 
-<dt>data</dt>
+<dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
 <dd><p>the data object from which the argument values are derived; by
 default, it is the <code>data</code> object provided to <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet()</a></code>
 initially, but can be overridden</p></dd>
@@ -150,9 +152,7 @@ initially, but can be overridden</p></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>the new <code>map</code> object</p>
+    <p>the new <code>map</code> object</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -160,7 +160,7 @@ initially, but can be overridden</p></dd>
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Mapkey Functions: 
+    <div class="dont-index"><p>Other Mapkey Functions:
 <code><a href="sub-.leaflet_mapkey_icon_set.html">[.leaflet_mapkey_icon_set</a>()</code>,
 <code><a href="makeMapkeyIcon.html">makeMapkeyIcon</a>()</code>,
 <code><a href="mapkeyIconList.html">mapkeyIconList</a>()</code>,
@@ -195,15 +195,15 @@ initially, but can be overridden</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 

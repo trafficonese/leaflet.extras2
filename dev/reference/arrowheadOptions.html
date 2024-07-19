@@ -5,7 +5,7 @@ L.Path"><meta name="robots" content="noindex"><!-- mathjax --><script src="https
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]--></head><body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-reference-topic">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -33,20 +33,20 @@ L.Path"><meta name="robots" content="noindex"><!-- mathjax --><script src="https
       </ul><ul class="nav navbar-nav navbar-right"><li>
   <a href="https://github.com/trafficonese/leaflet.extras2/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul></div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Arrowhead Options</h1>
-    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/HEAD/R/arrowhead.R" class="external-link"><code>R/arrowhead.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/trafficonese/leaflet.extras2/blob/master/R/arrowhead.R" class="external-link"><code>R/arrowhead.R</code></a></small>
     <div class="hidden name"><code>arrowheadOptions.Rd</code></div>
     </div>
 
@@ -70,12 +70,14 @@ options inherited from
 
     <div id="arguments">
     <h2>Arguments</h2>
-    <dl><dt>yawn</dt>
+
+
+<dl><dt id="arg-yawn">yawn<a class="anchor" aria-label="anchor" href="#arg-yawn"></a></dt>
 <dd><p>Defines the width of the opening of the arrowhead, given in
 degrees. The larger the angle, the wider the arrowhead.</p></dd>
 
 
-<dt>size</dt>
+<dt id="arg-size">size<a class="anchor" aria-label="anchor" href="#arg-size"></a></dt>
 <dd><p>Determines the size of the arrowhead. Accepts three types of
   values:</p><ul><li><p>A string with the suffix <code>'m'</code>, i.e. <code>'500m'</code> will set the
   size of the arrowhead to that number of meters.</p></li>
@@ -90,7 +92,7 @@ degrees. The larger the angle, the wider the arrowhead.</p></dd>
 </ul></dd>
 
 
-<dt>frequency</dt>
+<dt id="arg-frequency">frequency<a class="anchor" aria-label="anchor" href="#arg-frequency"></a></dt>
 <dd><p>How many arrowheads are rendered on a polyline.</p><ul><li><p><code>'allvertices'</code> renders an arrowhead on each vertex.</p></li>
 <li><p><code>'endonly'</code> renders only one at the end.</p></li>
 <li><p>A numeric value renders that number of arrowheads evenly spaced
@@ -104,7 +106,7 @@ regardless of zoom level.</p></li>
 </ul></dd>
 
 
-<dt>proportionalToTotal</dt>
+<dt id="arg-proportionaltototal">proportionalToTotal<a class="anchor" aria-label="anchor" href="#arg-proportionaltototal"></a></dt>
 <dd><p>Only relevant when size is given as a percent.
 Useful when frequency is set to <code>'endonly'</code>. Will render the
 arrowheads with a size proportional to the entire length of the
@@ -112,7 +114,7 @@ multi-segmented polyline, rather than proportional to the average length of
 all the segments.</p></dd>
 
 
-<dt>offsets</dt>
+<dt id="arg-offsets">offsets<a class="anchor" aria-label="anchor" href="#arg-offsets"></a></dt>
 <dd><p>Enables the developer to have the arrowheads start or end at
 some offset from the start and/or end of the polyline. This option can be a list
 with `start` and `end` names. The values must be strings
@@ -120,7 +122,7 @@ defining the size of the offset in either meters or pixels, i.e.
 <code>list('start' = '100m', 'end' = '15px')</code>.</p></dd>
 
 
-<dt>perArrowheadOptions</dt>
+<dt id="arg-perarrowheadoptions">perArrowheadOptions<a class="anchor" aria-label="anchor" href="#arg-perarrowheadoptions"></a></dt>
 <dd><p>Enables the developer to customize arrowheads on a
 one-by-one basis. Must be in the form of a function of i, which is the
 index of the arrowhead as it is rendered in the loop through all
@@ -129,16 +131,14 @@ account for <code>frequency</code> or <code>proportionalToTotal</code> from with
 <code>perArrowheadOptions</code> callback. See the example for details.</p></dd>
 
 
-<dt>...</dt>
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>Additional options for arrowheads, inherited from
 <a href="https://leafletjs.com/reference.html#path" class="external-link">L.Path</a></p></dd>
 
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    
-
-<p>A list of options for <code>addArrowhead</code> polylines</p>
+    <p>A list of options for <code>addArrowhead</code> polylines</p>
     </div>
     <div id="references">
     <h2>References</h2>
@@ -146,7 +146,7 @@ account for <code>frequency</code> or <code>proportionalToTotal</code> from with
     </div>
     <div id="see-also">
     <h2>See also</h2>
-    <div class="dont-index"><p>Other Arrowhead Functions: 
+    <div class="dont-index"><p>Other Arrowhead Functions:
 <code><a href="addArrowhead.html">addArrowhead</a>()</code>,
 <code><a href="clearArrowhead.html">clearArrowhead</a>()</code>,
 <code><a href="removeArrowhead.html">removeArrowhead</a>()</code></p></div>
@@ -164,15 +164,15 @@ account for <code>frequency</code> or <code>proportionalToTotal</code> from with
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
       </footer></div>
 
-  
 
 
-  
+
+
 
   </body></html>
 
