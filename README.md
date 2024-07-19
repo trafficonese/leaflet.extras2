@@ -2,15 +2,15 @@
 
 <!-- badges: start -->
 [![Checks](https://github.com/trafficonese/leaflet.extras2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras2/actions/workflows/R-CMD-check.yaml)
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/leaflet.extras2)](https://cran.r-project.org/package=leaflet.extras2)
+[![CRAN status](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://CRAN.R-project.org/package=leaflet.extras2)
 [![CRAN checks](https://badges.cranchecks.info/summary/leaflet.extras2.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
-[![](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](http://cran.rstudio.com/web/packages/leaflet.extras2/index.html)
-[![](http://cranlogs.r-pkg.org/badges/last-month/leaflet.extras2?color=blue)](https://cran.r-project.org/package=leaflet.extras2)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://cran.rstudio.com/web/packages/leaflet.extras2/index.html)
+[![](https://cranlogs.r-pkg.org/badges/last-month/leaflet.extras2?color=blue)](https://cran.r-project.org/package=leaflet.extras2)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
 <!-- badges: end -->
 
-The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/package=leaflet) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various leaflet plugins.
+The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/package=leaflet) and [leaflet.extras](https://github.com/trafficonese/leaflet.extras) R packages using various leaflet plugins.
 
 ### Installation
 

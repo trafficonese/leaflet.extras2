@@ -1,7 +1,7 @@
 {
   "name": "leaflet.extras2",
   "version": "1.0.0",
-  "description": "The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).",
+  "description": "The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/trafficonese/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).",
   "main": "index.js",
   "directories": {
     "man": "man"
