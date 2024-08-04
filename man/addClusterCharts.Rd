@@ -11,8 +11,7 @@ addClusterCharts(
   layerId = NULL,
   group = NULL,
   type = c("pie", "bar"),
-  rmax = 30,
-  size = c(18, 18),
+  options = clusterchartOptions(),
   popup = NULL,
   popupOptions = NULL,
   label = NULL,
@@ -49,7 +48,7 @@ Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
-\item{rmax}{The maxClusterRadius}
+\item{options}{clusterchartOptions}
 
 \item{popup}{a character vector of the HTML content for the popups (you are
 recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
@@ -80,6 +79,8 @@ initially, but can be overridden}
 \item{lat_center, lng_center}{lat/lng for the center}
 
 \item{radius}{in meters}
+
+\item{rmax}{The maxClusterRadius}
 }
 \description{
 Adds a Great Circle to the map.

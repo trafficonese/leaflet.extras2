@@ -27,11 +27,12 @@ clusterchartsDependencies <- function() {
 #' @param rmax The maxClusterRadius
 #' @param categoryField in meters
 #' @param popupFields in meters
+#' @param options clusterchartOptions
 #' @inheritParams leaflet::addCircleMarkers
 #' @export
 addClusterCharts <- function(
     map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar"),
-    rmax = 30, size = c(18, 18),
+    options = clusterchartOptions(),
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
     clusterOptions = NULL, clusterId = NULL,
     categoryField, categoryMap, popupFields = NULL, popupLabels = NULL,
@@ -52,8 +53,8 @@ addClusterCharts <- function(
   }
 
   ## CSS string #############
-  # browser()
   css <- paste(apply(categoryMap, 1, generate_css), collapse = "\n")
+  size <- options$size
   if (length(size) == 1) size <- rep(size, 2)
   css <- paste0(css, "\n.clustermarker {",
                 "width: ",size[1],"px; height: ",size[2],"px;",
@@ -78,7 +79,8 @@ addClusterCharts <- function(
   points <- derivePoints(data, lng, lat, missing(lng), missing(lat),
                          "addClusterCharts")
   leaflet::invokeMethod(
-    map, NULL, "addClusterCharts", geojson, layerId, group, type, rmax, size,
+    map, NULL, "addClusterCharts", geojson, layerId, group, type,
+    options,
     popup, popupOptions, safeLabel(label, data), labelOptions,
     clusterOptions, clusterId,
     categoryField, categoryMap, popupFields, popupLabels,
@@ -87,6 +89,30 @@ addClusterCharts <- function(
     leaflet::expandLimits(points$lat, points$lng)
 }
 
+#' clusterchartOptions
+#' @description Adds options for clusterCharts
+#' @param rmax The maxClusterRadius
+#' @param size the size
+#' @param width the width
+#' @param height the height
+#' @param strokeWidth the strokeWidth
+#' @param pieMultiplier the pieMultiplier
+#' @param innerRadius the innerRadius
+#' @export
+clusterchartOptions <- function(rmax = 30, size = c(20, 20),
+                                width = 40, height = 50,
+                                strokeWidth = 1,
+                                pieMultiplier = 2,
+                                innerRadius = -10) {
+  list(
+    rmax = rmax,
+    size = size,
+    width = width,
+    height = height,
+    strokeWidth = strokeWidth,
+    innerRadius = innerRadius
+  )
+}
 
 generate_css <- function(row) {
   label <- row["label"]

@@ -23,6 +23,8 @@ ui <- fluidPage(
               )
 )
 
+options("shiny.autoreload" = TRUE)
+
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>% addMapPane("clusterpane", 420) %>%
@@ -31,18 +33,20 @@ server <- function(input, output, session) {
       # addCircleMarkers(data = data, clusterOptions = markerClusterOptions()) %>%
       # addCircleMarkers(data = data, options = pathOptions(pane = "clusterpane")) %>%
       addClusterCharts(data = data
-                       , rmax = 50
-                       , size = 50
+                       , options = clusterchartOptions(rmax = 40, size = 40,
+                                                       width = 40, height = 40,
+                                                       strokeWidth = 0.7,
+                                                       innerRadius = 14)
                        , type = "bar"
                        , categoryField = "category"
                        , categoryMap =
                          data.frame(label = c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
-                              # color  = c("#F88", "#FA0", "#FF3", "#BFB"),
+                              color  = c("#F88", "#FA0", "#FF3", "#BFB"),
+                              # color  = c("lightblue", "orange", "lightyellow", "lightgreen"),
+                              # color = c("cyan", "darkorange", "yellow", "#9fca8b"),
+                              icons = c("icons/Icon 29.svg", "icons/Icon 8.svg", "icons/Icon 5.svg", "icons/Icon 25.svg"),
                               # stroke = c("#800", "#B60", "#D80", "#070")
-                              color  = c("lightblue", "orange", "lightyellow", "lightgreen"),
-                              icons = c("icons/Icon 1.svg", "icons/Icon 10.svg", "icons/Icon 20.svg", "icons/Icon 25.svg"),
-                              # color = c("blue", "darkorange", "yellow", "green"),
-                              stroke = "black"
+                              stroke = "gray"
                          )
                        , group = "clustermarkers"
                        # group = "zipcode",

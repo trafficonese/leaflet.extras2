@@ -1,11 +1,16 @@
 /* global LeafletWidget, $, L */
-LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type, rmax, size,
+LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
+                                                  options,
                                                   popup, popupOptions, label, labelOptions,
                                                   clusterOptions, clusterId,
                                                   categoryField, categoryMap, popupFields, popupLabels,
                                                   markerOptions, legendOptions) {
 
   var map = this;
+
+  var rmax = options.rmax ? options.rmax : 30;
+  var innerRadius = options.innerRadius ? options.innerRadius : -10;
+  var strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
 
   var markerclusters = L.markerClusterGroup(
     Object.assign({
@@ -101,60 +106,44 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
   }
   function defineClusterIcon(cluster) {
       var children = cluster.getAllChildMarkers(),
-          n = children.length, //Get number of markers in cluster
-          strokeWidth = 1, //Set clusterpie stroke width
-          r = rmax-2*strokeWidth-(n<10?12:n<100?8:n<1000?4:0), //Calculate clusterpie radius...
+          n = children.length //Get number of markers in cluster
+      var r = rmax-2*strokeWidth-(n<10?12:n<100?8:n<1000?4:0), //Calculate clusterpie radius...
           iconDim = (r+strokeWidth)*2, //...and divIcon dimensions (leaflet really want to know the size)
           html;
-          //bake some svg markup
-          var data = d3.nest() //Build a dataset for the pie chart
-                .key(function(d) { return d.feature.properties[categoryField]; })
-                .entries(children, d3.map)
 
-          // Group data by categoryField
-          /*
-          var data = Array.from(
-            d3.group(children, d => d.feature.properties[categoryField]),
-            ([key, values]) => ({ key, values })
-          );
-          */
+      //bake some svg markup
+      var data = d3.nest() //Build a dataset for the pie chart
+            .key(function(d) { return d.feature.properties[categoryField]; })
+            .entries(children, d3.map)
 
-          if (type == "pie") {
-            console.log("Piechart")
-            html = bakeThePie({
-              data: data,
-              valueFunc: function(d){return d.values.length;},
-              strokeWidth: strokeWidth,
-              outerRadius: r,
-              innerRadius: r-10,
-              pieClass: 'cluster-pie',
-              pieLabel: n,
-              pieLabelClass: 'clustermarker-cluster-pie-label',
-              pathClassFunc: function(d){
-                return "category-" + d.data.key;
-              },
-              pathTitleFunc: function(d){
-                return d.data.key + ' (' + d.data.values.length + ')';
-              }
-            })
-          } else {
-            console.log("Barchart")
-            html = bakeTheBarChart({
-              data: data,
-              valueFunc: function(d){return d.values.length;},
-              barClass: 'cluster-bar',
-              barLabel: n,
-              barLabelClass: 'clustermarker-cluster-bar-label',
-              pathClassFunc: function(d){
-                console.log("d.data"); console.log(d.data)
-                //return "category-" + d.data.key;
-              },
-              pathTitleFunc: function(d){
-                console.log("d.data"); console.log(d.data)
-                //return d.data.key + ' (' + d.data.values.length + ')';
-              }
-            });
+      if (type == "pie") {
+        console.log("Piechart")
+        html = bakeThePie({
+          data: data,
+          valueFunc: function(d){return d.values.length;},
+          outerRadius: r,
+          innerRadius: r-innerRadius,
+          pieClass: 'cluster-pie',
+          pieLabel: n,
+          pieLabelClass: 'clustermarker-cluster-pie-label',
+          pathClassFunc: function(d){
+            return "category-" + d.data.key;
+          },
+          pathTitleFunc: function(d){
+            return d.data.key + ' (' + d.data.values.length + ')';
           }
+        })
+      } else {
+        console.log("Barchart")
+        html = bakeTheBarChart({
+          data: data,
+          barClass: 'cluster-bar',
+          barLabel: n,
+          width: options.width ? options.width : 70,
+          height: options.height ? options.height : 40,
+          barLabelClass: 'clustermarker-cluster-bar-label'
+        });
+      }
 
       //Create a new divIcon and assign the svg markup to the html property
       var myIcon = new L.DivIcon({
@@ -163,8 +152,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
               iconSize: new L.Point(iconDim, iconDim)
           });
 
-      console.log("r"); console.log(r)
-      //console.log("data"); console.log(data)
       return myIcon;
   }
   //function that generates a svg markup for the Pie chart
@@ -173,16 +160,16 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       if (!options.data || !options.valueFunc) {
           return '';
       }
+      console.log("bakeThePie with these options"); console.log(options)
       var data = options.data,
           valueFunc = options.valueFunc,
-          r = options.outerRadius?options.outerRadius:28, //Default outer radius = 28px
-          rInner = options.innerRadius?options.innerRadius:r-10, //Default inner radius = r-10
-          strokeWidth = options.strokeWidth?options.strokeWidth:1, //Default stroke is 1
-          pathClassFunc = options.pathClassFunc?options.pathClassFunc:function(){return '';}, //Class for each path
-          pathTitleFunc = options.pathTitleFunc?options.pathTitleFunc:function(){return '';}, //Title for each path
-          pieClass = options.pieClass?options.pieClass:'marker-cluster-pie', //Class for the whole pie
+          r = options.outerRadius,
+          rInner = options.innerRadius,
+          pathClassFunc = options.pathClassFunc,
+          pathTitleFunc = options.pathTitleFunc,
+          pieClass = options.pieClass,
           pieLabel = options.pieLabel?options.pieLabel:d3.sum(data,valueFunc), //Label for the whole pie
-          pieLabelClass = options.pieLabelClass?options.pieLabelClass:'marker-cluster-pie-label',//Class for the pie label
+          pieLabelClass = options.pieLabelClass,
 
           origo = (r+strokeWidth), //Center coordinate
           w = origo*2, //width and height of the svg element
@@ -226,18 +213,16 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
   //function that generates a svg markup for the Bar chart
   function bakeTheBarChart(options) {
-    if (!options.data || !options.valueFunc) {
+    if (!options.data) {
       return '';
     }
+    console.log("bakeTheBarChart with these options"); console.log(options)
     var data = options.data,
-        valueFunc = options.valueFunc,
-        barClass = options.barClass ? options.barClass : 'marker-cluster-bar',
+        barClass = options.barClass,
         barLabel = options.barLabel ? options.barLabel : d3.sum(data, function(d) { return d.values.length; }),
-        barLabelClass = options.barLabelClass ? options.barLabelClass : 'marker-cluster-bar-label',
-        pathClassFunc = options.pathClassFunc?options.pathClassFunc:function(){return '';},
-        pathTitleFunc = options.pathTitleFunc?options.pathTitleFunc:function(){return '';},
-        width = 100,
-        height = 50,
+        barLabelClass = options.barLabelClass,
+        width = options.width,
+        height = options.height,
         x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1),
         y = d3.scale.linear().range([height, 0]);
 
@@ -253,31 +238,23 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     vis.selectAll('.bar')
         .data(data)
         .enter().append('rect')
-        //.attr('class', 'bar')
         .attr('class', function(d) {
-          console.log("category-"+d.key)
           return "category-"+d.key
         })
-        //.attr('class', pathClassFunc)
         .attr('x', function(d) {
-          console.log("vis.selectAll - d.key"); console.log(d.key)
-          console.log("vis.selectAll - d.values"); console.log(d.values)
-          console.log("vis.selectAll - x(d.key)"); console.log(x(d.key))
           return x(d.key);
         })
         .attr('width', x.rangeBand())
         .attr('y', function(d) { return y(d.values.length); })
         .attr('height', function(d) { return height - y(d.values.length); })
         .append('svg:title')
-        //.text(pathTitleFunc);
         .text(function(d) { return d.key + ' (' + d.values.length + ')'; });
-
 
     vis.append('text')
         .attr('x', width / 2)
         .attr('y', height / 2)
         .attr('class', barLabelClass)
-        .attr('text-anchor', 'middle')
+        .attr('text-anchor', 'top')
         .attr('dy', '.3em')
         .text(barLabel);
 
@@ -313,7 +290,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       legendItems.enter()
           .append('div')
           .attr('class', function(d) {
-              console.log("d"); console.log(d)
               return 'category-' + d.value;
           })
           .classed('legenditem', true)
