@@ -29,9 +29,7 @@ Suggests:
     htmlwidgets,
     covr,
     curl,
-    knitr,
     rmarkdown
 URL: https://trafficonese.github.io/leaflet.extras2/, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.3.1
-VignetteBuilder: knitr

@@ -76,10 +76,56 @@ options}
 
 \item{popupLabels}{A string or vector of strings indicating the labels for the popup fields.}
 
+\item{markerOptions}{Additional options for markers (see \code{\link[leaflet:markerOptions]{markerOptions::markerOptions()}}).}
+
+\item{legendOptions}{A list of options for the legend, including the title and position.}
+
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \description{
 Adds cluster charts (either pie or bar charts) to a Leaflet map.
+}
+\examples{
+# Example usage:
+library(sf)
+library(geojsonsf)
+library(leaflet)
+library(leaflet.extras2)
+
+data <- sf::st_as_sf(breweries91)
+categories <- c("Schwer", "Mäßig", "Leicht", "kein Schaden")
+data$category <- sample(categories, size = nrow(data), replace = TRUE)
+
+## Pie Chart
+leaflet() \%>\%
+  addProviderTiles("CartoDB.Positron") \%>\%
+  leaflet::addLayersControl(overlayGroups = "clustermarkers") \%>\%
+  addClusterCharts(data = data
+                   , categoryField = "category"
+                   , categoryMap = data.frame(labels = categories,
+                                              colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
+                                              strokes = "gray")
+                   , group = "clustermarkers"
+                   , popupFields = c("brewery", "address", "zipcode", "category")
+                   , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
+                   , label = "brewery"
+  )
+
+## Bar Chart
+leaflet() \%>\%
+  addProviderTiles("CartoDB.Positron") \%>\%
+  leaflet::addLayersControl(overlayGroups = "clustermarkers") \%>\%
+  addClusterCharts(data = data
+                   , type = "bar"
+                   , categoryField = "category"
+                   , categoryMap = data.frame(labels = categories,
+                                              colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
+                                              strokes = "gray")
+                   , group = "clustermarkers"
+                   , popupFields = c("brewery", "address", "zipcode", "category")
+                   , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
+                   , label = "brewery"
+  )
 }

@@ -8,21 +8,19 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
   var map = this;
 
+  // options
   var rmax = options.rmax ? options.rmax : 30;
-  var innerRadius = options.innerRadius ? options.innerRadius : -10;
   var strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
 
+  // Make L.markerClusterGroup, markers, fitBounds and renderLegend
+  console.log("geojson"); console.log(geojson)
   var markerclusters = L.markerClusterGroup(
     Object.assign({
       maxClusterRadius: 2 * rmax,
       iconCreateFunction: defineClusterIcon // this is where the magic happens
     }, clusterOptions)
   )
-
-  map.addLayer(markerclusters);
   map.layerManager.addLayer(markerclusters, "cluster", clusterId, group);
-
-  console.log("geojson"); console.log(geojson)
   var markers = L.geoJson(geojson, {
   	pointToLayer: defineFeature,
   	onEachFeature: defineFeaturePopup
@@ -31,6 +29,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
   map.fitBounds(markers.getBounds());
   renderLegend();
 
+  // Show/Hide the legend when the group is shown/hidden
   map.on('overlayadd', function(eventlayer){
     if (eventlayer.name == group) {
       $(".clusterlegend").show()
@@ -42,6 +41,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     }
   });
 
+  // Functions
   function defineFeature(feature, latlng) {
     var categoryVal = feature.properties[categoryField]
     var myClass = 'clustermarker category-'+categoryVal+' icon-'+categoryVal;
@@ -87,7 +87,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
                 popupContent = '';
     if (popup && props[popup]) {
       popupContent = props[popup];
-    } else {
+    } else if (popupFields !== null ) {
       popupContent += '<table class="map-popup">';
       popupFields.map( function(key, idx) {
         if (props[key]) {
@@ -98,10 +98,13 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       });
       popupContent += '</table>';
     }
-    if (popupOptions !== null){
-      layer.bindPopup(popupContent, popupOptions);
-    } else {
-      layer.bindPopup(popupContent);
+
+    if (popupContent !== '') {
+      if (popupOptions !== null){
+        layer.bindPopup(popupContent, popupOptions);
+      } else {
+        layer.bindPopup(popupContent);
+      }
     }
   }
   function defineClusterIcon(cluster) {
@@ -118,6 +121,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
       if (type == "pie") {
         console.log("Piechart")
+        var innerRadius = options.innerRadius ? options.innerRadius : -10;
         html = bakeThePie({
           data: data,
           valueFunc: function(d){return d.values.length;},
@@ -216,7 +220,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       //Return the svg-markup rather than the actual element
       return serializeXmlNode(svg);
   }
-
   //function that generates a svg markup for the Bar chart
   function bakeTheBarChart(options) {
     if (!options.data) {
@@ -266,7 +269,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
     return serializeXmlNode(svg);
   }
-
   //Helper function
   function serializeXmlNode(xmlNode) {
       if (typeof window.XMLSerializer != "undefined") {
@@ -276,7 +278,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       }
       return "";
   }
-
   //Function for generating a legend with the same categories as in the clusterPie
   function renderLegend() {
     var data = Object.entries(categoryMap).map(([key, value]) => ({

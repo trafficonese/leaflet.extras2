@@ -10,7 +10,7 @@ clusterchartOptions(
   width = 40,
   height = 50,
   strokeWidth = 1,
-  innerRadius = -10
+  innerRadius = 10
 )
 }
 \arguments{
