@@ -21,13 +21,14 @@ clusterchartsDependencies <- function() {
 
 
 #' addClusterCharts
-#' @description Adds a Great Circle to the map.
-#' @param lat_center,lng_center lat/lng for the center
-#' @param radius in meters
-#' @param rmax The maxClusterRadius
-#' @param categoryField in meters
-#' @param popupFields in meters
-#' @param options clusterchartOptions
+#' @description Adds cluster charts (either pie or bar charts) to a Leaflet map.
+#' @param type The type of chart to use for clusters, either "pie" or "bar".
+#' @param categoryField The name of the feature property used to categorize the charts.
+#' @param categoryMap A data frame mapping categories to chart properties (label, color, icons, stroke).
+#' @param popup Use the column name given in popup to collect the feature property with this name.
+#' @param popupFields A string or vector of strings indicating the feature properties to include in popups.
+#' @param popupLabels A string or vector of strings indicating the labels for the popup fields.
+#' @param options Additional options for cluster charts (see \code{\link{clusterchartOptions}}).
 #' @inheritParams leaflet::addCircleMarkers
 #' @export
 addClusterCharts <- function(
@@ -91,18 +92,16 @@ addClusterCharts <- function(
 
 #' clusterchartOptions
 #' @description Adds options for clusterCharts
-#' @param rmax The maxClusterRadius
-#' @param size the size
-#' @param width the width
-#' @param height the height
-#' @param strokeWidth the strokeWidth
-#' @param pieMultiplier the pieMultiplier
-#' @param innerRadius the innerRadius
+#' @param rmax The maximum radius of the clusters.
+#' @param size The size of the cluster markers.
+#' @param strokeWidth The stroke width in the chart.
+#' @param width The width of the bar-chart.
+#' @param height The height of the bar-chart.
+#' @param innerRadius The inner radius of the pie-chart.
 #' @export
 clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 width = 40, height = 50,
                                 strokeWidth = 1,
-                                pieMultiplier = 2,
                                 innerRadius = -10) {
   list(
     rmax = rmax,

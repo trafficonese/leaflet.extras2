@@ -141,7 +141,13 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           barLabel: n,
           width: options.width ? options.width : 70,
           height: options.height ? options.height : 40,
-          barLabelClass: 'clustermarker-cluster-bar-label'
+          barLabelClass: 'clustermarker-cluster-bar-label',
+          pathClassFunc: function(d){
+            return "category-" + d.key;
+          },
+          pathTitleFunc: function(d){
+            return d.key + ' (' + d.values.length + ')';
+          }
         });
       }
 
@@ -223,6 +229,8 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         barLabelClass = options.barLabelClass,
         width = options.width,
         height = options.height,
+        pathClassFunc = options.pathClassFunc,
+        pathTitleFunc = options.pathTitleFunc,
         x = d3.scale.ordinal().rangeRoundBands([0, width], 0.1),
         y = d3.scale.linear().range([height, 0]);
 
@@ -238,9 +246,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     vis.selectAll('.bar')
         .data(data)
         .enter().append('rect')
-        .attr('class', function(d) {
-          return "category-"+d.key
-        })
+        .attr('class', pathClassFunc)
         .attr('x', function(d) {
           return x(d.key);
         })
@@ -248,7 +254,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         .attr('y', function(d) { return y(d.values.length); })
         .attr('height', function(d) { return height - y(d.values.length); })
         .append('svg:title')
-        .text(function(d) { return d.key + ' (' + d.values.length + ')'; });
+        .text(pathTitleFunc);
 
     vis.append('text')
         .attr('x', width / 2)

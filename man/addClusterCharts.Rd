@@ -48,11 +48,11 @@ Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
-\item{options}{clusterchartOptions}
+\item{type}{The type of chart to use for clusters, either "pie" or "bar".}
 
-\item{popup}{a character vector of the HTML content for the popups (you are
-recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
-for security reasons)}
+\item{options}{Additional options for cluster charts (see \code{\link{clusterchartOptions}}).}
+
+\item{popup}{Use the column name given in popup to collect the feature property with this name.}
 
 \item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
@@ -68,20 +68,18 @@ options}
 
 \item{clusterId}{the id for the marker cluster layer}
 
-\item{categoryField}{in meters}
+\item{categoryField}{The name of the feature property used to categorize the charts.}
 
-\item{popupFields}{in meters}
+\item{categoryMap}{A data frame mapping categories to chart properties (label, color, icons, stroke).}
+
+\item{popupFields}{A string or vector of strings indicating the feature properties to include in popups.}
+
+\item{popupLabels}{A string or vector of strings indicating the labels for the popup fields.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
-
-\item{lat_center, lng_center}{lat/lng for the center}
-
-\item{radius}{in meters}
-
-\item{rmax}{The maxClusterRadius}
 }
 \description{
-Adds a Great Circle to the map.
+Adds cluster charts (either pie or bar charts) to a Leaflet map.
 }

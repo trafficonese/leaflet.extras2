@@ -10,24 +10,21 @@ clusterchartOptions(
   width = 40,
   height = 50,
   strokeWidth = 1,
-  pieMultiplier = 2,
   innerRadius = -10
 )
 }
 \arguments{
-\item{rmax}{The maxClusterRadius}
+\item{rmax}{The maximum radius of the clusters.}
 
-\item{size}{the size}
+\item{size}{The size of the cluster markers.}
 
-\item{width}{the width}
+\item{width}{The width of the bar-chart.}
 
-\item{height}{the height}
+\item{height}{The height of the bar-chart.}
 
-\item{strokeWidth}{the strokeWidth}
+\item{strokeWidth}{The stroke width in the chart.}
 
-\item{pieMultiplier}{the pieMultiplier}
-
-\item{innerRadius}{the innerRadius}
+\item{innerRadius}{The inner radius of the pie-chart.}
 }
 \description{
 Adds options for clusterCharts

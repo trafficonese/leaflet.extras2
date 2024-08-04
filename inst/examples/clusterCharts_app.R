@@ -33,9 +33,9 @@ server <- function(input, output, session) {
       # addCircleMarkers(data = data, clusterOptions = markerClusterOptions()) %>%
       # addCircleMarkers(data = data, options = pathOptions(pane = "clusterpane")) %>%
       addClusterCharts(data = data
-                       , options = clusterchartOptions(rmax = 40, size = 40,
-                                                       width = 40, height = 40,
-                                                       strokeWidth = 0.7,
+                       , options = clusterchartOptions(rmax = 40, size = 30,
+                                                       width = 30, height = 30,
+                                                       strokeWidth = 10,
                                                        innerRadius = 14)
                        , type = "bar"
                        , categoryField = "category"
