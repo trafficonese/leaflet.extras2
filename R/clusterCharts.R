@@ -72,7 +72,7 @@ clusterchartsDependencies <- function() {
 #'                    , label = "brewery"
 #'   )
 addClusterCharts <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar"),
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar","horizontal"),
     options = clusterchartOptions(),
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
     clusterOptions = NULL, clusterId = NULL,
@@ -133,7 +133,6 @@ addClusterCharts <- function(
                         clusterchartsDependencies())
 
   ## Make Geojson ###########
-  ##TODO - check if its a Point SimpleFeature
   if (!inherits(sf::st_as_sf(data), "sf")) {
     data <- sf::st_as_sf(data)
   }

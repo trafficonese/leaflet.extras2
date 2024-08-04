@@ -142,6 +142,22 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
             return d.data.key + ' (' + d.data.values.length + ')';
           }
         })
+      } else if (type == "horizontal") {
+        console.log("Barchart horizontal")
+        html = bakeTheBarChartHorizontal({
+          data: data,
+          barClass: 'cluster-bar',
+          barLabel: n,
+          width: options.width ? options.width : 70,
+          height: options.height ? options.height : 40,
+          barLabelClass: 'clustermarker-cluster-bar-label',
+          pathClassFunc: function(d){
+            return "category-" + d.key;
+          },
+          pathTitleFunc: function(d){
+            return d.key + ' (' + d.values.length + ')';
+          }
+        });
       } else {
         console.log("Barchart")
         html = bakeTheBarChart({
@@ -307,6 +323,76 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         .attr('y', 43) // Adjust the y position for the text
         .attr('class', barLabelClass)
         .attr('text-anchor', 'middle')
+        .attr('dy', '.3em')
+        .attr('fill', labelColor)
+        .text(barLabel)
+        .append('svg:title')
+        .text(allTitles); // Title for the rectangle with all values
+
+    return serializeXmlNode(svg);
+  }
+  //function that generates a svg markup for the horizontal Bar chart
+  function bakeTheBarChartHorizontal(options) {
+    if (!options.data) {
+      return '';
+    }
+    console.log("bakeTheBarChart with these options"); console.log(options)
+    var data = options.data,
+        barClass = options.barClass,
+        barLabel = options.barLabel ? options.barLabel : d3.sum(data, function(d) { return d.values.length; }),
+        barLabelClass = options.barLabelClass,
+        width = options.width,
+        height = options.height,
+        pathClassFunc = options.pathClassFunc,
+        pathTitleFunc = options.pathTitleFunc,
+        x = d3.scale.linear().range([0, width]), // Linear scale for horizontal length
+        y = d3.scale.ordinal().rangeRoundBands([0, height], 0.1); // Ordinal scale for vertical positioning
+
+    x.domain([0, d3.max(data, function(d) { return d.values.length; })]);
+    y.domain(data.map(function(d) { return d.key; }));
+
+    var svg = document.createElementNS(d3.ns.prefix.svg, "svg");
+    var vis = d3.select(svg)
+        .attr('class', barClass)
+        .attr('width', width)
+        .attr('height', height + 20);
+
+    // Bars
+    vis.selectAll('.bar')
+        .data(data)
+        .enter().append('rect')
+        .attr('class', pathClassFunc)
+        .attr('x', 0)
+        .attr('y', function(d) { return y(d.key); })
+        .attr('width', function(d) { return x(d.values.length); }) // Bar length based on x scale
+        .attr('height', y.rangeBand()) // Bar thickness based on y scale
+        .append('svg:title')
+        .text(pathTitleFunc);
+
+    // Bar Label Background
+   var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
+    if (labelBackground && labelBackground == true) {
+        vis.append('rect')
+            .attr('x', 0) // Adjust the width of the background
+            .attr('y', height) // Adjust the y position for the background
+            .attr('width', width) // Width of the background
+            .attr('height', 15) // Height of the background
+            .attr('fill', labelFill)
+            .attr('stroke', labelStroke)
+            .attr('opacity', labelOpacity)
+            .attr('stroke-width', strokeWidth)
+            .append('svg:title')
+            .text(allTitles); // Title for the rectangle with all values
+    }
+
+    // Bar Label
+    vis.append('text')
+        .attr('x', width / 2)
+        .attr('y', (height + 5)) // Adjust the y position for the text
+        .attr('class', barLabelClass)
+        .attr('text-anchor', 'middle')
+        .attr('dominant-baseline', 'middle')
+        .attr('alignment-baseline', 'middle')
         .attr('dy', '.3em')
         .attr('fill', labelColor)
         .text(barLabel)
