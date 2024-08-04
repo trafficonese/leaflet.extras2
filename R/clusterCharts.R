@@ -134,6 +134,9 @@ addClusterCharts <- function(
 
   ## Make Geojson ###########
   ##TODO - check if its a Point SimpleFeature
+  if (!inherits(sf::st_as_sf(data), "sf")) {
+    data <- sf::st_as_sf(data)
+  }
   geojson <- geojsonsf::sf_geojson(data)
 
   ## Derive Points and Invoke Method ##################
@@ -162,15 +165,25 @@ addClusterCharts <- function(
 clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 width = 40, height = 50,
                                 strokeWidth = 1,
-                                innerRadius = 10) {
-  list(
-    rmax = rmax,
-    size = size,
-    width = width,
-    height = height,
-    strokeWidth = strokeWidth,
-    innerRadius = innerRadius
-  )
+                                innerRadius = 10,
+                                labelBackground = FALSE,
+                                labelFill = "white",
+                                labelStroke = "black",
+                                labelColor = "black",
+                                labelOpacity = 0.9) {
+  filterNULL(list(
+    rmax = rmax
+    , size = size
+    , width = width
+    , height = height
+    , strokeWidth = strokeWidth
+    , innerRadius = innerRadius
+    , labelBackground = labelBackground
+    , labelFill = labelFill
+    , labelStroke = labelStroke
+    , labelColor = labelColor
+    , labelOpacity = labelOpacity
+  ))
 }
 
 generate_css <- function(row) {

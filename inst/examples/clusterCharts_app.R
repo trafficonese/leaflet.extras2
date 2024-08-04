@@ -29,7 +29,12 @@ server <- function(input, output, session) {
       addClusterCharts(data = data
                        , options = clusterchartOptions(rmax = 40, size = 30,
                                                        width = 30, height = 30,
-                                                       strokeWidth = 1,
+                                                       strokeWidth = 0.5,
+                                                       labelBackground = T,
+                                                       labelFill = "orange",
+                                                       labelStroke = "gray10",
+                                                       labelColor = "blue",
+                                                       labelOpacity = 0.5,
                                                        innerRadius = 10)
                        # , type = "bar"
                        , categoryField = "category"

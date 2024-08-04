@@ -11,6 +11,11 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
   // options
   var rmax = options.rmax ? options.rmax : 30;
   var strokeWidth = options.strokeWidth ? options.strokeWidth : 1;
+  var labelBackground = options.labelBackground;
+  var labelFill = options.labelFill ? options.labelFill : "white";
+  var labelStroke = options.labelStroke ? options.labelStroke : "black";
+  var labelColor = options.labelColor ? options.labelColor : "black";
+  var labelOpacity = options.labelOpacity ? options.labelOpacity : 0.9;
 
   // Make L.markerClusterGroup, markers, fitBounds and renderLegend
   console.log("geojson"); console.log(geojson)
@@ -196,6 +201,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           .attr('width', w)
           .attr('height', h);
 
+      // Arcs
       var arcs = vis.selectAll('g.arc')
           .data(donut.value(valueFunc))
           .enter().append('svg:g')
@@ -209,13 +215,34 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           .append('svg:title')
           .text(pathTitleFunc);
 
+      // Bar Label Background
+      console.log("d3pie data")
+      pathTitleFunc = function(d){
+            return d.key + ' (' + d.values.length + ')';
+          }
+      var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
+      if (labelBackground && labelBackground == true) {
+        vis.append('circle')
+            .attr('r', rInner-5)
+            .attr('transform', 'translate(' + origo + ',' + origo + ')')
+            .attr('fill', labelFill)
+            .attr('stroke', labelStroke)
+            .attr('stroke-width', strokeWidth)
+            .attr('opacity', labelOpacity)
+            .append('svg:title')
+            .text(allTitles); // Title for the rectangle with all values
+      }
+      // Text
       vis.append('text')
           .attr('x',origo)
           .attr('y',origo)
           .attr('class', pieLabelClass)
           .attr('text-anchor', 'middle')
+          .attr('fill', labelColor)
           .attr('dy','.3em')
-          .text(pieLabel);
+          .text(pieLabel)
+          .append('svg:title')
+          .text(allTitles);
 
       //Return the svg-markup rather than the actual element
       return serializeXmlNode(svg);
@@ -244,28 +271,47 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     var vis = d3.select(svg)
         .attr('class', barClass)
         .attr('width', width)
-        .attr('height', height);
+        .attr('height', height + 20);
 
+    // Bars
     vis.selectAll('.bar')
         .data(data)
         .enter().append('rect')
         .attr('class', pathClassFunc)
-        .attr('x', function(d) {
-          return x(d.key);
-        })
+        .attr('x', function(d) { return x(d.key); })
         .attr('width', x.rangeBand())
         .attr('y', function(d) { return y(d.values.length); })
         .attr('height', function(d) { return height - y(d.values.length); })
         .append('svg:title')
         .text(pathTitleFunc);
 
+    // Bar Label Background
+    var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
+    if (labelBackground && labelBackground == true) {
+      vis.append('rect')
+          .attr('x', 0) // Adjust the width of the background
+          .attr('y', 35) // Adjust the y position for the background
+          .attr('width', 30) // Width of the background
+          .attr('height', 15) // Height of the background
+          .attr('fill', labelFill)
+          .attr('stroke', labelStroke)
+          .attr('opacity', labelOpacity)
+          .attr('stroke-width', strokeWidth)
+          .append('svg:title')
+          .text(allTitles); // Title for the rectangle with all values
+    }
+
+    // Bar Label
     vis.append('text')
         .attr('x', width / 2)
-        .attr('y', height / 2)
+        .attr('y', 43) // Adjust the y position for the text
         .attr('class', barLabelClass)
-        .attr('text-anchor', 'top')
+        .attr('text-anchor', 'middle')
         .attr('dy', '.3em')
-        .text(barLabel);
+        .attr('fill', labelColor)
+        .text(barLabel)
+        .append('svg:title')
+        .text(allTitles); // Title for the rectangle with all values
 
     return serializeXmlNode(svg);
   }

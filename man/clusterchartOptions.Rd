@@ -10,7 +10,12 @@ clusterchartOptions(
   width = 40,
   height = 50,
   strokeWidth = 1,
-  innerRadius = 10
+  innerRadius = 10,
+  labelBackground = FALSE,
+  labelFill = "white",
+  labelStroke = "black",
+  labelColor = "black",
+  labelOpacity = 0.9
 )
 }
 \arguments{
