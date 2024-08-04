@@ -39,7 +39,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, rmax,
 
   function defineFeature(feature, latlng) {
     var categoryVal = feature.properties[categoryField]
-    var myClass = 'marker category-'+categoryVal+' icon-'+categoryVal;
+    var myClass = 'clustermarker category-'+categoryVal+' icon-'+categoryVal;
     //console.log("myClass"); console.log(myClass)
     let extraInfo = { clusterId: clusterId };
 
@@ -88,7 +88,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, rmax,
         if (props[key]) {
           var val = props[key],
             label = popupLabels[idx];
-          popupContent += '<tr class="attribute"><td class="clustermarkerlabel">' + label + ':</td><td>' + val + '</td></tr>';
+          popupContent += '<tr class="attribute"><td class="clustermarkerpopuplabel">' + label + ':</td><td>' + val + '</td></tr>';
         }
       });
       popupContent += '</table>';
@@ -111,26 +111,27 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, rmax,
           //bake some svg markup
           html = bakeThePie({data: data,
                               valueFunc: function(d){return d.values.length;},
-                              strokeWidth: 1,
+                              strokeWidth: strokeWidth,
                               outerRadius: r,
                               innerRadius: r-10,
                               pieClass: 'cluster-pie',
                               pieLabel: n,
-                              pieLabelClass: 'marker-cluster-pie-label',
+                              pieLabelClass: 'clustermarker-cluster-pie-label',
                               pathClassFunc: function(d){
-                                return "category-"+d.data.key;
+                                return "category-" + d.data.key;
                               },
                               pathTitleFunc: function(d){
-                                return d.data.key+' ('+d.data.values.length+' element)';
+                                return d.data.key + ' (' + d.data.values.length + ')';
                               }
                             }),
           //Create a new divIcon and assign the svg markup to the html property
           myIcon = new L.DivIcon({
               html: html,
-              className: 'marker-cluster',
+              className: 'clustermarker-cluster',
               iconSize: new L.Point(iconDim, iconDim)
           });
 
+      console.log("r"); console.log(r)
       //console.log("data"); console.log(data)
       return myIcon;
   }
@@ -172,7 +173,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, rmax,
           .attr('class', 'arc')
           .attr('transform', 'translate(' + origo + ',' + origo + ')');
 
-      console.log("pathTitleFunc"); console.log(pathTitleFunc)
       arcs.append('svg:path')
           .attr('class', pathClassFunc)
           .attr('stroke-width', strokeWidth)

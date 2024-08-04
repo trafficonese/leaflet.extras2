@@ -1,5 +1,5 @@
 
-.clustermarkerlabel {
+.clustermarkerpopuplabel {
   font-weight: 800;
 }
 
@@ -25,24 +25,22 @@
 }
 
 /*Marker clusters*/
-.marker-cluster-pie g.arc{
+.clustermarker-cluster-pie g.arc{
   fill-opacity: 0.5;
 }
-.marker-cluster-pie-label {
+.clustermarker-cluster-pie-label {
   font-size: 14px;
   font-weight: bold;
   font-family: sans-serif;
 }
 
 /*Markers*/
-.marker {
+.clustermarker {
   border-width: 2px;
   border-radius:10px;
-  margin-top: -10px;
-  margin-left: -10px;
   border-style: solid;
 }
-.marker div{
+.clustermarker div{
   text-align: center;
   font-size: 14px;
   font-weight: bold;

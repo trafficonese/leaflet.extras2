@@ -54,7 +54,10 @@ addClusterCharts <- function(
   # browser()
   css <- paste(apply(categoryMap, 1, generate_css), collapse = "\n")
   if (length(size) == 1) size <- rep(size, 2)
-  css <- paste0(css, "\n.marker {width: ",size[1],"px;height: ",size[1],"px;}")
+  css <- paste0(css, "\n.clustermarker {",
+                "width: ",size[1],"px; height: ",size[2],"px;",
+                "margin-top: -",size[1]/2,"px; margin-left: -",size[2]/2,"px;",
+                "}")
   csssrc <- list(
     htmltools::htmlDependency(
       "lfx-clustercharts-css", version = "1.0.0",
