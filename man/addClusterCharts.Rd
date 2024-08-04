@@ -10,6 +10,7 @@ addClusterCharts(
   lat = NULL,
   layerId = NULL,
   group = NULL,
+  type = c("pie", "bar"),
   rmax = 30,
   size = c(18, 18),
   popup = NULL,

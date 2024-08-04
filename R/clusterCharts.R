@@ -30,7 +30,7 @@ clusterchartsDependencies <- function() {
 #' @inheritParams leaflet::addCircleMarkers
 #' @export
 addClusterCharts <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar"),
     rmax = 30, size = c(18, 18),
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
     clusterOptions = NULL, clusterId = NULL,
@@ -39,7 +39,8 @@ addClusterCharts <- function(
                                                position = "topright"),
     data = getMapData(map)) {
 
-  ## Check labelOptions, popupFields, popupLabels, clusterOptions ############
+  ## Check type, labelOptions, popupFields, popupLabels, clusterOptions ############
+  type <- match.arg(type)
   if (missing(labelOptions))
     labelOptions <- labelOptions()
   if (!is.null(popupFields) && is.null(popupLabels)) {
@@ -77,7 +78,7 @@ addClusterCharts <- function(
   points <- derivePoints(data, lng, lat, missing(lng), missing(lat),
                          "addClusterCharts")
   leaflet::invokeMethod(
-    map, NULL, "addClusterCharts", geojson, layerId, group, rmax, size,
+    map, NULL, "addClusterCharts", geojson, layerId, group, type, rmax, size,
     popup, popupOptions, safeLabel(label, data), labelOptions,
     clusterOptions, clusterId,
     categoryField, categoryMap, popupFields, popupLabels,

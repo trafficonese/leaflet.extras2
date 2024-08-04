@@ -28,7 +28,7 @@
 .clustermarker-cluster-pie g.arc{
   fill-opacity: 0.5;
 }
-.clustermarker-cluster-pie-label {
+.clustermarker-cluster-pie-label, .clustermarker-cluster-bar-label {
   font-size: 14px;
   font-weight: bold;
   font-family: sans-serif;

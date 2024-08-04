@@ -29,10 +29,11 @@ server <- function(input, output, session) {
       addProviderTiles("CartoDB") %>%
       leaflet::addLayersControl(overlayGroups = "clustermarkers") %>%
       # addCircleMarkers(data = data, clusterOptions = markerClusterOptions()) %>%
-      # addCircleMarkers(data = data) %>%
+      # addCircleMarkers(data = data, options = pathOptions(pane = "clusterpane")) %>%
       addClusterCharts(data = data
                        , rmax = 50
                        , size = 50
+                       , type = "bar"
                        , categoryField = "category"
                        , categoryMap =
                          data.frame(label = c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
@@ -68,8 +69,9 @@ server <- function(input, output, session) {
                                                                removeOutsideVisibleBounds = TRUE,
                                                                spiderLegPolylineOptions = list(weight = 1.5, color = "#222", opacity = 0.5),
                                                                freezeAtZoom = TRUE,
-                                                               spiderfyDistanceMultiplier = 2,
-                                                               clusterPane = "clusterpane")
+                                                               # clusterPane = "clusterpane",
+                                                               spiderfyDistanceMultiplier = 2
+                                                               )
                        , labelOptions = labelOptions(opacity = 0.8, textsize = "14px")
                        , popupOptions = popupOptions(maxWidth = 900, minWidth = 200, keepInView = TRUE)
                        )
