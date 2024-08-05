@@ -22,7 +22,7 @@ Suggests:
     jsonlite,
     shiny,
     sf,
-    geojsonsf,
+    yyjsonr,
     sp,
     testthat (>= 2.1.0),
     fontawesome,

@@ -16,7 +16,6 @@ clusterchartsDependencies <- function() {
   )
 }
 
-
 #' addClusterCharts
 #' @description Adds cluster charts (either pie or bar charts) to a Leaflet map.
 #' @param type The type of chart to use for clusters, either "pie" or "bar".
@@ -33,7 +32,6 @@ clusterchartsDependencies <- function() {
 #' @examples
 #' # Example usage:
 #' library(sf)
-#' library(geojsonsf)
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
@@ -136,7 +134,8 @@ addClusterCharts <- function(
   if (!inherits(sf::st_as_sf(data), "sf")) {
     data <- sf::st_as_sf(data)
   }
-  geojson <- geojsonsf::sf_geojson(data)
+  geojson <- yyjsonr::write_geojson_str(data)
+  class(geojson) <- c("geojson","json")
 
   ## Derive Points and Invoke Method ##################
   points <- derivePoints(data, lng, lat, missing(lng), missing(lat),

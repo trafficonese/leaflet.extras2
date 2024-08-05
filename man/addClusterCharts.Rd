@@ -90,7 +90,6 @@ Adds cluster charts (either pie or bar charts) to a Leaflet map.
 \examples{
 # Example usage:
 library(sf)
-library(geojsonsf)
 library(leaflet)
 library(leaflet.extras2)
 

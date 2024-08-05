@@ -84,7 +84,6 @@ JQuery UI slider.
 library(leaflet)
 library(leaflet.extras2)
 library(sf)
-library(geojsonsf)
 
 data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
 data <- st_cast(data, "POINT")
