@@ -3,14 +3,6 @@ LeafletWidget.methods.addSidebar = function(id, options) {
   (function(){
     var map = this;
 
-    // Check if run in Shiny
-    /*
-    if (!HTMLWidgets.shinyMode) {
-      console.error("The sidebar-plugin is not called within a Shiny application and therefore does not work.")
-      return(0)
-    }
-    */
-
     // Add css class ('sidebar-map') to map
     if (!map._container.classList.contains('sidebar-map')) {
       map._container.classList.add('sidebar-map');
@@ -26,7 +18,7 @@ LeafletWidget.methods.addSidebar = function(id, options) {
         mapdiv.className = 'leaflet-sidebar-container';
         $(mapdiv).appendTo($(mapid));
       }
-      $('.leafsidebar.collapsed').appendTo(mapid + ' .leaflet-sidebar-container');
+      $('#'+id).appendTo(mapid + ' .leaflet-sidebar-container');
 
       // Disable/Re-enable dragging+scrolling when user's cursor enters/exits the element
       var content = $('.leafsidebar-content');
@@ -89,6 +81,7 @@ LeafletWidget.methods.removeSidebar = function(sidebar_id) {
       }
       // Remove Sidebar and Delete from map
       sidebar.remove();
+      $(".leaflet-sidebar-container").remove();
       delete map.sidebar[tid];
     }
   }
