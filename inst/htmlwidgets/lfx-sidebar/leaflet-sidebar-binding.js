@@ -9,7 +9,6 @@ LeafletWidget.methods.addSidebar = function(id, options) {
     }
 
     // Move Sidebar inside Map-Div
-    /*var mapid = "#"+map.id*/
     var mapid = "#" + (map.id ? map.id : map._container.id);
     if (options && options.fit === true) {
       // Append sidebar container to map div
@@ -74,14 +73,10 @@ LeafletWidget.methods.removeSidebar = function(sidebar_id) {
     var sidebar = $(`#${tid}`);
     if (sidebar[0]) {
       // Remove left/right CSS
-      if (L.DomUtil.hasClass(sidebar[0], 'leafsidebar-left')) {
-        $('.sidebar-map .leaflet-left').css('left', 0);
-      } else {
-        $('.sidebar-map .leaflet-right').css('right', 0);
-      }
+      map._container.classList.remove("sidebar-map")
       // Remove Sidebar and Delete from map
       sidebar.remove();
-      $(".leaflet-sidebar-container").remove();
+      $("#" + map.id + " .leaflet-sidebar-container").remove();
       delete map.sidebar[tid];
     }
   }

@@ -144,10 +144,10 @@
 }
 
 .sidebar-map .leaflet-left {
-  left: 40px;
+  left: 40px !important;
 }
 .sidebar-map .leaflet-right {
-  right: 40px;
+  right: 40px !important;
 }
 
 .leafsidebar.leaflet-touch {
