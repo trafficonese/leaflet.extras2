@@ -310,8 +310,8 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     var svg = document.createElementNS(d3.ns.prefix.svg, "svg");
     var vis = d3.select(svg)
         .attr('class', barClass)
-        .attr('width', width)
-        .attr('height', height + 20);
+        .attr('width', width + strokeWidth)
+        .attr('height', height + 20 + strokeWidth);
 
     // Bars
     vis.selectAll('.bar')
@@ -327,7 +327,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
     // Create Title for Individual Elements and All in Cluster
     let allTitles = ""
-    //var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
     if (sortTitlebyCount) {
       allTitles = data
             .sort(function(a, b) { return b.values.length - a.values.length; })  // Sort by length in descending order
@@ -352,9 +351,9 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     // Bar Label Background
     if (labelBackground && labelBackground == true) {
       vis.append('rect')
-          .attr('x', 0) // Adjust the width of the background
-          .attr('y', 35) // Adjust the y position for the background
-          .attr('width', 30) // Width of the background
+          .attr('x', (width - (width - 10)) / 2) // Adjust the width of the background
+          .attr('y', height + 5) // Adjust the y position for the background
+          .attr('width', width - 10) // Width of the background
           .attr('height', 15) // Height of the background
           .attr('fill', labelFill)
           .attr('stroke', labelStroke)
@@ -367,7 +366,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     // Bar Label
     vis.append('text')
         .attr('x', width / 2)
-        .attr('y', 43) // Adjust the y position for the text
+        .attr('y', height + 13) // Adjust the y position for the text
         .attr('class', barLabelClass)
         .attr('text-anchor', 'middle')
         .attr('dy', '.3em')
@@ -401,8 +400,8 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     var svg = document.createElementNS(d3.ns.prefix.svg, "svg");
     var vis = d3.select(svg)
         .attr('class', barClass)
-        .attr('width', width)
-        .attr('height', height + 20);
+        .attr('width', width + strokeWidth)
+        .attr('height', height + 20 + strokeWidth);
 
     // Bars
     vis.selectAll('.bar')
@@ -444,7 +443,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     if (labelBackground && labelBackground == true) {
         vis.append('rect')
             .attr('x', 0) // Adjust the width of the background
-            .attr('y', height) // Adjust the y position for the background
+            .attr('y', height + 3) // Adjust the y position for the background
             .attr('width', width) // Width of the background
             .attr('height', 15) // Height of the background
             .attr('fill', labelFill)
@@ -458,7 +457,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     // Bar Label
     vis.append('text')
         .attr('x', width / 2)
-        .attr('y', (height + 5)) // Adjust the y position for the text
+        .attr('y', (height + 8)) // Adjust the y position for the text
         .attr('class', barLabelClass)
         .attr('text-anchor', 'middle')
         .attr('dominant-baseline', 'middle')
