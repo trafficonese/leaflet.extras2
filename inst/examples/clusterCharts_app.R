@@ -30,6 +30,7 @@ data$id <- paste0("ID", seq.int(nrow(data)))
 data$popup <- paste0("<h6>", data$brewery, "</h6><div>", data$address, "</div>")
 data$web <- gsub(">(.*?)<", ">LINK<", data$web)
 data$web <- ifelse(is.na(data$web), "", paste0("<div class='markerhtml'>", data$web, "</div>"))
+data$tosum <- sample(1:100, nrow(data), replace = TRUE)
 
 ui <- fluidPage(
   tags$head(tags$style("
@@ -56,19 +57,19 @@ server <- function(input, output, session) {
     leaflet() %>% addMapPane("clusterpane", 420) %>%
       addProviderTiles("CartoDB") %>%
       leaflet::addLayersControl(overlayGroups = c("clustermarkers","normalcircles")) %>%
-      addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
+      # addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
       addClusterCharts(data = data
-                       , options = clusterchartOptions(rmax = 40,
+                       , options = clusterchartOptions(rmax = 50,
                                                        size = c(100,40),
                                                        # size=40,
-                                                       # width = 70, height = 30,
+                                                       width = 100, height = 30,
                                                        strokeWidth = 1,
                                                        labelBackground = T,
-                                                       # labelFill = "white",
+                                                       # labelFill = "red",
                                                        # labelStroke = "green",
                                                        labelColor = "blue",
                                                        labelOpacity = 0.5,
-                                                       innerRadius = 6,
+                                                       innerRadius = 10,
                                                        sortTitlebyCount = T)
                        # , type = "bar"
                        # , type = "horizontal"
@@ -96,20 +97,21 @@ server <- function(input, output, session) {
                        , markerOptions = markerOptions(interactive = TRUE,
                                                        draggable = TRUE,
                                                        keyboard = TRUE,
+                                                       # stroke = 0.1,
                                                        title = "Some Marker Title",
                                                        zIndexOffset = 100,
                                                        opacity = 1,
                                                        riseOnHover = TRUE,
                                                        riseOffset = 400)
                        , legendOptions = list(position = "bottomright", title = "Unfälle im Jahr 2003")
-                       , clusterOptions = markerClusterOptions(showCoverageOnHover = TRUE,
-                                                               zoomToBoundsOnClick = TRUE,
-                                                               spiderfyOnMaxZoom = TRUE,
-                                                               removeOutsideVisibleBounds = TRUE,
-                                                               spiderLegPolylineOptions = list(weight = 1.5, color = "#222", opacity = 0.5),
-                                                               freezeAtZoom = TRUE,
-                                                               clusterPane = "clusterpane",
-                                                               spiderfyDistanceMultiplier = 2
+                       , clusterOptions = markerClusterOptions(showCoverageOnHover = TRUE
+                                                               , zoomToBoundsOnClick = TRUE
+                                                               , spiderfyOnMaxZoom = TRUE
+                                                               , removeOutsideVisibleBounds = TRUE
+                                                               , spiderLegPolylineOptions = list(weight = 1.5, color = "#222", opacity = 0.5)
+                                                               , freezeAtZoom = TRUE
+                                                               , clusterPane = "clusterpane"
+                                                               , spiderfyDistanceMultiplier = 1
                                                                )
                        , labelOptions = labelOptions(opacity = 0.8, textsize = "14px")
                        , popupOptions = popupOptions(maxWidth = 900, minWidth = 200, keepInView = TRUE)
