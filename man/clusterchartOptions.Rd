@@ -15,7 +15,8 @@ clusterchartOptions(
   labelFill = "white",
   labelStroke = "black",
   labelColor = "black",
-  labelOpacity = 0.9
+  labelOpacity = 0.9,
+  sortTitlebyCount = TRUE
 )
 }
 \arguments{

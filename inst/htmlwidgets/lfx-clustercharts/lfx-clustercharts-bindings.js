@@ -1,6 +1,6 @@
 /* global LeafletWidget, $, L */
 LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
-                                                  options,
+                                                  options, icon, html,
                                                   popup, popupOptions, label, labelOptions,
                                                   clusterOptions, clusterId,
                                                   categoryField, categoryMap, popupFields, popupLabels,
@@ -16,6 +16,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
   var labelStroke = options.labelStroke ? options.labelStroke : "black";
   var labelColor = options.labelColor ? options.labelColor : "black";
   var labelOpacity = options.labelOpacity ? options.labelOpacity : 0.9;
+  var sortTitlebyCount = options.sortTitlebyCount ? options.sortTitlebyCount : false;
 
   // Make L.markerClusterGroup, markers, fitBounds and renderLegend
   console.log("geojson"); console.log(geojson)
@@ -49,13 +50,14 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
   // Functions
   function defineFeature(feature, latlng) {
     var categoryVal = feature.properties[categoryField]
-    var myClass = 'clustermarker category-'+categoryVal+' icon-'+categoryVal;
-    //console.log("myClass"); console.log(myClass)
+    var myClass = 'clustermarker category-'+categoryVal+' clusterchartsicon icon-'+categoryVal;
     let extraInfo = { clusterId: clusterId };
 
+    console.log("feature"); console.log(feature)
     // Make DIV-Icon marker
     var myIcon = L.divIcon({
         className: myClass,
+        html: feature.properties[html] ? feature.properties[html] : "",
         iconSize: null
     });
     var marker = L.marker(latlng,
@@ -231,12 +233,34 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           .append('svg:title')
           .text(pathTitleFunc);
 
-      // Bar Label Background
+      // Create Title for Individual Elements and All in Cluster
       console.log("d3pie data")
       pathTitleFunc = function(d){
             return d.key + ' (' + d.values.length + ')';
-          }
-      var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
+      }
+      let allTitles = ""
+      if (sortTitlebyCount) {
+        allTitles = data
+              .sort(function(a, b) { return b.values.length - a.values.length; })  // Sort by length in descending order
+              .map(function(d) { return pathTitleFunc(d); })
+              .join('\n');
+      } else {
+        let categoryOrder = {};
+        for (var key in categoryMap) {
+            categoryOrder[categoryMap[key]] = parseInt(key);
+        }
+        allTitles = data
+            .sort(function(a, b) {
+                // Get the order values from categoryOrder
+                var orderA = categoryOrder[a.key] || Infinity;
+                var orderB = categoryOrder[b.key] || Infinity;
+                return orderA - orderB; // Sort in ascending order
+            })
+            .map(function(d) { return pathTitleFunc(d); })
+            .join('\n');
+      }
+
+      // Show Label Background
       if (labelBackground && labelBackground == true) {
         vis.append('circle')
             .attr('r', rInner-5)
@@ -301,8 +325,31 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         .append('svg:title')
         .text(pathTitleFunc);
 
+    // Create Title for Individual Elements and All in Cluster
+    let allTitles = ""
+    //var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
+    if (sortTitlebyCount) {
+      allTitles = data
+            .sort(function(a, b) { return b.values.length - a.values.length; })  // Sort by length in descending order
+            .map(function(d) { return pathTitleFunc(d); })
+            .join('\n');
+    } else {
+      let categoryOrder = {};
+      for (var key in categoryMap) {
+          categoryOrder[categoryMap[key]] = parseInt(key);
+      }
+      allTitles = data
+          .sort(function(a, b) {
+              // Get the order values from categoryOrder
+              var orderA = categoryOrder[a.key] || Infinity;
+              var orderB = categoryOrder[b.key] || Infinity;
+              return orderA - orderB; // Sort in ascending order
+          })
+          .map(function(d) { return pathTitleFunc(d); })
+          .join('\n');
+    }
+
     // Bar Label Background
-    var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
     if (labelBackground && labelBackground == true) {
       vis.append('rect')
           .attr('x', 0) // Adjust the width of the background
@@ -369,8 +416,31 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         .append('svg:title')
         .text(pathTitleFunc);
 
+    // Create Title for Individual Elements and All in Cluster
+    let allTitles = ""
+    //var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
+    if (sortTitlebyCount) {
+      allTitles = data
+            .sort(function(a, b) { return b.values.length - a.values.length; })  // Sort by length in descending order
+            .map(function(d) { return pathTitleFunc(d); })
+            .join('\n');
+    } else {
+      let categoryOrder = {};
+      for (var key in categoryMap) {
+          categoryOrder[categoryMap[key]] = parseInt(key);
+      }
+      allTitles = data
+          .sort(function(a, b) {
+              // Get the order values from categoryOrder
+              var orderA = categoryOrder[a.key] || Infinity;
+              var orderB = categoryOrder[b.key] || Infinity;
+              return orderA - orderB; // Sort in ascending order
+          })
+          .map(function(d) { return pathTitleFunc(d); })
+          .join('\n');
+    }
+
     // Bar Label Background
-   var allTitles = data.map(function(d) { return pathTitleFunc(d); }).join('\n');
     if (labelBackground && labelBackground == true) {
         vis.append('rect')
             .attr('x', 0) // Adjust the width of the background

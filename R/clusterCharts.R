@@ -72,6 +72,7 @@ clusterchartsDependencies <- function() {
 addClusterCharts <- function(
     map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar","horizontal"),
     options = clusterchartOptions(),
+    icon = NULL, html = NULL,
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
     clusterOptions = NULL, clusterId = NULL,
     categoryField, categoryMap, popupFields = NULL, popupLabels = NULL,
@@ -107,13 +108,14 @@ addClusterCharts <- function(
   }
 
   ## CSS string #############
-  css <- paste(apply(categoryMap, 1, generate_css), collapse = "\n")
+  css <- paste(apply(categoryMap, 1, generate_css, icon), collapse = "\n")
   size <- options$size
   if (length(size) == 1) size <- rep(size, 2)
   css <- paste0(css, "\n.clustermarker {",
                 "width: ",size[1],"px; height: ",size[2],"px;",
-                "margin-top: -",size[1]/2,"px; margin-left: -",size[2]/2,"px;",
+                "margin-top: -",size[2]/2,"px; margin-left: -",size[1]/2,"px;",
                 "}")
+
   csssrc <- list(
     htmltools::htmlDependency(
       "lfx-clustercharts-css", version = "1.0.0",
@@ -142,7 +144,7 @@ addClusterCharts <- function(
                          "addClusterCharts")
   leaflet::invokeMethod(
     map, NULL, "addClusterCharts", geojson, layerId, group, type,
-    options,
+    options, icon, html,
     popup, popupOptions, safeLabel(label, data), labelOptions,
     clusterOptions, clusterId,
     categoryField, categoryMapList, popupFields, popupLabels,
@@ -168,7 +170,8 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 labelFill = "white",
                                 labelStroke = "black",
                                 labelColor = "black",
-                                labelOpacity = 0.9) {
+                                labelOpacity = 0.9,
+                                sortTitlebyCount = TRUE) {
   filterNULL(list(
     rmax = rmax
     , size = size
@@ -181,20 +184,23 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
     , labelStroke = labelStroke
     , labelColor = labelColor
     , labelOpacity = labelOpacity
+    , sortTitlebyCount = sortTitlebyCount
   ))
 }
 
-generate_css <- function(row) {
+generate_css <- function(row, icon) {
+  ## Get/Check Inputs ############
   label <- row["labels"]
   color <- row["colors"]
   stroke <- row["strokes"]
-  icon <- row['icons']
   if (is.null(color)) color <- stroke
   if (is.null(stroke)) stroke <- color
 
-  # Replace spaces with dots in the class name
-  class_name <- paste0("category-",gsub(" ", ".", label))
+  ## Replace spaces with dots in the class name #######
+  label_nospaces <- gsub(" ", ".", label, fixed = TRUE)
 
+  ## Make Custom CSS-class with fill/stroke/background ################
+  class_name <- paste0("category-", label_nospaces)
   css <- paste0(
     ".", class_name, " {\n",
     "  fill: ", color, ";\n",
@@ -203,15 +209,77 @@ generate_css <- function(row) {
     "  border-color: ", stroke, ";\n",
     "}\n"
   )
-  if (!is.null(icon)) {
+
+  ## Make Icon ################
+  if (is.null(icon)) {
+    icon <- row['icons']
+    if (!is.null(icon)) {
+      css <- paste0(css,
+                    ".icon-", label_nospaces, " {\n",
+                    "  background-image: url('", icon, "');\n",
+                    "  background-repeat: no-repeat;\n",
+                    "  background-position: 0px 1px;\n",
+                    "}"
+                    )
+      # css <- backgroundCSS(label_nospaces, icon,
+      #                       additional_css = list(
+      #                         c("background-blend-mode", "color-burn"),
+      #                         c("opacity", "0.8"),
+      #                         c("border-radius", "5px")
+      #                       ))
+    }
+  } else {
+    if (inherits(icon, "leaflet_icon_set")) {
+      icon <- icon[[label]]
+    }
+    iconuse <- b64EncodePackedIcons(packStrings(icon$iconUrl))
+    size = ""
+    names_icon <- names(icon)
+    if ("iconWidth" %in% names_icon) {
+      if ("iconHeight" %in% names_icon) {
+        size <- paste0("background-size: ", icon$iconWidth, "px ", icon$iconHeight, "px;\n")
+      } else {
+        size <- paste0("background-size: ", icon$iconWidth, "px ", icon$iconWidth, "px;\n")
+      }
+    }
     css <- paste0(css,
-                  ".icon-", gsub(" ", ".", label), " {\n",
-                  "  background-image: url('", icon, "') !important;\n",
-                  "  background-repeat: no-repeat !important;\n",
-                  "  background-position: 0px 1px !important;\n",
+                  ".icon-", label_nospaces, " {\n",
+                  "  background-image: url('", iconuse$data, "');\n",
+                  "  background-repeat: no-repeat;\n",
+                  "  background-position: 0px 1px;\n",
+                  size,
                   "}"
-                  )
+    )
   }
+  # cat(css)
   css
 }
+
+iconSetToIcons <- utils::getFromNamespace("iconSetToIcons", "leaflet")
+b64EncodePackedIcons <- utils::getFromNamespace("b64EncodePackedIcons", "leaflet")
+packStrings <- utils::getFromNamespace("packStrings", "leaflet")
+
+
+backgroundCSS <- function(label, icon,
+                          background_repeat = "no-repeat",
+                          background_position = "0px 1px",
+                          additional_css = list()) {
+  # Start the CSS string
+  css <- paste0(".icon-", label, " {\n",
+                "  background-image: url('", icon, "');\n",
+                "  background-repeat: ", background_repeat, ";\n",
+                "  background-position: ", background_position, ";\n")
+
+  # Add each additional CSS property
+  for (css_property in additional_css) {
+    css <- paste0(css, "  ", css_property[1], ": ", css_property[2], ";\n")
+  }
+
+  # Close the CSS block
+  css <- paste0(css, "}")
+
+  return(css)
+}
+
+
 
