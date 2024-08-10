@@ -24,7 +24,7 @@ shipIcon <- iconList(
 # )
 
 data <- sf::st_as_sf(breweries91)
-data$category <- sample(c("Schwer", "Mäßig", "Leicht", "kein Schaden"), size = nrow(data), replace = TRUE)
+data$categoryfields <- sample(c("Schwer", "Mäßig", "Leicht", "kein Schaden"), size = nrow(data), replace = TRUE)
 data$label <- paste0(data$brewery, "<br>", data$address)
 data$id <- paste0("ID", seq.int(nrow(data)))
 data$popup <- paste0("<h6>", data$brewery, "</h6><div>", data$address, "</div>")
@@ -73,7 +73,7 @@ server <- function(input, output, session) {
                                                        sortTitlebyCount = T)
                        # , type = "bar"
                        # , type = "horizontal"
-                       , categoryField = "category"
+                       , categoryField = "categoryfields"
                        , html = "web"
                        , icon = shipIcon
                        , categoryMap =
@@ -91,7 +91,7 @@ server <- function(input, output, session) {
                        , clusterId = "id"
                        , popupFields = c("brewery","address","zipcode", "category")
                        , popupLabels = c("Brauerei","Addresse","PLZ", "Art")
-                       # , popup = "popup"
+                       , popup = "popup"
                        , label = "label"
                        ## Options #############
                        , markerOptions = markerOptions(interactive = TRUE,

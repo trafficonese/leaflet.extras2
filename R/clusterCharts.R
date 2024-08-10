@@ -70,9 +70,10 @@ clusterchartsDependencies <- function() {
 #'                    , label = "brewery"
 #'   )
 addClusterCharts <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar","horizontal"),
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar","horizontal","custom"),
     options = clusterchartOptions(),
     icon = NULL, html = NULL,
+    customFunc = NULL,
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
     clusterOptions = NULL, clusterId = NULL,
     categoryField, categoryMap, popupFields = NULL, popupLabels = NULL,
@@ -146,7 +147,7 @@ addClusterCharts <- function(
     map, NULL, "addClusterCharts", geojson, layerId, group, type,
     options, icon, html,
     popup, popupOptions, safeLabel(label, data), labelOptions,
-    clusterOptions, clusterId,
+    clusterOptions, clusterId, customFunc,
     categoryField, categoryMapList, popupFields, popupLabels,
     markerOptions, legendOptions
   ) %>%
@@ -171,6 +172,7 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 labelStroke = "black",
                                 labelColor = "black",
                                 labelOpacity = 0.9,
+                                aggregation = "sum",
                                 sortTitlebyCount = TRUE) {
   filterNULL(list(
     rmax = rmax
@@ -184,6 +186,7 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
     , labelStroke = labelStroke
     , labelColor = labelColor
     , labelOpacity = labelOpacity
+    , aggregation = aggregation
     , sortTitlebyCount = sortTitlebyCount
   ))
 }
@@ -251,7 +254,7 @@ generate_css <- function(row, icon) {
                   "}"
     )
   }
-  # cat(css)
+  cat(css)
   css
 }
 

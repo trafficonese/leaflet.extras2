@@ -2,7 +2,7 @@
 LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
                                                   options, icon, html,
                                                   popup, popupOptions, label, labelOptions,
-                                                  clusterOptions, clusterId,
+                                                  clusterOptions, clusterId, customFunc,
                                                   categoryField, categoryMap, popupFields, popupLabels,
                                                   markerOptions, legendOptions) {
 
@@ -17,9 +17,11 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
   var labelColor = options.labelColor ? options.labelColor : "black";
   var labelOpacity = options.labelOpacity ? options.labelOpacity : 0.9;
   var sortTitlebyCount = options.sortTitlebyCount ? options.sortTitlebyCount : false;
+  var aggregation = options.aggregation ? options.aggregation : "sum";
 
   // Make L.markerClusterGroup, markers, fitBounds and renderLegend
   console.log("geojson"); console.log(geojson)
+  console.log("clusterOptions"); console.log(clusterOptions)
   var markerclusters = L.markerClusterGroup(
     Object.assign({
       maxClusterRadius: 2 * rmax,
@@ -53,7 +55,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     var myClass = 'clustermarker category-'+categoryVal+' clusterchartsicon icon-'+categoryVal;
     let extraInfo = { clusterId: clusterId };
 
-    console.log("feature"); console.log(feature)
+    //console.log("feature"); console.log(feature)
     // Make DIV-Icon marker
     var myIcon = L.divIcon({
         className: myClass,
@@ -95,6 +97,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     if (popup && props[popup]) {
       popupContent = props[popup];
     } else if (popupFields !== null ) {
+      console.log("popupFields"); console.log(popupFields)
       popupContent += '<table class="map-popup">';
       popupFields.map( function(key, idx) {
         if (props[key]) {
@@ -120,62 +123,116 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       var r = rmax-2*strokeWidth-(n<10?12:n<100?8:n<1000?4:0), //Calculate clusterpie radius...
           iconDim = (r+strokeWidth)*2, //...and divIcon dimensions (leaflet really want to know the size)
           html;
+      var innerRadius = options.innerRadius ? options.innerRadius : -10;
 
       //bake some svg markup
-      var data = d3.nest() //Build a dataset for the pie chart
-            .key(function(d) { return d.feature.properties[categoryField]; })
-            .entries(children, d3.map)
+      if (type == "custom") {
 
-      if (type == "pie") {
-        console.log("Piechart")
-        var innerRadius = options.innerRadius ? options.innerRadius : -10;
-        html = bakeThePie({
-          data: data,
-          valueFunc: function(d){return d.values.length;},
-          outerRadius: r,
-          innerRadius: r-innerRadius,
-          pieClass: 'cluster-pie',
-          pieLabel: n,
-          pieLabelClass: 'clustermarker-cluster-pie-label',
-          pathClassFunc: function(d){
-            return "category-" + d.data.key;
-          },
-          pathTitleFunc: function(d){
-            return d.data.key + ' (' + d.data.values.length + ')';
-          }
-        })
-      } else if (type == "horizontal") {
-        console.log("Barchart horizontal")
-        html = bakeTheBarChartHorizontal({
-          data: data,
-          barClass: 'cluster-bar',
-          barLabel: n,
-          width: options.width ? options.width : 70,
-          height: options.height ? options.height : 40,
-          barLabelClass: 'clustermarker-cluster-bar-label',
-          pathClassFunc: function(d){
-            return "category-" + d.key;
-          },
-          pathTitleFunc: function(d){
-            return d.key + ' (' + d.values.length + ')';
-          }
+        // Step 1: Define a flexible aggregation function
+        function aggregateData(data, categoryField, aggregationFunc, valueField) {
+            return d3.nest()
+                .key(function(d) { return d.feature.properties[categoryField]; })
+                .rollup(function(leaves) {
+                    return aggregationFunc(leaves, function(d) { return d.feature.properties[valueField]; });
+                })
+                .entries(data);
+        }
+
+        // Example aggregation functions
+        const aggregationFunctions = {
+            sum: (leaves, accessor) => d3.sum(leaves, accessor),
+            max: (leaves, accessor) => d3.max(leaves, accessor),
+            min: (leaves, accessor) => d3.min(leaves, accessor),
+            mean: (leaves, accessor) => d3.mean(leaves, accessor),
+            variance: (leaves, accessor) => d3.variance(leaves, accessor),
+            // Add more as needed
+        };
+
+        console.log("children"); console.log(children)
+        console.log("categoryField"); console.log(categoryField)
+        var data = aggregateData(children, categoryField, aggregationFunctions[aggregation], 'tosum');
+        console.log("data"); console.log(data)
+
+        console.log("Bubble chart");
+        html = bakeTheBubbleChart({
+            data: data,
+            valueFunc: function(d) {
+              var res = d.values;
+              console.log("valueFunc res"); console.log(res)
+              return res;
+            },
+            outerRadius: r,
+            innerRadius: r-innerRadius,
+            bubbleClass: 'cluster-bubble',
+            bubbleLabelClass: 'clustermarker-cluster-bubble-label',
+            pathClassFunc: function(d) {
+              console.log('"category-" + d.key;'); console.log("category-" + d.key)
+              return "category-" + d.data.key;
+            },
+            pathTitleFunc: function(d) {
+              console.log('pathTitleFunc'); console.log(d.key + ' (' + d.value + ')')
+              return d.data.key + ' (' + d.value + ')';
+            }
         });
+
       } else {
-        console.log("Barchart")
-        html = bakeTheBarChart({
-          data: data,
-          barClass: 'cluster-bar',
-          barLabel: n,
-          width: options.width ? options.width : 70,
-          height: options.height ? options.height : 40,
-          barLabelClass: 'clustermarker-cluster-bar-label',
-          pathClassFunc: function(d){
-            return "category-" + d.key;
-          },
-          pathTitleFunc: function(d){
-            return d.key + ' (' + d.values.length + ')';
-          }
-        });
+        console.log("data");console.log(data)
+        console.log("categoryField");console.log(categoryField)
+        var data = d3.nest() //Build a dataset for the pie chart
+              .key(function(d) { return d.feature.properties[categoryField]; })
+              .entries(children, d3.map)
+
+        if (type == "pie") {
+          console.log("Piechart")
+
+          html = bakeThePie({
+            data: data,
+            valueFunc: function(d){return d.values.length;},
+            outerRadius: r,
+            innerRadius: r-innerRadius,
+            pieClass: 'cluster-pie',
+            pieLabel: n,
+            pieLabelClass: 'clustermarker-cluster-pie-label',
+            pathClassFunc: function(d){
+              return "category-" + d.data.key;
+            },
+            pathTitleFunc: function(d){
+              return d.data.key + ' (' + d.data.values.length + ')';
+            }
+          })
+        } else if (type == "horizontal") {
+          console.log("Barchart horizontal")
+          html = bakeTheBarChartHorizontal({
+            data: data,
+            barClass: 'cluster-bar',
+            barLabel: n,
+            width: options.width ? options.width : 70,
+            height: options.height ? options.height : 40,
+            barLabelClass: 'clustermarker-cluster-bar-label',
+            pathClassFunc: function(d){
+              return "category-" + d.key;
+            },
+            pathTitleFunc: function(d){
+              return d.key + ' (' + d.values.length + ')';
+            }
+          });
+        } else {
+          console.log("Barchart")
+          html = bakeTheBarChart({
+            data: data,
+            barClass: 'cluster-bar',
+            barLabel: n,
+            width: options.width ? options.width : 70,
+            height: options.height ? options.height : 40,
+            barLabelClass: 'clustermarker-cluster-bar-label',
+            pathClassFunc: function(d){
+              return "category-" + d.key;
+            },
+            pathTitleFunc: function(d){
+              return d.key + ' (' + d.values.length + ')';
+            }
+          });
+        }
       }
 
       //Create a new divIcon and assign the svg markup to the html property
@@ -187,7 +244,116 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
       return myIcon;
   }
-  //function that generates a svg markup for the Pie chart
+  //function that generates a svg markup for a Bubble chart
+  function bakeTheBubbleChart(options) {
+      if (!options.data || !options.valueFunc) {
+          return '';
+      }
+
+      if (false) {
+        console.log("1")
+        var data = options.data,
+            valueFunc = options.valueFunc,
+            r = options.outerRadius,
+            rInner = options.innerRadius,
+            pathClassFunc = options.pathClassFunc,
+            pathTitleFunc = options.pathTitleFunc,
+            origo = (r+strokeWidth), // Center coordinate
+            w = origo * 2, // Width and height of the svg element
+            h = w,
+            donut = d3.layout.pie(),
+            arc = d3.svg.arc().innerRadius(rInner).outerRadius(r);
+
+        console.log("3")
+        var svg = document.createElementNS(d3.ns.prefix.svg, 'svg');
+        var vis = d3.select(svg)
+            .data([data])
+            .attr('class', options.bubbleClass)
+            .attr('width', w)
+            .attr('height', h);
+
+        console.log("4 - data");
+        console.log(data)
+        var arcs = vis.selectAll('g.arc')
+            .data(donut.value(valueFunc))
+            .enter().append('svg:g')
+            .attr('class', 'arc')
+            .attr('transform', 'translate(' + origo + ',' + origo + ')');
+
+        arcs.append('svg:path')
+            .attr('class', pathClassFunc)
+            .attr('stroke-width', strokeWidth)
+            .attr('d', arc)
+
+      } else {
+        var data = options.data,
+          valueFunc = options.valueFunc,
+          r = options.outerRadius,
+          rInner = options.innerRadius,
+          pathClassFunc = options.pathClassFunc,
+          pathTitleFunc = options.pathTitleFunc,
+          bubbleLabelClass = options.bubbleLabelClass,
+          origo = (r+strokeWidth), // Center coordinate
+          w = origo * 2, // Width and height of the svg element
+          h = w,
+          donut = d3.layout.pie(),
+          arc = d3.svg.arc().innerRadius(rInner).outerRadius(r);
+
+      let radius = w;
+
+      let pie = donut
+          .padAngle(1 / radius)
+          .sort(null)
+          .value(function(d) { return d.values; });
+
+      var arc = d3.svg.arc()
+          .innerRadius(rInner)
+          .outerRadius(r);
+
+      //Create the pie chart
+      var svg = document.createElementNS(d3.ns.prefix.svg, 'svg');
+      var vis = d3.select(svg)
+          .attr("width", w)
+          .attr("height", h)
+
+      var arcs = vis.selectAll('g.arc')
+        .data(pie(data))
+        .enter().append('svg:g')
+        .attr('class', 'arc')
+        .attr('transform', 'translate(' + origo + ',' + origo + ')');
+      console.log("arcs"); console.log(arcs)
+
+      arcs.append('svg:path')
+        .attr('class', pathClassFunc)
+        .attr('stroke-width', strokeWidth)
+        .attr('d', arc)
+        .append('svg:title')
+        .text(pathTitleFunc);
+
+      // Text
+      vis.append('text')
+          .data(pie(data))
+          //.data(data)
+          .attr('x',origo)
+          .attr('y',origo)
+          .attr('class', bubbleLabelClass)
+          .attr('text-anchor', 'middle')
+          .attr('fill', labelColor)
+          .attr('dy','.3em')
+          .text(function(d){
+            console.log("TEXT - d"); console.log(d)
+            //return d.values;
+            return d.value;
+          })
+          //.append('svg:title')
+          //.text(allTitles);
+
+      }
+
+      console.log("6")
+      return serializeXmlNode(svg);
+  }
+  //function that generates a svg markup for a Pie chart
   function bakeThePie(options) {
       //data and valueFunc are required
       if (!options.data || !options.valueFunc) {
@@ -201,9 +367,8 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           pathClassFunc = options.pathClassFunc,
           pathTitleFunc = options.pathTitleFunc,
           pieClass = options.pieClass,
-          pieLabel = options.pieLabel?options.pieLabel:d3.sum(data,valueFunc), //Label for the whole pie
+          pieLabel = options.pieLabel ? options.pieLabel : d3.sum(data, valueFunc), //Label for the whole pie
           pieLabelClass = options.pieLabelClass,
-
           origo = (r+strokeWidth), //Center coordinate
           w = origo*2, //width and height of the svg element
           h = w,
@@ -287,7 +452,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
       //Return the svg-markup rather than the actual element
       return serializeXmlNode(svg);
   }
-  //function that generates a svg markup for the Bar chart
+  //function that generates a svg markup for a Bar chart
   function bakeTheBarChart(options) {
     if (!options.data) {
       return '';
@@ -377,7 +542,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
     return serializeXmlNode(svg);
   }
-  //function that generates a svg markup for the horizontal Bar chart
+  //function that generates a svg markup for a Bar chart (horizontal)
   function bakeTheBarChartHorizontal(options) {
     if (!options.data) {
       return '';

@@ -16,6 +16,7 @@ clusterchartOptions(
   labelStroke = "black",
   labelColor = "black",
   labelOpacity = 0.9,
+  aggregation = "sum",
   sortTitlebyCount = TRUE
 )
 }
