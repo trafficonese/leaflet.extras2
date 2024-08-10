@@ -153,6 +153,12 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         var data = aggregateData(children, categoryField, aggregationFunctions[aggregation], 'tosum');
         console.log("data"); console.log(data)
 
+        var totalAggregation = aggregationFunctions[aggregation](children, function(d) {
+          console.log("totalAggregation - d.feature.properties['tosum']"); console.log(d.feature.properties['tosum'])
+          return d.feature.properties['tosum'];
+        });
+        console.log("Total Aggregation: " + totalAggregation);
+
         console.log("Bubble chart");
         html = bakeTheBubbleChart({
             data: data,
@@ -162,7 +168,8 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
               return res;
             },
             outerRadius: r,
-            innerRadius: r-innerRadius,
+            innerRadius: r - innerRadius,
+            totalAggregation: totalAggregation,
             bubbleClass: 'cluster-bubble',
             bubbleLabelClass: 'clustermarker-cluster-bubble-label',
             pathClassFunc: function(d) {
@@ -292,6 +299,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           rInner = options.innerRadius,
           pathClassFunc = options.pathClassFunc,
           pathTitleFunc = options.pathTitleFunc,
+          totalAggregation = options.totalAggregation,
           bubbleLabelClass = options.bubbleLabelClass,
           origo = (r+strokeWidth), // Center coordinate
           w = origo * 2, // Width and height of the svg element
@@ -331,11 +339,10 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         .text(pathTitleFunc);
 
       // Text
-      vis.append('text')
-          .data(pie(data))
-          //.data(data)
-          .attr('x',origo)
-          .attr('y',origo)
+      arcs.append('text')
+          .attr('transform', function(d) {
+              return 'translate(' + arc.centroid(d) + ')';
+          })
           .attr('class', bubbleLabelClass)
           .attr('text-anchor', 'middle')
           .attr('fill', labelColor)
@@ -343,10 +350,19 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
           .text(function(d){
             console.log("TEXT - d"); console.log(d)
             //return d.values;
-            return d.value;
+            return d.data.values;
           })
           //.append('svg:title')
           //.text(allTitles);
+
+      vis.append('text')
+          .attr('x', origo)
+          .attr('y', origo)
+          .attr('class', bubbleLabelClass)
+          .attr('text-anchor', 'middle')
+          .attr('fill', labelColor)
+          .attr('dy', '.3em')
+          .text(totalAggregation);  // Display the total aggregation
 
       }
 
