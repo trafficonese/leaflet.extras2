@@ -136,7 +136,7 @@ addClusterCharts <- function(
                         clusterchartsDependencies())
 
   ## Make Geojson ###########
-  if (!inherits(sf::st_as_sf(data), "sf")) {
+  if (!inherits(data, "sf")) {
     data <- sf::st_as_sf(data)
   }
   geojson <- yyjsonr::write_geojson_str(data)
@@ -160,10 +160,10 @@ addClusterCharts <- function(
 #' @description Adds options for clusterCharts
 #' @param rmax The maximum radius of the clusters.
 #' @param size The size of the cluster markers.
-#' @param strokeWidth The stroke width in the chart.
+#' @param strokeWidth The stroke width of the chart.
 #' @param width The width of the bar-charts.
 #' @param height The height of the bar-charts.
-#' @param innerRadius The inner radius of the pie-charts.
+#' @param innerRadius The inner radius of pie-charts.
 #' @param labelBackground Should the label have a background? Default is `FALSE`
 #' @param labelFill The label background color. Default is `white`
 #' @param labelStroke The label stroke color. Default is `black`
@@ -212,8 +212,7 @@ generate_css <- function(row, icon) {
   label <- row["labels"]
   color <- row["colors"]
   stroke <- row["strokes"]
-  if (is.null(color)) color <- stroke
-  if (is.null(stroke)) stroke <- color
+  if (is.null(stroke) || is.na(stroke)) stroke <- color
 
   ## Replace spaces with dots in the class name #######
   label_nospaces <- gsub(" ", ".", label, fixed = TRUE)
@@ -232,11 +231,11 @@ generate_css <- function(row, icon) {
   ## Make Icon ################
   if (is.null(icon)) {
     icon <- row['icons']
-    if (!is.null(icon)) {
+    if (!is.null(icon) && !is.na(icon)) {
       css <- paste0(css,
                     ".icon-", label_nospaces, " {\n",
                     "  background-image: url('", icon, "');\n",
-                    "  background-repeat: no-repeat;\n",
+                    "  background-repeat: round;\n",
                     "  background-position: 0px 1px;\n",
                     "}"
                     )
@@ -264,13 +263,12 @@ generate_css <- function(row, icon) {
     css <- paste0(css,
                   ".icon-", label_nospaces, " {\n",
                   "  background-image: url('", iconuse$data, "');\n",
-                  "  background-repeat: no-repeat;\n",
+                  "  background-repeat: round;\n",
                   "  background-position: 0px 1px;\n",
                   size,
                   "}"
     )
   }
-  cat(css)
   css
 }
 
@@ -279,26 +277,26 @@ b64EncodePackedIcons <- utils::getFromNamespace("b64EncodePackedIcons", "leaflet
 packStrings <- utils::getFromNamespace("packStrings", "leaflet")
 
 
-backgroundCSS <- function(label, icon,
-                          background_repeat = "no-repeat",
-                          background_position = "0px 1px",
-                          additional_css = list()) {
-  # Start the CSS string
-  css <- paste0(".icon-", label, " {\n",
-                "  background-image: url('", icon, "');\n",
-                "  background-repeat: ", background_repeat, ";\n",
-                "  background-position: ", background_position, ";\n")
-
-  # Add each additional CSS property
-  for (css_property in additional_css) {
-    css <- paste0(css, "  ", css_property[1], ": ", css_property[2], ";\n")
-  }
-
-  # Close the CSS block
-  css <- paste0(css, "}")
-
-  return(css)
-}
+# backgroundCSS <- function(label, icon,
+#                           background_repeat = "no-repeat",
+#                           background_position = "0px 1px",
+#                           additional_css = list()) {
+#   # Start the CSS string
+#   css <- paste0(".icon-", label, " {\n",
+#                 "  background-image: url('", icon, "');\n",
+#                 "  background-repeat: ", background_repeat, ";\n",
+#                 "  background-position: ", background_position, ";\n")
+#
+#   # Add each additional CSS property
+#   for (css_property in additional_css) {
+#     css <- paste0(css, "  ", css_property[1], ": ", css_property[2], ";\n")
+#   }
+#
+#   # Close the CSS block
+#   css <- paste0(css, "}")
+#
+#   return(css)
+# }
 
 
 

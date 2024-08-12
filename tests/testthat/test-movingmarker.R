@@ -19,10 +19,10 @@ test_that("movingmarker", {
 
   m <- expect_warning(
     leaflet()  %>%
-    addMovingMarker(data = df,
-                    movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
-                    label="I am a pirate!",
-                    popup="Arrr"))
+      addMovingMarker(data = df,
+                      movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+                      label="I am a pirate!",
+                      popup="Arrr"))
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
 
@@ -82,14 +82,14 @@ test_that("movingmarker", {
   dfsf <- expect_warning(st_cast(dfsf, "POINT"))
   dfsf <- st_transform(dfsf, 4326)
   m <- leaflet()  %>%
-      addMovingMarker(data = dfsf) %>%
-      startMoving()
+    addMovingMarker(data = dfsf) %>%
+    startMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "startMoving")
 
   m <- leaflet()  %>%
-      addMovingMarker(data = dfsf) %>%
-      startMoving()
+    addMovingMarker(data = dfsf) %>%
+    startMoving()
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[length(m$x$calls)]]$method, "startMoving")
 

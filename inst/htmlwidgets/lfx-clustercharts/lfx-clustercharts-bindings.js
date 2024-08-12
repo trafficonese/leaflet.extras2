@@ -672,7 +672,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
     legendControl.onAdd = function(map) {
       var div = L.DomUtil.create('div', 'clusterlegend');
-      div.innerHTML = '<div class="legendheading">' + legendOptions.title + '</div>';
+      div.innerHTML = legendOptions.title ? '<div class="legendheading">' + legendOptions.title + '</div>' : '';
 
       var legendItems = d3.select(div)
           .selectAll('.legenditem')

@@ -49,4 +49,28 @@ test_that("timeslider", {
     removeTimeslider()
   expect_identical(m$x$calls[[length(m$x$calls)]]$method, "removeTimeslider")
 
+  m <- leaflet() %>%
+    addTimeslider(data = data, fill = FALSE,
+                  label = ~Name,
+                  options = timesliderOptions(
+                    position = "topright",
+                    timeAttribute = "time",
+                    range = FALSE))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[1]]$method, "addTimeslider")
+  expect_is(m$x$calls[[1]]$args[[1]], "geojson")
+  expect_true(inherits(m$x$calls[[1]]$args[[1]], "geojson"))
+
+  m <- leaflet() %>%
+    addTimeslider(data = data, fill = FALSE,
+                  label = data$Name,
+                  options = timesliderOptions(
+                    position = "topright",
+                    timeAttribute = "time",
+                    range = FALSE))
+  expect_is(m, "leaflet")
+  expect_identical(m$x$calls[[1]]$method, "addTimeslider")
+  expect_is(m$x$calls[[1]]$args[[1]], "geojson")
+  expect_true(inherits(m$x$calls[[1]]$args[[1]], "geojson"))
+
 })

@@ -31,9 +31,9 @@ clusterchartOptions(
 
 \item{height}{The height of the bar-charts.}
 
-\item{strokeWidth}{The stroke width in the chart.}
+\item{strokeWidth}{The stroke width of the chart.}
 
-\item{innerRadius}{The inner radius of the pie-charts.}
+\item{innerRadius}{The inner radius of pie-charts.}
 
 \item{labelBackground}{Should the label have a background? Default is `FALSE`}
 
