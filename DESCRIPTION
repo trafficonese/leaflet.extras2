@@ -27,9 +27,10 @@ Suggests:
     testthat (>= 2.1.0),
     fontawesome,
     htmlwidgets,
+    grDevices,
+    xfun,
     covr,
-    curl,
-    rmarkdown
+    curl
 URL: https://trafficonese.github.io/leaflet.extras2/, https://github.com/trafficonese/leaflet.extras2
 BugReports: https://github.com/trafficonese/leaflet.extras2/issues
 RoxygenNote: 7.3.1

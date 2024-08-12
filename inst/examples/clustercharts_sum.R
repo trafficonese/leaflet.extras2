@@ -70,6 +70,8 @@ server <- function(input, output, session) {
                                                        size = 40,
                                                        # size = c(100,140),
                                                        labelBackground = TRUE,
+                                                       labelStroke = "orange",
+                                                       labelColor = "gray",
                                                        labelOpacity = 0.5,
                                                        innerRadius = 20,
                                                        aggregation = input$aggr,

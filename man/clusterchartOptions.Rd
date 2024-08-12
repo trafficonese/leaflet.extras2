@@ -27,13 +27,31 @@ clusterchartOptions(
 
 \item{size}{The size of the cluster markers.}
 
-\item{width}{The width of the bar-chart.}
+\item{width}{The width of the bar-charts.}
 
-\item{height}{The height of the bar-chart.}
+\item{height}{The height of the bar-charts.}
 
 \item{strokeWidth}{The stroke width in the chart.}
 
-\item{innerRadius}{The inner radius of the pie-chart.}
+\item{innerRadius}{The inner radius of the pie-charts.}
+
+\item{labelBackground}{Should the label have a background? Default is `FALSE`}
+
+\item{labelFill}{The label background color. Default is `white`}
+
+\item{labelStroke}{The label stroke color. Default is `black`}
+
+\item{labelColor}{The label color. Default is `black`}
+
+\item{labelOpacity}{The label color. Default is `0.9`}
+
+\item{aggregation}{If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.}
+
+\item{valueField}{If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.}
+
+\item{digits}{The amount of digits. Default is `2`}
+
+\item{sortTitlebyCount}{Should the svg-title be sorted by count or by the categories.}
 }
 \description{
 Adds options for clusterCharts

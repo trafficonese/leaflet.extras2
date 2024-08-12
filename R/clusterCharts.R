@@ -18,9 +18,11 @@ clusterchartsDependencies <- function() {
 
 #' addClusterCharts
 #' @description Adds cluster charts (either pie or bar charts) to a Leaflet map.
-#' @param type The type of chart to use for clusters, either "pie" or "bar".
+#' @param type The type of chart to use for clusters, either \code{c("pie","bar","horizontal","custom")}.
 #' @param categoryField The name of the feature property used to categorize the charts.
 #' @param categoryMap A data frame mapping categories to chart properties (label, color, icons, stroke).
+#' @param icon Include an icon or a set of icons with \code{makeIcon} or \code{iconList}
+#' @param html The html to include in the markers
 #' @param popup Use the column name given in popup to collect the feature property with this name.
 #' @param popupFields A string or vector of strings indicating the feature properties to include in popups.
 #' @param popupLabels A string or vector of strings indicating the labels for the popup fields.
@@ -70,7 +72,8 @@ clusterchartsDependencies <- function() {
 #'                    , label = "brewery"
 #'   )
 addClusterCharts <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL, type = c("pie","bar","horizontal","custom"),
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    type = c("pie","bar","horizontal","custom"),
     options = clusterchartOptions(),
     icon = NULL, html = NULL,
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
@@ -158,9 +161,19 @@ addClusterCharts <- function(
 #' @param rmax The maximum radius of the clusters.
 #' @param size The size of the cluster markers.
 #' @param strokeWidth The stroke width in the chart.
-#' @param width The width of the bar-chart.
-#' @param height The height of the bar-chart.
-#' @param innerRadius The inner radius of the pie-chart.
+#' @param width The width of the bar-charts.
+#' @param height The height of the bar-charts.
+#' @param innerRadius The inner radius of the pie-charts.
+#' @param labelBackground Should the label have a background? Default is `FALSE`
+#' @param labelFill The label background color. Default is `white`
+#' @param labelStroke The label stroke color. Default is `black`
+#' @param labelColor The label color. Default is `black`
+#' @param labelOpacity The label color. Default is `0.9`
+#' @param aggregation If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.
+#' @param valueField If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.
+#' @param digits The amount of digits. Default is `2`
+#' @param sortTitlebyCount Should the svg-title be sorted by count or by the categories.
+#'
 #' @export
 clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 width = 40, height = 50,

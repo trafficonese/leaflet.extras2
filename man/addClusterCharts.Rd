@@ -50,19 +50,13 @@ Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
-\item{type}{The type of chart to use for clusters, either "pie" or "bar".}
+\item{type}{The type of chart to use for clusters, either \code{c("pie","bar","horizontal","custom")}.}
 
 \item{options}{Additional options for cluster charts (see \code{\link{clusterchartOptions}}).}
 
-\item{icon}{the icon(s) for markers; an icon is represented by an R list of
-the form \code{list(iconUrl = "?", iconSize = c(x, y))}, and you can use
-\code{\link[leaflet]{icons}()} to create multiple icons; note when you use an R list
-that contains images as local files, these local image files will be base64
-encoded into the HTML page so the icon images will still be available even
-when you publish the map elsewhere}
+\item{icon}{Include an icon or a set of icons with \code{makeIcon} or \code{iconList}}
 
-\item{html}{the content of the control. May be provided as string or as HTML
-generated with Shiny/htmltools tags}
+\item{html}{The html to include in the markers}
 
 \item{popup}{Use the column name given in popup to collect the feature property with this name.}
 
