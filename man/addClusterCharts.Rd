@@ -11,6 +11,8 @@ addClusterCharts(
   layerId = NULL,
   group = NULL,
   type = c("pie", "bar", "horizontal", "custom"),
+  aggregation = "sum",
+  valueField = NULL,
   options = clusterchartOptions(),
   icon = NULL,
   html = NULL,
@@ -51,6 +53,10 @@ identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
 \item{type}{The type of chart to use for clusters, either \code{c("pie","bar","horizontal","custom")}.}
+
+\item{aggregation}{If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.}
+
+\item{valueField}{If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.}
 
 \item{options}{Additional options for cluster charts (see \code{\link{clusterchartOptions}}).}
 

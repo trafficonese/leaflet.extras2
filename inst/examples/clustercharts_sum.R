@@ -5,7 +5,7 @@ library(leaflet.extras)
 library(leaflet.extras2)
 options("shiny.autoreload" = TRUE)
 
-
+## Icons ##############
 # shipIcon <- leaflet::makeIcon(
 #   iconUrl = "./icons/Icon5.svg"
 #   ,className = "lsaicons"
@@ -23,6 +23,7 @@ shipIcon <- iconList(
 #   iconAnchorX = 0, iconAnchorY = 0
 # )
 
+## Data ##############
 data <- sf::st_as_sf(breweries91)
 data$category <- sample(c("Schwer", "Mäßig", "Leicht", "kein Schaden"), size = nrow(data), replace = TRUE)
 data$label <- paste0(data$brewery, "<br>", data$address)
@@ -30,16 +31,13 @@ data$id <- paste0("ID", seq.int(nrow(data)))
 data$popup <- paste0("<h6>", data$brewery, "</h6><div>", data$address, "</div>")
 data$tosum <- sample(1:100, nrow(data), replace = TRUE)
 data$tosum2 <- sample(1:10, nrow(data), replace = TRUE)
-# data$tosum <- 10
 data$tosumlabel <- paste("Sum: ", data$tosum)
 data$web <- gsub(">(.*?)<", ">",data$tosum,"<", data$web)
 data$web <- ifelse(is.na(data$web), "", paste0("<div class='markerhtml'>", data$web, "</div>"))
 
+## UI ##############
 ui <- fluidPage(
   tags$head(tags$style("
-  .clusterchartsicon {
-    background-position: left !important;
-  }
   .markerhtml {
     height: 100%;
     margin-top: 8px;
@@ -47,10 +45,13 @@ ui <- fluidPage(
     position: absolute;
   }")),
   leafletOutput("map", height = 650),
-  selectInput("aggr", "Aggregation", choices = c("sum","max", "min", "mean",
-                                                 # "variance","deviation" ## working but not correct? ??
-                                                 # "cumsum", "mode", "least" ## not wokring - new d3 v?
-                                                 "median"), selected = "mean"),
+    selectInput("type", "Plot type", choices = c("bar","horizontal", "custom", "pie")),
+    conditionalPanel("input.type == 'custom'",
+                     selectInput("aggr", "Aggregation", choices = c("sum","max", "min", "mean",
+                                                                    # "variance","deviation" ## working but not correct? ??
+                                                                    # "cumsum", "mode", "least" ## not wokring - new d3 v?
+                                                                    "median"), selected = "mean")
+                     ),
   splitLayout(cellWidths = paste0(rep(20,4), "%"),
               div(h5("Click Event"), verbatimTextOutput("click")),
               div(h5("Mouseover Event"), verbatimTextOutput("mouseover")),
@@ -59,6 +60,7 @@ ui <- fluidPage(
   )
 )
 
+## Server ##############
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>% addMapPane("clusterpane", 420) %>%
@@ -70,17 +72,13 @@ server <- function(input, output, session) {
                                                        size = 40,
                                                        # size = c(100,140),
                                                        labelBackground = TRUE,
-                                                       labelStroke = "orange",
-                                                       labelColor = "gray",
                                                        labelOpacity = 0.5,
                                                        innerRadius = 20,
-                                                       aggregation = input$aggr,
-                                                       valueField = "tosum",
                                                        digits = 0,
                                                        sortTitlebyCount = TRUE)
-                       # , type = "bar"
-                       # , type = "horizontal"
-                       , type = "custom"
+                       , aggregation = input$aggr
+                       , valueField = "tosum"
+                       , type = input$type
                        , categoryField = "category"
                        , html = "web"
                        , icon = shipIcon
@@ -90,8 +88,8 @@ server <- function(input, output, session) {
                        , group = "clustermarkers"
                        , layerId = "id"
                        , clusterId = "id"
-                       , popupFields = c("id","brewery","address","zipcode", "category","tosum","tosum2")
-                       , popupLabels = c("id","Brauerei","Addresse","PLZ", "Art", "tosum","tosum2")
+                       # , popupFields = c("id","brewery","address","zipcode", "category","tosum","tosum2")
+                       # , popupLabels = c("id","Brauerei","Addresse","PLZ", "Art", "tosum","tosum2")
                        , label = "label"
                        ## Options #############
                        , markerOptions = markerOptions(interactive = TRUE,

@@ -21,6 +21,8 @@ clusterchartsDependencies <- function() {
 #' @param type The type of chart to use for clusters, either \code{c("pie","bar","horizontal","custom")}.
 #' @param categoryField The name of the feature property used to categorize the charts.
 #' @param categoryMap A data frame mapping categories to chart properties (label, color, icons, stroke).
+#' @param aggregation If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.
+#' @param valueField If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.
 #' @param icon Include an icon or a set of icons with \code{makeIcon} or \code{iconList}
 #' @param html The html to include in the markers
 #' @param popup Use the column name given in popup to collect the feature property with this name.
@@ -74,6 +76,7 @@ clusterchartsDependencies <- function() {
 addClusterCharts <- function(
     map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
     type = c("pie","bar","horizontal","custom"),
+    aggregation = "sum", valueField = NULL,
     options = clusterchartOptions(),
     icon = NULL, html = NULL,
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
@@ -109,6 +112,8 @@ addClusterCharts <- function(
     clusterOptions$maxClusterRadius = NULL
     clusterOptions$iconCreateFunction = NULL
   }
+  options$aggregation = aggregation
+  options$valueField = valueField
 
   ## CSS string #############
   css <- paste(apply(categoryMap, 1, generate_css, icon), collapse = "\n")
@@ -169,8 +174,6 @@ addClusterCharts <- function(
 #' @param labelStroke The label stroke color. Default is `black`
 #' @param labelColor The label color. Default is `black`
 #' @param labelOpacity The label color. Default is `0.9`
-#' @param aggregation If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.
-#' @param valueField If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.
 #' @param digits The amount of digits. Default is `2`
 #' @param sortTitlebyCount Should the svg-title be sorted by count or by the categories.
 #'
@@ -184,8 +187,6 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 labelStroke = "black",
                                 labelColor = "black",
                                 labelOpacity = 0.9,
-                                aggregation = "sum",
-                                valueField = NULL,
                                 digits = 2,
                                 sortTitlebyCount = TRUE) {
   filterNULL(list(
@@ -200,8 +201,6 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
     , labelStroke = labelStroke
     , labelColor = labelColor
     , labelOpacity = labelOpacity
-    , aggregation = aggregation
-    , valueField = valueField
     , digits = digits
     , sortTitlebyCount = sortTitlebyCount
   ))
@@ -235,7 +234,7 @@ generate_css <- function(row, icon) {
       css <- paste0(css,
                     ".icon-", label_nospaces, " {\n",
                     "  background-image: url('", icon, "');\n",
-                    "  background-repeat: round;\n",
+                    "  background-repeat: no-repeat;\n",
                     "  background-position: 0px 1px;\n",
                     "}"
                     )
@@ -263,7 +262,7 @@ generate_css <- function(row, icon) {
     css <- paste0(css,
                   ".icon-", label_nospaces, " {\n",
                   "  background-image: url('", iconuse$data, "');\n",
-                  "  background-repeat: round;\n",
+                  "  background-repeat: no-repeat;\n",
                   "  background-position: 0px 1px;\n",
                   size,
                   "}"

@@ -34,8 +34,12 @@ data$tosum <- sample(1:100, nrow(data), replace = TRUE)
 
 ui <- fluidPage(
   tags$head(tags$style("
-  .clusterchartsicon {
-    background-position: left !important;
+  .inputs {
+    display: flex;
+  }
+  .inputdiv {
+    position: relative;
+    z-index: 100000000;
   }
   .markerhtml {
     height: 100%;
@@ -43,6 +47,18 @@ ui <- fluidPage(
     left: 41px;
     position: absolute;
   }")),
+  div(class="inputdiv",
+      div(class="inputs",
+      selectInput("type", "Plot type", choices = c("bar","horizontal", "pie"), selected = "pie"),
+      numericInput("stroke", "strokeWidth", 1, 1, 10),
+      numericInput("rmax", "MaxRadius", 50, 1, 150),
+      numericInput("innerRadius", "InnerRadius", 10, 1, 100),
+      numericInput("width", "Width", 50, 1, 150),
+      numericInput("height", "Height", 50, 1, 150),
+      selectInput("labelBackground", "labelBackground", choices = c(T,F)),
+      selectInput("sortTitlebyCount", "sortTitlebyCount", choices = c(T,F)),
+      numericInput("labelOpacity", "labelOpacity", 0.5, 0, 1, step = 0.1),
+  )),
   leafletOutput("map", height = 650),
   splitLayout(cellWidths = paste0(rep(20,4), "%"),
               div(verbatimTextOutput("click")),
@@ -59,20 +75,22 @@ server <- function(input, output, session) {
       leaflet::addLayersControl(overlayGroups = c("clustermarkers","normalcircles")) %>%
       # addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
       addClusterCharts(data = data
-                       , options = clusterchartOptions(rmax = 50,
+                       , options = clusterchartOptions(rmax = input$rmax,
                                                        size = c(100,40),
                                                        # size=40,
-                                                       width = 100, height = 30,
-                                                       strokeWidth = 1,
-                                                       labelBackground = T,
+                                                       width = input$width,
+                                                       height = input$height,
+                                                       strokeWidth = input$stroke,
+                                                       labelBackground = as.logical(input$labelBackground),
                                                        # labelFill = "red",
                                                        # labelStroke = "green",
                                                        labelColor = "blue",
-                                                       labelOpacity = 0.5,
-                                                       innerRadius = 10,
-                                                       sortTitlebyCount = T)
+                                                       labelOpacity = input$labelOpacity,
+                                                       innerRadius = input$innerRadius,
+                                                       sortTitlebyCount = as.logical(input$sortTitlebyCount))
                        # , type = "bar"
                        # , type = "horizontal"
+                       , type = input$type
                        , categoryField = "categoryfields"
                        , html = "web"
                        , icon = shipIcon
@@ -86,21 +104,19 @@ server <- function(input, output, session) {
                               strokes = "gray"
                          )
                        , group = "clustermarkers"
-                       # group = "zipcode",
                        , layerId = "id"
                        , clusterId = "id"
                        , popupFields = c("brewery","address","zipcode", "category")
                        , popupLabels = c("Brauerei","Addresse","PLZ", "Art")
-                       , popup = "popup"
+                       # , popup = "popup"
                        , label = "label"
                        ## Options #############
                        , markerOptions = markerOptions(interactive = TRUE,
                                                        draggable = TRUE,
                                                        keyboard = TRUE,
-                                                       # stroke = 0.1,
                                                        title = "Some Marker Title",
                                                        zIndexOffset = 100,
-                                                       opacity = 1,
+                                                       opacity = 0.6,
                                                        riseOnHover = TRUE,
                                                        riseOffset = 400)
                        , legendOptions = list(position = "bottomright", title = "Unfälle im Jahr 2003")
@@ -111,7 +127,7 @@ server <- function(input, output, session) {
                                                                , spiderLegPolylineOptions = list(weight = 1.5, color = "#222", opacity = 0.5)
                                                                , freezeAtZoom = TRUE
                                                                , clusterPane = "clusterpane"
-                                                               , spiderfyDistanceMultiplier = 1
+                                                               , spiderfyDistanceMultiplier = 34
                                                                )
                        , labelOptions = labelOptions(opacity = 0.8, textsize = "14px")
                        , popupOptions = popupOptions(maxWidth = 900, minWidth = 200, keepInView = TRUE)

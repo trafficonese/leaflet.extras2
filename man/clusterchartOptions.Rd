@@ -16,8 +16,6 @@ clusterchartOptions(
   labelStroke = "black",
   labelColor = "black",
   labelOpacity = 0.9,
-  aggregation = "sum",
-  valueField = NULL,
   digits = 2,
   sortTitlebyCount = TRUE
 )
@@ -44,10 +42,6 @@ clusterchartOptions(
 \item{labelColor}{The label color. Default is `black`}
 
 \item{labelOpacity}{The label color. Default is `0.9`}
-
-\item{aggregation}{If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.}
-
-\item{valueField}{If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.}
 
 \item{digits}{The amount of digits. Default is `2`}
 
