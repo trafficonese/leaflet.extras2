@@ -79,7 +79,7 @@ clusterchartsDependencies <- function() {
 #'                    , group = "clustermarkers"
 #'                    , popupFields = c("brewery", "address", "zipcode", "category")
 #'                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
-#'                    , label = "brewery"
+#'                    , label = "brewery")
 #'
 #' ## Custom Pie Chart with "mean" aggregation on column "value"
 #' data <- sf::st_as_sf(breweries91)
@@ -105,10 +105,9 @@ clusterchartsDependencies <- function() {
 #'                    , label = "brewery"
 #'   )
 #'
-#' For Shiny examples, please run:
+#' ## For Shiny examples, please run:
 #' # runApp(system.file("examples/clusterCharts_app.R", package = "leaflet.extras2"))
 #' # runApp(system.file("examples/clustercharts_sum.R", package = "leaflet.extras2"))
-#'   )
 addClusterCharts <- function(
     map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
     type = c("pie","bar","horizontal","custom"),
