@@ -30,7 +30,6 @@ data$label <- paste0(data$brewery, "<br>", data$address)
 data$id <- paste0("ID", seq.int(nrow(data)))
 data$popup <- paste0("<h6>", data$brewery, "</h6><div>", data$address, "</div>")
 data$tosum <- sample(1:100, nrow(data), replace = TRUE)
-data$tosum2 <- sample(1:10, nrow(data), replace = TRUE)
 data$tosumlabel <- paste("Sum: ", data$tosum)
 data$web <- gsub(">(.*?)<", ">",data$tosum,"<", data$web)
 data$web <- ifelse(is.na(data$web), "", paste0("<div class='markerhtml'>", data$web, "</div>"))
@@ -48,9 +47,7 @@ ui <- fluidPage(
     selectInput("type", "Plot type", choices = c("bar","horizontal", "custom", "pie")),
     conditionalPanel("input.type == 'custom'",
                      selectInput("aggr", "Aggregation", choices = c("sum","max", "min", "mean",
-                                                                    # "variance","deviation" ## working but not correct? ??
-                                                                    # "cumsum", "mode", "least" ## not wokring - new d3 v?
-                                                                    "median"), selected = "mean")
+                                                                    "median"), selected = "sum")
                      ),
   splitLayout(cellWidths = paste0(rep(20,4), "%"),
               div(h5("Click Event"), verbatimTextOutput("click")),
@@ -70,7 +67,6 @@ server <- function(input, output, session) {
       addClusterCharts(data = data
                        , options = clusterchartOptions(rmax = 50,
                                                        size = 40,
-                                                       # size = c(100,140),
                                                        labelBackground = TRUE,
                                                        labelOpacity = 0.5,
                                                        innerRadius = 20,
@@ -88,8 +84,8 @@ server <- function(input, output, session) {
                        , group = "clustermarkers"
                        , layerId = "id"
                        , clusterId = "id"
-                       # , popupFields = c("id","brewery","address","zipcode", "category","tosum","tosum2")
-                       # , popupLabels = c("id","Brauerei","Addresse","PLZ", "Art", "tosum","tosum2")
+                       , popupFields = c("id","brewery","address","zipcode", "category","tosum")
+                       , popupLabels = c("id","Brauerei","Addresse","PLZ", "Art", "tosum")
                        , label = "label"
                        ## Options #############
                        , markerOptions = markerOptions(interactive = TRUE,

@@ -17,21 +17,29 @@ clusterchartsDependencies <- function() {
 }
 
 #' addClusterCharts
-#' @description Adds cluster charts (either pie or bar charts) to a Leaflet map.
-#' @param type The type of chart to use for clusters, either \code{c("pie","bar","horizontal","custom")}.
-#' @param categoryField The name of the feature property used to categorize the charts.
-#' @param categoryMap A data frame mapping categories to chart properties (label, color, icons, stroke).
-#' @param aggregation If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.
-#' @param valueField If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.
-#' @param icon Include an icon or a set of icons with \code{makeIcon} or \code{iconList}
-#' @param html The html to include in the markers
-#' @param popup Use the column name given in popup to collect the feature property with this name.
-#' @param popupFields A string or vector of strings indicating the feature properties to include in popups.
+#' @description Adds cluster charts (pie, bar, horizontal, or custom) to a Leaflet map.
+#' @param type The type of chart to use for clusters: \code{"pie"}, \code{"bar"}, \code{"horizontal"}, or \code{"custom"}.
+#' @param categoryField The column name used to categorize the charts.
+#' @param categoryMap A data.frame mapping categories to chart properties (e.g., label, color, icons, stroke).
+#' @param aggregation The aggregation method to use when \code{type = "custom"}.
+#' @param valueField The column name containing values to be aggregated when \code{type = "custom"}.
+#' @param icon An icon or set of icons to include, created with \code{makeIcon} or \code{iconList}.
+#' @param html The column name containing the HTML content to include in the markers.
+#' @param popup The column name used to retrieve feature properties for the popup.
+#' @param popupFields A string or vector of strings indicating the column names to include in popups.
 #' @param popupLabels A string or vector of strings indicating the labels for the popup fields.
 #' @param options Additional options for cluster charts (see \code{\link{clusterchartOptions}}).
 #' @param legendOptions A list of options for the legend, including the title and position.
 #' @param markerOptions Additional options for markers (see \code{\link[leaflet:markerOptions]{markerOptions::markerOptions()}}).
 #' @inheritParams leaflet::addCircleMarkers
+#'
+#' @family clusterCharts
+#' @details
+#' The `clusterCharts` use Leaflet's `L.DivIcon`, allowing you to fully customize
+#' the styling of individual markers and clusters using CSS. Each individual marker
+#' within a cluster is assigned the CSS class `clustermarker`, while the entire
+#' cluster is assigned the class `clustermarker-cluster`. You can modify the appearance
+#' of these elements by targeting these classes in your custom CSS.
 #' @export
 #' @examples
 #' # Example usage:
@@ -72,11 +80,40 @@ clusterchartsDependencies <- function() {
 #'                    , popupFields = c("brewery", "address", "zipcode", "category")
 #'                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
 #'                    , label = "brewery"
+#'
+#' ## Custom Pie Chart with "mean" aggregation on column "value"
+#' data <- sf::st_as_sf(breweries91)
+#' categories <- c("Schwer", "Mäßig", "Leicht", "kein Schaden")
+#' data$category <- sample(categories, size = nrow(data), replace = TRUE)
+#' data$value <- round(runif(nrow(data), 0, 100), 0)
+#'
+#' leaflet() %>%
+#'   addProviderTiles("CartoDB.Positron") %>%
+#'   leaflet::addLayersControl(overlayGroups = "clustermarkers") %>%
+#'   addClusterCharts(data = data
+#'                    , type = "custom"
+#'                    , valueField = "value"
+#'                    , aggregation = "mean"
+#'                    , categoryField = "category"
+#'                    , categoryMap = data.frame(labels = categories,
+#'                                               colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
+#'                                               strokes = "gray")
+#'                    , options = clusterchartOptions(rmax=50, digits=0, innerRadius = 20)
+#'                    , group = "clustermarkers"
+#'                    , popupFields = c("brewery", "address", "zipcode", "category","value")
+#'                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art", "Value")
+#'                    , label = "brewery"
+#'   )
+#'
+#' For Shiny examples, please run:
+#' # runApp(system.file("examples/clusterCharts_app.R", package = "leaflet.extras2"))
+#' # runApp(system.file("examples/clustercharts_sum.R", package = "leaflet.extras2"))
 #'   )
 addClusterCharts <- function(
     map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
     type = c("pie","bar","horizontal","custom"),
-    aggregation = "sum", valueField = NULL,
+    aggregation = c("sum","min","max","mean","median"),
+    valueField = NULL,
     options = clusterchartOptions(),
     icon = NULL, html = NULL,
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
@@ -88,6 +125,7 @@ addClusterCharts <- function(
 
   ## Check arguments ############
   type <- match.arg(type)
+  aggregation <- match.arg(aggregation)
   if (missing(labelOptions)) labelOptions <- labelOptions()
   if (missing(categoryMap)) {
     stop("The `categoryMap` is missing.\n",
@@ -177,6 +215,7 @@ addClusterCharts <- function(
 #' @param digits The amount of digits. Default is `2`
 #' @param sortTitlebyCount Should the svg-title be sorted by count or by the categories.
 #'
+#' @family clusterCharts
 #' @export
 clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 width = 40, height = 50,

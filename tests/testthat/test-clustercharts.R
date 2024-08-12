@@ -225,6 +225,8 @@ test_that("clustercharts", {
   ## ALL ############
   m <- leaflet() %>% addMapPane("clusterpane", 420) %>%
     addClusterCharts(data = data
+                     , aggregation = "sum"
+                     , valueField = "tosum"
                      , options = clusterchartOptions(rmax = 50,
                                                      size = 40,
                                                      # size = c(100,140),
@@ -233,8 +235,6 @@ test_that("clustercharts", {
                                                      labelColor = "gray",
                                                      labelOpacity = 0.5,
                                                      innerRadius = 20,
-                                                     aggregation = "sum",
-                                                     valueField = "tosum",
                                                      digits = 0,
                                                      sortTitlebyCount = TRUE)
                      # , type = "bar"

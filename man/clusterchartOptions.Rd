@@ -50,3 +50,8 @@ clusterchartOptions(
 \description{
 Adds options for clusterCharts
 }
+\seealso{
+Other clusterCharts: 
+\code{\link{addClusterCharts}()}
+}
+\concept{clusterCharts}

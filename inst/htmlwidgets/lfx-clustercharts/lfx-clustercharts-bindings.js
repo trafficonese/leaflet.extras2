@@ -55,7 +55,6 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
     var myClass = 'clustermarker category-'+categoryVal+' icon-'+categoryVal;
     let extraInfo = { clusterId: clusterId };
 
-    //console.log("feature"); console.log(feature)
     // Make DIV-Icon marker
     var myIcon = L.divIcon({
         className: myClass,

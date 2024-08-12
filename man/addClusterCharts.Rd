@@ -11,7 +11,7 @@ addClusterCharts(
   layerId = NULL,
   group = NULL,
   type = c("pie", "bar", "horizontal", "custom"),
-  aggregation = "sum",
+  aggregation = c("sum", "min", "max", "mean", "median"),
   valueField = NULL,
   options = clusterchartOptions(),
   icon = NULL,
@@ -52,19 +52,19 @@ Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
-\item{type}{The type of chart to use for clusters, either \code{c("pie","bar","horizontal","custom")}.}
+\item{type}{The type of chart to use for clusters: \code{"pie"}, \code{"bar"}, \code{"horizontal"}, or \code{"custom"}.}
 
-\item{aggregation}{If `type = "custom"` in the `addClusterCharts` function, this aggregation method will be used.}
+\item{aggregation}{The aggregation method to use when \code{type = "custom"}.}
 
-\item{valueField}{If `type = "custom"` in the `addClusterCharts` function, the aggregation will be used on this column.}
+\item{valueField}{The column name containing values to be aggregated when \code{type = "custom"}.}
 
 \item{options}{Additional options for cluster charts (see \code{\link{clusterchartOptions}}).}
 
-\item{icon}{Include an icon or a set of icons with \code{makeIcon} or \code{iconList}}
+\item{icon}{An icon or set of icons to include, created with \code{makeIcon} or \code{iconList}.}
 
-\item{html}{The html to include in the markers}
+\item{html}{The column name containing the HTML content to include in the markers.}
 
-\item{popup}{Use the column name given in popup to collect the feature property with this name.}
+\item{popup}{The column name used to retrieve feature properties for the popup.}
 
 \item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
@@ -80,11 +80,11 @@ options}
 
 \item{clusterId}{the id for the marker cluster layer}
 
-\item{categoryField}{The name of the feature property used to categorize the charts.}
+\item{categoryField}{The column name used to categorize the charts.}
 
-\item{categoryMap}{A data frame mapping categories to chart properties (label, color, icons, stroke).}
+\item{categoryMap}{A data.frame mapping categories to chart properties (e.g., label, color, icons, stroke).}
 
-\item{popupFields}{A string or vector of strings indicating the feature properties to include in popups.}
+\item{popupFields}{A string or vector of strings indicating the column names to include in popups.}
 
 \item{popupLabels}{A string or vector of strings indicating the labels for the popup fields.}
 
@@ -97,7 +97,14 @@ default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \description{
-Adds cluster charts (either pie or bar charts) to a Leaflet map.
+Adds cluster charts (pie, bar, horizontal, or custom) to a Leaflet map.
+}
+\details{
+The `clusterCharts` use Leaflet's `L.DivIcon`, allowing you to fully customize
+the styling of individual markers and clusters using CSS. Each individual marker
+within a cluster is assigned the CSS class `clustermarker`, while the entire
+cluster is assigned the class `clustermarker-cluster`. You can modify the appearance
+of these elements by targeting these classes in your custom CSS.
 }
 \examples{
 # Example usage:
@@ -138,5 +145,38 @@ leaflet() \%>\%
                    , popupFields = c("brewery", "address", "zipcode", "category")
                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
                    , label = "brewery"
+
+## Custom Pie Chart with "mean" aggregation on column "value"
+data <- sf::st_as_sf(breweries91)
+categories <- c("Schwer", "Mäßig", "Leicht", "kein Schaden")
+data$category <- sample(categories, size = nrow(data), replace = TRUE)
+data$value <- round(runif(nrow(data), 0, 100), 0)
+
+leaflet() \%>\%
+  addProviderTiles("CartoDB.Positron") \%>\%
+  leaflet::addLayersControl(overlayGroups = "clustermarkers") \%>\%
+  addClusterCharts(data = data
+                   , type = "custom"
+                   , valueField = "value"
+                   , aggregation = "mean"
+                   , categoryField = "category"
+                   , categoryMap = data.frame(labels = categories,
+                                              colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
+                                              strokes = "gray")
+                   , options = clusterchartOptions(rmax=50, digits=0, innerRadius = 20)
+                   , group = "clustermarkers"
+                   , popupFields = c("brewery", "address", "zipcode", "category","value")
+                   , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art", "Value")
+                   , label = "brewery"
+  )
+
+For Shiny examples, please run:
+# runApp(system.file("examples/clusterCharts_app.R", package = "leaflet.extras2"))
+# runApp(system.file("examples/clustercharts_sum.R", package = "leaflet.extras2"))
   )
 }
+\seealso{
+Other clusterCharts: 
+\code{\link{clusterchartOptions}()}
+}
+\concept{clusterCharts}
