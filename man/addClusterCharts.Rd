@@ -14,7 +14,6 @@ addClusterCharts(
   options = clusterchartOptions(),
   icon = NULL,
   html = NULL,
-  customFunc = NULL,
   popup = NULL,
   popupOptions = NULL,
   label = NULL,
