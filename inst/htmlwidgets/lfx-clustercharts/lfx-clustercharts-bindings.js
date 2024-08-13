@@ -160,7 +160,7 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
         totalAggregation = totalAggregation.toFixed(digits);
 
         // Make Chart
-        html = bakeTheBubbleChart({
+        html = bakeTheStatsChart({
             data: data,
             valueFunc: function(d) { return d.values; },
             outerRadius: r,
@@ -239,8 +239,8 @@ LeafletWidget.methods.addClusterCharts = function(geojson, layerId, group, type,
 
       return myIcon;
   }
-  //function that generates a svg markup for a Bubble chart
-  function bakeTheBubbleChart(options) {
+  //function that generates a svg markup for a Statistics chart
+  function bakeTheStatsChart(options) {
       if (!options.data || !options.valueFunc) {
           return '';
       }
