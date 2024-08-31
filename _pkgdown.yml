@@ -25,6 +25,10 @@ reference:
     - menuItem
     - mapmenuItems
     - markermenuItems
+  - title: DivIcons
+    contents:
+    - matches("DivIcon")
+    - matches("divIcon")
   - title: Easy Print
     contents:
     - matches("Easyprint")
