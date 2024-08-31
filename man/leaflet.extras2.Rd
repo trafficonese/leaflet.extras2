@@ -2,9 +2,22 @@
 % Please edit documentation in R/leaflet.extras2-package.R
 \docType{package}
 \name{leaflet.extras2}
+\alias{leaflet.extras2-package}
 \alias{leaflet.extras2}
 \title{leaflet.extras2: Extra Functionality for 'leaflet' Package.}
 \description{
 This package serves as an add-on to the 'leaflet' package by providing
 extra functionality via 'leaflet' plugins.
+}
+\seealso{
+Useful links:
+\itemize{
+  \item \url{https://github.com/trafficonese/leaflet.extras2}
+  \item Report bugs at \url{https://github.com/trafficonese/leaflet.extras2/issues}
+}
+
+}
+\author{
+\strong{Maintainer}: Gatscha Sebastian \email{sebastian_gatscha@gmax.at}
+
 }

@@ -10,7 +10,7 @@ addBuildings(
   layerId = NULL,
   group = NULL,
   opacity = 0.5,
-  attribution = "Â© Map tiles <a href=\\"https://mapbox.com\\">Mapbox</a>"
+  attribution = "© Map tiles <a href=\\"https://mapbox.com\\">Mapbox</a>"
 )
 }
 \arguments{
