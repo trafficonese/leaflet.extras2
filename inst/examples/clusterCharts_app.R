@@ -33,6 +33,7 @@ data$web <- ifelse(is.na(data$web), "", paste0("<div class='markerhtml'>", data$
 data$tosum <- sample(1:100, nrow(data), replace = TRUE)
 
 ui <- fluidPage(
+  titlePanel("Cluster Markers and Calculate Category Counts"),
   tags$head(tags$style("
   .inputs {
     display: flex;
@@ -61,10 +62,10 @@ ui <- fluidPage(
   )),
   leafletOutput("map", height = 650),
   splitLayout(cellWidths = paste0(rep(20,4), "%"),
-              div(verbatimTextOutput("click")),
-              div(verbatimTextOutput("mouseover")),
-              div(verbatimTextOutput("mouseout")),
-              div(verbatimTextOutput("dragend"))
+              div(h4("Click Event"), verbatimTextOutput("click")),
+              div(h4("Mouseover Event"), verbatimTextOutput("mouseover")),
+              div(h4("Mouseout Event"), verbatimTextOutput("mouseout")),
+              div(h4("Dragend Event"), verbatimTextOutput("dragend"))
               )
 )
 
@@ -72,7 +73,7 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>% addMapPane("clusterpane", 420) %>%
       addProviderTiles("CartoDB") %>%
-      leaflet::addLayersControl(overlayGroups = c("clustermarkers","normalcircles")) %>%
+      leaflet::addLayersControl(overlayGroups = c("clustermarkers")) %>%
       # addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
       addClusterCharts(data = data
                        , options = clusterchartOptions(rmax = input$rmax,
@@ -101,7 +102,7 @@ server <- function(input, output, session) {
                               # colors = c("cyan", "darkorange", "yellow", "#9fca8b"),
                               # icons = c("icons/Icon29.svg", "icons/Icon8.svg", "icons/Icon5.svg", "icons/Icon25.svg"),
                               # strokes = c("#800", "#B60", "#D80", "#070")
-                              strokes = "gray"
+                              strokes = "black"
                          )
                        , group = "clustermarkers"
                        , layerId = "id"
@@ -116,7 +117,7 @@ server <- function(input, output, session) {
                                                        keyboard = TRUE,
                                                        title = "Some Marker Title",
                                                        zIndexOffset = 100,
-                                                       opacity = 0.6,
+                                                       opacity = 1,
                                                        riseOnHover = TRUE,
                                                        riseOffset = 400)
                        , legendOptions = list(position = "bottomright", title = "Unfälle im Jahr 2003")

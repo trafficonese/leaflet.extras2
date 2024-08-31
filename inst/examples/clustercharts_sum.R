@@ -36,6 +36,7 @@ data$web <- ifelse(is.na(data$web), "", paste0("<div class='markerhtml'>", data$
 
 ## UI ##############
 ui <- fluidPage(
+  titlePanel("Cluster Markers and calculate Sum/Max/Min/Mean/Median across Categories"),
   tags$head(tags$style("
   .markerhtml {
     height: 100%;
@@ -44,16 +45,16 @@ ui <- fluidPage(
     position: absolute;
   }")),
   leafletOutput("map", height = 650),
-    selectInput("type", "Plot type", choices = c("bar","horizontal", "custom", "pie")),
+    selectInput("type", "Plot type", choices = c("bar","horizontal", "custom", "pie"), selected = "custom"),
     conditionalPanel("input.type == 'custom'",
                      selectInput("aggr", "Aggregation", choices = c("sum","max", "min", "mean",
                                                                     "median"), selected = "sum")
                      ),
   splitLayout(cellWidths = paste0(rep(20,4), "%"),
-              div(h5("Click Event"), verbatimTextOutput("click")),
-              div(h5("Mouseover Event"), verbatimTextOutput("mouseover")),
-              div(h5("Mouseout Event"), verbatimTextOutput("mouseout")),
-              div(h5("Drag-End Event"), verbatimTextOutput("dragend"))
+              div(h4("Click Event"), verbatimTextOutput("click")),
+              div(h4("Mouseover Event"), verbatimTextOutput("mouseover")),
+              div(h4("Mouseout Event"), verbatimTextOutput("mouseout")),
+              div(h4("Dragend Event"), verbatimTextOutput("dragend"))
   )
 )
 
@@ -62,13 +63,14 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>% addMapPane("clusterpane", 420) %>%
       addProviderTiles("CartoDB") %>%
-      leaflet::addLayersControl(overlayGroups = c("clustermarkers","normalcircles")) %>%
+      leaflet::addLayersControl(overlayGroups = c("clustermarkers")) %>%
       # addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
       addClusterCharts(data = data
                        , options = clusterchartOptions(rmax = 50,
                                                        size = 40,
                                                        labelBackground = TRUE,
-                                                       labelOpacity = 0.5,
+                                                       labelOpacity = 1,
+                                                       strokeWidth = 0.1,
                                                        innerRadius = 20,
                                                        digits = 0,
                                                        sortTitlebyCount = TRUE)
