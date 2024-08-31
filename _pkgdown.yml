@@ -28,7 +28,7 @@ reference:
   - title: DivIcons
     contents:
     - matches("DivIcon")
-    - matches("divIcon")
+    - matches("divicon")
   - title: Easy Print
     contents:
     - matches("Easyprint")
