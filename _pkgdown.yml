@@ -27,7 +27,6 @@ reference:
     - markermenuItems
   - title: Clustercharts with d3
     contents:
-    - matches("Contextmenu")
     - matches("ClusterCharts")
     - matches("clusterchart")
   - title: Easy Print
