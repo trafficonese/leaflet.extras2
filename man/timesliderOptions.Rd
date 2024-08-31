@@ -33,7 +33,7 @@ Default is \code{FALSE}}
 \item{startTimeIdx}{where to start looking for a timestring
 Default is \code{0}}
 
-\item{timeStrLength}{the size of yyyy-mm-dd hh:mm:ss - if milliseconds are
+\item{timeStrLength}{the size of \code{yyyy-mm-dd hh:mm:ss} - if milliseconds are
 present this will be larger. Default is \code{19}}
 
 \item{maxValue}{Set the maximum value of the slider. Default is \code{-1}}

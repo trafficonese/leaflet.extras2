@@ -1,7 +1,7 @@
 
 test_that("easyprint", {
 
-  m <- leaflet()  %>%
+  m <- leaflet() %>%
     addTiles() %>%
     addEasyprint(options = easyprintOptions(
       title = 'Print map',
@@ -18,6 +18,15 @@ test_that("easyprint", {
       exportOnly = TRUE))
   expect_is(m, "leaflet")
 
+  cl <- c("class1", "class2")
+  opts <- easyprintOptions(hideClasses = cl)
+  expect_is(opts$hideClasses, "list")
+  expect_equal(unlist(opts$hideClasses), cl)
+  opts <- easyprintOptions(hideClasses = as.list(cl))
+  expect_is(opts$hideClasses, "list")
+  expect_equal(unlist(opts$hideClasses), cl)
+  expect_false("hideClasses" %in% names(easyprintOptions(hideClasses = NULL)))
+
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "lfx-easyprint")
 
@@ -28,6 +37,10 @@ test_that("easyprint", {
   m <- m %>% easyprintMap()
   expect_equal(m$x$calls[[length(m$x$calls)]]$method,
                "easyprintMap")
+
+  expect_error(easyprintOptions(sizeModes = NULL))
+  expect_error(easyprintOptions(sizeModes = NA))
+  expect_error(easyprintOptions(sizeModes = ""))
 
 })
 

@@ -10,16 +10,12 @@ tangram_deps <- function() {
 
 #' Adds a Tangram layer to a Leaflet map in a Shiny App.
 #'
-#' @param map A leaflet map widget
 #' @param scene Path to a required \bold{.yaml} or \bold{.zip} file. If the file
 #'   is within the \code{/www} folder of a Shiny-App, only the filename must be
 #'   given, otherwise the full path is needed. See the
 #'   \href{https://github.com/tangrams/tangram}{Tangram repository} or the
 #'   \href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
 #'   information on how to edit such a .yaml file.
-#' @param layerId A layer ID
-#' @param group The name of the group the newly created layer should belong to
-#'   (for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
 #' @param options A list of further options. See the app in the
 #'   \code{examples/tangram} folder or the
 #'   \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
@@ -27,6 +23,7 @@ tangram_deps <- function() {
 #' @note Only works correctly in a Shiny-App environment.
 #' @references \url{https://github.com/tangrams/tangram}
 #' @family Tangram Functions
+#' @inheritParams leaflet::addPolygons
 #' @inherit leaflet::addWMSTiles return
 #' @export
 #' @examples \dontrun{

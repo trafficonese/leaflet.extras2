@@ -4,12 +4,14 @@ library(leaflet.extras2)
 library(sf)
 library(sfheaders)
 
-data <- st_cast(st_as_sf(leaflet::atlStorms2005[1,]), "LINESTRING")
+data(atlStorms2005)
+data <- st_cast(st_as_sf(atlStorms2005[1,]), "LINESTRING")
 data <- st_transform(data, 4326)
 data <- data.frame(st_coordinates(data))
 data$elev <-  runif(nrow(data), 10, 500)
 data$L1 <- round(seq.int(1, 4, length.out = nrow(data)))
-data <- sfheaders::sf_linestring(data, x = "X", y = "Y", z = "elev", linestring_id = "L1")
+data <- sfheaders::sf_linestring(data, x = "X",
+                                 y = "Y", z = "elev", linestring_id = "L1")
 data$steepness <- 1:nrow(data)
 data$suitability <- nrow(data):1
 data$popup <- apply(data, 1, function(x) {

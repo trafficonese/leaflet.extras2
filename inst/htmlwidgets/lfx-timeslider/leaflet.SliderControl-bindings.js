@@ -1,5 +1,5 @@
 /* global LeafletWidget, $, L */
-LeafletWidget.methods.addTimeslider = function(data, options, popupOptions) {
+LeafletWidget.methods.addTimeslider = function(data, options, popupOptions, labelOptions) {
   var map = this;
   if (map.sliderCntr) {
     map.sliderCntr.remove();
@@ -8,8 +8,11 @@ LeafletWidget.methods.addTimeslider = function(data, options, popupOptions) {
 
   // Add popups
   function onEachFeature(feature, layer) {
-    var content = feature.properties.popup;
-    if (content) layer.bindPopup(content, popupOptions);
+    var popup = feature.properties.popup;
+    if (popup) layer.bindPopup(popup, popupOptions);
+
+    var label = feature.properties.label;
+    if (label) layer.bindTooltip(label, labelOptions);
   };
 
   //Create a marker layer

@@ -24,7 +24,7 @@ hexbinDependency <- function() {
 #'
 #' @note Currently doesn't respect \code{layerId} nor \code{group}.
 #'
-#' @references \url{https://github.com/Asymmetrik/leaflet-d3#hexbins-api}
+#' @references \url{https://github.com/bluehalo/leaflet-d3#hexbins-api}
 #' @family Hexbin-D3 Functions
 #' @inherit leaflet::addCircleMarkers return
 #' @export

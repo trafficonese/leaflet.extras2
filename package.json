@@ -1,7 +1,7 @@
 {
   "name": "leaflet.extras2",
   "version": "1.0.0",
-  "description": "The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).",
+  "description": "The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/trafficonese/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).",
   "main": "index.js",
   "directories": {
     "man": "man"
@@ -12,9 +12,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "d3": "^5.15.0",
+    "d3": "^7.6.1",
+    "d3-color": "^3.1.0",
     "d3-hexbin": "^0.2.2",
+    "labelgun": "^6.1.0",
     "leaflet": "^1.6.0",
-    "leaflet.heightgraph": "^0.4.1"
+    "leaflet-ant-path": "^1.3.0",
+    "leaflet-arrowheads": "^1.4.0",
+    "leaflet-easyprint": "^2.1.9",
+    "leaflet-geometryutil": "^0.10.1",
+    "leaflet.heightgraph": "^1.4.0"
   }
 }

@@ -9,8 +9,11 @@ easyprintMap(map, sizeModes = "A4Portrait", filename = "map")
 \arguments{
 \item{map}{the map widget}
 
-\item{sizeModes}{Options available include CurrentSize, A4Portrait,
-A4Landscape or a custom size object. Default is \code{A4Portrait}}
+\item{sizeModes}{Must match one of the given \code{sizeMode} names in
+\code{\link{easyprintOptions}}. The options are:
+\code{CurrentSize}, \code{A4Portrait} or \code{A4Landscape}. If you want to
+print the map with a \code{Custom} sizeMode you need to pass the Custom className.
+Default is \code{A4Portrait}}
 
 \item{filename}{Name of the file if \code{exportOnly} option is \code{TRUE}.}
 }

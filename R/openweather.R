@@ -13,8 +13,7 @@ openweatherDependency <- function() {
 
 #' Add OpenWeatherMap Tiles
 #' @inheritParams leaflet::addWMSTiles
-#' @param apikey a valid OpenWeatherMap-API key. Get one from
-#'   \href{https://openweathermap.org/api}{here}.
+#' @param apikey a valid OpenWeatherMap-API key.
 #' @param layers character vector of layers you wish to add to the map. The
 #'   following layers are currently possible \code{c("clouds", "cloudsClassic",
 #'   "precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
@@ -122,8 +121,7 @@ openweatherOptions <-  function(showLegend = TRUE,
 
 #' Add current OpenWeatherMap Marker
 #' @inheritParams leaflet::addMarkers
-#' @param apikey a valid Openweathermap-API key. Get one from
-#'   \href{https://openweathermap.org/api}{here}.
+#' @param apikey a valid Openweathermap-API key.
 #' @param options List of further options. See
 #'   \code{\link{openweatherCurrentOptions}}
 #'

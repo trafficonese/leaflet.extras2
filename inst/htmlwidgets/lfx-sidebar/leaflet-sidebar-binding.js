@@ -2,64 +2,114 @@
 LeafletWidget.methods.addSidebar = function(id, options) {
   (function(){
     var map = this;
-    if (map.sidebar) {
-      map.sidebar.remove();
-      delete map.sidebar;
+
+    // Add css class ('sidebar-map') to map
+    if (!map._container.classList.contains('sidebar-map')) {
+      map._container.classList.add('sidebar-map');
     }
 
-    // Add css class ("sidebar-map") to map
-    map._container.classList.add("sidebar-map");
-
-    // Change CSS if fit = true.
+    // Move Sidebar inside Map-Div
+    var mapid = "#" + (map.id ? map.id : map._container.id);
     if (options && options.fit === true) {
-      var mapheight = (parseInt(map._container.style.height.replace(/px/,"")) + 3)+"px";
-      $(".sidebar").css("height", mapheight);
-      $(".sidebar").css("top", map._container.offsetTop - 2);
-      if (options.position === "right") {
-        var right = 100 - map._container.parentElement.style.width.match(/\d*/im)[0];
-        $(".sidebar").css("right", (right)+"%");
-      } else {
-        var left = 100 - map._container.parentElement.style.width.match(/\d*/im)[0];
-        $(".sidebar").css("left", (left)+"%");
+      // Append sidebar container to map div
+      if ($(mapid + ' .leaflet-sidebar-container').length === 0) {
+        var mapdiv = document.createElement('div');
+        mapdiv.className = 'leaflet-sidebar-container';
+        $(mapdiv).appendTo($(mapid));
       }
+      $('#'+id).appendTo(mapid + ' .leaflet-sidebar-container');
+
+      // Disable/Re-enable dragging+scrolling when user's cursor enters/exits the element
+      var content = $('.leafsidebar-content');
+      content.on('mouseover', function () {
+          map.dragging.disable();
+          content.on('mousewheel', L.DomEvent.stopPropagation);
+      });
+      content.on('mouseout', function () {
+          map.dragging.enable();
+      });
     }
 
-    // Extend onClick method to trigger "shown" event, otherwise Shiny-Inputs/Outputs are not reactive
+    // Show Sidebar & content
+    setTimeout(function(){
+      $('.leafsidebar.collapsed .leafsidebar-tabs, .leafsidebar.collapsed .leafsidebar-content').css('display','block');
+    }, 400);
+
+    // Extend onClick method to trigger 'shown' event, otherwise Shiny-Inputs/Outputs are not reactive
     L.Control.Sidebar = L.Control.Sidebar.extend({
       _onClick: function() {
         if (L.DomUtil.hasClass(this, 'active')) {
           this._sidebar.close();
+          Shiny.setInputValue(id, null);
         } else if (!L.DomUtil.hasClass(this, 'disabled')) {
-          this._sidebar.open(this.querySelector('a').hash.slice(1));
-          $(this.firstElementChild.attributes.href.nodeValue).trigger("shown");
+          const openid = this.querySelector('a').hash.slice(1);
+          this._sidebar.open(openid);
+          Shiny.setInputValue(id, openid);
+          $(this.firstElementChild.attributes.href.nodeValue).trigger('shown');
         }
       }
     });
 
-    map.sidebar = L.control.sidebar(id, options);
-    map.controls.add(map.sidebar);
+    // initialize sidebar element of map
+    if (!map.sidebar) {
+      map.sidebar = {};
+    }
+    map.sidebar[id] = L.control.sidebar(id, options);
+    map.controls.add(map.sidebar[id]);
 
   }).call(this);
 };
 
-LeafletWidget.methods.removeSidebar = function() {
+LeafletWidget.methods.removeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
-    $(".sidebar").remove();
-    delete map.sidebar;
+    // if no sidebar_id specified, then use the first sidebar
+    var tid =
+      typeof(sidebar_id) === "string" ?
+        sidebar_id : Object.keys(map.sidebar)[0];
+
+    Shiny.setInputValue(tid, null);
+
+    var sidebar = $(`#${tid}`);
+    if (sidebar[0]) {
+      // Remove left/right CSS
+      map._container.classList.remove("sidebar-map")
+      // Remove Sidebar and Delete from map
+      sidebar.remove();
+      $("#" + map.id + " .leaflet-sidebar-container").remove();
+      delete map.sidebar[tid];
+    }
   }
 };
 
-LeafletWidget.methods.closeSidebar = function() {
+LeafletWidget.methods.closeSidebar = function(sidebar_id) {
   var map = this;
   if (map.sidebar) {
-    map.sidebar.close();
+    // if no sidebar_id specified, then use the first sidebar
+    var tid =
+      typeof(sidebar_id) === "string" ?
+        sidebar_id : Object.keys(map.sidebar)[0];
+
+    Shiny.setInputValue(tid, null);
+
+    if (map.sidebar[tid]) {
+      map.sidebar[tid].close();
+    }
   }
 };
 
-LeafletWidget.methods.openSidebar = function(id) {
+LeafletWidget.methods.openSidebar = function(x) {
   var map = this;
   if (map.sidebar) {
-    map.sidebar.open(id);
+    // if no sidebar_id specified, then use the first sidebar
+    var tid =
+      typeof(x.sidebar_id) === "string" ?
+        x.sidebar_id : Object.keys(map.sidebar)[0];
+
+    Shiny.setInputValue(tid, x.id);
+
+    if (map.sidebar[tid]) {
+      map.sidebar[tid].open(x.id);
+    }
   }
 };

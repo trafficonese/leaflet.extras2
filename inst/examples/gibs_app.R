@@ -4,7 +4,7 @@ library(leaflet.extras2)
 
 ui <- fluidPage(
   leafletOutput("map", height = "700px"),
-  dateInput("date", "Date:"),
+  dateInput("date", "Date:", max = Sys.Date(), value = Sys.Date()-10),
   actionButton("go", "Set the new Date"),
   checkboxInput("trans", "Transparency", value = TRUE),
   actionButton("go1", "Set the new Transparency")
@@ -18,7 +18,7 @@ server <- function(input, output, session) {
       addTiles() %>%
       setView(9, 50, 6) %>%
       addGIBS(layers = layers,
-              dates = Sys.Date() - 1,
+              dates = Sys.Date() - 10,
               group = layers, opacity = c(0.5, 0.3, 1)) %>%
       addLayersControl(overlayGroups = layers)
   })

@@ -78,11 +78,18 @@ The function expects either line or point data as spatial data or as Simple Feat
 Alternatively, coordinates can also be passed as numeric vectors.
 }
 \examples{
+\dontrun{
 library(sf)
 library(leaflet)
 library(leaflet.extras2)
 
-df <- sf::st_as_sf(atlStorms2005)[1,]
+crds <- data.frame(structure(c(-67.5, -68.5, -69.6, -70.5, -71.3, -72.2, -72.7,
+                              -72.9, -73, -72.4, -70.8, 15.8, 16.5, 17.3, 17.8, 18.3, 18.6,
+                              19.8, 21.6, 23.5, 25.1, 27.9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+                            dim = c(11L, 3L), dimnames = list(NULL, c("X", "Y", "L1"))))
+df <- st_sf(st_sfc(st_linestring(as.matrix(crds), dim="XYZ"), crs = 4326))
+st_geometry(df) <- "geometry"; df <- st_zm(df)
+
 leaflet()  \%>\%
   addTiles() \%>\%
   addPolylines(data = df) \%>\%
@@ -90,7 +97,7 @@ leaflet()  \%>\%
                   movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                   label="I am a pirate!",
                   popup="Arrr")
-
+}
 }
 \references{
 \url{https://github.com/ewoken/Leaflet.MovingMarker}

@@ -4,7 +4,7 @@ heightgraphDependency <- function() {
       "lfx-heightgraph", version = "1.0.0",
       src = system.file("htmlwidgets/lfx-heightgraph", package = "leaflet.extras2"),
       script = c(
-        "d3.js",
+        # "d3.js",
         "L.Control.Heightgraph.js",
         "L.Control.Heightgraph-bindings.js"),
       stylesheet = "L.Control.Heightgraph.css"

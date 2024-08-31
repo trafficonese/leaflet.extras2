@@ -20,7 +20,7 @@ timesliderDependencies <- function() {
 #' @param map a map widget
 #' @param data data must be a Simple Feature collection of type POINT or LINESTRING
 #'    with a column of class Date or POSIXct.
-#' @param ordertime boolean value, indicating wether to order the data by the
+#' @param ordertime boolean value indicating whether to order the data by the
 #'    time column. The slider will adopt the order of the timestamps.
 #'    The default is \code{TRUE}.
 #' @param options List of additional options. See \code{\link{timesliderOptions}}
@@ -54,6 +54,7 @@ addTimeslider <- function(map, data, radius = 10,
                           weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
                           fillOpacity = 0.2, dashArray = NULL,
                           popup = NULL, popupOptions = NULL,
+                          label = NULL, labelOptions = NULL,
                           ordertime = TRUE,
                           options = timesliderOptions()){
 
@@ -78,6 +79,11 @@ addTimeslider <- function(map, data, radius = 10,
     data$popup = leaflet::evalFormula(popup, data)
   }
 
+  ## Label
+  if (!is.null(label) && !isFALSE(label)) {
+    data$label = leaflet::evalFormula(label, data)
+  }
+
   ## BBOX
   if (!requireNamespace("sf")) {
     stop("The package `sf` is needed for this plugin. ",
@@ -94,7 +100,7 @@ addTimeslider <- function(map, data, radius = 10,
 
   ## Add Deps and invoke Leaflet
   map$dependencies <- c(map$dependencies, timesliderDependencies())
-  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions) %>%
+  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions, labelOptions) %>%
     expandLimits(bbox[c(2,4)], bbox[c(1,3)])
 }
 
@@ -109,7 +115,7 @@ addTimeslider <- function(map, data, radius = 10,
 #'   Default is \code{FALSE}
 #' @param startTimeIdx where to start looking for a timestring
 #'   Default is \code{0}
-#' @param timeStrLength the size of yyyy-mm-dd hh:mm:ss - if milliseconds are
+#' @param timeStrLength the size of \code{yyyy-mm-dd hh:mm:ss} - if milliseconds are
 #'   present this will be larger. Default is \code{19}
 #' @param maxValue Set the maximum value of the slider. Default is \code{-1}
 #' @param minValue Set the minimum value of the slider. Default is \code{0}

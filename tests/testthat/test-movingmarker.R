@@ -1,9 +1,22 @@
 library(sf)
+## DATA #######################
+# df <- atlStorms2005[1,]
+df <- new("SpatialLinesDataFrame", data = structure(list(Name = structure(1L, levels = c("ALPHA",
+                                                                                           "ARLENE", "BRET", "CINDY", "DELTA", "DENNIS", "EMILY", "EPSILON",
+                                                                                           "FRANKLIN", "GAMMA", "GERT", "HARVEY", "IRENE", "JOSE", "KATRINA",
+                                                                                           "LEE", "MARIA", "NATE", "OPHELIA", "PHILIPPE", "RITA", "TEN",
+                                                                                           "TWENTY-TWO", "WILMA"), class = "factor"), MaxWind = 45, MinPress = 998), row.names = 1L, class = "data.frame"),
+            lines = list(new("Lines", Lines = list(new("Line", coords = structure(c(-67.5,
+                                                                                    -68.5, -69.6, -70.5, -71.3, -72.2, -72.7, -72.9, -73, -72.4,
+                                                                                    -70.8, 15.8, 16.5, 17.3, 17.8, 18.3, 18.6, 19.8, 21.6, 23.5,
+                                                                                    25.1, 27.9), dim = c(11L, 2L)))), ID = "1")), bbox = structure(c(-73,
+                                                                                                                                                     15.8, -67.5, 27.9), dim = c(2L, 2L), dimnames = list(c("x",
+                                                                                                                                                                                                            "y"), c("min", "max"))), proj4string = new("CRS", projargs = "+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs"))
+
+## TESTS #######################
 
 test_that("movingmarker", {
 
-  ## Data is a SpatialLinesDataFrame
-  df <- atlStorms2005[1,]
   m <- leaflet()  %>%
     addMovingMarker(data = df,
                     movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
@@ -13,20 +26,34 @@ test_that("movingmarker", {
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
 
   ## Data as coordinates
-  df <- sf::st_as_sf(atlStorms2005)[1,]
-  df <- st_coordinates(df)
+  df1 <- sf::st_as_sf(df)
+  df1 <- st_coordinates(df1)
   m <- leaflet()  %>%
-    addMovingMarker(lng = df[,1], lat = df[,2],
+    addMovingMarker(lng = df1[,1], lat = df1[,2],
                     movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                     label="I am a pirate!",
                     popup="Arrr")
   expect_is(m, "leaflet")
   expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
 
-  ## Data is Simple Feature LINESTRING
-  df <- sf::st_as_sf(atlStorms2005)[1,]
+  ## Use awesomeIcon
+  shipIcon2 <- makeAwesomeIcon(icon = "arrow-up", markerColor = "black")
   m <- leaflet()  %>%
-      addMovingMarker(data = df,
+    addMovingMarker(lng = df1[,1], lat = df1[,2], icon = shipIcon2,
+                    movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+                    label="I am a pirate!",
+                    popup="Arrr")
+  expect_is(m, "leaflet")
+  expect_equal(m$x$calls[[1]]$method, "addMovingMarker")
+  expect_contains(
+    vapply(m$dependencies, function(x) x$name, character(1)),
+    c("lfx-movingmarker", "leaflet-awesomemarkers")
+  )
+
+  ## Data is Simple Feature LINESTRING
+  df1 <- sf::st_as_sf(df)
+  m <- leaflet()  %>%
+      addMovingMarker(data = df1,
                       movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                       label="I am a pirate!",
                       popup="Arrr")
@@ -36,10 +63,10 @@ test_that("movingmarker", {
   expect_equal(deps[[length(deps)]]$name, "lfx-movingmarker")
 
   ## Data is Simple Feature POINT
-  df <- sf::st_as_sf(atlStorms2005)[1,]
-  df <- sf::st_cast(df, "POINT")
+  df1 <- sf::st_as_sf(df)[1,]
+  df1 <- sf::st_cast(df1, "POINT")
   m <- leaflet() %>%
-      addMovingMarker(data = df,
+      addMovingMarker(data = df1,
                       movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                       label="I am a pirate!",
                       popup="Arrr")

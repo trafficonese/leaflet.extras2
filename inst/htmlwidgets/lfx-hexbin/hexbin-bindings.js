@@ -35,7 +35,7 @@ LeafletWidget.methods.addHexbin = function(data, layerId, group, options) {
     hexLayer.dispatch()
     	.on('click', function(d, i) {
     	   var pts = [];
-    	   d.forEach(x => pts.push(x.o));
+    	   i.forEach(x => pts.push(x.o));
     	   Shiny.setInputValue(map.id+"_hexbin_click", {index: i, pts: pts}, {priority: "event"});
     });
   }

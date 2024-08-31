@@ -11,8 +11,8 @@ insertItemContextmenu(map, option, index)
 
 \item{option}{new menu item to add}
 
-\item{index}{Index of the contextmenu. (NOTE: Since the index is passed to JavaScript,
-it is zero-based)}
+\item{index}{Index of the contextmenu. (NOTE: Since the index is passed
+to JavaScript, it is zero-based)}
 }
 \value{
 A leaflet map object
@@ -24,6 +24,11 @@ Insert a new contextmenu menu item at a specific index
 Other Contextmenu Functions: 
 \code{\link{addContextmenu}()},
 \code{\link{addItemContextmenu}()},
+\code{\link{context_mapmenuItems}()},
+\code{\link{context_markermenuItems}()},
+\code{\link{context_menuItem}()},
+\code{\link{disableContextmenu}()},
+\code{\link{enableContextmenu}()},
 \code{\link{hideContextmenu}()},
 \code{\link{mapmenuItems}()},
 \code{\link{markermenuItems}()},

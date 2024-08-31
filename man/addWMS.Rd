@@ -13,6 +13,7 @@ addWMS(
   attribution = NULL,
   layers = NULL,
   popupOptions = NULL,
+  checkempty = FALSE,
   data = getMapData(map)
 )
 }
@@ -39,6 +40,9 @@ layers (e.g. markers and polygons) can share the same group name.}
 \item{popupOptions}{List of popup options. See
 \code{\link[leaflet]{popupOptions}}. Default is NULL.}
 
+\item{checkempty}{Should the returned HTML-content be checked for emptiness?
+If the HTML-body is empty no popup is opened. Default is \code{FALSE}}
+
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
@@ -49,7 +53,11 @@ the new \code{map} object
 \description{
 A Leaflet plugin for working with Web Map services, providing:
 single-tile/untiled/nontiled layers, shared WMS sources, and
-GetFeatureInfo-powered identify.
+\bold{GetFeatureInfo}-powered identify.
+
+You can also use \bold{CQL-Filters} by appending a string to the \code{'baseUrl'}.
+
+Something like \code{'http://server/wms?cql_filter=attribute=value'}
 }
 \examples{
 library(leaflet)
@@ -61,6 +69,7 @@ leaflet() \%>\%
   addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
          layers = "dwd:BRD_1km_winddaten_10m",
       popupOptions = popupOptions(maxWidth = 600),
+      checkempty = TRUE,
       options = WMSTileOptions(
         transparent = TRUE,
         format = "image/png",

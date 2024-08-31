@@ -1,23 +1,24 @@
 # leaflet.extras2
 
 <!-- badges: start -->
-[![](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://www.r-pkg.org/pkg/leaflet.extras2)
-[![cran checks](https://cranchecks.info/badges/worst/leaflet.extras2)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
-[![CRAN RStudio mirror downloads](https://cranlogs.r-pkg.org/badges/leaflet.extras2?color=brightgreen)](https://www.r-pkg.org/pkg/leaflet.extras2)
-[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://www.rpackages.io/package/leaflet.extras2)
-[![Lifecycle: maturing](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![R build status](https://github.com/trafficonese/leaflet.extras2/workflows/R-CMD-check/badge.svg)](https://github.com/trafficonese/leaflet.extras2/actions)
-[![AppVeyor build status](https://ci.appveyor.com/api/projects/status/github/trafficonese/leaflet.extras2?branch=master&svg=true)](https://ci.appveyor.com/project/trafficonese/leaflet-extras2)
-[![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
+[![Checks](https://github.com/trafficonese/leaflet.extras2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras2/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://CRAN.R-project.org/package=leaflet.extras2)
+[![CRAN checks](https://badges.cranchecks.info/summary/leaflet.extras2.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
+[![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://cran.rstudio.com/web/packages/leaflet.extras2/index.html)
+[![](https://cranlogs.r-pkg.org/badges/last-month/leaflet.extras2?color=blue)](https://cran.r-project.org/package=leaflet.extras2)
+[![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
 <!-- badges: end -->
 
-The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/web/packages/leaflet/index.html) and [leaflet.extras](https://github.com/bhaskarvk/leaflet.extras) R packages using various [leaflet plugins](http://leafletjs.com/plugins).
+The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/package=leaflet) and [leaflet.extras](https://github.com/trafficonese/leaflet.extras) R packages using various leaflet plugins.
 
 ### Installation
 
 For CRAN version
 
-`install.packages('leaflet.extras2')`
+``` r
+install.packages('leaflet.extras2')
+```
 
 For latest development version
 
@@ -25,17 +26,20 @@ For latest development version
 remotes::install_github('trafficonese/leaflet.extras2')
 ```
 
-### Progress
+### Integrated Plugins
 
-Plugins integrated so far ...
+If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
+-   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
 -   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
 -   [GIBS](https://github.com/aparshin/leaflet-GIBS)
 -   [Heightgraph](https://github.com/GIScience/Leaflet.Heightgraph)
--   [Hexbin-D3](https://github.com/Asymmetrik/leaflet-d3#hexbins-api)
+-   [Hexbin-D3](https://github.com/bluehalo/leaflet-d3#hexbins-api)
 -   [History](https://github.com/cscott530/leaflet-history)
+-   [Labelgun](https://github.com/Geovation/labelgun)
+-   [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync)
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Moving Markers](https://github.com/ewoken/Leaflet.MovingMarker)
 -   [OpenWeatherMap](https://github.com/trafficonese/leaflet-openweathermap)
@@ -43,19 +47,16 @@ Plugins integrated so far ...
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
 -   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)
 -   [Side-by-Side](https://github.com/digidem/leaflet-side-by-side)
+-   [Spin](https://github.com/makinacorpus/Leaflet.Spin)
 -   [Timeslider](https://github.com/dwilhelm89/LeafletSlider)
 -   [Tangram](https://github.com/tangrams/tangram)
--   [Velocity](https://github.com/danwild/leaflet-velocity)
+-   [Velocity](https://github.com/onaci/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
 
 
-If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
-
 ### Documentation
 
-The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation.
-
-Currently there are no vignettes (contributions welcome), but there are plenty of [examples](https://github.com/trafficonese/leaflet.extras2/tree/master/inst/examples) available.
+The R functions have been documented using roxygen, and should provide enough help to get started on using a feature. However some plugins have lots of options and it's not feasible to document every single detail. In such cases you are encouraged to check the plugin's documentation and the [examples](https://github.com/trafficonese/leaflet.extras2/tree/master/inst/examples).
 
 ### FAQ
 
@@ -63,7 +64,7 @@ Currently there are no vignettes (contributions welcome), but there are plenty o
 
 -   **Good Solution**: Create issues for plugins you wish incorporated but before that search the existing issues to see if issue already exists and if so comment on that issue instead of creating duplicates.
 -   **Better Solution**: It would help in prioritizing if you can include additional details like why you need the plugin, how helpful will it be to everyone etc.
--   **Best Solution**: Code it yourself and submit a pull request. This is the fastest way to get a plugin into the package.
+-   **Best Solution**: Code it yourself and submit a pull request. This is the fastest way to get a plugin into the package. Checkout this little [tutorial](https://github.com/trafficonese/leaflet.extras2/blob/master/HowTo.md).
 
 *I submitted an issue for a plugin long time ago but it is still not available.*
 

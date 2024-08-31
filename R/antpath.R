@@ -27,21 +27,23 @@ antpathDependency <- function() {
 #' library(leaflet)
 #' leaflet() %>%
 #'   addAntpath(data = atlStorms2005)
-addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-                       stroke = TRUE, color = "#03F", weight = 5, opacity = 0.5,
-                       fill = FALSE, fillColor = color, fillOpacity = 0.2, dashArray = NULL,
-                       smoothFactor = 1, noClip = FALSE, popup = NULL, popupOptions = NULL,
-                       label = NULL, labelOptions = NULL, options = antpathOptions(),
-                       highlightOptions = NULL, data = getMapData(map)) {
+addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL,
+                       group = NULL, stroke = TRUE, color = "#03F", weight = 5,
+                       opacity = 0.5, fill = FALSE, fillColor = color,
+                       fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
+                       noClip = FALSE, popup = NULL, popupOptions = NULL,
+                       label = NULL, labelOptions = NULL,
+                       options = antpathOptions(), highlightOptions = NULL,
+                       data = getMapData(map)) {
 
   if (missing(labelOptions))
     labelOptions <- labelOptions()
 
   options <- c(options, filterNULL(
-    list(stroke = stroke, color = color,
-         weight = weight, opacity = opacity, fill = fill, fillColor = fillColor,
-         fillOpacity = fillOpacity, dashArray = dashArray, smoothFactor = smoothFactor,
-         noClip = noClip)))
+    list(stroke = stroke, color = color, weight = weight,
+         opacity = opacity, fill = fill, fillColor = fillColor,
+         fillOpacity = fillOpacity, dashArray = dashArray,
+         smoothFactor = smoothFactor, noClip = noClip)))
 
   pgons <- derivePolygons(data, lng, lat, missing(lng), missing(lat),
                           "addPolylines")
@@ -78,7 +80,8 @@ antpathOptions = function(
   pulseColor = "#ffffff",
   lineCap = NULL, lineJoin = NULL,
   interactive = TRUE, pointerEvents = NULL,
-  className = "") {
+  className = "",
+  ...) {
 
   filterNULL(list(
     delay = delay,
@@ -91,7 +94,8 @@ antpathOptions = function(
     lineJoin = lineJoin,
     interactive = interactive,
     pointerEvents = pointerEvents,
-    className = className
+    className = className,
+    ...
   ))
 }
 

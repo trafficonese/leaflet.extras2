@@ -13,10 +13,15 @@ reference:
     contents:
     - matches("Antpath")
     - matches("antpath")
+  - title: Arrowhead
+    contents:
+    - matches("Arrowhead")
+    - matches("arrowhead")
   - title: Contextmenu
     contents:
     - matches("Contextmenu")
     - matches("contextmenu")
+    - matches("context_")
     - menuItem
     - mapmenuItems
     - markermenuItems
@@ -43,6 +48,10 @@ reference:
     - matches("History")
     - matches("history")
     - clearFuture
+  - title: Labelgun
+    contents:
+    - matches("Labelgun")
+  - title: Moving Markers
   - title: Mapkey Icons
     contents:
     - matches("Mapkey")
@@ -72,6 +81,13 @@ reference:
   - title: Side-by-Side
     contents:
     - matches("Sidebyside")
+  - title: Spinner
+    contents:
+    - matches("Spinner")
+  - title: Sync
+    contents:
+    - matches("sync")
+    - matches("Sync")
   - title: Tangram
     contents:
     - matches("Tangram")

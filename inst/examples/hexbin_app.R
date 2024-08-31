@@ -57,27 +57,28 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles(group = "base") %>%
-      addHexbin(data = df, opacity = 1,
-                # radius = 20,
-                layerId = "hexbin_id", group = "hexbin_group",
-                options = hexbinOptions(
-                  duration = 300,
-                  # colorRange = c("#ff0000", "#08306b"),
-                  colorRange = c("red", "yellow", "blue"),
-                  # colorRange = col,
-                  # colorScaleExtent = c(1, 40),
-                  # colorRange = c('red', 'red', 'orange', 'orange', 'yellow', 'yellow', 'green', 'green', 'blue', 'blue'),
+      addHexbin(
+        data = df, opacity = 1,
+        # radius = 20,
+        layerId = "hexbin_id", group = "hexbin_group",
+        options = hexbinOptions(
+          duration = 300,
+          # colorRange = c("#ff0000", "#08306b"),
+          colorRange = c("red", "yellow", "blue"),
+          # colorRange = col,
+          # colorScaleExtent = c(1, 40),
+          # colorRange = c('red', 'red', 'orange', 'orange', 'yellow', 'yellow', 'green', 'green', 'blue', 'blue'),
 
-                  # radiusScaleExtent = (JS("[40, undefined]")),
-                  radiusRange = c(10, 20),
-                  pointerEvents = "all",
-                  resizetoCount = TRUE,
-                  # resizetoCount = JS("function(d) { return (Math.cos(d.length) * 10); }"),
+          # radiusScaleExtent = (JS("[40, undefined]")),
+          radiusRange = c(10, 20),
+          pointerEvents = "all",
+          resizetoCount = TRUE,
+          # resizetoCount = JS("function(d) { return (Math.cos(d.length) * 10); }"),
 
-                  tooltip = JS("function(d) {return 'Amount of coordinates: ' + d.length;} ")
-                  # tooltip = "Amount of Markers: "
-                  # tooltip = T
-                )) %>%
+          tooltip = JS("function(d) {return 'Amount of coordinates: ' + d.length;} ")
+          # tooltip = "Amount of Markers: "
+          # tooltip = T
+        )) %>%
       addMarkers(data = df, group = "markers") %>%
       hideGroup("markers") %>%
       addLayersControl(overlayGroups = c("hexbin_group", "markers"))
@@ -91,6 +92,7 @@ server <- function(input, output, session) {
     pts <- do.call(rbind, lapply(pts$pts, function(x) do.call("cbind", x)))
     colnames(pts) <- c("lng","lat")
     clicked <- df[which(round(df$lng, 10) %in% round(pts[,"lng"], 10)),]
+    req(nrow(clicked) != 0)
 
     leafletProxy("map", session)  %>%
       clearGroup("clicked_markers") %>%
@@ -98,18 +100,21 @@ server <- function(input, output, session) {
                  label = ~category)
   })
   observeEvent(input$update_data, {
-    df <- data.frame(lat = rand_lat(n), lng = rand_lng(n))
+    df <<- data.frame(lat = rand_lat(n), lng = rand_lng(n),
+                      category = factor(sample(categories, n, replace = TRUE), levels = categories))
     leafletProxy("map", session) %>%
       updateHexbin(data = df)
   })
   observeEvent(input$update_color, {
-    cols <- sample(colors()[!(grepl("grey", colors())) | grepl("gray", colors())], 2)
+    cols <- sample(colors()[!(grepl("grey", colors())) |
+                              grepl("gray", colors())], 2)
     leafletProxy("map", session) %>%
       updateHexbin(colorRange = rgb(t(col2rgb(cols)/255)))
   })
   observeEvent(input$update_both, {
     df <- data.frame(lat = rand_lat(n), lng = rand_lng(n))
-    cols <- sample(colors()[!(grepl("grey", colors())) | grepl("gray", colors())], 2)
+    cols <- sample(colors()[!(grepl("grey", colors())) |
+                              grepl("gray", colors())], 2)
     leafletProxy("map", session) %>%
       updateHexbin(data = df, colorRange = rgb(t(col2rgb(cols)/255)))
   })

@@ -19,8 +19,7 @@ mapkeyIcons(
 )
 }
 \arguments{
-\item{icon}{ID of the mapkey Icon you want to use. See
-\href{http://mapkeyicons.com/}{mapkeyicons.com} for a full list.}
+\item{icon}{ID of the mapkey Icon you want to use.}
 
 \item{color}{Any CSS color (e.g. 'red','rgba(20,160,90,0.5)', '#686868', ...)}
 
@@ -35,13 +34,12 @@ effect)}
 
 \item{hoverEffect}{Switch on/off effect on hover}
 
-\item{hoverCSS}{CSS code (e.g. "background-color:#992b00 !important;
-color:#99defc !important;")}
+\item{hoverCSS}{CSS code (e.g. \code{"background-color:#992b00 !important;
+color:#99defc !important;"})}
 
-\item{additionalCSS}{CSS code (e.g. "border:4px solid #aa3838;")}
+\item{additionalCSS}{CSS code (e.g. \code{"border:4px solid #aa3838;"})}
 
-\item{htmlCode}{e.g. '&#57347;&#xe003;'. See
-\href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
+\item{htmlCode}{e.g. \code{'&#57347;&#xe003;'}.}
 
 \item{boxShadow}{Should a shadow be visible}
 }
@@ -55,6 +53,7 @@ icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 these arguments will be ignored.
 }
 \examples{
+\dontrun{
 library(leaflet)
 leaflet()  \%>\%
   addMapkeyMarkers(data = breweries91,
@@ -62,6 +61,7 @@ leaflet()  \%>\%
                      color = "red",
                      borderRadius = 0,
                      iconSize = 25))
+}
 }
 \references{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}

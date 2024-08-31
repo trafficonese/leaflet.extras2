@@ -20,7 +20,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
-      addTiles() %>%
+      addTiles() %>% addMapPane("my-pane", 420) %>%
       addAntpath(data = coords,
                  layerId = ~FGN,
                  label = ~sprintf("Ant-Colony of %s", district),
@@ -30,11 +30,13 @@ server <- function(input, output, session) {
                  popup = ~FGN,
                  opacity = 1,
                  options = antpathOptions(
-                   pulseColor = colorNumeric("Reds", domain = as.numeric(coords$FKN))(as.numeric(coords$FKN)),
-                   delay = c(rep(300, 50), rep(3000, 50)),
+                   pulseColor = colorNumeric("Reds",
+                     domain = as.numeric(coords$FKN))(as.numeric(coords$FKN)),
+                   delay = 4000,
                    paused = FALSE,
+                   renderer= JS('L.svg({pane: "my-pane"})'),
                    reverse = TRUE,
-                   dashArray = c(40, 50),
+                   dashArray = c(40, 10),
                    hardwareAccelerated = T,
                    interactive = TRUE,
                    lineCap = "butt",

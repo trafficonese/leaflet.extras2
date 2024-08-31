@@ -22,21 +22,25 @@ bindings and to set up some Shiny event handlers.
 \subsection{Contextmenu initialization}{
 The contextmenu for
 \itemize{
- \item {the \strong{map} must be defined in \code{\link[leaflet]{leafletOptions}}.}
- \item {the \strong{markers/vector layers} must be defined in \code{\link[leaflet]{markerOptions}}
-        or \code{\link[leaflet]{pathOptions}}.}
+ \item {the \strong{map} must be defined in
+        \code{\link[leaflet]{leafletOptions}}.}
+ \item {the \strong{markers/vector layers} must be defined
+        in \code{\link[leaflet]{markerOptions}} or
+        \code{\link[leaflet]{pathOptions}}.}
 }
 }
 
 \subsection{Contextmenu selection}{
-When a contextmenu is selected, a Shiny input with the ID \code{"MAPID_contextmenu_select"}
-is set (`MAPID` refers to the map's id).
+When a contextmenu is selected, a Shiny input with the
+ID \code{"MAPID_contextmenu_select"} is set (`MAPID` refers to the map's id).
 
 If the selected contextmenu item is triggered from:
 \itemize{
-  \item {the \strong{map}, the returned list containts the \code{text} of the item.}
+  \item {the \strong{map}, the returned list contains the \code{text} of
+         the item.}
   \item {the \strong{markers}, the returned list also contains the
-         \code{layerId}, \code{group}, \code{lat}, \code{lng} and \code{label}.}
+         \code{layerId}, \code{group}, \code{lat},
+         \code{lng} and \code{label}.}
   \item {the \strong{vector layers}, the returned list also contains the
          \code{layerId}, \code{group} and \code{label}.}
 }
@@ -48,10 +52,10 @@ leaflet(options = leafletOptions(
     contextmenu = TRUE,
     contextmenuWidth = 200,
     contextmenuItems =
-     mapmenuItems(
-       menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
+     context_mapmenuItems(
+       context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
        "-",
-       menuItem("Zoom In", "function(e) {this.zoomIn()}")))) \%>\%
+       context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) \%>\%
   addTiles(group = "base") \%>\%
   addContextmenu() \%>\%
   addMarkers(data = breweries91, label = ~brewery,
@@ -60,8 +64,8 @@ leaflet(options = leafletOptions(
             contextmenu = TRUE,
             contextmenuWidth = 200,
             contextmenuItems =
-              markermenuItems(
-                menuItem(text = "Show Marker Coords",
+              context_markermenuItems(
+                context_menuItem(text = "Show Marker Coords",
                          callback = "function(e) {alert(e.latlng);}",
                          index = 1)
               )
@@ -74,6 +78,11 @@ leaflet(options = leafletOptions(
 \seealso{
 Other Contextmenu Functions: 
 \code{\link{addItemContextmenu}()},
+\code{\link{context_mapmenuItems}()},
+\code{\link{context_markermenuItems}()},
+\code{\link{context_menuItem}()},
+\code{\link{disableContextmenu}()},
+\code{\link{enableContextmenu}()},
 \code{\link{hideContextmenu}()},
 \code{\link{insertItemContextmenu}()},
 \code{\link{mapmenuItems}()},

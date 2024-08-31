@@ -33,22 +33,34 @@ LeafletWidget.methods.addPlayback= function(data, options) {
   // Add Mouse Events (Mouseover + Click)
   if (HTMLWidgets.shinyMode === true) {
     options.mouseOverCallback = function(el) {
+      var ind = el.target.index
       var obj = {
         lat: el.latlng.lat,
         lng: el.latlng.lng,
-        popup: el.popupContent
+        index: ind,
+        timestamp: new Date(el.target.feature.properties.time[ind]),
+        content: el.target.tooltipContent
       };
       Shiny.onInputChange(map.id+"_pb_mouseover", obj);
     };
-    options.clickCallback  = function(el) {
+  }
+  options.clickCallback  = function(el) {
+    // Workaround since bindPopup doesnt show popups at the correct location
+    if (el.target._popup) {
+      el.target._popup.setLatLng(el.latlng).openOn(map);
+    }
+    if (HTMLWidgets.shinyMode === true) {
+      var ind = el.target.index
       var obj = {
         lat: el.latlng.lat,
         lng: el.latlng.lng,
-        popup: el.popupContent
+        index: el.target.index,
+        timestamp: new Date(el.target.feature.properties.time[ind]),
+        content: el.target.popupContent
       };
       Shiny.onInputChange(map.id+"_pb_click", obj);
-    };
-  }
+    }
+  };
 
   // Add playbackoptions and Icon
   options.layer = {
@@ -61,7 +73,10 @@ LeafletWidget.methods.addPlayback= function(data, options) {
         return new L.CircleMarker(latlng, result);
     }
   };
-  if (options && options.icon) {
+
+  if (options && options.marker && options.icon == undefined) {
+    options.marker = options.marker;
+  } else if (options && options.icon) {
     var icoli = options.icon;
     var madeIcon = L.icon({
             iconUrl: icoli.iconUrl,
@@ -72,11 +87,19 @@ LeafletWidget.methods.addPlayback= function(data, options) {
             popupAnchor: [icoli.popupAnchorX, icoli.popupAnchorY]
     });
     options.marker = function(featureData) {
-        return {icon: madeIcon};
+        return {
+          icon: madeIcon
+          /*
+          getPopup: function (feature) {
+            debugger;
+            return this.feature.popupContent[this.index]
+          }
+          */
+        };
     };
   }
 
-  map.playback = new L.Playback(map, data, null, options);
+  map.playback = L.playback(map, data, null, options);
 };
 
 
