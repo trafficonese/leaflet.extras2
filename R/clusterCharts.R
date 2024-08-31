@@ -17,12 +17,15 @@ clusterchartsDependencies <- function() {
 }
 
 #' addClusterCharts
-#' @description Adds cluster charts (pie, bar, horizontal, or custom) to a Leaflet map.
+#' @description Clusters markers on a Leaflet map and visualizes them using
+#' customizable charts, such as pie or bar charts, showing counts by category.
+#' When using the \code{"custom"} type, a pie chart is rendered with aggregated data,
+#' employing methods like sum, min, max, mean, or median.
 #' @param type The type of chart to use for clusters: \code{"pie"}, \code{"bar"}, \code{"horizontal"}, or \code{"custom"}.
-#' @param categoryField The column name used to categorize the charts.
+#' @param categoryField Column name for categorizing charts.
 #' @param categoryMap A data.frame mapping categories to chart properties (e.g., label, color, icons, stroke).
-#' @param aggregation The aggregation method to use when \code{type = "custom"}.
-#' @param valueField The column name containing values to be aggregated when \code{type = "custom"}.
+#' @param aggregation Aggregation method for \code{"custom"} charts (e.g., sum, min, max, mean, median).
+#' @param valueField Column name with values to aggregate for \code{"custom"} charts.
 #' @param icon An icon or set of icons to include, created with \code{makeIcon} or \code{iconList}.
 #' @param html The column name containing the HTML content to include in the markers.
 #' @param popup The column name used to retrieve feature properties for the popup.

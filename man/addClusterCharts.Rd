@@ -54,9 +54,9 @@ layers (e.g. markers and polygons) can share the same group name.}
 
 \item{type}{The type of chart to use for clusters: \code{"pie"}, \code{"bar"}, \code{"horizontal"}, or \code{"custom"}.}
 
-\item{aggregation}{The aggregation method to use when \code{type = "custom"}.}
+\item{aggregation}{Aggregation method for \code{"custom"} charts (e.g., sum, min, max, mean, median).}
 
-\item{valueField}{The column name containing values to be aggregated when \code{type = "custom"}.}
+\item{valueField}{Column name with values to aggregate for \code{"custom"} charts.}
 
 \item{options}{Additional options for cluster charts (see \code{\link{clusterchartOptions}}).}
 
@@ -80,7 +80,7 @@ options}
 
 \item{clusterId}{the id for the marker cluster layer}
 
-\item{categoryField}{The column name used to categorize the charts.}
+\item{categoryField}{Column name for categorizing charts.}
 
 \item{categoryMap}{A data.frame mapping categories to chart properties (e.g., label, color, icons, stroke).}
 
@@ -97,7 +97,10 @@ default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \description{
-Adds cluster charts (pie, bar, horizontal, or custom) to a Leaflet map.
+Clusters markers on a Leaflet map and visualizes them using
+customizable charts, such as pie or bar charts, showing counts by category.
+When using the \code{"custom"} type, a pie chart is rendered with aggregated data,
+employing methods like sum, min, max, mean, or median.
 }
 \details{
 The `clusterCharts` use Leaflet's `L.DivIcon`, allowing you to fully customize
