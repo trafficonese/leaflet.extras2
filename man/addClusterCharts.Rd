@@ -6,8 +6,6 @@
 \usage{
 addClusterCharts(
   map,
-  lng = NULL,
-  lat = NULL,
   layerId = NULL,
   group = NULL,
   type = c("pie", "bar", "horizontal", "custom"),
@@ -33,16 +31,6 @@ addClusterCharts(
 }
 \arguments{
 \item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
-
-\item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
-\code{~x} where \code{x} is a variable in \code{data}; by default (if not
-explicitly provided), it will be automatically inferred from \code{data} by
-looking for a column named \code{lng}, \code{long}, or \code{longitude}
-(case-insensitively)}
-
-\item{lat}{a vector of latitudes or a formula (similar to the \code{lng}
-argument; the names \code{lat} and \code{latitude} are used when guessing
-the latitude column from \code{data})}
 
 \item{layerId}{the layer id}
 

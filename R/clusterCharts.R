@@ -112,7 +112,7 @@ clusterchartsDependencies <- function() {
 #' # runApp(system.file("examples/clusterCharts_app.R", package = "leaflet.extras2"))
 #' # runApp(system.file("examples/clustercharts_sum.R", package = "leaflet.extras2"))
 addClusterCharts <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    map, layerId = NULL, group = NULL,
     type = c("pie","bar","horizontal","custom"),
     aggregation = c("sum","min","max","mean","median"),
     valueField = NULL,
@@ -188,7 +188,7 @@ addClusterCharts <- function(
   class(geojson) <- c("geojson","json")
 
   ## Derive Points and Invoke Method ##################
-  points <- derivePoints(data, lng, lat, missing(lng), missing(lat),
+  points <- derivePoints(data, NULL, NULL, TRUE, TRUE,
                          "addClusterCharts")
   leaflet::invokeMethod(
     map, NULL, "addClusterCharts", geojson, layerId, group, type,
