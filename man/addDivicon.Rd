@@ -2,7 +2,7 @@
 % Please edit documentation in R/divicon.R
 \name{addDivicon}
 \alias{addDivicon}
-\title{Add DivIcon}
+\title{Add DivIcon Markers to a Leaflet Map}
 \usage{
 addDivicon(
   map,
@@ -10,21 +10,21 @@ addDivicon(
   lat = NULL,
   layerId = NULL,
   group = NULL,
-  icon = NULL,
   popup = NULL,
   popupOptions = NULL,
   label = NULL,
   labelOptions = NULL,
-  classes = NULL,
-  htmls = NULL,
+  className = NULL,
+  html = NULL,
   options = markerOptions(),
   clusterOptions = NULL,
   clusterId = NULL,
+  divOptions = list(),
   data = getMapData(map)
 )
 }
 \arguments{
-\item{map}{the map to add moving markers}
+\item{map}{The Leaflet map object to which the DivIcon markers will be added.}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -44,8 +44,6 @@ Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
 layers (e.g. markers and polygons) can share the same group name.}
 
-\item{icon}{the icon(s) for markers;}
-
 \item{popup}{a character vector of the HTML content for the popups (you are
 recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
 for security reasons)}
@@ -57,12 +55,12 @@ for security reasons)}
 \item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
-\item{classes}{A single or vector of CSS-classes}
+\item{className}{A single CSS class or a vector of CSS classes to apply to the DivIcon markers.}
 
-\item{htmls}{A single or vector of HTML objects}
+\item{html}{A single HTML string or a vector of HTML strings to display within the DivIcon markers.}
 
-\item{options}{a list of extra options for markers. See
-\code{\link[leaflet]{markerOptions}}}
+\item{options}{A list of extra options for the markers.
+See \code{\link[leaflet]{markerOptions}} for more details.}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
@@ -71,18 +69,50 @@ options}
 
 \item{clusterId}{the id for the marker cluster layer}
 
+\item{divOptions}{A list of extra options for Leaflet DivIcon.}
+
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \value{
-the new \code{map} object
+The modified Leaflet map object.
 }
 \description{
-The function expects either line or point data as spatial data or as Simple Feature.
-Alternatively, coordinates can also be passed as numeric vectors.
+Adds customizable DivIcon markers to a Leaflet map. The function can accept either spatial
+data (lines or points) in the form of a Simple Feature (sf) object or numeric vectors
+for latitude and longitude coordinates. It allows for the application of custom HTML
+content and CSS classes to each marker, providing high flexibility in marker design.
 }
-\references{
-\url{https://github.com/ewoken/Leaflet.MovingMarker}
+\examples{
+library(sf)
+library(leaflet)
+library(leaflet.extras2)
+
+# Sample data
+df <- sf::st_as_sf(atlStorms2005)
+df <- suppressWarnings(st_cast(df, "POINT"))
+df <- df[sample(1:nrow(df), 50, replace = FALSE),]
+df$classes = sample(x = c("myclass1","myclass2","myclass3"), nrow(df), replace = TRUE)
+df$ID <- paste0("ID_", 1:nrow(df))
+
+leaflet()  \%>\%
+  addTiles() \%>\%
+  addDivicon(data = df
+             , html = ~paste0(
+               '<div class="custom-html">',
+               '<div class="title">', Name, '</div>',
+               '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
+               '</div>'
+             )
+             , label = ~Name
+             , layerId = ~ID
+             , group = "Divicons"
+             , popup = ~paste("ID: ", ID, "<br>",
+                              "Name: ", Name, "<br>",
+                              "MaxWind:", MaxWind, "<br>",
+                              "MinPress:", MinPress)
+             , options = markerOptions(draggable = TRUE)
+  )
 }
-\concept{Divicon Functions}
+\concept{DivIcon Functions}

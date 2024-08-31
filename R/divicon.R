@@ -9,41 +9,81 @@ diviconDependency <- function() {
   )
 }
 
-#' Add DivIcon
+#' Add DivIcon Markers to a Leaflet Map
 #'
-#' The function expects either line or point data as spatial data or as Simple Feature.
-#' Alternatively, coordinates can also be passed as numeric vectors.
-#' @param map the map to add moving markers
+#' Adds customizable DivIcon markers to a Leaflet map. The function can accept either spatial
+#' data (lines or points) in the form of a Simple Feature (sf) object or numeric vectors
+#' for latitude and longitude coordinates. It allows for the application of custom HTML
+#' content and CSS classes to each marker, providing high flexibility in marker design.
+#'
+#' @param map The Leaflet map object to which the DivIcon markers will be added.
 #' @inheritParams leaflet::addAwesomeMarkers
-#' @param classes A single or vector of CSS-classes
-#' @param htmls A single or vector of HTML objects
-#' @param options a list of extra options for markers. See
-#'   \code{\link[leaflet]{markerOptions}}
-#' @family Divicon Functions
-#' @references \url{https://github.com/ewoken/Leaflet.MovingMarker}
-#' @inherit leaflet::addMarkers return
+#' @param className A single CSS class or a vector of CSS classes to apply to the DivIcon markers.
+#' @param html A single HTML string or a vector of HTML strings to display within the DivIcon markers.
+#' @param divOptions A list of extra options for Leaflet DivIcon.
+#' @param options A list of extra options for the markers.
+#'   See \code{\link[leaflet]{markerOptions}} for more details.
+#' @family DivIcon Functions
+#' @return The modified Leaflet map object.
 #' @export
 #' @examples
+#' library(sf)
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' # Sample data
+#' df <- sf::st_as_sf(atlStorms2005)
+#' df <- suppressWarnings(st_cast(df, "POINT"))
+#' df <- df[sample(1:nrow(df), 50, replace = FALSE),]
+#' df$classes = sample(x = c("myclass1","myclass2","myclass3"), nrow(df), replace = TRUE)
+#' df$ID <- paste0("ID_", 1:nrow(df))
+#'
+#' leaflet()  %>%
+#'   addTiles() %>%
+#'   addDivicon(data = df
+#'              , html = ~paste0(
+#'                '<div class="custom-html">',
+#'                '<div class="title">', Name, '</div>',
+#'                '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
+#'                '</div>'
+#'              )
+#'              , label = ~Name
+#'              , layerId = ~ID
+#'              , group = "Divicons"
+#'              , popup = ~paste("ID: ", ID, "<br>",
+#'                               "Name: ", Name, "<br>",
+#'                               "MaxWind:", MaxWind, "<br>",
+#'                               "MinPress:", MinPress)
+#'              , options = markerOptions(draggable = TRUE)
+#'   )
 addDivicon <- function (map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-                        icon = NULL, popup = NULL, popupOptions = NULL, label = NULL,
+                        popup = NULL, popupOptions = NULL, label = NULL,
                         labelOptions = NULL,
-                        classes = NULL, htmls = NULL,
+                        className = NULL, html = NULL,
                         options = markerOptions(), clusterOptions = NULL,
-                        clusterId = NULL, data = getMapData(map)) {
+                        clusterId = NULL, divOptions = list(), data = getMapData(map)) {
   if (missing(labelOptions))
     labelOptions <- labelOptions()
-
   map$dependencies <- c(map$dependencies,
                         diviconDependency())
+  if (!is.null(clusterOptions))
+    map$dependencies <- c(map$dependencies, leafletDependencies$markerCluster())
+
   pts <- derivePoints(data, lng, lat, missing(lng), missing(lat),
                       "addDivicon")
   invokeMethod(map, data, "addDivicon", pts$lat, pts$lng,
-               icon, layerId, group, options,
-               classes, htmls,
+               layerId, group, options,
+               className, html,
                popup, popupOptions,
                label, labelOptions,
-               clusterId, clusterOptions) %>%
+               clusterId, clusterOptions,
+               divOptions,
+               getCrosstalkOptions(data)) %>%
     expandLimits(pts$lat, pts$lng)
 }
+
+
+getCrosstalkOptions <- utils::getFromNamespace("getCrosstalkOptions", "leaflet")
+
 
 

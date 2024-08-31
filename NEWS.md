@@ -3,6 +3,7 @@
 * Fix for roxygen2 > 7.0.0. #1491
 * The opened sidebar tab is returned as Shiny input using the `sidebar_tabs` ID.
 * allow `...` in `antpathOptions` to be able to set the pane (e.g.: `renderer= JS('L.svg({pane: "my-pane"})')`)
+* New Function `addDivicon` adds `DivIcon` markers to Leaflet maps with support for custom HTML and CSS classes. See the example in `./inst/examples/divicons_html_app.R`
 
 # leaflet.extras2 1.2.2
 
