@@ -1,25 +1,75 @@
 /* global LeafletWidget, $, L */
 LeafletWidget.methods.addDivicon = function(
-    data, duration, icon, layerId, group, options,
-    popup, popupOptions, label, labelOptions) {
+    lats, lngs, icon, layerId, group, options,
+    classes, htmls,
+    popups, popupOptions, labels, labelOptions,
+    clusterId, clusterOptions, divOptions) {
 
     var map = this;
+    console.log("addDivicon")
 
-    debugger;
-    var divmarker = new L.Marker([57.666667, -2.64], {
-      icon: new L.DivIcon({
-          className: 'my-div-icon',
-          html: '<img class="my-div-image" src="http://png-3.vector.me/files/images/4/0/402272/aiga_air_transportation_bg_thumb"/>'+
-                '<span class="my-div-span">RAF Banff Airfield</span>'
-      })
-    });
+    // Convert inputs to arrays if they are single strings
+    classes = toArray(classes, lats.length);
+    htmls = toArray(htmls, lats.length);
+    popups = toArray(popups, lats.length);
+    labels = toArray(labels, lats.length);
+    layerIds = toArray(layerId, lats.length);
 
-    map.layerManager.addLayer(divmarker, "marker", layerId, group);
+    for (var i = 0; i < lats.length; i++) {
+      var lat = lats[i];
+      var lng = lngs[i];
+      var iconClass = classes[i];
+      var html = htmls[i];
+      var popupContent = popups[i];
+      var labelContent = labels[i];
+      var layerId = layerIds[i];
+
+      // Create a new marker with DivIcon
+      var divIconOptions = Object.assign({}, divOptions, {
+          className: iconClass,
+          html: html
+      });
+     var divmarker = new L.Marker([lat, lng],
+       Object.assign({}, options, {
+            icon: new L.DivIcon(divIconOptions)
+        }));
+
+      // Bind popup to the marker if popup content is provided
+      if (popupContent) {
+          divmarker.bindPopup(popupContent, popupOptions);
+      }
+
+      // Assign label (tooltip) to marker if label content is provided
+      if (labelContent) {
+          divmarker.bindTooltip(labelContent, labelOptions);
+      }
+
+      // Add the marker to the map's layer manager
+      map.layerManager.addLayer(divmarker, "marker", layerId, group);
+
+      divmarker.on("click", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "marker_click", ""), this);
+      divmarker.on("mouseover", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "marker_mouseover", ""), this);
+      divmarker.on("mouseout", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "marker_mouseout", ""), this);
+      divmarker.on("dragend", LeafletWidget.methods.mouseHandler(map.id, layerId, group, "marker_dragend", ""), this);
+
+      if (clusterId) {
+        map.layerManager.addLayer(divmarker, "cluster", clusterId, group);
+      }
+
+    }
 };
 
 
+// Convert single string inputs to arrays
+function toArray(input, length) {
+    if (typeof input === 'string') {
+        return Array(length).fill(input);
+    }
+    return input;
+}
 
 
+/*
 addDivicon(map, df, group, markerFunc) {
   (function() {
     for (let i = 0; i < df.nrow(); i++) {
@@ -52,12 +102,11 @@ addDivicon(map, df, group, markerFunc) {
               marker.bindTooltip(label);
             }
           }
-          /*
-          marker.on("click", mouseHandler(this.id, thisId, thisGroup, "marker_click"), this);
-          marker.on("mouseover", mouseHandler(this.id, thisId, thisGroup, "marker_mouseover"), this);
-          marker.on("mouseout", mouseHandler(this.id, thisId, thisGroup, "marker_mouseout"), this);
-          marker.on("dragend", mouseHandler(this.id, thisId, thisGroup, "marker_dragend"), this);
-          */
+          //marker.on("click", mouseHandler(this.id, thisId, thisGroup, "marker_click"), this);
+          //marker.on("mouseover", mouseHandler(this.id, thisId, thisGroup, "marker_mouseover"), this);
+          //marker.on("mouseout", mouseHandler(this.id, thisId, thisGroup, "marker_mouseout"), this);
+          //marker.on("dragend", mouseHandler(this.id, thisId, thisGroup, "marker_dragend"), this);
+
         }).call(this);
       }
     }
@@ -67,3 +116,5 @@ addDivicon(map, df, group, markerFunc) {
     }
   }).call(map);
 }
+
+*/

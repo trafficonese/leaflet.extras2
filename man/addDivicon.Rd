@@ -15,6 +15,8 @@ addDivicon(
   popupOptions = NULL,
   label = NULL,
   labelOptions = NULL,
+  classes = NULL,
+  htmls = NULL,
   options = markerOptions(),
   clusterOptions = NULL,
   clusterId = NULL,
@@ -34,9 +36,7 @@ looking for a column named \code{lng}, \code{long}, or \code{longitude}
 argument; the names \code{lat} and \code{latitude} are used when guessing
 the latitude column from \code{data})}
 
-\item{layerId}{In order to be able to address the moving markings
-individually, a layerId is required. If none is specified, one is created
-that is derived from the current timestamp.}
+\item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
 (for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
@@ -57,6 +57,10 @@ for security reasons)}
 \item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
+\item{classes}{A single or vector of CSS-classes}
+
+\item{htmls}{A single or vector of HTML objects}
+
 \item{options}{a list of extra options for markers. See
 \code{\link[leaflet]{markerOptions}}}
 
@@ -70,12 +74,6 @@ options}
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
-
-\item{duration}{Duration in milliseconds per line segment between 2 points.
-Can be a vector or a single number. Default is \code{1000}}
-
-\item{movingOptions}{a list of extra options for moving markers.
-See \code{\link{movingMarkerOptions}}}
 }
 \value{
 the new \code{map} object
@@ -83,21 +81,6 @@ the new \code{map} object
 \description{
 The function expects either line or point data as spatial data or as Simple Feature.
 Alternatively, coordinates can also be passed as numeric vectors.
-}
-\examples{
-library(sf)
-library(leaflet)
-library(leaflet.extras2)
-
-df <- sf::st_as_sf(atlStorms2005)[1,]
-leaflet()  \%>\%
-  addTiles() \%>\%
-  addPolylines(data = df) \%>\%
-  addMovingMarker(data = df,
-                  movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
-                  label="I am a pirate!",
-                  popup="Arrr")
-
 }
 \references{
 \url{https://github.com/ewoken/Leaflet.MovingMarker}

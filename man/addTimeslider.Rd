@@ -49,7 +49,7 @@ circles)}
 \item{fillOpacity}{fill opacity}
 
 \item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en/SVG/Attribute/stroke-dasharray}{dash
+\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
 pattern}}
 
 \item{popup}{a character vector of the HTML content for the popups (you are
