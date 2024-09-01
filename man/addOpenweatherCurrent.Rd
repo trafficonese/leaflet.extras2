@@ -44,12 +44,14 @@ and if used in Shiny, a click on an icon will update a Shiny input at
 library(leaflet)
 library(leaflet.extras2)
 
-Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+Sys.setenv("OPENWEATHERMAP" = "Your_API_Key")
 
-leaflet()  \%>\%
-  addTiles() \%>\% setView(9, 50, 9) \%>\%
+leaflet() \%>\%
+  addTiles() \%>\%
+  setView(9, 50, 9) \%>\%
   addOpenweatherCurrent(options = openweatherCurrentOptions(
-    lang = "en", popup = TRUE))
+    lang = "en", popup = TRUE
+  ))
 }
 }
 \references{

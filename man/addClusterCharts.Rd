@@ -111,31 +111,38 @@ data$category <- sample(categories, size = nrow(data), replace = TRUE)
 leaflet() \%>\%
   addProviderTiles("CartoDB.Positron") \%>\%
   leaflet::addLayersControl(overlayGroups = "clustermarkers") \%>\%
-  addClusterCharts(data = data
-                   , categoryField = "category"
-                   , categoryMap = data.frame(labels = categories,
-                                              colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
-                                              strokes = "gray")
-                   , group = "clustermarkers"
-                   , popupFields = c("brewery", "address", "zipcode", "category")
-                   , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
-                   , label = "brewery"
+  addClusterCharts(
+    data = data,
+    categoryField = "category",
+    categoryMap = data.frame(
+      labels = categories,
+      colors = c("#F88", "#FA0", "#FF3", "#BFB"),
+      strokes = "gray"
+    ),
+    group = "clustermarkers",
+    popupFields = c("brewery", "address", "zipcode", "category"),
+    popupLabels = c("Brauerei", "Adresse", "PLZ", "Art"),
+    label = "brewery"
   )
 
 ## Bar Chart
 leaflet() \%>\%
   addProviderTiles("CartoDB.Positron") \%>\%
   leaflet::addLayersControl(overlayGroups = "clustermarkers") \%>\%
-  addClusterCharts(data = data
-                   , type = "bar"
-                   , categoryField = "category"
-                   , categoryMap = data.frame(labels = categories,
-                                              colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
-                                              strokes = "gray")
-                   , group = "clustermarkers"
-                   , popupFields = c("brewery", "address", "zipcode", "category")
-                   , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
-                   , label = "brewery")
+  addClusterCharts(
+    data = data,
+    type = "bar",
+    categoryField = "category",
+    categoryMap = data.frame(
+      labels = categories,
+      colors = c("#F88", "#FA0", "#FF3", "#BFB"),
+      strokes = "gray"
+    ),
+    group = "clustermarkers",
+    popupFields = c("brewery", "address", "zipcode", "category"),
+    popupLabels = c("Brauerei", "Adresse", "PLZ", "Art"),
+    label = "brewery"
+  )
 
 ## Custom Pie Chart with "mean" aggregation on column "value"
 data <- sf::st_as_sf(breweries91)
@@ -146,19 +153,22 @@ data$value <- round(runif(nrow(data), 0, 100), 0)
 leaflet() \%>\%
   addProviderTiles("CartoDB.Positron") \%>\%
   leaflet::addLayersControl(overlayGroups = "clustermarkers") \%>\%
-  addClusterCharts(data = data
-                   , type = "custom"
-                   , valueField = "value"
-                   , aggregation = "mean"
-                   , categoryField = "category"
-                   , categoryMap = data.frame(labels = categories,
-                                              colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
-                                              strokes = "gray")
-                   , options = clusterchartOptions(rmax=50, digits=0, innerRadius = 20)
-                   , group = "clustermarkers"
-                   , popupFields = c("brewery", "address", "zipcode", "category","value")
-                   , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art", "Value")
-                   , label = "brewery"
+  addClusterCharts(
+    data = data,
+    type = "custom",
+    valueField = "value",
+    aggregation = "mean",
+    categoryField = "category",
+    categoryMap = data.frame(
+      labels = categories,
+      colors = c("#F88", "#FA0", "#FF3", "#BFB"),
+      strokes = "gray"
+    ),
+    options = clusterchartOptions(rmax = 50, digits = 0, innerRadius = 20),
+    group = "clustermarkers",
+    popupFields = c("brewery", "address", "zipcode", "category", "value"),
+    popupLabels = c("Brauerei", "Adresse", "PLZ", "Art", "Value"),
+    label = "brewery"
   )
 
 ## For Shiny examples, please run:

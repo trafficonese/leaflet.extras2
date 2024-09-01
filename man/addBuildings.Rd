@@ -49,7 +49,7 @@ See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}
 library(leaflet)
 library(leaflet.extras2)
 
-leaflet()  \%>\%
+leaflet() \%>\%
   addProviderTiles("CartoDB") \%>\%
   addBuildings(group = "Buildings") \%>\%
   addLayersControl(overlayGroups = "Buildings") \%>\%

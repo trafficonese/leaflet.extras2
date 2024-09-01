@@ -19,12 +19,13 @@ Add a control, which allows to print or export a map as .PNG.
 }
 \examples{
 library(leaflet)
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
   addEasyprint(options = easyprintOptions(
-    title = 'Print map',
-    position = 'bottomleft',
-    exportOnly = TRUE))
+    title = "Print map",
+    position = "bottomleft",
+    exportOnly = TRUE
+  ))
 }
 \references{
 \url{https://github.com/rowanwins/leaflet-easyPrint}

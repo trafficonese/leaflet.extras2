@@ -55,12 +55,15 @@ these arguments will be ignored.
 \examples{
 \dontrun{
 library(leaflet)
-leaflet()  \%>\%
-  addMapkeyMarkers(data = breweries91,
-                   icon = mapkeyIcons(
-                     color = "red",
-                     borderRadius = 0,
-                     iconSize = 25))
+leaflet() \%>\%
+  addMapkeyMarkers(
+    data = breweries91,
+    icon = mapkeyIcons(
+      color = "red",
+      borderRadius = 0,
+      iconSize = 25
+    )
+  )
 }
 }
 \references{

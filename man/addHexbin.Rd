@@ -63,16 +63,20 @@ library(leaflet)
 library(leaflet.extras2)
 
 n <- 1000
-df <- data.frame(lat = rnorm(n, 42.0285, .01),
-                 lng = rnorm(n, -93.65, .01))
+df <- data.frame(
+  lat = rnorm(n, 42.0285, .01),
+  lng = rnorm(n, -93.65, .01)
+)
 
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
-  addHexbin(lng = df$lng, lat = df$lat,
-            options = hexbinOptions(
-               colorRange = c("red", "yellow", "blue"),
-               radiusRange = c(10, 20)
-           ))
+  addHexbin(
+    lng = df$lng, lat = df$lat,
+    options = hexbinOptions(
+      colorRange = c("red", "yellow", "blue"),
+      radiusRange = c(10, 20)
+    )
+  )
 }
 \references{
 \url{https://github.com/bluehalo/leaflet-d3#hexbins-api}

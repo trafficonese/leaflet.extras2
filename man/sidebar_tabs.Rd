@@ -26,12 +26,16 @@ Create a Sidebar
 library(shiny)
 
 # run example app showing a single sidebar
-runApp(paste0(system.file("examples", package = "leaflet.extras2"),
-              "/sidebar_app.R"))
+runApp(paste0(
+  system.file("examples", package = "leaflet.extras2"),
+  "/sidebar_app.R"
+))
 
 # run example app showing two sidebars
-runApp(paste0(system.file("examples", package = "leaflet.extras2"),
-              "/multi_sidebar_app.R"))
+runApp(paste0(
+  system.file("examples", package = "leaflet.extras2"),
+  "/multi_sidebar_app.R"
+))
 }
 }
 \references{
