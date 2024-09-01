@@ -20,5 +20,5 @@ test_that("wms", {
 
 test_that("wms-error", {
   expect_error(leaflet() %>%
-    addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms"))
+                 addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms"))
 })

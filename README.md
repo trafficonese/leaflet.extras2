@@ -8,7 +8,6 @@
 [![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://cran.rstudio.com/web/packages/leaflet.extras2/index.html)
 [![](https://cranlogs.r-pkg.org/badges/last-month/leaflet.extras2?color=blue)](https://cran.r-project.org/package=leaflet.extras2)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
-[![R-CMD-check](https://github.com/trafficonese/leaflet.extras2/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/trafficonese/leaflet.extras2/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 The goal of `leaflet.extras2` package is to provide extra functionality to the [leaflet](https://cran.r-project.org/package=leaflet) and [leaflet.extras](https://github.com/trafficonese/leaflet.extras) R packages using various leaflet plugins.
@@ -33,7 +32,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
--   [ClusterCharts](https://gist.github.com/gisminister/10001728)
+-   [ClusterCharts-D3](https://gist.github.com/gisminister/10001728)
 -   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
 -   [DivIcon](https://leafletjs.com/reference.html#divicon)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)

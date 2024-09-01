@@ -4,7 +4,8 @@ test_that("contextmenu", {
     contextmenuWidth = 200,
     contextmenuItems =
       context_mapmenuItems(
-        context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled = FALSE),
+        context_menuItem("Zoom Out", "function(e) {this.zoomOut()}",
+                         disabled = FALSE),
         "-",
         context_menuItem("Zoom In", "function(e) {this.zoomIn()}")
       )
@@ -42,14 +43,16 @@ test_that("contextmenu", {
     m$x$calls[[length(m$x$calls)]]$method,
     "showContextmenu"
   )
-  expect_true(all(colnames(m$x$calls[[length(m$x$calls)]]$args[[1]]) %in% c("lng", "lat")))
+  expect_true(all(
+    colnames(m$x$calls[[length(m$x$calls)]]$args[[1]]) %in% c("lng", "lat")))
 
   m <- m %>% showContextmenu(lat = 49.79433, lng = 11.50941)
   expect_equal(
     m$x$calls[[length(m$x$calls)]]$method,
     "showContextmenu"
   )
-  expect_true(all(colnames(m$x$calls[[length(m$x$calls)]]$args[[1]]) %in% c("lng", "lat")))
+  expect_true(all(
+    colnames(m$x$calls[[length(m$x$calls)]]$args[[1]]) %in% c("lng", "lat")))
 
   m <- m %>% hideContextmenu()
   expect_equal(

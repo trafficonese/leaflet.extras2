@@ -83,9 +83,12 @@ test_that("sidebar-error", {
   expect_error(
     sidebar_tabs(
       list(tags$i(class = "person"), tags$i(class = "person")),
-      sidebar_pane(id = "home_id", icon = tags$i(class = "person"), tagList()),
-      sidebar_pane(id = "profile_id", icon = tags$i(class = "person"), tagList()),
-      sidebar_pane(id = "messages_id", icon = tags$i(class = "person"), tagList())
+      sidebar_pane(id = "home_id",
+                   icon = tags$i(class = "person"), tagList()),
+      sidebar_pane(id = "profile_id",
+                   icon = tags$i(class = "person"), tagList()),
+      sidebar_pane(id = "messages_id",
+                   icon = tags$i(class = "person"), tagList())
     )
   )
 })

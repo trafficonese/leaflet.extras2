@@ -34,7 +34,8 @@ data <- structure(
     )
   ),
   row.names = 4L, class = c("sf", "data.frame"), sf_column = "geometry",
-  agr = structure(c(Name = NA_integer_, MaxWind = NA_integer_, MinPress = NA_integer_),
+  agr = structure(c(Name = NA_integer_,
+                    MaxWind = NA_integer_, MinPress = NA_integer_),
     levels = c("constant", "aggregate", "identity"), class = "factor"
   )
 )

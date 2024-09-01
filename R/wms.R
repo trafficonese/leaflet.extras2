@@ -19,7 +19,8 @@ wmsDependency <- function() {
 #' single-tile/untiled/nontiled layers, shared WMS sources, and
 #' \bold{GetFeatureInfo}-powered identify.
 #'
-#' You can also use \bold{CQL-Filters} by appending a string to the \code{'baseUrl'}.
+#' You can also use \bold{CQL-Filters} by appending a string
+#' to the \code{'baseUrl'}.
 #'
 #' Something like \code{'http://server/wms?cql_filter=attribute=value'}
 #'

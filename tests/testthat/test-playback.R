@@ -134,10 +134,15 @@ test_that("playback", {
           structure(c(11.5772056036448, 49.9436206656224), class = c("XY", "POINT", "sfg"))
         ),
         precision = 0,
-        bbox = structure(c(xmin = 11.5772056036448, ymin = 49.9434124224934, xmax = 11.5779536762059, ymax = 49.9447628006851),
+        bbox = structure(c(xmin = 11.5772056036448,
+                           ymin = 49.9434124224934,
+                           xmax = 11.5779536762059,
+                           ymax = 49.9447628006851),
           class = "bbox"
         ),
-        crs = structure(list(epsg = 4326L, proj4string = "+proj=longlat +datum=WGS84 +no_defs"), class = "crs"),
+        crs = structure(list(
+          epsg = 4326L,
+          proj4string = "+proj=longlat +datum=WGS84 +no_defs"), class = "crs"),
         n_empty = 0L, class = c("sfc_POINT", "sfc"), ids = 100L
       )
     ),
