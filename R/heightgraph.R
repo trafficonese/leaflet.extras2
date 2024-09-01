@@ -1,12 +1,14 @@
 heightgraphDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-heightgraph", version = "1.0.0",
+      "lfx-heightgraph",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-heightgraph", package = "leaflet.extras2"),
       script = c(
         # "d3.js",
         "L.Control.Heightgraph.js",
-        "L.Control.Heightgraph-bindings.js"),
+        "L.Control.Heightgraph-bindings.js"
+      ),
       stylesheet = "L.Control.Heightgraph.css"
     )
   )
@@ -45,7 +47,7 @@ heightgraphDependency <- function() {
 #' library(leaflet.extras2)
 #' library(sf)
 #'
-#' data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
+#' data <- st_cast(st_as_sf(leaflet::atlStorms2005[4, ]), "LINESTRING")
 #' data <- st_transform(data, 4326)
 #' data <- data.frame(st_coordinates(data))
 #' data$elev <- round(runif(nrow(data), 10, 500), 2)
@@ -62,19 +64,22 @@ heightgraphDependency <- function() {
 #'
 #' leaflet() %>%
 #'   addTiles(group = "base") %>%
-#'   addHeightgraph(color = "red", columns = c("steepness", "suitability"),
-#'                  opacity = 1, data = data, group = "heightgraph",
-#'                  options = heightgraphOptions(width = 400))
+#'   addHeightgraph(
+#'     color = "red", columns = c("steepness", "suitability"),
+#'     opacity = 1, data = data, group = "heightgraph",
+#'     options = heightgraphOptions(width = 400)
+#'   )
 addHeightgraph <- function(
-  map, data = NULL, columns = NULL, layerId = NULL, group = NULL,
-  color = "#03F", weight = 5, opacity = 0.5,
-  dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-  pathOpts = leaflet::pathOptions(),
-  options = heightgraphOptions()) {
-
+    map, data = NULL, columns = NULL, layerId = NULL, group = NULL,
+    color = "#03F", weight = 5, opacity = 0.5,
+    dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+    pathOpts = leaflet::pathOptions(),
+    options = heightgraphOptions()) {
   if (!requireNamespace("yyjsonr")) {
-    stop("The package `yyjsonr` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('yyjsonr')")
+    stop(
+      "The package `yyjsonr` is needed for this plugin. ",
+      "Please install it with:\ninstall.packages('yyjsonr')"
+    )
   }
 
   ## TODO - Use all columns if NULL ??
@@ -86,14 +91,16 @@ addHeightgraph <- function(
   bounds <- as.numeric(sf::st_bbox(data))
 
   ## Create Property List
-  props <- lapply(columns, function(x) {data[[x]]})
+  props <- lapply(columns, function(x) {
+    data[[x]]
+  })
   names(props) <- columns
 
   ## Change columnnames to `attributeType` and transform to Geojson
   data <- lapply(columns, function(x) {
-    names(data)[names(data) == x] <- 'attributeType'
+    names(data)[names(data) == x] <- "attributeType"
     data <- yyjsonr::write_geojson_str(data)
-    class(data) <- c("geojson","json")
+    class(data) <- c("geojson", "json")
     data
   })
 
@@ -101,16 +108,21 @@ addHeightgraph <- function(
   stopifnot(length(props) == length(data))
 
   geojson_opts <- c(pathOpts, filterNULL(
-    list(color = color,
-         weight = weight, opacity = opacity,
-         dashArray = dashArray, smoothFactor = smoothFactor,
-         noClip = noClip)))
+    list(
+      color = color,
+      weight = weight, opacity = opacity,
+      dashArray = dashArray, smoothFactor = smoothFactor,
+      noClip = noClip
+    )
+  ))
 
   map$dependencies <- c(map$dependencies, heightgraphDependency())
 
-  invokeMethod(map, data, "addHeightgraph", data, props, layerId,
-               group, geojson_opts, options) %>%
-    expandLimits(bounds[c(2,4)], bounds[c(1,3)])
+  invokeMethod(
+    map, data, "addHeightgraph", data, props, layerId,
+    group, geojson_opts, options
+  ) %>%
+    expandLimits(bounds[c(2, 4)], bounds[c(1, 3)])
 }
 
 #' heightgraphOptions
@@ -154,19 +166,18 @@ addHeightgraph <- function(
 #' @family Heightgraph Functions
 #' @return A list of further options for \code{addHeightgraph}
 #' @export
-heightgraphOptions = function(
-  position = c("bottomright", "topleft", "topright", "bottomleft"),
-  width = 800,
-  height = 200,
-  margins = list(top = 10, right = 30, bottom = 55, left = 50),
-  expand = TRUE,
-  expandCallback = NULL,
-  mappings = NULL,
-  highlightStyle = list(color = "red"),
-  translation = NULL,
-  xTicks = 3,
-  yTicks = 3
-) {
+heightgraphOptions <- function(
+    position = c("bottomright", "topleft", "topright", "bottomleft"),
+    width = 800,
+    height = 200,
+    margins = list(top = 10, right = 30, bottom = 55, left = 50),
+    expand = TRUE,
+    expandCallback = NULL,
+    mappings = NULL,
+    highlightStyle = list(color = "red"),
+    translation = NULL,
+    xTicks = 3,
+    yTicks = 3) {
   position <- match.arg(position)
   filterNULL(list(
     position = position,

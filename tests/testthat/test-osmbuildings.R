@@ -65,7 +65,7 @@ test_that("updateBuildingTime updates the time correctly", {
 
   map <- addBuildings(map) %>%
     updateBuildingTime(time) %>%
-    setView(13.40, 52.51836,15)
+    setView(13.40, 52.51836, 15)
 
   # Check if invokeMethod is called with the correct timestamp
   expect_equal(map$x$calls[[3]]$method, "updateBuildingTime")
@@ -79,7 +79,7 @@ test_that("setBuildingStyle applies styles correctly", {
 
   map <- addBuildings(map) %>%
     setBuildingStyle(style) %>%
-    setView(13.40, 52.51836,15)
+    setView(13.40, 52.51836, 15)
 
   # Check if invokeMethod is called with the correct style
   expect_equal(map$x$calls[[3]]$method, "setBuildingStyle")
@@ -91,7 +91,7 @@ test_that("setBuildingStyle uses default styles if not provided", {
 
   map <- addBuildings(map) %>%
     setBuildingStyle() %>%
-    setView(13.40, 52.51836,15)
+    setView(13.40, 52.51836, 15)
   # map
 
   # Check if invokeMethod is called with the default styles
@@ -128,9 +128,10 @@ test_that("setBuildingData updates the building data correctly", {
   )
 
   map <- addBuildings(map,
-                      buildingURL = NULL,
-                      data = geojson_data) %>%
-    setView(13.40, 52.51836,15)
+    buildingURL = NULL,
+    data = geojson_data
+  ) %>%
+    setView(13.40, 52.51836, 15)
   # map
   # Check if invokeMethod is called with the correct data
   expect_equal(map$x$calls[[2]]$method, "addBuilding")
@@ -138,7 +139,7 @@ test_that("setBuildingData updates the building data correctly", {
 
   map <- addBuildings(create_test_map(), buildingURL = NULL) %>%
     setBuildingData(geojson_data) %>%
-    setView(13.40, 52.51836,15)
+    setView(13.40, 52.51836, 15)
   # map
   # Check if invokeMethod is called with the correct data
   expect_equal(map$x$calls[[2]]$method, "addBuilding")

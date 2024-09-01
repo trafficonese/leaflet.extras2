@@ -3,8 +3,10 @@ reachabilityDependencies <- function() {
     htmlDependency(
       "lfx-reachability", "1.0.0",
       src = system.file("htmlwidgets/lfx-reachability", package = "leaflet.extras2"),
-      script = c("leaflet.reachability.js",
-                 "leaflet.reachability-bindings.js"),
+      script = c(
+        "leaflet.reachability.js",
+        "leaflet.reachability-bindings.js"
+      ),
       stylesheet = "leaflet.reachability.css"
     )
   )
@@ -35,7 +37,7 @@ reachabilityDependencies <- function() {
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
-#' Sys.setenv("OPRS" = 'Your_API_Key')
+#' Sys.setenv("OPRS" = "Your_API_Key")
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
@@ -43,16 +45,18 @@ reachabilityDependencies <- function() {
 #'   addReachability()
 #' }
 addReachability <- function(map, apikey = NULL,
-                            options = reachabilityOptions()){
+                            options = reachabilityOptions()) {
   if (is.null(apikey)) {
     apikey <- Sys.getenv("OPRS")
     if (apikey == "") {
-      stop("You must either pass an Openrouteservice-`apikey` directly or save it as ",
-           "system variable under `OPRS`.")
+      stop(
+        "You must either pass an Openrouteservice-`apikey` directly or save it as ",
+        "system variable under `OPRS`."
+      )
     }
   }
   map$dependencies <- c(map$dependencies, reachabilityDependencies())
-  options = leaflet::filterNULL(c(apiKey = apikey, options))
+  options <- leaflet::filterNULL(c(apiKey = apikey, options))
   invokeMethod(map, NULL, "addReachability", options)
 }
 
@@ -70,10 +74,10 @@ addReachability <- function(map, apikey = NULL,
 #' @references \url{https://github.com/traffordDataLab/leaflet.reachability}
 #' @return A list of options for \code{addReachability}
 #' @export
-reachabilityOptions = function(collapsed = TRUE,
-                               pane = "overlayPane",
-                               position = "topleft",
-                               ...) {
+reachabilityOptions <- function(collapsed = TRUE,
+                                pane = "overlayPane",
+                                position = "topleft",
+                                ...) {
   filterNULL(list(
     collapsed = collapsed,
     pane = pane,
@@ -89,6 +93,6 @@ reachabilityOptions = function(collapsed = TRUE,
 #' @inherit leaflet::addControl return
 #' @export
 #' @family Reachability Functions
-removeReachability <- function(map){
+removeReachability <- function(map) {
   invokeMethod(map, NULL, "removeReachability")
 }

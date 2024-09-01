@@ -1,13 +1,15 @@
 hexbinDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-hexbin", version = "1.0.0",
+      "lfx-hexbin",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-hexbin", package = "leaflet.extras2"),
       script = c(
         "d3.js",
         "d3-hexbin.js",
         "HexbinLayer.js",
-        "hexbin-bindings.js")
+        "hexbin-bindings.js"
+      )
     )
   )
 }
@@ -33,35 +35,44 @@ hexbinDependency <- function() {
 #' library(leaflet.extras2)
 #'
 #' n <- 1000
-#' df <- data.frame(lat = rnorm(n, 42.0285, .01),
-#'                  lng = rnorm(n, -93.65, .01))
+#' df <- data.frame(
+#'   lat = rnorm(n, 42.0285, .01),
+#'   lng = rnorm(n, -93.65, .01)
+#' )
 #'
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addTiles() %>%
-#'   addHexbin(lng = df$lng, lat = df$lat,
-#'             options = hexbinOptions(
-#'                colorRange = c("red", "yellow", "blue"),
-#'                radiusRange = c(10, 20)
-#'            ))
+#'   addHexbin(
+#'     lng = df$lng, lat = df$lat,
+#'     options = hexbinOptions(
+#'       colorRange = c("red", "yellow", "blue"),
+#'       radiusRange = c(10, 20)
+#'     )
+#'   )
 addHexbin <- function(
-  map, lng = NULL, lat = NULL, radius = 20,
-  layerId = NULL, group = NULL, opacity = 0.5,
-  options = hexbinOptions(),
-  data = getMapData(map)) {
+    map, lng = NULL, lat = NULL, radius = 20,
+    layerId = NULL, group = NULL, opacity = 0.5,
+    options = hexbinOptions(),
+    data = getMapData(map)) {
+  options <- c(
+    options,
+    filterNULL(list(
+      radius = radius,
+      extraJS = JS("function(d) { return d.length; }"),
+      opacity = opacity
+    ))
+  )
 
-  options <- c(options,
-    filterNULL(list(radius = radius,
-                    extraJS = JS("function(d) { return d.length; }"),
-                    opacity = opacity)))
-
-  pts <- derivePoints(data, lng, lat, missing(lng), missing(lat),
-                      "addCircleMarkers")
+  pts <- derivePoints(
+    data, lng, lat, missing(lng), missing(lat),
+    "addCircleMarkers"
+  )
   pts <- as.matrix(pts)
 
   map$dependencies <- c(map$dependencies, hexbinDependency())
 
   invokeMethod(map, getMapData(map), "addHexbin", pts, layerId, group, options) %>%
-    expandLimits(pts[,"lat"], pts[,"lng"])
+    expandLimits(pts[, "lat"], pts[, "lng"])
 }
 
 #' updateHexbin
@@ -77,8 +88,10 @@ updateHexbin <- function(map, data = NULL, lng = NULL, lat = NULL, colorRange = 
   if (is.null(c(data, lng, lat))) {
     pts <- NULL
   } else {
-    pts <- derivePoints(data, lng, lat, missing(lng), missing(lat),
-                        "addCircleMarkers")
+    pts <- derivePoints(
+      data, lng, lat, missing(lng), missing(lat),
+      "addCircleMarkers"
+    )
     pts <- as.matrix(pts)
   }
   invokeMethod(map, NULL, "updateHexbin", pts, colorRange)
@@ -149,17 +162,15 @@ showHexbin <- function(map) {
 #' @family Hexbin-D3 Functions
 #' @return A list of hexbin-specific options
 #' @export
-hexbinOptions = function(
-  duration = 200,
-  colorScaleExtent = NULL,
-  radiusScaleExtent = NULL,
-  colorRange = c('#f7fbff', '#08306b'),
-  radiusRange = c(5, 15),
-  pointerEvents = 'all',
-  resizetoCount = FALSE,
-  tooltip = "Count "
-) {
-
+hexbinOptions <- function(
+    duration = 200,
+    colorScaleExtent = NULL,
+    radiusScaleExtent = NULL,
+    colorRange = c("#f7fbff", "#08306b"),
+    radiusRange = c(5, 15),
+    pointerEvents = "all",
+    resizetoCount = FALSE,
+    tooltip = "Count ") {
   if (tooltip == FALSE) tooltip <- NULL
 
   filterNULL(list(

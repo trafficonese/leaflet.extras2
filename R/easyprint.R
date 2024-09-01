@@ -1,15 +1,18 @@
 easyprintDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-easyprint", version = "1.0.0",
+      "lfx-easyprint",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-easyprint",
-                        package = "leaflet.extras2"),
+        package = "leaflet.extras2"
+      ),
       script = c(
         "dom-to-image.js",
         "FileSaver.js",
         # "lfx-easyprint.js",
         "lfx-easyprint_full.js",
-        "lfx-easyprint-bindings.js")
+        "lfx-easyprint-bindings.js"
+      )
     )
   )
 }
@@ -25,12 +28,13 @@ easyprintDependency <- function() {
 #' @return A leaflet map object
 #' @examples
 #' library(leaflet)
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addTiles() %>%
 #'   addEasyprint(options = easyprintOptions(
-#'     title = 'Print map',
-#'     position = 'bottomleft',
-#'     exportOnly = TRUE))
+#'     title = "Print map",
+#'     position = "bottomleft",
+#'     exportOnly = TRUE
+#'   ))
 addEasyprint <- function(map, options = easyprintOptions()) {
   map$dependencies <- c(map$dependencies, easyprintDependency())
   leaflet::invokeMethod(map, NULL, "addEasyprint", options)
@@ -52,33 +56,33 @@ addEasyprint <- function(map, options = easyprintOptions()) {
 #' @examples
 #' ## Only run examples in interactive R sessions
 #' if (interactive()) {
-#' library(shiny)
-#' library(leaflet)
-#' library(leaflet.extras2)
+#'   library(shiny)
+#'   library(leaflet)
+#'   library(leaflet.extras2)
 #'
-#' ui <- fluidPage(
-#'   leafletOutput("map"),
-#'   selectInput("scene", "Select Scene", choices = c("CurrentSize", "A4Landscape", "A4Portrait")),
-#'   actionButton("print", "Print Map")
-#' )
+#'   ui <- fluidPage(
+#'     leafletOutput("map"),
+#'     selectInput("scene", "Select Scene", choices = c("CurrentSize", "A4Landscape", "A4Portrait")),
+#'     actionButton("print", "Print Map")
+#'   )
 #'
-#' server <- function(input, output, session) {
-#'   output$map <- renderLeaflet({
-#'     input$print
-#'     leaflet()  %>%
-#'       addTiles() %>%
-#'       setView(10, 50, 9) %>%
-#'       addEasyprint(options = easyprintOptions(
-#'         exportOnly = TRUE
-#'       ))
-#' })
-#'   observeEvent(input$print, {
-#'     leafletProxy("map") %>%
-#'       easyprintMap(sizeModes = input$scene)
-#' })
-#' }
+#'   server <- function(input, output, session) {
+#'     output$map <- renderLeaflet({
+#'       input$print
+#'       leaflet() %>%
+#'         addTiles() %>%
+#'         setView(10, 50, 9) %>%
+#'         addEasyprint(options = easyprintOptions(
+#'           exportOnly = TRUE
+#'         ))
+#'     })
+#'     observeEvent(input$print, {
+#'       leafletProxy("map") %>%
+#'         easyprintMap(sizeModes = input$scene)
+#'     })
+#'   }
 #'
-#' shinyApp(ui, server)
+#'   shinyApp(ui, server)
 #' }
 easyprintMap <- function(map, sizeModes = "A4Portrait", filename = "map") {
   leaflet::invokeMethod(map, NULL, "easyprintMap", sizeModes, filename)
@@ -127,25 +131,27 @@ removeEasyprint <- function(map) {
 #' @return A list of options for the 'easyprint' control
 #' @references \url{https://github.com/rowanwins/leaflet-easyPrint}
 #' @export
-easyprintOptions <- function(title = 'Print map',
-                             position = 'topleft',
+easyprintOptions <- function(title = "Print map",
+                             position = "topleft",
                              sizeModes = list("A4Portrait", "A4Landscape", "CurrentSize"),
                              defaultSizeTitles = NULL,
                              exportOnly = FALSE,
                              tileLayer = NULL,
                              tileWait = 500,
-                             filename = 'map',
+                             filename = "map",
                              hidden = FALSE,
                              hideControlContainer = TRUE,
                              hideClasses = NULL,
                              customWindowTitle = NULL,
-                             spinnerBgColor = '#0DC5C1',
-                             customSpinnerClass = 'epLoader') {
+                             spinnerBgColor = "#0DC5C1",
+                             customSpinnerClass = "epLoader") {
   if (inherits(sizeModes, "character")) sizeModes <- as.list(sizeModes)
   if (inherits(hideClasses, "character")) hideClasses <- as.list(hideClasses)
   if (length(sizeModes) == 0 || (is.null(sizeModes) || all(is.na(sizeModes)) || all(sizeModes == ""))) {
-    stop("The 'sizeModes' argument cannot be empty.\nUse one of the following ",
-         "options: 'A4Portrait', 'A4Landscape', 'CurrentSize' or define a 'Custom' sizeMode.")
+    stop(
+      "The 'sizeModes' argument cannot be empty.\nUse one of the following ",
+      "options: 'A4Portrait', 'A4Landscape', 'CurrentSize' or define a 'Custom' sizeMode."
+    )
   }
   leaflet::filterNULL(list(
     title = title,

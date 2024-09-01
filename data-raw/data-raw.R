@@ -1,4 +1,3 @@
-
 gibs_layerslink <- paste0(system.file("htmlwidgets/lfx-gibs", package = "leaflet.extras2"), "/gibs_layers_meta.json")
 gibs_layers <- jsonify::from_json(json = gibs_layerslink, simplify = TRUE)
 gibs_layers <- data.frame(do.call(rbind, gibs_layers), stringsAsFactors = FALSE)

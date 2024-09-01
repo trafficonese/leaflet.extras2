@@ -3,8 +3,10 @@ sidebysideDependencies <- function() {
     htmlDependency(
       "lfx-sidebyside", "1.0.0",
       src = system.file("htmlwidgets/lfx-side-by-side", package = "leaflet.extras2"),
-      script = c("lfx-side-by-side.js",
-                 "lfx-side-by-side-bindings.js")
+      script = c(
+        "lfx-side-by-side.js",
+        "lfx-side-by-side-bindings.js"
+      )
     )
   )
 }
@@ -34,29 +36,42 @@ sidebysideDependencies <- function() {
 #' leaflet(quakes) %>%
 #'   addMapPane("left", zIndex = 0) %>%
 #'   addMapPane("right", zIndex = 0) %>%
-#'   addTiles(group = "base", layerId = "baseid",
-#'            options = pathOptions(pane = "right")) %>%
-#'   addProviderTiles(providers$CartoDB.DarkMatter, group="carto", layerId = "cartoid",
-#'                    options = pathOptions(pane = "left")) %>%
-#'   addCircleMarkers(data = breweries91[1:15,], color = "blue", group = "blue",
-#'                    options = pathOptions(pane = "left")) %>%
-#'   addCircleMarkers(data = breweries91[15:20,], color = "yellow", group = "yellow") %>%
-#'   addCircleMarkers(data = breweries91[15:30,], color = "red", group = "red",
-#'                    options = pathOptions(pane = "right")) %>%
-#'   addLayersControl(overlayGroups = c("blue","red", "yellow")) %>%
-#'   addSidebyside(layerId = "sidecontrols",
-#'                 rightId = "baseid",
-#'                 leftId = "cartoid")
+#'   addTiles(
+#'     group = "base", layerId = "baseid",
+#'     options = pathOptions(pane = "right")
+#'   ) %>%
+#'   addProviderTiles(providers$CartoDB.DarkMatter,
+#'     group = "carto", layerId = "cartoid",
+#'     options = pathOptions(pane = "left")
+#'   ) %>%
+#'   addCircleMarkers(
+#'     data = breweries91[1:15, ], color = "blue", group = "blue",
+#'     options = pathOptions(pane = "left")
+#'   ) %>%
+#'   addCircleMarkers(data = breweries91[15:20, ], color = "yellow", group = "yellow") %>%
+#'   addCircleMarkers(
+#'     data = breweries91[15:30, ], color = "red", group = "red",
+#'     options = pathOptions(pane = "right")
+#'   ) %>%
+#'   addLayersControl(overlayGroups = c("blue", "red", "yellow")) %>%
+#'   addSidebyside(
+#'     layerId = "sidecontrols",
+#'     rightId = "baseid",
+#'     leftId = "cartoid"
+#'   )
 addSidebyside <- function(map, layerId = NULL,
                           leftId = NULL, rightId = NULL,
-                          options = list(thumbSize = 42,
-                                         padding = 0)){
-
+                          options = list(
+                            thumbSize = 42,
+                            padding = 0
+                          )) {
   map$dependencies <- c(map$dependencies, sidebysideDependencies())
-  options = leaflet::filterNULL(c(options))
+  options <- leaflet::filterNULL(c(options))
 
-  invokeMethod(map, NULL, "addSidebyside",
-               layerId, leftId, rightId, options)
+  invokeMethod(
+    map, NULL, "addSidebyside",
+    layerId, leftId, rightId, options
+  )
 }
 
 #' removeSidebyside
@@ -65,6 +80,6 @@ addSidebyside <- function(map, layerId = NULL,
 #' @param layerId the layer id of the \code{\link{addSidebyside}} layer
 #' @inherit leaflet::addControl return
 #' @family Sidebyside Functions
-removeSidebyside <- function(map, layerId = NULL){
+removeSidebyside <- function(map, layerId = NULL) {
   invokeMethod(map, NULL, "removeSidebyside", layerId)
 }

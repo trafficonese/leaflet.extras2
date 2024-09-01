@@ -3,8 +3,11 @@ tangram_deps <- function() {
     htmlDependency(
       "lfx-tangram", "1.0.0",
       src = system.file("htmlwidgets/lfx-tangram", package = "leaflet.extras2"),
-      script = c("tangram.min.js",
-                 "leaflet.tangram.binding.js"))
+      script = c(
+        "tangram.min.js",
+        "leaflet.tangram.binding.js"
+      )
+    )
   )
 }
 
@@ -43,8 +46,10 @@ tangram_deps <- function() {
 #'       addTangram(scene = scene, group = "tangram") %>%
 #'       addCircleMarkers(data = breweries91, group = "brews") %>%
 #'       setView(11, 49.4, 14) %>%
-#'       addLayersControl(baseGroups = c("tangram", "base"),
-#'                        overlayGroups = c("brews"))
+#'       addLayersControl(
+#'         baseGroups = c("tangram", "base"),
+#'         overlayGroups = c("brews")
+#'       )
 #'   })
 #' }
 #'
@@ -52,10 +57,11 @@ tangram_deps <- function() {
 #' }
 addTangram <- function(map, scene = NULL, layerId = NULL, group = NULL,
                        options = NULL) {
-
   if ((is.null(scene) || !is.character(scene) || (!gsub(".*\\.", "", scene) %in% c("yaml", "zip")))) {
-    stop("The scene must point to a valid .yaml or .zip file.\n",
-         "See the documentation for further information.")
+    stop(
+      "The scene must point to a valid .yaml or .zip file.\n",
+      "See the documentation for further information."
+    )
   }
 
   tngrscene <- list(
@@ -64,12 +70,15 @@ addTangram <- function(map, scene = NULL, layerId = NULL, group = NULL,
       version = 1,
       src = dirname(scene),
       attachment = basename(scene)
-    ))
+    )
+  )
 
   map$dependencies <- c(map$dependencies, tngrscene, tangram_deps())
 
   options <- leaflet::filterNULL(c(list(scene = basename(scene)), options))
 
-  invokeMethod(map, NULL, "addTangram",
-               layerId, group, options)
+  invokeMethod(
+    map, NULL, "addTangram",
+    layerId, group, options
+  )
 }

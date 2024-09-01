@@ -5,13 +5,14 @@
 clusterchartsDependencies <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-clustercharts", version = "1.0.0",
+      "lfx-clustercharts",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-clustercharts", package = "leaflet.extras2"),
       stylesheet = c("lfx-clustercharts.css"),
       script = c(
         "d3.v3.min.js",
         "lfx-clustercharts-bindings.js"
-        )
+      )
     )
   )
 }
@@ -58,31 +59,38 @@ clusterchartsDependencies <- function() {
 #' leaflet() %>%
 #'   addProviderTiles("CartoDB.Positron") %>%
 #'   leaflet::addLayersControl(overlayGroups = "clustermarkers") %>%
-#'   addClusterCharts(data = data
-#'                    , categoryField = "category"
-#'                    , categoryMap = data.frame(labels = categories,
-#'                                               colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
-#'                                               strokes = "gray")
-#'                    , group = "clustermarkers"
-#'                    , popupFields = c("brewery", "address", "zipcode", "category")
-#'                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
-#'                    , label = "brewery"
+#'   addClusterCharts(
+#'     data = data,
+#'     categoryField = "category",
+#'     categoryMap = data.frame(
+#'       labels = categories,
+#'       colors = c("#F88", "#FA0", "#FF3", "#BFB"),
+#'       strokes = "gray"
+#'     ),
+#'     group = "clustermarkers",
+#'     popupFields = c("brewery", "address", "zipcode", "category"),
+#'     popupLabels = c("Brauerei", "Adresse", "PLZ", "Art"),
+#'     label = "brewery"
 #'   )
 #'
 #' ## Bar Chart
 #' leaflet() %>%
 #'   addProviderTiles("CartoDB.Positron") %>%
 #'   leaflet::addLayersControl(overlayGroups = "clustermarkers") %>%
-#'   addClusterCharts(data = data
-#'                    , type = "bar"
-#'                    , categoryField = "category"
-#'                    , categoryMap = data.frame(labels = categories,
-#'                                               colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
-#'                                               strokes = "gray")
-#'                    , group = "clustermarkers"
-#'                    , popupFields = c("brewery", "address", "zipcode", "category")
-#'                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art")
-#'                    , label = "brewery")
+#'   addClusterCharts(
+#'     data = data,
+#'     type = "bar",
+#'     categoryField = "category",
+#'     categoryMap = data.frame(
+#'       labels = categories,
+#'       colors = c("#F88", "#FA0", "#FF3", "#BFB"),
+#'       strokes = "gray"
+#'     ),
+#'     group = "clustermarkers",
+#'     popupFields = c("brewery", "address", "zipcode", "category"),
+#'     popupLabels = c("Brauerei", "Adresse", "PLZ", "Art"),
+#'     label = "brewery"
+#'   )
 #'
 #' ## Custom Pie Chart with "mean" aggregation on column "value"
 #' data <- sf::st_as_sf(breweries91)
@@ -93,19 +101,22 @@ clusterchartsDependencies <- function() {
 #' leaflet() %>%
 #'   addProviderTiles("CartoDB.Positron") %>%
 #'   leaflet::addLayersControl(overlayGroups = "clustermarkers") %>%
-#'   addClusterCharts(data = data
-#'                    , type = "custom"
-#'                    , valueField = "value"
-#'                    , aggregation = "mean"
-#'                    , categoryField = "category"
-#'                    , categoryMap = data.frame(labels = categories,
-#'                                               colors  = c("#F88", "#FA0", "#FF3", "#BFB"),
-#'                                               strokes = "gray")
-#'                    , options = clusterchartOptions(rmax=50, digits=0, innerRadius = 20)
-#'                    , group = "clustermarkers"
-#'                    , popupFields = c("brewery", "address", "zipcode", "category","value")
-#'                    , popupLabels = c("Brauerei", "Adresse", "PLZ", "Art", "Value")
-#'                    , label = "brewery"
+#'   addClusterCharts(
+#'     data = data,
+#'     type = "custom",
+#'     valueField = "value",
+#'     aggregation = "mean",
+#'     categoryField = "category",
+#'     categoryMap = data.frame(
+#'       labels = categories,
+#'       colors = c("#F88", "#FA0", "#FF3", "#BFB"),
+#'       strokes = "gray"
+#'     ),
+#'     options = clusterchartOptions(rmax = 50, digits = 0, innerRadius = 20),
+#'     group = "clustermarkers",
+#'     popupFields = c("brewery", "address", "zipcode", "category", "value"),
+#'     popupLabels = c("Brauerei", "Adresse", "PLZ", "Art", "Value"),
+#'     label = "brewery"
 #'   )
 #'
 #' ## For Shiny examples, please run:
@@ -113,60 +124,70 @@ clusterchartsDependencies <- function() {
 #' # runApp(system.file("examples/clustercharts_sum.R", package = "leaflet.extras2"))
 addClusterCharts <- function(
     map, layerId = NULL, group = NULL,
-    type = c("pie","bar","horizontal","custom"),
-    aggregation = c("sum","min","max","mean","median"),
+    type = c("pie", "bar", "horizontal", "custom"),
+    aggregation = c("sum", "min", "max", "mean", "median"),
     valueField = NULL,
     options = clusterchartOptions(),
     icon = NULL, html = NULL,
     popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
     clusterOptions = NULL, clusterId = NULL,
     categoryField, categoryMap, popupFields = NULL, popupLabels = NULL,
-    markerOptions = NULL, legendOptions = list(title = "",
-                                               position = "topright"),
+    markerOptions = NULL, legendOptions = list(
+      title = "",
+      position = "topright"
+    ),
     data = getMapData(map)) {
-
   ## Check arguments ############
   type <- match.arg(type)
   aggregation <- match.arg(aggregation)
   if (missing(labelOptions)) labelOptions <- labelOptions()
   if (missing(categoryMap)) {
-    stop("The `categoryMap` is missing.\n",
-            "A `categoryMap` is required to associate `labels`, `colors`, `icons`, and `strokes` with individual features\n",
-            "based on the specified `categoryField`: ", categoryField, ".")
+    stop(
+      "The `categoryMap` is missing.\n",
+      "A `categoryMap` is required to associate `labels`, `colors`, `icons`, and `strokes` with individual features\n",
+      "based on the specified `categoryField`: ", categoryField, "."
+    )
   }
   if (is.null(categoryMap$labels)) {
-    warning("The `categoryMap` is missing a `labels` column.\n",
-            "Values will be generated based on the unique values of `", categoryField, "` in `data`.\n",
-            "Note: The order may be incorrect, so it is recommended to add a correct `labels` column in the `categoryMap`.")
+    warning(
+      "The `categoryMap` is missing a `labels` column.\n",
+      "Values will be generated based on the unique values of `", categoryField, "` in `data`.\n",
+      "Note: The order may be incorrect, so it is recommended to add a correct `labels` column in the `categoryMap`."
+    )
     categoryMap$labels <- unique(data[[categoryField]])
   }
   if (is.null(categoryMap$colors)) {
-    warning("The `categoryMap` is missing a `color` column.\n",
-            "An automatic color palette will be assigned.")
+    warning(
+      "The `categoryMap` is missing a `color` column.\n",
+      "An automatic color palette will be assigned."
+    )
     categoryMap$colors <- colorRampPalette(c("#fc8d8d", "white", "lightblue"))(nrow(categoryMap))
   }
   if (!is.null(popupFields) && is.null(popupLabels)) {
     popupLabels <- popupFields
   }
   if (!is.null(clusterOptions)) {
-    clusterOptions$maxClusterRadius = NULL
-    clusterOptions$iconCreateFunction = NULL
+    clusterOptions$maxClusterRadius <- NULL
+    clusterOptions$iconCreateFunction <- NULL
   }
-  options$aggregation = aggregation
-  options$valueField = valueField
+  options$aggregation <- aggregation
+  options$valueField <- valueField
 
   ## CSS string #############
   css <- paste(apply(categoryMap, 1, generate_css, icon), collapse = "\n")
   size <- options$size
   if (length(size) == 1) size <- rep(size, 2)
-  css <- paste0(css, "\n.clustermarker {",
-                "width: ",size[1],"px; height: ",size[2],"px;",
-                "margin-top: -",size[2]/2,"px; margin-left: -",size[1]/2,"px;",
-                "}")
+  css <- paste0(
+    css, "\n.clustermarker {",
+    "width: ", size[1], "px; height: ", size[2], "px;",
+    "margin-top: -", size[2] / 2, "px; margin-left: -", size[1] / 2, "px;",
+    "}"
+  )
 
   csssrc <- list(
     htmltools::htmlDependency(
-      "lfx-clustercharts-css", version = "1.0.0",
+      "lfx-clustercharts-css",
+      version = "1.0.0",
       head = as.character(tags$style(css)),
       src = system.file("htmlwidgets/lfx-clustercharts", package = "leaflet.extras2")
     )
@@ -175,21 +196,25 @@ addClusterCharts <- function(
   names(categoryMapList) <- seq.int(categoryMapList)
 
   ## Add Deps ############
-  map$dependencies <- c(map$dependencies,
-                        csssrc,
-                        leaflet::leafletDependencies$markerCluster(),
-                        clusterchartsDependencies())
+  map$dependencies <- c(
+    map$dependencies,
+    csssrc,
+    leaflet::leafletDependencies$markerCluster(),
+    clusterchartsDependencies()
+  )
 
   ## Make Geojson ###########
   if (!inherits(data, "sf")) {
     data <- sf::st_as_sf(data)
   }
   geojson <- yyjsonr::write_geojson_str(data)
-  class(geojson) <- c("geojson","json")
+  class(geojson) <- c("geojson", "json")
 
   ## Derive Points and Invoke Method ##################
-  points <- derivePoints(data, NULL, NULL, TRUE, TRUE,
-                         "addClusterCharts")
+  points <- derivePoints(
+    data, NULL, NULL, TRUE, TRUE,
+    "addClusterCharts"
+  )
   leaflet::invokeMethod(
     map, NULL, "addClusterCharts", geojson, layerId, group, type,
     options, icon, html,
@@ -231,19 +256,19 @@ clusterchartOptions <- function(rmax = 30, size = c(20, 20),
                                 digits = 2,
                                 sortTitlebyCount = TRUE) {
   filterNULL(list(
-    rmax = rmax
-    , size = size
-    , width = width
-    , height = height
-    , strokeWidth = strokeWidth
-    , innerRadius = innerRadius
-    , labelBackground = labelBackground
-    , labelFill = labelFill
-    , labelStroke = labelStroke
-    , labelColor = labelColor
-    , labelOpacity = labelOpacity
-    , digits = digits
-    , sortTitlebyCount = sortTitlebyCount
+    rmax = rmax,
+    size = size,
+    width = width,
+    height = height,
+    strokeWidth = strokeWidth,
+    innerRadius = innerRadius,
+    labelBackground = labelBackground,
+    labelFill = labelFill,
+    labelStroke = labelStroke,
+    labelColor = labelColor,
+    labelOpacity = labelOpacity,
+    digits = digits,
+    sortTitlebyCount = sortTitlebyCount
   ))
 }
 
@@ -270,15 +295,16 @@ generate_css <- function(row, icon) {
 
   ## Make Icon ################
   if (is.null(icon)) {
-    icon <- row['icons']
+    icon <- row["icons"]
     if (!is.null(icon) && !is.na(icon)) {
-      css <- paste0(css,
-                    ".icon-", label_nospaces, " {\n",
-                    "  background-image: url('", icon, "');\n",
-                    "  background-repeat: no-repeat;\n",
-                    "  background-position: 0px 1px;\n",
-                    "}"
-                    )
+      css <- paste0(
+        css,
+        ".icon-", label_nospaces, " {\n",
+        "  background-image: url('", icon, "');\n",
+        "  background-repeat: no-repeat;\n",
+        "  background-position: 0px 1px;\n",
+        "}"
+      )
       # css <- backgroundCSS(label_nospaces, icon,
       #                       additional_css = list(
       #                         c("background-blend-mode", "color-burn"),
@@ -291,7 +317,7 @@ generate_css <- function(row, icon) {
       icon <- icon[[label]]
     }
     iconuse <- b64EncodePackedIcons(packStrings(icon$iconUrl))
-    size = ""
+    size <- ""
     names_icon <- names(icon)
     if ("iconWidth" %in% names_icon) {
       if ("iconHeight" %in% names_icon) {
@@ -300,13 +326,14 @@ generate_css <- function(row, icon) {
         size <- paste0("background-size: ", icon$iconWidth, "px ", icon$iconWidth, "px;\n")
       }
     }
-    css <- paste0(css,
-                  ".icon-", label_nospaces, " {\n",
-                  "  background-image: url('", iconuse$data, "');\n",
-                  "  background-repeat: no-repeat;\n",
-                  "  background-position: 0px 1px;\n",
-                  size,
-                  "}"
+    css <- paste0(
+      css,
+      ".icon-", label_nospaces, " {\n",
+      "  background-image: url('", iconuse$data, "');\n",
+      "  background-repeat: no-repeat;\n",
+      "  background-position: 0px 1px;\n",
+      size,
+      "}"
     )
   }
   css
@@ -337,6 +364,3 @@ packStrings <- utils::getFromNamespace("packStrings", "leaflet")
 #
 #   return(css)
 # }
-
-
-

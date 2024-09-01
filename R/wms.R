@@ -1,10 +1,13 @@
 wmsDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-wms", version = "1.0.0",
+      "lfx-wms",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-wms", package = "leaflet.extras2"),
-      script = c("leaflet.wms.js",
-                 "leaflet.wms-bindings.js")
+      script = c(
+        "leaflet.wms.js",
+        "leaflet.wms-bindings.js"
+      )
     )
   )
 }
@@ -36,14 +39,17 @@ wmsDependency <- function() {
 #' leaflet() %>%
 #'   addTiles(group = "base") %>%
 #'   setView(9, 50, 5) %>%
-#'   addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
-#'          layers = "dwd:BRD_1km_winddaten_10m",
-#'       popupOptions = popupOptions(maxWidth = 600),
-#'       checkempty = TRUE,
-#'       options = WMSTileOptions(
-#'         transparent = TRUE,
-#'         format = "image/png",
-#'         info_format = "text/html"))
+#'   addWMS(
+#'     baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
+#'     layers = "dwd:BRD_1km_winddaten_10m",
+#'     popupOptions = popupOptions(maxWidth = 600),
+#'     checkempty = TRUE,
+#'     options = WMSTileOptions(
+#'       transparent = TRUE,
+#'       format = "image/png",
+#'       info_format = "text/html"
+#'     )
+#'   )
 addWMS <- function(map, baseUrl, layerId = NULL, group = NULL,
                    options = WMSTileOptions(),
                    attribution = NULL,
@@ -51,7 +57,6 @@ addWMS <- function(map, baseUrl, layerId = NULL, group = NULL,
                    popupOptions = NULL,
                    checkempty = FALSE,
                    data = getMapData(map)) {
-
   if (is.null(layers)) {
     stop("layers is a required argument with comma-separated list of WMS layers to show")
   }
@@ -61,6 +66,8 @@ addWMS <- function(map, baseUrl, layerId = NULL, group = NULL,
 
   map$dependencies <- c(map$dependencies, wmsDependency())
 
-  invokeMethod(map, data, "addWMS", baseUrl, layerId,
-               group, options, popupOptions)
+  invokeMethod(
+    map, data, "addWMS", baseUrl, layerId,
+    group, options, popupOptions
+  )
 }

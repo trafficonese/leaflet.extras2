@@ -1,10 +1,13 @@
 leafletsyncDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-leafletsync", version = "1.0.0",
+      "lfx-leafletsync",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-leafletsync", package = "leaflet.extras2"),
-      script = c("L.Map.Sync.js",
-                 "leafletsync-bindings.js")
+      script = c(
+        "L.Map.Sync.js",
+        "leafletsync-bindings.js"
+      )
     )
   )
 }
@@ -61,11 +64,12 @@ addLeafletsync <- function(map,
                            ids = NULL,
                            synclist = "all",
                            options = leafletsyncOptions()) {
-
   ## Stop If Synclist is NULL or 'all' and 'ids' is also NULL
   if (((length(synclist) == 1 && synclist == "all") || is.null(synclist)) && is.null(ids)) {
-    stop("You must pass a character vector to 'ids' ",
-         "if you use synclist = 'all' or if it is unset.")
+    stop(
+      "You must pass a character vector to 'ids' ",
+      "if you use synclist = 'all' or if it is unset."
+    )
   }
   ## If 'ids' is NULL and a 'synclist' is passed, take the unique values/names
   if (is.null(ids) && is.list(synclist)) {
@@ -81,13 +85,14 @@ addLeafletsync <- function(map,
         synclist[[i]][j] <- rest[j]
       }
     }
-  }
-  else {
+  } else {
     ## Warn if some names of the 'synclist' to not correspond to the 'ids'
     if (is.list(synclist)) {
       if (any(!names(synclist) %in% ids)) {
-        warning(sprintf("The map-ids %s in 'synclist' do not correspond to the given ids.\n",
-                paste(names(synclist)[!names(synclist) %in% ids], collapse = ", ")))
+        warning(sprintf(
+          "The map-ids %s in 'synclist' do not correspond to the given ids.\n",
+          paste(names(synclist)[!names(synclist) %in% ids], collapse = ", ")
+        ))
       }
     }
   }
@@ -154,14 +159,13 @@ isSynced <- function(map, id = NULL, syncwith = NULL) {
 #' @family leafletsync Functions
 #' @return A list of options for \code{addLeafletsync}
 #' @export
-leafletsyncOptions = function(
-  noInitialSync = FALSE,
-  syncCursor = TRUE,
-  offsetFn = JS("function (center, zoom, refMap, tgtMap) { return center; }")) {
+leafletsyncOptions <- function(
+    noInitialSync = FALSE,
+    syncCursor = TRUE,
+    offsetFn = JS("function (center, zoom, refMap, tgtMap) { return center; }")) {
   filterNULL(list(
     noInitialSync = noInitialSync,
     syncCursor = syncCursor,
     offsetFn = offsetFn
   ))
 }
-

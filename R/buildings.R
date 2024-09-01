@@ -1,12 +1,14 @@
 buildingsDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-building", version = "2.1.0",
+      "lfx-building",
+      version = "2.1.0",
       src = system.file("htmlwidgets/lfx-building", package = "leaflet.extras2"),
       stylesheet = "osm-buildings.css",
       script = c(
         "osm-buildings.js",
-        "osm-buildings-bindings.js")
+        "osm-buildings-bindings.js"
+      )
     )
   )
 }
@@ -45,22 +47,23 @@ buildingsDependency <- function() {
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addProviderTiles("CartoDB") %>%
 #'   addBuildings(group = "Buildings") %>%
 #'   addLayersControl(overlayGroups = "Buildings") %>%
 #'   setView(lng = 13.4, lat = 52.51, zoom = 15)
 addBuildings <- function(
-  map,
-  buildingURL = "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json",
-  group = NULL,
-  eachFn = NULL, clickFn = NULL, data = NULL) {
-
+    map,
+    buildingURL = "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json",
+    group = NULL,
+    eachFn = NULL, clickFn = NULL, data = NULL) {
   map$dependencies <- c(map$dependencies, buildingsDependency())
 
-  invokeMethod(map, getMapData(map), "addBuilding",
-               buildingURL, group,
-               eachFn, clickFn, data)
+  invokeMethod(
+    map, getMapData(map), "addBuilding",
+    buildingURL, group,
+    eachFn, clickFn, data
+  )
 }
 
 
@@ -78,7 +81,7 @@ addBuildings <- function(
 #'   addTiles() %>%
 #'   addBuildings() %>%
 #'   updateBuildingTime(as.POSIXct("2024-09-01 19:00:00 CET")) %>%
-#'   setView(13.40, 52.51836,15)
+#'   setView(13.40, 52.51836, 15)
 updateBuildingTime <- function(map, time) {
   invokeMethod(map, NULL, "updateBuildingTime", time)
 }
@@ -98,11 +101,13 @@ updateBuildingTime <- function(map, time) {
 #'   addTiles() %>%
 #'   addBuildings() %>%
 #'   setBuildingStyle(style) %>%
-#'   setView(13.40, 52.51836,15)
-setBuildingStyle <- function(map, style = list(color = "#ffcc00",
-                                               wallColor = "#ffcc00",
-                                               roofColor = "orange",
-                                               shadows = TRUE)) {
+#'   setView(13.40, 52.51836, 15)
+setBuildingStyle <- function(map, style = list(
+                               color = "#ffcc00",
+                               wallColor = "#ffcc00",
+                               roofColor = "orange",
+                               shadows = TRUE
+                             )) {
   invokeMethod(map, NULL, "setBuildingStyle", style)
 }
 

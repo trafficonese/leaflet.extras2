@@ -3,8 +3,10 @@ playbackDependencies <- function() {
     htmlDependency(
       "lfx-playback", "1.0.0",
       src = system.file("htmlwidgets/lfx-playback", package = "leaflet.extras2"),
-      script = c("leaflet.playback.js",
-                 "leaflet.playback-bindings.js")
+      script = c(
+        "leaflet.playback.js",
+        "leaflet.playback-bindings.js"
+      )
     )
   )
 }
@@ -44,56 +46,71 @@ playbackDependencies <- function() {
 #' library(sf)
 #'
 #' ## Single Elements
-#' data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1, ])
 #' data <- st_cast(data, "POINT")
-#' data$time = as.POSIXct(
-#'   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+#' data$time <- as.POSIXct(
+#'   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data))
+#' )
 #' data$label <- as.character(data$time)
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
-#'   addPlayback(data = data, label = ~label,
-#'               popup = ~sprintf("I am a popup for <b>%s</b> and <b>%s</b>",
-#'                                Name, label),
-#'               popupOptions = popupOptions(offset = c(0, -35)),
-#'               options = playbackOptions(radius = 3,
-#'                                         tickLen = 36000,
-#'                                         speed = 50,
-#'                                         maxInterpolationTime = 1000),
-#'               pathOpts = pathOptions(weight = 5))
+#'   addPlayback(
+#'     data = data, label = ~label,
+#'     popup = ~ sprintf(
+#'       "I am a popup for <b>%s</b> and <b>%s</b>",
+#'       Name, label
+#'     ),
+#'     popupOptions = popupOptions(offset = c(0, -35)),
+#'     options = playbackOptions(
+#'       radius = 3,
+#'       tickLen = 36000,
+#'       speed = 50,
+#'       maxInterpolationTime = 1000
+#'     ),
+#'     pathOpts = pathOptions(weight = 5)
+#'   )
 #'
 #'
 #' ## Multiple Elements
-#' data <- sf::st_as_sf(leaflet::atlStorms2005[1:5,])
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1:5, ])
 #' data$Name <- as.character(data$Name)
 #' data <- st_cast(data, "POINT")
 #' data$time <- unlist(lapply(rle(data$Name)$lengths, function(x) {
-#'   seq.POSIXt(as.POSIXct(Sys.Date()-2), as.POSIXct(Sys.Date()), length.out = x)
+#'   seq.POSIXt(as.POSIXct(Sys.Date() - 2), as.POSIXct(Sys.Date()), length.out = x)
 #' }))
-#' data$time <- as.POSIXct(data$time, origin="1970-01-01")
+#' data$time <- as.POSIXct(data$time, origin = "1970-01-01")
 #' data$label <- paste0("Time: ", data$time)
-#' data$popup = sprintf("<h3>Customized Popup</h3><b>Name</b>: %s<br><b>Time</b>: %s",
-#'                      data$Name, data$time)
+#' data$popup <- sprintf(
+#'   "<h3>Customized Popup</h3><b>Name</b>: %s<br><b>Time</b>: %s",
+#'   data$Name, data$time
+#' )
 #' data <- split(data, f = data$Name)
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
-#'   addPlayback(data = data,
-#'              popup = ~popup,
-#'              label = ~label,
-#'              popupOptions = popupOptions(offset=c(0,-35)),
-#'              labelOptions = labelOptions(noHide = TRUE),
-#'              options = playbackOptions(radius = 3,
-#'                                        tickLen = 1000000,
-#'                                        speed = 5000,
-#'                                        maxInterpolationTime = 10000,
-#'                                        transitionpopup = FALSE,
-#'                                        transitionlabel = FALSE,
-#'                                        playCommand = "Let's go",
-#'                                        stopCommand = "Stop it!",
-#'                                        color = c("red","green","blue",
-#'                                                  "orange","yellow")),
-#'               pathOpts = pathOptions(weight = 5))
+#'   addPlayback(
+#'     data = data,
+#'     popup = ~popup,
+#'     label = ~label,
+#'     popupOptions = popupOptions(offset = c(0, -35)),
+#'     labelOptions = labelOptions(noHide = TRUE),
+#'     options = playbackOptions(
+#'       radius = 3,
+#'       tickLen = 1000000,
+#'       speed = 5000,
+#'       maxInterpolationTime = 10000,
+#'       transitionpopup = FALSE,
+#'       transitionlabel = FALSE,
+#'       playCommand = "Let's go",
+#'       stopCommand = "Stop it!",
+#'       color = c(
+#'         "red", "green", "blue",
+#'         "orange", "yellow"
+#'       )
+#'     ),
+#'     pathOpts = pathOptions(weight = 5)
+#'   )
 addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOpts = pathOptions(),
                         popup = NULL,
@@ -101,11 +118,12 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
                         popupOptions = NULL,
                         labelOptions = NULL,
                         options = playbackOptions(),
-                        name = NULL){
-
+                        name = NULL) {
   if (!requireNamespace("sf")) {
-    stop("The package `sf` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('sf')")
+    stop(
+      "The package `sf` is needed for this plugin. ",
+      "Please install it with:\ninstall.packages('sf')"
+    )
   }
 
   if (inherits(data, "list")) {
@@ -119,17 +137,21 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
   }
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
-  options <- leaflet::filterNULL(c(icon = list(icon),
-                                  pathOptions = list(pathOpts),
-                                  popupOptions = list(popupOptions),
-                                  labelOptions = list(labelOptions),
-                                  popups = if(is.null(popup)) NULL else TRUE,
-                                  labels = if(is.null(label)) NULL else TRUE,
-                                  options))
+  options <- leaflet::filterNULL(c(
+    icon = list(icon),
+    pathOptions = list(pathOpts),
+    popupOptions = list(popupOptions),
+    labelOptions = list(labelOptions),
+    popups = if (is.null(popup)) NULL else TRUE,
+    labels = if (is.null(label)) NULL else TRUE,
+    options
+  ))
 
   invokeMethod(map, NULL, "addPlayback", data, options) %>%
-    expandLimits(lat = as.numeric(bounds[,"Y"]),
-                 lng = as.numeric(bounds[,"X"]))
+    expandLimits(
+      lat = as.numeric(bounds[, "Y"]),
+      lng = as.numeric(bounds[, "X"])
+    )
 }
 
 #' playbackOptions
@@ -164,21 +186,21 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' @return A list of options for \code{addPlayback}
 #' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
-playbackOptions = function(
-  color = "blue",
-  radius = 5,
-  tickLen = 250,
-  speed = 50,
-  maxInterpolationTime = 5*60*1000,
-  tracksLayer = TRUE,
-  playControl = TRUE,
-  dateControl = TRUE,
-  sliderControl = TRUE,
-  orientIcons = FALSE,
-  staleTime = 60*60*1000,
-  transitionpopup = TRUE,
-  transitionlabel = TRUE,
-  ...) {
+playbackOptions <- function(
+    color = "blue",
+    radius = 5,
+    tickLen = 250,
+    speed = 50,
+    maxInterpolationTime = 5 * 60 * 1000,
+    tracksLayer = TRUE,
+    playControl = TRUE,
+    dateControl = TRUE,
+    sliderControl = TRUE,
+    orientIcons = FALSE,
+    staleTime = 60 * 60 * 1000,
+    transitionpopup = TRUE,
+    transitionlabel = TRUE,
+    ...) {
   leaflet::filterNULL(list(
     color = color,
     radius = radius,
@@ -204,7 +226,7 @@ playbackOptions = function(
 #' @export
 #' @inherit leaflet::addMarkers return
 #' @family Playback Functions
-removePlayback <- function(map){
+removePlayback <- function(map) {
   invokeMethod(map, NULL, "removePlayback")
 }
 
@@ -219,21 +241,23 @@ removePlayback <- function(map){
 #' @param label Name of the label column.
 #' @param name Name of the name column.
 #' @return A list that is transformed to the expected JSON format
-to_jsonformat <- function(data, time, popup=NULL, label=NULL, name=NULL) {
+to_jsonformat <- function(data, time, popup = NULL, label = NULL, name = NULL) {
   if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
   if (inherits(data, "sf")) {
     stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
     data <- to_ms(data, time)
     dataorig <- data
-    data <- list("type"="Feature",
-                 "name"=evalFormula(name, dataorig)[1],
-                 "geometry"=list(
-                   "type"="MultiPoint",
-                   "coordinates"=sf::st_coordinates(data)
-                 ),
-                 "properties"=list(
-                   "time"=data$time
-                 ))
+    data <- list(
+      "type" = "Feature",
+      "name" = evalFormula(name, dataorig)[1],
+      "geometry" = list(
+        "type" = "MultiPoint",
+        "coordinates" = sf::st_coordinates(data)
+      ),
+      "properties" = list(
+        "time" = data$time
+      )
+    )
 
     if (!is.null(popup)) {
       data <- c(data, list("popupContent" = evalFormula(popup, dataorig)))

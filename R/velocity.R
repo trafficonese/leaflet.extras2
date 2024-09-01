@@ -3,8 +3,10 @@ velocityDependencies <- function() {
     htmlDependency(
       "lfx-velocity", "1.0.0",
       src = system.file("htmlwidgets/lfx-velocity", package = "leaflet.extras2"),
-      script = c("leaflet-velocity.js",
-                 "leaflet-velocity-bindings.js"),
+      script = c(
+        "leaflet-velocity.js",
+        "leaflet-velocity-bindings.js"
+      ),
       stylesheet = "leaflet-velocity.css"
     )
   )
@@ -36,7 +38,6 @@ velocityDependencies <- function() {
 #' }
 addVelocity <- function(map, layerId = NULL, group = NULL,
                         content = NULL, options = velocityOptions()) {
-
   if (!requireNamespace("jsonlite")) {
     stop("Package `jsonlite` must be loaded to parse the `content`")
   }
@@ -80,11 +81,13 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
                             maxVelocity = 10,
                             velocityScale = 0.005,
                             colorScale = NULL,
-                            ...){
+                            ...) {
   if (!is.null(colorScale) && is.matrix(colorScale)) {
     colorScale <- as.matrix(
-      paste0("rgb(", apply(colorScale, 1, function(x)
-        paste(x, collapse = ",")), ")"))
+      paste0("rgb(", apply(colorScale, 1, function(x) {
+        paste(x, collapse = ",")
+      }), ")")
+    )
   }
   speedUnit <- match.arg(speedUnit)
   list(
@@ -103,7 +106,7 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
 #' @export
 #' @inherit leaflet::removeMarker return
 #' @family Velocity Functions
-removeVelocity <- function(map, group){
+removeVelocity <- function(map, group) {
   invokeMethod(map, NULL, "removeVelocity", group)
 }
 
@@ -114,7 +117,7 @@ removeVelocity <- function(map, group){
 #' @inherit leaflet::removeMarker return
 #' @export
 #' @family Velocity Functions
-setOptionsVelocity <- function(map, layerId, options){
+setOptionsVelocity <- function(map, layerId, options) {
   options <- filterNULL(options)
   invokeMethod(map, NULL, "setOptionsVelocity", layerId, options)
 }
