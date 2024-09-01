@@ -92,27 +92,30 @@ library(leaflet.extras2)
 # Sample data
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
-df <- df[sample(1:nrow(df), 50, replace = FALSE),]
-df$classes = sample(x = c("myclass1","myclass2","myclass3"), nrow(df), replace = TRUE)
+df <- df[sample(1:nrow(df), 50, replace = FALSE), ]
+df$classes <- sample(x = c("myclass1", "myclass2", "myclass3"), nrow(df), replace = TRUE)
 df$ID <- paste0("ID_", 1:nrow(df))
 
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
-  addDivicon(data = df
-             , html = ~paste0(
-               '<div class="custom-html">',
-               '<div class="title">', Name, '</div>',
-               '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
-               '</div>'
-             )
-             , label = ~Name
-             , layerId = ~ID
-             , group = "Divicons"
-             , popup = ~paste("ID: ", ID, "<br>",
-                              "Name: ", Name, "<br>",
-                              "MaxWind:", MaxWind, "<br>",
-                              "MinPress:", MinPress)
-             , options = markerOptions(draggable = TRUE)
+  addDivicon(
+    data = df,
+    html = ~ paste0(
+      '<div class="custom-html">',
+      '<div class="title">', Name, "</div>",
+      '<div class="subtitle">MaxWind: ', MaxWind, "</div>",
+      "</div>"
+    ),
+    label = ~Name,
+    layerId = ~ID,
+    group = "Divicons",
+    popup = ~ paste(
+      "ID: ", ID, "<br>",
+      "Name: ", Name, "<br>",
+      "MaxWind:", MaxWind, "<br>",
+      "MinPress:", MinPress
+    ),
+    options = markerOptions(draggable = TRUE)
   )
 }
 \concept{DivIcon Functions}

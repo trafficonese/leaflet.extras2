@@ -47,12 +47,14 @@ library(leaflet.extras2)
 
 layers <- gibs_layers$title[c(35, 128, 185)]
 
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
   setView(9, 50, 4) \%>\%
-  addGIBS(layers = layers,
-          dates = Sys.Date() - 1,
-          group = layers) \%>\%
+  addGIBS(
+    layers = layers,
+    dates = Sys.Date() - 1,
+    group = layers
+  ) \%>\%
   addLayersControl(overlayGroups = layers)
 }
 \references{

@@ -49,27 +49,33 @@ If the selected contextmenu item is triggered from:
 \examples{
 library(leaflet)
 leaflet(options = leafletOptions(
-    contextmenu = TRUE,
-    contextmenuWidth = 200,
-    contextmenuItems =
-     context_mapmenuItems(
-       context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
-       "-",
-       context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) \%>\%
+  contextmenu = TRUE,
+  contextmenuWidth = 200,
+  contextmenuItems =
+    context_mapmenuItems(
+      context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled = FALSE),
+      "-",
+      context_menuItem("Zoom In", "function(e) {this.zoomIn()}")
+    )
+)) \%>\%
   addTiles(group = "base") \%>\%
   addContextmenu() \%>\%
-  addMarkers(data = breweries91, label = ~brewery,
-          layerId = ~founded, group = "marker",
-          options = markerOptions(
-            contextmenu = TRUE,
-            contextmenuWidth = 200,
-            contextmenuItems =
-              context_markermenuItems(
-                context_menuItem(text = "Show Marker Coords",
-                         callback = "function(e) {alert(e.latlng);}",
-                         index = 1)
-              )
-          ))
+  addMarkers(
+    data = breweries91, label = ~brewery,
+    layerId = ~founded, group = "marker",
+    options = markerOptions(
+      contextmenu = TRUE,
+      contextmenuWidth = 200,
+      contextmenuItems =
+        context_markermenuItems(
+          context_menuItem(
+            text = "Show Marker Coords",
+            callback = "function(e) {alert(e.latlng);}",
+            index = 1
+          )
+        )
+    )
+  )
 
 }
 \references{

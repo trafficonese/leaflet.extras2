@@ -26,33 +26,33 @@ Print or export a map programmatically (e.g. in a Shiny environment).
 \examples{
 ## Only run examples in interactive R sessions
 if (interactive()) {
-library(shiny)
-library(leaflet)
-library(leaflet.extras2)
+  library(shiny)
+  library(leaflet)
+  library(leaflet.extras2)
 
-ui <- fluidPage(
-  leafletOutput("map"),
-  selectInput("scene", "Select Scene", choices = c("CurrentSize", "A4Landscape", "A4Portrait")),
-  actionButton("print", "Print Map")
-)
+  ui <- fluidPage(
+    leafletOutput("map"),
+    selectInput("scene", "Select Scene", choices = c("CurrentSize", "A4Landscape", "A4Portrait")),
+    actionButton("print", "Print Map")
+  )
 
-server <- function(input, output, session) {
-  output$map <- renderLeaflet({
-    input$print
-    leaflet()  \%>\%
-      addTiles() \%>\%
-      setView(10, 50, 9) \%>\%
-      addEasyprint(options = easyprintOptions(
-        exportOnly = TRUE
-      ))
-})
-  observeEvent(input$print, {
-    leafletProxy("map") \%>\%
-      easyprintMap(sizeModes = input$scene)
-})
-}
+  server <- function(input, output, session) {
+    output$map <- renderLeaflet({
+      input$print
+      leaflet() \%>\%
+        addTiles() \%>\%
+        setView(10, 50, 9) \%>\%
+        addEasyprint(options = easyprintOptions(
+          exportOnly = TRUE
+        ))
+    })
+    observeEvent(input$print, {
+      leafletProxy("map") \%>\%
+        easyprintMap(sizeModes = input$scene)
+    })
+  }
 
-shinyApp(ui, server)
+  shinyApp(ui, server)
 }
 }
 \seealso{

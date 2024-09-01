@@ -63,14 +63,15 @@ History Options
 }
 \examples{
 library(leaflet)
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
-    addHistory(options = historyOptions(position = "bottomright",
+  addHistory(options = historyOptions(
+    position = "bottomright",
     maxMovesToSave = 20,
-    backText =  "Go back",
+    backText = "Go back",
     forwardText = "Go forward",
     orientation = "vertical"
-    ))
+  ))
 }
 \references{
 \url{https://github.com/cscott530/leaflet-history}

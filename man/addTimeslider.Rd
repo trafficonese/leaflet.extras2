@@ -84,18 +84,22 @@ library(leaflet)
 library(leaflet.extras2)
 library(sf)
 
-data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+data <- sf::st_as_sf(leaflet::atlStorms2005[1, ])
 data <- st_cast(data, "POINT")
-data$time = as.POSIXct(
-  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+data$time <- as.POSIXct(
+  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data))
+)
 
 leaflet() \%>\%
   addTiles() \%>\%
-  addTimeslider(data = data,
-             options = timesliderOptions(
-               position = "topright",
-               timeAttribute = "time",
-               range = TRUE)) \%>\%
+  addTimeslider(
+    data = data,
+    options = timesliderOptions(
+      position = "topright",
+      timeAttribute = "time",
+      range = TRUE
+    )
+  ) \%>\%
   setView(-72, 22, 4)
 }
 \references{

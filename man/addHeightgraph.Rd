@@ -81,7 +81,7 @@ library(leaflet)
 library(leaflet.extras2)
 library(sf)
 
-data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
+data <- st_cast(st_as_sf(leaflet::atlStorms2005[4, ]), "LINESTRING")
 data <- st_transform(data, 4326)
 data <- data.frame(st_coordinates(data))
 data$elev <- round(runif(nrow(data), 10, 500), 2)
@@ -98,9 +98,11 @@ data$popup <- apply(data, 1, function(x) {
 
 leaflet() \%>\%
   addTiles(group = "base") \%>\%
-  addHeightgraph(color = "red", columns = c("steepness", "suitability"),
-                 opacity = 1, data = data, group = "heightgraph",
-                 options = heightgraphOptions(width = 400))
+  addHeightgraph(
+    color = "red", columns = c("steepness", "suitability"),
+    opacity = 1, data = data, group = "heightgraph",
+    options = heightgraphOptions(width = 400)
+  )
 }
 \references{
 \url{https://github.com/GIScience/Leaflet.Heightgraph}

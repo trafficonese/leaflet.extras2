@@ -40,10 +40,12 @@ library(leaflet.extras2)
 
 leaflet() \%>\%
   addTiles() \%>\%
-  addMarkers(data = breweries91,
-             label = ~brewery,
-             group = "markers",
-             labelOptions = labelOptions(permanent = TRUE)) \%>\%
+  addMarkers(
+    data = breweries91,
+    label = ~brewery,
+    group = "markers",
+    labelOptions = labelOptions(permanent = TRUE)
+  ) \%>\%
   addLabelgun("markers", 1)
 }
 \references{

@@ -37,7 +37,7 @@ When used in Shiny, 3 events update a certain shiny Input:
 library(leaflet)
 library(leaflet.extras2)
 
-Sys.setenv("OPRS" = 'Your_API_Key')
+Sys.setenv("OPRS" = "Your_API_Key")
 
 leaflet() \%>\%
   addTiles() \%>\%

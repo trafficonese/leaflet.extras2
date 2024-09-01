@@ -22,7 +22,7 @@ browser. By default, it is a simple pair of buttons -- back and forward.
 }
 \examples{
 library(leaflet)
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
   addHistory()
 }
