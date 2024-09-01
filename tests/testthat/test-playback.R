@@ -221,7 +221,7 @@ test_that("playback", {
         tickLen = 1000000,
         speed = 10000000000,
         fadeMarkersWhenStale = TRUE,
-        dateControl = T,
+        dateControl = TRUE,
         staleTime = 1,
         maxInterpolationTime = 5 * 60 * 1000
       ),

@@ -2,7 +2,8 @@ timesliderDependencies <- function() {
   list(
     htmlDependency(
       "lfx-timeslider", "1.0.0",
-      src = system.file("htmlwidgets/lfx-timeslider", package = "leaflet.extras2"),
+      src = system.file("htmlwidgets/lfx-timeslider",
+                        package = "leaflet.extras2"),
       stylesheet = "jquery-ui.css",
       script = c(
         "jquery-ui.min.js",
@@ -54,7 +55,8 @@ timesliderDependencies <- function() {
 #'   setView(-72, 22, 4)
 addTimeslider <- function(map, data, radius = 10,
                           stroke = TRUE, color = "#03F",
-                          weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+                          weight = 5, opacity = 0.5, fill = TRUE,
+                          fillColor = color,
                           fillOpacity = 0.2, dashArray = NULL,
                           popup = NULL, popupOptions = NULL,
                           label = NULL, labelOptions = NULL,
@@ -107,7 +109,8 @@ addTimeslider <- function(map, data, radius = 10,
 
   ## Add Deps and invoke Leaflet
   map$dependencies <- c(map$dependencies, timesliderDependencies())
-  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions, labelOptions) %>%
+  invokeMethod(map, NULL, "addTimeslider", data, options,
+               popupOptions, labelOptions) %>%
     expandLimits(bbox[c(2, 4)], bbox[c(1, 3)])
 }
 

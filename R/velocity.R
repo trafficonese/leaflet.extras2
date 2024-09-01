@@ -2,7 +2,8 @@ velocityDependencies <- function() {
   list(
     htmlDependency(
       "lfx-velocity", "1.0.0",
-      src = system.file("htmlwidgets/lfx-velocity", package = "leaflet.extras2"),
+      src = system.file("htmlwidgets/lfx-velocity",
+                        package = "leaflet.extras2"),
       script = c(
         "leaflet-velocity.js",
         "leaflet-velocity-bindings.js"
@@ -18,8 +19,8 @@ velocityDependencies <- function() {
 #'   \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 #' @inheritParams leaflet::addMarkers
 #' @param content the path or URL to a JSON file representing the velocity data
-#'   or a data.frame which can be transformed to such a JSON file. Please see the
-#'   \href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
+#'   or a data.frame which can be transformed to such a JSON file. Please see
+#'   the \href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
 #'   files} for some example data.
 #' @param options List of further options. See \code{\link{velocityOptions}}
 #' @export
@@ -72,7 +73,8 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
 #' @param velocityScale scale for wind velocity
 #' @param colorScale A vector of hex colors or an RGB matrix
 #' @param ... Further arguments passed to the Velocity layer and Windy.js.
-#'   For more information, please visit \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
+#'   For more information, please visit
+#'   \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 #' @return A list of further options for \code{addVelocity}
 #' @export
 #' @family Velocity Functions

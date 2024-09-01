@@ -1,5 +1,3 @@
-# library(testthat)
-# library(leaflet)
 
 create_test_map <- function() {
   leaflet() %>% addTiles()
@@ -13,11 +11,14 @@ test_that("addBuildings adds dependencies and invokes method correctly", {
   map <- addBuildings(map)
 
   # Check if the dependencies are added
-  expect_true(any(sapply(map$dependencies, function(dep) dep$name) == "lfx-building"))
+  expect_true(any(sapply(map$dependencies,
+                         function(dep) dep$name) == "lfx-building"))
 
   # Check if invokeMethod is called with correct arguments
   expect_equal(map$x$calls[[2]]$method, "addBuilding")
-  expect_equal(map$x$calls[[2]]$args[[1]], "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json")
+  expect_equal(
+    map$x$calls[[2]]$args[[1]],
+    "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json")
 })
 
 test_that("addBuildings handles custom eachFn, clickFn, and data", {
@@ -50,7 +51,8 @@ test_that("addBuildings handles custom eachFn, clickFn, and data", {
     )
   )
 
-  map <- addBuildings(map, eachFn = each_fn, clickFn = click_fn, data = geojson_data)
+  map <- addBuildings(map, eachFn = each_fn,
+                      clickFn = click_fn, data = geojson_data)
 
   # Check if the JavaScript functions and data are passed correctly
   expect_equal(map$x$calls[[2]]$args[[3]], each_fn)
@@ -75,7 +77,8 @@ test_that("updateBuildingTime updates the time correctly", {
 # Test suite for setBuildingStyle
 test_that("setBuildingStyle applies styles correctly", {
   map <- create_test_map()
-  style <- list(color = "#0000ff", wallColor = "#0000ff", roofColor = "blue", shadows = FALSE)
+  style <- list(color = "#0000ff", wallColor = "#0000ff",
+                roofColor = "blue", shadows = FALSE)
 
   map <- addBuildings(map) %>%
     setBuildingStyle(style) %>%
@@ -95,7 +98,8 @@ test_that("setBuildingStyle uses default styles if not provided", {
   # map
 
   # Check if invokeMethod is called with the default styles
-  default_style <- list(color = "#ffcc00", wallColor = "#ffcc00", roofColor = "orange", shadows = TRUE)
+  default_style <- list(color = "#ffcc00", wallColor = "#ffcc00",
+                        roofColor = "orange", shadows = TRUE)
   expect_equal(map$x$calls[[3]]$"method", "setBuildingStyle")
   expect_equal(map$x$calls[[3]]$args[[1]], default_style)
 })

@@ -1,6 +1,5 @@
 library(sf)
 ## DATA #######################
-# df <- atlStorms2005[1,]
 df <- new("SpatialLinesDataFrame",
   data = structure(list(Name = structure(1L, levels = c(
     "ALPHA",
@@ -8,7 +7,8 @@ df <- new("SpatialLinesDataFrame",
     "FRANKLIN", "GAMMA", "GERT", "HARVEY", "IRENE", "JOSE", "KATRINA",
     "LEE", "MARIA", "NATE", "OPHELIA", "PHILIPPE", "RITA", "TEN",
     "TWENTY-TWO", "WILMA"
-  ), class = "factor"), MaxWind = 45, MinPress = 998), row.names = 1L, class = "data.frame"),
+  ), class = "factor"), MaxWind = 45, MinPress = 998),
+  row.names = 1L, class = "data.frame"),
   lines = list(new("Lines", Lines = list(new("Line", coords = structure(c(
     -67.5,
     -68.5, -69.6, -70.5, -71.3, -72.2, -72.7, -72.9, -73, -72.4,
@@ -20,7 +20,9 @@ df <- new("SpatialLinesDataFrame",
   ), dim = c(2L, 2L), dimnames = list(c(
     "x",
     "y"
-  ), c("min", "max"))), proj4string = new("CRS", projargs = "+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs")
+  ), c("min", "max"))), proj4string = new(
+    "CRS",
+    projargs = "+proj=longlat +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +no_defs")
 )
 
 ## TESTS #######################

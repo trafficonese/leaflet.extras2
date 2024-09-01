@@ -10,7 +10,7 @@ test_that("arrowhead", {
     "addArrowhead"
   )
   expect_true(all(names(m$x$calls[[1]]$args[[10]]) %in%
-    c("yawn", "size", "frequency", "proportionalToTotal")))
+                    c("yawn", "size", "frequency", "proportionalToTotal")))
 
   m <- leaflet() %>% clearArrowhead("groupname")
   m$x$calls[[length(m$x$calls)]]$method == "clearArrowhead"

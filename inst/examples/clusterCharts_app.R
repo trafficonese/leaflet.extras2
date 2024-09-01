@@ -6,30 +6,22 @@ library(leaflet.extras2)
 options("shiny.autoreload" = TRUE)
 
 
-# shipIcon <- leaflet::makeIcon(
-#   iconUrl = "./icons/Icon5.svg"
-#   ,className = "lsaicons"
-#   ,iconWidth = 24, iconHeight = 24, iconAnchorX = 0, iconAnchorY = 0
-# )
 shipIcon <- iconList(
   "Schwer"       = makeIcon("./icons/Icon5.svg", iconWidth = 32, iconHeight = 32),
   "Mäßig"        = makeIcon("./icons/Icon8.svg", iconWidth = 32, iconHeight = 32),
   "Leicht"       = makeIcon("./icons/Icon25.svg", iconWidth = 32, iconHeight = 32),
   "kein Schaden" = makeIcon("./icons/Icon29.svg", iconWidth = 32, iconHeight = 32)
 )
-# shipIcon <- makeIcon(
-#   iconUrl = "https://cdn-icons-png.flaticon.com/512/1355/1355883.png",
-#   iconWidth = 40, iconHeight = 50,
-#   iconAnchorX = 0, iconAnchorY = 0
-# )
 
 data <- sf::st_as_sf(breweries91)
-data$categoryfields <- sample(c("Schwer", "Mäßig", "Leicht", "kein Schaden"), size = nrow(data), replace = TRUE)
+data$categoryfields <- sample(c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
+                              size = nrow(data), replace = TRUE)
 data$label <- paste0(data$brewery, "<br>", data$address)
 data$id <- paste0("ID", seq.int(nrow(data)))
 data$popup <- paste0("<h6>", data$brewery, "</h6><div>", data$address, "</div>")
 data$web <- gsub(">(.*?)<", ">LINK<", data$web)
-data$web <- ifelse(is.na(data$web), "", paste0("<div class='markerhtml'>", data$web, "</div>"))
+data$web <- ifelse(is.na(data$web), "",
+                   paste0("<div class='markerhtml'>", data$web, "</div>"))
 data$tosum <- sample(1:100, nrow(data), replace = TRUE)
 
 ui <- fluidPage(
@@ -50,14 +42,15 @@ ui <- fluidPage(
   }")),
   div(class="inputdiv",
       div(class="inputs",
-      selectInput("type", "Plot type", choices = c("bar","horizontal", "pie"), selected = "pie"),
+      selectInput("type", "Plot type", choices = c("bar","horizontal", "pie"),
+                  selected = "pie"),
       numericInput("stroke", "strokeWidth", 1, 1, 10),
       numericInput("rmax", "MaxRadius", 50, 1, 150),
       numericInput("innerRadius", "InnerRadius", 10, 1, 100),
       numericInput("width", "Width", 50, 1, 150),
       numericInput("height", "Height", 50, 1, 150),
-      selectInput("labelBackground", "labelBackground", choices = c(T,F)),
-      selectInput("sortTitlebyCount", "sortTitlebyCount", choices = c(T,F)),
+      selectInput("labelBackground", "labelBackground", choices = c(TRUE, FALSE)),
+      selectInput("sortTitlebyCount", "sortTitlebyCount", choices = c(TRUE, FALSE)),
       numericInput("labelOpacity", "labelOpacity", 0.5, 0, 1, step = 0.1),
   )),
   leafletOutput("map", height = 650),
@@ -76,19 +69,20 @@ server <- function(input, output, session) {
       leaflet::addLayersControl(overlayGroups = c("clustermarkers")) %>%
       # addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
       addClusterCharts(data = data
-                       , options = clusterchartOptions(rmax = input$rmax,
-                                                       size = c(100,40),
-                                                       # size=40,
-                                                       width = input$width,
-                                                       height = input$height,
-                                                       strokeWidth = input$stroke,
-                                                       labelBackground = as.logical(input$labelBackground),
-                                                       # labelFill = "red",
-                                                       # labelStroke = "green",
-                                                       labelColor = "blue",
-                                                       labelOpacity = input$labelOpacity,
-                                                       innerRadius = input$innerRadius,
-                                                       sortTitlebyCount = as.logical(input$sortTitlebyCount))
+                       , options = clusterchartOptions(
+                         rmax = input$rmax,
+                         size = c(100,40),
+                         # size=40,
+                         width = input$width,
+                         height = input$height,
+                         strokeWidth = input$stroke,
+                         labelBackground = as.logical(input$labelBackground),
+                         # labelFill = "red",
+                         # labelStroke = "green",
+                         labelColor = "blue",
+                         labelOpacity = input$labelOpacity,
+                         innerRadius = input$innerRadius,
+                         sortTitlebyCount = as.logical(input$sortTitlebyCount))
                        # , type = "bar"
                        # , type = "horizontal"
                        , type = input$type

@@ -57,7 +57,8 @@ tangram_deps <- function() {
 #' }
 addTangram <- function(map, scene = NULL, layerId = NULL, group = NULL,
                        options = NULL) {
-  if ((is.null(scene) || !is.character(scene) || (!gsub(".*\\.", "", scene) %in% c("yaml", "zip")))) {
+  if ((is.null(scene) || !is.character(scene) ||
+       (!gsub(".*\\.", "", scene) %in% c("yaml", "zip")))) {
     stop(
       "The scene must point to a valid .yaml or .zip file.\n",
       "See the documentation for further information."

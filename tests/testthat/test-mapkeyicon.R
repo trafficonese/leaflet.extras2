@@ -122,7 +122,7 @@ test_that("mapkey", {
     addMapkeyMarkers(
       lng = ~Long, lat = ~Lat,
       label = ~City,
-      labelOptions = rep(labelOptions(noHide = T), nrow(cities)),
+      labelOptions = rep(labelOptions(noHide = TRUE), nrow(cities)),
       icon = ~ iconSet[PopCat]
     )
   expect_is(m, "leaflet")
@@ -132,7 +132,7 @@ test_that("mapkey", {
     addMapkeyMarkers(
       lng = ~Long, lat = ~Lat,
       label = ~City,
-      labelOptions = rep(labelOptions(noHide = T), nrow(cities)),
+      labelOptions = rep(labelOptions(noHide = TRUE), nrow(cities)),
       icon = ~ iconSet[as.factor(PopCat)]
     )
 
@@ -148,7 +148,8 @@ test_that("mapkey", {
   expect_is(m, "leaflet")
 
   expect_error(
-    leaflet(cities) %>% addTiles() %>%
+    leaflet(cities) %>%
+      addTiles() %>%
       addMapkeyMarkers(
         lng = ~Long, lat = ~Lat, label = ~City,
         icon = ~ iconSet[list()]
