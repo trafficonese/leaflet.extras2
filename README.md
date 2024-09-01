@@ -28,7 +28,7 @@ remotes::install_github('trafficonese/leaflet.extras2')
 
 ### Integrated Plugins
 
-If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
+If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#faq) section below for details.
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
