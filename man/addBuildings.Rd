@@ -21,9 +21,9 @@ addBuildings(
 
 \item{group}{The name of the group the buildings will be added to.}
 
-\item{eachFn}{A JavaScript function (using \code{\link[htmlwidgets]{JS}}) that will be called for each building feature. Use this to apply custom logic to each feature.}
+\item{eachFn}{A JavaScript function (using \code{\link[leaflet]{JS}}) that will be called for each building feature. Use this to apply custom logic to each feature.}
 
-\item{clickFn}{A JavaScript function (using \code{\link[htmlwidgets]{JS}}) that will be called when a building is clicked. Use this to handle click events on buildings.}
+\item{clickFn}{A JavaScript function (using \code{\link[leaflet]{JS}}) that will be called when a building is clicked. Use this to handle click events on buildings.}
 
 \item{data}{A GeoJSON object containing Polygon features representing the buildings. The properties of these polygons can include attributes like \code{height}, \code{color}, \code{roofColor}, and others as specified in the OSM Buildings documentation.}
 }
@@ -43,8 +43,7 @@ The `data` parameter allows you to provide custom building data as a GeoJSON obj
   \item \strong{roofShape}
   \item \strong{roofHeight}
 }
-
-See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}
+See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}{Simple_3D_Buildings}
 }
 \seealso{
 \url{https://github.com/kekscom/osmbuildings/} for more details on the OSM Buildings plugin and available properties.

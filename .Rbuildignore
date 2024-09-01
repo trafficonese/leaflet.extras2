@@ -18,3 +18,5 @@
 ^newfeatures/.*
 ^package\.json$
 ^package-lock\.json$
+^revdep$
+^bower_components$

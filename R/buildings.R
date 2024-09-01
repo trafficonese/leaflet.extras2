@@ -19,8 +19,8 @@ buildingsDependency <- function() {
 #' @param buildingURL The URL template for the building data. Default is the OSM Buildings tile server: \cr
 #'   \code{"https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json"}.
 #' @param group The name of the group the buildings will be added to.
-#' @param eachFn A JavaScript function (using \code{\link[htmlwidgets]{JS}}) that will be called for each building feature. Use this to apply custom logic to each feature.
-#' @param clickFn A JavaScript function (using \code{\link[htmlwidgets]{JS}}) that will be called when a building is clicked. Use this to handle click events on buildings.
+#' @param eachFn A JavaScript function (using \code{\link[leaflet]{JS}}) that will be called for each building feature. Use this to apply custom logic to each feature.
+#' @param clickFn A JavaScript function (using \code{\link[leaflet]{JS}}) that will be called when a building is clicked. Use this to handle click events on buildings.
 #' @param data A GeoJSON object containing Polygon features representing the buildings. The properties of these polygons can include attributes like \code{height}, \code{color}, \code{roofColor}, and others as specified in the OSM Buildings documentation.
 #'
 #' @details
@@ -36,8 +36,7 @@ buildingsDependency <- function() {
 #'   \item \strong{roofShape}
 #'   \item \strong{roofHeight}
 #' }
-#'
-#' See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}
+#' See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}{Simple_3D_Buildings}
 #'
 #' @seealso \url{https://github.com/kekscom/osmbuildings/} for more details on the OSM Buildings plugin and available properties.
 #' @family OSM-Buildings Plugin
