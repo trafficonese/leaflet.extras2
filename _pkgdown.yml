@@ -5,114 +5,137 @@ template:
 
 reference:
   - title: Package Documentation
-    desc: ~
+    desc: "Overview and primary documentation for the leaflet.extras2 package."
     contents:
-    - '`leaflet.extras2`'
-  - title: Ant Path
+      - '`leaflet.extras2`'
+
+  - title: Data Visualization
+    desc: "Plugins for rendering various types of geographic and point data on the map."
     contents:
-    - matches("Antpath")
-    - matches("antpath")
-  - title: Arrowhead
+      - title: Clustercharts with d3
+        contents:
+          - matches("ClusterCharts")
+          - matches("clusterchart")
+      - title: DivIcons
+        contents:
+          - matches("DivIcon")
+          - matches("Divicon")
+          - matches("divicon")
+      - title: Mapkey Icons
+        contents:
+          - matches("Mapkey")
+          - matches("mapkey")
+      - title: Moving Markers
+        contents:
+          - matches("movingMarker")
+          - matches("Moving")
+      - title: Playback
+        contents:
+          - matches("Playback")
+          - matches("playback")
+          - to_jsonformat
+          - to_ms
+      - title: Timeslider
+        contents:
+          - matches("Timeslider")
+          - matches("timeslider")
+      - title: Hexbin-D3
+        contents:
+          - matches("Hexbin")
+          - matches("hexbin")
+      - title: OSM Buildings
+        contents:
+          - matches("Building")
+      - title: Velocity
+        contents:
+          - matches("Velocity")
+          - matches("velocity")
+      - title: Ant Path
+        contents:
+          - matches("Antpath")
+          - matches("antpath")
+      - title: Heightgraph
+        contents:
+          - matches("Heightgraph")
+          - matches("heightgraph")
+
+  - title: Temporal Data Visualization
+    desc: "Plugins for visualizing changes in point data over time."
     contents:
-    - matches("Arrowhead")
-    - matches("arrowhead")
-  - title: Contextmenu
+      - title: Moving Markers
+        contents:
+          - matches("movingMarker")
+          - matches("Moving")
+      - title: Playback
+        contents:
+          - matches("Playback")
+          - matches("playback")
+          - to_jsonformat
+          - to_ms
+      - title: Timeslider
+        contents:
+          - matches("Timeslider")
+          - matches("timeslider")
+
+  - title: Map Tools
+    desc: "Plugins that provide additional tools and interactivity features for maps."
     contents:
-    - matches("Contextmenu")
-    - matches("contextmenu")
-    - matches("context_")
-    - menuItem
-    - mapmenuItems
-    - markermenuItems
-  - title: DivIcons
+      - title: Easy Print
+        contents:
+          - matches("Easyprint")
+          - matches("easyprint")
+      - title: Labelgun
+        contents:
+          - matches("Labelgun")
+      - title: Contextmenu
+        contents:
+          - matches("Contextmenu")
+          - matches("contextmenu")
+          - matches("context_")
+          - menuItem
+          - mapmenuItems
+          - markermenuItems
+      - title: Spinner
+        contents:
+          - matches("Spinner")
+      - title: Sync
+        contents:
+          - matches("sync")
+          - matches("Sync")
+      - title: Sidebar-v2
+        contents:
+          - matches("Sidebar")
+          - matches("sidebar")
+      - title: Side-by-Side Layers
+        contents:
+          - matches("Sidebyside")
+      - title: History
+        desc: "Tools to historize the map bounds and navigate back and forth."
+        contents:
+          - matches("History")
+          - matches("history")
+          - clearFuture
+
+  - title: 3D and Advanced Map Rendering
+    desc: "Advanced rendering techniques for 3D maps and other complex visualizations."
     contents:
-    - matches("DivIcon")
-    - matches("Divicon")
-    - matches("divicon")
-  - title: Clustercharts with d3
+      - title: Tangram
+        contents:
+          - matches("Tangram")
+
+  - title: Environmental and Weather Data
+    desc: "Plugins for displaying environmental and meteorological data."
     contents:
-    - matches("ClusterCharts")
-    - matches("clusterchart")
-  - title: Easy Print
-    contents:
-    - matches("Easyprint")
-    - matches("easyprint")
-  - title: GIBS
-    contents:
-    - matches("GIBS")
-    - setDate
-    - setTransparent
-    - gibs_layers
-  - title: Heightgraph
-    contents:
-    - matches("Heightgraph")
-    - matches("heightgraph")
-  - title: Hexbin-D3
-    contents:
-    - matches("Hexbin")
-    - matches("hexbin")
-  - title: History
-    contents:
-    - matches("History")
-    - matches("history")
-    - clearFuture
-  - title: Labelgun
-    contents:
-    - matches("Labelgun")
-  - title: Moving Markers
-  - title: Mapkey Icons
-    contents:
-    - matches("Mapkey")
-    - matches("mapkey")
-  - title: Moving Markers
-    contents:
-    - matches("movingMarker")
-    - matches("Moving")
-  - title: OpenWeatherMap
-    contents:
-    - matches("Openweather")
-    - matches("openweather")
-  - title: OSM Buildings
-    contents:
-    - matches("Building")
-  - title: Playback
-    contents:
-    - matches("Playback")
-    - matches("playback")
-    - to_jsonformat
-    - to_ms
-  - title: Reachability
-    contents:
-    - matches("Reachability")
-    - matches("reachability")
-  - title: Sidebar-v2
-    contents:
-    - matches("Sidebar")
-    - matches("sidebar")
-  - title: Side-by-Side
-    contents:
-    - matches("Sidebyside")
-  - title: Spinner
-    contents:
-    - matches("Spinner")
-  - title: Sync
-    contents:
-    - matches("sync")
-    - matches("Sync")
-  - title: Tangram
-    contents:
-    - matches("Tangram")
-  - title: Timeslider
-    contents:
-    - matches("Timeslider")
-    - matches("timeslider")
-  - title: Velocity
-    contents:
-    - matches("Velocity")
-    - matches("velocity")
-  - title: WMS
-    contents:
-    - matches("WMS")
+      - title: GIBS (Global Imagery Browse Services)
+        contents:
+          - matches("GIBS")
+          - setDate
+          - setTransparent
+          - gibs_layers
+      - title: OpenWeatherMap
+        contents:
+          - matches("Openweather")
+          - matches("openweather")
 
 authors:
   Sebastian Gatscha:
