@@ -18,6 +18,9 @@ LeafletWidget.methods.addBuilding = function(layerId, group, opacity, attributio
     var osmb = new OSMBuildings(map)
       .load('https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json');
 
+
+    osmb.date(new Date(2017, 15, 1, 19, 30))
+
     map.osmb = osmb;
 
 //  }).call(this);
