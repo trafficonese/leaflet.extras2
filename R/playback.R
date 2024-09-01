@@ -38,7 +38,7 @@ playbackDependencies <- function() {
 #' @export
 #' @inheritParams leaflet::addMarkers
 #' @inherit leaflet::addMarkers return
-#' @examples \dontrun{
+#' @examples
 #' library(leaflet)
 #' library(leaflet.extras2)
 #' library(sf)
@@ -94,7 +94,6 @@ playbackDependencies <- function() {
 #'                                        color = c("red","green","blue",
 #'                                                  "orange","yellow")),
 #'               pathOpts = pathOptions(weight = 5))
-#' }
 addPlayback <- function(map, data, time = "time", icon = NULL,
                         pathOpts = pathOptions(),
                         popup = NULL,
