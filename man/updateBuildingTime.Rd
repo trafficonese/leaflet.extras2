@@ -22,7 +22,7 @@ leaflet() \%>\%
   addTiles() \%>\%
   addBuildings() \%>\%
   updateBuildingTime(as.POSIXct("2024-09-01 19:00:00 CET")) \%>\%
-  setView(13.40, 52.51836,15)
+  setView(13.40, 52.51836, 15)
 }
 \seealso{
 Other OSM-Buildings Plugin: 

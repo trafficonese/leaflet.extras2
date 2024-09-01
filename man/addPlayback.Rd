@@ -68,56 +68,71 @@ library(leaflet.extras2)
 library(sf)
 
 ## Single Elements
-data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+data <- sf::st_as_sf(leaflet::atlStorms2005[1, ])
 data <- st_cast(data, "POINT")
-data$time = as.POSIXct(
-  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+data$time <- as.POSIXct(
+  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data))
+)
 data$label <- as.character(data$time)
 
 leaflet() \%>\%
   addTiles() \%>\%
-  addPlayback(data = data, label = ~label,
-              popup = ~sprintf("I am a popup for <b>\%s</b> and <b>\%s</b>",
-                               Name, label),
-              popupOptions = popupOptions(offset = c(0, -35)),
-              options = playbackOptions(radius = 3,
-                                        tickLen = 36000,
-                                        speed = 50,
-                                        maxInterpolationTime = 1000),
-              pathOpts = pathOptions(weight = 5))
+  addPlayback(
+    data = data, label = ~label,
+    popup = ~ sprintf(
+      "I am a popup for <b>\%s</b> and <b>\%s</b>",
+      Name, label
+    ),
+    popupOptions = popupOptions(offset = c(0, -35)),
+    options = playbackOptions(
+      radius = 3,
+      tickLen = 36000,
+      speed = 50,
+      maxInterpolationTime = 1000
+    ),
+    pathOpts = pathOptions(weight = 5)
+  )
 
 
 ## Multiple Elements
-data <- sf::st_as_sf(leaflet::atlStorms2005[1:5,])
+data <- sf::st_as_sf(leaflet::atlStorms2005[1:5, ])
 data$Name <- as.character(data$Name)
 data <- st_cast(data, "POINT")
 data$time <- unlist(lapply(rle(data$Name)$lengths, function(x) {
-  seq.POSIXt(as.POSIXct(Sys.Date()-2), as.POSIXct(Sys.Date()), length.out = x)
+  seq.POSIXt(as.POSIXct(Sys.Date() - 2), as.POSIXct(Sys.Date()), length.out = x)
 }))
-data$time <- as.POSIXct(data$time, origin="1970-01-01")
+data$time <- as.POSIXct(data$time, origin = "1970-01-01")
 data$label <- paste0("Time: ", data$time)
-data$popup = sprintf("<h3>Customized Popup</h3><b>Name</b>: \%s<br><b>Time</b>: \%s",
-                     data$Name, data$time)
+data$popup <- sprintf(
+  "<h3>Customized Popup</h3><b>Name</b>: \%s<br><b>Time</b>: \%s",
+  data$Name, data$time
+)
 data <- split(data, f = data$Name)
 
 leaflet() \%>\%
   addTiles() \%>\%
-  addPlayback(data = data,
-             popup = ~popup,
-             label = ~label,
-             popupOptions = popupOptions(offset=c(0,-35)),
-             labelOptions = labelOptions(noHide = TRUE),
-             options = playbackOptions(radius = 3,
-                                       tickLen = 1000000,
-                                       speed = 5000,
-                                       maxInterpolationTime = 10000,
-                                       transitionpopup = FALSE,
-                                       transitionlabel = FALSE,
-                                       playCommand = "Let's go",
-                                       stopCommand = "Stop it!",
-                                       color = c("red","green","blue",
-                                                 "orange","yellow")),
-              pathOpts = pathOptions(weight = 5))
+  addPlayback(
+    data = data,
+    popup = ~popup,
+    label = ~label,
+    popupOptions = popupOptions(offset = c(0, -35)),
+    labelOptions = labelOptions(noHide = TRUE),
+    options = playbackOptions(
+      radius = 3,
+      tickLen = 1000000,
+      speed = 5000,
+      maxInterpolationTime = 10000,
+      transitionpopup = FALSE,
+      transitionlabel = FALSE,
+      playCommand = "Let's go",
+      stopCommand = "Stop it!",
+      color = c(
+        "red", "green", "blue",
+        "orange", "yellow"
+      )
+    ),
+    pathOpts = pathOptions(weight = 5)
+  )
 }
 \references{
 \url{https://github.com/hallahan/LeafletPlayback}

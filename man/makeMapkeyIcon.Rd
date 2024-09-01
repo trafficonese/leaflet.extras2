@@ -50,11 +50,13 @@ A list of mapkey-icon data that can be passed to the argument \code{icon}
 Make Mapkey Icon
 }
 \examples{
-makeMapkeyIcon(icon = "traffic_signal",
-               color = "#0000ff",
-               iconSize = 12,
-               boxShadow = FALSE,
-               background="transparent")
+makeMapkeyIcon(
+  icon = "traffic_signal",
+  color = "#0000ff",
+  iconSize = 12,
+  boxShadow = FALSE,
+  background = "transparent"
+)
 }
 \references{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}

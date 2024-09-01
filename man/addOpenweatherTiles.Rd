@@ -52,10 +52,11 @@ Out of the box a legend image is only available for Pressure,
 library(leaflet)
 library(leaflet.extras2)
 
-Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+Sys.setenv("OPENWEATHERMAP" = "Your_API_Key")
 
-leaflet()  \%>\%
-  addTiles() \%>\% setView(9, 50, 6) \%>\%
+leaflet() \%>\%
+  addTiles() \%>\%
+  setView(9, 50, 6) \%>\%
   addOpenweatherTiles(layers = "wind")
 }
 }

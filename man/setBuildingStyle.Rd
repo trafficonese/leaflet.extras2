@@ -27,7 +27,7 @@ leaflet() \%>\%
   addTiles() \%>\%
   addBuildings() \%>\%
   setBuildingStyle(style) \%>\%
-  setView(13.40, 52.51836,15)
+  setView(13.40, 52.51836, 15)
 }
 \seealso{
 Other OSM-Buildings Plugin: 

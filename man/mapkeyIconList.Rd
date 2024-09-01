@@ -16,7 +16,7 @@ A list of class \code{"leaflet_mapkey_icon_set"}
 Make Mapkey-icon set
 }
 \examples{
-iconSet = mapkeyIconList(
+iconSet <- mapkeyIconList(
   red = makeMapkeyIcon(color = "#ff0000"),
   blue = makeMapkeyIcon(color = "#0000ff")
 )

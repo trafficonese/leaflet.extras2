@@ -78,15 +78,19 @@ Add Mapkey Markers
 \examples{
 library(leaflet)
 
-leaflet()  \%>\%
+leaflet() \%>\%
   addTiles() \%>\%
-  addMapkeyMarkers(data = breweries91,
-                icon = makeMapkeyIcon(icon = "mapkey",
-                                      iconSize = 30,
-                                      boxShadow = FALSE,
-                                      background = "transparent"),
-                group = "mapkey",
-                label = ~state, popup = ~village)
+  addMapkeyMarkers(
+    data = breweries91,
+    icon = makeMapkeyIcon(
+      icon = "mapkey",
+      iconSize = 30,
+      boxShadow = FALSE,
+      background = "transparent"
+    ),
+    group = "mapkey",
+    label = ~state, popup = ~village
+  )
 }
 \references{
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}

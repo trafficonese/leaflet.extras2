@@ -31,7 +31,7 @@ leaflet(data = quakes) \%>\%
   addTiles() \%>\%
   addSpinner() \%>\%
   startSpinner(options = list("lines" = 7, "length" = 20)) \%>\%
-  addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag)) \%>\%
+  addMarkers(~long, ~lat, popup = ~ as.character(mag), label = ~ as.character(mag)) \%>\%
   stopSpinner()
 }
 \references{

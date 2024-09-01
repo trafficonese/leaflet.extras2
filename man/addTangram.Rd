@@ -56,8 +56,10 @@ server <- function(input, output, session) {
       addTangram(scene = scene, group = "tangram") \%>\%
       addCircleMarkers(data = breweries91, group = "brews") \%>\%
       setView(11, 49.4, 14) \%>\%
-      addLayersControl(baseGroups = c("tangram", "base"),
-                       overlayGroups = c("brews"))
+      addLayersControl(
+        baseGroups = c("tangram", "base"),
+        overlayGroups = c("brews")
+      )
   })
 }
 
