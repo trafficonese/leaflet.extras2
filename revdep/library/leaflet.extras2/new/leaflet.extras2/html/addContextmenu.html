@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add contextmenu Plugin</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addContextmenu {leaflet.extras2}"><tr><td>addContextmenu {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add contextmenu Plugin</h2>
+
+<h3>Description</h3>
+
+<p>Add a contextmenu to the map or markers/vector layers.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addContextmenu(map)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/html/leaflet.html">leaflet</a></code></p>
+</td></tr>
+</table>
+
+
+<h3>Details</h3>
+
+<p>This function is only used to include the required JavaScript and CSS
+bindings and to set up some Shiny event handlers.
+</p>
+
+
+<h4>Contextmenu initialization</h4>
+
+<p>The contextmenu for
+</p>
+
+<ul>
+<li> <p>the <strong>map</strong> must be defined in
+<code><a href="../../leaflet/html/leafletOptions.html">leafletOptions</a></code>.
+</p>
+</li>
+<li> <p>the <strong>markers/vector layers</strong> must be defined
+in <code><a href="../../leaflet/html/markerOptions.html">markerOptions</a></code> or
+<code><a href="../../leaflet/html/pathOptions.html">pathOptions</a></code>.
+</p>
+</li></ul>
+
+
+
+
+<h4>Contextmenu selection</h4>
+
+<p>When a contextmenu is selected, a Shiny input with the
+ID <code>"MAPID_contextmenu_select"</code> is set (&lsquo;MAPID' refers to the map&rsquo;s id).
+</p>
+<p>If the selected contextmenu item is triggered from:
+</p>
+
+<ul>
+<li> <p>the <strong>map</strong>, the returned list contains the <code>text</code> of
+the item.
+</p>
+</li>
+<li> <p>the <strong>markers</strong>, the returned list also contains the
+<code>layerId</code>, <code>group</code>, <code>lat</code>,
+<code>lng</code> and <code>label</code>.
+</p>
+</li>
+<li> <p>the <strong>vector layers</strong>, the returned list also contains the
+<code>layerId</code>, <code>group</code> and <code>label</code>.
+</p>
+</li></ul>
+
+
+
+
+<h3>Value</h3>
+
+<p>A leaflet map object
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/aratcliffe/Leaflet.contextmenu">https://github.com/aratcliffe/Leaflet.contextmenu</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Contextmenu Functions: 
+<code><a href="addItemContextmenu.html">addItemContextmenu</a>()</code>,
+<code><a href="context_mapmenuItems.html">context_mapmenuItems</a>()</code>,
+<code><a href="context_markermenuItems.html">context_markermenuItems</a>()</code>,
+<code><a href="context_menuItem.html">context_menuItem</a>()</code>,
+<code><a href="hideContextmenu.html">hideContextmenu</a>()</code>,
+<code><a href="insertItemContextmenu.html">insertItemContextmenu</a>()</code>,
+<code><a href="mapmenuItems.html">mapmenuItems</a>()</code>,
+<code><a href="markermenuItems.html">markermenuItems</a>()</code>,
+<code><a href="menuItem.html">menuItem</a>()</code>,
+<code><a href="removeItemContextmenu.html">removeItemContextmenu</a>()</code>,
+<code><a href="removeallItemsContextmenu.html">removeallItemsContextmenu</a>()</code>,
+<code><a href="setDisabledContextmenu.html">setDisabledContextmenu</a>()</code>,
+<code><a href="showContextmenu.html">showContextmenu</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(leaflet)
+leaflet(options = leafletOptions(
+    contextmenu = TRUE,
+    contextmenuWidth = 200,
+    contextmenuItems =
+     context_mapmenuItems(
+       context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
+       "-",
+       context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) %&gt;%
+  addTiles(group = "base") %&gt;%
+  addContextmenu() %&gt;%
+  addMarkers(data = breweries91, label = ~brewery,
+          layerId = ~founded, group = "marker",
+          options = markerOptions(
+            contextmenu = TRUE,
+            contextmenuWidth = 200,
+            contextmenuItems =
+              context_markermenuItems(
+                context_menuItem(text = "Show Marker Coords",
+                         callback = "function(e) {alert(e.latlng);}",
+                         index = 1)
+              )
+          ))
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

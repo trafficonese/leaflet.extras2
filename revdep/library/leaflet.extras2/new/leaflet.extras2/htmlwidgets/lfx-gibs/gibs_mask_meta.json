@@ -1,0 +1,13 @@
+{
+    "MODIS_Terra_Data_No_Data": {
+        "title":"MODIS_Terra_Data_No_Data",
+        "template":"http://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Terra_Data_No_Data/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.png",
+        "zoom": 9, "date": true
+    }
+    ,
+    "MODIS_Aqua_Data_No_Data": {
+        "title":"MODIS_Aqua_Data_No_Data",
+        "template":"http://gibs.earthdata.nasa.gov/wmts/epsg3857/best/MODIS_Aqua_Data_No_Data/default/{Time}/{TileMatrixSet}/{TileMatrix}/{TileRow}/{TileCol}.png",
+        "zoom": 9, "date": true
+    }
+}

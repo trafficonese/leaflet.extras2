@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: playbackOptions</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for playbackOptions {leaflet.extras2}"><tr><td>playbackOptions {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>playbackOptions</h2>
+
+<h3>Description</h3>
+
+<p>A list of options for <code><a href="addPlayback.html">addPlayback</a></code>. For a full list please visit
+the <a href="https://github.com/hallahan/LeafletPlayback">plugin repository</a>.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+playbackOptions(
+  color = "blue",
+  radius = 5,
+  tickLen = 250,
+  speed = 50,
+  maxInterpolationTime = 5 * 60 * 1000,
+  tracksLayer = TRUE,
+  playControl = TRUE,
+  dateControl = TRUE,
+  sliderControl = TRUE,
+  orientIcons = FALSE,
+  staleTime = 60 * 60 * 1000,
+  transitionpopup = TRUE,
+  transitionlabel = TRUE,
+  ...
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>color</code></td>
+<td>
+<p>colors of the CircleMarkers.</p>
+</td></tr>
+<tr valign="top"><td><code>radius</code></td>
+<td>
+<p>a numeric value for the radius of the CircleMarkers.</p>
+</td></tr>
+<tr valign="top"><td><code>tickLen</code></td>
+<td>
+<p>Set tick length in milliseconds. Increasing this value, may
+improve performance, at the cost of animation smoothness. Default is 250</p>
+</td></tr>
+<tr valign="top"><td><code>speed</code></td>
+<td>
+<p>Set float multiplier for default animation speed. Default is 50</p>
+</td></tr>
+<tr valign="top"><td><code>maxInterpolationTime</code></td>
+<td>
+<p>Set max interpolation time in seconds.
+Default is 5*60*1000 (5 minutes).</p>
+</td></tr>
+<tr valign="top"><td><code>tracksLayer</code></td>
+<td>
+<p>Set <code>TRUE</code> if you want to show layer control on the
+map. Default is <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>playControl</code></td>
+<td>
+<p>Set <code>TRUE</code> if play button is needed.
+Default is <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>dateControl</code></td>
+<td>
+<p>Set <code>TRUE</code> if date label is needed.
+Default is <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>sliderControl</code></td>
+<td>
+<p>Set <code>TRUE</code> if slider control is needed.
+Default is <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>orientIcons</code></td>
+<td>
+<p>Set <code>TRUE</code> if you want icons to orient themselves on each
+tick based on the bearing towards their next location. Default: <code>FALSE</code></p>
+</td></tr>
+<tr valign="top"><td><code>staleTime</code></td>
+<td>
+<p>Set time before a track is considered stale and faded out.
+Default is 60*60*1000 (1 hour)</p>
+</td></tr>
+<tr valign="top"><td><code>transitionpopup</code></td>
+<td>
+<p>Should the position of the popup move smoothly,
+like the marker icon? Default: <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>transitionlabel</code></td>
+<td>
+<p>Should the position of the label move smoothly,
+like the marker icon? Default: <code>TRUE</code></p>
+</td></tr>
+<tr valign="top"><td><code>...</code></td>
+<td>
+<p>Further arguments passed to 'L.Playback'</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A list of options for <code>addPlayback</code>
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/hallahan/LeafletPlayback">https://github.com/hallahan/LeafletPlayback</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Playback Functions: 
+<code><a href="addPlayback.html">addPlayback</a>()</code>,
+<code><a href="removePlayback.html">removePlayback</a>()</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: showContextmenu</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for showContextmenu {leaflet.extras2}"><tr><td>showContextmenu {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>showContextmenu</h2>
+
+<h3>Description</h3>
+
+<p>Open the contextmenu at certain lat/lng-coordinates
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+showContextmenu(map, lat = NULL, lng = NULL, data = leaflet::getMapData(map))
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>a map widget object created from <code><a href="../../leaflet/html/leaflet.html">leaflet</a>()</code></p>
+</td></tr>
+<tr valign="top"><td><code>lat</code></td>
+<td>
+<p>a vector of latitudes or a formula (similar to the <code>lng</code>
+argument; the names <code>lat</code> and <code>latitude</code> are used when guessing
+the latitude column from <code>data</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>lng</code></td>
+<td>
+<p>a numeric vector of longitudes, or a one-sided formula of the form
+<code>~x</code> where <code>x</code> is a variable in <code>data</code>; by default (if not
+explicitly provided), it will be automatically inferred from <code>data</code> by
+looking for a column named <code>lng</code>, <code>long</code>, or <code>longitude</code>
+(case-insensitively)</p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>the data object from which the argument values are derived; by
+default, it is the <code>data</code> object provided to <code>leaflet()</code>
+initially, but can be overridden</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>A leaflet map object
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other Contextmenu Functions: 
+<code><a href="addContextmenu.html">addContextmenu</a>()</code>,
+<code><a href="addItemContextmenu.html">addItemContextmenu</a>()</code>,
+<code><a href="context_mapmenuItems.html">context_mapmenuItems</a>()</code>,
+<code><a href="context_markermenuItems.html">context_markermenuItems</a>()</code>,
+<code><a href="context_menuItem.html">context_menuItem</a>()</code>,
+<code><a href="hideContextmenu.html">hideContextmenu</a>()</code>,
+<code><a href="insertItemContextmenu.html">insertItemContextmenu</a>()</code>,
+<code><a href="mapmenuItems.html">mapmenuItems</a>()</code>,
+<code><a href="markermenuItems.html">markermenuItems</a>()</code>,
+<code><a href="menuItem.html">menuItem</a>()</code>,
+<code><a href="removeItemContextmenu.html">removeItemContextmenu</a>()</code>,
+<code><a href="removeallItemsContextmenu.html">removeallItemsContextmenu</a>()</code>,
+<code><a href="setDisabledContextmenu.html">setDisabledContextmenu</a>()</code>
+</p>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

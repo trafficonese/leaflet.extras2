@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Add Moving Markers</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addMovingMarker {leaflet.extras2}"><tr><td>addMovingMarker {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Add Moving Markers</h2>
+
+<h3>Description</h3>
+
+<p>The function expects either line or point data as spatial data or as Simple Feature.
+Alternatively, coordinates can also be passed as numeric vectors.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addMovingMarker(
+  map,
+  lng = NULL,
+  lat = NULL,
+  layerId = NULL,
+  group = NULL,
+  duration = 2000,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  movingOptions = movingMarkerOptions(),
+  options = leaflet::markerOptions(),
+  data = leaflet::getMapData(map)
+)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>the map to add moving markers</p>
+</td></tr>
+<tr valign="top"><td><code>lng</code></td>
+<td>
+<p>a numeric vector of longitudes, or a one-sided formula of the form
+<code>~x</code> where <code>x</code> is a variable in <code>data</code>; by default (if not
+explicitly provided), it will be automatically inferred from <code>data</code> by
+looking for a column named <code>lng</code>, <code>long</code>, or <code>longitude</code>
+(case-insensitively)</p>
+</td></tr>
+<tr valign="top"><td><code>lat</code></td>
+<td>
+<p>a vector of latitudes or a formula (similar to the <code>lng</code>
+argument; the names <code>lat</code> and <code>latitude</code> are used when guessing
+the latitude column from <code>data</code>)</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>In order to be able to address the moving markings
+individually, a layerId is required. If none is specified, one is created
+that is derived from the current timestamp.</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>the name of the group the newly created layers should belong to
+(for <code><a href="../../leaflet/html/clearGroup.html">clearGroup</a></code> and <code><a href="../../leaflet/html/addLayersControl.html">addLayersControl</a></code> purposes).
+Human-friendly group names are permitted&ndash;they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.</p>
+</td></tr>
+<tr valign="top"><td><code>duration</code></td>
+<td>
+<p>Duration in milliseconds per line segment between 2 points.
+Can be a vector or a single number. Default is <code>1000</code></p>
+</td></tr>
+<tr valign="top"><td><code>icon</code></td>
+<td>
+<p>the icon(s) for markers;</p>
+</td></tr>
+<tr valign="top"><td><code>popup</code></td>
+<td>
+<p>a character vector of the HTML content for the popups (you are
+recommended to escape the text using <code><a href="../../htmltools/html/htmlEscape.html">htmlEscape</a>()</code>
+for security reasons)</p>
+</td></tr>
+<tr valign="top"><td><code>popupOptions</code></td>
+<td>
+<p>A Vector of <code><a href="../../leaflet/html/popupOptions.html">popupOptions</a></code> to provide popups</p>
+</td></tr>
+<tr valign="top"><td><code>label</code></td>
+<td>
+<p>a character vector of the HTML content for the labels</p>
+</td></tr>
+<tr valign="top"><td><code>labelOptions</code></td>
+<td>
+<p>A Vector of <code><a href="../../leaflet/html/labelOptions.html">labelOptions</a></code> to provide label
+options for each label. Default <code>NULL</code></p>
+</td></tr>
+<tr valign="top"><td><code>movingOptions</code></td>
+<td>
+<p>a list of extra options for moving markers.
+See <code><a href="movingMarkerOptions.html">movingMarkerOptions</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>a list of extra options for markers. See
+<code><a href="../../leaflet/html/markerOptions.html">markerOptions</a></code></p>
+</td></tr>
+<tr valign="top"><td><code>data</code></td>
+<td>
+<p>the data object from which the argument values are derived; by
+default, it is the <code>data</code> object provided to <code>leaflet()</code>
+initially, but can be overridden</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/ewoken/Leaflet.MovingMarker">https://github.com/ewoken/Leaflet.MovingMarker</a>
+</p>
+
+
+<h3>See Also</h3>
+
+<p>Other MovingMarker Functions: 
+<code><a href="movingMarkerOptions.html">movingMarkerOptions</a>()</code>,
+<code><a href="startMoving.html">startMoving</a>()</code>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+library(sf)
+library(leaflet)
+library(leaflet.extras2)
+
+df &lt;- sf::st_as_sf(atlStorms2005)[1,]
+leaflet()  %&gt;%
+  addTiles() %&gt;%
+  addPolylines(data = df) %&gt;%
+  addMovingMarker(data = df,
+                  movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+                  label="I am a pirate!",
+                  popup="Arrr")
+
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>

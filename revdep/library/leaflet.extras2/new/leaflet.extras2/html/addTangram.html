@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Adds a Tangram layer to a Leaflet map in a Shiny App.</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for addTangram {leaflet.extras2}"><tr><td>addTangram {leaflet.extras2}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Adds a Tangram layer to a Leaflet map in a Shiny App.</h2>
+
+<h3>Description</h3>
+
+<p>Adds a Tangram layer to a Leaflet map in a Shiny App.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+addTangram(map, scene = NULL, layerId = NULL, group = NULL, options = NULL)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>map</code></td>
+<td>
+<p>A leaflet map widget</p>
+</td></tr>
+<tr valign="top"><td><code>scene</code></td>
+<td>
+<p>Path to a required <b>.yaml</b> or <b>.zip</b> file. If the file
+is within the <code>/www</code> folder of a Shiny-App, only the filename must be
+given, otherwise the full path is needed. See the
+<a href="https://github.com/tangrams/tangram">Tangram repository</a> or the
+<a href="https://tangrams.readthedocs.io/en/latest/">Tangram docs</a> for further
+information on how to edit such a .yaml file.</p>
+</td></tr>
+<tr valign="top"><td><code>layerId</code></td>
+<td>
+<p>A layer ID</p>
+</td></tr>
+<tr valign="top"><td><code>group</code></td>
+<td>
+<p>The name of the group the newly created layer should belong to
+(for <code><a href="../../leaflet/html/remove.html">clearGroup</a></code> and <code><a href="../../leaflet/html/addLayersControl.html">addLayersControl</a></code> purposes).</p>
+</td></tr>
+<tr valign="top"><td><code>options</code></td>
+<td>
+<p>A list of further options. See the app in the
+<code>examples/tangram</code> folder or the
+<a href="https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet">docs</a>
+for further information.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>the new <code>map</code> object
+</p>
+
+
+<h3>Note</h3>
+
+<p>Only works correctly in a Shiny-App environment.
+</p>
+
+
+<h3>References</h3>
+
+<p><a href="https://github.com/tangrams/tangram">https://github.com/tangrams/tangram</a>
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+## Not run: 
+library(shiny)
+library(leaflet)
+library(leaflet.extras2)
+
+## In the /www folder of a ShinyApp. Must contain the Nextzen API-key
+scene &lt;- "scene.yaml"
+
+ui &lt;- fluidPage(leafletOutput("map"))
+
+server &lt;- function(input, output, session) {
+  output$map &lt;- renderLeaflet({
+    leaflet() %&gt;%
+      addTiles(group = "base") %&gt;%
+      addTangram(scene = scene, group = "tangram") %&gt;%
+      addCircleMarkers(data = breweries91, group = "brews") %&gt;%
+      setView(11, 49.4, 14) %&gt;%
+      addLayersControl(baseGroups = c("tangram", "base"),
+                       overlayGroups = c("brews"))
+  })
+}
+
+shinyApp(ui, server)
+
+## End(Not run)
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>leaflet.extras2</em> version 1.1.0.9000 <a href="00Index.html">Index</a>]</div>
+</body></html>
