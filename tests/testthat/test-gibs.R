@@ -29,7 +29,7 @@ test_that("gibs", {
     Sys.Date() - 5
   )
 
-  m <- m %>% setTransparent(layers, transparent = FFALSE)
+  m <- m %>% setTransparent(layers, transparent = FALSE)
   expect_equal(
     m$x$calls[[length(m$x$calls)]]$method,
     "setTransparent"
