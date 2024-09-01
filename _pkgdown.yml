@@ -3,7 +3,7 @@ url: https://trafficonese.github.io/leaflet.extras2/
 template:
   bootstrap: 5
 reference:
-- title: Package Documentation
+- title: Package Documentation - new page
   desc: ~
   contents: '`leaflet.extras2`'
 - title: Ant Path
