@@ -4,90 +4,90 @@ var isMSIE8 = !('getComputedStyle' in window && typeof window.getComputedStyle =
 
 function extensions(parentClass) { return {
 
-  initialize: function (arg1, arg2) {
-    var options;
-    if (parentClass === L.GeoJSON) {
-      parentClass.prototype.initialize.call(this, arg1, arg2);
-      options = arg2;
-    } else {
-      parentClass.prototype.initialize.call(this, arg1);
-      options = arg1;
-    }
-    this._originalLayers = [];
-    this._visibleLayers = [];
-    this._staticLayers = [];
-    this._rbush = [];
-    this._cachedRelativeBoxes = [];
-    this._margin = options.margin || 0;
-    this._rbush = null;
-  },
+	initialize: function (arg1, arg2) {
+		var options;
+		if (parentClass === L.GeoJSON) {
+			parentClass.prototype.initialize.call(this, arg1, arg2);
+			options = arg2;
+		} else {
+			parentClass.prototype.initialize.call(this, arg1);
+			options = arg1;
+		}
+		this._originalLayers = [];
+		this._visibleLayers = [];
+		this._staticLayers = [];
+		this._rbush = [];
+		this._cachedRelativeBoxes = [];
+		this._margin = options.margin || 0;
+		this._rbush = null;
+	},
 
-  addLayer: function(layer) {
-    if ( !('options' in layer) || !('icon' in layer.options)) {
-      this._staticLayers.push(layer);
-      parentClass.prototype.addLayer.call(this, layer);
-      return;
-    }
+	addLayer: function(layer) {
+		if ( !('options' in layer) || !('icon' in layer.options)) {
+			this._staticLayers.push(layer);
+			parentClass.prototype.addLayer.call(this, layer);
+			return;
+		}
 
-    this._originalLayers.push(layer);
-    if (this._map) {
-      this._maybeAddLayerToRBush( layer );
-    }
-  },
+		this._originalLayers.push(layer);
+		if (this._map) {
+			this._maybeAddLayerToRBush( layer );
+		}
+	},
 
-  removeLayer: function(layer) {
-    this._rbush.remove(this._cachedRelativeBoxes[layer._leaflet_id]);
-    delete this._cachedRelativeBoxes[layer._leaflet_id];
-    parentClass.prototype.removeLayer.call(this,layer);
-    var i;
+	removeLayer: function(layer) {
+		this._rbush.remove(this._cachedRelativeBoxes[layer._leaflet_id]);
+		delete this._cachedRelativeBoxes[layer._leaflet_id];
+		parentClass.prototype.removeLayer.call(this,layer);
+		var i;
 
-    i = this._originalLayers.indexOf(layer);
-    if (i !== -1) { this._originalLayers.splice(i,1); }
+		i = this._originalLayers.indexOf(layer);
+		if (i !== -1) { this._originalLayers.splice(i,1); }
 
-    i = this._visibleLayers.indexOf(layer);
-    if (i !== -1) { this._visibleLayers.splice(i,1); }
+		i = this._visibleLayers.indexOf(layer);
+		if (i !== -1) { this._visibleLayers.splice(i,1); }
 
-    i = this._staticLayers.indexOf(layer);
-    if (i !== -1) { this._staticLayers.splice(i,1); }
-  },
+		i = this._staticLayers.indexOf(layer);
+		if (i !== -1) { this._staticLayers.splice(i,1); }
+	},
 
-  clearLayers: function() {
-    this._rbush = rbush();
-    this._originalLayers = [];
-    this._visibleLayers  = [];
-    this._staticLayers   = [];
-    this._cachedRelativeBoxes = [];
-    parentClass.prototype.clearLayers.call(this);
-  },
+	clearLayers: function() {
+		this._rbush = rbush();
+		this._originalLayers = [];
+		this._visibleLayers  = [];
+		this._staticLayers   = [];
+		this._cachedRelativeBoxes = [];
+		parentClass.prototype.clearLayers.call(this);
+	},
 
-  onAdd: function (map) {
-    this._map = map;
+	onAdd: function (map) {
+		this._map = map;
 
-    for (var i in this._staticLayers) {
-      map.addLayer(this._staticLayers[i]);
-    }
+		for (var i in this._staticLayers) {
+			map.addLayer(this._staticLayers[i]);
+		}
 
-    this._onZoomEnd();
-    map.on('zoomend', this._onZoomEnd, this);
-  },
+		this._onZoomEnd();
+		map.on('zoomend', this._onZoomEnd, this);
+	},
 
-  onRemove: function(map) {
-    for (var i in this._staticLayers) {
-      map.removeLayer(this._staticLayers[i]);
-    }
-    map.off('zoomend', this._onZoomEnd, this);
-    parentClass.prototype.onRemove.call(this, map);
-  },
+	onRemove: function(map) {
+		for (var i in this._staticLayers) {
+			map.removeLayer(this._staticLayers[i]);
+		}
+		map.off('zoomend', this._onZoomEnd, this);
+		parentClass.prototype.onRemove.call(this, map);
+	},
 
-  _maybeAddLayerToRBush: function(layer) {
+	_maybeAddLayerToRBush: function(layer) {
 
-    var z    = this._map.getZoom();
-    var bush = this._rbush;
+		var z    = this._map.getZoom();
+		var bush = this._rbush;
 
-    var boxes = this._cachedRelativeBoxes[layer._leaflet_id];
-    var visible = false;
-    if (!boxes) {
-      // Add the layer to the map so it's instantiated on the DOM,
+		var boxes = this._cachedRelativeBoxes[layer._leaflet_id];
+		var visible = false;
+		if (!boxes) {
+			// Add the layer to the map so it's instantiated on the DOM,
 			//   in order to fetch its position and size.
 			parentClass.prototype.addLayer.call(this, layer);
 			var visible = true;
@@ -241,3 +241,4 @@ L.featureGroup.collision = function (options) {
 L.geoJson.collision = function (geojson, options) {
 	return new L.GeoJSON.Collision(geojson, options || {});
 };
+

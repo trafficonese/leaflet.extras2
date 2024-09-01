@@ -1,12 +1,42 @@
 /* global LeafletWidget, $, L, Shiny, HTMLWidgets */
 LeafletWidget.methods.addLayerGroupCollision = function(
-    lat, lng, layerId, group, options,
+    data, layerId, group, options,
     className, html,
     popup, popupOptions, label, labelOptions,
     clusterId, clusterOptions, divOptions,
     crosstalkOptions) {
 
-    (function() {
+
+		var collisionLayer = L.LayerGroup.collision({margin:5});
+		console.log("collisionLayer"); console.log(collisionLayer)
+
+		// Manually parse the GeoJSON and create the L.Markers one by one
+		// Note that 'cities' is defined in the natural earth data files.
+		console.log("data"); console.log(data)
+		for (var i=0; i < data.features.length; i++) {
+
+			var feat = data.features[i];
+			var labelClass = 'city-label city-label-' + feat.properties.scalerank;
+
+// 			Note that the markers are not interactive because MSIE on a WinPhone will take *ages*
+// 			to run addEventListener() on them.
+			var marker = L.marker(L.GeoJSON.coordsToLatLng(feat.geometry.coordinates), {
+				icon: L.divIcon({
+					html:
+						"<span class='" + labelClass + "'>" +
+						feat.properties.Name +
+						"</span>"
+				})
+				,interactive: false	// Post-0.7.3
+				,clickable:   false	//      0.7.3
+				});
+			collisionLayer.addLayer(marker);
+		}
+		collisionLayer.addTo(this);
+
+};
+/*
+(function() {
       var collisionLayer = L.LayerGroup.collision({margin:5});
 
       // Make a Dataframe
@@ -56,7 +86,7 @@ LeafletWidget.methods.addLayerGroupCollision = function(
                   icon: new L.DivIcon(divIconOptions)
               }));
 
-            collisionLayer.addLayer(marker);
+            collisionLayer.addLayer(divmarker);
 
             if (cluster) {
               clusterGroup.clusterLayerStore.add(divmarker, thisId);
@@ -108,5 +138,4 @@ LeafletWidget.methods.addLayerGroupCollision = function(
       collisionLayer.addTo(this);
   }).call(this);
 
-};
-
+*/

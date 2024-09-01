@@ -21,7 +21,7 @@ layergroupCollisionDependency <- function() {
 #'
 #' @name LayerroupCollision
 addLayerGroupCollision <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    map, layerId = NULL, group = NULL,
     popup = NULL, popupOptions = NULL, label = NULL,
     labelOptions = NULL,
     className = NULL, html = NULL,
@@ -31,20 +31,27 @@ addLayerGroupCollision <- function(
 
   map$dependencies <- c(map$dependencies, layergroupCollisionDependency())
 
+  ## Make Geojson ###########
+  if (!inherits(data, "sf")) {
+    data <- sf::st_as_sf(data)
+  }
+  geojson <- yyjsonr::write_geojson_str(data)
+  class(geojson) <- c("geojson", "json")
+
   ## Derive Points and Invoke Method ##################
   pts <- derivePoints(
-    data, lng, lat, missing(lng), missing(lat),
+    data, NULL, NULL, TRUE, TRUE,
     "addLayerGroupCollision"
   )
   invokeMethod(
-    map, data, "addLayerGroupCollision", pts$lat, pts$lng,
+    map, data, "addLayerGroupCollision", geojson,
     layerId, group, options,
     className, html,
     popup, popupOptions,
     label, labelOptions,
     clusterId, clusterOptions,
-    margin,
-    getCrosstalkOptions(data)
+    margin
+    # getCrosstalkOptions(data)
   ) %>%
     expandLimits(pts$lat, pts$lng)
 }
