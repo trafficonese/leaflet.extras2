@@ -5,3 +5,8 @@ newfeatures/
 node_modules/
 docs/
 bower_components/
+inst/doc
+revdep/checks*
+revdep/library*
+revdep/data*
+docs

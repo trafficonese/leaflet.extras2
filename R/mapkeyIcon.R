@@ -1,10 +1,13 @@
 mapkeyIconDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-mapkeyicon", version = "1.0.0",
+      "lfx-mapkeyicon",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-mapkeyicon", package = "leaflet.extras2"),
-      script = c("L.Icon.Mapkey.js",
-                 "lfx-mapkeyicon-bindings.js"),
+      script = c(
+        "L.Icon.Mapkey.js",
+        "lfx-mapkeyicon-bindings.js"
+      ),
       stylesheet = c("L.Icon.Mapkey.css"),
       all_files = TRUE
     )
@@ -18,19 +21,20 @@ mapkeyIconDependency <- function() {
 #' @export
 #' @return A list of class \code{"leaflet_mapkey_icon_set"}
 #' @examples
-#' iconSet = mapkeyIconList(
+#' iconSet <- mapkeyIconList(
 #'   red = makeMapkeyIcon(color = "#ff0000"),
 #'   blue = makeMapkeyIcon(color = "#0000ff")
 #' )
 #' iconSet[c("red", "blue")]
-mapkeyIconList = function(...) {
-  res = structure(
+mapkeyIconList <- function(...) {
+  res <- structure(
     list(...),
     class = "leaflet_mapkey_icon_set"
   )
-  cls = unlist(lapply(res, inherits, "leaflet_mapkey_icon"))
-  if (any(!cls))
+  cls <- unlist(lapply(res, inherits, "leaflet_mapkey_icon"))
+  if (any(!cls)) {
     stop("Arguments passed to mapkeyIconList() must be icon objects returned from makeMapkeyIcon()")
+  }
   res
 }
 
@@ -39,9 +43,9 @@ mapkeyIconList = function(...) {
 #' @param i offset
 #' @export
 #' @family Mapkey Functions
-`[.leaflet_mapkey_icon_set` = function(x, i) {
+`[.leaflet_mapkey_icon_set` <- function(x, i) {
   if (is.factor(i)) {
-    i = as.character(i)
+    i <- as.character(i)
   }
   if (!is.character(i) && !is.numeric(i) && !is.integer(i)) {
     stop("Invalid subscript type '", typeof(i), "'")
@@ -49,15 +53,15 @@ mapkeyIconList = function(...) {
   structure(.subset(x, i), class = "leaflet_mapkey_icon_set")
 }
 
-mapkeyIconSetToMapkeyIcons = function(x) {
-  cols = names(formals(makeMapkeyIcon))
-  cols = structure(as.list(cols), names = cols)
+mapkeyIconSetToMapkeyIcons <- function(x) {
+  cols <- names(formals(makeMapkeyIcon))
+  cols <- structure(as.list(cols), names = cols)
 
   # Construct an equivalent output to mapkeyIcons().
   leaflet::filterNULL(lapply(cols, function(col) {
     # Pluck the `col` member off of each item in mapkeyIconObjs and put them in an
     # unnamed list (or vector if possible).
-    colVals = unname(sapply(x, `[[`, col))
+    colVals <- unname(sapply(x, `[[`, col))
 
     # If this is the common case where there"s lots of values but they"re all
     # actually the same exact thing, then just return one value; this will be
@@ -78,25 +82,26 @@ mapkeyIconSetToMapkeyIcons = function(x) {
 #' @references \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #' @return A list of mapkey-icon data that can be passed to the argument \code{icon}
 #' @examples
-#' makeMapkeyIcon(icon = "traffic_signal",
-#'                color = "#0000ff",
-#'                iconSize = 12,
-#'                boxShadow = FALSE,
-#'                background="transparent")
+#' makeMapkeyIcon(
+#'   icon = "traffic_signal",
+#'   color = "#0000ff",
+#'   iconSize = 12,
+#'   boxShadow = FALSE,
+#'   background = "transparent"
+#' )
 makeMapkeyIcon <- function(
-  icon = 'mapkey',
-  color = "#ff0000",
-  iconSize = 12,
-  background = '#1F7499',
-  borderRadius = '100%',
-  hoverScale = 1.4,
-  hoverEffect = TRUE,
-  additionalCSS = NULL,
-  hoverCSS = NULL,
-  htmlCode = NULL,
-  boxShadow = TRUE
-) {
-  icon = leaflet::filterNULL(list(
+    icon = "mapkey",
+    color = "#ff0000",
+    iconSize = 12,
+    background = "#1F7499",
+    borderRadius = "100%",
+    hoverScale = 1.4,
+    hoverEffect = TRUE,
+    additionalCSS = NULL,
+    hoverCSS = NULL,
+    htmlCode = NULL,
+    boxShadow = TRUE) {
+  icon <- leaflet::filterNULL(list(
     icon = icon,
     color = color,
     size = iconSize,
@@ -137,26 +142,28 @@ makeMapkeyIcon <- function(
 #' @return A list of mapkey-icon data that can be passed to the argument \code{icon}
 #' @examples \dontrun{
 #' library(leaflet)
-#' leaflet()  %>%
-#'   addMapkeyMarkers(data = breweries91,
-#'                    icon = mapkeyIcons(
-#'                      color = "red",
-#'                      borderRadius = 0,
-#'                      iconSize = 25))
+#' leaflet() %>%
+#'   addMapkeyMarkers(
+#'     data = breweries91,
+#'     icon = mapkeyIcons(
+#'       color = "red",
+#'       borderRadius = 0,
+#'       iconSize = 25
+#'     )
+#'   )
 #' }
 mapkeyIcons <- function(
-  icon = 'mapkey',
-  color = "#ff0000",
-  iconSize = 12,
-  background = '#1F7499',
-  borderRadius = '100%',
-  hoverScale = 1.4,
-  hoverEffect = TRUE,
-  hoverCSS = NULL,
-  additionalCSS = NULL,
-  htmlCode = NULL,
-  boxShadow = TRUE
-) {
+    icon = "mapkey",
+    color = "#ff0000",
+    iconSize = 12,
+    background = "#1F7499",
+    borderRadius = "100%",
+    hoverScale = 1.4,
+    hoverEffect = TRUE,
+    hoverCSS = NULL,
+    additionalCSS = NULL,
+    htmlCode = NULL,
+    boxShadow = TRUE) {
   leaflet::filterNULL(list(
     icon = icon,
     color = color,
@@ -184,46 +191,53 @@ mapkeyIcons <- function(
 #' @examples
 #' library(leaflet)
 #'
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addTiles() %>%
-#'   addMapkeyMarkers(data = breweries91,
-#'                 icon = makeMapkeyIcon(icon = "mapkey",
-#'                                       iconSize = 30,
-#'                                       boxShadow = FALSE,
-#'                                       background = "transparent"),
-#'                 group = "mapkey",
-#'                 label = ~state, popup = ~village)
-addMapkeyMarkers = function(
-  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-  icon = NULL,
-  popup = NULL,
-  popupOptions = NULL,
-  label = NULL,
-  labelOptions = NULL,
-  options = leaflet::markerOptions(),
-  clusterOptions = NULL,
-  clusterId = NULL,
-  data = leaflet::getMapData(map)
-) {
-  map$dependencies <- c(map$dependencies,
-                        mapkeyIconDependency())
+#'   addMapkeyMarkers(
+#'     data = breweries91,
+#'     icon = makeMapkeyIcon(
+#'       icon = "mapkey",
+#'       iconSize = 30,
+#'       boxShadow = FALSE,
+#'       background = "transparent"
+#'     ),
+#'     group = "mapkey",
+#'     label = ~state, popup = ~village
+#'   )
+addMapkeyMarkers <- function(
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    icon = NULL,
+    popup = NULL,
+    popupOptions = NULL,
+    label = NULL,
+    labelOptions = NULL,
+    options = leaflet::markerOptions(),
+    clusterOptions = NULL,
+    clusterId = NULL,
+    data = leaflet::getMapData(map)) {
+  map$dependencies <- c(
+    map$dependencies,
+    mapkeyIconDependency()
+  )
 
   if (!is.null(icon)) {
     # If formulas are present, they must be evaluated first so we can pack the
     # resulting values
-    icon = leaflet::evalFormula(list(icon), data)[[1]]
+    icon <- leaflet::evalFormula(list(icon), data)[[1]]
 
     if (inherits(icon, "leaflet_mapkey_icon_set")) {
-      icon = mapkeyIconSetToMapkeyIcons(icon)
+      icon <- mapkeyIconSetToMapkeyIcons(icon)
     }
-    icon = leaflet::filterNULL(icon)
+    icon <- leaflet::filterNULL(icon)
   }
 
-  if (!is.null(clusterOptions))
-    map$dependencies = c(map$dependencies, leaflet::leafletDependencies$markerCluster())
+  if (!is.null(clusterOptions)) {
+    map$dependencies <- c(map$dependencies, leaflet::leafletDependencies$markerCluster())
+  }
 
-  pts = leaflet::derivePoints(
-    data, lng, lat, missing(lng), missing(lat), "addMapkeyMarkers")
+  pts <- leaflet::derivePoints(
+    data, lng, lat, missing(lng), missing(lat), "addMapkeyMarkers"
+  )
   leaflet::invokeMethod(
     map, data, "addMapkeyMarkers", pts$lat, pts$lng, icon, layerId,
     group, options, popup, popupOptions,

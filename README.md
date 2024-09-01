@@ -28,11 +28,13 @@ remotes::install_github('trafficonese/leaflet.extras2')
 
 ### Integrated Plugins
 
-If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#FAQ) section below for details.
+If you need a plugin that is not already implemented create an [issue](https://github.com/trafficonese/leaflet.extras2/issues/new). See the [FAQ](#faq) section below for details.
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
+-   [ClusterCharts-D3](https://gist.github.com/gisminister/10001728)
 -   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
+-   [DivIcon](https://leafletjs.com/reference.html#divicon)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
 -   [GIBS](https://github.com/aparshin/leaflet-GIBS)
 -   [Heightgraph](https://github.com/GIScience/Leaflet.Heightgraph)
@@ -43,6 +45,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Moving Markers](https://github.com/ewoken/Leaflet.MovingMarker)
 -   [OpenWeatherMap](https://github.com/trafficonese/leaflet-openweathermap)
+-   [OSMBuildings](https://github.com/kekscom/osmbuildings/tree/master)
 -   [Playback](https://github.com/hallahan/LeafletPlayback)
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
 -   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)

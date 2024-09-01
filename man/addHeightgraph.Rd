@@ -77,7 +77,6 @@ If you want to explicitly remove the Heightgraph control, please use
 \code{\link[leaflet]{removeControl}} with the \code{layerId = "hg_control"}.
 }
 \examples{
-\dontrun{
 library(leaflet)
 library(leaflet.extras2)
 library(sf)
@@ -85,17 +84,16 @@ library(sf)
 data <- st_cast(st_as_sf(leaflet::atlStorms2005[4,]), "LINESTRING")
 data <- st_transform(data, 4326)
 data <- data.frame(st_coordinates(data))
-data$elev <-  runif(nrow(data), 10, 500)
+data$elev <- round(runif(nrow(data), 10, 500), 2)
 data$L1 <- NULL
 L1 <- round(seq.int(1, 4, length.out = nrow(data)))
-data <- st_as_sf(st_sfc(lapply(split(data, L1), sfg_linestring)))
 data <- st_as_sf(st_sfc(lapply(split(data, L1), function(x) {
-    st_linestring(as.matrix(x))
+  st_linestring(as.matrix(x))
 })))
 data$steepness <- 1:nrow(data)
 data$suitability <- nrow(data):1
 data$popup <- apply(data, 1, function(x) {
- sprintf("Steepness: \%s<br>Suitability: \%s", x$steepness, x$suitability)
+  sprintf("Steepness: \%s<br>Suitability: \%s", x$steepness, x$suitability)
 })
 
 leaflet() \%>\%
@@ -103,7 +101,6 @@ leaflet() \%>\%
   addHeightgraph(color = "red", columns = c("steepness", "suitability"),
                  opacity = 1, data = data, group = "heightgraph",
                  options = heightgraphOptions(width = 400))
-}
 }
 \references{
 \url{https://github.com/GIScience/Leaflet.Heightgraph}

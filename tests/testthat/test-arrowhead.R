@@ -1,4 +1,3 @@
-
 test_that("arrowhead", {
   m <- leaflet() %>%
     addArrowhead(data = atlStorms2005, group = "groupname")
@@ -6,10 +5,12 @@ test_that("arrowhead", {
 
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "lfx-arrowhead")
-  expect_equal(m$x$calls[[length(m$x$calls)]]$method,
-               "addArrowhead")
+  expect_equal(
+    m$x$calls[[length(m$x$calls)]]$method,
+    "addArrowhead"
+  )
   expect_true(all(names(m$x$calls[[1]]$args[[10]]) %in%
-                    c("yawn","size","frequency","proportionalToTotal")))
+                    c("yawn", "size", "frequency", "proportionalToTotal")))
 
   m <- leaflet() %>% clearArrowhead("groupname")
   m$x$calls[[length(m$x$calls)]]$method == "clearArrowhead"
@@ -21,5 +22,4 @@ test_that("arrowhead", {
 
   expect_error(leaflet() %>% clearArrowhead())
   expect_error(leaflet() %>% removeArrowhead())
-
 })

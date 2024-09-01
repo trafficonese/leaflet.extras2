@@ -1,11 +1,13 @@
 openweatherDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-openweather", version = "1.0.0",
+      "lfx-openweather",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-openweather", package = "leaflet.extras2"),
       script = c(
         "leaflet-openweathermap.js",
-        "leaflet-openweathermap-bindings.js"),
+        "leaflet-openweathermap-bindings.js"
+      ),
       stylesheet = "leaflet-openweathermap.css"
     )
   )
@@ -33,28 +35,32 @@ openweatherDependency <- function() {
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
-#' Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+#' Sys.setenv("OPENWEATHERMAP" = "Your_API_Key")
 #'
-#' leaflet()  %>%
-#'   addTiles() %>% setView(9, 50, 6) %>%
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   setView(9, 50, 6) %>%
 #'   addOpenweatherTiles(layers = "wind")
 #' }
 addOpenweatherTiles <- function(
-  map, apikey = NULL, layers = NULL,
-  group = NULL, layerId = NULL, opacity = 0.5,
-  options = openweatherOptions()) {
-
+    map, apikey = NULL, layers = NULL,
+    group = NULL, layerId = NULL, opacity = 0.5,
+    options = openweatherOptions()) {
   if (is.null(apikey)) {
     apikey <- Sys.getenv("OPENWEATHERMAP")
     if (apikey == "") {
-      stop("You must either pass an `apikey` directly or save it as ",
-           "system variable under `OPENWEATHERMAP`.")
+      stop(
+        "You must either pass an `apikey` directly or save it as ",
+        "system variable under `OPENWEATHERMAP`."
+      )
     }
   }
 
-  osm_layers <- c("clouds", "cloudsClassic", "precipitation", "precipitationClassic",
-                  "rain", "rainClassic", "snow", "pressure", "pressureContour",
-                  "temperature", "wind")
+  osm_layers <- c(
+    "clouds", "cloudsClassic", "precipitation", "precipitationClassic",
+    "rain", "rainClassic", "snow", "pressure", "pressureContour",
+    "temperature", "wind"
+  )
 
   if (!all(layers %in% osm_layers)) {
     idx <- which(layers %in% osm_layers)
@@ -71,8 +77,10 @@ addOpenweatherTiles <- function(
 
   if (!is.null(layerId)) {
     if (length(layerId) != length(layers)) {
-      warning("The lengths of `layers` and `layerId` do not match.",
-              "Instead, the `layers` are used as the `layerID`.")
+      warning(
+        "The lengths of `layers` and `layerId` do not match.",
+        "Instead, the `layers` are used as the `layerID`."
+      )
       layerId <- layers
     }
   } else {
@@ -83,17 +91,21 @@ addOpenweatherTiles <- function(
       group <- rep(group, length(layers))[seq.int(layers)]
     }
   } else {
-    group = layers
+    group <- layers
   }
 
-  options <- c(appId = apikey,
-               opacity = opacity,
-               options)
+  options <- c(
+    appId = apikey,
+    opacity = opacity,
+    options
+  )
 
   map$dependencies <- c(map$dependencies, openweatherDependency())
 
-  invokeMethod(map, NULL, "addOpenweather", layers,
-               group, layerId, options)
+  invokeMethod(
+    map, NULL, "addOpenweather", layers,
+    group, layerId, options
+  )
 }
 
 #' OpenWeatherMap Options
@@ -107,10 +119,12 @@ addOpenweatherTiles <- function(
 #' @return A list of options for \code{addOpenweatherTiles}
 #' @family Openweathermap Functions
 #' @export
-openweatherOptions <-  function(showLegend = TRUE,
-                                legendImagePath = NULL,
-                                legendPosition = c('bottomleft', 'bottomright',
-                                                   'topleft', 'topright')) {
+openweatherOptions <- function(showLegend = TRUE,
+                               legendImagePath = NULL,
+                               legendPosition = c(
+                                 "bottomleft", "bottomright",
+                                 "topleft", "topright"
+                               )) {
   legendPosition <- match.arg(legendPosition)
   leaflet::filterNULL(list(
     showLegend = showLegend,
@@ -136,28 +150,33 @@ openweatherOptions <-  function(showLegend = TRUE,
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
-#' Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+#' Sys.setenv("OPENWEATHERMAP" = "Your_API_Key")
 #'
-#' leaflet()  %>%
-#'   addTiles() %>% setView(9, 50, 9) %>%
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   setView(9, 50, 9) %>%
 #'   addOpenweatherCurrent(options = openweatherCurrentOptions(
-#'     lang = "en", popup = TRUE))
+#'     lang = "en", popup = TRUE
+#'   ))
 #' }
 addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
                                   layerId = NULL,
                                   options = openweatherCurrentOptions()) {
-
   if (is.null(apikey)) {
     apikey <- Sys.getenv("OPENWEATHERMAP")
     if (apikey == "") {
-      stop("You must either pass an `apikey` directly or save it as ",
-           "system variable under `OPENWEATHERMAP`.")
+      stop(
+        "You must either pass an `apikey` directly or save it as ",
+        "system variable under `OPENWEATHERMAP`."
+      )
     }
   }
 
-  options <- c(appId = apikey,
-               type = "city",
-               options)
+  options <- c(
+    appId = apikey,
+    type = "city",
+    options
+  )
 
   map$dependencies <- c(map$dependencies, openweatherDependency())
 
@@ -177,10 +196,10 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 #' @family Openweathermap Functions
 #' @return A list of options for \code{addOpenweatherCurrent}
 #' @export
-openweatherCurrentOptions <-  function(lang = "en",
-                                       minZoom = 7,
-                                       interval = 10,
-                                       ...) {
+openweatherCurrentOptions <- function(lang = "en",
+                                      minZoom = 7,
+                                      interval = 10,
+                                      ...) {
   leaflet::filterNULL(list(
     lang = lang,
     minZoom = minZoom,

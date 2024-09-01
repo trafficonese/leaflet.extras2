@@ -1,11 +1,14 @@
 spinDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-spin", version = "1.0.0",
+      "lfx-spin",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-spin", package = "leaflet.extras2"),
-      script = c("spin.min.js",
-                 "leaflet.spin.min.js",
-                 "leaflet.spin-binding.js"),
+      script = c(
+        "spin.min.js",
+        "leaflet.spin.min.js",
+        "leaflet.spin-binding.js"
+      ),
       # stylesheet = c("spin.css"),
       all_files = TRUE
     )
@@ -35,7 +38,7 @@ spinDependency <- function() {
 #'   addTiles() %>%
 #'   addSpinner() %>%
 #'   startSpinner(options = list("lines" = 7, "length" = 20)) %>%
-#'   addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag)) %>%
+#'   addMarkers(~long, ~lat, popup = ~ as.character(mag), label = ~ as.character(mag)) %>%
 #'   stopSpinner()
 addSpinner <- function(map) {
   map$dependencies <- c(map$dependencies, spinDependency())
@@ -46,12 +49,12 @@ addSpinner <- function(map) {
 #'
 #' @rdname addSpinner
 startSpinner <- function(map, options = NULL) {
-  invokeMethod(map, NULL, 'spinner', TRUE, options)
+  invokeMethod(map, NULL, "spinner", TRUE, options)
 }
 
 #' @export
 #'
 #' @rdname addSpinner
 stopSpinner <- function(map) {
-  invokeMethod(map, NULL, 'spinner', FALSE)
+  invokeMethod(map, NULL, "spinner", FALSE)
 }

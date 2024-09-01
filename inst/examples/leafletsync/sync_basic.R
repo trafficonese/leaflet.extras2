@@ -37,7 +37,7 @@ server <- function(input, output, session) {
   })
   output$map2 <- renderLeaflet({
     leaflet() %>%
-      addProviderTiles(provider = "Stamen") %>%
+      addProviderTiles(provider = "CartoDB") %>%
       addCircleMarkers(data = df, color = "orange")
   })
   output$map3 <- renderLeaflet({

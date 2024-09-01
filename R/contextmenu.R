@@ -1,11 +1,15 @@
 contextmenuDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-contextmenu", version = "1.0.0",
+      "lfx-contextmenu",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-contextmenu",
-                        package = "leaflet.extras2"),
-      script = c("leaflet.contextmenu.js",
-                 "leaflet.contextmenu-bindings.js"),
+        package = "leaflet.extras2"
+      ),
+      script = c(
+        "leaflet.contextmenu.js",
+        "leaflet.contextmenu-bindings.js"
+      ),
       stylesheet = "leaflet.contextmenu.css"
     )
   )
@@ -54,27 +58,33 @@ contextmenuDependency <- function() {
 #' @examples
 #' library(leaflet)
 #' leaflet(options = leafletOptions(
-#'     contextmenu = TRUE,
-#'     contextmenuWidth = 200,
-#'     contextmenuItems =
-#'      context_mapmenuItems(
-#'        context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled=FALSE),
-#'        "-",
-#'        context_menuItem("Zoom In", "function(e) {this.zoomIn()}")))) %>%
+#'   contextmenu = TRUE,
+#'   contextmenuWidth = 200,
+#'   contextmenuItems =
+#'     context_mapmenuItems(
+#'       context_menuItem("Zoom Out", "function(e) {this.zoomOut()}", disabled = FALSE),
+#'       "-",
+#'       context_menuItem("Zoom In", "function(e) {this.zoomIn()}")
+#'     )
+#' )) %>%
 #'   addTiles(group = "base") %>%
 #'   addContextmenu() %>%
-#'   addMarkers(data = breweries91, label = ~brewery,
-#'           layerId = ~founded, group = "marker",
-#'           options = markerOptions(
-#'             contextmenu = TRUE,
-#'             contextmenuWidth = 200,
-#'             contextmenuItems =
-#'               context_markermenuItems(
-#'                 context_menuItem(text = "Show Marker Coords",
-#'                          callback = "function(e) {alert(e.latlng);}",
-#'                          index = 1)
-#'               )
-#'           ))
+#'   addMarkers(
+#'     data = breweries91, label = ~brewery,
+#'     layerId = ~founded, group = "marker",
+#'     options = markerOptions(
+#'       contextmenu = TRUE,
+#'       contextmenuWidth = 200,
+#'       contextmenuItems =
+#'         context_markermenuItems(
+#'           context_menuItem(
+#'             text = "Show Marker Coords",
+#'             callback = "function(e) {alert(e.latlng);}",
+#'             index = 1
+#'           )
+#'         )
+#'     )
+#'   )
 #'
 addContextmenu <- function(map) {
   map$dependencies <- c(map$dependencies, contextmenuDependency())
@@ -90,8 +100,10 @@ addContextmenu <- function(map) {
 #' @export
 showContextmenu <- function(map, lat = NULL, lng = NULL,
                             data = leaflet::getMapData(map)) {
-  pts <- leaflet::derivePoints(data, lng, lat,
-                               missing(lng), missing(lat), "showContextmenu")
+  pts <- leaflet::derivePoints(
+    data, lng, lat,
+    missing(lng), missing(lat), "showContextmenu"
+  )
   leaflet::invokeMethod(map, NULL, "showContextmenu", pts)
 }
 
@@ -182,7 +194,7 @@ removeItemContextmenu <- function(map, index) {
 #'   to enable it. Default is \code{TRUE}
 #' @return A leaflet map object
 #' @export
-setDisabledContextmenu <- function(map, index, disabled=TRUE) {
+setDisabledContextmenu <- function(map, index, disabled = TRUE) {
   leaflet::invokeMethod(map, NULL, "setDisabledContextmenu", index, disabled)
 }
 
@@ -212,9 +224,11 @@ removeallItemsContextmenu <- function(map) {
 #' @return A contextmenu item list
 #' @export
 context_menuItem <- function(text, callback = NULL, ...) {
-  list(text = text,
-       callback = leaflet::JS(callback),
-       ...)
+  list(
+    text = text,
+    callback = leaflet::JS(callback),
+    ...
+  )
 }
 
 #' context_mapmenuItems
@@ -251,9 +265,11 @@ context_markermenuItems <- function(...) {
 #' @export
 menuItem <- function(text, callback = NULL, ...) {
   .Deprecated("context_menuItem")
-  list(text = text,
-       callback=leaflet::JS(callback),
-       ...)
+  list(
+    text = text,
+    callback = leaflet::JS(callback),
+    ...
+  )
 }
 
 #' mapmenuItems

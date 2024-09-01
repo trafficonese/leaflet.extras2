@@ -1,11 +1,14 @@
 arrowheadDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-arrowhead", version = "1.0.0",
+      "lfx-arrowhead",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-arrowhead", package = "leaflet.extras2"),
-      script = c("leaflet.geometryutil.js",
-                 "leaflet-arrowheads.js",
-                 "leaflet-arrowheads-bindings.js")
+      script = c(
+        "leaflet.geometryutil.js",
+        "leaflet-arrowheads.js",
+        "leaflet-arrowheads-bindings.js"
+      )
     )
   )
 }
@@ -28,34 +31,43 @@ arrowheadDependency <- function() {
 #' leaflet() %>%
 #'   addArrowhead(data = atlStorms2005)
 addArrowhead <- function(map, lng = NULL, lat = NULL, layerId = NULL,
-                       group = NULL, stroke = TRUE, color = "#03F", weight = 5,
-                       opacity = 0.5, fill = FALSE, fillColor = color,
-                       fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
-                       noClip = FALSE, popup = NULL, popupOptions = NULL,
-                       label = NULL, labelOptions = NULL,
-                       options = arrowheadOptions(), highlightOptions = NULL,
-                       data = getMapData(map)) {
-
-  if (missing(labelOptions))
+                         group = NULL, stroke = TRUE, color = "#03F", weight = 5,
+                         opacity = 0.5, fill = FALSE, fillColor = color,
+                         fillOpacity = 0.2, dashArray = NULL, smoothFactor = 1,
+                         noClip = FALSE, popup = NULL, popupOptions = NULL,
+                         label = NULL, labelOptions = NULL,
+                         options = arrowheadOptions(), highlightOptions = NULL,
+                         data = getMapData(map)) {
+  if (missing(labelOptions)) {
     labelOptions <- labelOptions()
+  }
 
   arrowheadOptions <- options
   options <- filterNULL(
-    c(list(stroke = stroke, color = color, weight = weight,
-         opacity = opacity, fill = fill, fillColor = fillColor,
-         fillOpacity = fillOpacity, dashArray = dashArray,
-         smoothFactor = smoothFactor, noClip = noClip),
-      arrowheadOptions))
+    c(
+      list(
+        stroke = stroke, color = color, weight = weight,
+        opacity = opacity, fill = fill, fillColor = fillColor,
+        fillOpacity = fillOpacity, dashArray = dashArray,
+        smoothFactor = smoothFactor, noClip = noClip
+      ),
+      arrowheadOptions
+    )
+  )
 
 
-  pgons <- derivePolygons(data, lng, lat, missing(lng), missing(lat),
-                          "addPolylines")
+  pgons <- derivePolygons(
+    data, lng, lat, missing(lng), missing(lat),
+    "addPolylines"
+  )
 
   map$dependencies <- c(map$dependencies, arrowheadDependency())
 
-  invokeMethod(map, data, "addArrowhead", pgons, layerId, group,
-               options, popup, popupOptions, safeLabel(label, data),
-               labelOptions, highlightOptions, arrowheadOptions) %>%
+  invokeMethod(
+    map, data, "addArrowhead", pgons, layerId, group,
+    options, popup, popupOptions, safeLabel(label, data),
+    labelOptions, highlightOptions, arrowheadOptions
+  ) %>%
     expandLimitsBbox(pgons)
 }
 
@@ -116,14 +128,13 @@ addArrowhead <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 #' @return A list of options for \code{addArrowhead} polylines
 #' @export
 arrowheadOptions <- function(
-  yawn = 60,
-  size = '15%',
-  frequency = 'allvertices',
-  proportionalToTotal = FALSE,
-  offsets = NULL,
-  perArrowheadOptions = NULL,
-  ...) {
-
+    yawn = 60,
+    size = "15%",
+    frequency = "allvertices",
+    proportionalToTotal = FALSE,
+    offsets = NULL,
+    perArrowheadOptions = NULL,
+    ...) {
   filterNULL(list(
     yawn = yawn,
     size = size,
@@ -156,4 +167,3 @@ clearArrowhead <- function(map, group) {
 removeArrowhead <- function(map, layerId) {
   invokeMethod(map, getMapData(map), "removeArrowhead", layerId)
 }
-

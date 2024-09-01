@@ -33,35 +33,42 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     ## Basemap ####################
     suppressWarnings(
-    leaflet(options = leafletOptions(
-      contextmenu=TRUE,
-      contextmenuWidth = 200,
-      contextmenuItems =
-        context_mapmenuItems(
-          context_menuItem("Zoom Out", "function(e) {this.zoomOut();}", disabled=TRUE),
-          context_menuItem("Zoom In", "function(e) {this.zoomIn();}"),
-          "-",
-          context_menuItem("Disable index 0",
-                   "function(e) {this.contextmenu.setDisabled(0, true)}",
-                   hideOnSelect = TRUE),
-          context_menuItem("Enable index 0",
-                   "function(e) {this.contextmenu.setDisabled(0, false)}",
-                   hideOnSelect = FALSE),
-          "-",
-          context_menuItem(text="Center Map",
-               callback="function(e) {this.panTo(e.latlng);}",
-               icon="https://cdn3.iconfinder.com/data/icons/web-15/128/RSSvgLink-2-512.png"),
-          list(text="Console Log",
-                   callback=JS("function(e) {console.log('e');console.log(e);}"))
-        ))) %>%
-      addTiles(group = "base") %>%
-      addContextmenu() %>%
+      leaflet(
+        options = leafletOptions(
+          contextmenu=TRUE,
+          contextmenuWidth = 200,
+          contextmenuItems =
+            context_mapmenuItems(
+              context_menuItem(
+                "Zoom Out", "function(e) {this.zoomOut();}",
+                disabled = TRUE),
+              context_menuItem(
+                "Zoom In", "function(e) {this.zoomIn();}"),
+              "-",
+              context_menuItem(
+                "Disable index 0",
+                "function(e) {this.contextmenu.setDisabled(0, true)}",
+                hideOnSelect = TRUE),
+              context_menuItem(
+                "Enable index 0",
+                "function(e) {this.contextmenu.setDisabled(0, false)}",
+                hideOnSelect = FALSE),
+              "-",
+              context_menuItem(
+                text = "Center Map",
+                callback = "function(e) {this.panTo(e.latlng);}",
+                icon =  "https://cdn3.iconfinder.com/data/icons/web-15/128/RSSvgLink-2-512.png"),
+              list(text = "Console Log",
+                   callback = JS("function(e) {console.log('e');console.log(e);}"))
+            ))) %>%
+        addTiles(group = "base") %>%
+        addContextmenu() %>%
 
       ## Points ###############################
       addMarkers(data = sf::st_as_sf(leaflet::breweries91),
-                 label=~brewery, layerId = ~founded, group="marker",
+                 label = ~brewery, layerId = ~founded, group = "marker",
                  options = markerOptions(
-                   contextmenu=TRUE,
+                   contextmenu = TRUE,
                    contextmenuWidth = 200,
                    contextmenuItems =
                      context_markermenuItems(
@@ -77,16 +84,16 @@ server <- function(input, output, session) {
                                   });
                             alert(e.latlng);}",
                          id = "somemarkerid",
-                         icon="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Person_icon_BLACK-01.svg/1200px-Person_icon_BLACK-01.svg.png",
-                         index=0)
+                         icon = "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Person_icon_BLACK-01.svg/1200px-Person_icon_BLACK-01.svg.png",
+                         index = 0)
                      )
                  )) %>%
       ## Lines ###############################
       addPolylines(data = sf::st_as_sf(leaflet::atlStorms2005),
-                   layerId = ~Name, group="lines",
+                   layerId = ~Name, group = "lines",
                    label = ~Name,
                    options = pathOptions(
-                     contextmenu=TRUE,
+                     contextmenu = TRUE,
                      contextmenuWidth = 400,
                      contextmenuInheritItems = FALSE,
                      contextmenuItems =
@@ -111,15 +118,15 @@ server <- function(input, output, session) {
                                   "function(e) {console.log(e.relatedTarget.toGeoJSON());}",
                                   icon = "https://cdn0.iconfinder.com/data/icons/outlinecons-filetypes/512/log-512.png",
                                   index = 4),
-                         context_menuItem(text = "-", separator=TRUE,
+                         context_menuItem(text = "-", separator = TRUE,
                                   index = 5)
                        )
                    )) %>%
       ## Shapes ###############################
       addPolygons(data = sf::st_as_sf(leaflet::gadmCHE),
-                  label=~NAME_1, layerId = ~OBJECTID, group="shapes",
+                  label = ~NAME_1, layerId = ~OBJECTID, group = "shapes",
                   options = pathOptions(
-                    contextmenu=TRUE,
+                    contextmenu = TRUE,
                     contextmenuWidth = 200,
                     contextmenuItems =
                       context_markermenuItems(
@@ -140,7 +147,7 @@ server <- function(input, output, session) {
                         context_menuItem(text = "Log GeoJSON",
                                  "function(e) {console.log(e.relatedTarget.toGeoJSON());}",
                                  index = 4),
-                        context_menuItem(text = "-", NULL, separator=TRUE,
+                        context_menuItem(text = "-", NULL, separator = TRUE,
                                  index = 5)
                       )
                   ))

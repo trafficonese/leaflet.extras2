@@ -78,7 +78,6 @@ The function expects either line or point data as spatial data or as Simple Feat
 Alternatively, coordinates can also be passed as numeric vectors.
 }
 \examples{
-\dontrun{
 library(sf)
 library(leaflet)
 library(leaflet.extras2)
@@ -97,7 +96,6 @@ leaflet()  \%>\%
                   movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
                   label="I am a pirate!",
                   popup="Arrr")
-}
 }
 \references{
 \url{https://github.com/ewoken/Leaflet.MovingMarker}

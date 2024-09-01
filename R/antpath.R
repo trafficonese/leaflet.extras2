@@ -1,10 +1,13 @@
 antpathDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-antpath", version = "1.0.0",
+      "lfx-antpath",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-antpath", package = "leaflet.extras2"),
-      script = c("lfx-ant-path.js",
-                 "lfx-ant-path-bindings.js")
+      script = c(
+        "lfx-ant-path.js",
+        "lfx-ant-path-bindings.js"
+      )
     )
   )
 }
@@ -35,24 +38,31 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL,
                        label = NULL, labelOptions = NULL,
                        options = antpathOptions(), highlightOptions = NULL,
                        data = getMapData(map)) {
-
-  if (missing(labelOptions))
+  if (missing(labelOptions)) {
     labelOptions <- labelOptions()
+  }
 
   options <- c(options, filterNULL(
-    list(stroke = stroke, color = color, weight = weight,
-         opacity = opacity, fill = fill, fillColor = fillColor,
-         fillOpacity = fillOpacity, dashArray = dashArray,
-         smoothFactor = smoothFactor, noClip = noClip)))
+    list(
+      stroke = stroke, color = color, weight = weight,
+      opacity = opacity, fill = fill, fillColor = fillColor,
+      fillOpacity = fillOpacity, dashArray = dashArray,
+      smoothFactor = smoothFactor, noClip = noClip
+    )
+  ))
 
-  pgons <- derivePolygons(data, lng, lat, missing(lng), missing(lat),
-                          "addPolylines")
+  pgons <- derivePolygons(
+    data, lng, lat, missing(lng), missing(lat),
+    "addPolylines"
+  )
 
   map$dependencies <- c(map$dependencies, antpathDependency())
 
-  invokeMethod(map, data, "addAntpath", pgons, layerId, group,
-               options, popup, popupOptions, safeLabel(label, data),
-               labelOptions, highlightOptions) %>%
+  invokeMethod(
+    map, data, "addAntpath", pgons, layerId, group,
+    options, popup, popupOptions, safeLabel(label, data),
+    labelOptions, highlightOptions
+  ) %>%
     expandLimitsBbox(pgons)
 }
 
@@ -71,18 +81,17 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 #' @family Antpath Functions
 #' @return A list of options for \code{addAntpath} animated polylines
 #' @export
-antpathOptions = function(
-  delay = 400,
-  paused = FALSE,
-  reverse = FALSE,
-  hardwareAccelerated = FALSE,
-  dashArray = c(10, 20),
-  pulseColor = "#ffffff",
-  lineCap = NULL, lineJoin = NULL,
-  interactive = TRUE, pointerEvents = NULL,
-  className = "",
-  ...) {
-
+antpathOptions <- function(
+    delay = 400,
+    paused = FALSE,
+    reverse = FALSE,
+    hardwareAccelerated = FALSE,
+    dashArray = c(10, 20),
+    pulseColor = "#ffffff",
+    lineCap = NULL, lineJoin = NULL,
+    interactive = TRUE, pointerEvents = NULL,
+    className = "",
+    ...) {
   filterNULL(list(
     delay = delay,
     paused = paused,

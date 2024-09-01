@@ -2,12 +2,14 @@ timesliderDependencies <- function() {
   list(
     htmlDependency(
       "lfx-timeslider", "1.0.0",
-      src = system.file("htmlwidgets/lfx-timeslider", package = "leaflet.extras2"),
+      src = system.file("htmlwidgets/lfx-timeslider",
+                        package = "leaflet.extras2"),
       stylesheet = "jquery-ui.css",
       script = c(
         "jquery-ui.min.js",
         "leaflet.SliderControl.min.js",
-        "leaflet.SliderControl-bindings.js")
+        "leaflet.SliderControl-bindings.js"
+      )
     )
   )
 }
@@ -29,79 +31,87 @@ timesliderDependencies <- function() {
 #' @export
 #' @inheritParams leaflet::addCircleMarkers
 #' @inherit leaflet::addMarkers return
-#' @examples \dontrun{
+#' @examples
 #' library(leaflet)
 #' library(leaflet.extras2)
 #' library(sf)
-#' library(geojsonsf)
 #'
-#' data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1, ])
 #' data <- st_cast(data, "POINT")
-#' data$time = as.POSIXct(
-#'   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+#' data$time <- as.POSIXct(
+#'   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data))
+#' )
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
-#'   addTimeslider(data = data,
-#'              options = timesliderOptions(
-#'                position = "topright",
-#'                timeAttribute = "time",
-#'                range = TRUE)) %>%
+#'   addTimeslider(
+#'     data = data,
+#'     options = timesliderOptions(
+#'       position = "topright",
+#'       timeAttribute = "time",
+#'       range = TRUE
+#'     )
+#'   ) %>%
 #'   setView(-72, 22, 4)
-#' }
 addTimeslider <- function(map, data, radius = 10,
                           stroke = TRUE, color = "#03F",
-                          weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,
+                          weight = 5, opacity = 0.5, fill = TRUE,
+                          fillColor = color,
                           fillOpacity = 0.2, dashArray = NULL,
                           popup = NULL, popupOptions = NULL,
                           label = NULL, labelOptions = NULL,
                           ordertime = TRUE,
-                          options = timesliderOptions()){
-
+                          options = timesliderOptions()) {
   ## Style Options
-  data$radius = leaflet::evalFormula(radius, data)
-  data$stroke = leaflet::evalFormula(stroke, data)
-  data$color = leaflet::evalFormula(color, data)
-  data$weight = leaflet::evalFormula(weight, data)
-  data$fillColor = leaflet::evalFormula(fillColor, data)
-  data$opacity = leaflet::evalFormula(opacity, data)
-  data$fill = leaflet::evalFormula(fill, data)
-  data$dashArray = leaflet::evalFormula(dashArray, data)
-  data$fillOpacity = leaflet::evalFormula(fillOpacity, data)
+  data$radius <- leaflet::evalFormula(radius, data)
+  data$stroke <- leaflet::evalFormula(stroke, data)
+  data$color <- leaflet::evalFormula(color, data)
+  data$weight <- leaflet::evalFormula(weight, data)
+  data$fillColor <- leaflet::evalFormula(fillColor, data)
+  data$opacity <- leaflet::evalFormula(opacity, data)
+  data$fill <- leaflet::evalFormula(fill, data)
+  data$dashArray <- leaflet::evalFormula(dashArray, data)
+  data$fillOpacity <- leaflet::evalFormula(fillOpacity, data)
 
   ## Order by time
   if (ordertime) {
-    data <- data[order(data[[options$timeAttribute]]),]
+    data <- data[order(data[[options$timeAttribute]]), ]
   }
 
   ## Popup
   if (!is.null(popup) && !isFALSE(popup)) {
-    data$popup = leaflet::evalFormula(popup, data)
+    data$popup <- leaflet::evalFormula(popup, data)
   }
 
   ## Label
   if (!is.null(label) && !isFALSE(label)) {
-    data$label = leaflet::evalFormula(label, data)
+    data$label <- leaflet::evalFormula(label, data)
   }
 
   ## BBOX
   if (!requireNamespace("sf")) {
-    stop("The package `sf` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('sf')")
+    stop(
+      "The package `sf` is needed for this plugin. ",
+      "Please install it with:\ninstall.packages('sf')"
+    )
   }
   bbox <- sf::st_bbox(data)
 
   ## Make GeoJSON
-  if (!requireNamespace("geojsonsf")) {
-    stop("The package `geojsonsf` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('geojsonsf')")
+  if (!requireNamespace("yyjsonr")) {
+    stop(
+      "The package `yyjsonr` is needed for this plugin. ",
+      "Please install it with:\ninstall.packages('yyjsonr')"
+    )
   }
-  data <- geojsonsf::sf_geojson(data)
+  data <- yyjsonr::write_geojson_str(data)
+  class(data) <- c("geojson", "json")
 
   ## Add Deps and invoke Leaflet
   map$dependencies <- c(map$dependencies, timesliderDependencies())
-  invokeMethod(map, NULL, "addTimeslider", data, options, popupOptions, labelOptions) %>%
-    expandLimits(bbox[c(2,4)], bbox[c(1,3)])
+  invokeMethod(map, NULL, "addTimeslider", data, options,
+               popupOptions, labelOptions) %>%
+    expandLimits(bbox[c(2, 4)], bbox[c(1, 3)])
 }
 
 #' timesliderOptions
@@ -137,21 +147,20 @@ addTimeslider <- function(map, data, radius = 10,
 #' @return A list of options for \code{addTimeslider}
 #' @references \url{https://github.com/dwilhelm89/LeafletSlider}
 #' @export
-timesliderOptions = function(
-  position = c("topright", "bottomleft", "bottomright", "topleft"),
-  timeAttribute = "time",
-  isEpoch = FALSE,
-  startTimeIdx = 0,
-  timeStrLength = 19,
-  maxValue = -1,
-  minValue = 0,
-  showAllOnStart = FALSE,
-  range = FALSE,
-  follow = FALSE,
-  alwaysShowDate = FALSE,
-  rezoom = NULL,
-  sameDate = FALSE) {
-
+timesliderOptions <- function(
+    position = c("topright", "bottomleft", "bottomright", "topleft"),
+    timeAttribute = "time",
+    isEpoch = FALSE,
+    startTimeIdx = 0,
+    timeStrLength = 19,
+    maxValue = -1,
+    minValue = 0,
+    showAllOnStart = FALSE,
+    range = FALSE,
+    follow = FALSE,
+    alwaysShowDate = FALSE,
+    rezoom = NULL,
+    sameDate = FALSE) {
   leaflet::filterNULL(list(
     position = match.arg(position),
     timeAttribute = timeAttribute,
@@ -176,6 +185,6 @@ timesliderOptions = function(
 #' @export
 #' @inherit leaflet::addMarkers return
 #' @family Timeslider Functions
-removeTimeslider <- function(map){
+removeTimeslider <- function(map) {
   invokeMethod(map, NULL, "removeTimeslider")
 }

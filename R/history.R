@@ -8,12 +8,15 @@ historyDependency <- function() {
       stylesheet = c("css/all.min.css", "css/v4-shims.min.css")
     ),
     htmlDependency(
-      "lfx-history", version = "1.0.0",
+      "lfx-history",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-history", package = "leaflet.extras2"),
-      script = c("zoomCenter.js",
-                 "lfx-history.js",
-                 "lfx-history-bindings.js"),
-      stylesheet =  "lfx-history.css"
+      script = c(
+        "zoomCenter.js",
+        "lfx-history.js",
+        "lfx-history-bindings.js"
+      ),
+      stylesheet = "lfx-history.css"
     )
   )
 }
@@ -31,13 +34,15 @@ historyDependency <- function() {
 #' @export
 #' @examples
 #' library(leaflet)
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addTiles() %>%
 #'   addHistory()
 addHistory <- function(map, layerId = NULL, options = historyOptions()) {
   if (!requireNamespace("fontawesome")) {
-    stop("The package `fontawesome` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('fontawesome')")
+    stop(
+      "The package `fontawesome` is needed for this plugin. ",
+      "Please install it with:\ninstall.packages('fontawesome')"
+    )
   }
   ## Check Icon options. Is it character or shiny.tag. Adapt htmlDeps
   map$dependencies <- c(map$dependencies, historyDependency())
@@ -74,22 +79,23 @@ addHistory <- function(map, layerId = NULL, options = historyOptions()) {
 #' @export
 #' @examples
 #' library(leaflet)
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addTiles() %>%
-#'     addHistory(options = historyOptions(position = "bottomright",
+#'   addHistory(options = historyOptions(
+#'     position = "bottomright",
 #'     maxMovesToSave = 20,
-#'     backText =  "Go back",
+#'     backText = "Go back",
 #'     forwardText = "Go forward",
 #'     orientation = "vertical"
-#'     ))
-historyOptions <- function(position = c("topright", "topleft", "bottomleft","bottomright"),
+#'   ))
+historyOptions <- function(position = c("topright", "topleft", "bottomleft", "bottomright"),
                            maxMovesToSave = 10,
                            backImage = "fa fa-caret-left",
                            forwardImage = "fa fa-caret-right",
-                           backText = '',
-                           forwardText = '',
-                           backTooltip = 'Go to Previous Extent',
-                           forwardTooltip = 'Go to Next Extent',
+                           backText = "",
+                           forwardText = "",
+                           backTooltip = "Go to Previous Extent",
+                           forwardTooltip = "Go to Next Extent",
                            backImageBeforeText = TRUE,
                            forwardImageBeforeText = FALSE,
                            orientation = c("horizontal", "vertical"),
@@ -162,4 +168,3 @@ clearHistory <- function(map) {
 clearFuture <- function(map) {
   leaflet::invokeMethod(map, NULL, "clearFuture")
 }
-

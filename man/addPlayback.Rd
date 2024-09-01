@@ -63,7 +63,6 @@ If used in Shiny, you can listen to 2 events
 }
 }
 \examples{
-\dontrun{
 library(leaflet)
 library(leaflet.extras2)
 library(sf)
@@ -119,7 +118,6 @@ leaflet() \%>\%
                                        color = c("red","green","blue",
                                                  "orange","yellow")),
               pathOpts = pathOptions(weight = 5))
-}
 }
 \references{
 \url{https://github.com/hallahan/LeafletPlayback}

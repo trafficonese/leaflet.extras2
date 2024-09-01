@@ -1,11 +1,14 @@
 labelgunDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-labelgun", version = "1.0.0",
+      "lfx-labelgun",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-labelgun", package = "leaflet.extras2"),
-      script = c("rbush.min.js",
-                 "labelgun.js",
-                 "labelgun-binding.js"),
+      script = c(
+        "rbush.min.js",
+        "labelgun.js",
+        "labelgun-binding.js"
+      ),
       all_files = TRUE
     )
   )
@@ -38,7 +41,20 @@ labelgunDependency <- function() {
 #' @references \url{https://github.com/Geovation/labelgun}
 #'
 #' @name addLabelgun
-addLabelgun <- function(map, group=NULL, weight=NULL, entries=NULL) {
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addMarkers(
+#'     data = breweries91,
+#'     label = ~brewery,
+#'     group = "markers",
+#'     labelOptions = labelOptions(permanent = TRUE)
+#'   ) %>%
+#'   addLabelgun("markers", 1)
+addLabelgun <- function(map, group = NULL, weight = NULL, entries = NULL) {
   stopifnot("The group argument is NULL. Please define a valid group." = !is.null(group))
   map$dependencies <- c(map$dependencies, labelgunDependency())
   invokeMethod(map, NULL, "addLabelgun", group, weight, entries[1])

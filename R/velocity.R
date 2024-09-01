@@ -2,9 +2,12 @@ velocityDependencies <- function() {
   list(
     htmlDependency(
       "lfx-velocity", "1.0.0",
-      src = system.file("htmlwidgets/lfx-velocity", package = "leaflet.extras2"),
-      script = c("leaflet-velocity.js",
-                 "leaflet-velocity-bindings.js"),
+      src = system.file("htmlwidgets/lfx-velocity",
+                        package = "leaflet.extras2"),
+      script = c(
+        "leaflet-velocity.js",
+        "leaflet-velocity-bindings.js"
+      ),
       stylesheet = "leaflet-velocity.css"
     )
   )
@@ -16,8 +19,8 @@ velocityDependencies <- function() {
 #'   \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 #' @inheritParams leaflet::addMarkers
 #' @param content the path or URL to a JSON file representing the velocity data
-#'   or a data.frame which can be transformed to such a JSON file. Please see the
-#'   \href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
+#'   or a data.frame which can be transformed to such a JSON file. Please see
+#'   the \href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
 #'   files} for some example data.
 #' @param options List of further options. See \code{\link{velocityOptions}}
 #' @export
@@ -36,7 +39,6 @@ velocityDependencies <- function() {
 #' }
 addVelocity <- function(map, layerId = NULL, group = NULL,
                         content = NULL, options = velocityOptions()) {
-
   if (!requireNamespace("jsonlite")) {
     stop("Package `jsonlite` must be loaded to parse the `content`")
   }
@@ -71,7 +73,8 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
 #' @param velocityScale scale for wind velocity
 #' @param colorScale A vector of hex colors or an RGB matrix
 #' @param ... Further arguments passed to the Velocity layer and Windy.js.
-#'   For more information, please visit \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
+#'   For more information, please visit
+#'   \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 #' @return A list of further options for \code{addVelocity}
 #' @export
 #' @family Velocity Functions
@@ -80,11 +83,13 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
                             maxVelocity = 10,
                             velocityScale = 0.005,
                             colorScale = NULL,
-                            ...){
+                            ...) {
   if (!is.null(colorScale) && is.matrix(colorScale)) {
     colorScale <- as.matrix(
-      paste0("rgb(", apply(colorScale, 1, function(x)
-        paste(x, collapse = ",")), ")"))
+      paste0("rgb(", apply(colorScale, 1, function(x) {
+        paste(x, collapse = ",")
+      }), ")")
+    )
   }
   speedUnit <- match.arg(speedUnit)
   list(
@@ -103,7 +108,7 @@ velocityOptions <- function(speedUnit = c("m/s", "k/h", "kt"),
 #' @export
 #' @inherit leaflet::removeMarker return
 #' @family Velocity Functions
-removeVelocity <- function(map, group){
+removeVelocity <- function(map, group) {
   invokeMethod(map, NULL, "removeVelocity", group)
 }
 
@@ -114,7 +119,7 @@ removeVelocity <- function(map, group){
 #' @inherit leaflet::removeMarker return
 #' @export
 #' @family Velocity Functions
-setOptionsVelocity <- function(map, layerId, options){
+setOptionsVelocity <- function(map, layerId, options) {
   options <- filterNULL(options)
   invokeMethod(map, NULL, "setOptionsVelocity", layerId, options)
 }

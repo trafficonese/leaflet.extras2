@@ -1,19 +1,23 @@
 movingmarkerDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-movingmarker", version = "1.0.0",
+      "lfx-movingmarker",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-movingmarker", package = "leaflet.extras2"),
-      script = c("MovingMarker.js",
-                 "lfx-movingmarker-bindings.js"),
+      script = c(
+        "MovingMarker.js",
+        "lfx-movingmarker-bindings.js"
+      ),
       all_files = TRUE
     )
   )
 }
 leafletAwesomeMarkersDependencies1 <- function() {
   list(htmltools::htmlDependency("leaflet-awesomemarkers",
-                                 "2.0.3", "htmlwidgets/plugins/Leaflet.awesome-markers",
-                                 package = "leaflet", script = c("leaflet.awesome-markers.min.js"),
-                                 stylesheet = c("leaflet.awesome-markers.css")))
+    "2.0.3", "htmlwidgets/plugins/Leaflet.awesome-markers",
+    package = "leaflet", script = c("leaflet.awesome-markers.min.js"),
+    stylesheet = c("leaflet.awesome-markers.css")
+  ))
 }
 
 
@@ -36,43 +40,51 @@ leafletAwesomeMarkersDependencies1 <- function() {
 #' @references \url{https://github.com/ewoken/Leaflet.MovingMarker}
 #' @inherit leaflet::addMarkers return
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' library(sf)
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
-#' crds <- data.frame(structure(c(-67.5, -68.5, -69.6, -70.5, -71.3, -72.2, -72.7,
-#'                               -72.9, -73, -72.4, -70.8, 15.8, 16.5, 17.3, 17.8, 18.3, 18.6,
-#'                               19.8, 21.6, 23.5, 25.1, 27.9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-#'                             dim = c(11L, 3L), dimnames = list(NULL, c("X", "Y", "L1"))))
-#' df <- st_sf(st_sfc(st_linestring(as.matrix(crds), dim="XYZ"), crs = 4326))
-#' st_geometry(df) <- "geometry"; df <- st_zm(df)
+#' crds <- data.frame(structure(
+#'   c(
+#'     -67.5, -68.5, -69.6, -70.5, -71.3, -72.2, -72.7,
+#'     -72.9, -73, -72.4, -70.8, 15.8, 16.5, 17.3, 17.8, 18.3, 18.6,
+#'     19.8, 21.6, 23.5, 25.1, 27.9, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+#'   ),
+#'   dim = c(11L, 3L), dimnames = list(NULL, c("X", "Y", "L1"))
+#' ))
+#' df <- st_sf(st_sfc(st_linestring(as.matrix(crds), dim = "XYZ"), crs = 4326))
+#' st_geometry(df) <- "geometry"
+#' df <- st_zm(df)
 #'
-#' leaflet()  %>%
+#' leaflet() %>%
 #'   addTiles() %>%
 #'   addPolylines(data = df) %>%
-#'   addMovingMarker(data = df,
-#'                   movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
-#'                   label="I am a pirate!",
-#'                   popup="Arrr")
-#' }
-addMovingMarker = function(
-  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-  duration = 2000,
-  icon = NULL,
-  popup = NULL, popupOptions = NULL,
-  label = NULL, labelOptions = NULL,
-  movingOptions = movingMarkerOptions(),
-  options = leaflet::markerOptions(),
-  data = leaflet::getMapData(map)) {
-
-  if (missing(labelOptions))
+#'   addMovingMarker(
+#'     data = df,
+#'     movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+#'     label = "I am a pirate!",
+#'     popup = "Arrr"
+#'   )
+addMovingMarker <- function(
+    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+    duration = 2000,
+    icon = NULL,
+    popup = NULL, popupOptions = NULL,
+    label = NULL, labelOptions = NULL,
+    movingOptions = movingMarkerOptions(),
+    options = leaflet::markerOptions(),
+    data = leaflet::getMapData(map)) {
+  if (missing(labelOptions)) {
     labelOptions <- labelOptions()
+  }
 
   if (!is.null(data)) {
     if (!requireNamespace("sf")) {
-      stop("The package `sf` is needed for this plugin. ",
-           "Please install it with:\ninstall.packages('sf')")
+      stop(
+        "The package `sf` is needed for this plugin. ",
+        "Please install it with:\ninstall.packages('sf')"
+      )
     }
     if (inherits(data, "Spatial")) {
       data <- sf::st_as_sf(data)
@@ -82,28 +94,34 @@ addMovingMarker = function(
     }
   }
 
-  if (is.null(layerId))
+  if (is.null(layerId)) {
     layerId <- paste0("_", as.numeric(Sys.time()))
+  }
 
   pts <- derivePoints(data, lng, lat, missing(lng), missing(lat), "addMovingMarker")
 
   duration <- evalFormula(duration, data)
   options <- filterNULL(c(options, movingOptions))
 
-  map$dependencies <- c(map$dependencies,
-                        movingmarkerDependency())
+  map$dependencies <- c(
+    map$dependencies,
+    movingmarkerDependency()
+  )
 
   if (inherits(icon, "leaflet_awesome_icon")) {
-    icon$class = "awesome"
-    map$dependencies <- c(map$dependencies,
-                          leafletAwesomeMarkersDependencies1())
+    icon$class <- "awesome"
+    map$dependencies <- c(
+      map$dependencies,
+      leafletAwesomeMarkersDependencies1()
+    )
   }
 
   leaflet::invokeMethod(
     map, data, "addMovingMarker", cbind(pts$lat, pts$lng),
     duration, icon, layerId,
     group, options, popup, popupOptions,
-    leaflet::safeLabel(label, data), labelOptions) %>%
+    leaflet::safeLabel(label, data), labelOptions
+  ) %>%
     expandLimits(pts$lat, pts$lng)
 }
 
@@ -198,4 +216,3 @@ moveToMoving <- function(map, layerId = NULL, latlng, duration) {
 addStationMoving <- function(map, layerId = NULL, pointIndex, duration) {
   leaflet::invokeMethod(map, NULL, "addStationMoving", layerId, pointIndex, duration)
 }
-
