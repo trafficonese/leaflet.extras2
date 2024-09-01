@@ -74,9 +74,9 @@ addHeightgraph <- function(
   pathOpts = leaflet::pathOptions(),
   options = heightgraphOptions()) {
 
-  if (!requireNamespace("geojsonsf")) {
-    stop("The package `geojsonsf` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('geojsonsf')")
+  if (!requireNamespace("yyjsonr")) {
+    stop("The package `yyjsonr` is needed for this plugin. ",
+         "Please install it with:\ninstall.packages('yyjsonr')")
   }
 
   ## TODO - Use all columns if NULL ??
@@ -94,7 +94,9 @@ addHeightgraph <- function(
   ## Change columnnames to `attributeType` and transform to Geojson
   data <- lapply(columns, function(x) {
     names(data)[names(data) == x] <- 'attributeType'
-    geojsonsf::sf_geojson(data)
+    data <- yyjsonr::write_geojson_str(data)
+    class(data) <- c("geojson","json")
+    data
   })
 
   # Check if Properties and Data have same length

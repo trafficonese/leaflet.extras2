@@ -28,7 +28,6 @@ data <- structure(list(
 ## TESTS #######################
 test_that("heightgraph", {
   library(sf)
-  library(geojsonsf)
 
   data <- st_transform(data, 4326)
   data <- data.frame(st_coordinates(data))
