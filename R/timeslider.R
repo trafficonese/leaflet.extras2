@@ -29,7 +29,7 @@ timesliderDependencies <- function() {
 #' @export
 #' @inheritParams leaflet::addCircleMarkers
 #' @inherit leaflet::addMarkers return
-#' @examples \dontrun{
+#' @examples
 #' library(leaflet)
 #' library(leaflet.extras2)
 #' library(sf)
@@ -47,7 +47,6 @@ timesliderDependencies <- function() {
 #'                timeAttribute = "time",
 #'                range = TRUE)) %>%
 #'   setView(-72, 22, 4)
-#' }
 addTimeslider <- function(map, data, radius = 10,
                           stroke = TRUE, color = "#03F",
                           weight = 5, opacity = 0.5, fill = TRUE, fillColor = color,

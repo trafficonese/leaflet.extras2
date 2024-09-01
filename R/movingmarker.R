@@ -36,7 +36,7 @@ leafletAwesomeMarkersDependencies1 <- function() {
 #' @references \url{https://github.com/ewoken/Leaflet.MovingMarker}
 #' @inherit leaflet::addMarkers return
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' library(sf)
 #' library(leaflet)
 #' library(leaflet.extras2)
@@ -55,7 +55,6 @@ leafletAwesomeMarkersDependencies1 <- function() {
 #'                   movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
 #'                   label="I am a pirate!",
 #'                   popup="Arrr")
-#' }
 addMovingMarker = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   duration = 2000,

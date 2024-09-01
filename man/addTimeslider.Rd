@@ -80,7 +80,6 @@ enables you to dynamically add and remove Markers/Lines on a map by using a
 JQuery UI slider.
 }
 \examples{
-\dontrun{
 library(leaflet)
 library(leaflet.extras2)
 library(sf)
@@ -98,7 +97,6 @@ leaflet() \%>\%
                timeAttribute = "time",
                range = TRUE)) \%>\%
   setView(-72, 22, 4)
-}
 }
 \references{
 \url{https://github.com/dwilhelm89/LeafletSlider}

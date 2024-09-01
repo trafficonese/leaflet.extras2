@@ -38,6 +38,17 @@ labelgunDependency <- function() {
 #' @references \url{https://github.com/Geovation/labelgun}
 #'
 #' @name addLabelgun
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addMarkers(data = breweries91,
+#'              label = ~brewery,
+#'              group = "markers",
+#'              labelOptions = labelOptions(permanent = TRUE)) %>%
+#'   addLabelgun("markers", 1)
 addLabelgun <- function(map, group=NULL, weight=NULL, entries=NULL) {
   stopifnot("The group argument is NULL. Please define a valid group." = !is.null(group))
   map$dependencies <- c(map$dependencies, labelgunDependency())

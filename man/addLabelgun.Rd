@@ -34,6 +34,18 @@ to labels of your choice (with higher weight).
 It is important to invoke the function after the markers have been
   added to the map. Otherwise nothing will happen.
 }
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  addMarkers(data = breweries91,
+             label = ~brewery,
+             group = "markers",
+             labelOptions = labelOptions(permanent = TRUE)) \%>\%
+  addLabelgun("markers", 1)
+}
 \references{
 \url{https://github.com/Geovation/labelgun}
 }
