@@ -1,0 +1,50 @@
+
+.clustermarkerpopuplabel {
+  font-weight: 800;
+}
+
+.clusterlegend {
+  padding: 2px 9px;
+  border-radius: 8px;
+  z-index: 100;
+  font-size: 1em;
+  font-family: sans-serif;
+  background: rgba(255,255,255,0.9);
+  min-width: 100px;
+}
+.legendheading {
+  position: relative;
+  height: 25px;
+  padding: 5px 2px 0px 2px;
+  font-size: larger;
+  font-weight: bold;
+}
+.legenditem {
+  padding: 2px;
+  margin-bottom: 2px;
+}
+
+/*Marker clusters*/
+.clustermarker-cluster-pie g.arc{
+  fill-opacity: 0.5;
+}
+.clustermarker-cluster-pie-label, .clustermarker-cluster-bar-label {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+/*Markers*/
+.clustermarker {
+  border-width: 2px;
+  border-radius:10px;
+  border-style: solid;
+}
+.clustermarker div{
+  text-align: center;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+
+
