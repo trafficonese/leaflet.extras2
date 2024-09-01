@@ -41,6 +41,15 @@ buildingsDependency <- function() {
 #' @seealso \url{https://github.com/kekscom/osmbuildings/} for more details on the OSM Buildings plugin and available properties.
 #' @family OSM-Buildings Plugin
 #' @export
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' leaflet()  %>%
+#'   addProviderTiles("CartoDB") %>%
+#'   addBuildings(group = "Buildings") %>%
+#'   addLayersControl(overlayGroups = "Buildings") %>%
+#'   setView(lng = 13.4, lat = 52.51, zoom = 15)
 addBuildings <- function(
   map,
   buildingURL = "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json",

@@ -43,6 +43,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Moving Markers](https://github.com/ewoken/Leaflet.MovingMarker)
 -   [OpenWeatherMap](https://github.com/trafficonese/leaflet-openweathermap)
+-   [OSMBuildings](https://github.com/kekscom/osmbuildings/tree/master)
 -   [Playback](https://github.com/hallahan/LeafletPlayback)
 -   [Reachability](https://github.com/traffordDataLab/leaflet.reachability)
 -   [Sidebar-v2](https://github.com/Turbo87/sidebar-v2)

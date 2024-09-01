@@ -45,6 +45,16 @@ The `data` parameter allows you to provide custom building data as a GeoJSON obj
 }
 See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}{Simple_3D_Buildings}
 }
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+leaflet()  \%>\%
+  addProviderTiles("CartoDB") \%>\%
+  addBuildings(group = "Buildings") \%>\%
+  addLayersControl(overlayGroups = "Buildings") \%>\%
+  setView(lng = 13.4, lat = 52.51, zoom = 15)
+}
 \seealso{
 \url{https://github.com/kekscom/osmbuildings/} for more details on the OSM Buildings plugin and available properties.
 

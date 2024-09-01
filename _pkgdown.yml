@@ -64,6 +64,9 @@ reference:
     contents:
     - matches("Openweather")
     - matches("openweather")
+  - title: OSM Buildings
+    contents:
+    - matches("Building")
   - title: Playback
     contents:
     - matches("Playback")
