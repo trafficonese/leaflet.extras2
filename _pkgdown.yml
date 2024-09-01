@@ -1,8 +1,7 @@
 title: leaflet.extras2
-
+url: https://trafficonese.github.io/leaflet.extras2/
 template:
-  params:
-    bootswatch: yeti
+  bootstrap: 5
 
 reference:
   - title: Package Documentation
