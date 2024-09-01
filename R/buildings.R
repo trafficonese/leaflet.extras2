@@ -70,6 +70,15 @@ addBuildings <- function(
 #' @param time a timestamp that can be converted to POSIXct
 #' @family OSM-Buildings Plugin
 #' @export
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addBuildings() %>%
+#'   updateBuildingTime(as.POSIXct("2024-09-01 19:00:00 CET")) %>%
+#'   setView(13.40, 52.51836,15)
 updateBuildingTime <- function(map, time) {
   invokeMethod(map, NULL, "updateBuildingTime", time)
 }
@@ -80,6 +89,16 @@ updateBuildingTime <- function(map, time) {
 #' @param style A named list of styles
 #' @family OSM-Buildings Plugin
 #' @export
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' style <- list(color = "#0000ff", wallColor = "gray", roofColor = "orange", shadows = TRUE)
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addBuildings() %>%
+#'   setBuildingStyle(style) %>%
+#'   setView(13.40, 52.51836,15)
 setBuildingStyle <- function(map, style = list(color = "#ffcc00",
                                                wallColor = "#ffcc00",
                                                roofColor = "orange",

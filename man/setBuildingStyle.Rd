@@ -18,6 +18,17 @@ setBuildingStyle(
 \description{
 Update the OSM-Buildings Style
 }
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+style <- list(color = "#0000ff", wallColor = "gray", roofColor = "orange", shadows = TRUE)
+leaflet() \%>\%
+  addTiles() \%>\%
+  addBuildings() \%>\%
+  setBuildingStyle(style) \%>\%
+  setView(13.40, 52.51836,15)
+}
 \seealso{
 Other OSM-Buildings Plugin: 
 \code{\link{addBuildings}()},
