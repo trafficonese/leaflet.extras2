@@ -28,6 +28,7 @@ reference:
   - title: DivIcons
     contents:
     - matches("DivIcon")
+    - matches("Divicon")
     - matches("divicon")
   - title: Easy Print
     contents:
