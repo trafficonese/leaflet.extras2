@@ -33,7 +33,6 @@ timesliderDependencies <- function() {
 #' library(leaflet)
 #' library(leaflet.extras2)
 #' library(sf)
-#' library(geojsonsf)
 #'
 #' data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
 #' data <- st_cast(data, "POINT")
@@ -92,11 +91,12 @@ addTimeslider <- function(map, data, radius = 10,
   bbox <- sf::st_bbox(data)
 
   ## Make GeoJSON
-  if (!requireNamespace("geojsonsf")) {
-    stop("The package `geojsonsf` is needed for this plugin. ",
-         "Please install it with:\ninstall.packages('geojsonsf')")
+  if (!requireNamespace("yyjsonr")) {
+    stop("The package `yyjsonr` is needed for this plugin. ",
+         "Please install it with:\ninstall.packages('yyjsonr')")
   }
-  data <- geojsonsf::sf_geojson(data)
+  data <- yyjsonr::write_geojson_str(data)
+  class(data) <- c("geojson","json")
 
   ## Add Deps and invoke Leaflet
   map$dependencies <- c(map$dependencies, timesliderDependencies())

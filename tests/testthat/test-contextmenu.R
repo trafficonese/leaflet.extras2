@@ -46,6 +46,14 @@ test_that("contextmenu", {
   expect_equal(m$x$calls[[length(m$x$calls)]]$method,
                "hideContextmenu")
 
+  m <- m %>% enableContextmenu()
+  expect_equal(m$x$calls[[length(m$x$calls)]]$method,
+               "enableContextmenu")
+
+  m <- m %>% disableContextmenu()
+  expect_equal(m$x$calls[[length(m$x$calls)]]$method,
+               "disableContextmenu")
+
   if (packageVersion("leaflet") < "2.0.4") {
     m <- expect_warning(
       m %>% addItemContextmenu(

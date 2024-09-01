@@ -1,7 +1,6 @@
 library(leaflet)
 library(leaflet.extras2)
 library(sf)
-library(geojsonsf)
 library(shiny)
 
 data <- sf::st_as_sf(leaflet::atlStorms2005[1,])

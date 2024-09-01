@@ -4,6 +4,9 @@
 * The opened sidebar tab is returned as Shiny input using the `sidebar_tabs` ID.
 * allow `...` in `antpathOptions` to be able to set the pane (e.g.: `renderer= JS('L.svg({pane: "my-pane"})')`)
 * New Function `addDivicon` adds `DivIcon` markers to Leaflet maps with support for custom HTML and CSS classes. See the example in `./inst/examples/divicons_html_app.R`
+* Added custom `clusterCharts` using `Leaflet.markercluster` and `d3` for piechart and barcharts.
+* Added `addClusterCharts` to enable **pie** and **bar** charts in Marker clusters using `Leaflet.markercluster`, `d3` and `L.DivIcon`, with support for customizable category styling and various aggregation methods like **sum, min, max, mean**, and **median**.
+* Switched from `geojsonsf` to `yyjsonr` (*heightgraph*, *timeslider*, *clustercharts*)
 
 # leaflet.extras2 1.2.2
 
