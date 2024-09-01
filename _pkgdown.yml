@@ -25,6 +25,15 @@ reference:
     - menuItem
     - mapmenuItems
     - markermenuItems
+  - title: DivIcons
+    contents:
+    - matches("DivIcon")
+    - matches("Divicon")
+    - matches("divicon")
+  - title: Clustercharts with d3
+    contents:
+    - matches("ClusterCharts")
+    - matches("clusterchart")
   - title: Easy Print
     contents:
     - matches("Easyprint")

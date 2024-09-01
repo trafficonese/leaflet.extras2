@@ -53,6 +53,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Tangram](https://github.com/tangrams/tangram)
 -   [Velocity](https://github.com/onaci/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
+-   [ClusterCharts](https://gist.github.com/gisminister/10001728)
 
 
 ### Documentation
