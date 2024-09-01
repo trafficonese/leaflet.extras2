@@ -9,7 +9,7 @@ on:
     types: [published]
   workflow_dispatch:
 
-name: pkgdown.yaml
+name: _pkgdown.yaml
 
 permissions: read-all
 
