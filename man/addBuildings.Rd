@@ -2,33 +2,56 @@
 % Please edit documentation in R/buildings.R
 \name{addBuildings}
 \alias{addBuildings}
-\title{Add OSM-Buildings}
+\title{Add OSM-Buildings to a Leaflet Map}
 \usage{
 addBuildings(
   map,
-  layerId = NULL,
+  buildingURL = "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json",
   group = NULL,
-  opacity = 0.5,
-  attribution = "© Map tiles <a href=\\"https://mapbox.com\\">Mapbox</a>"
+  eachFn = NULL,
+  clickFn = NULL,
+  data = NULL
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}.}
 
-\item{options}{List of further options. See \code{\link{hexbinOptions}}}
+\item{buildingURL}{The URL template for the building data. Default is the OSM Buildings tile server: \cr
+\code{"https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json"}.}
+
+\item{group}{The name of the group the buildings will be added to.}
+
+\item{eachFn}{A JavaScript function (using \code{\link[htmlwidgets]{JS}}) that will be called for each building feature. Use this to apply custom logic to each feature.}
+
+\item{clickFn}{A JavaScript function (using \code{\link[htmlwidgets]{JS}}) that will be called when a building is clicked. Use this to handle click events on buildings.}
+
+\item{data}{A GeoJSON object containing Polygon features representing the buildings. The properties of these polygons can include attributes like \code{height}, \code{color}, \code{roofColor}, and others as specified in the OSM Buildings documentation.}
 }
 \description{
-Add OSM-Buildings
+This function adds 2.5D buildings to a Leaflet map using the OSM Buildings plugin.
 }
-\note{
-Out of the box a legend image is only available for Pressure,
-  Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
-  Wind Speed.
+\details{
+The `data` parameter allows you to provide custom building data as a GeoJSON object. The following properties can be used within the GeoJSON:
+\itemize{
+  \item \strong{height}
+  \item \strong{minHeight}
+  \item \strong{color/wallColor}
+  \item \strong{material}
+  \item \strong{roofColor}
+  \item \strong{roofMaterial}
+  \item \strong{shape}
+  \item \strong{roofShape}
+  \item \strong{roofHeight}
+}
+
+See the OSM Wiki: \href{https://wiki.openstreetmap.org/wiki/Simple_3D_Buildings}
 }
 \seealso{
-https://osmbuildings.org/documentation/viewer/
+\url{https://github.com/kekscom/osmbuildings/} for more details on the OSM Buildings plugin and available properties.
 
 Other OSM-Buildings Plugin: 
+\code{\link{setBuildingData}()},
+\code{\link{setBuildingStyle}()},
 \code{\link{updateBuildingTime}()}
 }
 \concept{OSM-Buildings Plugin}

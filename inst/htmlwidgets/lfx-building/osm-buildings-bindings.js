@@ -1,46 +1,76 @@
-LeafletWidget.methods.addBuilding = function(layerId, group, opacity, attribution) {
-//  (function(){
+LeafletWidget.methods.addBuilding = function(buildingURL, group, eachFn, clickFn, data) {
+  (function(){
     var map = this;
     if (map.osmb) {
       map.osmb.remove();
       delete map.osmb;
     }
-    console.log(("Schaff ich es hjier"))
-
-    map.setView([52.51836, 13.40438], 16, false);
-
-    new L.TileLayer('https://tile-a.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
-      attribution: '© Data <a href="https://openstreetmap.org">OpenStreetMap</a>',
-      maxZoom: 18,
-      maxNativeZoom: 20
-    }).addTo(map);
 
     var osmb = new OSMBuildings(map)
-      .load('https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json');
+      .date(new Date())
 
+    if (data) {
+      if (data.features && data.features[0].properties.height && data.features[0].geometry.type == "Polygon") {
+        console.log("data is defined"); console.log(data);
+        osmb.set(data);
+      } else {
+        console.error("The data is not a correct GeoJSON of type 'Polygon' or has no property 'height'.");
+      }
+    } else {
+      osmb.load(buildingURL);
+    }
 
-    osmb.date(new Date(2017, 15, 1, 19, 30))
+    if (eachFn && typeof eachFn === 'function') {
+      osmb.each(eachFn);
+    }
+    if (clickFn && typeof clickFn === 'function') {
+      osmb.click(clickFn);
+    }
 
+    map.layerManager.addLayer(osmb, "building", null, group);
     map.osmb = osmb;
 
-//  }).call(this);
+  }).call(this);
 };
 
 
 LeafletWidget.methods.updateBuildingTime = function(date) {
-  var map = this;
-  if (map.osmb) {
-    var now = new Date(date);
-    console.log("now"); console.log(now)
-    var Y = now.getFullYear(),
-      M = now.getMonth(),
-      D = now.getDate(),
-      h = now.getHours(),
-      m = now.getMinutes();
+  (function(){
+    var map = this;
+    if (map.osmb) {
+      var now = new Date(date);
+      var Y = now.getFullYear(),
+        M = now.getMonth(),
+        D = now.getDate(),
+        h = now.getHours(),
+        m = now.getMinutes();
 
-    // Update the date on the OSMBuildings instance
-    map.osmb.date(new Date(Y, M, D, h, m));
-  } else {
-    console.error("OSMBuildings instance is not initialized.");
-  }
+      // Update the date on the OSMBuildings instance
+      map.osmb.date(new Date(Y, M, D, h, m));
+    } else {
+      console.error("OSMBuildings instance is not initialized.");
+    }
+  }).call(this);
+};
+
+LeafletWidget.methods.setBuildingStyle = function(style) {
+  (function(){
+    var map = this;
+    if (map.osmb) {
+      map.osmb.style(style);
+    } else {
+      console.error("OSMBuildings instance is not initialized.");
+    }
+  }).call(this);
+};
+
+LeafletWidget.methods.setBuildingData = function(data) {
+  (function(){
+    var map = this;
+    if (map.osmb) {
+      map.osmb.set(data);
+    } else {
+      console.error("OSMBuildings instance is not initialized.");
+    }
+  }).call(this);
 };
