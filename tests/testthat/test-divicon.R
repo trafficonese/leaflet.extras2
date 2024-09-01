@@ -4,8 +4,10 @@ library(sf)
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
 df <- df[sample(1:nrow(df), 50, replace = FALSE), ]
-df$classes <- sample(x = c("myclass1", "myclass2", "myclass3"),
-                     nrow(df), replace = TRUE)
+df$classes <- sample(
+  x = c("myclass1", "myclass2", "myclass3"),
+  nrow(df), replace = TRUE
+)
 df$ID <- paste0("ID_", 1:nrow(df))
 df$lon <- st_coordinates(df)[, 1]
 df$lat <- st_coordinates(df)[, 2]
@@ -27,16 +29,20 @@ test_that("addDivicon works", {
       className = ~ paste("globalclass", classes),
       html = ~ paste0("<div>", Name, "</div>")
     )
-  expect_true(any(sapply(map$dependencies,
-                         function(dep) dep$name == "lfx-divicon")))
+  expect_true(any(sapply(
+    map$dependencies,
+    function(dep) dep$name == "lfx-divicon"
+  )))
   expect_is(map, "leaflet")
   expect_identical(map$x$calls[[2]]$method, "addDivicon")
   expect_identical(map$x$calls[[2]]$args[[3]], df$ID)
   expect_identical(map$x$calls[[2]]$args[[4]], NULL)
   expect_identical(map$x$calls[[2]]$args[[5]], leaflet::markerOptions())
   expect_identical(map$x$calls[[2]]$args[[6]], paste("globalclass", df$classes))
-  expect_identical(map$x$calls[[2]]$args[[7]],
-                   paste0("<div>", df$Name, "</div>"))
+  expect_identical(
+    map$x$calls[[2]]$args[[7]],
+    paste0("<div>", df$Name, "</div>")
+  )
   expect_identical(map$x$calls[[2]]$args[[8]], NULL)
   expect_identical(map$x$calls[[2]]$args[[9]], NULL)
   expect_identical(map$x$calls[[2]]$args[[10]], NULL)
@@ -45,8 +51,10 @@ test_that("addDivicon works", {
   expect_identical(map$x$calls[[2]]$args[[13]], NULL)
 
   # Test 2: Passing a group
-  df$groups <- sample(x = c("myclass1", "myclass2", "myclass3"),
-                      nrow(df), replace = TRUE)
+  df$groups <- sample(
+    x = c("myclass1", "myclass2", "myclass3"),
+    nrow(df), replace = TRUE
+  )
   map <- generate_test_map() %>%
     addDivicon(
       data = df,
@@ -61,8 +69,10 @@ test_that("addDivicon works", {
   expect_identical(map$x$calls[[2]]$args[[4]], df$groups)
   expect_identical(map$x$calls[[2]]$args[[5]], leaflet::markerOptions())
   expect_identical(map$x$calls[[2]]$args[[6]], paste("globalclass", df$classes))
-  expect_identical(map$x$calls[[2]]$args[[7]],
-                   paste0("<div>", df$Name, "</div>"))
+  expect_identical(
+    map$x$calls[[2]]$args[[7]],
+    paste0("<div>", df$Name, "</div>")
+  )
   expect_identical(map$x$calls[[2]]$args[[8]], NULL)
   expect_identical(map$x$calls[[2]]$args[[9]], NULL)
   expect_identical(map$x$calls[[2]]$args[[10]], NULL)
@@ -89,8 +99,10 @@ test_that("addDivicon works", {
   expect_identical(map$x$calls[[2]]$args[[4]], df$groups)
   expect_identical(map$x$calls[[2]]$args[[5]], leaflet::markerOptions())
   expect_identical(map$x$calls[[2]]$args[[6]], paste("globalclass", df$classes))
-  expect_identical(map$x$calls[[2]]$args[[7]],
-                   paste0("<div>", df$Name, "</div>"))
+  expect_identical(
+    map$x$calls[[2]]$args[[7]],
+    paste0("<div>", df$Name, "</div>")
+  )
   expect_identical(map$x$calls[[2]]$args[[8]], paste0(df$ID, ": ", df$Name))
   expect_identical(map$x$calls[[2]]$args[[9]], popupOptions(minWidth = 400))
   expect_identical(map$x$calls[[2]]$args[[10]], df$groups)
@@ -119,8 +131,10 @@ test_that("addDivicon works", {
   expect_identical(map$x$calls[[2]]$args[[4]], df$groups)
   expect_identical(map$x$calls[[2]]$args[[5]], leaflet::markerOptions())
   expect_identical(map$x$calls[[2]]$args[[6]], paste("globalclass", df$classes))
-  expect_identical(map$x$calls[[2]]$args[[7]],
-                   paste0("<div>", df$Name, "</div>"))
+  expect_identical(
+    map$x$calls[[2]]$args[[7]],
+    paste0("<div>", df$Name, "</div>")
+  )
   expect_identical(map$x$calls[[2]]$args[[8]], paste0(df$ID, ": ", df$Name))
   expect_identical(map$x$calls[[2]]$args[[9]], popupOptions(minWidth = 400))
   expect_identical(map$x$calls[[2]]$args[[10]], df$groups)

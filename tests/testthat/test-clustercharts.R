@@ -1,19 +1,25 @@
 test_that("clustercharts", {
-
   ## data ##########
   data <- sf::st_as_sf(breweries91)
-  data$category <- sample(c("Schwer", "Mäßig",
-                            "Leicht", "kein Schaden"),
-                          size = nrow(data), replace = TRUE)
+  data$category <- sample(
+    c(
+      "Schwer", "Mäßig",
+      "Leicht", "kein Schaden"
+    ),
+    size = nrow(data), replace = TRUE
+  )
   data$label <- paste0(data$brewery, "<br>", data$address)
   data$id <- paste0("ID", seq.int(nrow(data)))
-  data$popup <- paste0("<h6>", data$brewery,
-                       "</h6><div>", data$address, "</div>")
+  data$popup <- paste0(
+    "<h6>", data$brewery,
+    "</h6><div>", data$address, "</div>"
+  )
   data$tosum <- sample(1:100, nrow(data), replace = TRUE)
   data$tosumlabel <- paste("Sum: ", data$tosum)
   data$web <- gsub(">(.*?)<", ">", data$tosum, "<", data$web)
   data$web <- ifelse(is.na(data$web), "",
-                     paste0("<div class='markerhtml'>", data$web, "</div>"))
+    paste0("<div class='markerhtml'>", data$web, "</div>")
+  )
 
   ## simple example  ##########
   m <- leaflet() %>%
@@ -62,8 +68,10 @@ test_that("clustercharts", {
           labels = c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
           colors = c("lightblue", "orange", "lightyellow", "lightgreen")
         ),
-      popupFields = c("id", "brewery", "address",
-                      "zipcode", "category", "tosum"),
+      popupFields = c(
+        "id", "brewery", "address",
+        "zipcode", "category", "tosum"
+      ),
       popupLabels = c("id", "Brauerei", "Addresse", "PLZ", "Art", "tosum")
     )
   deps <- findDependencies(m)
@@ -82,8 +90,10 @@ test_that("clustercharts", {
           labels = c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
           colors = c("lightblue", "orange", "lightyellow", "lightgreen")
         ),
-      popupFields = c("id", "brewery", "address",
-                      "zipcode", "category", "tosum")
+      popupFields = c(
+        "id", "brewery", "address",
+        "zipcode", "category", "tosum"
+      )
     )
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "lfx-clustercharts")
@@ -108,8 +118,10 @@ test_that("clustercharts", {
       addClusterCharts(
         data = data,
         categoryMap =
-          data.frame(colors = c("lightblue", "orange",
-                                "lightyellow", "lightgreen"))
+          data.frame(colors = c(
+            "lightblue", "orange",
+            "lightyellow", "lightgreen"
+          ))
       )
   )
 
@@ -141,8 +153,10 @@ test_that("clustercharts", {
         data = data,
         categoryField = "category",
         categoryMap =
-          data.frame(colors = c("lightblue", "orange",
-                                "lightyellow", "lightgreen"))
+          data.frame(colors = c(
+            "lightblue", "orange",
+            "lightyellow", "lightgreen"
+          ))
       )
   )
   deps <- findDependencies(m)
@@ -187,10 +201,14 @@ test_that("clustercharts", {
           labels = c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
           colors = c("lightblue", "orange", "lightyellow", "lightgreen")
         ),
-      popupFields = c("id", "brewery", "address",
-                      "zipcode", "category", "tosum", "tosum2"),
-      popupLabels = c("id", "Brauerei", "Addresse",
-                      "PLZ", "Art", "tosum", "tosum2"),
+      popupFields = c(
+        "id", "brewery", "address",
+        "zipcode", "category", "tosum", "tosum2"
+      ),
+      popupLabels = c(
+        "id", "Brauerei", "Addresse",
+        "PLZ", "Art", "tosum", "tosum2"
+      ),
       label = "label",
       options = clusterchartOptions(size = 50)
     )
@@ -226,10 +244,14 @@ test_that("clustercharts", {
           labels = c("Schwer", "Mäßig", "Leicht", "kein Schaden"),
           colors = c("lightblue", "orange", "lightyellow", "lightgreen")
         ),
-      popupFields = c("id", "brewery", "address",
-                      "zipcode", "category", "tosum", "tosum2"),
-      popupLabels = c("id", "Brauerei", "Addresse",
-                      "PLZ", "Art", "tosum", "tosum2"),
+      popupFields = c(
+        "id", "brewery", "address",
+        "zipcode", "category", "tosum", "tosum2"
+      ),
+      popupLabels = c(
+        "id", "Brauerei", "Addresse",
+        "PLZ", "Art", "tosum", "tosum2"
+      ),
       label = "label",
       options = clusterchartOptions(size = c(30, 35))
     )
@@ -258,10 +280,14 @@ test_that("clustercharts", {
           icons = iconvec
         ),
       options = clusterchartOptions(size = 50),
-      popupFields = c("id", "brewery", "address",
-                      "zipcode", "category", "tosum", "tosum2"),
-      popupLabels = c("id", "Brauerei", "Addresse",
-                      "PLZ", "Art", "tosum", "tosum2"),
+      popupFields = c(
+        "id", "brewery", "address",
+        "zipcode", "category", "tosum", "tosum2"
+      ),
+      popupLabels = c(
+        "id", "Brauerei", "Addresse",
+        "PLZ", "Art", "tosum", "tosum2"
+      ),
       label = "label"
     )
   deps <- findDependencies(m)
@@ -303,10 +329,14 @@ test_that("clustercharts", {
       group = "clustermarkers",
       layerId = "id",
       clusterId = "id",
-      popupFields = c("id", "brewery", "address",
-                      "zipcode", "category", "tosum", "tosum2"),
-      popupLabels = c("id", "Brauerei", "Addresse",
-                      "PLZ", "Art", "tosum", "tosum2"),
+      popupFields = c(
+        "id", "brewery", "address",
+        "zipcode", "category", "tosum", "tosum2"
+      ),
+      popupLabels = c(
+        "id", "Brauerei", "Addresse",
+        "PLZ", "Art", "tosum", "tosum2"
+      ),
       label = "label",
       markerOptions = markerOptions(
         interactive = TRUE,
@@ -318,21 +348,27 @@ test_that("clustercharts", {
         riseOnHover = TRUE,
         riseOffset = 400
       ),
-      legendOptions = list(position = "bottomright",
-                           title = "Unfälle im Jahr 2003"),
+      legendOptions = list(
+        position = "bottomright",
+        title = "Unfälle im Jahr 2003"
+      ),
       clusterOptions = markerClusterOptions(
         showCoverageOnHover = TRUE,
         zoomToBoundsOnClick = TRUE,
         spiderfyOnMaxZoom = TRUE,
         removeOutsideVisibleBounds = TRUE,
-        spiderLegPolylineOptions = list(weight = 1.5,
-                                        color = "#222", opacity = 0.5),
+        spiderLegPolylineOptions = list(
+          weight = 1.5,
+          color = "#222", opacity = 0.5
+        ),
         freezeAtZoom = TRUE,
         clusterPane = "clusterpane",
         spiderfyDistanceMultiplier = 2
       ),
       labelOptions = labelOptions(opacity = 0.8, textsize = "14px"),
-      popupOptions = popupOptions(maxWidth = 900,
-                                  minWidth = 200, keepInView = TRUE)
+      popupOptions = popupOptions(
+        maxWidth = 900,
+        minWidth = 200, keepInView = TRUE
+      )
     )
 })
