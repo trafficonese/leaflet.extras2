@@ -32,7 +32,9 @@ If you need a plugin that is not already implemented create an [issue](https://g
 
 -   [Ant Path](https://github.com/rubenspgcavalcante/leaflet-ant-path)
 -   [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
+-   [ClusterCharts](https://gist.github.com/gisminister/10001728)
 -   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
+-   [DivIcon](https://leafletjs.com/reference.html#divicon)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
 -   [GIBS](https://github.com/aparshin/leaflet-GIBS)
 -   [Heightgraph](https://github.com/GIScience/Leaflet.Heightgraph)
@@ -52,7 +54,6 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Tangram](https://github.com/tangrams/tangram)
 -   [Velocity](https://github.com/onaci/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
--   [ClusterCharts](https://gist.github.com/gisminister/10001728)
 
 
 ### Documentation
