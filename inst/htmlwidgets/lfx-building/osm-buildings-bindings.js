@@ -1,48 +1,43 @@
-LeafletWidget.methods.addBuilding = function(apikey, layerId, group, opacity, attribution) {
+LeafletWidget.methods.addBuilding = function(layerId, group, opacity, attribution) {
+//  (function(){
+    var map = this;
+    if (map.osmb) {
+      map.osmb.remove();
+      delete map.osmb;
+    }
+    console.log(("Schaff ich es hjier"))
 
-  var map = this;
+    map.setView([52.51836, 13.40438], 16, false);
 
-/*
-  let rotation = 0;
-  function rotate() {
-    map.setRotation(rotation);
-    rotation = (rotation+1) % 360;
-    requestAnimationFrame(rotate);
-  }
+    new L.TileLayer('https://tile-a.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
+      attribution: '© Data <a href="https://openstreetmap.org">OpenStreetMap</a>',
+      maxZoom: 18,
+      maxNativeZoom: 20
+    }).addTo(map);
 
-  var buildings = new OSMBuildings({
-  	container: 'map',
-  	//position: { latitude: 52.51836, longitude: 13.40438 },
-  	zoom: 16,
-  	minZoom: 15,
-  	maxZoom: 20,
-    tilt: 40,
-    rotation: 300,
-    effects: ['shadows'],
-  	attribution: '© Data <a href="https://openstreetmap.org/copyright/">OpenStreetMap</a> © Map <a href="https://mapbox.com/">Mapbox</a> © 3D <a href="https://osmbuildings.org/copyright/">OSM Buildings</a>'
-  });
-*/
+    var osmb = new OSMBuildings(map)
+      .load('https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json');
 
-  // 2.5D buildings to Leaflet web maps.
-/*
-  new L.TileLayer('https://{s}.tiles.mapbox.com/v3/'+apikey+'/{z}/{x}/{y}.png', {
-    attribution: attribution,
-    maxZoom: 18,
-    maxNativeZoom: 20
-  }).addTo(map);
-  new OSMBuildings(map).load('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
-*/
+    map.osmb = osmb;
 
-  // 3D buildings
-  var map1 = new OSMBuildings({
-  	container: 'map',
-  	position: { latitude: 52.51836, longitude: 13.40438 },
-  	zoom: 16,
-  	minZoom: 15,
-  	maxZoom: 20,
-  	attribution: attribution
-  })
-  map1.addMapTiles('https://{s}.tiles.mapbox.com/v3/'+apikey+'/{z}/{x}/{y}.png');
-  map1.addGeoJSONTiles('https://{s}.data.osmbuildings.org/0.2/anonymous/tile/{z}/{x}/{y}.json');
+//  }).call(this);
 };
 
+
+LeafletWidget.methods.updateBuildingTime = function(date) {
+  var map = this;
+  if (map.osmb) {
+    var now = new Date(date);
+    console.log("now"); console.log(now)
+    var Y = now.getFullYear(),
+      M = now.getMonth(),
+      D = now.getDate(),
+      h = now.getHours(),
+      m = now.getMinutes();
+
+    // Update the date on the OSMBuildings instance
+    map.osmb.date(new Date(Y, M, D, h, m));
+  } else {
+    console.error("OSMBuildings instance is not initialized.");
+  }
+};

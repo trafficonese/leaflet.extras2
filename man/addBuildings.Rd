@@ -6,7 +6,6 @@
 \usage{
 addBuildings(
   map,
-  apikey = NULL,
   layerId = NULL,
   group = NULL,
   opacity = 0.5,
@@ -28,5 +27,8 @@ Out of the box a legend image is only available for Pressure,
 }
 \seealso{
 https://osmbuildings.org/documentation/viewer/
+
+Other OSM-Buildings Plugin: 
+\code{\link{updateBuildingTime}()}
 }
 \concept{OSM-Buildings Plugin}
