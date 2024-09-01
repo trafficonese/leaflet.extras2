@@ -19,8 +19,9 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
-    leaflet()  %>%
-      addTiles() %>% addMapPane("my-pane", 420) %>%
+    leaflet() %>%
+      addTiles() %>%
+      addMapPane("my-pane", 420) %>%
       addAntpath(data = coords,
                  layerId = ~FGN,
                  label = ~sprintf("Ant-Colony of %s", district),
