@@ -2,34 +2,70 @@
 % Please edit documentation in R/openweather.R
 \name{addOpenweatherTiles}
 \alias{addOpenweatherTiles}
-\title{Add OpenWeather Layers}
+\title{Add OpenWeatherMap Tiles}
 \usage{
 addOpenweatherTiles(
   map,
   apikey = NULL,
   layers = NULL,
-  addControl = TRUE,
   group = NULL,
-  opacity = 0.5
+  layerId = NULL,
+  opacity = 0.5,
+  options = openweatherOptions()
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{options}{List of further options. See \code{\link{hexbinOptions}}}
+\item{apikey}{a valid OpenWeatherMap-API key.}
+
+\item{layers}{character vector of layers you wish to add to the map. The
+following layers are currently possible \code{c("clouds", "cloudsClassic",
+"precipitation", "precipitationClassic", "rain", "rainClassic", "snow",
+"pressure", "pressureContour", "temperature", "wind")}.}
+
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
+
+\item{layerId}{the layer id}
+
+\item{opacity}{opacity of the layer}
+
+\item{options}{List of further options. See \code{\link{openweatherOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add OpenWeather Layers
+Add OpenWeatherMap Tiles
 }
 \note{
 Out of the box a legend image is only available for Pressure,
   Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
-  Wind Speed.
+  Wind Speed. Please add your own images if you need some more.
+}
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+
+leaflet()  \%>\%
+  addTiles() \%>\% setView(9, 50, 6) \%>\%
+  addOpenweatherTiles(layers = "wind")
+}
+}
+\references{
+\url{https://github.com/trafficonese/leaflet-openweathermap}
 }
 \seealso{
-https://github.com/Asymmetrik/leaflet-d3#hexbins-api
-
-Other Openweather Plugin: 
-\code{\link{addOpenweatherCurrent}()}
+Other Openweathermap Functions: 
+\code{\link{addOpenweatherCurrent}()},
+\code{\link{openweatherCurrentOptions}()},
+\code{\link{openweatherOptions}()}
 }
-\concept{Openweather Plugin}
+\concept{Openweathermap Functions}

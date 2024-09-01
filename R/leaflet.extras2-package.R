@@ -1,14 +1,13 @@
-#' leaflet.extras2: Extra Functionality for 'leaflet' Package.
-#'
-#' This package serves as an add-on to the 'leaflet' package by providing
-#' extra functionality via 'leaflet' plugins.
-#'
+
+#' @keywords internal
+"_PACKAGE"
+
+## usethis namespace: start
 #' @importFrom magrittr %>%
 #' @import leaflet
 #' @importFrom htmltools htmlDependency tagGetAttribute tags tagList
-#' @importFrom jsonlite fromJSON toJSON read_json
-#' @importFrom shiny addResourcePath
-#'
-#' @name leaflet.extras2
-#' @docType package
+#' @importFrom utils globalVariables adist packageVersion
+## usethis namespace: end
 NULL
+
+globalVariables(c("gibs_layers"))

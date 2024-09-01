@@ -15,10 +15,10 @@
 leaflet_mapkey_icon_set
 }
 \seealso{
-Other Mapkey Plugin: 
+Other Mapkey Functions: 
 \code{\link{addMapkeyMarkers}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIconList}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

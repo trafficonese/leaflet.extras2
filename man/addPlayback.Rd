@@ -9,55 +9,124 @@ addPlayback(
   data,
   time = "time",
   icon = NULL,
-  pathOptions = pathOptions(),
-  options = playbackOptions()
+  pathOpts = pathOptions(),
+  popup = NULL,
+  label = NULL,
+  popupOptions = NULL,
+  labelOptions = NULL,
+  options = playbackOptions(),
+  name = NULL
 )
 }
 \arguments{
 \item{map}{a map widget}
 
-\item{data}{data can either be a matrix or data.frame with coordinates,
-a POINT Simple Feature or a \code{SpatialPointsDataFrame}.
-It must contain a time column of class \code{POSIXct} or \code{numeric}.
-It can also be a JSON string which must be in a specific form. See the Details
-for further information.}
+\item{data}{data must be a POINT Simple Feature or a list of POINT Simple
+Feature's with a time column.}
 
 \item{time}{The column name of the time column. Default is \code{"time"}.}
 
-\item{icon}{an icon which can be created with \code{\link{makeIcon}{leaflet}}}
+\item{icon}{an icon which can be created with \code{\link[leaflet]{makeIcon}}}
 
-\item{pathOptions}{style the CircleMarker with \code{\link{pathOptions}{leaflet}}}
+\item{pathOpts}{style the CircleMarkers with
+\code{\link[leaflet]{pathOptions}}}
 
-\item{options}{see \code{\link{playbackOptions}}}
+\item{popup}{A formula with the column names for the popup content}
+
+\item{label}{A formula with the column names for the label content}
+
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
+
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
+options for each label. Default \code{NULL}}
+
+\item{options}{List of additional options. See \code{\link{playbackOptions}}}
+
+\item{name}{A formula with the column names for the feature name}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add Leaflet Playback Plugin based on the
- \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
+The \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
+provides the ability to replay GPS Points in the form of
+POINT Simple Features. Rather than simply animating a marker along a
+polyline, the speed of the animation is synchronized to a clock. The playback
+functionality is similar to a video player; you can start and stop playback or
+change the playback speed.
 }
-\details{
-If data is a JSON string, it must have the following form:
-\preformatted{
-{
-  "type": "Feature",
-  "geometry": {
-    "type": "MultiPoint",
-    "coordinates": [
-      [-123.2653968, 44.54962188],
-      [-123.26542599, 44.54951009]
-    ]
-},
-  "properties": {
-    "time": [1366067072000, 1366067074000]
-  }
+\note{
+If used in Shiny, you can listen to 2 events
+\itemize{
+ \item `map-ID`+"_pb_mouseover"
+ \item `map-ID`+"_pb_click"
 }
 }
-Additional arrays can be inside the properties, but are not required and are not used
-by the plugin. If the JSON is stored in a file you can load it to R via:
-\code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+library(sf)
+
+## Single Elements
+data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+data <- st_cast(data, "POINT")
+data$time = as.POSIXct(
+  seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+data$label <- as.character(data$time)
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  addPlayback(data = data, label = ~label,
+              popup = ~sprintf("I am a popup for <b>\%s</b> and <b>\%s</b>",
+                               Name, label),
+              popupOptions = popupOptions(offset = c(0, -35)),
+              options = playbackOptions(radius = 3,
+                                        tickLen = 36000,
+                                        speed = 50,
+                                        maxInterpolationTime = 1000),
+              pathOpts = pathOptions(weight = 5))
+
+
+## Multiple Elements
+data <- sf::st_as_sf(leaflet::atlStorms2005[1:5,])
+data$Name <- as.character(data$Name)
+data <- st_cast(data, "POINT")
+data$time <- unlist(lapply(rle(data$Name)$lengths, function(x) {
+  seq.POSIXt(as.POSIXct(Sys.Date()-2), as.POSIXct(Sys.Date()), length.out = x)
+}))
+data$time <- as.POSIXct(data$time, origin="1970-01-01")
+data$label <- paste0("Time: ", data$time)
+data$popup = sprintf("<h3>Customized Popup</h3><b>Name</b>: \%s<br><b>Time</b>: \%s",
+                     data$Name, data$time)
+data <- split(data, f = data$Name)
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  addPlayback(data = data,
+             popup = ~popup,
+             label = ~label,
+             popupOptions = popupOptions(offset=c(0,-35)),
+             labelOptions = labelOptions(noHide = TRUE),
+             options = playbackOptions(radius = 3,
+                                       tickLen = 1000000,
+                                       speed = 5000,
+                                       maxInterpolationTime = 10000,
+                                       transitionpopup = FALSE,
+                                       transitionlabel = FALSE,
+                                       playCommand = "Let's go",
+                                       stopCommand = "Stop it!",
+                                       color = c("red","green","blue",
+                                                 "orange","yellow")),
+              pathOpts = pathOptions(weight = 5))
+}
+}
+\references{
+\url{https://github.com/hallahan/LeafletPlayback}
 }
 \seealso{
-Other Playback Plugin: 
+Other Playback Functions: 
 \code{\link{playbackOptions}()},
 \code{\link{removePlayback}()}
 }
-\concept{Playback Plugin}
+\concept{Playback Functions}

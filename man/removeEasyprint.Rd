@@ -2,20 +2,23 @@
 % Please edit documentation in R/easyprint.R
 \name{removeEasyprint}
 \alias{removeEasyprint}
-\title{easyprintMapremoveEasyprint}
+\title{removeEasyprint}
 \usage{
 removeEasyprint(map)
 }
 \arguments{
 \item{map}{the map widget}
 }
+\value{
+A leaflet map object
+}
 \description{
-easyprintMapremoveEasyprint
+Removes the easyprint control from the map.
 }
 \seealso{
-Other EasyPrint Plugin: 
+Other EasyPrint Functions: 
 \code{\link{addEasyprint}()},
 \code{\link{easyprintMap}()},
 \code{\link{easyprintOptions}()}
 }
-\concept{EasyPrint Plugin}
+\concept{EasyPrint Functions}

@@ -25,7 +25,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         this._sidebar = L.DomUtil.get(id);
 
         // Attach .sidebar-left/right class
-        L.DomUtil.addClass(this._sidebar, 'sidebar-' + this.options.position);
+        L.DomUtil.addClass(this._sidebar, 'leafsidebar-' + this.options.position);
 
         // Attach touch styling if necessary
         if (L.Browser.touch)
@@ -35,26 +35,26 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         for (i = this._sidebar.children.length - 1; i >= 0; i--) {
             child = this._sidebar.children[i];
             if (child.tagName == 'DIV' &&
-                    L.DomUtil.hasClass(child, 'sidebar-content'))
+                    L.DomUtil.hasClass(child, 'leafsidebar-content'))
                 this._container = child;
         }
 
         // Find sidebar ul.sidebar-tabs > li, sidebar .sidebar-tabs > ul > li
-        this._tabitems = this._sidebar.querySelectorAll('ul.sidebar-tabs > li, .sidebar-tabs > ul > li');
+        this._tabitems = this._sidebar.querySelectorAll('ul.leafsidebar-tabs > li, .leafsidebar-tabs > ul > li');
         for (i = this._tabitems.length - 1; i >= 0; i--) {
             this._tabitems[i]._sidebar = this;
         }
 
-        // Find sidebar > div.sidebar-content > div.sidebar-pane
+        // Find sidebar > div.sidebar-content > div.leafsidebar-pane
         this._panes = [];
         this._closeButtons = [];
         for (i = this._container.children.length - 1; i >= 0; i--) {
             child = this._container.children[i];
             if (child.tagName == 'DIV' &&
-                L.DomUtil.hasClass(child, 'sidebar-pane')) {
+                L.DomUtil.hasClass(child, 'leafsidebar-pane')) {
                 this._panes.push(child);
 
-                var closeButtons = child.querySelectorAll('.sidebar-close');
+                var closeButtons = child.querySelectorAll('.leafsidebar-close');
                 for (var j = 0, len = closeButtons.length; j < len; j++)
                     this._closeButtons.push(closeButtons[j]);
             }
@@ -156,6 +156,8 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         // open sidebar (if necessary)
         if (L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('opening');
+            var pos = L.DomUtil.hasClass(this._sidebar, 'leafsidebar-left') ? '.leaflet-left' : '.leaflet-right';
+            $(pos).addClass('extended');
             L.DomUtil.removeClass(this._sidebar, 'collapsed');
         }
 
@@ -176,6 +178,8 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         // close sidebar
         if (!L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('closing');
+            var pos = L.DomUtil.hasClass(this._sidebar, 'leafsidebar-left') ? '.leaflet-left' : '.leaflet-right';
+            $(pos).removeClass('extended');
             L.DomUtil.addClass(this._sidebar, 'collapsed');
         }
 

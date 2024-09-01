@@ -15,7 +15,8 @@ antpathOptions(
   lineJoin = NULL,
   interactive = TRUE,
   pointerEvents = NULL,
-  className = ""
+  className = "",
+  ...
 )
 }
 \arguments{
@@ -47,14 +48,19 @@ acceleration. Default is \code{FALSE}}
 SVG backend is used}
 
 \item{className}{a CSS class name set on an element}
+
+\item{...}{extra options passed to underlying Javascript object constructor.}
+}
+\value{
+A list of options for \code{addAntpath} animated polylines
 }
 \description{
-Antpath Options
+Additional list of options for 'ant-path' animated polylines.
 }
 \seealso{
-Other Antpath Plugin: 
+Other Antpath Functions: 
 \code{\link{addAntpath}()},
 \code{\link{clearAntpath}()},
 \code{\link{removeAntpath}()}
 }
-\concept{Antpath Plugin}
+\concept{Antpath Functions}

@@ -7,43 +7,75 @@
 addWMS(
   map,
   baseUrl,
-  layers = "",
+  layerId = NULL,
   group = NULL,
   options = WMSTileOptions(),
   attribution = NULL,
+  layers = NULL,
+  popupOptions = NULL,
+  checkempty = FALSE,
   data = getMapData(map)
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{baseUrl}{a base URL of the WMS service}
 
-\item{layers}{vector or list of WMS layers to show. The name of the layer is
-used as the \code{layerId} (for \code{\link[leaflet]{removeTiles}}
-purposes)}
+\item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for clearGroup and addLayersControl purposes). Human-friendly group names
-are permitted–they need not be short, identifier-style names. Any number of
-layers and even different types of layers (e.g. markers and polygons) can
-share the same group name. NOTE: If multiple \code{layers} are included,
-the group argument will be ignored and the the layer-names will serve as
-group names.}
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
-\item{options}{List of further options. See
-\code{\link[leaflet]{WMSTileOptions}}}
+\item{options}{a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements}
 
 \item{attribution}{the attribution text of the tile layer (HTML)}
 
+\item{layers}{comma-separated list of WMS layers to show}
+
+\item{popupOptions}{List of popup options. See
+\code{\link[leaflet]{popupOptions}}. Default is NULL.}
+
+\item{checkempty}{Should the returned HTML-content be checked for emptiness?
+If the HTML-body is empty no popup is opened. Default is \code{FALSE}}
+
 \item{data}{the data object from which the argument values are derived; by
-default, it is the data object provided to \code{\link[leaflet]{leaflet}}
-initially, but can be overridden.}
+default, it is the \code{data} object provided to \code{leaflet()}
+initially, but can be overridden}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add Queryable WMS Layer
+A Leaflet plugin for working with Web Map services, providing:
+single-tile/untiled/nontiled layers, shared WMS sources, and
+\bold{GetFeatureInfo}-powered identify.
+
+You can also use \bold{CQL-Filters} by appending a string to the \code{'baseUrl'}.
+
+Something like \code{'http://server/wms?cql_filter=attribute=value'}
 }
-\seealso{
-https://github.com/heigeo/leaflet.wms
+\examples{
+library(leaflet)
+library(leaflet.extras2)
+
+leaflet() \%>\%
+  addTiles(group = "base") \%>\%
+  setView(9, 50, 5) \%>\%
+  addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms",
+         layers = "dwd:BRD_1km_winddaten_10m",
+      popupOptions = popupOptions(maxWidth = 600),
+      checkempty = TRUE,
+      options = WMSTileOptions(
+        transparent = TRUE,
+        format = "image/png",
+        info_format = "text/html"))
 }
-\concept{WMS Plugin}
+\references{
+\url{https://github.com/heigeo/leaflet.wms}
+}
+\concept{WMS Functions}

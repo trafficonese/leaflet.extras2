@@ -2,34 +2,63 @@
 % Please edit documentation in R/openweather.R
 \name{addOpenweatherCurrent}
 \alias{addOpenweatherCurrent}
-\title{Add OpenWeather Layers}
+\title{Add current OpenWeatherMap Marker}
 \usage{
 addOpenweatherCurrent(
   map,
   apikey = NULL,
-  layers = NULL,
-  addControl = TRUE,
   group = NULL,
-  opacity = 0.5
+  layerId = NULL,
+  options = openweatherCurrentOptions()
 )
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{options}{List of further options. See \code{\link{hexbinOptions}}}
+\item{apikey}{a valid Openweathermap-API key.}
+
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
+
+\item{layerId}{the layer id}
+
+\item{options}{List of further options. See
+\code{\link{openweatherCurrentOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add OpenWeather Layers
+Add current OpenWeatherMap Marker
 }
 \note{
-Out of the box a legend image is only available for Pressure,
-  Precipitation Classic, Clouds Classic, Rain Classic, Snow, Temperature and
-  Wind Speed.
+The current weather icons will appear beginning with zoom level 9
+and if used in Shiny, a click on an icon will update a Shiny input at
+\code{input$MAPID_owm_click}.
+}
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPENWEATHERMAP" = 'Your_API_Key')
+
+leaflet()  \%>\%
+  addTiles() \%>\% setView(9, 50, 9) \%>\%
+  addOpenweatherCurrent(options = openweatherCurrentOptions(
+    lang = "en", popup = TRUE))
+}
+}
+\references{
+\url{https://github.com/trafficonese/leaflet-openweathermap}
 }
 \seealso{
-https://github.com/Asymmetrik/leaflet-d3#hexbins-api
-
-Other Openweather Plugin: 
-\code{\link{addOpenweatherTiles}()}
+Other Openweathermap Functions: 
+\code{\link{addOpenweatherTiles}()},
+\code{\link{openweatherCurrentOptions}()},
+\code{\link{openweatherOptions}()}
 }
-\concept{Openweather Plugin}
+\concept{Openweathermap Functions}

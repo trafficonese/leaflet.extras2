@@ -4,20 +4,26 @@
 \alias{closeSidebar}
 \title{Close the Sidebar}
 \usage{
-closeSidebar(map)
+closeSidebar(map, sidebar_id = NULL)
 }
 \arguments{
 \item{map}{A leaflet map widget}
+
+\item{sidebar_id}{The id of the sidebar (per \code{\link{sidebar_tabs}}).
+Defaults to \code{NULL} such that the first sidebar is used.}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Close the Sidebar
 }
 \seealso{
-Other Sidebar Plugin: 
+Other Sidebar Functions: 
 \code{\link{addSidebar}()},
 \code{\link{openSidebar}()},
 \code{\link{removeSidebar}()},
 \code{\link{sidebar_pane}()},
 \code{\link{sidebar_tabs}()}
 }
-\concept{Sidebar Plugin}
+\concept{Sidebar Functions}

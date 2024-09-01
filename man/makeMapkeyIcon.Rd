@@ -2,7 +2,7 @@
 % Please edit documentation in R/mapkeyIcon.R
 \name{makeMapkeyIcon}
 \alias{makeMapkeyIcon}
-\title{Make mapkey Icon}
+\title{Make Mapkey Icon}
 \usage{
 makeMapkeyIcon(
   icon = "mapkey",
@@ -19,8 +19,7 @@ makeMapkeyIcon(
 )
 }
 \arguments{
-\item{icon}{ID of the mapkey Icon you want to use. See
-\href{http://mapkeyicons.com/}{mapkeyicons.com} for a full list.}
+\item{icon}{ID of the mapkey Icon you want to use.}
 
 \item{color}{Any CSS color (e.g. 'red','rgba(20,160,90,0.5)', '#686868', ...)}
 
@@ -30,27 +29,41 @@ makeMapkeyIcon(
 
 \item{borderRadius}{Any number (for circle size/2, for square 0.001)}
 
-\item{hoverScale}{Any real number (best result in range 1 - 2, use 1 for no effect)}
+\item{hoverScale}{Any real number (best result in range 1 - 2, use 1 for no
+effect)}
 
 \item{hoverEffect}{Switch on/off effect on hover}
 
-\item{additionalCSS}{CSS code (e.g. "border:4px solid #aa3838;")}
+\item{additionalCSS}{CSS code (e.g. \code{"border:4px solid #aa3838;"})}
 
-\item{hoverCSS}{CSS code (e.g. "background-color:#992b00!important; color:#99defc!important;")}
+\item{hoverCSS}{CSS code (e.g. \code{"background-color:#992b00 !important;
+color:#99defc !important;"})}
 
-\item{htmlCode}{e.g. '&#57347;&#xe003;'.
-See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information}
+\item{htmlCode}{e.g. \code{'&#57347;&#xe003;'}.}
 
-\item{boxShadow}{Should a shadow be visible.}
+\item{boxShadow}{Should a shadow be visible}
+}
+\value{
+A list of mapkey-icon data that can be passed to the argument \code{icon}
 }
 \description{
-Make mapkey Icon
+Make Mapkey Icon
+}
+\examples{
+makeMapkeyIcon(icon = "traffic_signal",
+               color = "#0000ff",
+               iconSize = 12,
+               boxShadow = FALSE,
+               background="transparent")
+}
+\references{
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
 }
 \seealso{
-Other Mapkey Plugin: 
+Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},
 \code{\link{mapkeyIconList}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

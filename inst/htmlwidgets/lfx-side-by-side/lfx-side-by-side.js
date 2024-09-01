@@ -79,6 +79,7 @@
 
         this._divider = L.DomUtil.create('div', 'leaflet-sbs-divider', container)
         var range = this._range = L.DomUtil.create('input', 'leaflet-sbs-range', container)
+        range.addEventListener('click', function (e) { e.stopPropagation() })
         range.type = 'range'
         range.min = 0
         range.max = 1

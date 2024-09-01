@@ -13,41 +13,49 @@ addVelocity(
 )
 }
 \arguments{
-\item{map}{a map widget}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{clearGroup} and \code{addLayersControl} purposes). Human-friendly
-group names are permitted–they need not be short, identifier-style names.
-Any number of layers and even different types of layers (e.g. markers and
-polygons) can share the same group name.}
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
-\item{content}{a JSON File respresenting the velocity data or a URL pointing
-to such a JSON file.}
+\item{content}{the path or URL to a JSON file representing the velocity data
+or a data.frame which can be transformed to such a JSON file. Please see the
+\href{https://github.com/onaci/leaflet-velocity/tree/master/demo}{demo
+files} for some example data.}
 
-\item{options}{see \code{\link{velocityOptions}}}
+\item{options}{List of further options. See \code{\link{velocityOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Add velocity animated data to leaflet. Based on the
- \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}
+  \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}
 }
 \examples{
 \dontrun{
 library(leaflet)
 library(leaflet.extras2)
-content <- system.file("examples/velocity/wind-global.json", package = "leaflet.extras2")
+content <- "https://raw.githubusercontent.com/onaci/leaflet-velocity/master/demo/water-gbr.json"
 leaflet() \%>\%
   addTiles(group = "base") \%>\%
-  addLayersControl(baseGroups = "base", overlayGroups = "velo") \%>\%
-  addVelocity(content = content, group = "velo", layerId = "veloid")
+  setView(145, -20, 4) \%>\%
+  addVelocity(content = content, group = "velo", layerId = "veloid") \%>\%
+  addLayersControl(baseGroups = "base", overlayGroups = "velo")
 }
+}
+\references{
+\url{https://github.com/onaci/leaflet-velocity}
 }
 \seealso{
-https://github.com/danwild/leaflet-velocity
-
-Other Velocity Plugin: 
+Other Velocity Functions: 
 \code{\link{removeVelocity}()},
+\code{\link{setOptionsVelocity}()},
 \code{\link{velocityOptions}()}
 }
-\concept{Velocity Plugin}
+\concept{Velocity Functions}

@@ -22,13 +22,19 @@ Default is \code{overlayPane}}
 
 \item{...}{Further arguments passed to `L.Control.Reachability`}
 }
+\value{
+A list of options for \code{addReachability}
+}
 \description{
 Add extra options. For a full list please visit the
-\href{https://github.com/traffordDataLab/leaflet.reachability}{plugin repository}
+\href{https://github.com/traffordDataLab/leaflet.reachability}{plugin repository}.
+}
+\references{
+\url{https://github.com/traffordDataLab/leaflet.reachability}
 }
 \seealso{
-Other Reachability Plugin: 
+Other Reachability Functions: 
 \code{\link{addReachability}()},
 \code{\link{removeReachability}()}
 }
-\concept{Reachability Plugin}
+\concept{Reachability Functions}

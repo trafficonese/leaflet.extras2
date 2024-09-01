@@ -1,5 +1,5 @@
 global:
-    api_key: '__YOUR__NEXTZEN_API_KEY__' # put your nextzen API key here
+    api_key: 'Your_API_Key' # put your nextzen API key here
     language: en # optional ISO 2-char code
     language_text_source: |
         function() {
@@ -41,7 +41,7 @@ fonts:
 
 textures:
     icons:
-        url: images/pois.png
+        url: pois.png
         filtering: mipmap
         sprites:
             # define sprites: [x origin, y origin, width, height]

@@ -26,14 +26,18 @@ per hour or 'kt' for knots}
 \item{colorScale}{A vector of hex colors or an RGB matrix}
 
 \item{...}{Further arguments passed to the Velocity layer and Windy.js.
-For more information, please visit \href{https://github.com/danwild/leaflet-velocity}{leaflet-velocity plugin}}
+For more information, please visit \href{https://github.com/onaci/leaflet-velocity}{leaflet-velocity plugin}}
+}
+\value{
+A list of further options for \code{addVelocity}
 }
 \description{
 Define further options for the velocity layer.
 }
 \seealso{
-Other Velocity Plugin: 
+Other Velocity Functions: 
 \code{\link{addVelocity}()},
-\code{\link{removeVelocity}()}
+\code{\link{removeVelocity}()},
+\code{\link{setOptionsVelocity}()}
 }
-\concept{Velocity Plugin}
+\concept{Velocity Functions}

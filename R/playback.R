@@ -1,136 +1,148 @@
 playbackDependencies <- function() {
   list(
     htmlDependency(
-      "leaflet.playback", "1.0.0",
+      "lfx-playback", "1.0.0",
       src = system.file("htmlwidgets/lfx-playback", package = "leaflet.extras2"),
       script = c("leaflet.playback.js",
-                 "leaflet.playback.bindings.js")
+                 "leaflet.playback-bindings.js")
     )
   )
 }
 
 #' Add Playback to Leaflet
 #'
+#' The \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
+#' provides the ability to replay GPS Points in the form of
+#' POINT Simple Features. Rather than simply animating a marker along a
+#' polyline, the speed of the animation is synchronized to a clock. The playback
+#' functionality is similar to a video player; you can start and stop playback or
+#' change the playback speed.
 #' @param map a map widget
-#' @param data data can either be a matrix or data.frame with coordinates,
-#'   a POINT Simple Feature or a \code{SpatialPointsDataFrame}.
-#'   It must contain a time column of class \code{POSIXct} or \code{numeric}.
-#'   It can also be a JSON string which must be in a specific form. See the Details
-#'   for further information.
+#' @param data data must be a POINT Simple Feature or a list of POINT Simple
+#'   Feature's with a time column.
+#' @param popup A formula with the column names for the popup content
+#' @param label A formula with the column names for the label content
+#' @param name A formula with the column names for the feature name
 #' @param time The column name of the time column. Default is \code{"time"}.
-#' @param icon an icon which can be created with \code{\link{makeIcon}{leaflet}}
-#' @param pathOptions style the CircleMarker with \code{\link{pathOptions}{leaflet}}
-#' @param options see \code{\link{playbackOptions}}
-#' @description Add Leaflet Playback Plugin based on the
-#'  \href{https://github.com/hallahan/LeafletPlayback}{LeafletPlayback plugin}
-#' @details If data is a JSON string, it must have the following form:
-#' \preformatted{
-#' {
-#'   "type": "Feature",
-#'   "geometry": {
-#'     "type": "MultiPoint",
-#'     "coordinates": [
-#'       [-123.2653968, 44.54962188],
-#'       [-123.26542599, 44.54951009]
-#'     ]
-#' },
-#'   "properties": {
-#'     "time": [1366067072000, 1366067074000]
-#'   }
+#' @param icon an icon which can be created with \code{\link[leaflet]{makeIcon}}
+#' @param pathOpts style the CircleMarkers with
+#'   \code{\link[leaflet]{pathOptions}}
+#' @param options List of additional options. See \code{\link{playbackOptions}}
+#' @note If used in Shiny, you can listen to 2 events
+#' \itemize{
+#'  \item `map-ID`+"_pb_mouseover"
+#'  \item `map-ID`+"_pb_click"
 #' }
-#' }
-#' Additional arrays can be inside the properties, but are not required and are not used
-#' by the plugin. If the JSON is stored in a file you can load it to R via:
-#' \code{data <- paste(readLines(json_file_path, warn = F), collapse = "")}
-#'
+#' @family Playback Functions
+#' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
-#' @family Playback Plugin
+#' @inheritParams leaflet::addMarkers
+#' @inherit leaflet::addMarkers return
+#' @examples \dontrun{
+#' library(leaflet)
+#' library(leaflet.extras2)
+#' library(sf)
+#'
+#' ## Single Elements
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+#' data <- st_cast(data, "POINT")
+#' data$time = as.POSIXct(
+#'   seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data)))
+#' data$label <- as.character(data$time)
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addPlayback(data = data, label = ~label,
+#'               popup = ~sprintf("I am a popup for <b>%s</b> and <b>%s</b>",
+#'                                Name, label),
+#'               popupOptions = popupOptions(offset = c(0, -35)),
+#'               options = playbackOptions(radius = 3,
+#'                                         tickLen = 36000,
+#'                                         speed = 50,
+#'                                         maxInterpolationTime = 1000),
+#'               pathOpts = pathOptions(weight = 5))
+#'
+#'
+#' ## Multiple Elements
+#' data <- sf::st_as_sf(leaflet::atlStorms2005[1:5,])
+#' data$Name <- as.character(data$Name)
+#' data <- st_cast(data, "POINT")
+#' data$time <- unlist(lapply(rle(data$Name)$lengths, function(x) {
+#'   seq.POSIXt(as.POSIXct(Sys.Date()-2), as.POSIXct(Sys.Date()), length.out = x)
+#' }))
+#' data$time <- as.POSIXct(data$time, origin="1970-01-01")
+#' data$label <- paste0("Time: ", data$time)
+#' data$popup = sprintf("<h3>Customized Popup</h3><b>Name</b>: %s<br><b>Time</b>: %s",
+#'                      data$Name, data$time)
+#' data <- split(data, f = data$Name)
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addPlayback(data = data,
+#'              popup = ~popup,
+#'              label = ~label,
+#'              popupOptions = popupOptions(offset=c(0,-35)),
+#'              labelOptions = labelOptions(noHide = TRUE),
+#'              options = playbackOptions(radius = 3,
+#'                                        tickLen = 1000000,
+#'                                        speed = 5000,
+#'                                        maxInterpolationTime = 10000,
+#'                                        transitionpopup = FALSE,
+#'                                        transitionlabel = FALSE,
+#'                                        playCommand = "Let's go",
+#'                                        stopCommand = "Stop it!",
+#'                                        color = c("red","green","blue",
+#'                                                  "orange","yellow")),
+#'               pathOpts = pathOptions(weight = 5))
+#' }
 addPlayback <- function(map, data, time = "time", icon = NULL,
-                        pathOptions = pathOptions(),
-                        options = playbackOptions()){
+                        pathOpts = pathOptions(),
+                        popup = NULL,
+                        label = NULL,
+                        popupOptions = NULL,
+                        labelOptions = NULL,
+                        options = playbackOptions(),
+                        name = NULL){
 
-  ## If data is a `data.frame` / `data.table` or `matrix`
-  if (inherits(data, "data.frame") || inherits(data, "matrix")) {
-    ## Check if the `time` column exists. It is required!
-    if (!any(colnames(data) == time)) stop("No column named `", time, "` in data.")
-    ## If the `time` column is present but not numeric, convert it
-    if (!is.null(data[,time]) && !is.numeric(data[,time])) {
-      data$time <- as.numeric(data[,time][[1]])
-    }
-    ## If there is no `geometry` column, check if lat/lng are given as columns
-    if (!any(colnames(data) %in% c("geom","geometry"))) {
-      ## Check if any column has lat/lon values
-      latnams <- c("y","lat","latitude")
-      lonnams <- c("x","lon","lng","longitude")
-      has_lat <- tolower(colnames(data)) %in% latnams
-      has_lng <- tolower(colnames(data)) %in% lonnams
-      if (any(has_lat) && any(has_lng)) {
-        ## If data has lat/lon columns, use `sf` if possible to transform to Simple Feature
-        if (requireNamespace("sf", quietly = TRUE)) {
-          data <- sf::st_as_sf(data.frame(data),  ## Convert to data.frame. Matrix wouldnt work otherwise
-                               coords = c(colnames(data)[which(has_lng)],
-                                          colnames(data)[which(has_lat)]))
-        } else {
-          ## If `sf` is not available, build a list which can be read by the plugin
-          data <- list(
-            coordinates = cbind(data[,colnames(data)[which(has_lng)]],
-                                data[,colnames(data)[which(has_lat)]]),
-            time = data[,time]
-          )
-        }
-      } else {
-        ## No lat/lng columns in data. Error
-        stop("Cannot read Lat/Lon columns. The column names must match either: \n",
-             paste(latnams, collapse = ","), " / ", paste(lonnams, collapse = ","))
-      }
-    }
+  if (!requireNamespace("sf")) {
+    stop("The package `sf` is needed for this plugin. ",
+         "Please install it with:\ninstall.packages('sf')")
   }
 
-  ## If data is a `SpatialPointsDataFrame`
-  if (inherits(data, "SpatialPointsDataFrame")) {
-    if (requireNamespace("sf", quietly = TRUE)) {
-      ## If `sf` is available, use it to transform to Simple Features
-      data <- sf::st_as_sf(data)
-    } else {
-      ## If `sf` is not available, build a list with coordinates and the time column.
-      coords <- sp::coordinates(data)
-      data <- list(
-        coordinates = cbind(coords[,1], coords[,2]),
-        time = data[,time]
-      )
-    }
-  }
-
-  ## If data is a `character`
-  if (inherits(data, "character")) {
-    ## Since `basename` does not work, when the string is too long, we count
-    ## the number of characters first. 300 is chosen randomly, but I doubt that
-    ## file paths would be that long. If it's longer, we assume that its a JSON string already
-    if (nchar(data) < 300) {
-      ## Check if it's a path or URL to a json file
-      fileext <- gsub(".*\\.", "", basename(data))
-      if (fileext == "json" || fileext == "geojson") {
-        data <- jsonlite::read_json(data)
-      }
-    }
-    ## Otherwise just pass the string (do nothing)
+  if (inherits(data, "list")) {
+    data <- lapply(data, function(x) {
+      to_jsonformat(x, time, popup, label, name)
+    })
+    bounds <- do.call(rbind, lapply(data, function(x) x$geometry$coordinates))
+  } else {
+    data <- to_jsonformat(data, time, popup, label, name)
+    bounds <- data$geometry$coordinates
   }
 
   map$dependencies <- c(map$dependencies, playbackDependencies())
-  options = leaflet::filterNULL(c(icon = list(icon),
-                                  pathOptions = list(pathOptions),
+  options <- leaflet::filterNULL(c(icon = list(icon),
+                                  pathOptions = list(pathOpts),
+                                  popupOptions = list(popupOptions),
+                                  labelOptions = list(labelOptions),
+                                  popups = if(is.null(popup)) NULL else TRUE,
+                                  labels = if(is.null(label)) NULL else TRUE,
                                   options))
 
-  invokeMethod(map, NULL, "addPlayback", data, options)
+  invokeMethod(map, NULL, "addPlayback", data, options) %>%
+    expandLimits(lat = as.numeric(bounds[,"Y"]),
+                 lng = as.numeric(bounds[,"X"]))
 }
 
 #' playbackOptions
 #'
+#' A list of options for \code{\link{addPlayback}}. For a full list please visit
+#' the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}.
+#' @param color colors of the CircleMarkers.
 #' @param radius a numeric value for the radius of the CircleMarkers.
-#' @param tickLen Set tick length in miliseconds. Increasing this value, may
+#' @param tickLen Set tick length in milliseconds. Increasing this value, may
 #'   improve performance, at the cost of animation smoothness. Default is 250
-#' @param speed Set float multiplier for default animation speed. Default is 1
-#' @param maxInterpolationTime Set max interpolation time in seconds.
+#' @param speed Set float multiplier for default animation speed. Default is 50
+#' @param maxInterpolationTime Set max interpolation time in milliseconds.
 #'   Default is 5*60*1000 (5 minutes).
 #' @param tracksLayer Set \code{TRUE} if you want to show layer control on the
 #'   map. Default is \code{TRUE}
@@ -140,25 +152,36 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #'   Default is \code{TRUE}
 #' @param sliderControl Set \code{TRUE} if slider control is needed.
 #'   Default is \code{TRUE}
+#' @param orientIcons Set \code{TRUE} if you want icons to orient themselves on each
+#'   tick based on the bearing towards their next location. Default: \code{FALSE}
 #' @param staleTime Set time before a track is considered stale and faded out.
 #'   Default is 60*60*1000 (1 hour)
+#' @param transitionpopup Should the position of the popup move smoothly,
+#'   like the marker icon? Default: \code{TRUE}
+#' @param transitionlabel Should the position of the label move smoothly,
+#'   like the marker icon? Default: \code{TRUE}
 #' @param ... Further arguments passed to `L.Playback`
-#' @description Add extra options to \code{\link{addPlayback}}. For a full list
-#'   please visit the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}
+#' @family Playback Functions
+#' @return A list of options for \code{addPlayback}
+#' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
-#' @family Playback Plugin
 playbackOptions = function(
+  color = "blue",
   radius = 5,
   tickLen = 250,
-  speed = 1,
+  speed = 50,
   maxInterpolationTime = 5*60*1000,
   tracksLayer = TRUE,
   playControl = TRUE,
   dateControl = TRUE,
   sliderControl = TRUE,
+  orientIcons = FALSE,
   staleTime = 60*60*1000,
+  transitionpopup = TRUE,
+  transitionlabel = TRUE,
   ...) {
   leaflet::filterNULL(list(
+    color = color,
     radius = radius,
     tickLen = tickLen,
     speed = speed,
@@ -167,16 +190,79 @@ playbackOptions = function(
     playControl = playControl,
     dateControl = dateControl,
     sliderControl = sliderControl,
+    orientIcons = orientIcons,
     staleTime = staleTime,
+    transitionpopup = transitionpopup,
+    transitionlabel = transitionlabel,
     ...
   ))
 }
 
 #' removePlayback
-#' @param map the map widget.
-#' @description Remove the reachability controls
+#'
+#' Remove the Playback controls and markers.
+#' @param map the map widget
 #' @export
-#' @family Playback Plugin
+#' @inherit leaflet::addMarkers return
+#' @family Playback Functions
 removePlayback <- function(map){
   invokeMethod(map, NULL, "removePlayback")
+}
+
+
+
+
+#' to_jsonformat
+#' Transform object to JSON expected format
+#' @param data The data
+#' @param time Name of the time column.
+#' @param popup Name of the popup column.
+#' @param label Name of the label column.
+#' @param name Name of the name column.
+#' @return A list that is transformed to the expected JSON format
+to_jsonformat <- function(data, time, popup=NULL, label=NULL, name=NULL) {
+  if (inherits(data, "Spatial")) data <- sf::st_as_sf(data)
+  if (inherits(data, "sf")) {
+    stopifnot(inherits(sf::st_geometry(data), c("sfc_POINT")))
+    data <- to_ms(data, time)
+    dataorig <- data
+    data <- list("type"="Feature",
+                 "name"=evalFormula(name, dataorig)[1],
+                 "geometry"=list(
+                   "type"="MultiPoint",
+                   "coordinates"=sf::st_coordinates(data)
+                 ),
+                 "properties"=list(
+                   "time"=data$time
+                 ))
+
+    if (!is.null(popup)) {
+      data <- c(data, list("popupContent" = evalFormula(popup, dataorig)))
+    }
+    if (!is.null(label)) {
+      data <- c(data, list("tooltipContent" = evalFormula(label, dataorig)))
+    }
+  }
+  data
+}
+
+#' to_ms
+#' Change POSIX or Date to milliseconds
+#' @inheritParams to_jsonformat
+#' @return A data.frame with the time column in milliseconds
+to_ms <- function(data, time) {
+  coln <- colnames(data)
+  if (!any(coln == time)) {
+    stop("No column named `", time, "` found.")
+  }
+  if (time != "time") {
+    colnames(data)[coln == time] <- "time"
+  }
+  stopifnot(inherits(data[["time"]], c("POSIXt", "Date", "numeric")))
+  if (inherits(data[["time"]], "POSIXt")) {
+    data[["time"]] <- as.numeric(data[["time"]]) * 1000
+  } else if (inherits(data[["time"]], "Date")) {
+    data[["time"]] <- as.numeric(data[["time"]]) * 86400000
+  }
+  data
 }

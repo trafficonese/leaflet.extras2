@@ -1,4 +1,3 @@
-
 mapkeyIconDependency <- function() {
   list(
     htmltools::htmlDependency(
@@ -12,21 +11,18 @@ mapkeyIconDependency <- function() {
   )
 }
 
-
-#' Make mapkey-icon set
-#'
+#' Make Mapkey-icon set
 #' @param ... icons created from \code{\link{makeMapkeyIcon}()}
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @references \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 #' @export
+#' @return A list of class \code{"leaflet_mapkey_icon_set"}
 #' @examples
-#'
 #' iconSet = mapkeyIconList(
 #'   red = makeMapkeyIcon(color = "#ff0000"),
 #'   blue = makeMapkeyIcon(color = "#0000ff")
 #' )
-#'
 #' iconSet[c("red", "blue")]
-#'
 mapkeyIconList = function(...) {
   res = structure(
     list(...),
@@ -42,16 +38,14 @@ mapkeyIconList = function(...) {
 #' @param x icons
 #' @param i offset
 #' @export
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
 `[.leaflet_mapkey_icon_set` = function(x, i) {
   if (is.factor(i)) {
     i = as.character(i)
   }
-
   if (!is.character(i) && !is.numeric(i) && !is.integer(i)) {
     stop("Invalid subscript type '", typeof(i), "'")
   }
-
   structure(.subset(x, i), class = "leaflet_mapkey_icon_set")
 }
 
@@ -77,11 +71,18 @@ mapkeyIconSetToMapkeyIcons = function(x) {
   }))
 }
 
-#' Make mapkey Icon
-#'
+#' Make Mapkey Icon
 #' @inheritParams mapkeyIcons
 #' @export
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @references \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' @return A list of mapkey-icon data that can be passed to the argument \code{icon}
+#' @examples
+#' makeMapkeyIcon(icon = "traffic_signal",
+#'                color = "#0000ff",
+#'                iconSize = 12,
+#'                boxShadow = FALSE,
+#'                background="transparent")
 makeMapkeyIcon <- function(
   icon = 'mapkey',
   color = "#ff0000",
@@ -111,34 +112,37 @@ makeMapkeyIcon <- function(
   structure(icon, class = "leaflet_mapkey_icon")
 }
 
-#' Create a list of mapkey icon data see
-#' \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' Create a list of Mapkey icon data
 #'
 #' An icon can be represented as a list of the form \code{list(color, iconSize,
 #' ...)}. This function is vectorized over its arguments to create a list of
 #' icon data. Shorter argument values will be re-cycled. \code{NULL} values for
 #' these arguments will be ignored.
-#' @param icon ID of the mapkey Icon you want to use. See
-#'   \href{http://mapkeyicons.com/}{mapkeyicons.com} for a full list.
+#' @param icon ID of the mapkey Icon you want to use.
 #' @param color Any CSS color (e.g. 'red','rgba(20,160,90,0.5)', '#686868', ...)
 #' @param iconSize Size of Icon in Pixels. Default is 12
 #' @param background Any CSS color or false for no background
 #' @param borderRadius Any number (for circle size/2, for square 0.001)
-#' @param hoverScale Any real number (best result in range 1 - 2, use 1 for no effect)
+#' @param hoverScale Any real number (best result in range 1 - 2, use 1 for no
+#'   effect)
 #' @param hoverEffect Switch on/off effect on hover
-#' @param hoverCSS CSS code (e.g. "background-color:#992b00!important; color:#99defc!important;")
-#' @param additionalCSS CSS code (e.g. "border:4px solid #aa3838;")
-#' @param htmlCode e.g. '&#57347;&#xe003;'.
-#'   See \href{http://mapkeyicons.com/}{mapkeyicons.com} for further information
-#' @param boxShadow Should a shadow be visible.
+#' @param hoverCSS CSS code (e.g. \code{"background-color:#992b00 !important;
+#'   color:#99defc !important;"})
+#' @param additionalCSS CSS code (e.g. \code{"border:4px solid #aa3838;"})
+#' @param htmlCode e.g. \code{'&#57347;&#xe003;'}.
+#' @param boxShadow Should a shadow be visible
 #' @export
-#' @family Mapkey Plugin
+#' @family Mapkey Functions
+#' @references \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' @return A list of mapkey-icon data that can be passed to the argument \code{icon}
 #' @examples \dontrun{
-#' makeMapkeyIcon(icon = "traffic_signal",
-#'                color = "#0000ff",
-#'                iconSize = 12,
-#'                boxShadow = FALSE,
-#'                background="transparent")
+#' library(leaflet)
+#' leaflet()  %>%
+#'   addMapkeyMarkers(data = breweries91,
+#'                    icon = mapkeyIcons(
+#'                      color = "red",
+#'                      borderRadius = 0,
+#'                      iconSize = 25))
 #' }
 mapkeyIcons <- function(
   icon = 'mapkey',
@@ -168,53 +172,27 @@ mapkeyIcons <- function(
   ))
 }
 
-#' Add mapkey Markers
+#' Add Mapkey Markers
 #' @param map the map to add mapkey Markers to.
-#' @param lng a numeric vector of longitudes, or a one-sided formula of the form
-#'   \code{~x} where \code{x} is a variable in \code{data}; by default (if not
-#'   explicitly provided), it will be automatically inferred from \code{data} by
-#'   looking for a column named \code{lng}, \code{long}, or \code{longitude}
-#'   (case-insensitively)
-#' @param lat a vector of latitudes or a formula (similar to the \code{lng}
-#'   argument; the names \code{lat} and \code{latitude} are used when guessing
-#'   the latitude column from \code{data})
-#' @param popup a character vector of the HTML content for the popups (you are
-#'   recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
-#'   for security reasons)
-#' @param popupOptions options for popup
-#' @param layerId the layer id
-#' @param group the name of the group the newly created layers should belong to
-#'   (for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).
-#'   Human-friendly group names are permitted--they need not be short,
-#'   identifier-style names. Any number of layers and even different types of
-#'   layers (e.g. markers and polygons) can share the same group name.
-#' @param data the data object from which the argument values are derived; by
-#'   default, it is the \code{data} object provided to \code{leaflet()}
-#'   initially, but can be overridden
-#' @param icon the icon(s) for markers;
-#' @param label a character vector of the HTML content for the labels
-#' @param labelOptions A Vector of \code{\link{labelOptions}} to provide label
-#' options for each label. Default \code{NULL}
-#' @param clusterOptions if not \code{NULL}, markers will be clustered using
-#'   \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
-#'    you can use \code{\link{markerClusterOptions}()} to specify marker cluster
-#'   options
-#' @param clusterId the id for the marker cluster layer
-#' @param options a list of extra options for tile layers, popups, paths
-#'   (circles, rectangles, polygons, ...), or other map elements
-#' @family Mapkey Plugin
+#' @inheritParams leaflet::addAwesomeMarkers
+#' @param options a list of extra options for markers. See
+#'   \code{\link[leaflet]{markerOptions}}
+#' @family Mapkey Functions
+#' @references \url{https://github.com/mapshakers/leaflet-mapkey-icon}
+#' @inherit leaflet::addMarkers return
 #' @export
 #' @examples
-#' leaflet() %>%
-#'   addTiles() %>%
-#'   addMapkeyMarkers(
-#'     lng = -118.456554, lat = 34.078039,
-#'     label = "This is a label",
-#'     icon = makeMapkeyIcon(icon = "school")
-#'   )
+#' library(leaflet)
 #'
-#' ## for more examples see
-#' # browseURL(system.file("examples/mapkeyIcons.R", package = "leaflet.extras2"))
+#' leaflet()  %>%
+#'   addTiles() %>%
+#'   addMapkeyMarkers(data = breweries91,
+#'                 icon = makeMapkeyIcon(icon = "mapkey",
+#'                                       iconSize = 30,
+#'                                       boxShadow = FALSE,
+#'                                       background = "transparent"),
+#'                 group = "mapkey",
+#'                 label = ~state, popup = ~village)
 addMapkeyMarkers = function(
   map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
   icon = NULL,

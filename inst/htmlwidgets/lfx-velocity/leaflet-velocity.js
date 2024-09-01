@@ -63,7 +63,6 @@ L.CanvasLayer = (L.Layer ? L.Layer : L.Class).extend({
   },
   //-------------------------------------------------------------
   onAdd: function onAdd(map) {
-    console.log('canvas onAdd', this);
     this._map = map;
     this._canvas = L.DomUtil.create("canvas", "leaflet-layer");
     this.tiles = {};
@@ -259,7 +258,7 @@ L.VelocityLayer = (L.Layer ? L.Layer : L.Class).extend({
   },
   onAdd: function onAdd(map) {
     // determine where to add the layer
-    this._paneName = this.options.paneName || 'overlayPane'; // fall back to overlayPane for leaflet < 1
+    this._paneName = this.options.paneName || "overlayPane"; // fall back to overlayPane for leaflet < 1
 
     var pane = map._panes.overlayPane;
 
@@ -294,6 +293,11 @@ L.VelocityLayer = (L.Layer ? L.Layer : L.Class).extend({
     }
 
     this.fire("load");
+  },
+  setOpacity: function setOpacity(opacity) {
+    console.log("this._canvasLayer", this._canvasLayer);
+
+    this._canvasLayer.setOpacity(opacity);
   },
   setOptions: function setOptions(options) {
     this.options = Object.assign(this.options, options);
@@ -437,6 +441,7 @@ var Windy = function Windy(params) {
   var FRAME_RATE = params.frameRate || 15;
   var FRAME_TIME = 1000 / FRAME_RATE; // desired frames per second
 
+  var OPACITY = 0.97;
   var defaulColorScale = ["rgb(36,104, 180)", "rgb(60,157, 194)", "rgb(128,205,193 )", "rgb(151,218,168 )", "rgb(198,231,181)", "rgb(238,247,217)", "rgb(255,238,159)", "rgb(252,217,125)", "rgb(255,182,100)", "rgb(252,150,75)", "rgb(250,112,52)", "rgb(245,64,32)", "rgb(237,45,28)", "rgb(220,24,32)", "rgb(180,0,35)"];
   var colorScale = params.colorScale || defaulColorScale;
   var NULL_WIND_VECTOR = [NaN, NaN, null]; // singleton for no wind in the form: [u, v, magnitude]
@@ -458,6 +463,7 @@ var Windy = function Windy(params) {
     if (options.hasOwnProperty("particleAge")) MAX_PARTICLE_AGE = options.particleAge;
     if (options.hasOwnProperty("lineWidth")) PARTICLE_LINE_WIDTH = options.lineWidth;
     if (options.hasOwnProperty("particleMultiplier")) PARTICLE_MULTIPLIER = options.particleMultiplier;
+    if (options.hasOwnProperty("opacity")) OPACITY = +options.opacity;
     if (options.hasOwnProperty("frameRate")) FRAME_RATE = options.frameRate;
     FRAME_TIME = 1000 / FRAME_RATE;
   }; // interpolation for vectors like wind (u,v,m)
@@ -512,8 +518,19 @@ var Windy = function Windy(params) {
   };
 
   var buildGrid = function buildGrid(data, callback) {
+    var supported = true;
+    if (data.length < 2) supported = false;
+    if (!supported) console.log("Windy Error: data must have at least two components (u,v)");
     builder = createBuilder(data);
     var header = builder.header;
+    if (header.hasOwnProperty("gridDefinitionTemplate") && header.gridDefinitionTemplate != 0) supported = false;
+
+    if (!supported) {
+      console.log("Windy Error: Only data with Latitude_Longitude coordinates is supported");
+    }
+
+    supported = true; // reset for futher checks
+
     λ0 = header.lo1;
     φ0 = header.la1; // the grid's origin (e.g., 0.0E, 90.0N)
 
@@ -523,8 +540,23 @@ var Windy = function Windy(params) {
     ni = header.nx;
     nj = header.ny; // number of grid points W-E and N-S (e.g., 144 x 73)
 
+    if (header.hasOwnProperty("scanMode")) {
+      var scanModeMask = header.scanMode.toString(2);
+      scanModeMask = ('0' + scanModeMask).slice(-8);
+      var scanModeMaskArray = scanModeMask.split('').map(Number).map(Boolean);
+      if (scanModeMaskArray[0]) Δλ = -Δλ;
+      if (scanModeMaskArray[1]) Δφ = -Δφ;
+      if (scanModeMaskArray[2]) supported = false;
+      if (scanModeMaskArray[3]) supported = false;
+      if (scanModeMaskArray[4]) supported = false;
+      if (scanModeMaskArray[5]) supported = false;
+      if (scanModeMaskArray[6]) supported = false;
+      if (scanModeMaskArray[7]) supported = false;
+      if (!supported) console.log("Windy Error: Data with scanMode: " + header.scanMode + " is not supported.");
+    }
+
     date = new Date(header.refTime);
-    date.setHours(date.getHours() + header.forecastTime); // Scan mode 0 assumed. Longitude increases from λ0, and latitude decreases from φ0.
+    date.setHours(date.getHours() + header.forecastTime); // Scan modes 0, 64 allowed.
     // http://www.nco.ncep.noaa.gov/pmb/docs/grib2/grib2_table3-4.shtml
 
     grid = [];
@@ -791,7 +823,7 @@ var Windy = function Windy(params) {
       particleCount *= PARTICLE_REDUCTION;
     }
 
-    var fadeFillStyle = "rgba(0, 0, 0, 0.97)";
+    var fadeFillStyle = "rgba(0, 0, 0, ".concat(OPACITY, ")");
     var particles = [];
 
     for (var i = 0; i < particleCount; i++) {
@@ -848,7 +880,7 @@ var Windy = function Windy(params) {
       g.globalCompositeOperation = "destination-in";
       g.fillRect(bounds.x, bounds.y, bounds.width, bounds.height);
       g.globalCompositeOperation = prev;
-      g.globalAlpha = 0.9; // Draw new particle trails.
+      g.globalAlpha = OPACITY === 0 ? 0 : OPACITY * 0.9; // Draw new particle trails.
 
       buckets.forEach(function (bucket, i) {
         if (bucket.length > 0) {

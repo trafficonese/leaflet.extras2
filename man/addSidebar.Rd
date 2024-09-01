@@ -2,28 +2,51 @@
 % Please edit documentation in R/sidebar.R
 \name{addSidebar}
 \alias{addSidebar}
-\title{Adds a Sidebar Leaflet Control}
+\title{Add a Sidebar Leaflet Control}
 \usage{
-addSidebar(map, id = "sidebar", options = list(position = "left", fit = TRUE))
+addSidebar(map, id = "sidebar", options = list(position = "left"), ns = NULL)
 }
 \arguments{
 \item{map}{A leaflet map widget}
 
-\item{id}{Id of the sidebar-div}
+\item{id}{Id of the sidebar-div. Must match with the \code{id} of
+\code{\link{sidebar_tabs}}}
 
-\item{options}{A named list with \code{position} and \code{fit} elements.}
+\item{options}{A named list with the only option \code{position}, which should
+be either \code{left} or \code{right}.}
+
+\item{ns}{The namespace function, if used in Shiny modules.}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Adds a Sidebar Leaflet Control
+The sidebar HTML must be created with \code{\link{sidebar_tabs}} and
+\code{\link{sidebar_pane}} before
+\code{\link[leaflet]{leafletOutput}} is called.
+}
+\examples{
+\dontrun{
+library(shiny)
+
+# run example app showing a single sidebar
+runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+              "/sidebar_app.R"))
+
+# run example app showing two sidebars
+runApp(paste0(system.file("examples", package = "leaflet.extras2"),
+              "/multi_sidebar_app.R"))
+}
+}
+\references{
+\url{https://github.com/Turbo87/sidebar-v2}
 }
 \seealso{
-https://github.com/Turbo87/sidebar-v2
-
-Other Sidebar Plugin: 
+Other Sidebar Functions: 
 \code{\link{closeSidebar}()},
 \code{\link{openSidebar}()},
 \code{\link{removeSidebar}()},
 \code{\link{sidebar_pane}()},
 \code{\link{sidebar_tabs}()}
 }
-\concept{Sidebar Plugin}
+\concept{Sidebar Functions}

@@ -11,11 +11,14 @@ removeSidebyside(map, layerId = NULL)
 
 \item{layerId}{the layer id of the \code{\link{addSidebyside}} layer}
 }
+\value{
+the new \code{map} object
+}
 \description{
 removeSidebyside
 }
 \seealso{
-Other Sidebyside Plugin: 
+Other Sidebyside Functions: 
 \code{\link{addSidebyside}()}
 }
-\concept{Sidebyside Plugin}
+\concept{Sidebyside Functions}

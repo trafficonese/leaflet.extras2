@@ -7,33 +7,37 @@
 updateHexbin(map, data = NULL, lng = NULL, lat = NULL, colorRange = NULL)
 }
 \arguments{
-\item{map}{A map widget object created from \code{\link[leaflet]{leaflet}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{data}{the data object from which the argument values are derived; by
-default, it is the data object provided to leaflet() initially, but can be
-overridden.}
+default, it is the \code{data} object provided to \code{leaflet()}
+initially, but can be overridden}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
-~x where x is a variable in data; by default (if not explicitly provided),
-it will be automatically inferred from data by looking for a column named
-lng, long, or longitude (case-insensitively)}
+\code{~x} where \code{x} is a variable in \code{data}; by default (if not
+explicitly provided), it will be automatically inferred from \code{data} by
+looking for a column named \code{lng}, \code{long}, or \code{longitude}
+(case-insensitively)}
 
-\item{lat}{a vector of latitudes or a formula (similar to the lng argument;
-the names lat and latitude are used when guessing the latitude column from
-data)}
+\item{lat}{a vector of latitudes or a formula (similar to the \code{lng}
+argument; the names \code{lat} and \code{latitude} are used when guessing
+the latitude column from \code{data})}
 
-\item{colorRange}{Sets the range of the color scale used to fill the
-hexbins on the layer.}
+\item{colorRange}{The range of the color scale used to fill the
+hexbins}
+}
+\value{
+the new \code{map} object
 }
 \description{
-updateHexbin
+Dynamically change the \code{data} and/or the \code{colorRange}.
 }
 \seealso{
-Other Hexbin-D3 Plugin: 
+Other Hexbin-D3 Functions: 
 \code{\link{addHexbin}()},
 \code{\link{clearHexbin}()},
 \code{\link{hexbinOptions}()},
 \code{\link{hideHexbin}()},
 \code{\link{showHexbin}()}
 }
-\concept{Hexbin-D3 Plugin}
+\concept{Hexbin-D3 Functions}

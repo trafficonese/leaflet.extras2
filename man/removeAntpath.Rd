@@ -2,7 +2,7 @@
 % Please edit documentation in R/antpath.R
 \name{removeAntpath}
 \alias{removeAntpath}
-\title{Remove one or more Antpaths from a map, identified by \code{layerId}.}
+\title{removeAntpath}
 \usage{
 removeAntpath(map, layerId = NULL)
 }
@@ -12,13 +12,16 @@ but more likely from \code{\link[leaflet]{leafletProxy}}()}
 
 \item{layerId}{character vector; the layer id(s) of the item to remove}
 }
+\value{
+the new \code{map} object
+}
 \description{
 Remove one or more Antpaths from a map, identified by \code{layerId}.
 }
 \seealso{
-Other Antpath Plugin: 
+Other Antpath Functions: 
 \code{\link{addAntpath}()},
 \code{\link{antpathOptions}()},
 \code{\link{clearAntpath}()}
 }
-\concept{Antpath Plugin}
+\concept{Antpath Functions}

@@ -26,58 +26,43 @@ visible on the \strong{right} side}
 \item{options}{A list of options. Currently only \code{thumbSize} and
 \code{padding} can be changed.}
 }
+\value{
+the new \code{map} object
+}
 \description{
-Add Leaflet Sidebyside View. Based on the plugin
-  \href{https://github.com/digidem/leaflet-side-by-side}{leaflet-side-by-side}.
-  The plugin works with Panes, see the example.
+A Leaflet control to add a split screen to compare two map overlays.
+The plugin works with Panes, see the example.
 }
 \note{
-It is currently not working correctly if the \code{baseGroups} are defined in
-  \code{\link[leaflet]{addLayersControl}}.
+It is currently not working correctly if the \code{baseGroups} are
+  defined in \code{\link[leaflet]{addLayersControl}}.
 }
 \examples{
-\dontrun{
-library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-ui <- fluidPage(
-  leafletOutput("map"),
-  actionButton("removeSidebyside", "removeSidebyside")
-)
-
-server <- function(input, output, session) {
-  output$map <- renderLeaflet({
-    leaflet(quakes) \%>\%
-      addMapPane("left", zIndex = 0) \%>\%
-      addMapPane("right", zIndex = 0) \%>\%
-      addTiles(group = "base", layerId = "baseid",
-               options = pathOptions(pane = "right")) \%>\%
-      addProviderTiles(providers$CartoDB.DarkMatter, group="carto", layerId = "cartoid",
-                       options = pathOptions(pane = "left")) \%>\%
-      addCircleMarkers(data = breweries91[1:15,], color = "blue", group = "blue",
-                       options = pathOptions(pane = "left")) \%>\%
-      addCircleMarkers(data = breweries91[15:20,], color = "yellow", group = "yellow") \%>\%
-      addCircleMarkers(data = breweries91[15:30,], color = "red", group = "red",
-                       options = pathOptions(pane = "right")) \%>\%
-      addLayersControl(overlayGroups = c("blue","red", "yellow")) \%>\%
-      addSidebyside(layerId = "sidecontrols",
-                    rightId = "baseid",
-                    leftId = "opencycle")
-  })
-  observeEvent(input$removeSidebyside, {
-    leafletProxy("map") \%>\%
-      removeSidebyside("sidecontrols")
-  })
+leaflet(quakes) \%>\%
+  addMapPane("left", zIndex = 0) \%>\%
+  addMapPane("right", zIndex = 0) \%>\%
+  addTiles(group = "base", layerId = "baseid",
+           options = pathOptions(pane = "right")) \%>\%
+  addProviderTiles(providers$CartoDB.DarkMatter, group="carto", layerId = "cartoid",
+                   options = pathOptions(pane = "left")) \%>\%
+  addCircleMarkers(data = breweries91[1:15,], color = "blue", group = "blue",
+                   options = pathOptions(pane = "left")) \%>\%
+  addCircleMarkers(data = breweries91[15:20,], color = "yellow", group = "yellow") \%>\%
+  addCircleMarkers(data = breweries91[15:30,], color = "red", group = "red",
+                   options = pathOptions(pane = "right")) \%>\%
+  addLayersControl(overlayGroups = c("blue","red", "yellow")) \%>\%
+  addSidebyside(layerId = "sidecontrols",
+                rightId = "baseid",
+                leftId = "cartoid")
 }
-
-shinyApp(ui, server)
-}
+\references{
+\url{https://github.com/digidem/leaflet-side-by-side}
 }
 \seealso{
-https://github.com/digidem/leaflet-side-by-side
-
-Other Sidebyside Plugin: 
+Other Sidebyside Functions: 
 \code{\link{removeSidebyside}()}
 }
-\concept{Sidebyside Plugin}
+\concept{Sidebyside Functions}

@@ -2,31 +2,34 @@
 % Please edit documentation in R/mapkeyIcon.R
 \name{mapkeyIconList}
 \alias{mapkeyIconList}
-\title{Make mapkey-icon set}
+\title{Make Mapkey-icon set}
 \usage{
 mapkeyIconList(...)
 }
 \arguments{
 \item{...}{icons created from \code{\link{makeMapkeyIcon}()}}
 }
+\value{
+A list of class \code{"leaflet_mapkey_icon_set"}
+}
 \description{
-Make mapkey-icon set
+Make Mapkey-icon set
 }
 \examples{
-
 iconSet = mapkeyIconList(
   red = makeMapkeyIcon(color = "#ff0000"),
   blue = makeMapkeyIcon(color = "#0000ff")
 )
-
 iconSet[c("red", "blue")]
-
+}
+\references{
+\url{https://github.com/mapshakers/leaflet-mapkey-icon}
 }
 \seealso{
-Other Mapkey Plugin: 
+Other Mapkey Functions: 
 \code{\link{[.leaflet_mapkey_icon_set}()},
 \code{\link{addMapkeyMarkers}()},
 \code{\link{makeMapkeyIcon}()},
 \code{\link{mapkeyIcons}()}
 }
-\concept{Mapkey Plugin}
+\concept{Mapkey Functions}

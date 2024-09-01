@@ -9,12 +9,15 @@ removeReachability(map)
 \arguments{
 \item{map}{the map widget.}
 }
+\value{
+the new \code{map} object
+}
 \description{
-Remove the reachability controls
+Remove the reachability controls.
 }
 \seealso{
-Other Reachability Plugin: 
+Other Reachability Functions: 
 \code{\link{addReachability}()},
 \code{\link{reachabilityOptions}()}
 }
-\concept{Reachability Plugin}
+\concept{Reachability Functions}

@@ -4,25 +4,53 @@
 \alias{addReachability}
 \title{Add Isochrones to Leaflet}
 \usage{
-addReachability(map, apiKey = NULL, options = reachabilityOptions())
+addReachability(map, apikey = NULL, options = reachabilityOptions())
 }
 \arguments{
 \item{map}{a map widget}
 
-\item{apiKey}{a valid Openrouteservice API-key. Can be obtained from
+\item{apikey}{a valid Openrouteservice API-key. Can be obtained from
 \href{https://openrouteservice.org/dev/#/signup}{Openrouteservice}}
 
-\item{options}{see \code{\link{reachabilityOptions}}}
+\item{options}{A list of further options. See \code{\link{reachabilityOptions}}}
+}
+\value{
+the new \code{map} object
 }
 \description{
-Add Leaflet Reachability Plugin Control. Based on the
- \href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability plugin}
+A leaflet plugin which shows areas of reachability based on time or distance
+for different modes of travel using the openrouteservice isochrones API.
+Based on the
+\href{https://github.com/traffordDataLab/leaflet.reachability}{leaflet.reachability
+plugin}
+}
+\note{
+When used in Shiny, 3 events update a certain shiny Input:
+\enumerate{
+  \item reachability:displayed updates \code{input$MAPID_reachability_displayed}
+  \item reachability:delete updates \code{input$MAPID_reachability_delete}
+  \item reachability:error updates \code{input$MAPID_reachability_error}
+}
+}
+\examples{
+\dontrun{
+library(leaflet)
+library(leaflet.extras2)
+
+Sys.setenv("OPRS" = 'Your_API_Key')
+
+leaflet() \%>\%
+  addTiles() \%>\%
+  setView(8, 50, 10) \%>\%
+  addReachability()
+}
+}
+\references{
+\url{https://github.com/traffordDataLab/leaflet.reachability}
 }
 \seealso{
-https://github.com/traffordDataLab/leaflet.reachability
-
-Other Reachability Plugin: 
+Other Reachability Functions: 
 \code{\link{reachabilityOptions}()},
 \code{\link{removeReachability}()}
 }
-\concept{Reachability Plugin}
+\concept{Reachability Functions}

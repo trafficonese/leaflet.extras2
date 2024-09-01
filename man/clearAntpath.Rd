@@ -2,7 +2,7 @@
 % Please edit documentation in R/antpath.R
 \name{clearAntpath}
 \alias{clearAntpath}
-\title{Clear all Antpaths}
+\title{clearAntpath}
 \usage{
 clearAntpath(map)
 }
@@ -10,13 +10,16 @@ clearAntpath(map)
 \item{map}{a map widget object, possibly created from \code{\link[leaflet]{leaflet}}()
 but more likely from \code{\link[leaflet]{leafletProxy}}()}
 }
+\value{
+the new \code{map} object
+}
 \description{
 Clear all Antpaths
 }
 \seealso{
-Other Antpath Plugin: 
+Other Antpath Functions: 
 \code{\link{addAntpath}()},
 \code{\link{antpathOptions}()},
 \code{\link{removeAntpath}()}
 }
-\concept{Antpath Plugin}
+\concept{Antpath Functions}

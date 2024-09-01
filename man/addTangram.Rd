@@ -7,25 +7,36 @@
 addTangram(map, scene = NULL, layerId = NULL, group = NULL, options = NULL)
 }
 \arguments{
-\item{map}{A leaflet map widget}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
-\item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. The file must be in the
-/www folder of a shinyApp. See the
-\href{https://github.com/tangrams/tangram}{Tangram repo} or the
-\href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further information
-on how to edit such a .yaml file.}
+\item{scene}{Path to a required \bold{.yaml} or \bold{.zip} file. If the file
+is within the \code{/www} folder of a Shiny-App, only the filename must be
+given, otherwise the full path is needed. See the
+\href{https://github.com/tangrams/tangram}{Tangram repository} or the
+\href{https://tangrams.readthedocs.io/en/latest/}{Tangram docs} for further
+information on how to edit such a .yaml file.}
 
-\item{layerId}{A layer ID}
+\item{layerId}{the layer id}
 
-\item{group}{The name of the group the newly created layer should belong to
-(for \code{\link{clearGroup}} and \code{\link{addLayersControl}} purposes).}
+\item{group}{the name of the group the newly created layers should belong to
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+Human-friendly group names are permitted--they need not be short,
+identifier-style names. Any number of layers and even different types of
+layers (e.g. markers and polygons) can share the same group name.}
 
-\item{options}{A list of further options. See the app in the \code{examples/tangram} folder
-or the \href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
-for further information.}
+\item{options}{A list of further options. See the app in the
+\code{examples/tangram} folder or the
+\href{https://tangrams.readthedocs.io/en/latest/Overviews/Tangram-Overview/#leaflet}{docs}
+ for further information.}
+}
+\value{
+the new \code{map} object
 }
 \description{
 Adds a Tangram layer to a Leaflet map in a Shiny App.
+}
+\note{
+Only works correctly in a Shiny-App environment.
 }
 \examples{
 \dontrun{
@@ -33,13 +44,10 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
-## In the /www folder of the ShinyApp. Must contain the Nextzen API-key
+## In the /www folder of a ShinyApp. Must contain the Nextzen API-key
 scene <- "scene.yaml"
 
 ui <- fluidPage(leafletOutput("map"))
-
-## The JS-source can be loaded in an unminified version with the options command below.
-# options("leaflet.extras2.minified" = FALSE)
 
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
@@ -56,7 +64,7 @@ server <- function(input, output, session) {
 shinyApp(ui, server)
 }
 }
-\seealso{
-https://github.com/tangrams/tangram
+\references{
+\url{https://github.com/tangrams/tangram}
 }
-\concept{Tangram Plugin}
+\concept{Tangram Functions}
