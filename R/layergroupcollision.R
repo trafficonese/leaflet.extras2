@@ -23,6 +23,7 @@ layergroupCollisionDependency <- function() {
 #' allowing you to pass HTML content and CSS classes to style the markers.
 #'
 #' @param group the name of the group. It needs to be single string.
+#' @param margin defines the margin between markers, in pixels
 #' @return A leaflet map object with the LayerGroup Collision plugin added.
 #' @export
 #'
@@ -37,7 +38,7 @@ layergroupCollisionDependency <- function() {
 #'
 #' df <- sf::st_as_sf(atlStorms2005)
 #' df <- suppressWarnings(st_cast(df, "POINT"))
-#' df <- df[sample(1:nrow(df), 150, replace = F),]
+#' df <- df[sample(1:nrow(df), 150, replace = FALSE),]
 #' df$classes = sample(x = 1:5, nrow(df), replace = TRUE)
 #'
 #' leaflet() %>%

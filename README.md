@@ -41,6 +41,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Hexbin-D3](https://github.com/bluehalo/leaflet-d3#hexbins-api)
 -   [History](https://github.com/cscott530/leaflet-history)
 -   [Labelgun](https://github.com/Geovation/labelgun)
+-   [LayerGroup.Collision](https://github.com/MazeMap/Leaflet.LayerGroup.Collision)
 -   [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync)
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Moving Markers](https://github.com/ewoken/Leaflet.MovingMarker)

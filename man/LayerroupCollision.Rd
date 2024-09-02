@@ -23,6 +23,8 @@ addLayerGroupCollision(
 
 \item{html}{A single HTML string or a vector of HTML strings.}
 
+\item{margin}{defines the margin between markers, in pixels}
+
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
@@ -45,7 +47,7 @@ library(leaflet.extras2)
 
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
-df <- df[sample(1:nrow(df), 150, replace = F),]
+df <- df[sample(1:nrow(df), 150, replace = FALSE),]
 df$classes = sample(x = 1:5, nrow(df), replace = TRUE)
 
 leaflet() \%>\%
