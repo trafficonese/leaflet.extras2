@@ -3,22 +3,13 @@
 \name{LayerroupCollision}
 \alias{LayerroupCollision}
 \alias{addLayerGroupCollision}
-\title{Add LayerroupCollision Plugin
-Needs data to be ordered, as frst elements will have priority.}
+\title{Add LayerGroup Collision Plugin to Leaflet Map}
 \usage{
 addLayerGroupCollision(
   map,
-  layerId = NULL,
   group = NULL,
-  popup = NULL,
-  popupOptions = NULL,
-  label = NULL,
-  labelOptions = NULL,
   className = NULL,
   html = NULL,
-  options = markerOptions(),
-  clusterOptions = NULL,
-  clusterId = NULL,
   margin = 5,
   data = getMapData(map)
 )
@@ -26,46 +17,51 @@ addLayerGroupCollision(
 \arguments{
 \item{map}{the map to add awesome Markers to.}
 
-\item{layerId}{the layer id}
+\item{group}{the name of the group. It needs to be single string.}
 
-\item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
-Human-friendly group names are permitted--they need not be short,
-identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+\item{className}{A single CSS class or a vector of CSS classes.}
 
-\item{popup}{a character vector of the HTML content for the popups (you are
-recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
-for security reasons)}
-
-\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
-
-\item{label}{a character vector of the HTML content for the labels}
-
-\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
-options for each label. Default \code{NULL}}
-
-\item{options}{a list of extra options for tile layers, popups, paths
-(circles, rectangles, polygons, ...), or other map elements}
-
-\item{clusterOptions}{if not \code{NULL}, markers will be clustered using
-\href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
- you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
-options}
-
-\item{clusterId}{the id for the marker cluster layer}
+\item{html}{A single HTML string or a vector of HTML strings.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
 initially, but can be overridden}
 }
 \value{
-A leaflet map object
+A leaflet map object with the LayerGroup Collision plugin added.
 }
 \description{
-Add LayerroupCollision Plugin
-Needs data to be ordered, as frst elements will have priority.
+Integrates the LayerGroup Collision plugin into a Leaflet map,
+which hides overlapping markers and only displays the first added marker in a
+collision group. Markers must be static; dynamic changes, dragging, and
+deletions are not supported.
+The function transforms spatial data into GeoJSON format and uses `L.DivIcon`,
+allowing you to pass HTML content and CSS classes to style the markers.
+}
+\examples{
+library(leaflet)
+library(sf)
+library(leaflet.extras2)
+
+df <- sf::st_as_sf(atlStorms2005)
+df <- suppressWarnings(st_cast(df, "POINT"))
+df <- df[sample(1:nrow(df), 150, replace = F),]
+df$classes = sample(x = 1:5, nrow(df), replace = TRUE)
+
+leaflet() \%>\%
+  addProviderTiles("CartoDB.Positron") \%>\%
+  leaflet::addLayersControl(overlayGroups = c("Labels")) \%>\%
+  addLayerGroupCollision(data = df
+                         , html = ~paste0(
+                           '<div style="width: 70px" class="custom-html">',
+                           '<div class="title">', Name, '</div>',
+                           '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
+                           '</div>'
+                         )
+                         , className = ~paste0("my-label my-label-", classes)
+                         , group = "Labels"
+  )
 }
 \references{
-\url{https://github.com/Geovation/labelgun}
+\url{https://github.com/MazeMap/Leaflet.LayerGroup.Collision}
 }
