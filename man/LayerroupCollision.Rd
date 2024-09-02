@@ -3,7 +3,8 @@
 \name{LayerroupCollision}
 \alias{LayerroupCollision}
 \alias{addLayerGroupCollision}
-\title{Add LayerroupCollision Plugin}
+\title{Add LayerroupCollision Plugin
+Needs data to be ordered, as frst elements will have priority.}
 \usage{
 addLayerGroupCollision(
   map,
@@ -63,6 +64,7 @@ A leaflet map object
 }
 \description{
 Add LayerroupCollision Plugin
+Needs data to be ordered, as frst elements will have priority.
 }
 \references{
 \url{https://github.com/Geovation/labelgun}

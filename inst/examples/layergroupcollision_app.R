@@ -14,9 +14,12 @@ df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
 df <- df[sample(1:nrow(df), 150, replace = F),]
 # df$classes = sample(x = c("myclass1","myclass2","myclass3"), nrow(df), replace = TRUE)
-df$classes = sample(x = 1:5, nrow(df), replace = TRUE)
+df$classes = sample(x = 1:10, nrow(df), replace = TRUE)
 df$ID <- paste0("ID_", 1:nrow(df))
-df$scalerank <-  sample(x = 1:5, nrow(df), replace = TRUE)
+df$scalerank <-  sample(x = 1:10, nrow(df), replace = TRUE)
+
+## Ordering is important
+df <- df[order(df$scalerank, decreasing = FALSE),]
 
 ui <- fluidPage(
   ## CSS-style ############
@@ -29,10 +32,10 @@ ui <- fluidPage(
 			white-space: nowrap;
 		}
 
-		.city-label-0 { font-size: 20px; top: -27px; }
-		.city-label-1 { font-size: 19px; top: -26px; }
-		.city-label-2 { font-size: 18px; top: -25px; }
-		.city-label-3 { font-size: 17px; top: -24px; }
+		.city-label-0 { font-size: 30px; top: -27px; }
+		.city-label-1 { font-size: 25px; top: -26px; }
+		.city-label-2 { font-size: 24px; top: -25px; }
+		.city-label-3 { font-size: 22px; top: -24px; }
 		.city-label-4 { font-size: 16px; top: -23px; }
 		.city-label-5 { font-size: 15px; top: -22px; }
 		.city-label-6 { font-size: 14px; top: -21px; }
@@ -45,6 +48,7 @@ ui <- fluidPage(
   leafletOutput("map", height = 800)
 )
 
+## Server ###########
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%

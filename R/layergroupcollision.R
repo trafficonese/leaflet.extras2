@@ -13,6 +13,7 @@ layergroupCollisionDependency <- function() {
 }
 
 #' Add LayerroupCollision Plugin
+#' Needs data to be ordered, as frst elements will have priority.
 #' @return A leaflet map object
 #' @export
 #'
@@ -25,8 +26,8 @@ addLayerGroupCollision <- function(
     popup = NULL, popupOptions = NULL, label = NULL,
     labelOptions = NULL,
     className = NULL, html = NULL,
-    options = markerOptions(), clusterOptions = NULL,
-    clusterId = NULL, margin = 5, data = getMapData(map)
+    options = markerOptions(),
+    margin = 5, data = getMapData(map)
 ) {
 
   map$dependencies <- c(map$dependencies, layergroupCollisionDependency())
@@ -49,9 +50,7 @@ addLayerGroupCollision <- function(
     className, html,
     popup, popupOptions,
     label, labelOptions,
-    clusterId, clusterOptions,
     margin
-    # getCrosstalkOptions(data)
   ) %>%
     expandLimits(pts$lat, pts$lng)
 }

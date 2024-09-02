@@ -1,13 +1,11 @@
 /* global LeafletWidget, $, L, Shiny, HTMLWidgets */
 LeafletWidget.methods.addLayerGroupCollision = function(
     data, layerId, group, options,
-    className, html,
-    popup, popupOptions, label, labelOptions,
-    clusterId, clusterOptions, divOptions,
-    crosstalkOptions) {
+    className, html, popup, popupOptions,
+    label, labelOptions, margin) {
 
 
-		var collisionLayer = L.LayerGroup.collision({margin:5});
+		var collisionLayer = L.LayerGroup.collision({margin: margin});
 		console.log("collisionLayer"); console.log(collisionLayer)
 
 		// Manually parse the GeoJSON and create the L.Markers one by one
@@ -16,7 +14,7 @@ LeafletWidget.methods.addLayerGroupCollision = function(
 		for (var i=0; i < data.features.length; i++) {
 
 			var feat = data.features[i];
-			var labelClass = 'city-label city-label-' + feat.properties.scalerank;
+			var labelClass = 'city-label city-label-' + feat.properties.strklasse_numeric;
 
 // 			Note that the markers are not interactive because MSIE on a WinPhone will take *ages*
 // 			to run addEventListener() on them.
@@ -24,7 +22,7 @@ LeafletWidget.methods.addLayerGroupCollision = function(
 				icon: L.divIcon({
 					html:
 						"<span class='" + labelClass + "'>" +
-						feat.properties.Name +
+						feat.properties.strnummer +
 						"</span>"
 				})
 				,interactive: false	// Post-0.7.3
