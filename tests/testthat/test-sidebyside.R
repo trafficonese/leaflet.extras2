@@ -14,8 +14,10 @@ test_that("sidebyside", {
       data = breweries91[1:15, ], color = "blue", group = "blue",
       options = pathOptions(pane = "left")
     ) %>%
-    addCircleMarkers(data = breweries91[15:20, ],
-                     color = "yellow", group = "yellow") %>%
+    addCircleMarkers(
+      data = breweries91[15:20, ],
+      color = "yellow", group = "yellow"
+    ) %>%
     addCircleMarkers(
       data = breweries91[15:30, ], color = "red", group = "red",
       options = pathOptions(pane = "right")

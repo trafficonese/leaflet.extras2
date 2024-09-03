@@ -1,12 +1,16 @@
 layergroupCollisionDependency <- function() {
   list(
     htmltools::htmlDependency(
-      "lfx-layergroupcollision", version = "1.0.0",
+      "lfx-layergroupcollision",
+      version = "1.0.0",
       src = system.file("htmlwidgets/lfx-layergroupcollision",
-                        package = "leaflet.extras2"),
-      script = c("rbush.min.js",
-                 "Leaflet.LayerGroup.Collision.js",
-                 "layergroup-binding.js"),
+        package = "leaflet.extras2"
+      ),
+      script = c(
+        "rbush.min.js",
+        "Leaflet.LayerGroup.Collision.js",
+        "layergroup-binding.js"
+      ),
       all_files = TRUE
     )
   )
@@ -38,27 +42,27 @@ layergroupCollisionDependency <- function() {
 #'
 #' df <- sf::st_as_sf(atlStorms2005)
 #' df <- suppressWarnings(st_cast(df, "POINT"))
-#' df <- df[sample(1:nrow(df), 150, replace = FALSE),]
-#' df$classes = sample(x = 1:5, nrow(df), replace = TRUE)
+#' df <- df[sample(1:nrow(df), 150, replace = FALSE), ]
+#' df$classes <- sample(x = 1:5, nrow(df), replace = TRUE)
 #'
 #' leaflet() %>%
 #'   addProviderTiles("CartoDB.Positron") %>%
 #'   leaflet::addLayersControl(overlayGroups = c("Labels")) %>%
-#'   addLayerGroupCollision(data = df
-#'                          , html = ~paste0(
-#'                            '<div style="width: 70px" class="custom-html">',
-#'                            '<div class="title">', Name, '</div>',
-#'                            '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
-#'                            '</div>'
-#'                          )
-#'                          , className = ~paste0("my-label my-label-", classes)
-#'                          , group = "Labels"
+#'   addLayerGroupCollision(
+#'     data = df,
+#'     html = ~ paste0(
+#'       '<div style="width: 70px" class="custom-html">',
+#'       '<div class="title">', Name, "</div>",
+#'       '<div class="subtitle">MaxWind: ', MaxWind, "</div>",
+#'       "</div>"
+#'     ),
+#'     className = ~ paste0("my-label my-label-", classes),
+#'     group = "Labels"
 #'   )
 addLayerGroupCollision <- function(
     map, group = NULL,
     className = NULL, html = NULL,
     margin = 5, data = getMapData(map)) {
-
   map$dependencies <- c(map$dependencies, layergroupCollisionDependency())
 
   ## Make Geojson and Assign Class & HTML columns ###########

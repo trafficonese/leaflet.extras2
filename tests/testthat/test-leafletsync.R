@@ -5,7 +5,8 @@ test_that("Leaflet Sync works", {
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "lfx-leafletsync")
   expect_true(all(deps[[length(deps)]]$script %in% c(
-    "L.Map.Sync.js", "leafletsync-bindings.js")))
+    "L.Map.Sync.js", "leafletsync-bindings.js"
+  )))
 
 
   m <- leaflet() %>%

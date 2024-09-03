@@ -1,6 +1,7 @@
 test_that("tangram", {
   scene <- system.file("examples/tangram/www/scene.yaml",
-                       package = "leaflet.extras2")
+    package = "leaflet.extras2"
+  )
 
   m <- leaflet() %>%
     addTangram(scene = scene, group = "tangram") %>%

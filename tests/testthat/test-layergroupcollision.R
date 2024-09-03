@@ -6,8 +6,10 @@ library(leaflet)
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
 df <- df[sample(1:nrow(df), 50, replace = FALSE), ]
-df$classes <- sample(x = c("myclass1", "myclass2", "myclass3"),
-                     nrow(df), replace = TRUE)
+df$classes <- sample(
+  x = c("myclass1", "myclass2", "myclass3"),
+  nrow(df), replace = TRUE
+)
 df$ID <- paste0("ID_", 1:nrow(df))
 df$lon <- st_coordinates(df)[, 1]
 df$lat <- st_coordinates(df)[, 2]
@@ -29,8 +31,10 @@ test_that("addLayerGroupCollision works", {
     )
 
   expect_is(map, "leaflet")
-  expect_true(any(sapply(map$dependencies,
-                         function(dep) dep$name == "lfx-layergroupcollision")))
+  expect_true(any(sapply(
+    map$dependencies,
+    function(dep) dep$name == "lfx-layergroupcollision"
+  )))
   expect_length(map$dependencies[[length(map$dependencies)]]$script, 3)
   expect_identical(map$x$calls[[2]]$method, "addLayerGroupCollision")
   expect_is(map$x$calls[[2]]$args[[1]], "geojson")
