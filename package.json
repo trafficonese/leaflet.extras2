@@ -21,6 +21,7 @@
     "leaflet-arrowheads": "^1.4.0",
     "leaflet-easyprint": "^2.1.9",
     "leaflet-geometryutil": "^0.10.1",
-    "leaflet.heightgraph": "^1.4.0"
+    "leaflet.heightgraph": "^1.4.0",
+    "rbush": "^2.0.2"
   }
 }
