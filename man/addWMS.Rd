@@ -82,4 +82,8 @@ leaflet() \%>\%
 \references{
 \url{https://github.com/heigeo/leaflet.wms}
 }
+\seealso{
+Other WMS Functions: 
+\code{\link{addWMSHeader}()}
+}
 \concept{WMS Functions}
