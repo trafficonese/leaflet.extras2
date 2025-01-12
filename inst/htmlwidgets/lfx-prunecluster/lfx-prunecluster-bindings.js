@@ -58,12 +58,14 @@ LeafletWidget.methods.addPruneCluster = function(geojson, layerId, group,
 			}
 		}
 		if (data.label) {
+		  /*
 			var content = typeof data.label === 'function' ? data.label(data, category) : data.label;
 			if (marker.getLabel()) {
 				marker.setPopupContent(content, labelOptions);
 			} else {
 				marker.bindTooltip(content, labelOptions);
 			}
+			*/
 		}
 	};
   pruneCluster.BuildLeafletCluster = function(cluster, position) {
