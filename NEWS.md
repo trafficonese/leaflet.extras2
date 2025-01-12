@@ -1,4 +1,4 @@
-# leaflet.extras2 (development version)
+# leaflet.extras2 1.3.0
 
 * Included [LayerGroup.Collision](https://github.com/MazeMap/Leaflet.LayerGroup.Collision) plugin
 * Included [LayerGroup.Conditional](https://github.com/Solfisk/Leaflet.LayerGroup.Conditional) plugin
