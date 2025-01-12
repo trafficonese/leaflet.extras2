@@ -39,7 +39,7 @@ groups <- c("atlStorms","breweries","gadmCHE")
 
 leaflet()  \%>\%
 addTiles() \%>\%
-  leafem::addMouseCoordinates() \%>\%
+  #leafem::addMouseCoordinates() \%>\%
   addPolylines(data = lines, label = ~Name, group = groups[1]) \%>\%
   addCircleMarkers(data = breweries91, label = ~brewery, group = groups[2]) \%>\%
   addPolygons(data = polys, label = ~NAME_1, group = groups[3]) \%>\%
