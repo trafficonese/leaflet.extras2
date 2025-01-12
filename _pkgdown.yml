@@ -62,6 +62,10 @@ reference:
   - title: LayerGroup.Collision
     contents:
     - matches("LayerGroupCollision")
+  - title: LayerGroup.Conditional
+    contents:
+    - matches("LayerGroupConditional")
+    - matches("ConditionalLayer")
   - title: Mapkey Icons
     contents:
     - matches("Mapkey")

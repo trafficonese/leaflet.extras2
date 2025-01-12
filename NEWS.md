@@ -1,6 +1,7 @@
 # leaflet.extras2 (development version)
 
 * Included [LayerGroup.Collision](https://github.com/MazeMap/Leaflet.LayerGroup.Collision) plugin
+* Included [LayerGroup.Conditional](https://github.com/Solfisk/Leaflet.LayerGroup.Conditional) plugin
 * Included [OSM Buildings](https://osmbuildings.org/documentation/leaflet/) plugin
 * New Function `addDivicon` adds `DivIcon` markers to Leaflet maps with support for custom HTML and CSS classes. See the example in `./inst/examples/divicons_html_app.R`
 * Added `addClusterCharts` to enable **pie** and **bar** charts in Marker clusters using `Leaflet.markercluster`, `d3` and `L.DivIcon`, with support for customizable category styling and various aggregation methods like **sum, min, max, mean**, and **median**.
