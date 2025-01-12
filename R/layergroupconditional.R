@@ -40,7 +40,7 @@ layerGroupConditionalDependency <- function() {
 #' breweries91 <- st_as_sf(breweries91)
 #' lines <- st_as_sf(atlStorms2005)
 #' polys <- st_as_sf(leaflet::gadmCHE)
-#' groups <- c("storms","breweries","polys")
+#' groups <- c("atlStorms","breweries","gadmCHE")
 #'
 #' leaflet()  %>%
 #' addTiles() %>%
@@ -64,4 +64,22 @@ addLayerGroupConditional <- function(map, groups = NULL, conditions = NULL) {
     map, getMapData(map), "addLayerGroupConditional",
     groups, conditions
   )
+}
+
+#' removeConditionalLayer
+#'
+#' @inheritParams addLayerGroupConditional
+#' @family LayerGroupConditional Plugin
+#' @export
+removeConditionalLayer <- function(map, groups) {
+  invokeMethod(map, getMapData(map), "removeConditionalLayer", groups)
+}
+
+#' clearConditionalLayers
+#'
+#' @inheritParams addLayerGroupConditional
+#' @family LayerGroupConditional Plugin
+#' @export
+clearConditionalLayers <- function(map) {
+  invokeMethod(map, getMapData(map), "clearConditionalLayers")
 }

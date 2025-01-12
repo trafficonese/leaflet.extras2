@@ -6,10 +6,12 @@ library(leaflet.extras2)
 breweries91 <- st_as_sf(breweries91)
 lines <- st_as_sf(atlStorms2005)
 polys <- st_as_sf(leaflet::gadmCHE)
-groups <- c("storms","breweries","polys")
+groups <- c("atlStorms","breweries","gadmCHE")
 
 ui <- fluidPage(
-  leafletOutput("map", height = 900)
+  leafletOutput("map", height = 900),
+  actionButton("remove", "Remove by Group"),
+  actionButton("clear", "Clear")
 )
 
 server <- function(input, output, session) {
@@ -29,6 +31,14 @@ server <- function(input, output, session) {
       hideGroup(groups) %>%
       addLayersControl(overlayGroups = groups,
                        options = layersControlOptions(collapsed=FALSE))
+  })
+  observeEvent(input$clear, {
+    leafletProxy("map") %>%
+      clearConditionalLayers()
+  })
+  observeEvent(input$remove, {
+    leafletProxy("map") %>%
+      removeConditionalLayer(groups=groups[1])
   })
 }
 shinyApp(ui, server)

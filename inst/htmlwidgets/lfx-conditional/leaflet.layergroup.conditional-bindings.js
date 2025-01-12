@@ -3,6 +3,7 @@ LeafletWidget.methods.addLayerGroupConditional = function(groups, conditions) {
 
   const map = this;
   let conditionalGroup = L.layerGroup.conditional();
+  map.conditionalGroup = conditionalGroup;
 
   // Loop through each group
   groups.forEach(function(group) {
@@ -38,4 +39,24 @@ LeafletWidget.methods.addLayerGroupConditional = function(groups, conditions) {
     zoomHandler()
   }, 500);
 
+};
+
+
+LeafletWidget.methods.removeConditionalLayer = function(groups) {
+  const map = this;
+  if (!Array.isArray(groups)) {
+    groups = [groups];
+  }
+  groups.forEach(function(group) {
+    let layer = map.layerManager.getLayerGroup(group);
+    if (layer && map.conditionalGroup) {
+      map.conditionalGroup.removeConditionalLayer(layer)
+    } else {
+      console.warn("Layer not found " + group);
+    }
+  })
+};
+
+LeafletWidget.methods.clearConditionalLayers = function() {
+  this.conditionalGroup.clearConditionalLayers()
 };

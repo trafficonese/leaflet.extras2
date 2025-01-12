@@ -35,7 +35,7 @@ library(leaflet.extras2)
 breweries91 <- st_as_sf(breweries91)
 lines <- st_as_sf(atlStorms2005)
 polys <- st_as_sf(leaflet::gadmCHE)
-groups <- c("storms","breweries","polys")
+groups <- c("atlStorms","breweries","gadmCHE")
 
 leaflet()  \%>\%
 addTiles() \%>\%
@@ -56,5 +56,9 @@ addTiles() \%>\%
 }
 \seealso{
 \url{https://github.com/Solfisk/Leaflet.LayerGroup.Conditional?tab=readme-ov-file} for more details about the plugin.
+
+Other LayerGroupConditional Plugin: 
+\code{\link{clearConditionalLayers}()},
+\code{\link{removeConditionalLayer}()}
 }
 \concept{LayerGroupConditional Plugin}
