@@ -24,7 +24,7 @@ addDivicon(
 )
 }
 \arguments{
-\item{map}{The Leaflet map object to which the DivIcon markers will be added.}
+\item{map}{the map to add awesome Markers to.}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -55,12 +55,12 @@ for security reasons)}
 \item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
-\item{className}{A single CSS class or a vector of CSS classes to apply to the DivIcon markers.}
+\item{className}{A single CSS class or a vector of CSS classes.}
 
-\item{html}{A single HTML string or a vector of HTML strings to display within the DivIcon markers.}
+\item{html}{A single HTML string or a vector of HTML strings.}
 
-\item{options}{A list of extra options for the markers.
-See \code{\link[leaflet]{markerOptions}} for more details.}
+\item{options}{a list of extra options for tile layers, popups, paths
+(circles, rectangles, polygons, ...), or other map elements}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};

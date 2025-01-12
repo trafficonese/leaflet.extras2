@@ -17,13 +17,11 @@ diviconDependency <- function() {
 #' for latitude and longitude coordinates. It allows for the application of custom HTML
 #' content and CSS classes to each marker, providing high flexibility in marker design.
 #'
-#' @param map The Leaflet map object to which the DivIcon markers will be added.
 #' @inheritParams leaflet::addAwesomeMarkers
-#' @param className A single CSS class or a vector of CSS classes to apply to the DivIcon markers.
-#' @param html A single HTML string or a vector of HTML strings to display within the DivIcon markers.
+#' @param className A single CSS class or a vector of CSS classes.
+#' @param html A single HTML string or a vector of HTML strings.
 #' @param divOptions A list of extra options for Leaflet DivIcon.
-#' @param options A list of extra options for the markers.
-#'   See \code{\link[leaflet]{markerOptions}} for more details.
+#'
 #' @family DivIcon Functions
 #' @return The modified Leaflet map object.
 #' @export
