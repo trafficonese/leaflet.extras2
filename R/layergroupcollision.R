@@ -16,7 +16,7 @@ layergroupCollisionDependency <- function() {
   )
 }
 
-#' Add LayerGroup Collision Plugin to Leaflet Map
+#' Add LayerGroup Collision Plugin
 #'
 #' @description Integrates the LayerGroup Collision plugin into a Leaflet map,
 #' which hides overlapping markers and only displays the first added marker in a
@@ -34,7 +34,7 @@ layergroupCollisionDependency <- function() {
 #' @inheritParams addDivicon
 #' @references \url{https://github.com/MazeMap/Leaflet.LayerGroup.Collision}
 #'
-#' @name LayerroupCollision
+#' @name LayerGroupCollision
 #' @examples
 #' library(leaflet)
 #' library(sf)
@@ -42,16 +42,16 @@ layergroupCollisionDependency <- function() {
 #'
 #' df <- sf::st_as_sf(atlStorms2005)
 #' df <- suppressWarnings(st_cast(df, "POINT"))
-#' df <- df[sample(1:nrow(df), 150, replace = FALSE), ]
 #' df$classes <- sample(x = 1:5, nrow(df), replace = TRUE)
 #'
 #' leaflet() %>%
 #'   addProviderTiles("CartoDB.Positron") %>%
 #'   leaflet::addLayersControl(overlayGroups = c("Labels")) %>%
+#'   addPolylines(data = sf::st_as_sf(atlStorms2005), label = ~Name) %>%
 #'   addLayerGroupCollision(
-#'     data = df,
+#'     data = df, margin = 40,
 #'     html = ~ paste0(
-#'       '<div style="width: 70px" class="custom-html">',
+#'       '<div style="width: max-content; background-color: #cbc0c04f" class="custom-html">',
 #'       '<div class="title">', Name, "</div>",
 #'       '<div class="subtitle">MaxWind: ', MaxWind, "</div>",
 #'       "</div>"
