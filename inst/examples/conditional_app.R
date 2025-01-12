@@ -24,7 +24,7 @@ server <- function(input, output, session) {
                                conditions = list(
                                  "(zoomLevel) => zoomLevel < 4" = groups[1],
                                  "(zoomLevel) => zoomLevel >= 4 & zoomLevel < 6 " = groups[2],
-                                 "(zoomLevel) => zoomLevel >= 6" = c(groups[1], groups[3])
+                                 "(zoomLevel) => zoomLevel >= 6" = c(groups[3])
                                )) %>%
       hideGroup(groups) %>%
       addLayersControl(overlayGroups = groups,

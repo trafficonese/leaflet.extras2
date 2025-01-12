@@ -42,6 +42,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [History](https://github.com/cscott530/leaflet-history)
 -   [Labelgun](https://github.com/Geovation/labelgun)
 -   [LayerGroup.Collision](https://github.com/MazeMap/Leaflet.LayerGroup.Collision)
+-   [LayerGroup.Conditional](https://github.com/Solfisk/Leaflet.LayerGroup.Conditional)
 -   [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync)
 -   [Mapkey Icons](https://github.com/mapshakers/leaflet-mapkey-icon)
 -   [Moving Markers](https://github.com/ewoken/Leaflet.MovingMarker)
