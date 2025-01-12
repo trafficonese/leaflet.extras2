@@ -20,6 +20,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addHistory.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addItemContextmenu.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addLabelgun.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addLayerGroupConditional.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addLeafletsync.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addLeafletsyncDependency.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addMapkeyMarkers.html</loc></url>
@@ -39,6 +40,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/arrowheadOptions.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearAntpath.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearArrowhead.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearConditionalLayers.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearFuture.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearHexbin.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearHistory.html</loc></url>
@@ -78,6 +80,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/reachabilityOptions.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeAntpath.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeArrowhead.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeConditionalLayer.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeEasyprint.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeItemContextmenu.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removePlayback.html</loc></url>
