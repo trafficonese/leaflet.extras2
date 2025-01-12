@@ -5,7 +5,7 @@
 [![CRAN status](https://www.r-pkg.org/badges/version/leaflet.extras2)](https://CRAN.R-project.org/package=leaflet.extras2)
 [![CRAN checks](https://badges.cranchecks.info/summary/leaflet.extras2.svg)](https://cran.r-project.org/web/checks/check_results_leaflet.extras2.html)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2024--06--10-green.svg)](/commits/master)  
-[![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://cran.rstudio.com/web/packages/leaflet.extras2/index.html)
+[![](https://cranlogs.r-pkg.org/badges/grand-total/leaflet.extras2)](https://cran.r-project.org/package=leaflet.extras2)
 [![](https://cranlogs.r-pkg.org/badges/last-month/leaflet.extras2?color=blue)](https://cran.r-project.org/package=leaflet.extras2)
 [![Codecov test coverage](https://codecov.io/gh/trafficonese/leaflet.extras2/branch/master/graph/badge.svg)](https://app.codecov.io/gh/trafficonese/leaflet.extras2?branch=master)
 <!-- badges: end -->

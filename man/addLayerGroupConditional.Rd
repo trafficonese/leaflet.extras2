@@ -37,9 +37,9 @@ lines <- st_as_sf(atlStorms2005)
 polys <- st_as_sf(leaflet::gadmCHE)
 groups <- c("atlStorms", "breweries", "gadmCHE")
 
-leaflet()  \%>\%
-addTiles() \%>\%
-  #leafem::addMouseCoordinates() \%>\%
+leaflet() \%>\%
+  addTiles() \%>\%
+  # leafem::addMouseCoordinates() \%>\%
   addPolylines(data = lines, label = ~Name, group = groups[1]) \%>\%
   addCircleMarkers(data = breweries91, label = ~brewery, group = groups[2]) \%>\%
   addPolygons(data = polys, label = ~NAME_1, group = groups[3]) \%>\%
