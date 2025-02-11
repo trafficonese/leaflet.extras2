@@ -280,7 +280,8 @@ generate_css <- function(row, icon) {
   if (is.null(stroke) || is.na(stroke)) stroke <- color
 
   ## Replace spaces with dots in the class name #######
-  label_nospaces <- gsub(" ", ".", label, fixed = TRUE)
+  label_nospaces <- gsub("([\\^\\$\\.\\|\\(\\)\\[\\]\\{\\}\\*\\+\\?])", "\\\\\\1", label, perl=TRUE)
+  label_nospaces <- gsub(" ", ".", label_nospaces, fixed = TRUE)
 
   ## Make Custom CSS-class with fill/stroke/background ################
   class_name <- paste0("category-", label_nospaces)
