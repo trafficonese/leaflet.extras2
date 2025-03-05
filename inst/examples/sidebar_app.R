@@ -1,5 +1,6 @@
 library(sf)
 library(shiny)
+library(shinyWidgets)
 library(leaflet)
 library(leaflet.extras2)
 
@@ -45,9 +46,12 @@ ui <- fluidPage(
                                title = "profile", id = "profile_id", icon = icon("wrench"),
                                tagList(
                                  textInput("caption", "Caption", "Data Summary"),
-                                 selectInput("label", "Label",
-                                             choices = c("brewery", "address",
-                                                         "zipcode", "village")),
+                                 selectInput("label", "selectInput", selectize = FALSE,
+                                             choices = LETTERS[1:26]),
+                                 selectInput("label1", "selectInput with selectize", selectize = TRUE,
+                                             choices = LETTERS[1:26]),
+                                 virtualSelectInput("label2", "virtualSelectInput",
+                                             choices = LETTERS[1:26]),
                                  passwordInput("password", "Password:"),
                                  actionButton("go", "Go"),
                                  verbatimTextOutput("value")
