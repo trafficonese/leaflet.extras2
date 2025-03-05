@@ -1,4 +1,7 @@
-# leaflet.extras2 (development version)
+# leaflet.extras2 1.3.1
+
+* Fix tests
+* Add select-inputs to sidebar-example
 
 # leaflet.extras2 1.3.0
 
