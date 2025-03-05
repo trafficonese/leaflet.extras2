@@ -16,7 +16,7 @@ test_that("clustercharts", {
   )
   data$tosum <- sample(1:100, nrow(data), replace = TRUE)
   data$tosumlabel <- paste("Sum: ", data$tosum)
-  data$web <- gsub(">(.*?)<", ">", data$tosum, "<", data$web)
+  data$web <- as.character(data$tosum)
   data$web <- ifelse(is.na(data$web), "",
     paste0("<div class='markerhtml'>", data$web, "</div>")
   )
