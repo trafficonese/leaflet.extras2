@@ -48,12 +48,12 @@ addGeosearch <- function(map,
 #' \href{https://github.com/smeijer/leaflet-geosearch/blob/main/src/SearchControl.ts#L23}{source code}
 #'
 #' @param style Character. UI style, one of "bar" or "button".
+#' @param resetButton Icon or Character for the reset button.
 #' @param notFoundMessage Message shown if no result is found.
 #' @param autoComplete Logical. Enable autocomplete suggestions.
 #' @param autoCompleteDelay Delay in ms before suggestions appear.
 #' @param showMarker Logical. Show marker for result location.
 #' @param showPopup Logical. Show popup on result location.
-#' @param draggable Logical. Make marker draggable.
 #' @param maxMarkers Max number of markers shown.
 #' @param retainZoomLevel Logical.
 #' @param animateZoom Logical.
@@ -67,7 +67,7 @@ addGeosearch <- function(map,
 #' @return A list of options for \code{addGeosearch}
 #' @export
 geosearchOptions <- function(style = c("button", "bar"),
-                             resetButton = "🔍",
+                             resetButton = "x",
                              notFoundMessage = "Nothing found",
                              autoComplete = TRUE,
                              autoCompleteDelay = 250,

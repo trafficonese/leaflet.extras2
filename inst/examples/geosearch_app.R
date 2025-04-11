@@ -6,12 +6,8 @@ options("shiny.autoreload" = TRUE)
 ui <- fluidPage(
   actionButton("remove", label = "remove"),
   leafletOutput("map", height = 900),
-  splitLayout(cellWidths = c("49%", "49%"),
-              div(h4("Geosearch Results"),
-                  verbatimTextOutput("results")),
-              div(h4("Geosearch Dragend"),
-                  verbatimTextOutput("dragend"))
-              )
+  div(h4("Geosearch Results"),
+      verbatimTextOutput("results"))
 )
 
 server <- function(input, output, session) {
@@ -38,7 +34,6 @@ server <- function(input, output, session) {
                        autoCompleteDelay = 250,
                        showMarker = TRUE,
                        showPopup = TRUE,
-                       resultFormat = htmlwidgets::JS("function(result) { return result.result.label }"),
                        maxMarkers = 3,
                        retainZoomLevel = FALSE,
                        animateZoom = TRUE,
@@ -54,10 +49,6 @@ server <- function(input, output, session) {
 
   output$results <- renderPrint({
     txt <- req(input$map_geosearch_result)
-    print(txt)
-  })
-  output$dragend <- renderPrint({
-    txt <- req(input$map_geosearch_dragend)
     print(txt)
   })
 }

@@ -6,7 +6,7 @@
 \usage{
 geosearchOptions(
   style = c("button", "bar"),
-  resetButton = "🔍",
+  resetButton = "x",
   notFoundMessage = "Nothing found",
   autoComplete = TRUE,
   autoCompleteDelay = 250,
@@ -24,6 +24,8 @@ geosearchOptions(
 }
 \arguments{
 \item{style}{Character. UI style, one of "bar" or "button".}
+
+\item{resetButton}{Icon or Character for the reset button.}
 
 \item{notFoundMessage}{Message shown if no result is found.}
 
@@ -50,8 +52,6 @@ geosearchOptions(
 \item{updateMap}{Logical. Pan/zoom map on result.}
 
 \item{...}{Further arguments passed to `addGeosearch`}
-
-\item{draggable}{Logical. Make marker draggable.}
 }
 \value{
 A list of options for \code{addGeosearch}
