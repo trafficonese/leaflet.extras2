@@ -37,6 +37,10 @@ reference:
     contents:
     - matches("Easyprint")
     - matches("easyprint")
+  - title: Geosearch
+    contents:
+    - matches("Geosearch")
+    - matches("geosearch")
   - title: GIBS
     contents:
     - matches("GIBS")
