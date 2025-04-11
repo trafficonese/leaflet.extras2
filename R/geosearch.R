@@ -111,9 +111,11 @@ geosearchOptions <- function(style = c("button", "bar"),
 #' @param options Optional named list of options and parameters
 #' @return A list describing the provider config
 #' @export
-geosearchProvider <- function(type = c("OSM","Bing","Esri","GeocodeEarth",
-                                       "Google","Here","LocationIQ","OpenCage",
-                                       "Pelias","Geoapify","AMap","GeoApiFr"),
+geosearchProvider <- function(type = c(
+                                "OSM", "Bing", "Esri", "GeocodeEarth",
+                                "Google", "Here", "LocationIQ", "OpenCage",
+                                "Pelias", "Geoapify", "AMap", "GeoApiFr"
+                              ),
                               options = list()) {
   type <- match.arg(type)
   list(type = type, options = options)

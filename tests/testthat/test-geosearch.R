@@ -32,5 +32,4 @@ test_that("geosearch", {
 
   prov <- geosearchProvider("OSM")
   expect_equal(prov$type, "OSM")
-
 })
