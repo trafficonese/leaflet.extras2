@@ -25,14 +25,13 @@ geosearchDependencies <- function() {
 #' @references \url{https://github.com/smeijer/leaflet-geosearch}
 #' @inherit leaflet::addControl return
 #' @export
-#' @examples \dontrun{
+#' @examples
 #' library(leaflet)
 #' library(leaflet.extras2)
 #'
 #' leaflet() %>%
 #'   addTiles() %>%
 #'   addGeosearch()
-#' }
 addGeosearch <- function(map,
                          provider = geosearchProvider(),
                          options = geosearchOptions()) {

@@ -21,14 +21,12 @@ Adds a geocoding search widget to a leaflet map using the leaflet-geosearch plug
 Supports multiple providers such as OpenStreetMap, Esri, Google, HERE, etc.
 }
 \examples{
-\dontrun{
 library(leaflet)
 library(leaflet.extras2)
 
 leaflet() \%>\%
   addTiles() \%>\%
   addGeosearch()
-}
 }
 \references{
 \url{https://github.com/smeijer/leaflet-geosearch}
