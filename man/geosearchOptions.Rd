@@ -5,15 +5,13 @@
 \title{geosearchOptions}
 \usage{
 geosearchOptions(
-  style = "button",
+  style = c("button", "bar"),
   resetButton = "🔍",
   notFoundMessage = "Nothing found",
   autoComplete = TRUE,
   autoCompleteDelay = 250,
   showMarker = TRUE,
   showPopup = FALSE,
-  popupFormat = JS("function(query, result) { return result.result.label }"),
-  resultFormat = JS("function(result) { return result.result.label }"),
   maxMarkers = 1,
   retainZoomLevel = FALSE,
   animateZoom = TRUE,
@@ -36,10 +34,6 @@ geosearchOptions(
 \item{showMarker}{Logical. Show marker for result location.}
 
 \item{showPopup}{Logical. Show popup on result location.}
-
-\item{popupFormat}{JS expression (string) for custom popup.}
-
-\item{resultFormat}{JS expression (string) for result display.}
 
 \item{maxMarkers}{Max number of markers shown.}
 

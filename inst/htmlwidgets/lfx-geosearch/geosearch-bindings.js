@@ -1,3 +1,4 @@
+/* global LeafletWidget, $, Shiny, HTMLWidgets */
 LeafletWidget.methods.addGeosearch = function(providerConfig, options) {
   (function(){
     var map = this;
@@ -6,7 +7,6 @@ LeafletWidget.methods.addGeosearch = function(providerConfig, options) {
       delete map.geosearch;
     }
 
-    //console.log("providerConfig");console.log(providerConfig)
     const providerType = providerConfig.type;
     const providerOptions = providerConfig.options || {};
     const providerMap = {
@@ -26,7 +26,6 @@ LeafletWidget.methods.addGeosearch = function(providerConfig, options) {
 
     const ProviderConstructor = providerMap[providerType];
     const provider = new ProviderConstructor(providerOptions);
-    //console.log("provider");console.log(provider)
 
     const optionsIcon = Object.assign({
       marker: {
@@ -34,17 +33,17 @@ LeafletWidget.methods.addGeosearch = function(providerConfig, options) {
         }
       }, options);
     const controlOptions = Object.assign({ provider: provider }, optionsIcon);
-    //console.log("controlOptions");console.log(controlOptions)
-
     const searchControl = new GeoSearch.GeoSearchControl(controlOptions);
 
     map.on('geosearch/showlocation', function(e) {
-      console.log("geosearch/showlocation"); console.log(e)
-      Shiny.onInputChange(map.id+"_geosearch_result", e.location || null );
+      if (HTMLWidgets.shinyMode) {
+        Shiny.onInputChange(map.id+"_geosearch_result", e.location || null );
+      }
     });
     map.on('geosearch/marker/dragend', function(e) {
-      console.log("geosearch/marker/dragend"); console.log(e)
-      Shiny.onInputChange(map.id+"_geosearch_dragend", e.location || null);
+      if (HTMLWidgets.shinyMode) {
+        Shiny.onInputChange(map.id+"_geosearch_dragend", e.location || null);
+      }
     });
 
     map.geosearch = searchControl;

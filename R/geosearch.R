@@ -54,8 +54,6 @@ addGeosearch <- function(map,
 #' @param showMarker Logical. Show marker for result location.
 #' @param showPopup Logical. Show popup on result location.
 #' @param draggable Logical. Make marker draggable.
-#' @param popupFormat JS expression (string) for custom popup.
-#' @param resultFormat JS expression (string) for result display.
 #' @param maxMarkers Max number of markers shown.
 #' @param retainZoomLevel Logical.
 #' @param animateZoom Logical.
@@ -75,8 +73,8 @@ geosearchOptions <- function(style = c("button", "bar"),
                              autoCompleteDelay = 250,
                              showMarker = TRUE,
                              showPopup = FALSE,
-                             popupFormat = JS("function(query, result) { return result.result.label }"),
-                             resultFormat = JS("function(result) { return result.result.label }"),
+                             # popupFormat = JS("function(query, result) { return result.result.label }"),
+                             # resultFormat = JS("function(result) { return result.result.label }"),
                              maxMarkers = 1,
                              retainZoomLevel = FALSE,
                              animateZoom = TRUE,
@@ -94,8 +92,8 @@ geosearchOptions <- function(style = c("button", "bar"),
     autoCompleteDelay = autoCompleteDelay,
     showMarker = showMarker,
     showPopup = showPopup,
-    popupFormat = popupFormat,
-    resultFormat = resultFormat,
+    # popupFormat = popupFormat,
+    # resultFormat = resultFormat,
     maxMarkers = maxMarkers,
     retainZoomLevel = retainZoomLevel,
     animateZoom = animateZoom,
@@ -117,7 +115,6 @@ geosearchProvider <- function(type = c("OSM","Bing","Esri","GeocodeEarth",
                                        "Google","Here","LocationIQ","OpenCage",
                                        "Pelias","Geoapify","AMap","GeoApiFr"),
                               options = list()) {
-  if (type == "OpenStreetMap") type = "OSM"
   type <- match.arg(type)
   list(type = type, options = options)
 }

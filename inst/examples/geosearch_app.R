@@ -1,6 +1,5 @@
 library(shiny)
 library(leaflet)
-library(leafem)
 library(leaflet.extras2)
 options("shiny.autoreload" = TRUE)
 
@@ -18,9 +17,7 @@ ui <- fluidPage(
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet() %>%
-      leafem::addMouseCoordinates() %>%
       addTiles() %>%
-      addBuildings() %>%
       addGeosearch(provider = geosearchProvider(
         type = "OpenStreetMap",
         options = list(
