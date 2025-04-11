@@ -15,6 +15,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addDivicon.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addEasyprint.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addGIBS.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addGeosearch.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addHeightgraph.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addHexbin.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addHistory.html</loc></url>
@@ -53,6 +54,8 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/easyprintMap.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/easyprintOptions.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/enableContextmenu.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/geosearchOptions.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/geosearchProvider.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/gibs_layers.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/goBackHistory.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/goForwardHistory.html</loc></url>
@@ -82,6 +85,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeArrowhead.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeConditionalLayer.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeEasyprint.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeGeosearch.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeItemContextmenu.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removePlayback.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeReachability.html</loc></url>
