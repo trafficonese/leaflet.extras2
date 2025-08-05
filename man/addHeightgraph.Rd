@@ -21,7 +21,7 @@ addHeightgraph(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{data}{A Simple Feature LINESTRING with Z dimension.}
 
@@ -31,10 +31,10 @@ heightgraph control}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{color}{stroke color}
 
@@ -42,9 +42,7 @@ layers (e.g. markers and polygons) can share the same group name.}
 
 \item{opacity}{stroke opacity (or layer opacity for tile layers)}
 
-\item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
-pattern}}
+\item{dashArray}{a string that defines the stroke \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash pattern}}
 
 \item{smoothFactor}{how much to simplify the polyline on each zoom level
 (more means better performance and less accurate representation)}
