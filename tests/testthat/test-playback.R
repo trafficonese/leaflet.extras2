@@ -352,7 +352,7 @@ test_that("playback", {
 
   ## Test Example ###############
   library(sp)
-  crds <- coordinates(leaflet::atlStorms2005[1, ])[[1]][[1]]
+  crds <- coordinates(sf::as_Spatial(leaflet::atlStorms2005)[1, ])[[1]][[1]]
   df <- data.frame(time = as.POSIXct(
     seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds))
   ))
