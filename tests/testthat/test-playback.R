@@ -351,13 +351,24 @@ test_that("playback", {
 
 
   ## Test Example ###############
-  library(sp)
-  crds <- coordinates(sf::as_Spatial(leaflet::atlStorms2005)[1, ])[[1]][[1]]
-  df <- data.frame(time = as.POSIXct(
-    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds))
-  ))
-  spdf <- SpatialPointsDataFrame(crds, df)
-
+  if (inherits(leaflet::atlStorms2005, "sf")) {
+    # starting with leaflet 2.3.0
+    crds <- sf::st_coordinates(leaflet::atlStorms2005[1, ])
+    df <- data.frame(time = as.POSIXct(
+      seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds))),
+      x = crds[, 1],
+      y = crds[, 2]
+    )
+    spdf <- sf::st_as_sf(df, coords = c("x", "y"))
+  } else {
+    # can delete once leaflet 2.3 is required.
+    library(sp)
+    crds <- coordinates(leaflet::atlStorms2005[1, ])[[1]][[1]]
+    df <- data.frame(time = as.POSIXct(
+      seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds))
+    ))
+    spdf <- SpatialPointsDataFrame(crds, df)
+  }
   m <- leaflet() %>%
     addTiles() %>%
     addPlayback(
@@ -365,6 +376,7 @@ test_that("playback", {
       options = playbackOptions(radius = 3),
       pathOpts = pathOptions(weight = 5)
     )
+
   expect_is(m, "leaflet")
   expect_identical(m$x$calls[[2]]$method, "addPlayback")
   expect_identical(
@@ -372,12 +384,24 @@ test_that("playback", {
     leaflet.extras2:::to_jsonformat(spdf, "time")
   )
 
-
-  crds1 <- coordinates(leaflet::atlStorms2005[10, ])[[1]][[1]]
-  df1 <- data.frame(time = as.POSIXct(
-    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds1))
-  ))
-  spdf1 <- SpatialPointsDataFrame(crds1, df1)
+  if (inherits(leaflet::atlStorms2005, "sf")) {
+    # starting with leaflet 2.3.0
+    crds1 <- sf::st_coordinates(leaflet::atlStorms2005[10, ])
+    df1 <- data.frame(time = as.POSIXct(
+      seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds))),
+      x = crds1[, 1],
+      y = crds1[, 2]
+    )
+    spdf1 <- sf::st_as_sf(df1, coords = c("x", "y"))
+  } else {
+    # can delete once leaflet 2.3 is required.
+    library(sp)
+    crds1 <- coordinates(leaflet::atlStorms2005[10, ])[[1]][[1]]
+    df1 <- data.frame(time = as.POSIXct(
+      seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(crds1))
+    ))
+    spdf1 <- SpatialPointsDataFrame(crds1, df1)
+  }
 
   spdfm <- list(spdf, spdf1)
   m <- leaflet() %>%
