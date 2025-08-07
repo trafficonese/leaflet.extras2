@@ -7,7 +7,7 @@
 setDate(map, layers = NULL, dates = NULL)
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{layers}{A character vector of GIBS-layers. See \code{\link{gibs_layers}}}
 
