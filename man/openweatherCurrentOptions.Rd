@@ -4,7 +4,14 @@
 \alias{openweatherCurrentOptions}
 \title{openweatherCurrentOptions}
 \usage{
-openweatherCurrentOptions(lang = "en", minZoom = 7, interval = 10, ...)
+openweatherCurrentOptions(
+  lang = "en",
+  minZoom = 7,
+  interval = 10,
+  imageLoadingUrl = paste0(openweatherDependency()[[1]]$name, "-",
+    openweatherDependency()[[1]]$version, "owmloading.gif"),
+  ...
+)
 }
 \arguments{
 \item{lang}{'en', 'de', 'ru', 'fr', 'es', 'ca'. Language of popup texts.
@@ -13,7 +20,7 @@ Note: not every translation is finished yet.}
 \item{minZoom}{Number (7). Minimal zoom level for fetching city data. Use
 smaller values only at your own risk.}
 
-\item{interval}{Number (0). Time in minutes to reload city data. Please do
+\item{interval}{Number (10). Time in minutes to reload city data. Please do
 not use less than 10 minutes.}
 
 \item{...}{Further options passed to \code{L.OWM.current}. See the

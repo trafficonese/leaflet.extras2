@@ -8,6 +8,7 @@ openweatherDependency <- function() {
         "leaflet-openweathermap.js",
         "leaflet-openweathermap-bindings.js"
       ),
+      attachment = c("owmloading.gif"),
       stylesheet = "leaflet-openweathermap.css"
     )
   )
@@ -188,7 +189,7 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 #'   Note: not every translation is finished yet.
 #' @param minZoom Number (7). Minimal zoom level for fetching city data. Use
 #'   smaller values only at your own risk.
-#' @param interval Number (0). Time in minutes to reload city data. Please do
+#' @param interval Number (10). Time in minutes to reload city data. Please do
 #'   not use less than 10 minutes.
 #' @param ... Further options passed to \code{L.OWM.current}. See the
 #'   \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
@@ -199,11 +200,15 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 openweatherCurrentOptions <- function(lang = "en",
                                       minZoom = 7,
                                       interval = 10,
+                                      imageLoadingUrl = paste0(openweatherDependency()[[1]]$name, "-",
+                                                               openweatherDependency()[[1]]$version,
+                                                               "/owmloading.gif"),
                                       ...) {
   leaflet::filterNULL(list(
     lang = lang,
     minZoom = minZoom,
     interval = interval,
+    imageLoadingUrl = imageLoadingUrl,
     ...
   ))
 }

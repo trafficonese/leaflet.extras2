@@ -1,10 +1,8 @@
 LeafletWidget.methods.addOpenweather = function(layers, group, layerId, options) {
   var map = this;
   var owm;
-  // If 1 layer only, convert to Array
-  if (typeof layers == "string") {
-    layers = [layers];
-  }
+  layers = Array.isArray(layers) ? layers : [layers]
+  group = Array.isArray(group) ? group : [group]
   for (var i = 0; i < layers.length; i++) {
     var name = layers[i];
     owm = L.OWM[name](options);
