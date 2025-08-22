@@ -21,14 +21,67 @@ server <- function(input, output, session) {
       addReachability(apikey = apikey,
                       options = reachabilityOptions(
                         collapsed = FALSE,
-                        drawButtonContent = as.character(icon("plus")),
-                        deleteButtonContent = as.character(icon("minus")),
+                        drawButtonContent = as.character(icon("pen")),
+                        deleteButtonContent = as.character(icon("x")),
                         distanceButtonContent = as.character(icon("map-marked")),
                         timeButtonContent = as.character(icon("clock")),
                         travelModeButton1Content = as.character(icon("car")),
                         travelModeButton2Content = as.character(icon("bicycle")),
                         travelModeButton3Content = as.character(icon("walking")),
-                        travelModeButton4Content = as.character(icon("wheelchair"))
+                        travelModeButton4Content = as.character(icon("wheelchair")),
+                        clickFn = JS("function(e) {
+                          //console.log('clickFn');console.log(e);
+                          var layer = e.target;
+                          var props = layer.feature.properties;
+                          var popupContent = 'Mode of travel: ' + props['Travel mode'] +
+                                              '<br />Range: 0 - ' + props['Range'] + ' ' + props['Range units'] +
+                                              '<br />Area: ' + props['Area'] + ' ' + props['Area units'] +
+                                              '<br />Population: ' + props['Population'];
+                          if (props.hasOwnProperty('Reach factor')) popupContent += '<br />Reach factor: ' + props['Reach factor'];
+                          layer.bindPopup(popupContent).openPopup();
+                        }"),
+                        mouseOutFn = JS("function(e) {
+                          //console.log('mouseOutFn');console.log(e);
+                          var layer = e.target;
+                          e.target._map.reachabilityControl.isolinesGroup.resetStyle(layer);
+                        }"),
+                        mouseOverFn = JS("function(e) {
+                          //console.log('mouseOverFn');console.log(e);
+                          var layer = e.target;
+                          layer.setStyle({
+                              fillColor: '#E16462',
+                              dashArray: '1,13',
+                              weight: 4,
+                              fillOpacity: '0.5',
+                              opacity: '1'
+                          });
+                          // add tooltip/label dynamically
+                          if (layer.feature && layer.feature.properties) {
+                            var props = layer.feature.properties;
+                            var label = 'Range: ' + props['Range'] + ' ' + props['Range units'];
+                            layer.bindTooltip(label, {permanent: false, sticky: true, direction: 'top'});
+                            layer.openTooltip();
+                          }
+                         }"),
+                        styleFn = JS("function(feature) {
+                            //console.log('styleFn');console.log(feature);
+                            var rangeVal = feature.properties['Range'];
+                            if (feature.properties['Measure'] == 'distance') rangeVal = rangeVal * 10;
+                            return {
+                                color: getColourByRange(rangeVal),
+                                opacity: 0.5,
+                                fillOpacity: 0.2
+                            };
+                        }"),
+                        showOriginMarker = TRUE,
+                        markerFn = JS("function(latLng, travelMode, rangeType) {
+                          //console.log('markerFn');console.log(latLng);
+                          return L.circleMarker(latLng, { radius: 5, weight: 2, color: '#0073d4',
+                                                          fillColor: '#fff', fillOpacity: 1 });
+                        }"),
+                        markerClickFn = JS("function(e) {console.log('markerClickFn');console.log(e);}"),
+                        markerOutFn = JS("function(e) {console.log('markerOutFn');console.log(e);}"),
+                        markerOverFn = JS("function(e) {console.log('markerOverFn');console.log(e);}")
                       ))
   })
   observeEvent(input$removeReachability, {

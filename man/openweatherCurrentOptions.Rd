@@ -9,7 +9,7 @@ openweatherCurrentOptions(
   minZoom = 7,
   interval = 10,
   imageLoadingUrl = paste0(openweatherDependency()[[1]]$name, "-",
-    openweatherDependency()[[1]]$version, "owmloading.gif"),
+    openweatherDependency()[[1]]$version, "/owmloading.gif"),
   ...
 )
 }
