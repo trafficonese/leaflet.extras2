@@ -23,6 +23,8 @@ smaller values only at your own risk.}
 \item{interval}{Number (10). Time in minutes to reload city data. Please do
 not use less than 10 minutes.}
 
+\item{imageLoadingUrl}{URL of the loading image.}
+
 \item{...}{Further options passed to \code{L.OWM.current}. See the
 \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
 list of options}}

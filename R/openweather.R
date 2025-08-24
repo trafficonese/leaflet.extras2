@@ -191,6 +191,7 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 #'   smaller values only at your own risk.
 #' @param interval Number (10). Time in minutes to reload city data. Please do
 #'   not use less than 10 minutes.
+#' @param imageLoadingUrl URL of the loading image.
 #' @param ... Further options passed to \code{L.OWM.current}. See the
 #'   \href{https://github.com/trafficonese/leaflet-openweathermap#options}{full
 #'   list of options}
