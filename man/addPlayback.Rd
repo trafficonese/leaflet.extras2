@@ -35,9 +35,9 @@ Feature's with a time column.}
 
 \item{label}{A formula with the column names for the label content}
 
-\item{popupOptions}{A Vector of \code{\link[leaflet:popupOptions]{popupOptions()}} to provide popups}
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
-\item{labelOptions}{A Vector of \code{\link[leaflet:labelOptions]{labelOptions()}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
 \item{options}{List of additional options. See \code{\link{playbackOptions}}}

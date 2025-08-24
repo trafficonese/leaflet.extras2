@@ -7,8 +7,8 @@
 clearAntpath(map)
 }
 \arguments{
-\item{map}{a map widget object, possibly created from \code{\link[leaflet:leaflet]{leaflet()}}
-but more likely from \code{\link[leaflet:leafletProxy]{leafletProxy()}}}
+\item{map}{a map widget object, possibly created from \code{\link[leaflet]{leaflet}}()
+but more likely from \code{\link[leaflet]{leafletProxy}}()}
 }
 \value{
 the new \code{map} object

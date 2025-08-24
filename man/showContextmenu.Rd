@@ -7,7 +7,7 @@
 showContextmenu(map, lat = NULL, lng = NULL, data = leaflet::getMapData(map))
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{lat}{a vector of latitudes or a formula (similar to the \code{lng}
 argument; the names \code{lat} and \code{latitude} are used when guessing

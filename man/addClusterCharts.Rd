@@ -30,15 +30,15 @@ addClusterCharts(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
+\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
+(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g., markers and polygons) can share the same group name.}
+layers (e.g. markers and polygons) can share the same group name.}
 
 \item{type}{The type of chart to use for clusters: \code{"pie"}, \code{"bar"}, \code{"horizontal"}, or \code{"custom"}.}
 
@@ -54,16 +54,16 @@ layers (e.g., markers and polygons) can share the same group name.}
 
 \item{popup}{The column name used to retrieve feature properties for the popup.}
 
-\item{popupOptions}{A Vector of \code{\link[leaflet:popupOptions]{popupOptions()}} to provide popups}
+\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
 
 \item{label}{a character vector of the HTML content for the labels}
 
-\item{labelOptions}{A Vector of \code{\link[leaflet:labelOptions]{labelOptions()}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
 options for each label. Default \code{NULL}}
 
 \item{clusterOptions}{if not \code{NULL}, markers will be clustered using
 \href{https://github.com/Leaflet/Leaflet.markercluster}{Leaflet.markercluster};
-you can use \code{\link[leaflet:markerClusterOptions]{markerClusterOptions()}} to specify marker cluster
+ you can use \code{\link[leaflet]{markerClusterOptions}()} to specify marker cluster
 options}
 
 \item{clusterId}{the id for the marker cluster layer}
