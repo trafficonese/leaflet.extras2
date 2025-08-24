@@ -34,13 +34,11 @@ acceleration. Default is \code{FALSE}}
 
 \item{pulseColor}{Adds a color to the dashed flux. Default is \code{#ffffff}}
 
-\item{lineCap}{a string that defines
-\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap}{shape
- to be used at the end} of the stroke}
+\item{lineCap}{a string that defines \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap}{shape to be used at the end}
+of the stroke.}
 
-\item{lineJoin}{a string that defines
-\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin}{shape
- to be used at the corners} of the stroke}
+\item{lineJoin}{a string that defines \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin}{shape to be used at the corners}
+of the stroke.}
 
 \item{interactive}{whether the element emits mouse events}
 
@@ -49,7 +47,7 @@ SVG backend is used}
 
 \item{className}{a CSS class name set on an element}
 
-\item{...}{extra options passed to underlying Javascript object constructor.}
+\item{...}{extra options passed to underlying JavaScript object constructor.}
 }
 \value{
 A list of options for \code{addAntpath} animated polylines
