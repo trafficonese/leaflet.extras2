@@ -55,7 +55,12 @@ addReachability <- function(map, apikey = NULL,
       )
     }
   }
-  map$dependencies <- c(map$dependencies, reachabilityDependencies())
+
+  deps <- htmltools::findDependencies(options)
+  options <- lapply(options, function(x) {
+    if (inherits(x, "shiny.tag")) as.character(x) else x
+  })
+  map$dependencies <- c(map$dependencies, reachabilityDependencies(), deps)
   options <- leaflet::filterNULL(c(apiKey = apikey, options))
   invokeMethod(map, NULL, "addReachability", options)
 }

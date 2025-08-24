@@ -21,14 +21,14 @@ server <- function(input, output, session) {
       addReachability(apikey = apikey,
                       options = reachabilityOptions(
                         collapsed = FALSE,
-                        drawButtonContent = as.character(icon("pen")),
-                        deleteButtonContent = as.character(icon("x")),
-                        distanceButtonContent = as.character(icon("map-marked")),
-                        timeButtonContent = as.character(icon("clock")),
-                        travelModeButton1Content = as.character(icon("car")),
-                        travelModeButton2Content = as.character(icon("bicycle")),
-                        travelModeButton3Content = as.character(icon("walking")),
-                        travelModeButton4Content = as.character(icon("wheelchair")),
+                        drawButtonContent        = icon("pen"),
+                        deleteButtonContent      = icon("x"),
+                        distanceButtonContent    = icon("map-marked"),
+                        timeButtonContent        = icon("clock"),
+                        travelModeButton1Content = icon("car"),
+                        travelModeButton2Content = icon("bicycle"),
+                        travelModeButton3Content = icon("walking"),
+                        travelModeButton4Content = icon("wheelchair"),
                         clickFn = JS("function(e) {
                           //console.log('clickFn');console.log(e);
                           var layer = e.target;
