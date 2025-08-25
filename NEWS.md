@@ -1,7 +1,13 @@
 # leaflet.extras2 (development version)
 
-# leaflet.extras2 1.3.1
 * Included [Leaflet.Geosearch](https://github.com/smeijer/leaflet-geosearch/) plugin
+* Fix missing OpenWeather loading gif and correct layers and group matching.
+* Fix missing heightgraph icons. Thanks to @hungkitwchi
+* Fix tests using `leaflet::atlStorms2005`, as it will be an `sf` object. Thanks to @olivroy
+* Fix reachability icon use. Check for dependencies in options and append them and extend the example app.
+
+
+# leaflet.extras2 1.3.1
 
 * Fix tests
 * Add select-inputs to sidebar-example
