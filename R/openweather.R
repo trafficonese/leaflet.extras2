@@ -201,9 +201,11 @@ addOpenweatherCurrent <- function(map, apikey = NULL, group = NULL,
 openweatherCurrentOptions <- function(lang = "en",
                                       minZoom = 7,
                                       interval = 10,
-                                      imageLoadingUrl = paste0(openweatherDependency()[[1]]$name, "-",
-                                                               openweatherDependency()[[1]]$version,
-                                                               "/owmloading.gif"),
+                                      imageLoadingUrl = paste0(
+                                        openweatherDependency()[[1]]$name, "-",
+                                        openweatherDependency()[[1]]$version,
+                                        "/owmloading.gif"
+                                      ),
                                       ...) {
   leaflet::filterNULL(list(
     lang = lang,
