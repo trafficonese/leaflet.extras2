@@ -17,19 +17,23 @@ layerGroupConditionalDependency <- function() {
 #' @param map A map widget object created from \code{\link[leaflet]{leaflet}}.
 #' @param groups A character vector of layer group names already added to the map.
 #' These layer groups will be conditionally displayed based on the specified \code{conditions}.
-#' @param conditions A named list where:
-#'   - Each **name** is a JavaScript function (using \code{\link[leaflet]{JS}}) defining a condition for displaying a layer group.
-#'   - Each **value** corresponds to a layer group name (or names) from the \code{layers} parameter.
-#'   Example:
+#' @param conditions A named list of conditions for displaying layer groups.
+#'   Each list element should have:
+#'   \itemize{
+#'     \item A \emph{name}: a JavaScript function as string that defines the condition.
+#'     \item A \emph{value}: the layer group name(s) from the \code{layers} parameter
+#'       to be shown when the condition evaluates to \code{TRUE}.
+#'   }
+#' Example:
 #'   \preformatted{
-#'     condition = list(
-#'       "(zoomLevel) => zoomLevel < 4" = "group1",
-#'       "(zoomLevel) => zoomLevel >= 4 && zoomLevel < 6" = "group2",
-#'       "(zoomLevel) => zoomLevel >= 6" = c("group3", "group4")
-#'     )
+#'   conditions = list(
+#'     "(zoomLevel) => zoomLevel < 4"                     = "group1",
+#'     "(zoomLevel) => zoomLevel >= 4 && zoomLevel < 6"   = "group2",
+#'     "(zoomLevel) => zoomLevel >= 6"                    = c("group3", "group4")
+#'   )
 #'   }
 #'
-#' @seealso \url{https://github.com/Solfisk/Leaflet.LayerGroup.Conditional?tab=readme-ov-file} for more details about the plugin.
+#' @seealso \url{https://github.com/Solfisk/Leaflet.LayerGroup.Conditional} for more details about the plugin.
 #' @family LayerGroupConditional Plugin
 #' @export
 #' @examples

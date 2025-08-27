@@ -12,17 +12,22 @@ addLayerGroupConditional(map, groups = NULL, conditions = NULL)
 \item{groups}{A character vector of layer group names already added to the map.
 These layer groups will be conditionally displayed based on the specified \code{conditions}.}
 
-\item{conditions}{A named list where:
-- Each **name** is a JavaScript function (using \code{\link[leaflet]{JS}}) defining a condition for displaying a layer group.
-- Each **value** corresponds to a layer group name (or names) from the \code{layers} parameter.
+\item{conditions}{A named list of conditions for displaying layer groups.
+  Each list element should have:
+  \itemize{
+    \item A \emph{name}: a JavaScript function (wrapped in \code{\link[leaflet]{JS}})
+      that defines the condition.
+    \item A \emph{value}: the layer group name(s) from the \code{layers} parameter
+      to be shown when the condition evaluates to \code{TRUE}.
+  }
 Example:
-\preformatted{
-  condition = list(
-    "(zoomLevel) => zoomLevel < 4" = "group1",
-    "(zoomLevel) => zoomLevel >= 4 && zoomLevel < 6" = "group2",
-    "(zoomLevel) => zoomLevel >= 6" = c("group3", "group4")
+  \preformatted{
+  conditions = list(
+    "(zoomLevel) => zoomLevel < 4"                     = "group1",
+    "(zoomLevel) => zoomLevel >= 4 && zoomLevel < 6"   = "group2",
+    "(zoomLevel) => zoomLevel >= 6"                    = c("group3", "group4")
   )
-}}
+  }}
 }
 \description{
 addLayerGroupConditional
