@@ -15,8 +15,7 @@ These layer groups will be conditionally displayed based on the specified \code{
 \item{conditions}{A named list of conditions for displaying layer groups.
   Each list element should have:
   \itemize{
-    \item A \emph{name}: a JavaScript function (wrapped in \code{\link[leaflet]{JS}})
-      that defines the condition.
+    \item A \emph{name}: a JavaScript function as string that defines the condition.
     \item A \emph{value}: the layer group name(s) from the \code{layers} parameter
       to be shown when the condition evaluates to \code{TRUE}.
   }
@@ -64,7 +63,7 @@ leaflet() \%>\%
 
 }
 \seealso{
-\url{https://github.com/Solfisk/Leaflet.LayerGroup.Conditional?tab=readme-ov-file} for more details about the plugin.
+\url{https://github.com/Solfisk/Leaflet.LayerGroup.Conditional} for more details about the plugin.
 
 Other LayerGroupConditional Plugin: 
 \code{\link{clearConditionalLayers}()},
