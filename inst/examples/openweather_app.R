@@ -52,36 +52,36 @@ server <- function(input, output, session) {
       addLayersControl(overlayGroups = owmlayers)
   })
 
-  observeEvent(input$clgr , {
+  observeEvent(input$clgr, {
     leafletProxy("map") %>%
       clearGroup(group = "pressure")
   })
-  observeEvent(input$higr , {
+  observeEvent(input$higr, {
     leafletProxy("map") %>%
       hideGroup(group = "pressure")
   })
-  observeEvent(input$shgr , {
+  observeEvent(input$shgr, {
     leafletProxy("map") %>%
       showGroup(group = "pressure")
   })
-  observeEvent(input$rmti , {
+  observeEvent(input$rmti, {
     leafletProxy("map") %>%
       removeTiles(layerId = "precipitation")
   })
 
-  observeEvent(input$clgrc , {
+  observeEvent(input$clgrc, {
     leafletProxy("map") %>%
       clearGroup(group = "currentgr")
   })
-  observeEvent(input$higrc , {
+  observeEvent(input$higrc, {
     leafletProxy("map") %>%
       hideGroup(group = "currentgr")
   })
-  observeEvent(input$shgrc , {
+  observeEvent(input$shgrc, {
     leafletProxy("map") %>%
       showGroup(group = "currentgr")
   })
-  observeEvent(input$rmtic , {
+  observeEvent(input$rmtic, {
     leafletProxy("map") %>%
       removeMarker(layerId = "currentid")
   })

@@ -37,16 +37,16 @@ server <- function(input, output, session) {
     leaflet() %>%
       addProviderTiles("CartoDB.Positron") %>%
       leaflet::addLayersControl(overlayGroups = c("Labels")) %>%
-        addLayerGroupCollision(data = df
-                   , html = ~paste0(
-                     '<div class="custom-html">',
-                       '<div class="title">', Name, '</div>',
-                       '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
-                     '</div>'
-                   )
-                   , className = ~paste0("my-label my-label-", classes)
-                   , group = "Labels"
-        )
+      addLayerGroupCollision(data = df
+                             , html = ~paste0(
+                               "<div class='custom-html'>",
+                               "<div class='title'>", Name, "</div>",
+                               "<div class='subtitle'>MaxWind: ", MaxWind, "</div>",
+                               "</div>"
+                             )
+                             , className = ~paste0("my-label my-label-", classes)
+                             , group = "Labels"
+      )
 
   })
 }

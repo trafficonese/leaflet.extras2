@@ -19,7 +19,7 @@ library(mapview)
 ## Multiple Trails ##############
 n <- 150
 rows <- c(10, 21)
-trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[rows,], "LINESTRING"), n = n)
+trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[rows, ], "LINESTRING"), n = n)
 trail_pts <- st_transform(trail_pts, 4326)
 data <- sf::st_as_sf(st_cast(trail_pts, "POINT"))
 colnames(data) <- "geometry"
@@ -27,17 +27,17 @@ st_geometry(data) <- "geometry"
 nrows <- length(rows)
 data$id <- rep(1:nrows, each = n)
 time <- as.POSIXct(seq.POSIXt(Sys.time() - 1000, Sys.time(),
-                              length.out = nrow(data)/nrows))
+                              length.out = nrow(data) / nrows))
 data$time <- rep(time, nrows)
-data <- data[, c("id", "time","geometry")]
+data <- data[, c("id", "time", "geometry")]
 data$popup1 <- paste("This is a <b>popup</b> for Track ID: <em>",
-                     data$id,"</em> and <em>time:", data$time,"</em>")
-data$label1 <- paste("Track ID: ",data$id,"<br>", data$time)
+                     data$id, "</em> and <em>time:", data$time, "</em>")
+data$label1 <- paste("Track ID: ",data$id, "<br>", data$time)
 data <- split(data, data$id)
 
 ## Icon #################
 iconship <- makeIcon(
-  iconUrl = 'https://cdn0.iconfinder.com/data/icons/man-listening-to-music-with-earphone-headphone/247/listern-music-006-512.png',
+  iconUrl = "https://cdn0.iconfinder.com/data/icons/man-listening-to-music-with-earphone-headphone/247/listern-music-006-512.png",
   iconWidth = 30, iconHeight = 35, shadowWidth = 30, shadowHeight = 35,
   iconAnchorX = 0, iconAnchorY = 0
 )
@@ -45,7 +45,7 @@ iconship <- makeIcon(
 ## UI #################
 ui <- fluidPage(
   splitLayout(
-    cellWidths = c("60%","40%"),
+    cellWidths = c("60%", "40%"),
       leafletOutput("map", height = "800px"),
       div(
         h4("Clicks"),
@@ -54,7 +54,7 @@ ui <- fluidPage(
         verbatimTextOutput("mouseover")
       )
   ),
-  actionButton("rm","Remove Playback")
+  actionButton("rm", "Remove Playback")
 )
 
 ## Server ###############
@@ -74,13 +74,13 @@ server <- function(input, output, session) {
                     speed = 250, orientIcons = FALSE,
                     playCommand = "Let's go", stopCommand = "Stop it!",
                     transitionpopup = TRUE, transitionlabel = TRUE,
-                    locale = list(locale="de-DE",
-                                  options = list(weekday = 'long',
-                                                 year = 'numeric',
-                                                 month = 'long',
-                                                 day = 'numeric',
-                                                 timeZone = 'UTC',
-                                                 timeZoneName = 'short')),
+                    locale = list(locale = "de-DE",
+                                  options = list(weekday = "long",
+                                                 year = "numeric",
+                                                 month = "long",
+                                                 day = "numeric",
+                                                 timeZone = "UTC",
+                                                 timeZoneName = "short")),
                     radius = 3),
                   popupOptions = popupOptions(maxWidth = 700,
                                               closeOnClick = TRUE),
@@ -109,4 +109,3 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-

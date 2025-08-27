@@ -4,7 +4,7 @@ library(leaflet.extras2)
 
 ui <- fluidPage(
   leafletOutput("map", height = "700px"),
-  dateInput("date", "Date:", max = Sys.Date(), value = Sys.Date()-10),
+  dateInput("date", "Date:", max = Sys.Date(), value = Sys.Date() - 10),
   actionButton("go", "Set the new Date"),
   checkboxInput("trans", "Transparency", value = TRUE),
   actionButton("go1", "Set the new Transparency")
@@ -24,11 +24,11 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$go, {
-    leafletProxy("map",session) %>%
+    leafletProxy("map", session) %>%
       setDate(layers, input$date)
   })
   observeEvent(input$go1, {
-    leafletProxy("map",session) %>%
+    leafletProxy("map", session) %>%
       setTransparent(layers, input$trans)
   })
 }

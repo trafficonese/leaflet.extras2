@@ -18,9 +18,9 @@ server <- function(input, output, session) {
         type = "OSM",
         options = list(
           params = list(
-            'accept-language'= 'de'
-            , countrycodes= 'at'
-            , addressdetails= 1
+            "accept-language" = "de"
+            , countrycodes = "at"
+            , addressdetails = 1
             , extratags = 1
             # , viewbox = c(16.36,48.20,16.38,48.25)
             # , bounded = 1

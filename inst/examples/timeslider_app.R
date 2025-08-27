@@ -3,15 +3,15 @@ library(leaflet.extras2)
 library(sf)
 library(shiny)
 
-data <- sf::st_as_sf(leaflet::atlStorms2005[1,])
+data <- sf::st_as_sf(leaflet::atlStorms2005[1, ])
 data <- suppressWarnings(st_cast(data, "POINT"))
 data$time <- as.POSIXct(
-  seq.POSIXt(as.POSIXct(paste0(2020-nrow(data)+1,"-01-01")),
+  seq.POSIXt(as.POSIXct(paste0(2020 - nrow(data) + 1, "-01-01")),
              as.POSIXct("2020-01-01"), by = "year"))
-data1 <- sf::st_as_sf(leaflet::atlStorms2005[2,])
+data1 <- sf::st_as_sf(leaflet::atlStorms2005[2, ])
 data1 <- suppressWarnings(st_cast(data1, "POINT"))
 data1$time <- as.POSIXct(
-  seq.POSIXt(as.POSIXct(paste0(2020-nrow(data1)+1,"-01-01")),
+  seq.POSIXt(as.POSIXct(paste0(2020 - nrow(data1) + 1, "-01-01")),
              as.POSIXct("2020-01-01"), by = "year"))
 data <- rbind(data, data1)
 
@@ -41,4 +41,3 @@ server <- function(input, output, session) {
   })
 }
 shinyApp(ui, server)
-

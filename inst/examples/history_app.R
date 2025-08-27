@@ -20,7 +20,7 @@ server <- function(input, output, session) {
                  options = historyOptions(
                    backText = "Back",
                    forwardText = "Forward",
-                   position = 'bottomleft'))
+                   position = "bottomleft"))
   })
   observeEvent(input$goBack, {
     leafletProxy("map") %>%

@@ -90,8 +90,8 @@ server <- function(input, output, session) {
   observe({
     pts <- req(input$map_hexbin_click)
     pts <- do.call(rbind, lapply(pts$pts, function(x) do.call("cbind", x)))
-    colnames(pts) <- c("lng","lat")
-    clicked <- df[which(round(df$lng, 10) %in% round(pts[,"lng"], 10)),]
+    colnames(pts) <- c("lng", "lat")
+    clicked <- df[which(round(df$lng, 10) %in% round(pts[, "lng"], 10)),]
     req(nrow(clicked) != 0)
 
     leafletProxy("map", session)  %>%
@@ -109,14 +109,14 @@ server <- function(input, output, session) {
     cols <- sample(colors()[!(grepl("grey", colors())) |
                               grepl("gray", colors())], 2)
     leafletProxy("map", session) %>%
-      updateHexbin(colorRange = rgb(t(col2rgb(cols)/255)))
+      updateHexbin(colorRange = rgb(t(col2rgb(cols) / 255)))
   })
   observeEvent(input$update_both, {
     df <- data.frame(lat = rand_lat(n), lng = rand_lng(n))
     cols <- sample(colors()[!(grepl("grey", colors())) |
                               grepl("gray", colors())], 2)
     leafletProxy("map", session) %>%
-      updateHexbin(data = df, colorRange = rgb(t(col2rgb(cols)/255)))
+      updateHexbin(data = df, colorRange = rgb(t(col2rgb(cols) / 255)))
   })
   observeEvent(input$hide, {
     leafletProxy("map", session) %>%

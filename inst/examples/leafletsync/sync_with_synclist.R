@@ -7,11 +7,11 @@ df <- st_as_sf(breweries91)
 ui <- fluidPage(
   h4("4 Maps synced with a 'synclist'"),
   tags$head(tags$style(".shiny-split-layout {margin-bottom: 4px;}")),
-  splitLayout(cellWidths = rep("50%",2),
+  splitLayout(cellWidths = rep("50%", 2),
               leafletOutput("map1", height = 400),
               leafletOutput("map2", height = 400),
   ),
-  splitLayout(cellWidths = rep("50%",2),
+  splitLayout(cellWidths = rep("50%", 2),
               leafletOutput("map3", height = 400),
               leafletOutput("map4", height = 400)
   ),
@@ -44,9 +44,9 @@ server <- function(input, output, session) {
   observe({
     leafletProxy("map1") %>%
       addLeafletsync(
-        synclist = list(mapa = c("map2","map4"),
+        synclist = list(mapa = c("map2", "map4"),
                         map2 = c("map1"),
-                        map3 = c("map1","map2","map4"),
+                        map3 = c("map1", "map2", "map4"),
                         map4 = c("map2")),
         options = leafletsyncOptions(syncCursor = FALSE,
                                      noInitialSync = FALSE))
@@ -55,25 +55,19 @@ server <- function(input, output, session) {
   observeEvent(input$sync, {
     leafletProxy("map1") %>%
       addLeafletsync(
-        synclist = list(map1 = c("map2","map4"),
+        synclist = list(map1 = c("map2", "map4"),
                         map2 = c("map1"),
-                        map3 = c("map1","map2","map4"),
+                        map3 = c("map1", "map2", "map4"),
                         map4 = c("map2")),
         options = leafletsyncOptions(syncCursor = FALSE,
                                      noInitialSync = FALSE))
   })
   observeEvent(input$unsync, {
     leafletProxy("map1") %>%
-      unsync(id = "map1", unsyncids = c("map2","map3","map4")) %>%
-      unsync(id = "map2", unsyncids = c("map1","map3","map4")) %>%
-      unsync(id = "map3", unsyncids = c("map1","map2","map4")) %>%
-      unsync(id = "map4", unsyncids = c("map1","map2","map3"))
+      unsync(id = "map1", unsyncids = c("map2", "map3", "map4")) %>%
+      unsync(id = "map2", unsyncids = c("map1", "map3", "map4")) %>%
+      unsync(id = "map3", unsyncids = c("map1", "map2", "map4")) %>%
+      unsync(id = "map4", unsyncids = c("map1", "map2", "map3"))
   })
 }
 shinyApp(ui, server)
-
-
-
-
-
-

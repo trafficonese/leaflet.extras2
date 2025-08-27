@@ -7,11 +7,11 @@ df <- st_as_sf(breweries91)
 ui <- fluidPage(
   h4("1 Continuous Map built by 4 different Maps"),
   tags$head(tags$style(".shiny-split-layout {margin-bottom: 4px;}")),
-  splitLayout(cellWidths = rep("50%",2),
+  splitLayout(cellWidths = rep("50%", 2),
               leafletOutput("map1", height = 400),
               leafletOutput("map2", height = 400),
   ),
-  splitLayout(cellWidths = rep("50%",2),
+  splitLayout(cellWidths = rep("50%", 2),
               leafletOutput("map3", height = 400),
               leafletOutput("map4", height = 400)
   ),
@@ -43,10 +43,10 @@ server <- function(input, output, session) {
   })
   observe({
     leafletProxy("map1") %>%
-      addLeafletsync(ids = c("map1","map2","map3","map4"),
+      addLeafletsync(ids = c("map1", "map2", "map3", "map4"),
                      options = list(
                        "map1" = leafletsyncOptions(
-                         syncCursor = FALSE,noInitialSync = FALSE,
+                         syncCursor = FALSE, noInitialSync = FALSE,
                          offsetFn = JS("function (center, zoom, refMap, tgtMap) {
                                           var refC = refMap.getContainer();
                                           var tgtC = tgtMap.getContainer();
@@ -58,7 +58,7 @@ server <- function(input, output, session) {
                                           return refMap.unproject(pt, zoom);
                                       }")),
                        "map2" = leafletsyncOptions(
-                         syncCursor = FALSE,noInitialSync = FALSE,
+                         syncCursor = FALSE, noInitialSync = FALSE,
                          offsetFn = JS("function (center, zoom, refMap, tgtMap) {
                                           var refC = refMap.getContainer();
                                           var tgtC = tgtMap.getContainer();
@@ -70,7 +70,7 @@ server <- function(input, output, session) {
                                           return refMap.unproject(pt, zoom);
                                       }")),
                        "map3" = leafletsyncOptions(
-                         syncCursor = FALSE,noInitialSync = FALSE,
+                         syncCursor = FALSE, noInitialSync = FALSE,
                          offsetFn = JS("function (center, zoom, refMap, tgtMap) {
                                           var refC = refMap.getContainer();
                                           var tgtC = tgtMap.getContainer();
@@ -98,20 +98,14 @@ server <- function(input, output, session) {
 
   observeEvent(input$sync, {
     leafletProxy("map1") %>%
-      addLeafletsync(c("map1","map2","map3","map4"))
+      addLeafletsync(c("map1", "map2", "map3", "map4"))
   })
   observeEvent(input$unsync, {
     leafletProxy("map1") %>%
-      unsync(id = "map1", unsyncids = c("map2","map3","map4")) %>%
-      unsync(id = "map2", unsyncids = c("map1","map3","map4")) %>%
-      unsync(id = "map3", unsyncids = c("map1","map2","map4")) %>%
-      unsync(id = "map4", unsyncids = c("map1","map2","map3"))
+      unsync(id = "map1", unsyncids = c("map2", "map3", "map4")) %>%
+      unsync(id = "map2", unsyncids = c("map1", "map3", "map4")) %>%
+      unsync(id = "map3", unsyncids = c("map1", "map2", "map4")) %>%
+      unsync(id = "map4", unsyncids = c("map1", "map2", "map3"))
   })
 }
 shinyApp(ui, server)
-
-
-
-
-
-

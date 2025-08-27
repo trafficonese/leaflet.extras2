@@ -8,7 +8,7 @@ ui <- fluidPage(
   tags$head(tags$style(".btn-default {
     width: 49%; display: inline-block; margin-top: 5px; }")),
   h4("Drag/Zoom/Pan the individual maps"),
-  splitLayout(cellWidths = rep("33%",3),
+  splitLayout(cellWidths = rep("33%", 3),
     leafletOutput("map1", height = 700),
     leafletOutput("map2", height = 700),
     leafletOutput("map3", height = 700)
@@ -19,11 +19,13 @@ ui <- fluidPage(
   ),
   splitLayout(
     div(
-      actionButton("isSynced1", label = "Is map1 synced with any map?", width = "100%"),
+      actionButton("isSynced1", label = "Is map1 synced with any map?",
+                   width = "100%"),
       verbatimTextOutput("issyncprint1")
     ),
     div(
-      actionButton("isSynced2", label = "Is map2 synced with map1?", width = "100%"),
+      actionButton("isSynced2", label = "Is map2 synced with map1?",
+                   width = "100%"),
       verbatimTextOutput("issyncprint2")
     )
   )
@@ -43,7 +45,7 @@ server <- function(input, output, session) {
   output$map3 <- renderLeaflet({
     leaflet() %>%
       addProviderTiles(provider = "CartoDB.DarkMatter") %>%
-      addCircleMarkers(data = df[1:10,], color = "blue") %>%
+      addCircleMarkers(data = df[1:10, ], color = "blue") %>%
       addLeafletsync(
         ids = NULL,
         synclist = list(map1 = c("map2", "map3"), map2 = c("map3")),
@@ -52,15 +54,14 @@ server <- function(input, output, session) {
   })
   observeEvent(input$sync, {
     leafletProxy("map1") %>%
-      addLeafletsync(c("map1","map2","map3"))
+      addLeafletsync(c("map1", "map2", "map3"))
   })
   observeEvent(input$unsync, {
     leafletProxy("map1") %>%
-      unsync(id = "map1", unsyncids = c("map2","map3")) %>%
-      unsync(id = "map2", unsyncids = c("map1","map3")) %>%
-      unsync(id = "map3", unsyncids = c("map1","map2"))
+      unsync(id = "map1", unsyncids = c("map2", "map3")) %>%
+      unsync(id = "map2", unsyncids = c("map1", "map3")) %>%
+      unsync(id = "map3", unsyncids = c("map1", "map2"))
   })
-
 
   observeEvent(input$isSynced1, {
     leafletProxy("map1") %>%
@@ -78,9 +79,3 @@ server <- function(input, output, session) {
   })
 }
 shinyApp(ui, server)
-
-
-
-
-
-

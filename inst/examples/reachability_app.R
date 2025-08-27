@@ -8,8 +8,8 @@ apikey <- Sys.getenv("OPRS")
 
 ui <- fluidPage(
   icon("cars"), ## needed to load FontAwesome Lib
-  leafletOutput("map")
-  ,actionButton("removeReachability", "removeReachability")
+  leafletOutput("map"),
+  actionButton("removeReachability", "removeReachability")
 )
 
 server <- function(input, output, session) {

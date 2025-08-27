@@ -40,9 +40,9 @@ ui <- fluidPage(
     left: 41px;
     position: absolute;
   }")),
-  div(class="inputdiv",
-      div(class="inputs",
-      selectInput("type", "Plot type", choices = c("bar","horizontal", "pie"),
+  div(class = "inputdiv",
+      div(class = "inputs",
+      selectInput("type", "Plot type", choices = c("bar", "horizontal", "pie"),
                   selected = "pie"),
       numericInput("stroke", "strokeWidth", 1, 1, 10),
       numericInput("rmax", "MaxRadius", 50, 1, 150),
@@ -56,7 +56,7 @@ ui <- fluidPage(
       numericInput("labelOpacity", "labelOpacity", 0.5, 0, 1, step = 0.1),
   )),
   leafletOutput("map", height = 650),
-  splitLayout(cellWidths = paste0(rep(20,4), "%"),
+  splitLayout(cellWidths = paste0(rep(20, 4), "%"),
               div(h4("Click Event"), verbatimTextOutput("click")),
               div(h4("Mouseover Event"), verbatimTextOutput("mouseover")),
               div(h4("Mouseout Event"), verbatimTextOutput("mouseout")),
@@ -73,7 +73,7 @@ server <- function(input, output, session) {
       addClusterCharts(data = data
                        , options = clusterchartOptions(
                          rmax = input$rmax,
-                         size = c(100,40),
+                         size = c(100, 40),
                          # size=40,
                          width = input$width,
                          height = input$height,

@@ -6,8 +6,8 @@ library(leaflet.extras2)
 # Sample data
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
-df <- df[sample(1:nrow(df), 50, replace = F),]
-df$classes <- sample(x = c("myclass1","myclass2","myclass3"), nrow(df),
+df <- df[sample(1:nrow(df), 50, replace = FALSE),]
+df$classes <- sample(x = c("myclass1", "myclass2", "myclass3"), nrow(df),
                      replace = TRUE)
 df$ID <- paste0("ID_", 1:nrow(df))
 
@@ -60,7 +60,7 @@ ui <- fluidPage(
   ")),
   ## CSS-style END ############
   leafletOutput("map", height = 600),
-  splitLayout(cellWidths = paste0(rep(20,4), "%"),
+  splitLayout(cellWidths = paste0(rep(20, 4), "%"),
               div(h4("Click Event"), verbatimTextOutput("click")),
               div(h4("Mouseover Event"), verbatimTextOutput("mouseover")),
               div(h4("Mouseout Event"), verbatimTextOutput("mouseout")),
@@ -108,7 +108,7 @@ server <- function(input, output, session) {
       ) %>%
       addLabelgun("Divicons", 1) %>%
       hideGroup("normalmarker") %>%
-      addLayersControl(overlayGroups = c("Divicons","normalmarker"))
+      addLayersControl(overlayGroups = c("Divicons", "normalmarker"))
   })
   output$click <- renderPrint({input$map_marker_click})
   output$mouseover <- renderPrint({input$map_marker_mouseover})

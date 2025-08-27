@@ -33,7 +33,7 @@ ui <- fluidPage(
     ")),
   ## CSS-style END ############
   leafletOutput("map", height = 600),
-  splitLayout(cellWidths = paste0(rep(20,4), "%"),
+  splitLayout(cellWidths = paste0(rep(20, 4), "%"),
               div(h4("Click Event"), verbatimTextOutput("click")),
               div(h4("Mouseover Event"), verbatimTextOutput("mouseover")),
               div(h4("Mouseout Event"), verbatimTextOutput("mouseout")),
@@ -46,7 +46,7 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles() %>%
-      addMarkers(data = df, group="normalmarker",
+      addMarkers(data = df, group = "normalmarker",
                  clusterId = "someclusterid2",
                  clusterOptions = markerClusterOptions()) %>%
       addDivicon(data = df
@@ -67,7 +67,7 @@ server <- function(input, output, session) {
                  # , clusterOptions = markerClusterOptions()
       ) %>%
       hideGroup("normalmarker") %>%
-      addLayersControl(overlayGroups = c("Divicons","normalmarker"))
+      addLayersControl(overlayGroups = c("Divicons", "normalmarker"))
   })
   output$click <- renderPrint({input$map_marker_click})
   output$mouseover <- renderPrint({input$map_marker_mouseover})

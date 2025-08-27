@@ -12,7 +12,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       addTiles(group = "base") %>%
       addTangram(scene = scene, layerId = "tangramID", group = "tangram",
-                 options = list(attribution = 'Tangram JS',
+                 options = list(attribution = "Tangram JS",
                                 introspection = TRUE,
                                 modifyScrollWheel = TRUE,
                                 modifyZoomBehavior = TRUE,

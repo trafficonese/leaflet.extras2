@@ -9,9 +9,9 @@ data(breweries91, package = "leaflet")
 breweries_data <- breweries91 |>
   st_as_sf()
 
-sample_brewery_data <- function(data, n_obs){
-  ii <- sample.int(nrow(data),n_obs,replace = TRUE)
-  data[ii,]
+sample_brewery_data <- function(data, n_obs) {
+  ii <- sample.int(nrow(data), n_obs, replace = TRUE)
+  data[ii, ]
 }
 
 ui <- fluidPage(
@@ -117,7 +117,7 @@ server <- function(input, output, session) {
 
   observeEvent(input$open, {
     leafletProxy("map", session) %>%
-      openSidebar(sample(c("home_id","profile_id","messages_id"), 1))
+      openSidebar(sample(c("home_id", "profile_id", "messages_id"), 1))
   })
   observeEvent(input$close, {
     leafletProxy("map", session) %>%

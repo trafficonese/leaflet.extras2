@@ -5,7 +5,7 @@ library(leaflet.extras2)
 
 df <- sf::st_as_sf(atlStorms2005)[1,]
 dfp <- suppressWarnings(st_cast(df, "POINT"))
-dfp$duratios = sample(c(1000, 1500, 2000, 2500, 3000), nrow(dfp), TRUE)
+dfp$duratios <- sample(c(1000, 1500, 2000, 2500, 3000), nrow(dfp), TRUE)
 
 shipIcon <- makeIcon(
   iconUrl = "https://cdn-icons-png.flaticon.com/512/1355/1355883.png",
@@ -14,9 +14,9 @@ shipIcon <- makeIcon(
 )
 
 ui <- fluidPage(
-  splitLayout(cellWidths = c("50%","49%"),
+  splitLayout(cellWidths = c("50%", "49%"),
     leafletOutput("map", height = 800),
-    splitLayout(cellWidths = c("49%","49%"),
+    splitLayout(cellWidths = c("49%", "49%"),
       div(h5("Click Events"),
           verbatimTextOutput("click")),
       div(h5("Mouseover Events"),
@@ -80,17 +80,17 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$addLatLng, {
-    latlng <- list(lat=runif(1,30,35),lng=runif(1,-70,-65))
+    latlng <- list(lat = runif(1,30,35), lng = runif(1,-70,-65))
     leafletProxy("map", session) %>%
       addCircleMarkers(lng = latlng$lng,lat = latlng$lat,
                        label = paste("input$addLatLng:", input$addLatLng)) %>%
       addLatLngMoving(latlng = latlng, duration = 2000)
   })
   observeEvent(input$moveTo, {
-    latlng <- list(lat=runif(1,30,35),lng=runif(1,-70,-65))
+    latlng <- list(lat = runif(1,30,35), lng = runif(1,-70,-65))
     leafletProxy("map", session) %>%
       addCircleMarkers(lng = latlng$lng,lat = latlng$lat,
-                       label=paste("input$moveTo:", input$addLatLng)) %>%
+                       label = paste("input$moveTo:", input$addLatLng)) %>%
       moveToMoving(latlng = latlng, duration = 2000)
   })
   observeEvent(input$addStation, {

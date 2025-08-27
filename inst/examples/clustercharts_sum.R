@@ -32,7 +32,7 @@ data$id <- paste0("ID", seq.int(nrow(data)))
 data$popup <- paste0("<h6>", data$brewery, "</h6><div>", data$address, "</div>")
 data$tosum <- sample(1:100, nrow(data), replace = TRUE)
 data$tosumlabel <- paste("Sum: ", data$tosum)
-data$web <- gsub(">(.*?)<", ">",data$tosum,"<", data$web)
+data$web <- gsub(">(.*?)<", ">", data$tosum, "<", data$web)
 data$web <- ifelse(is.na(data$web), "",
                    paste0("<div class='markerhtml'>", data$web, "</div>"))
 
@@ -52,11 +52,11 @@ ui <- fluidPage(
                 selected = "custom"),
     conditionalPanel("input.type == 'custom'",
                      selectInput("aggr", "Aggregation",
-                                 choices = c("sum","max", "min",
+                                 choices = c("sum", "max", "min",
                                              "mean", "median"),
                                  selected = "sum")
                      ),
-  splitLayout(cellWidths = paste0(rep(20,4), "%"),
+  splitLayout(cellWidths = paste0(rep(20, 4), "%"),
               div(h4("Click Event"), verbatimTextOutput("click")),
               div(h4("Mouseover Event"), verbatimTextOutput("mouseover")),
               div(h4("Mouseout Event"), verbatimTextOutput("mouseout")),
@@ -95,9 +95,9 @@ server <- function(input, output, session) {
         , group = "clustermarkers"
         , layerId = "id"
         , clusterId = "id"
-        , popupFields = c("id","brewery", "address", "zipcode",
+        , popupFields = c("id", "brewery", "address", "zipcode",
                           "category", "tosum")
-        , popupLabels = c("id","Brauerei","Addresse","PLZ", "Art", "tosum")
+        , popupLabels = c("id", "Brauerei", "Addresse", "PLZ", "Art", "tosum")
         , label = "label"
         ## Options #############
         , markerOptions = markerOptions(interactive = TRUE,

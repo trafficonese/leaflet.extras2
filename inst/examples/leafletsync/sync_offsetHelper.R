@@ -7,7 +7,7 @@ df <- st_as_sf(breweries91)
 ui <- fluidPage(
   h4("2 Maps with offset using 'L.Sync.offsetHelper'"),
   tags$head(tags$style(".shiny-split-layout {margin-bottom: 4px;}")),
-  splitLayout(cellWidths = rep("50%",2),
+  splitLayout(cellWidths = rep("50%", 2),
               leafletOutput("map1", height = 800),
               leafletOutput("map2", height = 800),
   ),
@@ -30,13 +30,13 @@ server <- function(input, output, session) {
   })
   observe({
     leafletProxy("map1") %>%
-      addLeafletsync(ids = c("map1","map2"),
+      addLeafletsync(ids = c("map1", "map2"),
                      options = list(
                        "map1" = leafletsyncOptions(
-                         syncCursor = FALSE,noInitialSync = FALSE,
+                         syncCursor = FALSE, noInitialSync = FALSE,
                          offsetFn = JS("L.Sync.offsetHelper([0, 0.5], [0, 0])")),
                        "map2" = leafletsyncOptions(
-                         syncCursor = FALSE,noInitialSync = FALSE,
+                         syncCursor = FALSE, noInitialSync = FALSE,
                          offsetFn = JS("L.Sync.offsetHelper([0, 0], [0, 0.5])"))
                      )
       )
@@ -44,7 +44,7 @@ server <- function(input, output, session) {
 
   observeEvent(input$sync, {
     leafletProxy("map1") %>%
-      addLeafletsync(c("map1","map2"))
+      addLeafletsync(c("map1", "map2"))
   })
   observeEvent(input$unsync, {
     leafletProxy("map1") %>%
@@ -53,9 +53,3 @@ server <- function(input, output, session) {
   })
 }
 shinyApp(ui, server)
-
-
-
-
-
-

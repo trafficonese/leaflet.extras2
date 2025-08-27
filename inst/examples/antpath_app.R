@@ -36,7 +36,7 @@ server <- function(input, output, session) {
                      domain = as.numeric(coords$FKN))(as.numeric(coords$FKN)),
                    delay = 4000,
                    paused = FALSE,
-                   renderer= JS('L.svg({pane: "my-pane"})'),
+                   renderer = JS('L.svg({pane: "my-pane"})'),
                    reverse = TRUE,
                    dashArray = c(40, 10),
                    hardwareAccelerated = TRUE,

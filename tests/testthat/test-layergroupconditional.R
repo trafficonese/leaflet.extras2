@@ -3,7 +3,7 @@ library(sf)
 breweries91 <- st_as_sf(breweries91)
 lines <- st_as_sf(atlStorms2005)
 polys <- st_as_sf(leaflet::gadmCHE)
-groups <- c("atlStorms","breweries","gadmCHE")
+groups <- c("atlStorms", "breweries", "gadmCHE")
 
 test_that("layergroupconditional", {
   m <- leaflet() %>%

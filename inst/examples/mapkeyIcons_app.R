@@ -9,7 +9,7 @@ ui <- fluidPage(
 iconSet <- mapkeyIconList(
   red = makeMapkeyIcon(icon = "boundary_stone",
                        color = "#725139",
-                       background = '#f2c357',
+                       background = "#f2c357",
                        iconSize = 30,
                        boxShadow = FALSE),
   blue = makeMapkeyIcon(icon = "traffic_signal",

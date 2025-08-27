@@ -4,13 +4,13 @@ library(leaflet)
 library(leaflet.extras2)
 
 data(atlStorms2005)
-data <- sf::st_as_sf(leaflet::atlStorms2005)[1:5,]
+data <- sf::st_as_sf(leaflet::atlStorms2005)[1:5, ]
 data$Name <- as.character(data$Name)
 data <- st_cast(data, "POINT")
 data$time <- unlist(lapply(rle(data$Name)$lengths, function(x) {
-  seq.POSIXt(as.POSIXct(Sys.Date()-2), as.POSIXct(Sys.Date()), length.out = x)
+  seq.POSIXt(as.POSIXct(Sys.Date() - 2), as.POSIXct(Sys.Date()), length.out = x)
 }))
-data$time <- as.POSIXct(data$time, origin="1970-01-01")
+data$time <- as.POSIXct(data$time, origin = "1970-01-01")
 data$label <- paste0("Time: ", data$time)
 data$popup <- sprintf("<h3>Customized Popup</h3><b>Name</b>: %s<br><b>Time</b>: %s",
                      data$Name, data$time)
@@ -50,7 +50,7 @@ ui <- fluidPage(
                          background-color: #f127f4;
                        }
                        ")),
-  leafletOutput("map", height=800)
+  leafletOutput("map", height = 800)
 )
 
 server <- function(input, output, session) {
@@ -61,8 +61,8 @@ server <- function(input, output, session) {
                   popup = ~popup,
                   label = ~label,
                   name = ~Name,
-                  popupOptions = popupOptions(offset=c(8,0)),
-                  labelOptions  = labelOptions(offset=c(8,-10)),
+                  popupOptions = popupOptions(offset = c(8, 0)),
+                  labelOptions  = labelOptions(offset = c(8, -10)),
                   options = playbackOptions(radius = 3, tickLen = 1000000,
                                             speed = 5000,
                                             marker =  htmlwidgets::JS("
@@ -102,8 +102,8 @@ server <- function(input, output, session) {
                                             transitionlabel = FALSE,
                                             playCommand = "Let's go",
                                             stopCommand = "Stop it!",
-                                            color = c("red","green","blue",
-                                                           "orange","purple")),
+                                            color = c("red", "green", "blue",
+                                                           "orange", "purple")),
                                                            pathOpts = pathOptions(weight = 5))
   })
 }

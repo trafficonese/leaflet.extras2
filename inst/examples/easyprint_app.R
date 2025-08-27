@@ -14,11 +14,11 @@ ui <- fluidPage(
   ),
   leafletOutput("map", height = 700, width = "100%"),
   selectInput("scene", "Select Scene",
-              choices = c("CurrentSize"="CurrentSize",
-                          "A4Landscape"="A4Landscape",
-                          "A4Portrait"="A4Portrait",
-                          "Custom Landscape"="customCssClass",
-                          "Custom Portrait"="customCssClass1")),
+              choices = c("CurrentSize" = "CurrentSize",
+                          "A4Landscape" = "A4Landscape",
+                          "A4Portrait" = "A4Portrait",
+                          "Custom Landscape" = "customCssClass",
+                          "Custom Portrait" = "customCssClass1")),
   textInput("fn", "Filename", value = "map"),
   actionButton("print", "Print Map"),
   actionButton("rem", "removeEasyprint"),
@@ -29,13 +29,13 @@ server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
       addTiles(group = "basemap") %>%
-      addCircleMarkers(data=leaflet::breweries91,
-                       group = "markers", popup = ~brewery, label=~brewery) %>%
-      addPopups(data=leaflet::breweries91[1:5,],
+      addCircleMarkers(data = leaflet::breweries91,
+                       group = "markers", popup = ~brewery, label = ~brewery) %>%
+      addPopups(data = leaflet::breweries91[1:5,],
                 group = "popups", popup = ~brewery) %>%
       addEasyprint(options = easyprintOptions(
-        title = 'Give me that map',
-        position = 'bottomleft',
+        title = "Give me that map",
+        position = "bottomleft",
         exportOnly = TRUE,
         # hideClasses = list("leaflet-overlay-pane", "leaflet-popup"),
         # hidden = FALSE, hideControlContainer = TRUE,
@@ -51,16 +51,16 @@ server <- function(input, output, session) {
         sizeModes = list("CurrentSize" = "CurrentSize",
                          "A4Landscape" = "A4Landscape",
                          "A4Portrait" = "A4Portrait",
-                         "Custom Landscape"=list(
-                           width= 1800,
-                           height= 700,
+                         "Custom Landscape" = list(
+                           width = 1800,
+                           height = 700,
                            name = "A custom landscape size tooltip",
-                           className= 'customCssClass'),
-                         "Custom Portrait"=list(
-                           width= 700,
-                           height= 1800,
+                           className = 'customCssClass'),
+                         "Custom Portrait" = list(
+                           width = 700,
+                           height = 1800,
                            name = "A custom portrait size tooltip",
-                           className= 'customCssClass1')
+                           className = 'customCssClass1')
         ),
         customWindowTitle = "Some Fancy Title",
         customSpinnerClass = "shiny-spinner-placeholder",
@@ -70,7 +70,6 @@ server <- function(input, output, session) {
     scene <- input$scene
     leafletProxy("map") %>%
       easyprintMap(sizeModes = scene, filename = input$fn)
-      # easyprintMap(sizeModes = scene, filename = scene)
   })
   observeEvent(input$rem, {
     leafletProxy("map") %>%

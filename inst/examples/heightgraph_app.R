@@ -46,42 +46,42 @@ server <- function(input, output, session) {
                          "steepness" =
                            list(
                              "1" = list(
-                               "text"="1-3%",
-                               "color"="#a9befc"),
+                               "text" = "1-3%",
+                               "color" = "#a9befc"),
                              "2" = list(
-                               "text"="4-6%",
-                               "color"="#6f93fc"),
+                               "text" = "4-6%",
+                               "color" = "#6f93fc"),
                              "3" = list(
-                               "text"="4-6%",
-                               "color"="#2d62fc"),
+                               "text" = "4-6%",
+                               "color" = "#2d62fc"),
                              "4" = list(
-                               "text"="4-6%",
-                               "color"="#0026ff")
+                               "text" = "4-6%",
+                               "color" = "#0026ff")
                              ),
                          "suitability" =
                            list(
                              "1" = list(
-                               "text"="Very Good",
-                               "color"="green"),
+                               "text" = "Very Good",
+                               "color" = "green"),
                              "2" = list(
-                               "text"="Moderate",
-                               "color"="yellow"),
+                               "text" = "Moderate",
+                               "color" = "yellow"),
                              "3" = list(
-                               "text"="Bad",
-                               "color"="orange"),
+                               "text" = "Bad",
+                               "color" = "orange"),
                              "4" = list(
-                               "text"="Very Bad",
-                               "color"="red")
+                               "text" = "Very Bad",
+                               "color" = "red")
                            )
                        ),
-                       highlightStyle = list(weight= 10,
-                                             opacity= 0.8,
-                                             color= 'orange'),
-                       translation = list(distance= "Distanz",
-                                          elevation= "Höhe",
-                                          segment_length= "Segment Länge",
-                                          type= "Typ",
-                                          legend= "Legende"),
+                       highlightStyle = list(weight = 10,
+                                             opacity = 0.8,
+                                             color = 'orange'),
+                       translation = list(distance = "Distanz",
+                                          elevation = "Höhe",
+                                          segment_length = "Segment Länge",
+                                          type = "Typ",
+                                          legend = "Legende"),
                        xTicks = 3)
       ) %>%
       addLayersControl(baseGroups = "base", overlayGroups = "heightgraph")
