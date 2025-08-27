@@ -56,7 +56,7 @@ addReachability <- function(map, apikey = NULL,
     }
   }
 
-  deps <- htmltools::findDependencies(options)
+  deps <- unique(htmltools::findDependencies(options))
   options <- lapply(options, function(x) {
     if (inherits(x, "shiny.tag")) as.character(x) else x
   })

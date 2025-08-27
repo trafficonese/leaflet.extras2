@@ -428,4 +428,14 @@ test_that("playback-error", {
         pathOpts = pathOptions(weight = 5)
       )
   )
+
+  ## Deps not fulfilled ######
+  with_mocked_bindings({
+      expect_error(addPlayback(leaflet::leaflet(), data = NULL),
+                   "The package `sf` is needed")
+    },
+    requireNamespace = function(package, ..., quietly=FALSE) FALSE,
+    .package="base"
+  )
+
 })

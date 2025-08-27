@@ -89,3 +89,28 @@ test_that("timeslider", {
   expect_is(m$x$calls[[1]]$args[[1]], "geojson")
   expect_true(inherits(m$x$calls[[1]]$args[[1]], "geojson"))
 })
+
+test_that("timeslider deps not fulfilled", {
+  data <- suppressWarnings(sf::st_as_sf(leaflet::atlStorms2005[1, ]))
+  data <- suppressWarnings(st_cast(data, "POINT"))
+  data$time <- as.POSIXct(
+    seq.POSIXt(Sys.time() - 1000, Sys.time(), length.out = nrow(data))
+  )
+
+  ## Deps not fulfilled ######
+  with_mocked_bindings({
+    expect_error(leaflet() %>%
+                   addTimeslider(
+                     data = data,
+                     options = timesliderOptions(
+                       position = "topright",
+                       timeAttribute = "time",
+                       range = TRUE
+                     )
+                   ),
+                 "The package `sf` is needed")
+  },
+  requireNamespace = function(package, ..., quietly=FALSE) FALSE,
+  .package="base"
+  )
+})
