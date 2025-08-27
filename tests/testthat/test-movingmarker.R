@@ -163,17 +163,20 @@ test_that("movingmarker", {
 
 test_that("movingmarker deps not fulfilled", {
   ## Deps not fulfilled ######
-  with_mocked_bindings({
-    expect_error(leaflet() %>%
-                   addMovingMarker(
-                     data = df,
-                     movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
-                     label = "I am a pirate!",
-                     popup = "Arrr"
-                   ),
-                 "The package `sf` is needed")
-  },
-  requireNamespace = function(package, ..., quietly=FALSE) FALSE,
-  .package="base"
+  with_mocked_bindings(
+    {
+      expect_error(
+        leaflet() %>%
+          addMovingMarker(
+            data = df,
+            movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+            label = "I am a pirate!",
+            popup = "Arrr"
+          ),
+        "The package `sf` is needed"
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) FALSE,
+    .package = "base"
   )
 })

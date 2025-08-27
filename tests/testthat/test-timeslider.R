@@ -98,19 +98,22 @@ test_that("timeslider deps not fulfilled", {
   )
 
   ## Deps not fulfilled ######
-  with_mocked_bindings({
-    expect_error(leaflet() %>%
-                   addTimeslider(
-                     data = data,
-                     options = timesliderOptions(
-                       position = "topright",
-                       timeAttribute = "time",
-                       range = TRUE
-                     )
-                   ),
-                 "The package `sf` is needed")
-  },
-  requireNamespace = function(package, ..., quietly=FALSE) FALSE,
-  .package="base"
+  with_mocked_bindings(
+    {
+      expect_error(
+        leaflet() %>%
+          addTimeslider(
+            data = data,
+            options = timesliderOptions(
+              position = "topright",
+              timeAttribute = "time",
+              range = TRUE
+            )
+          ),
+        "The package `sf` is needed"
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) FALSE,
+    .package = "base"
   )
 })

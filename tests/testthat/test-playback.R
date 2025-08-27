@@ -430,12 +430,14 @@ test_that("playback-error", {
   )
 
   ## Deps not fulfilled ######
-  with_mocked_bindings({
-      expect_error(addPlayback(leaflet::leaflet(), data = NULL),
-                   "The package `sf` is needed")
+  with_mocked_bindings(
+    {
+      expect_error(
+        addPlayback(leaflet::leaflet(), data = NULL),
+        "The package `sf` is needed"
+      )
     },
-    requireNamespace = function(package, ..., quietly=FALSE) FALSE,
-    .package="base"
+    requireNamespace = function(package, ..., quietly = FALSE) FALSE,
+    .package = "base"
   )
-
 })

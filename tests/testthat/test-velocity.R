@@ -76,15 +76,20 @@ test_that("velocity-error", {
   )
 
 
-  with_mocked_bindings({
-    expect_error(leaflet() %>%
-                   addVelocity(content = "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json",
-                               options = velocityOptions(
-                                 colorScale = matrix(1:99, ncol = 3)
-                               )),
-                 "The package `jsonlite` is needed")
-  },
-  requireNamespace = function(package, ..., quietly=FALSE) FALSE,
-  .package="base"
+  with_mocked_bindings(
+    {
+      expect_error(
+        leaflet() %>%
+          addVelocity(
+            content = "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json",
+            options = velocityOptions(
+              colorScale = matrix(1:99, ncol = 3)
+            )
+          ),
+        "The package `jsonlite` is needed"
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) FALSE,
+    .package = "base"
   )
 })
