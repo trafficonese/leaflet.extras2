@@ -15,7 +15,7 @@ server <- function(input, output, session) {
     leaflet() %>%
       addTiles() %>%
       addGeosearch(provider = geosearchProvider(
-        type = "OpenStreetMap",
+        type = "OSM",
         options = list(
           params = list(
             'accept-language'= 'de'

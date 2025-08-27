@@ -36,6 +36,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu)
 -   [DivIcon](https://leafletjs.com/reference.html#divicon)
 -   [Easy Print](https://github.com/rowanwins/leaflet-easyPrint)
+-   [Geosearch](https://github.com/smeijer/leaflet-geosearch)
 -   [GIBS](https://github.com/aparshin/leaflet-GIBS)
 -   [Heightgraph](https://github.com/GIScience/Leaflet.Heightgraph)
 -   [Hexbin-D3](https://github.com/bluehalo/leaflet-d3#hexbins-api)
