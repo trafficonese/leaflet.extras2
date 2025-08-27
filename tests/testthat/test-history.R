@@ -38,14 +38,17 @@ test_that("history", {
 
 test_that("history deps not fulfilled", {
   ## Deps not fulfilled ######
-  with_mocked_bindings({
-    expect_error(leaflet() %>%
-                   addTiles(group = "base") %>%
-                   fitBounds(-72, 40, -70, 43) %>%
-                   addHistory(),
-                 "The package `fontawesome` is needed for this plugin. ")
-  },
-  requireNamespace = function(package, ..., quietly=FALSE) FALSE,
-  .package="base"
+  with_mocked_bindings(
+    {
+      expect_error(
+        leaflet() %>%
+          addTiles(group = "base") %>%
+          fitBounds(-72, 40, -70, 43) %>%
+          addHistory(),
+        "The package `fontawesome` is needed for this plugin. "
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) FALSE,
+    .package = "base"
   )
 })
