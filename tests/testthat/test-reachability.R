@@ -17,10 +17,11 @@ test_that("reachability", {
   m <- leaflet() %>%
     addReachability(options = reachabilityOptions(
       collapsed = FALSE,
-      drawButtonContent        = icon("pen"),
-      deleteButtonContent      = icon("x"),
-      distanceButtonContent    = icon("map-marked"),
-      timeButtonContent        = icon("clock")))
+      drawButtonContent = icon("pen"),
+      deleteButtonContent = icon("x"),
+      distanceButtonContent = icon("map-marked"),
+      timeButtonContent = icon("clock")
+    ))
   expect_is(m, "leaflet")
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "font-awesome")
@@ -37,8 +38,9 @@ test_that("reachability", {
   m <- leaflet() %>%
     addReachability(options = reachabilityOptions(
       collapsed = FALSE,
-      drawButtonContent        = as.character(icon("pen")),
-      timeButtonContent        = as.character(icon("clock"))))
+      drawButtonContent = as.character(icon("pen")),
+      timeButtonContent = as.character(icon("clock"))
+    ))
   expect_is(m, "leaflet")
   deps <- findDependencies(m)
   expect_equal(deps[[length(deps)]]$name, "lfx-reachability")
