@@ -2,4 +2,4 @@
 
 0 errors v | 0 warnings v | 0 notes v
 
-* This release includes new features and improvements
+* This release includes new features and some bugfixes
