@@ -1,3 +1,5 @@
+# leaflet.extras2 (development version)
+
 # leaflet.extras2 1.3.2
 
 * Included [Leaflet.Geosearch](https://github.com/smeijer/leaflet-geosearch/) plugin
