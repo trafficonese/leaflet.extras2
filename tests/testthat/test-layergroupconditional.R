@@ -11,12 +11,14 @@ test_that("layergroupconditional", {
     addPolylines(data = lines, label = ~Name, group = groups[1]) %>%
     addCircleMarkers(data = breweries91, label = ~brewery, group = groups[2]) %>%
     addPolygons(data = polys, label = ~NAME_1, group = groups[3]) %>%
-    addLayerGroupConditional(groups = groups,
-                             conditions = list(
-                               "(zoomLevel) => zoomLevel < 4" = groups[1],
-                               "(zoomLevel) => zoomLevel >= 4 & zoomLevel < 6 " = groups[2],
-                               "(zoomLevel) => zoomLevel >= 6" = c(groups[3])
-                             ))
+    addLayerGroupConditional(
+      groups = groups,
+      conditions = list(
+        "(zoomLevel) => zoomLevel < 4" = groups[1],
+        "(zoomLevel) => zoomLevel >= 4 & zoomLevel < 6 " = groups[2],
+        "(zoomLevel) => zoomLevel >= 6" = c(groups[3])
+      )
+    )
 
   expect_is(m, "leaflet")
   deps <- findDependencies(m)
@@ -37,5 +39,4 @@ test_that("layergroupconditional", {
     "removeConditionalLayer"
   )
   expect_silent(removeConditionalLayer(m, groups[1]))
-
 })
