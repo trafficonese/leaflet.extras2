@@ -27,7 +27,7 @@ server <- function(input, output, session) {
                  label = ~sprintf("Ant-Colony of %s", district),
                  group = "antgroup",
                  color = cols,
-                 weight = 2 + (1:nrow(coords)) / 30,
+                 weight = 2 + (seq_len(nrow(coords))) / 30,
                  popup = ~FGN,
                  opacity = 1,
                  options = antpathOptions(

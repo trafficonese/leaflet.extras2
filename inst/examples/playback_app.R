@@ -32,7 +32,7 @@ data$time <- rep(time, nrows)
 data <- data[, c("id", "time", "geometry")]
 data$popup1 <- paste("This is a <b>popup</b> for Track ID: <em>",
                      data$id, "</em> and <em>time:", data$time, "</em>")
-data$label1 <- paste("Track ID: ",data$id, "<br>", data$time)
+data$label1 <- paste("Track ID: ", data$id, "<br>", data$time)
 data <- split(data, data$id)
 
 ## Icon #################

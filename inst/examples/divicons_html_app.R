@@ -6,10 +6,10 @@ library(leaflet.extras2)
 # Sample data
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
-df <- df[sample(1:nrow(df), 50, replace = FALSE),]
+df <- df[sample(seq_len(nrow(df)), 50, replace = FALSE), ]
 df$classes <- sample(x = c("myclass1", "myclass2", "myclass3"), nrow(df),
                      replace = TRUE)
-df$ID <- paste0("ID_", 1:nrow(df))
+df$ID <- paste0("ID_", seq_len(nrow(df)))
 
 ## UI ##################
 ui <- fluidPage(
@@ -88,11 +88,11 @@ server <- function(input, output, session) {
       #            clusterOptions = markerClusterOptions()) %>%
       addDivicon(data = df
                  , html = ~paste0(
-                   '<div class="custom-html">',
-                   '<img src="', getImageUrls(classes), '">',
-                   '<div class="title">', Name, '</div>',
-                   '<div class="subtitle">MaxWind: ', MaxWind, '</div>',
-                   '</div>'
+                   "<div class='custom-html'>",
+                   "<img src='", getImageUrls(classes), "'>",
+                   "<div class='title'>", Name, "</div>",
+                   "<div class='subtitle'>MaxWind: ", MaxWind, "</div>",
+                   "</div>"
                  )
                  , className = ~paste("globalclass", classes)
                  , label = ~Name
@@ -110,10 +110,18 @@ server <- function(input, output, session) {
       hideGroup("normalmarker") %>%
       addLayersControl(overlayGroups = c("Divicons", "normalmarker"))
   })
-  output$click <- renderPrint({input$map_marker_click})
-  output$mouseover <- renderPrint({input$map_marker_mouseover})
-  output$mouseout <- renderPrint({input$map_marker_mouseout})
-  output$dragend <- renderPrint({input$map_marker_dragend})
+  output$click <- renderPrint({
+    input$map_marker_click
+  })
+  output$mouseover <- renderPrint({
+    input$map_marker_mouseover
+  })
+  output$mouseout <- renderPrint({
+    input$map_marker_mouseout
+  })
+  output$dragend <- renderPrint({
+    input$map_marker_dragend
+  })
 }
 
 shinyApp(ui, server)

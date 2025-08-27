@@ -3,12 +3,12 @@ library(sf)
 # Sample data for testing
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
-df <- df[sample(1:nrow(df), 50, replace = FALSE), ]
+df <- df[sample(seq_len(nrow(df)), 50, replace = FALSE), ]
 df$classes <- sample(
   x = c("myclass1", "myclass2", "myclass3"),
   nrow(df), replace = TRUE
 )
-df$ID <- paste0("ID_", 1:nrow(df))
+df$ID <- paste0("ID_", seq_len(nrow(df)))
 df$lon <- st_coordinates(df)[, 1]
 df$lat <- st_coordinates(df)[, 2]
 

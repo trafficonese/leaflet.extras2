@@ -4,7 +4,7 @@ library(leaflet)
 library(leaflet.extras2)
 
 df <- breweries91
-df$weight <- 1:nrow(df)
+df$weight <- seq_len(nrow(df))
 # df$weight <- sample(c(1,5,10,30), size = nrow(df), T)
 dfjitter <- suppressWarnings(sf::st_jitter(sf::st_as_sf(df), 0.09))
 dfjitter1 <- suppressWarnings(sf::st_jitter(sf::st_as_sf(df), 0.09, 0.1))

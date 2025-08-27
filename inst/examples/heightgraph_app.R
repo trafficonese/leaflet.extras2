@@ -5,15 +5,15 @@ library(sf)
 library(sfheaders)
 
 data(atlStorms2005)
-data <- st_cast(st_as_sf(atlStorms2005[1,]), "LINESTRING")
+data <- st_cast(st_as_sf(atlStorms2005[1, ]), "LINESTRING")
 data <- st_transform(data, 4326)
 data <- data.frame(st_coordinates(data))
 data$elev <-  runif(nrow(data), 10, 500)
 data$L1 <- round(seq.int(1, 4, length.out = nrow(data)))
 data <- sfheaders::sf_linestring(data, x = "X",
                                  y = "Y", z = "elev", linestring_id = "L1")
-data$steepness <- 1:nrow(data)
-data$suitability <- nrow(data):1
+data$steepness <- seq_len(nrow(data))
+data$suitability <- rev(seq_len(nrow(data)))
 data$popup <- apply(data, 1, function(x) {
   sprintf("Steepness: %s<br>Suitability: %s", x$steepness, x$suitability)
 })
@@ -76,7 +76,7 @@ server <- function(input, output, session) {
                        ),
                        highlightStyle = list(weight = 10,
                                              opacity = 0.8,
-                                             color = 'orange'),
+                                             color = "orange"),
                        translation = list(distance = "Distanz",
                                           elevation = "Höhe",
                                           segment_length = "Segment Länge",

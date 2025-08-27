@@ -167,7 +167,7 @@ server <- function(input, output, session) {
   })
   observeEvent(input$show, {
     leafletProxy("map") %>%
-      showContextmenu(data = leaflet::breweries91[sample(1:32, 1),])
+      showContextmenu(data = leaflet::breweries91[sample(1:32, 1), ])
   })
   observeEvent(input$hide, {
     leafletProxy("map") %>%

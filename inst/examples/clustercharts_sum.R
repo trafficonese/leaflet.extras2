@@ -67,7 +67,8 @@ ui <- fluidPage(
 ## Server ##############
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
-    leaflet() %>% addMapPane("clusterpane", 420) %>%
+    leaflet() %>%
+      addMapPane("clusterpane", 420) %>%
       addProviderTiles("CartoDB") %>%
       leaflet::addLayersControl(overlayGroups = c("clustermarkers")) %>%
       # addCircleMarkers(data = data, group = "normalcircles", clusterOptions = markerClusterOptions()) %>%
@@ -126,9 +127,17 @@ server <- function(input, output, session) {
                                       keepInView = TRUE)
       )
   })
-  output$click <- renderPrint({input$map_marker_click})
-  output$mouseover <- renderPrint({input$map_marker_mouseover})
-  output$mouseout <- renderPrint({input$map_marker_mouseout})
-  output$dragend <- renderPrint({input$map_marker_dragend})
+  output$click <- renderPrint({
+    input$map_marker_click
+  })
+  output$mouseover <- renderPrint({
+    input$map_marker_mouseover
+  })
+  output$mouseout <- renderPrint({
+    input$map_marker_mouseout
+  })
+  output$dragend <- renderPrint({
+    input$map_marker_dragend
+  })
 }
 shinyApp(ui, server)

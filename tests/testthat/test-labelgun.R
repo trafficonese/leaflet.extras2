@@ -3,7 +3,7 @@ library(leaflet)
 
 test_that("labelgun", {
   df <- breweries91
-  df$weight <- 1:nrow(df)
+  df$weight <- seq_len(nrow(df))
 
   m <- leaflet() %>%
     addMarkers(

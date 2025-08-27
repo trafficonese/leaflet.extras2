@@ -29,7 +29,8 @@ owmlayers <- c("clouds", "pressure",
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
     leaflet()  %>%
-      addTiles() %>% setView(9, 50, 11) %>%
+      addTiles() %>%
+      setView(9, 50, 11) %>%
       addOpenweatherTiles(apikey = apikey,
                           layers = owmlayers,
                           layerId = owmlayers,
@@ -40,7 +41,7 @@ server <- function(input, output, session) {
                               lang = "de",
                               temperatureUnit = "F",
                               temperatureDigits = 2,
-                              speedUnit = 'kmh',
+                              speedUnit = "kmh",
                               speedDigits = 3,
                               popup = TRUE,
                               # markerFunction = htmlwidgets::JS('function(data) {

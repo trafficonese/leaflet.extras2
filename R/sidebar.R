@@ -140,7 +140,7 @@ sidebar_tabs <- function(id = "sidebar", iconList = NULL, ...) {
       class = "leafsidebar-tabs", style = "display: none",
       tags$ul(
         role = "tablist",
-        tagList(lapply(1:length(ids), function(x) {
+        tagList(lapply(seq_along(ids), function(x) {
           tags$li(tags$a(href = paste0("#", ids[[x]]), role = "tab", iconList[[x]]))
         }))
       )

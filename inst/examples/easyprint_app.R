@@ -31,7 +31,7 @@ server <- function(input, output, session) {
       addTiles(group = "basemap") %>%
       addCircleMarkers(data = leaflet::breweries91,
                        group = "markers", popup = ~brewery, label = ~brewery) %>%
-      addPopups(data = leaflet::breweries91[1:5,],
+      addPopups(data = leaflet::breweries91[1:5, ],
                 group = "popups", popup = ~brewery) %>%
       addEasyprint(options = easyprintOptions(
         title = "Give me that map",
@@ -55,12 +55,12 @@ server <- function(input, output, session) {
                            width = 1800,
                            height = 700,
                            name = "A custom landscape size tooltip",
-                           className = 'customCssClass'),
+                           className = "customCssClass"),
                          "Custom Portrait" = list(
                            width = 700,
                            height = 1800,
                            name = "A custom portrait size tooltip",
-                           className = 'customCssClass1')
+                           className = "customCssClass1")
         ),
         customWindowTitle = "Some Fancy Title",
         customSpinnerClass = "shiny-spinner-placeholder",
@@ -82,5 +82,3 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui, server)
-
-

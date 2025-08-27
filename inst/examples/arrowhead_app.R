@@ -2,6 +2,7 @@ library(shiny)
 library(leaflet)
 library(leaflet.extras2)
 
+data(atlStorms2005)
 ui <- fluidPage(
   leafletOutput("map", height = 800),
   actionButton("clear", "Clear Group"),
@@ -16,7 +17,7 @@ server <- function(input, output, session) {
       addTiles() %>%
       addLayersControl(overlayGroups = c("blue", "red")) %>%
       ## Blue #############
-      addArrowhead(data = atlStorms2005[1:10,], color = "blue",
+      addArrowhead(data = atlStorms2005[1:10, ], color = "blue",
                    group = "blue",
                    options = arrowheadOptions(
                      yawn = 60,

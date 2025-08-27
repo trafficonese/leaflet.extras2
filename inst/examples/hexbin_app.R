@@ -14,7 +14,7 @@ df <- data.frame(
   category = factor(sample(categories, n, replace = TRUE), levels = categories),
   value = rnorm(n, 20, 200)
 )
-df$id <- 1:nrow(df)
+df$id <- seq_len(nrow(df))
 pal <- colorNumeric("viridis", df$value)
 col <- pal(df$value)
 
@@ -91,7 +91,7 @@ server <- function(input, output, session) {
     pts <- req(input$map_hexbin_click)
     pts <- do.call(rbind, lapply(pts$pts, function(x) do.call("cbind", x)))
     colnames(pts) <- c("lng", "lat")
-    clicked <- df[which(round(df$lng, 10) %in% round(pts[, "lng"], 10)),]
+    clicked <- df[which(round(df$lng, 10) %in% round(pts[, "lng"], 10)), ]
     req(nrow(clicked) != 0)
 
     leafletProxy("map", session)  %>%
@@ -132,5 +132,3 @@ server <- function(input, output, session) {
   })
 }
 shinyApp(ui, server)
-
-

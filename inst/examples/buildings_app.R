@@ -92,8 +92,8 @@ server <- function(input, output, session) {
   })
   observeEvent(input$data, {
     geojson <- yyjsonr::read_geojson_file("Buildings_mini.geojson")
-    filtered <- geojson[sample(1:nrow(geojson), 10, FALSE),]
-    filtered$height <- sample(seq(50,140,5), nrow(filtered), replace = TRUE)
+    filtered <- geojson[sample(seq_len(nrow(geojson)), 10, FALSE), ]
+    filtered$height <- sample(seq(50, 140, 5), nrow(filtered), replace = TRUE)
     filtered$color <- sample(cols, nrow(filtered), replace = TRUE)
     filtered$wallColor <- sample(cols, nrow(filtered), replace = TRUE)
     filtered$roofColor <- sample(cols, nrow(filtered), replace = TRUE)

@@ -3,7 +3,7 @@ library(sf)
 library(leaflet)
 library(leaflet.extras2)
 
-df <- sf::st_as_sf(atlStorms2005)[1,]
+df <- sf::st_as_sf(atlStorms2005)[1, ]
 dfp <- suppressWarnings(st_cast(df, "POINT"))
 dfp$duratios <- sample(c(1000, 1500, 2000, 2500, 3000), nrow(dfp), TRUE)
 
@@ -80,16 +80,16 @@ server <- function(input, output, session) {
   })
 
   observeEvent(input$addLatLng, {
-    latlng <- list(lat = runif(1,30,35), lng = runif(1,-70,-65))
+    latlng <- list(lat = runif(1, 30, 35), lng = runif(1, -70, -65))
     leafletProxy("map", session) %>%
-      addCircleMarkers(lng = latlng$lng,lat = latlng$lat,
+      addCircleMarkers(lng = latlng$lng, lat = latlng$lat,
                        label = paste("input$addLatLng:", input$addLatLng)) %>%
       addLatLngMoving(latlng = latlng, duration = 2000)
   })
   observeEvent(input$moveTo, {
-    latlng <- list(lat = runif(1,30,35), lng = runif(1,-70,-65))
+    latlng <- list(lat = runif(1, 30, 35), lng = runif(1, -70, -65))
     leafletProxy("map", session) %>%
-      addCircleMarkers(lng = latlng$lng,lat = latlng$lat,
+      addCircleMarkers(lng = latlng$lng, lat = latlng$lat,
                        label = paste("input$moveTo:", input$addLatLng)) %>%
       moveToMoving(latlng = latlng, duration = 2000)
   })

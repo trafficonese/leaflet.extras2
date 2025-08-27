@@ -55,8 +55,8 @@ test_that("heightgraph", {
   data <- st_as_sf(st_sfc(lapply(split(data, L1), function(x) {
     st_linestring(as.matrix(x))
   })))
-  data$steepness <- 1:nrow(data)
-  data$suitability <- nrow(data):1
+  data$steepness <- seq_len(nrow(data))
+  data$suitability <- rev(seq_len(nrow(data)))
   data$popup <- apply(data, 1, function(x) {
     sprintf("Steepness: %s<br>Suitability: %s", x$steepness, x$suitability)
   })
