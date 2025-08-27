@@ -17,7 +17,7 @@ library(mapview)
 # data$label1 <- paste("Time: ", data$time)
 
 ## Multiple Trails ##############
-n = 150
+n <- 150
 rows <- c(10, 21)
 trail_pts <- sf::st_line_sample(x = st_cast(mapview::trails[rows,], "LINESTRING"), n = n)
 trail_pts <- st_transform(trail_pts, 4326)
@@ -36,7 +36,7 @@ data$label1 <- paste("Track ID: ",data$id,"<br>", data$time)
 data <- split(data, data$id)
 
 ## Icon #################
-iconship = makeIcon(
+iconship <- makeIcon(
   iconUrl = 'https://cdn0.iconfinder.com/data/icons/man-listening-to-music-with-earphone-headphone/247/listern-music-006-512.png',
   iconWidth = 30, iconHeight = 35, shadowWidth = 30, shadowHeight = 35,
   iconAnchorX = 0, iconAnchorY = 0

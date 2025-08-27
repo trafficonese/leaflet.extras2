@@ -12,7 +12,7 @@ data$time <- unlist(lapply(rle(data$Name)$lengths, function(x) {
 }))
 data$time <- as.POSIXct(data$time, origin="1970-01-01")
 data$label <- paste0("Time: ", data$time)
-data$popup = sprintf("<h3>Customized Popup</h3><b>Name</b>: %s<br><b>Time</b>: %s",
+data$popup <- sprintf("<h3>Customized Popup</h3><b>Name</b>: %s<br><b>Time</b>: %s",
                      data$Name, data$time)
 data <- split(data, f = data$Name)
 

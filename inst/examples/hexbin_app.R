@@ -7,7 +7,7 @@ set.seed(100)
 rand_lng <- function(n = 10) rnorm(n, -93.65, .01)
 rand_lat <- function(n = 10) rnorm(n, 42.0285, .01)
 categories <- LETTERS[1:10]
-n = 1000
+n <- 1000
 df <- data.frame(
   lat = rand_lat(n), lng = rand_lng(n),
   size = runif(n, 1, 20),

@@ -6,7 +6,7 @@ ui <- fluidPage(
   leafletOutput("map")
 )
 
-iconSet = mapkeyIconList(
+iconSet <- mapkeyIconList(
   red = makeMapkeyIcon(icon = "boundary_stone",
                        color = "#725139",
                        background = '#f2c357',

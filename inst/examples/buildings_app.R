@@ -16,10 +16,13 @@ geojson$height <- sample(seq(50, 100, 5), nrow(geojson), replace = TRUE)
 geojson$color <- sample(cols, nrow(geojson), replace = TRUE)
 geojson$wallColor <- sample(cols, nrow(geojson), replace = TRUE)
 geojson$roofColor <- sample(darkcols, nrow(geojson), replace = TRUE)
-geojson$shape <- sample(c("cylinder", "sphere", ""), nrow(geojson), replace = TRUE)
-geojson$roofHeight <- geojson$height + sample(seq(1, 10, 1), nrow(geojson), replace = TRUE)
-geojson$roofShape <- sample(c("dome", "pyramidal", "butterfly", "gabled", "half-hipped",
-                            "gambrel", "onion"), nrow(geojson), replace = TRUE)
+geojson$shape <- sample(c("cylinder", "sphere", ""), nrow(geojson),
+                        replace = TRUE)
+geojson$roofHeight <- geojson$height + sample(seq(1, 10, 1), nrow(geojson),
+                                              replace = TRUE)
+geojson$roofShape <- sample(c("dome", "pyramidal", "butterfly",
+                              "gabled", "half-hipped", "gambrel", "onion"),
+                            nrow(geojson), replace = TRUE)
 geojson <- yyjsonr::write_geojson_str(geojson)
 class(geojson) <- "json"
 
@@ -54,8 +57,8 @@ server <- function(input, output, session) {
       m <- m %>%
         addBuildings(
           group = "Buildings"
-          # , eachFn = leaflet::JS("function(e) { console.log('each feature:', e); }")
-          # , clickFn = leaflet::JS("function(e) { console.log('clicked:', e); }")
+          #, eachFn = leaflet::JS("function(e) {console.log('eachFn:', e);}")
+          #, clickFn = leaflet::JS("function(e) {console.log('clicked:', e);}")
         )
     } else {
       m <- m %>%

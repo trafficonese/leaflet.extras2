@@ -7,7 +7,7 @@ options("shiny.autoreload" = TRUE)
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
 df <- df[sample(1:nrow(df), 150, replace = FALSE),]
-df$classes = sample(x = 1:5, nrow(df), replace = TRUE)
+df$classes <- sample(x = 1:5, nrow(df), replace = TRUE)
 
 ## Ordering is important
 df <- df[order(df$classes, decreasing = FALSE),]

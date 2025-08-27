@@ -7,7 +7,8 @@ library(leaflet.extras2)
 df <- sf::st_as_sf(atlStorms2005)
 df <- suppressWarnings(st_cast(df, "POINT"))
 df <- df[sample(1:nrow(df), 50, replace = F),]
-df$classes = sample(x = c("myclass1","myclass2","myclass3"), nrow(df), replace = TRUE)
+df$classes <- sample(x = c("myclass1","myclass2","myclass3"), nrow(df),
+                     replace = TRUE)
 df$ID <- paste0("ID_", 1:nrow(df))
 
 ## UI ##################
