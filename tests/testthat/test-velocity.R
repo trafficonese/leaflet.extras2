@@ -77,12 +77,12 @@ test_that("velocity-error", {
 
 
   with_mocked_bindings({
-    expect_error(leaflet() %>%
-                   addVelocity(content = "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json",
+    expect_error(addVelocity(map = leaflet(),
+                             content = "https://raw.githubusercontent.com/danwild/leaflet-velocity/master/demo/wind-gbr.json",
                                options = velocityOptions(
                                  colorScale = matrix(1:99, ncol = 3)
                                )),
-                 "The package `jsonlite` is needed")
+                 "Package `jsonlite` must be loaded to parse the `content`")
   },
   requireNamespace = function(package, ..., quietly=FALSE) FALSE,
   .package="base"

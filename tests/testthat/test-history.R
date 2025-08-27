@@ -43,7 +43,7 @@ test_that("history deps not fulfilled", {
                    addTiles(group = "base") %>%
                    fitBounds(-72, 40, -70, 43) %>%
                    addHistory(),
-                 "The package `fontawesome` is needed")
+                 "The package `fontawesome` is needed for this plugin. ")
   },
   requireNamespace = function(package, ..., quietly=FALSE) FALSE,
   .package="base"

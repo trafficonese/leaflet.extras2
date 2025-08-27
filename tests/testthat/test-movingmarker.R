@@ -164,14 +164,14 @@ test_that("movingmarker", {
 test_that("movingmarker deps not fulfilled", {
   ## Deps not fulfilled ######
   with_mocked_bindings({
-    expect_error(leaflet() %>%
-                   addMovingMarker(
-                     data = df,
-                     movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
-                     label = "I am a pirate!",
-                     popup = "Arrr"
-                   ),
-                 "The package `sf` is needed")
+    expect_error(addMovingMarker(
+      map = leaflet(),
+      data = df,
+      movingOptions = movingMarkerOptions(autostart = TRUE, loop = TRUE),
+      label = "I am a pirate!",
+      popup = "Arrr"
+    ),
+    "The package `sf` is needed for this plugin. ")
   },
   requireNamespace = function(package, ..., quietly=FALSE) FALSE,
   .package="base"
