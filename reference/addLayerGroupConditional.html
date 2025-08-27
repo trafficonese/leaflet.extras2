@@ -56,15 +56,18 @@ These layer groups will be conditionally displayed based on the specified <code>
 
 
 <dt id="arg-conditions">conditions<a class="anchor" aria-label="anchor" href="#arg-conditions"></a></dt>
-<dd><p>A named list where:
-- Each **name** is a JavaScript function (using <code><a href="https://rdrr.io/pkg/htmlwidgets/man/JS.html" class="external-link">JS</a></code>) defining a condition for displaying a layer group.
-- Each **value** corresponds to a layer group name (or names) from the <code>layers</code> parameter.
-Example:</p><div class="sourceCode"><pre><code><span></span>
-<span>  <span class="va">condition</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
-<span>    <span class="st">"(zoomLevel) =&gt; zoomLevel &lt; 4"</span> <span class="op">=</span> <span class="st">"group1"</span>,</span>
-<span>    <span class="st">"(zoomLevel) =&gt; zoomLevel &gt;= 4 &amp;&amp; zoomLevel &lt; 6"</span> <span class="op">=</span> <span class="st">"group2"</span>,</span>
-<span>    <span class="st">"(zoomLevel) =&gt; zoomLevel &gt;= 6"</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"group3"</span>, <span class="st">"group4"</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span></code></pre></div></dd>
+<dd><p>A named list of conditions for displaying layer groups.
+  Each list element should have:</p><ul><li><p>A <em>name</em>: a JavaScript function (wrapped in <code><a href="https://rdrr.io/pkg/htmlwidgets/man/JS.html" class="external-link">JS</a></code>)
+      that defines the condition.</p></li>
+<li><p>A <em>value</em>: the layer group name(s) from the <code>layers</code> parameter
+      to be shown when the condition evaluates to <code>TRUE</code>.</p></li>
+</ul><p>Example:</p><div class="sourceCode"><pre><code><span></span>
+<span>  <span class="va">conditions</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>    <span class="st">"(zoomLevel) =&gt; zoomLevel &lt; 4"</span>                     <span class="op">=</span> <span class="st">"group1"</span>,</span>
+<span>    <span class="st">"(zoomLevel) =&gt; zoomLevel &gt;= 4 &amp;&amp; zoomLevel &lt; 6"</span>   <span class="op">=</span> <span class="st">"group2"</span>,</span>
+<span>    <span class="st">"(zoomLevel) =&gt; zoomLevel &gt;= 6"</span>                    <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"group3"</span>, <span class="st">"group4"</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  </span></code></pre></div></dd>
 
 </dl></div>
     <div class="section level2">
