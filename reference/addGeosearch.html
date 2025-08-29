@@ -54,16 +54,33 @@ Supports multiple providers such as OpenStreetMap, Esri, Google, HERE, etc.</p>
 
 
 <dt id="arg-provider">provider<a class="anchor" aria-label="anchor" href="#arg-provider"></a></dt>
-<dd><p>A provider list object created with e.g. `geosearchProviderOSM()`.</p></dd>
+<dd><p>A provider list object created with e.g. <code><a href="geosearchProvider.html">geosearchProvider</a></code></p></dd>
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
-<dd><p>A list of control options created with `geosearchOptions()`.</p></dd>
+<dd><p>A list of control options created with <code><a href="geosearchOptions.html">geosearchOptions</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>the new <code>map</code> object</p>
+    </div>
+    <div class="section level2">
+    <h2 id="shiny-value">Shiny value<a class="anchor" aria-label="anchor" href="#shiny-value"></a></h2>
+
+
+<p>When used inside a Shiny application, <code>addGeosearch()</code> will also register
+two reactive inputs that return the most recent geosearch results:</p>
+<ul><li><p><code>input$&lt;mapId&gt;_geosearch_result</code>
+    Updated when a search result is selected (from the
+    <code>geosearch/showlocation</code> event). Returns a list with
+    <code>lat</code>, <code>lng</code>, <code>label</code>, <code>bounds</code>, and other properties
+    provided by the geocoder.</p></li>
+<li><p><code>input$&lt;mapId&gt;_geosearch_dragend</code>
+    Updated when the marker placed by the geosearch control is dragged to a
+    new location (from the <code>geosearch/marker/dragend</code> event). Returns the
+    same structure as above.</p></li>
+</ul><p>Both values are <code>NULL</code> if no result is available.</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
