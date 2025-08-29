@@ -9,9 +9,9 @@ addGeosearch(map, provider = geosearchProvider(), options = geosearchOptions())
 \arguments{
 \item{map}{a map widget}
 
-\item{provider}{A provider list object created with e.g. `geosearchProviderOSM()`.}
+\item{provider}{A provider list object created with e.g. \code{\link{geosearchProvider}}}
 
-\item{options}{A list of control options created with `geosearchOptions()`.}
+\item{options}{A list of control options created with \code{\link{geosearchOptions}}.}
 }
 \value{
 the new \code{map} object
@@ -20,6 +20,27 @@ the new \code{map} object
 Adds a geocoding search widget to a leaflet map using the leaflet-geosearch plugin.
 Supports multiple providers such as OpenStreetMap, Esri, Google, HERE, etc.
 }
+\section{Shiny value}{
+
+When used inside a Shiny application, \code{addGeosearch()} will also register
+two reactive inputs that return the most recent geosearch results:
+
+\itemize{
+  \item \code{input$<mapId>_geosearch_result}
+    Updated when a search result is selected (from the
+    \code{geosearch/showlocation} event). Returns a list with
+    \code{lat}, \code{lng}, \code{label}, \code{bounds}, and other properties
+    provided by the geocoder.
+
+  \item \code{input$<mapId>_geosearch_dragend}
+    Updated when the marker placed by the geosearch control is dragged to a
+    new location (from the \code{geosearch/marker/dragend} event). Returns the
+    same structure as above.
+}
+
+Both values are \code{NULL} if no result is available.
+}
+
 \examples{
 library(leaflet)
 library(leaflet.extras2)
