@@ -65,7 +65,8 @@ wms.Source = L.Layer.extend({
         // Create overlay with all options other than untiled & identify
         var overlayOptions = {};
         for (var opt in this.options) {
-            if (opt != 'untiled' && opt != 'identify') {
+            if (opt != 'untiled' && opt != 'identify' &&
+                opt != 'checkempty' && opt != 'popupOptions') {
                 overlayOptions[opt] = this.options[opt];
             }
         }
@@ -143,7 +144,6 @@ wms.Source = L.Layer.extend({
         }
         if (!subLayers) {
             this._overlay.remove();
-            this.remove();
         } else {
             this._overlay.setParams({'layers': subLayers});
             this._overlay.addTo(this._map);
@@ -370,7 +370,7 @@ wms.Overlay = L.Layer.extend({
     },
 
     'onRemove': function(map) {
-        if (this._currentOverlay) {
+        if (this._currentOverlay && map && map.removeLayer) {
             map.removeLayer(this._currentOverlay);
             delete this._currentOverlay;
         }
@@ -386,7 +386,7 @@ wms.Overlay = L.Layer.extend({
     },
 
     'update': function() {
-        if (!this._map) {
+        if (!this._map || !this._map._loaded) {
             return;
         }
         // Determine image URL and whether it has changed since last update

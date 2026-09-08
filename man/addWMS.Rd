@@ -66,6 +66,9 @@ The WMS attribution is shown only while the layer (or its
   GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
   \code{http://} WMS URLs to \code{https://} on HTTPS pages so popups
   still work behind a reverse proxy.
+  To change WMS request parameters such as \code{time} in Shiny, keep the
+  map in \code{renderLeaflet()} and call \code{\link{setWMSParams}} on a
+  \code{\link[leaflet]{leafletProxy}} instead of recreating the whole map.
 }
 \examples{
 library(leaflet)
@@ -88,5 +91,9 @@ leaflet() \%>\%
 }
 \references{
 \url{https://github.com/heigeo/leaflet.wms}
+}
+\seealso{
+Other WMS Functions: 
+\code{\link{setWMSParams}()}
 }
 \concept{WMS Functions}

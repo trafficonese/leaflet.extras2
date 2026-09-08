@@ -51,3 +51,28 @@ test_that("wms-error", {
   expect_error(leaflet() %>%
     addWMS(baseUrl = "https://maps.dwd.de/geoserver/dwd/wms"))
 })
+
+test_that("setWMSParams", {
+  expect_error(leaflet() %>% setWMSParams(), "requires at least one")
+
+  m <- leaflet() %>%
+    addWMS(
+      baseUrl = "https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi",
+      layers = "MODIS_Terra_CorrectedReflectance_TrueColor",
+      layerId = "modis",
+      group = "MODIS",
+      options = WMSTileOptions(format = "image/jpeg", time = "2022-11-10")
+    ) %>%
+    setWMSParams(layerId = "modis", time = "2022-11-11")
+
+  last <- m$x$calls[[length(m$x$calls)]]
+  expect_equal(last$method, "setWMSParams")
+  expect_equal(last$args[[1]], "modis")
+  expect_equal(last$args[[3]]$time, "2022-11-11")
+
+  bindings <- paste(
+    readLines(system.file("htmlwidgets/lfx-wms/leaflet.wms-bindings.js", package = "leaflet.extras2")),
+    collapse = "\n"
+  )
+  expect_match(bindings, "LeafletWidget.methods.setWMSParams")
+})

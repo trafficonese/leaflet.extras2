@@ -2,7 +2,7 @@ wmsDependency <- function() {
   list(
     htmltools::htmlDependency(
       "lfx-wms",
-      version = "1.0.2",
+      version = "1.0.3",
       src = system.file("htmlwidgets/lfx-wms", package = "leaflet.extras2"),
       script = c(
         "leaflet.wms.js",
@@ -29,6 +29,9 @@ wmsDependency <- function() {
 #'   GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
 #'   \code{http://} WMS URLs to \code{https://} on HTTPS pages so popups
 #'   still work behind a reverse proxy.
+#'   To change WMS request parameters such as \code{time} in Shiny, keep the
+#'   map in \code{renderLeaflet()} and call \code{\link{setWMSParams}} on a
+#'   \code{\link[leaflet]{leafletProxy}} instead of recreating the whole map.
 #'
 #' @inheritParams leaflet::addWMSTiles
 #' @param checkempty Should the returned HTML-content be checked for emptiness?
@@ -77,4 +80,37 @@ addWMS <- function(map, baseUrl, layerId = NULL, group = NULL,
     map, data, "addWMS", baseUrl, layerId,
     group, options, popupOptions
   )
+}
+
+#' Update WMS request parameters
+#'
+#' Change WMS parameters such as \code{time}, \code{styles} or
+#' \code{cql_filter} on an existing layer without rebuilding the map.
+#' In Shiny, call this on \code{\link[leaflet]{leafletProxy}}.
+#'
+#' @inheritParams addWMS
+#' @param ... Named WMS request parameters to set, for example
+#'   \code{time = "2022-11-10T21:00:00Z"}.
+#' @inherit leaflet::addWMSTiles return
+#' @family WMS Functions
+#' @export
+#' @examples
+#' library(leaflet)
+#' library(leaflet.extras2)
+#'
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addWMS(
+#'     baseUrl = "https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi",
+#'     layers = "MODIS_Terra_CorrectedReflectance_TrueColor",
+#'     layerId = "modis",
+#'     options = WMSTileOptions(format = "image/jpeg", time = "2022-11-10")
+#'   ) %>%
+#'   setWMSParams(layerId = "modis", time = "2022-11-11")
+setWMSParams <- function(map, layerId = NULL, group = NULL, ...) {
+  params <- list(...)
+  if (!length(params)) {
+    stop("setWMSParams() requires at least one WMS parameter, e.g. time = '...'")
+  }
+  invokeMethod(map, NULL, "setWMSParams", layerId, group, params)
 }

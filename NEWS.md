@@ -2,6 +2,9 @@
 
 * `addWMS()` now hides its attribution when the layer group is hidden,
   matching `leaflet::addWMSTiles()`.
+* `setWMSParams()` updates WMS request parameters (e.g. `time`) on an
+  existing layer via `leafletProxy()`, so Shiny apps no longer need to
+  rebuild the map (#52).
 * `addWMS()` GetFeatureInfo popups work behind HTTPS reverse proxies:
   HTTP→HTTPS redirects (301/302) are followed on the same host, and
   `http://` WMS URLs are upgraded on HTTPS pages (#14).
