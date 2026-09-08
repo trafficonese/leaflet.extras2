@@ -2,6 +2,9 @@
 
 ## leaflet.extras2 (development version)
 
+- Replaced deprecated `structure(..., .Label = )` with `levels =` in
+  tests (`test-mapkeyicon.R`, `test-playback.R`) to clear the R-devel
+  NOTE.
 - Documented Shiny mouse events for
   [`addAntpath()`](https://trafficonese.github.io/leaflet.extras2/reference/addAntpath.md):
   use `input$MAPID_antpath_click` / `_mouseover` / `_mouseout` instead
