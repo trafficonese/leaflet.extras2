@@ -1,5 +1,7 @@
 # leaflet.extras2 (development version)
 
+* Replaced deprecated `structure(..., .Label = )` with `levels =` in tests
+  (`test-mapkeyicon.R`, `test-playback.R`) to clear the R-devel NOTE.
 * Documented Shiny mouse events for `addAntpath()`: use
   `input$MAPID_antpath_click` / `_mouseover` / `_mouseout` instead of `shape_*`.
 * `addEasyprint()` custom export sizes no longer need extra CSS. Pass them in

@@ -74,7 +74,7 @@ test_that("mapkey", {
 
   cities <- structure(
     list(
-      City = structure(1:6, .Label = c(
+      City = structure(1:6, levels = c(
         "Boston", "Hartford", "New York City",
         "Philadelphia", "Pittsburgh",
         "Providence"

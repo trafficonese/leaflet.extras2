@@ -152,7 +152,7 @@ test_that("playback", {
     ),
     row.names = c(NA, 100L), class = c("sf", "data.frame"),
     sf_column = "geometry", agr = structure(c(time = NA_integer_),
-      .Label = c("constant", "aggregate", "identity"), class = "factor"
+      levels = c("constant", "aggregate", "identity"), class = "factor"
     )
   )
   ##############################
