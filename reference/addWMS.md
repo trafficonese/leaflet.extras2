@@ -22,6 +22,7 @@ addWMS(
   layers = NULL,
   popupOptions = NULL,
   checkempty = FALSE,
+  headers = NULL,
   data = getMapData(map)
 )
 ```
@@ -44,12 +45,12 @@ addWMS(
 - group:
 
   the name of the group the newly created layers should belong to (for
-  [`clearGroup`](https://rstudio.github.io/leaflet/reference/remove.html)
+  [`clearGroup()`](https://rstudio.github.io/leaflet/reference/remove.html)
   and
-  [`addLayersControl`](https://rstudio.github.io/leaflet/reference/addLayersControl.html)
+  [`addLayersControl()`](https://rstudio.github.io/leaflet/reference/addLayersControl.html)
   purposes). Human-friendly group names are permitted–they need not be
   short, identifier-style names. Any number of layers and even different
-  types of layers (e.g. markers and polygons) can share the same group
+  types of layers (e.g., markers and polygons) can share the same group
   name.
 
 - options:
@@ -76,6 +77,12 @@ addWMS(
   Should the returned HTML-content be checked for emptiness? If the
   HTML-body is empty no popup is opened. Default is `FALSE`
 
+- headers:
+
+  Optional HTTP headers for authenticated WMS requests, as a named
+  character vector (`c(Authorization = "Bearer <token>")`) or a list of
+  `list(header = "Authorization", value = "Bearer <token>")`.
+
 - data:
 
   the data object from which the argument values are derived; by
@@ -87,9 +94,33 @@ addWMS(
 
 the new `map` object
 
+## Note
+
+The WMS attribution is shown only while the layer (or its `group`) is
+visible, matching
+[`addWMSTiles`](https://rstudio.github.io/leaflet/reference/map-layers.html).
+GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
+`http://` WMS URLs to `https://` on HTTPS pages so popups still work
+behind a reverse proxy. To change WMS request parameters such as `time`
+in Shiny, keep the map in
+[`renderLeaflet()`](https://rstudio.github.io/leaflet/reference/map-shiny.html)
+and call
+[`setWMSParams`](https://trafficonese.github.io/leaflet.extras2/reference/setWMSParams.md)
+on a
+[`leafletProxy`](https://rstudio.github.io/leaflet/reference/leafletProxy.html)
+instead of recreating the whole map. Custom `headers` (Basic/Bearer) are
+sent for tiles, the single-image overlay and GetFeatureInfo. The WMS
+server must allow CORS for those header names. Tokens travel in the
+browser; do not use them for secrets that must stay on the server.
+
 ## References
 
 <https://github.com/heigeo/leaflet.wms>
+
+## See also
+
+Other WMS Functions:
+[`setWMSParams()`](https://trafficonese.github.io/leaflet.extras2/reference/setWMSParams.md)
 
 ## Examples
 

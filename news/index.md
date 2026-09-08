@@ -2,6 +2,25 @@
 
 ## leaflet.extras2 (development version)
 
+- [`addWMS()`](https://trafficonese.github.io/leaflet.extras2/reference/addWMS.md)
+  now hides its attribution when the layer group is hidden, matching
+  [`leaflet::addWMSTiles()`](https://rstudio.github.io/leaflet/reference/map-layers.html).
+- `addWMS(headers = ...)` sends Authorization (Basic/Bearer) and other
+  custom headers with tiles, the overlay image and GetFeatureInfo
+  ([\#54](https://github.com/trafficonese/leaflet.extras2/issues/54)).
+  The WMS must allow CORS for those headers. GetFeatureInfo no longer
+  opens a blocked iframe on 401/403; it shows an unauthorized message.
+  Example: `inst/examples/wms_geoserver_app.R`.
+- [`setWMSParams()`](https://trafficonese.github.io/leaflet.extras2/reference/setWMSParams.md)
+  updates WMS request parameters (e.g. `time`) on an existing layer via
+  [`leafletProxy()`](https://rstudio.github.io/leaflet/reference/leafletProxy.html),
+  so Shiny apps no longer need to rebuild the map
+  ([\#52](https://github.com/trafficonese/leaflet.extras2/issues/52)).
+- [`addWMS()`](https://trafficonese.github.io/leaflet.extras2/reference/addWMS.md)
+  GetFeatureInfo popups work behind HTTPS reverse proxies: HTTP→HTTPS
+  redirects (301/302) are followed on the same host, and `http://` WMS
+  URLs are upgraded on HTTPS pages
+  ([\#14](https://github.com/trafficonese/leaflet.extras2/issues/14)).
 - Replaced deprecated `structure(..., .Label = )` with `levels =` in
   tests (`test-mapkeyicon.R`, `test-playback.R`) to clear the R-devel
   NOTE.

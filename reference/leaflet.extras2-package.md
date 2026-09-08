@@ -18,6 +18,10 @@ Useful links:
 
 **Maintainer**: Gatscha Sebastian <sebastian_gatscha@gmx.at>
 
+Authors:
+
+- Gatscha Sebastian <sebastian_gatscha@gmx.at>
+
 Other contributors:
 
 - Ricardo Rodrigo Basa <radbasa@gmail.com> \[contributor\]

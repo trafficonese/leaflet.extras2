@@ -307,3 +307,5 @@
 
 - [`addWMS()`](https://trafficonese.github.io/leaflet.extras2/reference/addWMS.md)
   : Add Queryable WMS Layer
+- [`setWMSParams()`](https://trafficonese.github.io/leaflet.extras2/reference/setWMSParams.md)
+  : Update WMS request parameters

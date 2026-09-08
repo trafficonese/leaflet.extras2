@@ -51,13 +51,13 @@ antpathOptions(
 
   a string that defines [shape to be used at the
   end](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linecap)
-  of the stroke
+  of the stroke.
 
 - lineJoin:
 
   a string that defines [shape to be used at the
   corners](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-linejoin)
-  of the stroke
+  of the stroke.
 
 - interactive:
 
@@ -73,7 +73,7 @@ antpathOptions(
 
 - ...:
 
-  extra options passed to underlying Javascript object constructor.
+  extra options passed to underlying JavaScript object constructor.
 
 ## Value
 

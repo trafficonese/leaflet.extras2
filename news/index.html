@@ -34,7 +34,15 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="leafletextras2-development-version">leaflet.extras2 (development version)<a class="anchor" aria-label="anchor" href="#leafletextras2-development-version"></a></h2>
-<ul><li>Replaced deprecated <code>structure(..., .Label = )</code> with <code>levels =</code> in tests (<code>test-mapkeyicon.R</code>, <code>test-playback.R</code>) to clear the R-devel NOTE.</li>
+<ul><li>
+<code><a href="../reference/addWMS.html">addWMS()</a></code> now hides its attribution when the layer group is hidden, matching <code><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">leaflet::addWMSTiles()</a></code>.</li>
+<li>
+<code>addWMS(headers = ...)</code> sends Authorization (Basic/Bearer) and other custom headers with tiles, the overlay image and GetFeatureInfo (<a href="https://github.com/trafficonese/leaflet.extras2/issues/54" class="external-link">#54</a>). The WMS must allow CORS for those headers. GetFeatureInfo no longer opens a blocked iframe on 401/403; it shows an unauthorized message. Example: <code>inst/examples/wms_geoserver_app.R</code>.</li>
+<li>
+<code><a href="../reference/setWMSParams.html">setWMSParams()</a></code> updates WMS request parameters (e.g. <code>time</code>) on an existing layer via <code><a href="https://rstudio.github.io/leaflet/reference/leafletProxy.html" class="external-link">leafletProxy()</a></code>, so Shiny apps no longer need to rebuild the map (<a href="https://github.com/trafficonese/leaflet.extras2/issues/52" class="external-link">#52</a>).</li>
+<li>
+<code><a href="../reference/addWMS.html">addWMS()</a></code> GetFeatureInfo popups work behind HTTPS reverse proxies: HTTP→HTTPS redirects (301/302) are followed on the same host, and <code>http://</code> WMS URLs are upgraded on HTTPS pages (<a href="https://github.com/trafficonese/leaflet.extras2/issues/14" class="external-link">#14</a>).</li>
+<li>Replaced deprecated <code>structure(..., .Label = )</code> with <code>levels =</code> in tests (<code>test-mapkeyicon.R</code>, <code>test-playback.R</code>) to clear the R-devel NOTE.</li>
 <li>Documented Shiny mouse events for <code><a href="../reference/addAntpath.html">addAntpath()</a></code>: use <code>input$MAPID_antpath_click</code> / <code>_mouseover</code> / <code>_mouseout</code> instead of <code>shape_*</code>.</li>
 <li>
 <code><a href="../reference/addEasyprint.html">addEasyprint()</a></code> custom export sizes no longer need extra CSS. Pass them in <code>easyprintOptions(sizeModes = ...)</code> as R lists, for example <code>list(scale = 3, name = "3x current view")</code> or <code>list(width = 3000, height = 1800, name = "High res")</code>. <code>CurrentSize</code> still exports at the widget size (often low-res in Quarto/HTML). Custom sizes keep the current map view by default (<code>keepView = TRUE</code> in the size-mode list). Set <code>keepView = FALSE</code> to keep the zoom level and export a larger area. See <code>inst/examples/easyprint.R</code>.</li>

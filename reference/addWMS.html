@@ -9,7 +9,7 @@ single-tile/untiled/nontiled layers, shared WMS sources, and
 GetFeatureInfo-powered identify.
 You can also use CQL-Filters by appending a string
 to the 'baseUrl'.
-Something like 'http://server/wms?cql_filter=attribute=value'"><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet"><script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet"><script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet"><script src="libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="libs/lfx-wms-1.0.0/leaflet.wms.js"></script><script src="libs/lfx-wms-1.0.0/leaflet.wms-bindings.js"></script></head><body>
+Something like 'http://server/wms?cql_filter=attribute=value'"><!-- dependencies from examples --><script src="libs/htmlwidgets-1.6.4/htmlwidgets.js"></script><link href="libs/leaflet-1.3.1/leaflet.css" rel="stylesheet"><script src="libs/leaflet-1.3.1/leaflet.js"></script><link href="libs/leafletfix-1.0.0/leafletfix.css" rel="stylesheet"><script src="libs/proj4-2.6.2/proj4.min.js"></script><script src="libs/Proj4Leaflet-1.0.1/proj4leaflet.js"></script><link href="libs/rstudio_leaflet-1.3.1/rstudio_leaflet.css" rel="stylesheet"><script src="libs/leaflet-binding-2.2.3/leaflet.js"></script><script src="libs/lfx-wms-1.0.4/leaflet.wms.js"></script><script src="libs/lfx-wms-1.0.4/leaflet.wms-bindings.js"></script></head><body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
 
 
@@ -64,6 +64,7 @@ to the <code>'baseUrl'</code>.</p>
 <span>  layers <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  popupOptions <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  checkempty <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  headers <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  data <span class="op">=</span> <span class="fu"><a href="https://rstudio.github.io/leaflet/reference/getMapData.html" class="external-link">getMapData</a></span><span class="op">(</span><span class="va">map</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -86,10 +87,10 @@ to the <code>'baseUrl'</code>.</p>
 
 <dt id="arg-group">group<a class="anchor" aria-label="anchor" href="#arg-group"></a></dt>
 <dd><p>the name of the group the newly created layers should belong to
-(for <code><a href="https://rstudio.github.io/leaflet/reference/remove.html" class="external-link">clearGroup</a></code> and <code><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html" class="external-link">addLayersControl</a></code> purposes).
+(for <code><a href="https://rstudio.github.io/leaflet/reference/remove.html" class="external-link">clearGroup()</a></code> and <code><a href="https://rstudio.github.io/leaflet/reference/addLayersControl.html" class="external-link">addLayersControl()</a></code> purposes).
 Human-friendly group names are permitted–they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.</p></dd>
+layers (e.g., markers and polygons) can share the same group name.</p></dd>
 
 
 <dt id="arg-options">options<a class="anchor" aria-label="anchor" href="#arg-options"></a></dt>
@@ -115,6 +116,13 @@ layers (e.g. markers and polygons) can share the same group name.</p></dd>
 If the HTML-body is empty no popup is opened. Default is <code>FALSE</code></p></dd>
 
 
+<dt id="arg-headers">headers<a class="anchor" aria-label="anchor" href="#arg-headers"></a></dt>
+<dd><p>Optional HTTP headers for authenticated WMS requests,
+as a named character vector
+(<code>c(Authorization = "Bearer &lt;token&gt;")</code>) or a list of
+<code>list(header = "Authorization", value = "Bearer &lt;token&gt;")</code>.</p></dd>
+
+
 <dt id="arg-data">data<a class="anchor" aria-label="anchor" href="#arg-data"></a></dt>
 <dd><p>the data object from which the argument values are derived; by
 default, it is the <code>data</code> object provided to <code><a href="https://rstudio.github.io/leaflet/reference/leaflet.html" class="external-link">leaflet()</a></code>
@@ -126,8 +134,28 @@ initially, but can be overridden</p></dd>
     <p>the new <code>map</code> object</p>
     </div>
     <div class="section level2">
+    <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
+    <p>The WMS attribution is shown only while the layer (or its
+  <code>group</code>) is visible, matching <code><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">addWMSTiles</a></code>.
+  GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
+  <code>http://</code> WMS URLs to <code>https://</code> on HTTPS pages so popups
+  still work behind a reverse proxy.
+  To change WMS request parameters such as <code>time</code> in Shiny, keep the
+  map in <code><a href="https://rstudio.github.io/leaflet/reference/map-shiny.html" class="external-link">renderLeaflet()</a></code> and call <code><a href="setWMSParams.html">setWMSParams</a></code> on a
+  <code><a href="https://rstudio.github.io/leaflet/reference/leafletProxy.html" class="external-link">leafletProxy</a></code> instead of recreating the whole map.
+  Custom <code>headers</code> (Basic/Bearer) are sent for tiles, the single-image
+  overlay and GetFeatureInfo. The WMS server must allow CORS for those
+  header names. Tokens travel in the browser; do not use them for secrets
+  that must stay on the server.</p>
+    </div>
+    <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p><a href="https://github.com/heigeo/leaflet.wms" class="external-link">https://github.com/heigeo/leaflet.wms</a></p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>Other WMS Functions:
+<code><a href="setWMSParams.html">setWMSParams()</a></code></p></div>
     </div>
 
     <div class="section level2">

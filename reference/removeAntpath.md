@@ -13,9 +13,9 @@ removeAntpath(map, layerId = NULL)
 - map:
 
   a map widget object, possibly created from
-  [`leaflet`](https://rstudio.github.io/leaflet/reference/leaflet.html)()
+  [`leaflet()`](https://rstudio.github.io/leaflet/reference/leaflet.html)
   but more likely from
-  [`leafletProxy`](https://rstudio.github.io/leaflet/reference/leafletProxy.html)()
+  [`leafletProxy()`](https://rstudio.github.io/leaflet/reference/leafletProxy.html)
 
 - layerId:
 

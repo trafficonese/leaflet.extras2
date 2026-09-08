@@ -63,18 +63,18 @@ addAntpath(
 - group:
 
   the name of the group the newly created layers should belong to (for
-  [`clearGroup`](https://rstudio.github.io/leaflet/reference/remove.html)
+  [`clearGroup()`](https://rstudio.github.io/leaflet/reference/remove.html)
   and
-  [`addLayersControl`](https://rstudio.github.io/leaflet/reference/addLayersControl.html)
+  [`addLayersControl()`](https://rstudio.github.io/leaflet/reference/addLayersControl.html)
   purposes). Human-friendly group names are permitted–they need not be
   short, identifier-style names. Any number of layers and even different
-  types of layers (e.g. markers and polygons) can share the same group
+  types of layers (e.g., markers and polygons) can share the same group
   name.
 
 - stroke:
 
-  whether to draw stroke along the path (e.g. the borders of polygons or
-  circles)
+  whether to draw stroke along the path (e.g., the borders of polygons
+  or circles)
 
 - color:
 
@@ -90,7 +90,7 @@ addAntpath(
 
 - fill:
 
-  whether to fill the path with color (e.g. filling on polygons or
+  whether to fill the path with color (e.g., filling on polygons or
   circles)
 
 - fillColor:
@@ -119,13 +119,13 @@ addAntpath(
 
   a character vector of the HTML content for the popups (you are
   recommended to escape the text using
-  [`htmlEscape()`](https://rstudio.github.io/htmltools/reference/htmlEscape.html)
+  [`htmltools::htmlEscape()`](https://rstudio.github.io/htmltools/reference/htmlEscape.html)
   for security reasons)
 
 - popupOptions:
 
   A Vector of
-  [`popupOptions`](https://rstudio.github.io/leaflet/reference/map-options.html)
+  [`popupOptions()`](https://rstudio.github.io/leaflet/reference/map-options.html)
   to provide popups
 
 - label:
@@ -135,7 +135,7 @@ addAntpath(
 - labelOptions:
 
   A Vector of
-  [`labelOptions`](https://rstudio.github.io/leaflet/reference/map-options.html)
+  [`labelOptions()`](https://rstudio.github.io/leaflet/reference/map-options.html)
   to provide label options for each label. Default `NULL`
 
 - options:
