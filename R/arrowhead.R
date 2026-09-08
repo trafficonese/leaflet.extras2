@@ -20,6 +20,13 @@ arrowheadDependency <- function() {
 #' \href{https://github.com/slutske22/leaflet-arrowheads}{leaflet-arrowheads}
 #' for further details.
 #'
+#' It is possible to style the lines and the arrowheads separately; put styling
+#' specifications for the lines inside \code{\link{addArrowhead}} and the
+#' specifications for the arrowheads inside \code{\link{arrowheadOptions}}.
+#' A dashArray provided for the lines will also apply to the arrowheads,
+#' but the latter can be overruled by specifying a separate dashArray
+#' for the arrowheads inside \code{\link{arrowheadOptions}}.
+#'
 #' @inheritParams leaflet::addPolylines
 #' @param options A named list of options. See \code{\link{arrowheadOptions}}
 #' @family Arrowhead Functions
