@@ -110,7 +110,7 @@ normalize_wms_headers <- function(headers) {
   }
   nms <- names(headers)
   if (!is.null(nms) && all(nzchar(nms)) &&
-      all(vapply(headers, function(x) is.character(x) && length(x) == 1, logical(1)))) {
+    all(vapply(headers, function(x) is.character(x) && length(x) == 1, logical(1)))) {
     return(unname(lapply(nms, function(nm) as_entry(nm, headers[[nm]]))))
   }
   lapply(headers, function(h) {
