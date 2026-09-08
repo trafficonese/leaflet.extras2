@@ -46,11 +46,11 @@ runApp(paste0(
 \url{https://github.com/Turbo87/sidebar-v2}
 }
 \seealso{
-Other Sidebar Functions: 
-\code{\link{closeSidebar}()},
-\code{\link{openSidebar}()},
-\code{\link{removeSidebar}()},
-\code{\link{sidebar_pane}()},
-\code{\link{sidebar_tabs}()}
+Other Sidebar Functions:
+\code{\link[=closeSidebar]{closeSidebar()}},
+\code{\link[=openSidebar]{openSidebar()}},
+\code{\link[=removeSidebar]{removeSidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}},
+\code{\link[=sidebar_tabs]{sidebar_tabs()}}
 }
 \concept{Sidebar Functions}

@@ -72,7 +72,7 @@ leaflet(quakes) \%>\%
 \url{https://github.com/digidem/leaflet-side-by-side}
 }
 \seealso{
-Other Sidebyside Functions: 
-\code{\link{removeSidebyside}()}
+Other Sidebyside Functions:
+\code{\link[=removeSidebyside]{removeSidebyside()}}
 }
 \concept{Sidebyside Functions}

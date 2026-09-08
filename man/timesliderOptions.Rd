@@ -70,8 +70,8 @@ A list of options for \code{\link{addTimeslider}}.
 \url{https://github.com/dwilhelm89/LeafletSlider}
 }
 \seealso{
-Other Timeslider Functions: 
-\code{\link{addTimeslider}()},
-\code{\link{removeTimeslider}()}
+Other Timeslider Functions:
+\code{\link[=addTimeslider]{addTimeslider()}},
+\code{\link[=removeTimeslider]{removeTimeslider()}}
 }
 \concept{Timeslider Functions}

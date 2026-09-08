@@ -19,11 +19,11 @@ the new \code{map} object
 Remove the Sidebar
 }
 \seealso{
-Other Sidebar Functions: 
-\code{\link{addSidebar}()},
-\code{\link{closeSidebar}()},
-\code{\link{openSidebar}()},
-\code{\link{sidebar_pane}()},
-\code{\link{sidebar_tabs}()}
+Other Sidebar Functions:
+\code{\link[=addSidebar]{addSidebar()}},
+\code{\link[=closeSidebar]{closeSidebar()}},
+\code{\link[=openSidebar]{openSidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}},
+\code{\link[=sidebar_tabs]{sidebar_tabs()}}
 }
 \concept{Sidebar Functions}

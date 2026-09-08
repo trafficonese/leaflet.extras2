@@ -57,11 +57,11 @@ A list of hexbin-specific options
 A list of options for customizing the appearance/behavior of the hexbin layer.
 }
 \seealso{
-Other Hexbin-D3 Functions: 
-\code{\link{addHexbin}()},
-\code{\link{clearHexbin}()},
-\code{\link{hideHexbin}()},
-\code{\link{showHexbin}()},
-\code{\link{updateHexbin}()}
+Other Hexbin-D3 Functions:
+\code{\link[=addHexbin]{addHexbin()}},
+\code{\link[=clearHexbin]{clearHexbin()}},
+\code{\link[=hideHexbin]{hideHexbin()}},
+\code{\link[=showHexbin]{showHexbin()}},
+\code{\link[=updateHexbin]{updateHexbin()}}
 }
 \concept{Hexbin-D3 Functions}

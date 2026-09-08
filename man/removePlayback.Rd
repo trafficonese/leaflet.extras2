@@ -16,8 +16,8 @@ the new \code{map} object
 Remove the Playback controls and markers.
 }
 \seealso{
-Other Playback Functions: 
-\code{\link{addPlayback}()},
-\code{\link{playbackOptions}()}
+Other Playback Functions:
+\code{\link[=addPlayback]{addPlayback()}},
+\code{\link[=playbackOptions]{playbackOptions()}}
 }
 \concept{Playback Functions}

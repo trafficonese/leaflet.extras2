@@ -58,9 +58,9 @@ leaflet() \%>\%
 \seealso{
 \url{https://github.com/kekscom/osmbuildings/} for more details on the OSM Buildings plugin and available properties.
 
-Other OSM-Buildings Plugin: 
-\code{\link{setBuildingData}()},
-\code{\link{setBuildingStyle}()},
-\code{\link{updateBuildingTime}()}
+Other OSM-Buildings Plugin:
+\code{\link[=setBuildingData]{setBuildingData()}},
+\code{\link[=setBuildingStyle]{setBuildingStyle()}},
+\code{\link[=updateBuildingTime]{updateBuildingTime()}}
 }
 \concept{OSM-Buildings Plugin}

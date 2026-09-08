@@ -70,10 +70,10 @@ leaflet() \%>\%
 \url{https://github.com/mapshakers/leaflet-mapkey-icon}
 }
 \seealso{
-Other Mapkey Functions: 
-\code{\link{[.leaflet_mapkey_icon_set}()},
-\code{\link{addMapkeyMarkers}()},
-\code{\link{makeMapkeyIcon}()},
-\code{\link{mapkeyIconList}()}
+Other Mapkey Functions:
+\code{\link[=[.leaflet_mapkey_icon_set]{[.leaflet_mapkey_icon_set()}},
+\code{\link[=addMapkeyMarkers]{addMapkeyMarkers()}},
+\code{\link[=makeMapkeyIcon]{makeMapkeyIcon()}},
+\code{\link[=mapkeyIconList]{mapkeyIconList()}}
 }
 \concept{Mapkey Functions}

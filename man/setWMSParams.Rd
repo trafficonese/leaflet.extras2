@@ -7,15 +7,15 @@
 setWMSParams(map, layerId = NULL, group = NULL, ...)
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{...}{Named WMS request parameters to set, for example
 \code{time = "2022-11-10T21:00:00Z"}.}
@@ -43,7 +43,7 @@ leaflet() \%>\%
   setWMSParams(layerId = "modis", time = "2022-11-11")
 }
 \seealso{
-Other WMS Functions: 
-\code{\link{addWMS}()}
+Other WMS Functions:
+\code{\link[=addWMS]{addWMS()}}
 }
 \concept{WMS Functions}

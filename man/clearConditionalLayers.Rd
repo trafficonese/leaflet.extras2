@@ -13,8 +13,8 @@ clearConditionalLayers(map)
 clearConditionalLayers
 }
 \seealso{
-Other LayerGroupConditional Plugin: 
-\code{\link{addLayerGroupConditional}()},
-\code{\link{removeConditionalLayer}()}
+Other LayerGroupConditional Plugin:
+\code{\link[=addLayerGroupConditional]{addLayerGroupConditional()}},
+\code{\link[=removeConditionalLayer]{removeConditionalLayer()}}
 }
 \concept{LayerGroupConditional Plugin}

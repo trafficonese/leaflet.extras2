@@ -18,9 +18,9 @@ A modified leaflet map
 Remove arrowheads from Lines by layerId
 }
 \seealso{
-Other Arrowhead Functions: 
-\code{\link{addArrowhead}()},
-\code{\link{arrowheadOptions}()},
-\code{\link{clearArrowhead}()}
+Other Arrowhead Functions:
+\code{\link[=addArrowhead]{addArrowhead()}},
+\code{\link[=arrowheadOptions]{arrowheadOptions()}},
+\code{\link[=clearArrowhead]{clearArrowhead()}}
 }
 \concept{Arrowhead Functions}

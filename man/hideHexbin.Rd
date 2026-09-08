@@ -16,11 +16,11 @@ the new \code{map} object
 Hide the hexbinLayer.
 }
 \seealso{
-Other Hexbin-D3 Functions: 
-\code{\link{addHexbin}()},
-\code{\link{clearHexbin}()},
-\code{\link{hexbinOptions}()},
-\code{\link{showHexbin}()},
-\code{\link{updateHexbin}()}
+Other Hexbin-D3 Functions:
+\code{\link[=addHexbin]{addHexbin()}},
+\code{\link[=clearHexbin]{clearHexbin()}},
+\code{\link[=hexbinOptions]{hexbinOptions()}},
+\code{\link[=showHexbin]{showHexbin()}},
+\code{\link[=updateHexbin]{updateHexbin()}}
 }
 \concept{Hexbin-D3 Functions}

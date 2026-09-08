@@ -20,9 +20,9 @@ the new \code{map} object
 setOptionsVelocity
 }
 \seealso{
-Other Velocity Functions: 
-\code{\link{addVelocity}()},
-\code{\link{removeVelocity}()},
-\code{\link{velocityOptions}()}
+Other Velocity Functions:
+\code{\link[=addVelocity]{addVelocity()}},
+\code{\link[=removeVelocity]{removeVelocity()}},
+\code{\link[=velocityOptions]{velocityOptions()}}
 }
 \concept{Velocity Functions}

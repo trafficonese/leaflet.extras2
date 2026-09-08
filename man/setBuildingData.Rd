@@ -15,9 +15,9 @@ setBuildingData(map, data)
 Update the OSM-Buildings Data
 }
 \seealso{
-Other OSM-Buildings Plugin: 
-\code{\link{addBuildings}()},
-\code{\link{setBuildingStyle}()},
-\code{\link{updateBuildingTime}()}
+Other OSM-Buildings Plugin:
+\code{\link[=addBuildings]{addBuildings()}},
+\code{\link[=setBuildingStyle]{setBuildingStyle()}},
+\code{\link[=updateBuildingTime]{updateBuildingTime()}}
 }
 \concept{OSM-Buildings Plugin}
