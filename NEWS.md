@@ -3,8 +3,8 @@
 * `addWMS()` now hides its attribution when the layer group is hidden,
   matching `leaflet::addWMSTiles()`.
 * `addWMS()` GetFeatureInfo popups work behind HTTPS reverse proxies:
-  HTTP→HTTPS redirects (301/302) are followed, and `http://` WMS URLs
-  are upgraded on HTTPS pages (#14).
+  HTTP→HTTPS redirects (301/302) are followed on the same host, and
+  `http://` WMS URLs are upgraded on HTTPS pages (#14).
 * Replaced deprecated `structure(..., .Label = )` with `levels =` in tests
   (`test-mapkeyicon.R`, `test-playback.R`) to clear the R-devel NOTE.
 * Documented Shiny mouse events for `addAntpath()`: use

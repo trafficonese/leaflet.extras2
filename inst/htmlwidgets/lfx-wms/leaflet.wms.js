@@ -518,6 +518,19 @@ function absoluteUrl(base, loc) {
     }
 }
 
+function isSameHostRedirect(fromUrl, toUrl) {
+    try {
+        var from = new URL(fromUrl);
+        var to = new URL(toUrl, fromUrl);
+        if (to.protocol !== 'http:' && to.protocol !== 'https:') {
+            return false;
+        }
+        return to.hostname === from.hostname;
+    } catch (err) {
+        return false;
+    }
+}
+
 function ajax(url, callback, redirectCount) {
     var context = this,
         request = new XMLHttpRequest(),
@@ -538,7 +551,12 @@ function ajax(url, callback, redirectCount) {
         if (status >= 300 && status < 400 && hops < 5) {
             var loc = request.getResponseHeader('Location');
             if (loc) {
-                ajax.call(context, absoluteUrl(url, loc), callback, hops + 1);
+                var next = absoluteUrl(url, loc);
+                if (!isSameHostRedirect(url, next)) {
+                    callback.call(context, 'error');
+                    return;
+                }
+                ajax.call(context, next, callback, hops + 1);
                 return;
             }
             if (request.responseText) {

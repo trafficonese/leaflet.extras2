@@ -43,6 +43,7 @@ test_that("wms GetFeatureInfo accepts redirects and HTTPS upgrade", {
   expect_match(js, "status >= 200 && status < 300")
   expect_match(js, "status >= 300 && status < 400")
   expect_match(js, "getResponseHeader\\('Location'\\)")
+  expect_match(js, "isSameHostRedirect")
 })
 
 
