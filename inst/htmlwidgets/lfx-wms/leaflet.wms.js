@@ -65,19 +65,36 @@ wms.Source = L.Layer.extend({
         // Create overlay with all options other than untiled & identify
         var overlayOptions = {};
         for (var opt in this.options) {
-            if (opt != 'untiled' && opt != 'identify') {
+            if (opt != 'untiled' && opt != 'identify' &&
+                opt != 'checkempty' && opt != 'popupOptions') {
                 overlayOptions[opt] = this.options[opt];
             }
         }
+        overlayOptions.attribution = '';
         if (untiled) {
             return wms.overlay(this._url, overlayOptions);
-        } else {
-            return wms.tileLayer(this._url, overlayOptions);
         }
+        var tileOpts = L.extend({}, overlayOptions);
+        var hdrs = tileOpts.headers;
+        delete tileOpts.headers;
+        if (hasHeaders(hdrs)) {
+            return wms.tileLayerHeader(this._url, tileOpts, hdrs);
+        }
+        return wms.tileLayer(this._url, tileOpts);
     },
 
     'onAdd': function() {
         this.refreshOverlay();
+    },
+
+    'onRemove': function() {
+        if (this._overlay) {
+            this._overlay.remove();
+        }
+    },
+
+    'getAttribution': function() {
+        return null;
     },
 
     'getEvents': function() {
@@ -156,14 +173,16 @@ wms.Source = L.Layer.extend({
         // Request WMS GetFeatureInfo and call callback with results
         // (split from identify() to faciliate use outside of map events)
         var params = this.getFeatureInfoParams(point, layers),
-            url = this._url + L.Util.getParamString(params, this._url);
+            url = upgradeInsecureUrl(
+                this._url + L.Util.getParamString(params, this._url)
+            );
 
         this.showWaiting();
         this.ajax(url, done);
 
-        function done(result) {
+        function done(result, status) {
             this.hideWaiting();
-            var text = this.parseFeatureInfo(result, url);
+            var text = this.parseFeatureInfo(result, url, status);
             callback.call(this, latlng, text);
         }
     },
@@ -201,12 +220,12 @@ wms.Source = L.Layer.extend({
         return L.extend({}, wmsParams, infoParams);
     },
 
-    'parseFeatureInfo': function(result, url) {
-        // Hook to handle parsing AJAX response
+    'parseFeatureInfo': function(result, url, status) {
         if (result == "error") {
-            // AJAX failed, possibly due to CORS issues.
-            // Try loading content in <iframe>.
-            result = "<iframe src='" + url + "' style='border:none'>";
+            if (status === 401 || status === 403) {
+                return "WMS GetFeatureInfo: unauthorized (" + status + ")";
+            }
+            result = "<iframe src='" + upgradeInsecureUrl(url) + "' style='border:none'>";
         }
         return result;
     },
@@ -257,10 +276,15 @@ wms.Layer = L.Layer.extend({
         this._source = source;
         this._name = layerName;
     },
+    'getAttribution': function() {
+        return this._source && this._source.options
+            ? this._source.options.attribution
+            : null;
+    },
     'onAdd': function() {
+        this._source.addSubLayer(this._name);
         if (!this._source._map)
             this._source.addTo(this._map);
-        this._source.addSubLayer(this._name);
     },
     'onRemove': function() {
         this._source.removeSubLayer(this._name);
@@ -294,6 +318,35 @@ wms.getSourceForUrl = function(url, options) {
 wms.TileLayer = L.TileLayer.WMS;
 wms.tileLayer = L.tileLayer.wms;
 
+wms.TileLayerHeader = L.TileLayer.WMS.extend({
+    initialize: function(url, options, headers) {
+        L.TileLayer.WMS.prototype.initialize.call(this, url, options);
+        this.headers = headers || [];
+    },
+    createTile: function(coords, done) {
+        var url = this.getTileUrl(coords);
+        var img = document.createElement('img');
+        img.setAttribute('role', 'presentation');
+        fetchBlob(url, this.headers, function(blob) {
+            if (!blob) {
+                done(new Error('WMS tile request failed'), img);
+                return;
+            }
+            var objUrl = URL.createObjectURL(blob);
+            img.onload = function() {
+                URL.revokeObjectURL(objUrl);
+            };
+            img.src = objUrl;
+            done(null, img);
+        });
+        return img;
+    }
+});
+
+wms.tileLayerHeader = function(url, options, headers) {
+    return new wms.TileLayerHeader(url, options, headers);
+};
+
 /*
  * wms.Overlay:
  * "Single Tile" WMS image overlay that updates with map changes.
@@ -318,7 +371,8 @@ wms.Overlay = L.Layer.extend({
         'opacity': 1,
         'isBack': false,
         'minZoom': 0,
-        'maxZoom': 18
+        'maxZoom': 18,
+        'headers': null
     },
 
     'initialize': function(url, options) {
@@ -351,7 +405,7 @@ wms.Overlay = L.Layer.extend({
     },
 
     'onRemove': function(map) {
-        if (this._currentOverlay) {
+        if (this._currentOverlay && map && map.removeLayer) {
             map.removeLayer(this._currentOverlay);
             delete this._currentOverlay;
         }
@@ -367,7 +421,7 @@ wms.Overlay = L.Layer.extend({
     },
 
     'update': function() {
-        if (!this._map) {
+        if (!this._map || !this._map._loaded) {
             return;
         }
         // Determine image URL and whether it has changed since last update
@@ -389,34 +443,51 @@ wms.Overlay = L.Layer.extend({
             opt.zIndex=this.options.zIndex;
         if (this.options.pane)
             opt.pane=this.options.pane;
-        var overlay = L.imageOverlay(url, bounds, opt);
 
-        overlay.addTo(this._map);
-        overlay.once('load', _swap, this);
-        function _swap() {
-            if (!this._map) {
-                return;
-            }
-            if (overlay._url != this._currentUrl) {
-                this._map.removeLayer(overlay);
-                return;
-            } else if (this._currentOverlay) {
-                this._map.removeLayer(this._currentOverlay);
-            }
-            this._currentOverlay = overlay;
-            overlay.setOpacity(
-                this.options.opacity ? this.options.opacity : 1
-            );
-            if (this.options.isBack === true) {
-                overlay.bringToBack();
-            }
-            if (this.options.isBack === false) {
-                overlay.bringToFront();
+        var requestUrl = url;
+        var self = this;
+        function attachOverlay(src) {
+            var overlay = L.imageOverlay(src, bounds, opt);
+            overlay._wmsUrl = requestUrl;
+            overlay.addTo(self._map);
+            overlay.once('load', function() {
+                if (!self._map) {
+                    return;
+                }
+                if (overlay._wmsUrl != self._currentUrl) {
+                    self._map.removeLayer(overlay);
+                    if (src.indexOf('blob:') === 0) {
+                        URL.revokeObjectURL(src);
+                    }
+                    return;
+                } else if (self._currentOverlay) {
+                    self._map.removeLayer(self._currentOverlay);
+                }
+                self._currentOverlay = overlay;
+                overlay.setOpacity(
+                    self.options.opacity ? self.options.opacity : 1
+                );
+                if (self.options.isBack === true) {
+                    overlay.bringToBack();
+                }
+                if (self.options.isBack === false) {
+                    overlay.bringToFront();
+                }
+            });
+            if ((self._map.getZoom() < self.options.minZoom) ||
+                (self._map.getZoom() > self.options.maxZoom)){
+                self._map.removeLayer(overlay);
             }
         }
-        if ((this._map.getZoom() < this.options.minZoom) ||
-            (this._map.getZoom() > this.options.maxZoom)){
-            this._map.removeLayer(overlay);
+        if (hasHeaders(this.options.headers)) {
+            fetchBlob(url, this.options.headers, function(blob) {
+                if (!blob || requestUrl !== self._currentUrl) {
+                    return;
+                }
+                attachOverlay(URL.createObjectURL(blob));
+            });
+        } else {
+            attachOverlay(url);
         }
     },
 
@@ -481,22 +552,120 @@ wms.overlay = function(url, options) {
     return new wms.Overlay(url, options);
 };
 
-// Simple AJAX helper (since we can't assume jQuery etc. are present)
-function ajax(url, callback) {
+function headerList(headers) {
+    if (!headers) {
+        return [];
+    }
+    if (Object.prototype.toString.call(headers) === '[object Array]') {
+        return headers;
+    }
+    var out = [];
+    for (var key in headers) {
+        if (Object.prototype.hasOwnProperty.call(headers, key)) {
+            out.push({ header: key, value: headers[key] });
+        }
+    }
+    return out;
+}
+
+function hasHeaders(headers) {
+    return headerList(headers).length > 0;
+}
+
+function applyXhrHeaders(request, headers) {
+    headerList(headers).forEach(function(h) {
+        if (h && h.header && h.value != null) {
+            request.setRequestHeader(h.header, String(h.value));
+        }
+    });
+}
+
+function fetchBlob(url, headers, callback) {
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.responseType = 'blob';
+    applyXhrHeaders(request, headers);
+    request.onreadystatechange = function() {
+        if (request.readyState !== 4) {
+            return;
+        }
+        if (request.status >= 200 && request.status < 300 && request.response) {
+            callback(request.response);
+        } else {
+            callback(null);
+        }
+    };
+    request.send();
+}
+
+function upgradeInsecureUrl(url) {
+    if (typeof window !== 'undefined' &&
+        window.location &&
+        window.location.protocol === 'https:' &&
+        /^http:\/\//i.test(url)) {
+        return 'https://' + url.substring(7);
+    }
+    return url;
+}
+
+function absoluteUrl(base, loc) {
+    try {
+        return new URL(loc, base).toString();
+    } catch (err) {
+        return loc;
+    }
+}
+
+function isSameHostRedirect(fromUrl, toUrl) {
+    try {
+        var from = new URL(fromUrl);
+        var to = new URL(toUrl, fromUrl);
+        if (to.protocol !== 'http:' && to.protocol !== 'https:') {
+            return false;
+        }
+        return to.hostname === from.hostname;
+    } catch (err) {
+        return false;
+    }
+}
+
+function ajax(url, callback, redirectCount) {
     var context = this,
-        request = new XMLHttpRequest();
+        request = new XMLHttpRequest(),
+        hops = redirectCount || 0;
     request.onreadystatechange = change;
     request.open('GET', url);
+    if (context && context.options) {
+        applyXhrHeaders(request, context.options.headers);
+    }
     request.send();
 
     function change() {
-        if (request.readyState === 4) {
-            if (request.status === 200) {
+        if (request.readyState !== 4) {
+            return;
+        }
+        var status = request.status;
+        if (status >= 200 && status < 300) {
+            callback.call(context, request.responseText);
+            return;
+        }
+        if (status >= 300 && status < 400 && hops < 5) {
+            var loc = request.getResponseHeader('Location');
+            if (loc) {
+                var next = absoluteUrl(url, loc);
+                if (!isSameHostRedirect(url, next)) {
+                    callback.call(context, 'error', status);
+                    return;
+                }
+                ajax.call(context, next, callback, hops + 1);
+                return;
+            }
+            if (request.responseText) {
                 callback.call(context, request.responseText);
-            } else {
-                callback.call(context, "error");
+                return;
             }
         }
+        callback.call(context, 'error', status);
     }
 }
 
