@@ -7,7 +7,7 @@
 updateHexbin(map, data = NULL, lng = NULL, lat = NULL, colorRange = NULL)
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
@@ -33,11 +33,11 @@ the new \code{map} object
 Dynamically change the \code{data} and/or the \code{colorRange}.
 }
 \seealso{
-Other Hexbin-D3 Functions: 
-\code{\link{addHexbin}()},
-\code{\link{clearHexbin}()},
-\code{\link{hexbinOptions}()},
-\code{\link{hideHexbin}()},
-\code{\link{showHexbin}()}
+Other Hexbin-D3 Functions:
+\code{\link[=addHexbin]{addHexbin()}},
+\code{\link[=clearHexbin]{clearHexbin()}},
+\code{\link[=hexbinOptions]{hexbinOptions()}},
+\code{\link[=hideHexbin]{hideHexbin()}},
+\code{\link[=showHexbin]{showHexbin()}}
 }
 \concept{Hexbin-D3 Functions}

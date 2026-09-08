@@ -29,8 +29,8 @@ Set options for Moving Markers
 \url{https://github.com/ewoken/Leaflet.MovingMarker}
 }
 \seealso{
-Other MovingMarker Functions: 
-\code{\link{addMovingMarker}()},
-\code{\link{startMoving}()}
+Other MovingMarker Functions:
+\code{\link[=addMovingMarker]{addMovingMarker()}},
+\code{\link[=startMoving]{startMoving()}}
 }
 \concept{MovingMarker Functions}

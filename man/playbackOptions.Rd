@@ -71,8 +71,8 @@ the \href{https://github.com/hallahan/LeafletPlayback}{plugin repository}.
 \url{https://github.com/hallahan/LeafletPlayback}
 }
 \seealso{
-Other Playback Functions: 
-\code{\link{addPlayback}()},
-\code{\link{removePlayback}()}
+Other Playback Functions:
+\code{\link[=addPlayback]{addPlayback()}},
+\code{\link[=removePlayback]{removePlayback()}}
 }
 \concept{Playback Functions}

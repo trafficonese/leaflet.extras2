@@ -29,10 +29,10 @@ For a map with id \code{map1} the input can be retrieved with
 \code{input$map1_synced}.
 }
 \seealso{
-Other leafletsync Functions: 
-\code{\link{addLeafletsync}()},
-\code{\link{addLeafletsyncDependency}()},
-\code{\link{leafletsyncOptions}()},
-\code{\link{unsync}()}
+Other leafletsync Functions:
+\code{\link[=addLeafletsync]{addLeafletsync()}},
+\code{\link[=addLeafletsyncDependency]{addLeafletsyncDependency()}},
+\code{\link[=leafletsyncOptions]{leafletsyncOptions()}},
+\code{\link[=unsync]{unsync()}}
 }
 \concept{leafletsync Functions}

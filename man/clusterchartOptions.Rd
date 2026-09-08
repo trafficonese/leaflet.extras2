@@ -51,7 +51,7 @@ clusterchartOptions(
 Adds options for clusterCharts
 }
 \seealso{
-Other clusterCharts: 
-\code{\link{addClusterCharts}()}
+Other clusterCharts:
+\code{\link[=addClusterCharts]{addClusterCharts()}}
 }
 \concept{clusterCharts}

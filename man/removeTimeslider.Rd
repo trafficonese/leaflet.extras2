@@ -16,8 +16,8 @@ the new \code{map} object
 Remove the Timeslider controls and markers.
 }
 \seealso{
-Other Timeslider Functions: 
-\code{\link{addTimeslider}()},
-\code{\link{timesliderOptions}()}
+Other Timeslider Functions:
+\code{\link[=addTimeslider]{addTimeslider()}},
+\code{\link[=timesliderOptions]{timesliderOptions()}}
 }
 \concept{Timeslider Functions}

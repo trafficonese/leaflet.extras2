@@ -16,21 +16,21 @@ A leaflet map object
 Remove all contextmenu items from the map.
 }
 \seealso{
-Other Contextmenu Functions: 
-\code{\link{addContextmenu}()},
-\code{\link{addItemContextmenu}()},
-\code{\link{context_mapmenuItems}()},
-\code{\link{context_markermenuItems}()},
-\code{\link{context_menuItem}()},
-\code{\link{disableContextmenu}()},
-\code{\link{enableContextmenu}()},
-\code{\link{hideContextmenu}()},
-\code{\link{insertItemContextmenu}()},
-\code{\link{mapmenuItems}()},
-\code{\link{markermenuItems}()},
-\code{\link{menuItem}()},
-\code{\link{removeItemContextmenu}()},
-\code{\link{setDisabledContextmenu}()},
-\code{\link{showContextmenu}()}
+Other Contextmenu Functions:
+\code{\link[=addContextmenu]{addContextmenu()}},
+\code{\link[=addItemContextmenu]{addItemContextmenu()}},
+\code{\link[=context_mapmenuItems]{context_mapmenuItems()}},
+\code{\link[=context_markermenuItems]{context_markermenuItems()}},
+\code{\link[=context_menuItem]{context_menuItem()}},
+\code{\link[=disableContextmenu]{disableContextmenu()}},
+\code{\link[=enableContextmenu]{enableContextmenu()}},
+\code{\link[=hideContextmenu]{hideContextmenu()}},
+\code{\link[=insertItemContextmenu]{insertItemContextmenu()}},
+\code{\link[=mapmenuItems]{mapmenuItems()}},
+\code{\link[=markermenuItems]{markermenuItems()}},
+\code{\link[=menuItem]{menuItem()}},
+\code{\link[=removeItemContextmenu]{removeItemContextmenu()}},
+\code{\link[=setDisabledContextmenu]{setDisabledContextmenu()}},
+\code{\link[=showContextmenu]{showContextmenu()}}
 }
 \concept{Contextmenu Functions}

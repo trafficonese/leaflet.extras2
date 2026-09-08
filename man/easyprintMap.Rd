@@ -56,9 +56,9 @@ if (interactive()) {
 }
 }
 \seealso{
-Other EasyPrint Functions: 
-\code{\link{addEasyprint}()},
-\code{\link{easyprintOptions}()},
-\code{\link{removeEasyprint}()}
+Other EasyPrint Functions:
+\code{\link[=addEasyprint]{addEasyprint()}},
+\code{\link[=easyprintOptions]{easyprintOptions()}},
+\code{\link[=removeEasyprint]{removeEasyprint()}}
 }
 \concept{EasyPrint Functions}

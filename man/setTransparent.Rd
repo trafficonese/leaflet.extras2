@@ -7,7 +7,7 @@
 setTransparent(map, layers = NULL, transparent = TRUE)
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{layers}{A character vector of GIBS-layers. See \code{\link{gibs_layers}}}
 
@@ -21,8 +21,8 @@ the new \code{map} object
 Change the transparency for no-data pixels.
 }
 \seealso{
-Other GIBS Functions: 
-\code{\link{addGIBS}()},
-\code{\link{setDate}()}
+Other GIBS Functions:
+\code{\link[=addGIBS]{addGIBS()}},
+\code{\link[=setDate]{setDate()}}
 }
 \concept{GIBS Functions}

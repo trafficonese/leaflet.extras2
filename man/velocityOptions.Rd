@@ -36,9 +36,9 @@ A list of further options for \code{addVelocity}
 Define further options for the velocity layer.
 }
 \seealso{
-Other Velocity Functions: 
-\code{\link{addVelocity}()},
-\code{\link{removeVelocity}()},
-\code{\link{setOptionsVelocity}()}
+Other Velocity Functions:
+\code{\link[=addVelocity]{addVelocity()}},
+\code{\link[=removeVelocity]{removeVelocity()}},
+\code{\link[=setOptionsVelocity]{setOptionsVelocity()}}
 }
 \concept{Velocity Functions}

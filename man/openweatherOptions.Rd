@@ -28,9 +28,9 @@ A list of options for \code{addOpenweatherTiles}
 OpenWeatherMap Options
 }
 \seealso{
-Other Openweathermap Functions: 
-\code{\link{addOpenweatherCurrent}()},
-\code{\link{addOpenweatherTiles}()},
-\code{\link{openweatherCurrentOptions}()}
+Other Openweathermap Functions:
+\code{\link[=addOpenweatherCurrent]{addOpenweatherCurrent()}},
+\code{\link[=addOpenweatherTiles]{addOpenweatherTiles()}},
+\code{\link[=openweatherCurrentOptions]{openweatherCurrentOptions()}}
 }
 \concept{Openweathermap Functions}
