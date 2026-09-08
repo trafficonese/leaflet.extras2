@@ -2,7 +2,7 @@ wmsDependency <- function() {
   list(
     htmltools::htmlDependency(
       "lfx-wms",
-      version = "1.0.0",
+      version = "1.0.1",
       src = system.file("htmlwidgets/lfx-wms", package = "leaflet.extras2"),
       script = c(
         "leaflet.wms.js",
@@ -23,6 +23,9 @@ wmsDependency <- function() {
 #' to the \code{'baseUrl'}.
 #'
 #' Something like \code{'http://server/wms?cql_filter=attribute=value'}
+#'
+#' @note The WMS attribution is shown only while the layer (or its
+#'   \code{group}) is visible, matching \code{\link[leaflet]{addWMSTiles}}.
 #'
 #' @inheritParams leaflet::addWMSTiles
 #' @param checkempty Should the returned HTML-content be checked for emptiness?

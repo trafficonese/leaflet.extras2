@@ -69,6 +69,7 @@ wms.Source = L.Layer.extend({
                 overlayOptions[opt] = this.options[opt];
             }
         }
+        overlayOptions.attribution = '';
         if (untiled) {
             return wms.overlay(this._url, overlayOptions);
         } else {
@@ -78,6 +79,16 @@ wms.Source = L.Layer.extend({
 
     'onAdd': function() {
         this.refreshOverlay();
+    },
+
+    'onRemove': function() {
+        if (this._overlay) {
+            this._overlay.remove();
+        }
+    },
+
+    'getAttribution': function() {
+        return null;
     },
 
     'getEvents': function() {
@@ -132,6 +143,7 @@ wms.Source = L.Layer.extend({
         }
         if (!subLayers) {
             this._overlay.remove();
+            this.remove();
         } else {
             this._overlay.setParams({'layers': subLayers});
             this._overlay.addTo(this._map);
@@ -257,10 +269,15 @@ wms.Layer = L.Layer.extend({
         this._source = source;
         this._name = layerName;
     },
+    'getAttribution': function() {
+        return this._source && this._source.options
+            ? this._source.options.attribution
+            : null;
+    },
     'onAdd': function() {
+        this._source.addSubLayer(this._name);
         if (!this._source._map)
             this._source.addTo(this._map);
-        this._source.addSubLayer(this._name);
     },
     'onRemove': function() {
         this._source.removeSubLayer(this._name);

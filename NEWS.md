@@ -1,5 +1,7 @@
 # leaflet.extras2 (development version)
 
+* `addWMS()` now hides its attribution when the layer group is hidden,
+  matching `leaflet::addWMSTiles()`.
 * Replaced deprecated `structure(..., .Label = )` with `levels =` in tests
   (`test-mapkeyicon.R`, `test-playback.R`) to clear the R-devel NOTE.
 * Documented Shiny mouse events for `addAntpath()`: use

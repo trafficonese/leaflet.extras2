@@ -60,6 +60,10 @@ to the \code{'baseUrl'}.
 
 Something like \code{'http://server/wms?cql_filter=attribute=value'}
 }
+\note{
+The WMS attribution is shown only while the layer (or its
+  \code{group}) is visible, matching \code{\link[leaflet]{addWMSTiles}}.
+}
 \examples{
 library(leaflet)
 library(leaflet.extras2)
