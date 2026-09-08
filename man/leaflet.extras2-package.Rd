@@ -20,6 +20,11 @@ Useful links:
 \author{
 \strong{Maintainer}: Gatscha Sebastian \email{sebastian_gatscha@gmx.at}
 
+Authors:
+\itemize{
+  \item Gatscha Sebastian \email{sebastian_gatscha@gmx.at}
+}
+
 Other contributors:
 \itemize{
   \item Ricardo Rodrigo Basa \email{radbasa@gmail.com} [contributor]

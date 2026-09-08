@@ -33,8 +33,8 @@ Add extra options. For a full list please visit the
 \url{https://github.com/traffordDataLab/leaflet.reachability}
 }
 \seealso{
-Other Reachability Functions: 
-\code{\link{addReachability}()},
-\code{\link{removeReachability}()}
+Other Reachability Functions:
+\code{\link[=addReachability]{addReachability()}},
+\code{\link[=removeReachability]{removeReachability()}}
 }
 \concept{Reachability Functions}

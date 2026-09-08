@@ -16,8 +16,8 @@ the new \code{map} object
 Remove the reachability controls.
 }
 \seealso{
-Other Reachability Functions: 
-\code{\link{addReachability}()},
-\code{\link{reachabilityOptions}()}
+Other Reachability Functions:
+\code{\link[=addReachability]{addReachability()}},
+\code{\link[=reachabilityOptions]{reachabilityOptions()}}
 }
 \concept{Reachability Functions}

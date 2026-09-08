@@ -81,9 +81,9 @@ Create a list of further options for the easyprint plugin.
 \url{https://github.com/rowanwins/leaflet-easyPrint}
 }
 \seealso{
-Other EasyPrint Functions: 
-\code{\link{addEasyprint}()},
-\code{\link{easyprintMap}()},
-\code{\link{removeEasyprint}()}
+Other EasyPrint Functions:
+\code{\link[=addEasyprint]{addEasyprint()}},
+\code{\link[=easyprintMap]{easyprintMap()}},
+\code{\link[=removeEasyprint]{removeEasyprint()}}
 }
 \concept{EasyPrint Functions}

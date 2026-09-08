@@ -16,8 +16,8 @@ the new \code{map} object
 Remove the geosearch
 }
 \seealso{
-Other Geosearch Functions: 
-\code{\link{addGeosearch}()},
-\code{\link{geosearchOptions}()}
+Other Geosearch Functions:
+\code{\link[=addGeosearch]{addGeosearch()}},
+\code{\link[=geosearchOptions]{geosearchOptions()}}
 }
 \concept{Geosearch Functions}

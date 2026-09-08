@@ -25,21 +25,21 @@ A contextmenu item list
 menuItem
 }
 \seealso{
-Other Contextmenu Functions: 
-\code{\link{addContextmenu}()},
-\code{\link{addItemContextmenu}()},
-\code{\link{context_mapmenuItems}()},
-\code{\link{context_markermenuItems}()},
-\code{\link{context_menuItem}()},
-\code{\link{disableContextmenu}()},
-\code{\link{enableContextmenu}()},
-\code{\link{hideContextmenu}()},
-\code{\link{insertItemContextmenu}()},
-\code{\link{mapmenuItems}()},
-\code{\link{markermenuItems}()},
-\code{\link{removeItemContextmenu}()},
-\code{\link{removeallItemsContextmenu}()},
-\code{\link{setDisabledContextmenu}()},
-\code{\link{showContextmenu}()}
+Other Contextmenu Functions:
+\code{\link[=addContextmenu]{addContextmenu()}},
+\code{\link[=addItemContextmenu]{addItemContextmenu()}},
+\code{\link[=context_mapmenuItems]{context_mapmenuItems()}},
+\code{\link[=context_markermenuItems]{context_markermenuItems()}},
+\code{\link[=context_menuItem]{context_menuItem()}},
+\code{\link[=disableContextmenu]{disableContextmenu()}},
+\code{\link[=enableContextmenu]{enableContextmenu()}},
+\code{\link[=hideContextmenu]{hideContextmenu()}},
+\code{\link[=insertItemContextmenu]{insertItemContextmenu()}},
+\code{\link[=mapmenuItems]{mapmenuItems()}},
+\code{\link[=markermenuItems]{markermenuItems()}},
+\code{\link[=removeItemContextmenu]{removeItemContextmenu()}},
+\code{\link[=removeallItemsContextmenu]{removeallItemsContextmenu()}},
+\code{\link[=setDisabledContextmenu]{setDisabledContextmenu()}},
+\code{\link[=showContextmenu]{showContextmenu()}}
 }
 \concept{Contextmenu Functions}

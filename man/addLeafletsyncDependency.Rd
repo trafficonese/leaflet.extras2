@@ -19,10 +19,10 @@ before synchronizing maps. For example, if you want to use the
 \code{./inst/examples/offsetHelper.R}
 }
 \seealso{
-Other leafletsync Functions: 
-\code{\link{addLeafletsync}()},
-\code{\link{isSynced}()},
-\code{\link{leafletsyncOptions}()},
-\code{\link{unsync}()}
+Other leafletsync Functions:
+\code{\link[=addLeafletsync]{addLeafletsync()}},
+\code{\link[=isSynced]{isSynced()}},
+\code{\link[=leafletsyncOptions]{leafletsyncOptions()}},
+\code{\link[=unsync]{unsync()}}
 }
 \concept{leafletsync Functions}

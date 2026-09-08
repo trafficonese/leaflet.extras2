@@ -72,7 +72,7 @@ A list of further options for \code{addHeightgraph}
 Customize the heightgraph with the following additional options.
 }
 \seealso{
-Other Heightgraph Functions: 
-\code{\link{addHeightgraph}()}
+Other Heightgraph Functions:
+\code{\link[=addHeightgraph]{addHeightgraph()}}
 }
 \concept{Heightgraph Functions}

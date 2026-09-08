@@ -53,8 +53,8 @@ leaflet() \%>\%
 \url{https://github.com/smeijer/leaflet-geosearch}
 }
 \seealso{
-Other Geosearch Functions: 
-\code{\link{geosearchOptions}()},
-\code{\link{removeGeosearch}()}
+Other Geosearch Functions:
+\code{\link[=geosearchOptions]{geosearchOptions()}},
+\code{\link[=removeGeosearch]{removeGeosearch()}}
 }
 \concept{Geosearch Functions}

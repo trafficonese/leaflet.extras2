@@ -18,7 +18,7 @@ the new \code{map} object
 removeSidebyside
 }
 \seealso{
-Other Sidebyside Functions: 
-\code{\link{addSidebyside}()}
+Other Sidebyside Functions:
+\code{\link[=addSidebyside]{addSidebyside()}}
 }
 \concept{Sidebyside Functions}

@@ -14,21 +14,22 @@ addWMS(
   layers = NULL,
   popupOptions = NULL,
   checkempty = FALSE,
+  headers = NULL,
   data = getMapData(map)
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{baseUrl}{a base URL of the WMS service}
 
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{options}{a list of extra options for tile layers, popups, paths
 (circles, rectangles, polygons, ...), or other map elements}
@@ -42,6 +43,11 @@ layers (e.g. markers and polygons) can share the same group name.}
 
 \item{checkempty}{Should the returned HTML-content be checked for emptiness?
 If the HTML-body is empty no popup is opened. Default is \code{FALSE}}
+
+\item{headers}{Optional HTTP headers for authenticated WMS requests,
+as a named character vector
+(\code{c(Authorization = "Bearer <token>")}) or a list of
+\code{list(header = "Authorization", value = "Bearer <token>")}.}
 
 \item{data}{the data object from which the argument values are derived; by
 default, it is the \code{data} object provided to \code{leaflet()}
@@ -59,6 +65,20 @@ You can also use \bold{CQL-Filters} by appending a string
 to the \code{'baseUrl'}.
 
 Something like \code{'http://server/wms?cql_filter=attribute=value'}
+}
+\note{
+The WMS attribution is shown only while the layer (or its
+  \code{group}) is visible, matching \code{\link[leaflet]{addWMSTiles}}.
+  GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
+  \code{http://} WMS URLs to \code{https://} on HTTPS pages so popups
+  still work behind a reverse proxy.
+  To change WMS request parameters such as \code{time} in Shiny, keep the
+  map in \code{renderLeaflet()} and call \code{\link{setWMSParams}} on a
+  \code{\link[leaflet]{leafletProxy}} instead of recreating the whole map.
+  Custom \code{headers} (Basic/Bearer) are sent for tiles, the single-image
+  overlay and GetFeatureInfo. The WMS server must allow CORS for those
+  header names. Tokens travel in the browser; do not use them for secrets
+  that must stay on the server.
 }
 \examples{
 library(leaflet)
@@ -81,5 +101,9 @@ leaflet() \%>\%
 }
 \references{
 \url{https://github.com/heigeo/leaflet.wms}
+}
+\seealso{
+Other WMS Functions:
+\code{\link[=setWMSParams]{setWMSParams()}}
 }
 \concept{WMS Functions}

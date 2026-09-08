@@ -68,8 +68,8 @@ at the first or last point of the polyline.
 \url{https://github.com/ewoken/Leaflet.MovingMarker}
 }
 \seealso{
-Other MovingMarker Functions: 
-\code{\link{addMovingMarker}()},
-\code{\link{movingMarkerOptions}()}
+Other MovingMarker Functions:
+\code{\link[=addMovingMarker]{addMovingMarker()}},
+\code{\link[=movingMarkerOptions]{movingMarkerOptions()}}
 }
 \concept{MovingMarker Functions}

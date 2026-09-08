@@ -49,10 +49,10 @@ If you synchronize multiple maps, a map may not yet be
 \url{https://github.com/jieter/Leaflet.Sync}
 }
 \seealso{
-Other leafletsync Functions: 
-\code{\link{addLeafletsyncDependency}()},
-\code{\link{isSynced}()},
-\code{\link{leafletsyncOptions}()},
-\code{\link{unsync}()}
+Other leafletsync Functions:
+\code{\link[=addLeafletsyncDependency]{addLeafletsyncDependency()}},
+\code{\link[=isSynced]{isSynced()}},
+\code{\link[=leafletsyncOptions]{leafletsyncOptions()}},
+\code{\link[=unsync]{unsync()}}
 }
 \concept{leafletsync Functions}

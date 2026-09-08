@@ -18,9 +18,9 @@ A modified leaflet map
 Remove arrowheads from Lines by group
 }
 \seealso{
-Other Arrowhead Functions: 
-\code{\link{addArrowhead}()},
-\code{\link{arrowheadOptions}()},
-\code{\link{removeArrowhead}()}
+Other Arrowhead Functions:
+\code{\link[=addArrowhead]{addArrowhead()}},
+\code{\link[=arrowheadOptions]{arrowheadOptions()}},
+\code{\link[=removeArrowhead]{removeArrowhead()}}
 }
 \concept{Arrowhead Functions}

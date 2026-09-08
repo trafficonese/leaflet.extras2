@@ -18,7 +18,8 @@ server <- function(input, output, session) {
       addTiles(group = "base") %>%
       addWMS(baseUrl = "http://ows.terrestris.de/osm/service",
              layers = c("TOPO-WMS", "OSM-Overlay-WMS"),
-             group = "wmsgroup",
+             group = "WMS",
+             attribution = "WMS: terrestris / OpenStreetMap",
              options = leaflet::WMSTileOptions(
                transparent = TRUE,
                format = "image/png",
@@ -26,12 +27,12 @@ server <- function(input, output, session) {
                tiled = FALSE
              )) %>%
       addLayersControl(baseGroups = "base",
-                       overlayGroups = c("TOPO-WMS", "OSM-Overlay-WMS"))
+                       overlayGroups = "WMS")
 
   })
   observeEvent(input$group, {
     leafletProxy("map", session) %>%
-      clearGroup("TOPO-WMS")
+      clearGroup("WMS")
   })
   observeEvent(input$clear, {
     leafletProxy("map", session) %>%

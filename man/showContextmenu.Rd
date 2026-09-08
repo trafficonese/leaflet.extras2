@@ -7,7 +7,7 @@
 showContextmenu(map, lat = NULL, lng = NULL, data = leaflet::getMapData(map))
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{lat}{a vector of latitudes or a formula (similar to the \code{lng}
 argument; the names \code{lat} and \code{latitude} are used when guessing
@@ -30,21 +30,21 @@ A leaflet map object
 Open the contextmenu at certain lat/lng-coordinates
 }
 \seealso{
-Other Contextmenu Functions: 
-\code{\link{addContextmenu}()},
-\code{\link{addItemContextmenu}()},
-\code{\link{context_mapmenuItems}()},
-\code{\link{context_markermenuItems}()},
-\code{\link{context_menuItem}()},
-\code{\link{disableContextmenu}()},
-\code{\link{enableContextmenu}()},
-\code{\link{hideContextmenu}()},
-\code{\link{insertItemContextmenu}()},
-\code{\link{mapmenuItems}()},
-\code{\link{markermenuItems}()},
-\code{\link{menuItem}()},
-\code{\link{removeItemContextmenu}()},
-\code{\link{removeallItemsContextmenu}()},
-\code{\link{setDisabledContextmenu}()}
+Other Contextmenu Functions:
+\code{\link[=addContextmenu]{addContextmenu()}},
+\code{\link[=addItemContextmenu]{addItemContextmenu()}},
+\code{\link[=context_mapmenuItems]{context_mapmenuItems()}},
+\code{\link[=context_markermenuItems]{context_markermenuItems()}},
+\code{\link[=context_menuItem]{context_menuItem()}},
+\code{\link[=disableContextmenu]{disableContextmenu()}},
+\code{\link[=enableContextmenu]{enableContextmenu()}},
+\code{\link[=hideContextmenu]{hideContextmenu()}},
+\code{\link[=insertItemContextmenu]{insertItemContextmenu()}},
+\code{\link[=mapmenuItems]{mapmenuItems()}},
+\code{\link[=markermenuItems]{markermenuItems()}},
+\code{\link[=menuItem]{menuItem()}},
+\code{\link[=removeItemContextmenu]{removeItemContextmenu()}},
+\code{\link[=removeallItemsContextmenu]{removeallItemsContextmenu()}},
+\code{\link[=setDisabledContextmenu]{setDisabledContextmenu()}}
 }
 \concept{Contextmenu Functions}
