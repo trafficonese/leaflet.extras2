@@ -23,19 +23,55 @@ A leaflet map object
 \description{
 Adds an animated loading spinning over the map.
 }
+\section{Shiny}{
+
+\code{startSpinner()} and \code{stopSpinner()} in the same
+\code{\link[leaflet]{leaflet}} or \code{\link[leaflet]{leafletProxy}}
+chain are sent to the browser together. A \code{Sys.sleep()} on the server
+happens \emph{before} that, so no spinner is visible. Use
+\code{\link{spinWhile}} (or start the spinner, then run the work after
+\code{session$onFlushed}).
+}
+
 \examples{
 library(leaflet)
-library(leaflet.extras2)
 
 leaflet(data = quakes) \%>\%
   addTiles() \%>\%
   addSpinner() \%>\%
   startSpinner(options = list("lines" = 7, "length" = 20)) \%>\%
-  addMarkers(~long, ~lat, popup = ~ as.character(mag), label = ~ as.character(mag)) \%>\%
+  addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag)) \%>\%
   stopSpinner()
+
+\dontrun{
+library(shiny)
+shinyApp(
+  ui = fluidPage(
+    actionButton("go", "Load markers"),
+    leafletOutput("leaf")
+  ),
+  server = function(input, output, session) {
+    output$leaf <- renderLeaflet({
+      leaflet() \%>\% addTiles() \%>\% addSpinner()
+    })
+    observeEvent(input$go, {
+      spinWhile("leaf", {
+        Sys.sleep(2)
+        leafletProxy("leaf") \%>\%
+          addMarkers(data = quakes, ~long, ~lat)
+      }, options = list(lines = 7, length = 20))
+    })
+  }
+)
+}
 }
 \references{
 \url{https://github.com/makinacorpus/Leaflet.Spin}
 
 \url{https://github.com/fgnass/spin.js}
 }
+\seealso{
+Other Spinner Functions: 
+\code{\link{spinWhile}()}
+}
+\concept{Spinner Functions}
