@@ -2,7 +2,7 @@ easyprintDependency <- function() {
   list(
     htmltools::htmlDependency(
       "lfx-easyprint",
-      version = "1.0.0",
+      version = "1.0.1",
       src = system.file("htmlwidgets/lfx-easyprint",
         package = "leaflet.extras2"
       ),
@@ -124,12 +124,13 @@ removeEasyprint <- function(map) {
 #'   optionally \code{name} / \code{className}):
 #'   \code{list("CurrentSize", list(width = 3000, height = 1800, name = "High res"))}.
 #'   \code{CurrentSize} exports at the current map widget size (often low
-#'   resolution in Quarto/HTML documents). A custom size resizes the map before
-#'   export. By default \code{keepView = TRUE}: the current view is kept (zoom
-#'   in, same aspect ratio; the PNG may be smaller than \code{width}/\code{height}
-#'   on one side). Use \code{keepView = FALSE} to keep the zoom level and show a
-#'   larger area, like A4. \code{list(scale = 3, name = "3x current view")}
-#'   multiplies the current widget size and keeps the exact view.
+#'   resolution in Quarto/HTML documents).
+#'   \code{list(scale = 3)} captures the current view at 3x pixel resolution
+#'   without changing zoom or tile labels (best for presentations).
+#'   A custom \code{width}/\code{height} resizes the map before export.
+#'   By default \code{keepView = TRUE}: the same bounds are kept by zooming
+#'   in, so OSM/tile labels get smaller. Use \code{keepView = FALSE} to keep
+#'   the zoom level and show a larger area, like A4.
 #'   A custom \code{className} and CSS background-image are optional;
 #'   see \code{./inst/examples/easyprint.R} and
 #'   \code{./inst/examples/easyprint_app.R}.

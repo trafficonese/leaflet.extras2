@@ -2,8 +2,8 @@ library(leaflet)
 library(leaflet.extras2)
 
 ## Static map (Quarto/HTML): CurrentSize exports at widget size.
-## scale = 3 exports the current view at 3x pixel size.
-## width/height keep the current view by default (keepView = TRUE).
+## scale = 3 = same view/zoom/labels, 3x pixels (for presentations).
+## width/height + keepView zooms in (OSM labels get smaller).
 leaflet() %>%
   fitBounds(-91, 47, -87, 50) %>%
   addProviderTiles("Esri.WorldTopoMap", group = "Topographic") %>%

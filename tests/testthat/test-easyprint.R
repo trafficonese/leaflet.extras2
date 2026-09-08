@@ -191,5 +191,7 @@ test_that("easyprint JS keeps the current view when resizing", {
   expect_match(js, "viewScale")
   expect_match(js, "pixelWidth")
   expect_match(js, "Math\\.log\\(viewScale\\)")
+  expect_match(js, "_printAtDpi")
+  expect_match(js, "transform-origin")
   expect_match(js, "CustomSize")
 })
