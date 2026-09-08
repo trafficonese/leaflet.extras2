@@ -1,5 +1,7 @@
 # leaflet.extras2 (development version)
 
+* Documented Shiny mouse events for `addAntpath` (`input$MAPID_antpath_click` / `_mouseover` / `_mouseout` instead of `shape_*`).
+
 # leaflet.extras2 1.3.2
 
 * Included [Leaflet.Geosearch](https://github.com/smeijer/leaflet-geosearch/) plugin

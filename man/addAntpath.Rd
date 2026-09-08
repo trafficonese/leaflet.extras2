@@ -104,6 +104,16 @@ Antpath behaviour. See
 \href{https://github.com/rubenspgcavalcante/leaflet-ant-path}{leaflet-ant-path}
 for further details.
 }
+\note{
+Unlike \code{\link[leaflet]{addPolylines}}, antpath layers are not
+  registered as \code{"shape"}. In Shiny the mouse events therefore use the
+  \code{antpath} category instead of \code{shape}:
+  \enumerate{
+    \item A click updates \code{input$MAPID_antpath_click}
+    \item A mouseover updates \code{input$MAPID_antpath_mouseover}
+    \item A mouseout updates \code{input$MAPID_antpath_mouseout}
+  }
+}
 \examples{
 library(leaflet)
 leaflet() \%>\%
