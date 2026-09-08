@@ -1,0 +1,157 @@
+# Changelog
+
+## leaflet.extras2 (development version)
+
+- Documented Shiny mouse events for
+  [`addAntpath()`](https://trafficonese.github.io/leaflet.extras2/reference/addAntpath.md):
+  use `input$MAPID_antpath_click` / `_mouseover` / `_mouseout` instead
+  of `shape_*`.
+- [`addEasyprint()`](https://trafficonese.github.io/leaflet.extras2/reference/addEasyprint.md)
+  custom export sizes no longer need extra CSS. Pass them in
+  `easyprintOptions(sizeModes = ...)` as R lists, for example
+  `list(scale = 3, name = "3x current view")` or
+  `list(width = 3000, height = 1800, name = "High res")`. `CurrentSize`
+  still exports at the widget size (often low-res in Quarto/HTML).
+  Custom sizes keep the current map view by default (`keepView = TRUE`
+  in the size-mode list). Set `keepView = FALSE` to keep the zoom level
+  and export a larger area. See `inst/examples/easyprint.R`.
+
+## leaflet.extras2 1.3.2
+
+CRAN release: 2025-08-27
+
+- Included
+  [Leaflet.Geosearch](https://github.com/smeijer/leaflet-geosearch/)
+  plugin
+- Fixed missing OpenWeather loading GIF and layers/group matching.
+- Fixed missing heightgraph icons. (Thanks
+  [@hungkitwchi](https://github.com/hungkitwchi))
+- Fixed tests using
+  [`leaflet::atlStorms2005`](https://rstudio.github.io/leaflet/reference/atlStorms2005.html),
+  as it will be an `sf` object. (Thanks
+  [@olivroy](https://github.com/olivroy))
+- Fixed reachability icon handling: check for dependencies in options
+  and extend the example app.
+
+## leaflet.extras2 1.3.1
+
+CRAN release: 2025-03-05
+
+- Fix tests
+- Add select-inputs to sidebar-example
+
+## leaflet.extras2 1.3.0
+
+CRAN release: 2025-01-12
+
+- Included
+  [LayerGroup.Collision](https://github.com/MazeMap/Leaflet.LayerGroup.Collision)
+  plugin
+- Included
+  [LayerGroup.Conditional](https://github.com/Solfisk/Leaflet.LayerGroup.Conditional)
+  plugin
+- Included [OSM
+  Buildings](https://osmbuildings.org/documentation/leaflet/) plugin
+- New Function `addDivicon` adds `DivIcon` markers to Leaflet maps with
+  support for custom HTML and CSS classes. See the example in
+  `./inst/examples/divicons_html_app.R`
+- Added `addClusterCharts` to enable **pie** and **bar** charts in
+  Marker clusters using `Leaflet.markercluster`, `d3` and `L.DivIcon`,
+  with support for customizable category styling and various aggregation
+  methods like **sum, min, max, mean**, and **median**.
+- The opened sidebar tab is returned as Shiny input using the
+  `sidebar_tabs` ID.
+  [\#67](https://github.com/trafficonese/leaflet.extras2/issues/67)
+- allow `...` in `antpathOptions` to be able to set the pane (e.g.:
+  `renderer= JS('L.svg({pane: "my-pane"})')`)
+- Switched from `geojsonsf` to `yyjsonr` (*heightgraph*, *timeslider*,
+  *clustercharts*)
+- Fix for roxygen2 \> 7.0.0.
+  [\#1491](https://github.com/trafficonese/leaflet.extras2/issues/1491)
+
+## leaflet.extras2 1.2.2
+
+CRAN release: 2023-08-21
+
+- Added `enableContextmenu` and `disableContextmenu`
+- Fixed tests for leaflet v2.2.0. Thanks to
+  [@gadenbuie](https://github.com/gadenbuie)
+  ([\#60](https://github.com/trafficonese/leaflet.extras2/issues/60))
+
+## leaflet.extras2 1.2.1
+
+CRAN release: 2023-04-20
+
+- Bugfix when Sidebar is used inside Shiny modules. The sidebar
+  functions `addSidebar` and `openSidebar` now have an argument `ns`,
+  where Shiny’s namespacing function (e.g: session\$ns) can be included.
+- Arrowheads now passes all options in `arrowheadOptions` to
+  `L.polyline`
+- Update `leaflet.heightgraph` to
+  [1.3.2](https://github.com/GIScience/Leaflet.Heightgraph/releases/tag/v1.3.2).
+  Has no dependency to `d3` anymore.
+- Skip tests which use an internet connection
+- Adapted URLs and deleted old Mapkey URL
+
+## leaflet.extras2 1.2.0
+
+CRAN release: 2022-05-10
+
+- Included [Arrowheads](https://github.com/slutske22/leaflet-arrowheads)
+  plugin
+- Included [Leaflet.Sync](https://github.com/jieter/Leaflet.Sync) plugin
+- Included [Leaflet
+  MovingMarkers](https://github.com/ewoken/Leaflet.MovingMarker) plugin
+- Included [Leaflet Spin](https://github.com/makinacorpus/Leaflet.Spin)
+  plugin. Thanks to [@radbasa](https://github.com/radbasa)
+- Included [Labelgun](https://github.com/Geovation/labelgun) plugin.
+- `addTimeslider` gained styling options and the arguments `label`,
+  `labelOptions`, `sameDate` and `ordertime` and works for Point /
+  Linestring Simple Feature Collections
+- Enable multiple sidebars. Thanks to
+  [@jeffreyhanson](https://github.com/jeffreyhanson)
+- Option `fit` removed for sidebars as plugin CSS/JS was adapted
+- Deprecated `menuItem`/`mapmenuItems`/`markermenuItems` and renamed
+  with prefix `context_`. Fixes
+  [\#10](https://github.com/trafficonese/leaflet.extras2/issues/10) and
+  [\#17](https://github.com/trafficonese/leaflet.extras2/issues/17)
+- Some improvement for the `easyprint` plugin: (Fixes
+  [\#31](https://github.com/trafficonese/leaflet.extras2/issues/31))
+  - It is now possible to include multiple custom `sizeModes` in
+    `easyprintOptions`. The example
+    [easyprint_app.R](https://trafficonese.github.io/leaflet.extras2/news/inst/examples/easyprint_app.R)
+    has been extended to demonstrate the new functionalities.
+  - The `tileLayer` option now accepts a group name for a tilelayer for
+    which printing will wait until the layer is fully loaded.
+- The `addPlayback` is now capable of displaying labels and popups for
+  every timestep. The transition of labels and popups can be controlled
+  with `transitionpopup` and `transitionlabel`.
+- The function `addHistory` now requires the *fontawesome* package,
+  since the dependency is not included in shiny’s shared directory
+  anymore.
+- The function `addWMS` gained the argument `checkempty`, which will
+  check the returning HTML-body tag. If the body is empty, no popup is
+  opened.
+- The function `addMovingMarker` now accepts icons created by
+  `makeAwesomeIcon`.
+
+## leaflet.extras2 1.1.0
+
+CRAN release: 2020-10-20
+
+- Included [Leaflet
+  Contextmenu](https://github.com/aratcliffe/Leaflet.contextmenu) plugin
+- Included [Leaflet
+  TimeSlider](https://github.com/dwilhelm89/LeafletSlider) plugin
+- `addWMS` gained the `layerId` argument and works like
+  [`leaflet::addWMSTiles`](https://rstudio.github.io/leaflet/reference/map-layers.html)
+  except for the `popupOptions`
+- `Side-by-Side` doesn’t propagate click events when dragging. Thanks to
+  `f905a47` of
+  [\#23](https://github.com/digidem/leaflet-side-by-side/pull/23)
+
+## leaflet.extras2 1.0.0
+
+CRAN release: 2020-05-18
+
+- Initial release

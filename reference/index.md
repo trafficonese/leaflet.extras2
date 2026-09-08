@@ -1,0 +1,309 @@
+# Package index
+
+## Package Documentation
+
+- [`leaflet.extras2`](https://trafficonese.github.io/leaflet.extras2/reference/leaflet.extras2-package.md)
+  [`leaflet.extras2-package`](https://trafficonese.github.io/leaflet.extras2/reference/leaflet.extras2-package.md)
+  : leaflet.extras2: Extra Functionality for 'leaflet' Package
+
+## Ant Path
+
+- [`addAntpath()`](https://trafficonese.github.io/leaflet.extras2/reference/addAntpath.md)
+  : Add Antpath Lines
+- [`clearAntpath()`](https://trafficonese.github.io/leaflet.extras2/reference/clearAntpath.md)
+  : clearAntpath
+- [`removeAntpath()`](https://trafficonese.github.io/leaflet.extras2/reference/removeAntpath.md)
+  : removeAntpath
+- [`antpathOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/antpathOptions.md)
+  : Antpath Options
+
+## Arrowhead
+
+- [`addArrowhead()`](https://trafficonese.github.io/leaflet.extras2/reference/addArrowhead.md)
+  : Add Lines with an arrowhead
+- [`clearArrowhead()`](https://trafficonese.github.io/leaflet.extras2/reference/clearArrowhead.md)
+  : Remove arrowheads from Lines by group
+- [`removeArrowhead()`](https://trafficonese.github.io/leaflet.extras2/reference/removeArrowhead.md)
+  : Remove arrowheads from Lines by layerId
+- [`arrowheadOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/arrowheadOptions.md)
+  : Arrowhead Options
+
+## Contextmenu
+
+- [`addContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/addContextmenu.md)
+  : Add contextmenu Plugin
+- [`addItemContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/addItemContextmenu.md)
+  : addItemContextmenu
+- [`disableContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/disableContextmenu.md)
+  : disableContextmenu
+- [`enableContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/enableContextmenu.md)
+  : enableContextmenu
+- [`hideContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/hideContextmenu.md)
+  : hideContextmenu
+- [`insertItemContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/insertItemContextmenu.md)
+  : insertItemContextmenu
+- [`removeItemContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/removeItemContextmenu.md)
+  : removeItemContextmenu
+- [`removeallItemsContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/removeallItemsContextmenu.md)
+  : removeallItemsContextmenu
+- [`setDisabledContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/setDisabledContextmenu.md)
+  : setDisabledContextmenu
+- [`showContextmenu()`](https://trafficonese.github.io/leaflet.extras2/reference/showContextmenu.md)
+  : showContextmenu
+- [`context_mapmenuItems()`](https://trafficonese.github.io/leaflet.extras2/reference/context_mapmenuItems.md)
+  : context_mapmenuItems
+- [`context_markermenuItems()`](https://trafficonese.github.io/leaflet.extras2/reference/context_markermenuItems.md)
+  : context_markermenuItems
+- [`context_menuItem()`](https://trafficonese.github.io/leaflet.extras2/reference/context_menuItem.md)
+  : context_menuItem
+- [`menuItem()`](https://trafficonese.github.io/leaflet.extras2/reference/menuItem.md)
+  : menuItem
+- [`mapmenuItems()`](https://trafficonese.github.io/leaflet.extras2/reference/mapmenuItems.md)
+  : mapmenuItems
+- [`markermenuItems()`](https://trafficonese.github.io/leaflet.extras2/reference/markermenuItems.md)
+  : markermenuItems
+
+## DivIcons
+
+- [`addDivicon()`](https://trafficonese.github.io/leaflet.extras2/reference/addDivicon.md)
+  : Add DivIcon Markers to a Leaflet Map
+
+## Clustercharts with d3
+
+- [`addClusterCharts()`](https://trafficonese.github.io/leaflet.extras2/reference/addClusterCharts.md)
+  : addClusterCharts
+- [`clusterchartOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/clusterchartOptions.md)
+  : clusterchartOptions
+
+## Easy Print
+
+- [`addEasyprint()`](https://trafficonese.github.io/leaflet.extras2/reference/addEasyprint.md)
+  : Add easyPrint Plugin
+- [`removeEasyprint()`](https://trafficonese.github.io/leaflet.extras2/reference/removeEasyprint.md)
+  : removeEasyprint
+- [`easyprintMap()`](https://trafficonese.github.io/leaflet.extras2/reference/easyprintMap.md)
+  : easyprintMap
+- [`easyprintOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/easyprintOptions.md)
+  : easyprintOptions
+
+## Geosearch
+
+- [`addGeosearch()`](https://trafficonese.github.io/leaflet.extras2/reference/addGeosearch.md)
+  : Add a GeoSearch control to a Leaflet map
+- [`removeGeosearch()`](https://trafficonese.github.io/leaflet.extras2/reference/removeGeosearch.md)
+  : removeGeosearch
+- [`geosearchOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/geosearchOptions.md)
+  : geosearchOptions
+- [`geosearchProvider()`](https://trafficonese.github.io/leaflet.extras2/reference/geosearchProvider.md)
+  : Provider for GeoSearch
+
+## GIBS
+
+- [`addGIBS()`](https://trafficonese.github.io/leaflet.extras2/reference/addGIBS.md)
+  : Add GIBS Layers
+- [`setDate()`](https://trafficonese.github.io/leaflet.extras2/reference/setDate.md)
+  : Set Date for GIBS Layers
+- [`setTransparent()`](https://trafficonese.github.io/leaflet.extras2/reference/setTransparent.md)
+  : Set Transparency for GIBS Layers
+- [`gibs_layers`](https://trafficonese.github.io/leaflet.extras2/reference/gibs_layers.md)
+  : The available GIBS layers with attributes
+
+## Heightgraph
+
+- [`addHeightgraph()`](https://trafficonese.github.io/leaflet.extras2/reference/addHeightgraph.md)
+  : Add a Heightgraph layer
+- [`heightgraphOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/heightgraphOptions.md)
+  : heightgraphOptions
+
+## Hexbin-D3
+
+- [`addHexbin()`](https://trafficonese.github.io/leaflet.extras2/reference/addHexbin.md)
+  : Add a Hexbin layer
+- [`clearHexbin()`](https://trafficonese.github.io/leaflet.extras2/reference/clearHexbin.md)
+  : clearHexbin
+- [`hideHexbin()`](https://trafficonese.github.io/leaflet.extras2/reference/hideHexbin.md)
+  : hideHexbin
+- [`showHexbin()`](https://trafficonese.github.io/leaflet.extras2/reference/showHexbin.md)
+  : showHexbin
+- [`updateHexbin()`](https://trafficonese.github.io/leaflet.extras2/reference/updateHexbin.md)
+  : updateHexbin
+- [`hexbinOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/hexbinOptions.md)
+  : hexbinOptions
+
+## History
+
+- [`addHistory()`](https://trafficonese.github.io/leaflet.extras2/reference/addHistory.md)
+  : Add History Plugin
+- [`clearHistory()`](https://trafficonese.github.io/leaflet.extras2/reference/clearHistory.md)
+  : clearHistory
+- [`goBackHistory()`](https://trafficonese.github.io/leaflet.extras2/reference/goBackHistory.md)
+  : goBackHistory
+- [`goForwardHistory()`](https://trafficonese.github.io/leaflet.extras2/reference/goForwardHistory.md)
+  : goForwardHistory
+- [`historyOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/historyOptions.md)
+  : History Options
+- [`clearFuture()`](https://trafficonese.github.io/leaflet.extras2/reference/clearFuture.md)
+  : clearFuture
+
+## Labelgun
+
+- [`addLabelgun()`](https://trafficonese.github.io/leaflet.extras2/reference/addLabelgun.md)
+  : Add addLabelgun Plugin
+
+## LayerGroup.Collision
+
+- [`addLayerGroupCollision()`](https://trafficonese.github.io/leaflet.extras2/reference/LayerGroupCollision.md)
+  : Add LayerGroup Collision Plugin
+
+## LayerGroup.Conditional
+
+- [`addLayerGroupConditional()`](https://trafficonese.github.io/leaflet.extras2/reference/addLayerGroupConditional.md)
+  : addLayerGroupConditional
+- [`clearConditionalLayers()`](https://trafficonese.github.io/leaflet.extras2/reference/clearConditionalLayers.md)
+  : clearConditionalLayers
+- [`removeConditionalLayer()`](https://trafficonese.github.io/leaflet.extras2/reference/removeConditionalLayer.md)
+  : removeConditionalLayer
+
+## Mapkey Icons
+
+- [`addMapkeyMarkers()`](https://trafficonese.github.io/leaflet.extras2/reference/addMapkeyMarkers.md)
+  : Add Mapkey Markers
+- [`makeMapkeyIcon()`](https://trafficonese.github.io/leaflet.extras2/reference/makeMapkeyIcon.md)
+  : Make Mapkey Icon
+- [`mapkeyIconList()`](https://trafficonese.github.io/leaflet.extras2/reference/mapkeyIconList.md)
+  : Make Mapkey-icon set
+- [`mapkeyIcons()`](https://trafficonese.github.io/leaflet.extras2/reference/mapkeyIcons.md)
+  : Create a list of Mapkey icon data
+- [`` `[`( ``*`<leaflet_mapkey_icon_set>`*`)`](https://trafficonese.github.io/leaflet.extras2/reference/sub-.leaflet_mapkey_icon_set.md)
+  : leaflet_mapkey_icon_set
+
+## Moving Markers
+
+- [`addMovingMarker()`](https://trafficonese.github.io/leaflet.extras2/reference/addMovingMarker.md)
+  : Add Moving Markers
+- [`startMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  [`stopMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  [`pauseMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  [`resumeMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  [`addLatLngMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  [`moveToMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  [`addStationMoving()`](https://trafficonese.github.io/leaflet.extras2/reference/startMoving.md)
+  : Interact with the moving markers
+- [`movingMarkerOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/movingMarkerOptions.md)
+  : Set options for Moving Markers
+
+## OpenWeatherMap
+
+- [`addOpenweatherCurrent()`](https://trafficonese.github.io/leaflet.extras2/reference/addOpenweatherCurrent.md)
+  : Add current OpenWeatherMap Marker
+- [`addOpenweatherTiles()`](https://trafficonese.github.io/leaflet.extras2/reference/addOpenweatherTiles.md)
+  : Add OpenWeatherMap Tiles
+- [`openweatherCurrentOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/openweatherCurrentOptions.md)
+  : openweatherCurrentOptions
+- [`openweatherOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/openweatherOptions.md)
+  : OpenWeatherMap Options
+
+## OSM Buildings
+
+- [`addBuildings()`](https://trafficonese.github.io/leaflet.extras2/reference/addBuildings.md)
+  : Add OSM-Buildings to a Leaflet Map
+- [`setBuildingData()`](https://trafficonese.github.io/leaflet.extras2/reference/setBuildingData.md)
+  : Update the OSM-Buildings Data
+- [`setBuildingStyle()`](https://trafficonese.github.io/leaflet.extras2/reference/setBuildingStyle.md)
+  : Update the OSM-Buildings Style
+- [`updateBuildingTime()`](https://trafficonese.github.io/leaflet.extras2/reference/updateBuildingTime.md)
+  : Update the Shadows OSM-Buildings with a POSIXct timestamp
+
+## Playback
+
+- [`addPlayback()`](https://trafficonese.github.io/leaflet.extras2/reference/addPlayback.md)
+  : Add Playback to Leaflet
+- [`removePlayback()`](https://trafficonese.github.io/leaflet.extras2/reference/removePlayback.md)
+  : removePlayback
+- [`playbackOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/playbackOptions.md)
+  : playbackOptions
+- [`to_jsonformat()`](https://trafficonese.github.io/leaflet.extras2/reference/to_jsonformat.md)
+  : to_jsonformat Transform object to JSON expected format
+- [`to_ms()`](https://trafficonese.github.io/leaflet.extras2/reference/to_ms.md)
+  : to_ms Change POSIX or Date to milliseconds
+
+## Reachability
+
+- [`addReachability()`](https://trafficonese.github.io/leaflet.extras2/reference/addReachability.md)
+  : Add Isochrones to Leaflet
+- [`removeReachability()`](https://trafficonese.github.io/leaflet.extras2/reference/removeReachability.md)
+  : removeReachability
+- [`reachabilityOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/reachabilityOptions.md)
+  : reachabilityOptions
+
+## Sidebar-v2
+
+- [`addSidebar()`](https://trafficonese.github.io/leaflet.extras2/reference/addSidebar.md)
+  : Add a Sidebar Leaflet Control
+- [`closeSidebar()`](https://trafficonese.github.io/leaflet.extras2/reference/closeSidebar.md)
+  : Close the Sidebar
+- [`openSidebar()`](https://trafficonese.github.io/leaflet.extras2/reference/openSidebar.md)
+  : Open the Sidebar by ID
+- [`removeSidebar()`](https://trafficonese.github.io/leaflet.extras2/reference/removeSidebar.md)
+  : Remove the Sidebar
+- [`sidebar_pane()`](https://trafficonese.github.io/leaflet.extras2/reference/sidebar_pane.md)
+  : Create a Sidebar Pane
+- [`sidebar_tabs()`](https://trafficonese.github.io/leaflet.extras2/reference/sidebar_tabs.md)
+  : Create a Sidebar
+
+## Side-by-Side
+
+- [`addSidebyside()`](https://trafficonese.github.io/leaflet.extras2/reference/addSidebyside.md)
+  : Add Side by Side View
+- [`removeSidebyside()`](https://trafficonese.github.io/leaflet.extras2/reference/removeSidebyside.md)
+  : removeSidebyside
+
+## Spinner
+
+- [`addSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)
+  [`startSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)
+  [`stopSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)
+  : Add Spin Plugin
+
+## Sync
+
+- [`addLeafletsync()`](https://trafficonese.github.io/leaflet.extras2/reference/addLeafletsync.md)
+  : Synchronize multiple Leaflet map
+- [`addLeafletsyncDependency()`](https://trafficonese.github.io/leaflet.extras2/reference/addLeafletsyncDependency.md)
+  : Add the Leaflet Sync JS dependencies
+- [`leafletsyncOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/leafletsyncOptions.md)
+  : leafletsync Options
+- [`unsync()`](https://trafficonese.github.io/leaflet.extras2/reference/unsync.md)
+  : Removes synchronization.
+- [`isSynced()`](https://trafficonese.github.io/leaflet.extras2/reference/isSynced.md)
+  : Is a map synchronized?
+
+## Tangram
+
+- [`addTangram()`](https://trafficonese.github.io/leaflet.extras2/reference/addTangram.md)
+  : Adds a Tangram layer to a Leaflet map in a Shiny App.
+
+## Timeslider
+
+- [`addTimeslider()`](https://trafficonese.github.io/leaflet.extras2/reference/addTimeslider.md)
+  : Add Time Slider to Leaflet
+- [`removeTimeslider()`](https://trafficonese.github.io/leaflet.extras2/reference/removeTimeslider.md)
+  : removeTimeslider
+- [`timesliderOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/timesliderOptions.md)
+  : timesliderOptions
+
+## Velocity
+
+- [`addVelocity()`](https://trafficonese.github.io/leaflet.extras2/reference/addVelocity.md)
+  : Add Velocity Animation
+- [`removeVelocity()`](https://trafficonese.github.io/leaflet.extras2/reference/removeVelocity.md)
+  : removeVelocity
+- [`setOptionsVelocity()`](https://trafficonese.github.io/leaflet.extras2/reference/setOptionsVelocity.md)
+  : setOptionsVelocity
+- [`velocityOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/velocityOptions.md)
+  : velocityOptions
+
+## WMS
+
+- [`addWMS()`](https://trafficonese.github.io/leaflet.extras2/reference/addWMS.md)
+  : Add Queryable WMS Layer
