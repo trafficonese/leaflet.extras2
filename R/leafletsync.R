@@ -160,9 +160,10 @@ isSynced <- function(map, id = NULL, syncwith = NULL) {
 #' @return A list of options for \code{addLeafletsync}
 #' @export
 leafletsyncOptions <- function(
-    noInitialSync = FALSE,
-    syncCursor = TRUE,
-    offsetFn = JS("function (center, zoom, refMap, tgtMap) { return center; }")) {
+  noInitialSync = FALSE,
+  syncCursor = TRUE,
+  offsetFn = JS("function (center, zoom, refMap, tgtMap) { return center; }")
+) {
   filterNULL(list(
     noInitialSync = noInitialSync,
     syncCursor = syncCursor,

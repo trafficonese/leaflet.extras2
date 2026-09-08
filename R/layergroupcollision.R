@@ -60,9 +60,10 @@ layergroupCollisionDependency <- function() {
 #'     group = "Labels"
 #'   )
 addLayerGroupCollision <- function(
-    map, group = NULL,
-    className = NULL, html = NULL,
-    margin = 5, data = getMapData(map)) {
+  map, group = NULL,
+  className = NULL, html = NULL,
+  margin = 5, data = getMapData(map)
+) {
   map$dependencies <- c(map$dependencies, layergroupCollisionDependency())
 
   ## Make Geojson and Assign Class & HTML columns ###########

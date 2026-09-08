@@ -135,13 +135,14 @@ addArrowhead <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 #' @return A list of options for \code{addArrowhead} polylines
 #' @export
 arrowheadOptions <- function(
-    yawn = 60,
-    size = "15%",
-    frequency = "allvertices",
-    proportionalToTotal = FALSE,
-    offsets = NULL,
-    perArrowheadOptions = NULL,
-    ...) {
+  yawn = 60,
+  size = "15%",
+  frequency = "allvertices",
+  proportionalToTotal = FALSE,
+  offsets = NULL,
+  perArrowheadOptions = NULL,
+  ...
+) {
   filterNULL(list(
     yawn = yawn,
     size = size,

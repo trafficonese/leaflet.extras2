@@ -151,19 +151,20 @@ addTimeslider <- function(map, data, radius = 10,
 #' @references \url{https://github.com/dwilhelm89/LeafletSlider}
 #' @export
 timesliderOptions <- function(
-    position = c("topright", "bottomleft", "bottomright", "topleft"),
-    timeAttribute = "time",
-    isEpoch = FALSE,
-    startTimeIdx = 0,
-    timeStrLength = 19,
-    maxValue = -1,
-    minValue = 0,
-    showAllOnStart = FALSE,
-    range = FALSE,
-    follow = FALSE,
-    alwaysShowDate = FALSE,
-    rezoom = NULL,
-    sameDate = FALSE) {
+  position = c("topright", "bottomleft", "bottomright", "topleft"),
+  timeAttribute = "time",
+  isEpoch = FALSE,
+  startTimeIdx = 0,
+  timeStrLength = 19,
+  maxValue = -1,
+  minValue = 0,
+  showAllOnStart = FALSE,
+  range = FALSE,
+  follow = FALSE,
+  alwaysShowDate = FALSE,
+  rezoom = NULL,
+  sameDate = FALSE
+) {
   leaflet::filterNULL(list(
     position = match.arg(position),
     timeAttribute = timeAttribute,

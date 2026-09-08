@@ -67,14 +67,15 @@ leafletAwesomeMarkersDependencies1 <- function() {
 #'     popup = "Arrr"
 #'   )
 addMovingMarker <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-    duration = 2000,
-    icon = NULL,
-    popup = NULL, popupOptions = NULL,
-    label = NULL, labelOptions = NULL,
-    movingOptions = movingMarkerOptions(),
-    options = leaflet::markerOptions(),
-    data = leaflet::getMapData(map)) {
+  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+  duration = 2000,
+  icon = NULL,
+  popup = NULL, popupOptions = NULL,
+  label = NULL, labelOptions = NULL,
+  movingOptions = movingMarkerOptions(),
+  options = leaflet::markerOptions(),
+  data = leaflet::getMapData(map)
+) {
   if (missing(labelOptions)) {
     labelOptions <- labelOptions()
   }

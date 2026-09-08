@@ -123,20 +123,21 @@ clusterchartsDependencies <- function() {
 #' # runApp(system.file("examples/clusterCharts_app.R", package = "leaflet.extras2"))
 #' # runApp(system.file("examples/clustercharts_sum.R", package = "leaflet.extras2"))
 addClusterCharts <- function(
-    map, layerId = NULL, group = NULL,
-    type = c("pie", "bar", "horizontal", "custom"),
-    aggregation = c("sum", "min", "max", "mean", "median"),
-    valueField = NULL,
-    options = clusterchartOptions(),
-    icon = NULL, html = NULL,
-    popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
-    clusterOptions = NULL, clusterId = NULL,
-    categoryField, categoryMap, popupFields = NULL, popupLabels = NULL,
-    markerOptions = NULL, legendOptions = list(
-      title = "",
-      position = "topright"
-    ),
-    data = getMapData(map)) {
+  map, layerId = NULL, group = NULL,
+  type = c("pie", "bar", "horizontal", "custom"),
+  aggregation = c("sum", "min", "max", "mean", "median"),
+  valueField = NULL,
+  options = clusterchartOptions(),
+  icon = NULL, html = NULL,
+  popup = NULL, popupOptions = NULL, label = NULL, labelOptions = NULL,
+  clusterOptions = NULL, clusterId = NULL,
+  categoryField, categoryMap, popupFields = NULL, popupLabels = NULL,
+  markerOptions = NULL, legendOptions = list(
+    title = "",
+    position = "topright"
+  ),
+  data = getMapData(map)
+) {
   ## Check arguments ############
   type <- match.arg(type)
   aggregation <- match.arg(aggregation)

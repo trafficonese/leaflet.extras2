@@ -187,20 +187,21 @@ addPlayback <- function(map, data, time = "time", icon = NULL,
 #' @references \url{https://github.com/hallahan/LeafletPlayback}
 #' @export
 playbackOptions <- function(
-    color = "blue",
-    radius = 5,
-    tickLen = 250,
-    speed = 50,
-    maxInterpolationTime = 5 * 60 * 1000,
-    tracksLayer = TRUE,
-    playControl = TRUE,
-    dateControl = TRUE,
-    sliderControl = TRUE,
-    orientIcons = FALSE,
-    staleTime = 60 * 60 * 1000,
-    transitionpopup = TRUE,
-    transitionlabel = TRUE,
-    ...) {
+  color = "blue",
+  radius = 5,
+  tickLen = 250,
+  speed = 50,
+  maxInterpolationTime = 5 * 60 * 1000,
+  tracksLayer = TRUE,
+  playControl = TRUE,
+  dateControl = TRUE,
+  sliderControl = TRUE,
+  orientIcons = FALSE,
+  staleTime = 60 * 60 * 1000,
+  transitionpopup = TRUE,
+  transitionlabel = TRUE,
+  ...
+) {
   leaflet::filterNULL(list(
     color = color,
     radius = radius,
@@ -229,8 +230,6 @@ playbackOptions <- function(
 removePlayback <- function(map) {
   invokeMethod(map, NULL, "removePlayback")
 }
-
-
 
 
 #' to_jsonformat

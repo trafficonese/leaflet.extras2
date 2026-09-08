@@ -90,16 +90,17 @@ addAntpath <- function(map, lng = NULL, lat = NULL, layerId = NULL,
 #' @return A list of options for \code{addAntpath} animated polylines
 #' @export
 antpathOptions <- function(
-    delay = 400,
-    paused = FALSE,
-    reverse = FALSE,
-    hardwareAccelerated = FALSE,
-    dashArray = c(10, 20),
-    pulseColor = "#ffffff",
-    lineCap = NULL, lineJoin = NULL,
-    interactive = TRUE, pointerEvents = NULL,
-    className = "",
-    ...) {
+  delay = 400,
+  paused = FALSE,
+  reverse = FALSE,
+  hardwareAccelerated = FALSE,
+  dashArray = c(10, 20),
+  pulseColor = "#ffffff",
+  lineCap = NULL, lineJoin = NULL,
+  interactive = TRUE, pointerEvents = NULL,
+  className = "",
+  ...
+) {
   filterNULL(list(
     delay = delay,
     paused = paused,

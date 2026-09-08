@@ -53,10 +53,11 @@ buildingsDependency <- function() {
 #'   addLayersControl(overlayGroups = "Buildings") %>%
 #'   setView(lng = 13.4, lat = 52.51, zoom = 15)
 addBuildings <- function(
-    map,
-    buildingURL = "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json",
-    group = NULL,
-    eachFn = NULL, clickFn = NULL, data = NULL) {
+  map,
+  buildingURL = "https://{s}.data.osmbuildings.org/0.2/59fcc2e8/tile/{z}/{x}/{y}.json",
+  group = NULL,
+  eachFn = NULL, clickFn = NULL, data = NULL
+) {
   map$dependencies <- c(map$dependencies, buildingsDependency())
 
   invokeMethod(
