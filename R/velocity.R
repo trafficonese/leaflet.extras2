@@ -50,8 +50,7 @@ addVelocity <- function(map, layerId = NULL, group = NULL,
     content <- jsonlite::toJSON(content)
   } else if (inherits(content, "data.frame")) {
     content <- jsonlite::toJSON(content)
-  } else if (inherits(content, "json")) {
-  } else {
+  } else if (inherits(content, "json")) {} else {
     stop("Content does not point to a JSON file nor is it a data.frame")
   }
 

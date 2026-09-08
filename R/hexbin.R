@@ -50,10 +50,11 @@ hexbinDependency <- function() {
 #'     )
 #'   )
 addHexbin <- function(
-    map, lng = NULL, lat = NULL, radius = 20,
-    layerId = NULL, group = NULL, opacity = 0.5,
-    options = hexbinOptions(),
-    data = getMapData(map)) {
+  map, lng = NULL, lat = NULL, radius = 20,
+  layerId = NULL, group = NULL, opacity = 0.5,
+  options = hexbinOptions(),
+  data = getMapData(map)
+) {
   options <- c(
     options,
     filterNULL(list(
@@ -163,14 +164,15 @@ showHexbin <- function(map) {
 #' @return A list of hexbin-specific options
 #' @export
 hexbinOptions <- function(
-    duration = 200,
-    colorScaleExtent = NULL,
-    radiusScaleExtent = NULL,
-    colorRange = c("#f7fbff", "#08306b"),
-    radiusRange = c(5, 15),
-    pointerEvents = "all",
-    resizetoCount = FALSE,
-    tooltip = "Count ") {
+  duration = 200,
+  colorScaleExtent = NULL,
+  radiusScaleExtent = NULL,
+  colorRange = c("#f7fbff", "#08306b"),
+  radiusRange = c(5, 15),
+  pointerEvents = "all",
+  resizetoCount = FALSE,
+  tooltip = "Count "
+) {
   if (tooltip == FALSE) tooltip <- NULL
 
   filterNULL(list(

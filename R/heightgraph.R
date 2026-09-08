@@ -70,11 +70,12 @@ heightgraphDependency <- function() {
 #'     options = heightgraphOptions(width = 400)
 #'   )
 addHeightgraph <- function(
-    map, data = NULL, columns = NULL, layerId = NULL, group = NULL,
-    color = "#03F", weight = 5, opacity = 0.5,
-    dashArray = NULL, smoothFactor = 1, noClip = FALSE,
-    pathOpts = leaflet::pathOptions(),
-    options = heightgraphOptions()) {
+  map, data = NULL, columns = NULL, layerId = NULL, group = NULL,
+  color = "#03F", weight = 5, opacity = 0.5,
+  dashArray = NULL, smoothFactor = 1, noClip = FALSE,
+  pathOpts = leaflet::pathOptions(),
+  options = heightgraphOptions()
+) {
   if (!requireNamespace("yyjsonr")) {
     stop(
       "The package `yyjsonr` is needed for this plugin. ",
@@ -167,17 +168,18 @@ addHeightgraph <- function(
 #' @return A list of further options for \code{addHeightgraph}
 #' @export
 heightgraphOptions <- function(
-    position = c("bottomright", "topleft", "topright", "bottomleft"),
-    width = 800,
-    height = 200,
-    margins = list(top = 10, right = 30, bottom = 55, left = 50),
-    expand = TRUE,
-    expandCallback = NULL,
-    mappings = NULL,
-    highlightStyle = list(color = "red"),
-    translation = NULL,
-    xTicks = 3,
-    yTicks = 3) {
+  position = c("bottomright", "topleft", "topright", "bottomleft"),
+  width = 800,
+  height = 200,
+  margins = list(top = 10, right = 30, bottom = 55, left = 50),
+  expand = TRUE,
+  expandCallback = NULL,
+  mappings = NULL,
+  highlightStyle = list(color = "red"),
+  translation = NULL,
+  xTicks = 3,
+  yTicks = 3
+) {
   position <- match.arg(position)
   filterNULL(list(
     position = position,

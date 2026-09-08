@@ -210,7 +210,6 @@ removeallItemsContextmenu <- function(map) {
 }
 
 
-
 #' context_menuItem
 #' @param text The label to use for the menu item
 #' @param callback A callback function to be invoked when the menu item is

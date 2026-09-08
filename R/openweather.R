@@ -44,9 +44,10 @@ openweatherDependency <- function() {
 #'   addOpenweatherTiles(layers = "wind")
 #' }
 addOpenweatherTiles <- function(
-    map, apikey = NULL, layers = NULL,
-    group = NULL, layerId = NULL, opacity = 0.5,
-    options = openweatherOptions()) {
+  map, apikey = NULL, layers = NULL,
+  group = NULL, layerId = NULL, opacity = 0.5,
+  options = openweatherOptions()
+) {
   if (is.null(apikey)) {
     apikey <- Sys.getenv("OPENWEATHERMAP")
     if (apikey == "") {

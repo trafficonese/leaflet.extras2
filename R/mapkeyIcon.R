@@ -90,17 +90,18 @@ mapkeyIconSetToMapkeyIcons <- function(x) {
 #'   background = "transparent"
 #' )
 makeMapkeyIcon <- function(
-    icon = "mapkey",
-    color = "#ff0000",
-    iconSize = 12,
-    background = "#1F7499",
-    borderRadius = "100%",
-    hoverScale = 1.4,
-    hoverEffect = TRUE,
-    additionalCSS = NULL,
-    hoverCSS = NULL,
-    htmlCode = NULL,
-    boxShadow = TRUE) {
+  icon = "mapkey",
+  color = "#ff0000",
+  iconSize = 12,
+  background = "#1F7499",
+  borderRadius = "100%",
+  hoverScale = 1.4,
+  hoverEffect = TRUE,
+  additionalCSS = NULL,
+  hoverCSS = NULL,
+  htmlCode = NULL,
+  boxShadow = TRUE
+) {
   icon <- leaflet::filterNULL(list(
     icon = icon,
     color = color,
@@ -153,17 +154,18 @@ makeMapkeyIcon <- function(
 #'   )
 #' }
 mapkeyIcons <- function(
-    icon = "mapkey",
-    color = "#ff0000",
-    iconSize = 12,
-    background = "#1F7499",
-    borderRadius = "100%",
-    hoverScale = 1.4,
-    hoverEffect = TRUE,
-    hoverCSS = NULL,
-    additionalCSS = NULL,
-    htmlCode = NULL,
-    boxShadow = TRUE) {
+  icon = "mapkey",
+  color = "#ff0000",
+  iconSize = 12,
+  background = "#1F7499",
+  borderRadius = "100%",
+  hoverScale = 1.4,
+  hoverEffect = TRUE,
+  hoverCSS = NULL,
+  additionalCSS = NULL,
+  htmlCode = NULL,
+  boxShadow = TRUE
+) {
   leaflet::filterNULL(list(
     icon = icon,
     color = color,
@@ -205,16 +207,17 @@ mapkeyIcons <- function(
 #'     label = ~state, popup = ~village
 #'   )
 addMapkeyMarkers <- function(
-    map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
-    icon = NULL,
-    popup = NULL,
-    popupOptions = NULL,
-    label = NULL,
-    labelOptions = NULL,
-    options = leaflet::markerOptions(),
-    clusterOptions = NULL,
-    clusterId = NULL,
-    data = leaflet::getMapData(map)) {
+  map, lng = NULL, lat = NULL, layerId = NULL, group = NULL,
+  icon = NULL,
+  popup = NULL,
+  popupOptions = NULL,
+  label = NULL,
+  labelOptions = NULL,
+  options = leaflet::markerOptions(),
+  clusterOptions = NULL,
+  clusterId = NULL,
+  data = leaflet::getMapData(map)
+) {
   map$dependencies <- c(
     map$dependencies,
     mapkeyIconDependency()

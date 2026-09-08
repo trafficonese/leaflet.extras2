@@ -182,7 +182,6 @@ test_that("contextmenu", {
 })
 
 
-
 test_that("contextmenu-deprecation", {
   mn <- expect_warning(menuItem("some text", "my callback", id = "myid"))
   expect_is(mn, "list")

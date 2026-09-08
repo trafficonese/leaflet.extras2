@@ -349,7 +349,6 @@ test_that("playback", {
   )
 
 
-
   ## Test Example ###############
   if (inherits(leaflet::atlStorms2005, "sf")) {
     # starting with leaflet 2.3.0
