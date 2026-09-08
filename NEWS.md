@@ -1,6 +1,15 @@
 # leaflet.extras2 (development version)
 
-* Documented Shiny mouse events for `addAntpath` (`input$MAPID_antpath_click` / `_mouseover` / `_mouseout` instead of `shape_*`).
+* Documented Shiny mouse events for `addAntpath()`: use
+  `input$MAPID_antpath_click` / `_mouseover` / `_mouseout` instead of `shape_*`.
+* `addEasyprint()` custom export sizes no longer need extra CSS. Pass them in
+  `easyprintOptions(sizeModes = ...)` as R lists, for example
+  `list(scale = 3, name = "3x current view")` or
+  `list(width = 3000, height = 1800, name = "High res")`.
+  `CurrentSize` still exports at the widget size (often low-res in Quarto/HTML).
+  Custom sizes keep the current map view by default (`keepView = TRUE` in the
+  size-mode list). Set `keepView = FALSE` to keep the zoom level and export a
+  larger area. See `inst/examples/easyprint.R`.
 
 # leaflet.extras2 1.3.2
 

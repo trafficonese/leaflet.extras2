@@ -66,7 +66,13 @@ L.Control.EasyPrint = L.Control.extend({
       this.options.sizeModes.forEach(function (sizeMode) {
         var btn = L.DomUtil.create('li', 'easyPrintSizeMode', this.holder);
         btn.title = sizeMode.name;
-        var link = L.DomUtil.create('a', sizeMode.className, btn);
+        var cls = sizeMode.className || '';
+        var isBuiltin = cls === 'CurrentSize' || cls === 'A4Landscape' || cls === 'A4Portrait';
+        if (!isBuiltin && ((sizeMode.width && sizeMode.height) || sizeMode.scale)) {
+          cls = ('CustomSize ' + cls).trim();
+        }
+        L.DomUtil.create('a', cls, btn);
+        L.DomEvent.addListener(btn, 'click', L.DomEvent.preventDefault);
         L.DomEvent.addListener(btn, 'click', this.printMap, this);
       }, this);
 
@@ -83,25 +89,30 @@ L.Control.EasyPrint = L.Control.extend({
       this._page = window.open("", "_blank", 'toolbar=no,status=no,menubar=no,scrollbars=no,resizable=no,left=10, top=10, width=200, height=250, visible=none');
       this._page.document.write(this._createSpinner(this.options.customWindowTitle, this.options.customSpinnerClass, this.options.spinnerBgColor));
     }
-    //var mapsize = this._map.getSize()
+    var mapSize = this._map.getSize();
+    var widthStyle = this.mapContainer.style.width;
+    var heightStyle = this.mapContainer.style.height;
     this.originalState = {
-      mapWidth: this.mapContainer.style.width,
-      //mapWidth: mapsize.x,
-      widthWasAuto: false,
-      widthWasPercentage: false,
-      mapHeight: this.mapContainer.style.height,
-      //mapHeight: mapsize.y,
+      mapWidthStyle: widthStyle,
+      mapHeightStyle: heightStyle,
+      mapWidth: mapSize.x + 'px',
+      mapHeight: mapSize.y + 'px',
+      pixelWidth: mapSize.x,
+      pixelHeight: mapSize.y,
+      widthWasAuto: !widthStyle || widthStyle === 'auto',
+      widthWasPercentage: !!(widthStyle && widthStyle.indexOf('%') > -1),
+      percentageWidth: widthStyle,
       zoom: this._map.getZoom(),
-      center: this._map.getCenter()
+      center: this._map.getCenter(),
+      maxZoom: this._map.options.maxZoom
     };
-    if (this.originalState.mapWidth === 'auto') {
-      this.originalState.mapWidth = this._map.getSize().x  + 'px'
-      this.originalState.widthWasAuto = true
-    } else if (this.originalState.mapWidth.includes('%')) {
-      this.originalState.percentageWidth = this.originalState.mapWidth
-      this.originalState.widthWasPercentage = true
-      this.originalState.mapWidth = this._map.getSize().x  + 'px'
+    if (widthStyle && !this.originalState.widthWasAuto && !this.originalState.widthWasPercentage) {
+      this.originalState.mapWidth = widthStyle;
     }
+    if (heightStyle && heightStyle !== 'auto' && heightStyle.indexOf('%') === -1) {
+      this.originalState.mapHeight = heightStyle;
+    }
+    L.DomUtil.addClass(this.mapContainer, 'easyprint-exporting');
     this._map.fire("easyPrint-start", { event: event });
     if (!this.options.hidden) {
       this._togglePageSizeButtons({type: null});
@@ -112,9 +123,16 @@ L.Control.EasyPrint = L.Control.extend({
     if (this.options.hideClasses) {
       this._toggleClasses(this.options.hideClasses);
     }
-    var sizeMode = typeof event !== 'string' ? event.target.className : event;
+    var sizeMode = this._resolveSizeMode(event);
     if (sizeMode === 'CurrentSize') {
       return this._printOpertion(sizeMode);
+    }
+    if (!this._findPageSize(sizeMode)) {
+      console.error('easyPrint: could not resolve size mode', sizeMode, this.options.sizeModes);
+      L.DomUtil.removeClass(this.mapContainer, 'easyprint-exporting');
+      this._toggleControls(true);
+      this._toggleClasses(this.options.hideClasses, true);
+      return;
     }
     this.outerContainer = this._createOuterContainer(this.mapContainer)
     if (this.originalState.widthWasAuto) {
@@ -123,11 +141,49 @@ L.Control.EasyPrint = L.Control.extend({
     this._createImagePlaceholder(sizeMode)
   },
 
+  _resolveSizeMode: function (event) {
+    if (typeof event === 'string') {
+      return event;
+    }
+    if (event && typeof event.className === 'string' && !event.target) {
+      return event.className;
+    }
+    var a = null;
+    if (event && event.currentTarget && event.currentTarget.querySelector) {
+      a = event.currentTarget.querySelector('a');
+    }
+    if (!a && event && event.target) {
+      a = event.target.tagName === 'A' ? event.target :
+        (event.target.closest ? event.target.closest('a') : null);
+    }
+    var classes = ((a && a.className) ? String(a.className) : '').trim().split(/\s+/);
+    var known = (this.options.sizeModes || []).map(function (m) {
+      return m.className;
+    }).filter(Boolean);
+    for (var i = 0; i < classes.length; i++) {
+      if (known.indexOf(classes[i]) > -1) {
+        return classes[i];
+      }
+    }
+    return classes.filter(function (c) { return c && c !== 'CustomSize'; })[0] || '';
+  },
+
+  _findPageSize: function (sizeMode) {
+    var modes = this.options.sizeModes || [];
+    for (var i = 0; i < modes.length; i++) {
+      var cn = modes[i].className || '';
+      if (cn === sizeMode || cn.split(/\s+/).indexOf(sizeMode) > -1) {
+        return modes[i];
+      }
+    }
+    return null;
+  },
+
   _createImagePlaceholder: function (sizeMode) {
     var plugin = this;
     domtoimage.toPng(this.mapContainer, {
-      width: parseInt(this.originalState.mapWidth.replace('px')),
-      height: parseInt(this.originalState.mapHeight.replace('px'))
+      width: parseInt(this.originalState.mapWidth, 10) || this._map.getSize().x,
+      height: parseInt(this.originalState.mapHeight, 10) || this._map.getSize().y
     })
     .then(function (dataUrl) {
       plugin.blankDiv = document.createElement("div");
@@ -143,6 +199,7 @@ L.Control.EasyPrint = L.Control.extend({
       plugin._resizeAndPrintMap(sizeMode);
     })
     .catch(function (error) {
+      L.DomUtil.removeClass(plugin.mapContainer, 'easyprint-exporting');
       plugin._toggleControls(true);
       plugin._toggleClasses(plugin.options.hideClasses, true);
       if (plugin.outerContainer) {
@@ -154,35 +211,87 @@ L.Control.EasyPrint = L.Control.extend({
 
   _resizeAndPrintMap: function (sizeMode) {
     this.outerContainer.style.opacity = 0;
-    var pageSize = this.options.sizeModes.filter(function (item) {
-      return item.className.indexOf(sizeMode) > -1;
-    });
-    pageSize = pageSize[0]
-    this.mapContainer.style.width = pageSize.width + 'px';
-    this.mapContainer.style.height = pageSize.height + 'px';
-    if (this.mapContainer.style.width > this.mapContainer.style.height) {
-      this.orientation = 'portrait';
-    } else {
+    var pageSize = this._findPageSize(sizeMode);
+    var origW = this.originalState.pixelWidth;
+    var origH = this.originalState.pixelHeight;
+    var width = pageSize && pageSize.width;
+    var height = pageSize && pageSize.height;
+    var explicitScale = pageSize && Number(pageSize.scale);
+    if (explicitScale && (width == null || height == null)) {
+      width = Math.round(origW * explicitScale);
+      height = Math.round(origH * explicitScale);
+    }
+    if (!pageSize || width == null || height == null) {
+      console.error('easyPrint: unknown size mode', sizeMode, this.options.sizeModes);
+      L.DomUtil.removeClass(this.mapContainer, 'easyprint-exporting');
+      return;
+    }
+    var isA4 = pageSize.className === 'A4Landscape' || pageSize.className === 'A4Portrait';
+    var keepView = !isA4 && pageSize.keepView !== false;
+    var viewScale = 1;
+    if (keepView) {
+      viewScale = (explicitScale && isFinite(explicitScale) && explicitScale > 0)
+        ? explicitScale
+        : Math.min(width / origW, height / origH);
+      if (!isFinite(viewScale) || viewScale <= 0) {
+        viewScale = 1;
+      }
+      width = Math.round(origW * viewScale);
+      height = Math.round(origH * viewScale);
+    }
+
+    this.mapContainer.style.width = width + 'px';
+    this.mapContainer.style.height = height + 'px';
+    if (width > height) {
       this.orientation = 'landscape';
-    }
-    this._map.setView(this.originalState.center);
-    this._map.setZoom(this.originalState.zoom);
-    this._map.invalidateSize();
-    if (this.options.tileLayer) {
-      this._pausePrint(sizeMode)
     } else {
-      this._printOpertion(sizeMode)
+      this.orientation = 'portrait';
     }
+
+    var map = this._map;
+    var zoomAnim = map.options.zoomAnimation;
+    map.options.zoomAnimation = false;
+    map.invalidateSize({animate: false, pan: false});
+
+    var newZoom = this.originalState.zoom;
+    if (keepView && viewScale !== 1) {
+      newZoom = this.originalState.zoom + Math.log(viewScale) / Math.LN2;
+    }
+    if (typeof map.getMaxZoom === 'function' && newZoom > map.getMaxZoom()) {
+      map.options.maxZoom = newZoom;
+    }
+    if (map._limitZoom) {
+      newZoom = map._limitZoom(newZoom);
+    }
+
+    var plugin = this;
+    var done = false;
+    var resume = function () {
+      if (done) return;
+      done = true;
+      map.off('moveend', resume);
+      map.options.zoomAnimation = zoomAnim;
+      plugin._pausePrint(sizeMode);
+    };
+    map.once('moveend', resume);
+    map.setView(this.originalState.center, newZoom, {animate: false});
+    setTimeout(resume, 150);
   },
 
   _pausePrint: function (sizeMode) {
     var plugin = this
+    var started = Date.now();
+    var wait = plugin.options.tileWait || 500;
+    var maxWait = Math.max(wait, 30000);
     var loadingTest = setInterval(function () {
-      if(!plugin.options.tileLayer.isLoading()) {
+      var layer = plugin.options.tileLayer;
+      var tilesReady = !layer || typeof layer.isLoading !== "function" || !layer.isLoading();
+      var elapsed = Date.now() - started;
+      if ((tilesReady && elapsed >= wait) || elapsed >= maxWait) {
         clearInterval(loadingTest);
         plugin._printOpertion(sizeMode)
       }
-    }, plugin.options.tileWait);
+    }, 100);
   },
 
   _printOpertion: function (sizemode) {
@@ -194,6 +303,7 @@ L.Control.EasyPrint = L.Control.extend({
     }
 
     function restorePlugin(plugin) {
+      L.DomUtil.removeClass(plugin.mapContainer, 'easyprint-exporting');
       plugin._toggleControls(true);
       plugin._toggleClasses(plugin.options.hideClasses, true);
 
@@ -202,20 +312,24 @@ L.Control.EasyPrint = L.Control.extend({
           plugin.mapContainer.style.width = 'auto'
         } else if (plugin.originalState.widthWasPercentage) {
           plugin.mapContainer.style.width = plugin.originalState.percentageWidth
+        } else {
+          plugin.mapContainer.style.width = plugin.originalState.mapWidthStyle;
         }
-        else {
-          plugin.mapContainer.style.width = plugin.originalState.mapWidth;
-        }
-        plugin.mapContainer.style.height = plugin.originalState.mapHeight;
+        plugin.mapContainer.style.height = plugin.originalState.mapHeightStyle;
         plugin._removeOuterContainer(plugin.mapContainer, plugin.outerContainer, plugin.blankDiv)
+        if (plugin.originalState.maxZoom !== undefined) {
+          plugin._map.options.maxZoom = plugin.originalState.maxZoom;
+        }
         plugin._map.invalidateSize();
         plugin._map.setView(plugin.originalState.center);
         plugin._map.setZoom(plugin.originalState.zoom);
       }
     }
+    var exportWidth = parseInt(widthForExport, 10) || plugin._map.getSize().x;
+    var exportHeight = parseInt(plugin.mapContainer.style.height, 10) || plugin._map.getSize().y;
     domtoimage.toPng(plugin.mapContainer, {
-      width: parseInt(widthForExport),
-      height: parseInt(plugin.mapContainer.style.height.replace('px'))
+      width: exportWidth,
+      height: exportHeight
     })
     .then(function (dataUrl) {
       var blob = plugin._dataURItoBlob(dataUrl);
@@ -366,11 +480,12 @@ L.Control.EasyPrint = L.Control.extend({
     .easyPrintHolder a {
       background-size: 16px 16px;
       cursor: pointer;
+      background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ0NC44MzMgNDQ0LjgzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQ0LjgzMyA0NDQuODMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNTUuMjUsNDQ0LjgzM2gzMzQuMzMzYzkuMzUsMCwxNy03LjY1LDE3LTE3VjEzOS4xMTdjMC00LjgxNy0xLjk4My05LjM1LTUuMzgzLTEyLjQ2N0wyNjkuNzMzLDQuNTMzICAgIEMyNjYuNjE3LDEuNywyNjIuMzY3LDAsMjU4LjExNywwSDU1LjI1Yy05LjM1LDAtMTcsNy42NS0xNywxN3Y0MTAuODMzQzM4LjI1LDQzNy4xODMsNDUuOSw0NDQuODMzLDU1LjI1LDQ0NC44MzN6ICAgICBNMzcyLjU4MywxNDYuNDgzdjAuODVIMjU2LjQxN3YtMTA4LjhMMzcyLjU4MywxNDYuNDgzeiBNNzIuMjUsMzRoMTUwLjE2N3YxMzAuMzMzYzAsOS4zNSw3LjY1LDE3LDE3LDE3aDEzMy4xNjd2MjI5LjVINzIuMjVWMzR6ICAgICIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
     }
     .easyPrintHolder .CurrentSize{
       background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPCFET0NUWVBFIHN2ZyBQVUJMSUMgIi0vL1czQy8vRFREIFNWRyAxLjEvL0VOIiAiaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkIj4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTZweCIgdmVyc2lvbj0iMS4xIiBoZWlnaHQ9IjE2cHgiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZW5hYmxlLWJhY2tncm91bmQ9Im5ldyAwIDAgNjQgNjQiPgogIDxnPgogICAgPGcgZmlsbD0iIzFEMUQxQiI+CiAgICAgIDxwYXRoIGQ9Ik0yNS4yNTUsMzUuOTA1TDQuMDE2LDU3LjE0NVY0Ni41OWMwLTEuMTA4LTAuODk3LTIuMDA4LTIuMDA4LTIuMDA4QzAuODk4LDQ0LjU4MiwwLDQ1LjQ4MSwwLDQ2LjU5djE1LjQwMiAgICBjMCwwLjI2MSwwLjA1MywwLjUyMSwwLjE1NSwwLjc2N2MwLjIwMywwLjQ5MiwwLjU5NCwwLjg4MiwxLjA4NiwxLjA4N0MxLjQ4Niw2My45NDcsMS43NDcsNjQsMi4wMDgsNjRoMTUuNDAzICAgIGMxLjEwOSwwLDIuMDA4LTAuODk4LDIuMDA4LTIuMDA4cy0wLjg5OC0yLjAwOC0yLjAwOC0yLjAwOEg2Ljg1NWwyMS4yMzgtMjEuMjRjMC43ODQtMC43ODQsMC43ODQtMi4wNTUsMC0yLjgzOSAgICBTMjYuMDM5LDM1LjEyMSwyNS4yNTUsMzUuOTA1eiIgZmlsbD0iIzAwMDAwMCIvPgogICAgICA8cGF0aCBkPSJtNjMuODQ1LDEuMjQxYy0wLjIwMy0wLjQ5MS0wLjU5NC0wLjg4Mi0xLjA4Ni0xLjA4Ny0wLjI0NS0wLjEwMS0wLjUwNi0wLjE1NC0wLjc2Ny0wLjE1NGgtMTUuNDAzYy0xLjEwOSwwLTIuMDA4LDAuODk4LTIuMDA4LDIuMDA4czAuODk4LDIuMDA4IDIuMDA4LDIuMDA4aDEwLjU1NmwtMjEuMjM4LDIxLjI0Yy0wLjc4NCwwLjc4NC0wLjc4NCwyLjA1NSAwLDIuODM5IDAuMzkyLDAuMzkyIDAuOTA2LDAuNTg5IDEuNDIsMC41ODlzMS4wMjctMC4xOTcgMS40MTktMC41ODlsMjEuMjM4LTIxLjI0djEwLjU1NWMwLDEuMTA4IDAuODk3LDIuMDA4IDIuMDA4LDIuMDA4IDEuMTA5LDAgMi4wMDgtMC44OTkgMi4wMDgtMi4wMDh2LTE1LjQwMmMwLTAuMjYxLTAuMDUzLTAuNTIyLTAuMTU1LTAuNzY3eiIgZmlsbD0iIzAwMDAwMCIvPgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==)
     }
-    .easyPrintHolder .A4Landscape, .easyPrintHolder .A4Portrait {
+    .easyPrintHolder .A4Landscape, .easyPrintHolder .A4Portrait, .easyPrintHolder .CustomSize {
       background-image: url(data:image/svg+xml;utf8;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iaXNvLTg4NTktMSI/Pgo8IS0tIEdlbmVyYXRvcjogQWRvYmUgSWxsdXN0cmF0b3IgMTguMS4xLCBTVkcgRXhwb3J0IFBsdWctSW4gLiBTVkcgVmVyc2lvbjogNi4wMCBCdWlsZCAwKSAgLS0+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgdmVyc2lvbj0iMS4xIiBpZD0iQ2FwYV8xIiB4PSIwcHgiIHk9IjBweCIgdmlld0JveD0iMCAwIDQ0NC44MzMgNDQ0LjgzMyIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNDQ0LjgzMyA0NDQuODMzOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSIgd2lkdGg9IjUxMnB4IiBoZWlnaHQ9IjUxMnB4Ij4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNNTUuMjUsNDQ0LjgzM2gzMzQuMzMzYzkuMzUsMCwxNy03LjY1LDE3LTE3VjEzOS4xMTdjMC00LjgxNy0xLjk4My05LjM1LTUuMzgzLTEyLjQ2N0wyNjkuNzMzLDQuNTMzICAgIEMyNjYuNjE3LDEuNywyNjIuMzY3LDAsMjU4LjExNywwSDU1LjI1Yy05LjM1LDAtMTcsNy42NS0xNywxN3Y0MTAuODMzQzM4LjI1LDQzNy4xODMsNDUuOSw0NDQuODMzLDU1LjI1LDQ0NC44MzN6ICAgICBNMzcyLjU4MywxNDYuNDgzdjAuODVIMjU2LjQxN3YtMTA4LjhMMzcyLjU4MywxNDYuNDgzeiBNNzIuMjUsMzRoMTUwLjE2N3YxMzAuMzMzYzAsOS4zNSw3LjY1LDE3LDE3LDE3aDEzMy4xNjd2MjI5LjVINzIuMjVWMzR6ICAgICIgZmlsbD0iIzAwMDAwMCIvPgoJPC9nPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+CjxnPgo8L2c+Cjwvc3ZnPgo=);
     }
     .easyPrintHolder .A4Landscape {
@@ -404,6 +519,11 @@ L.Control.EasyPrint = L.Control.extend({
     .easyPrintPortrait:hover, .easyPrintLandscape:hover{
       background-color: #757570;
         cursor: pointer;
+    }
+    .easyprint-exporting .leaflet-control-layers-expanded,
+    .easyprint-exporting .leaflet-control-layers-expanded section {
+      height: auto !important;
+      max-height: none !important;
     }`;
     document.body.appendChild(css);
   },

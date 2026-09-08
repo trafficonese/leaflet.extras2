@@ -26,6 +26,20 @@ leaflet() \%>\%
     position = "bottomleft",
     exportOnly = TRUE
   ))
+
+## Custom pixel size (e.g. high-res PNG in a Quarto/HTML document):
+leaflet() \%>\%
+  addTiles() \%>\%
+  addEasyprint(options = easyprintOptions(
+    title = "Save map to PNG",
+    exportOnly = TRUE,
+    filename = "map",
+    tileWait = 1000,
+    sizeModes = list(
+      "CurrentSize",
+      list(scale = 3, name = "3x current view")
+    )
+  ))
 }
 \references{
 \url{https://github.com/rowanwins/leaflet-easyPrint}

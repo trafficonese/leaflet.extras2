@@ -27,20 +27,30 @@ easyprintOptions(
 \item{position}{Positions the print button}
 
 \item{sizeModes}{Either a character vector with one of the following options:
-\code{CurrentSize}, \code{A4Portrait}, \code{A4Landscape}. If you want to
-include a \code{Custom} size mode you need to pass a named list, with
-\code{width}, \code{height}, \code{name} and \code{className} and assign a
-background-image in CSS.
-See the example in \code{./inst/examples/easyprint_app.R}.}
+\code{CurrentSize}, \code{A4Portrait}, \code{A4Landscape}. Custom pixel
+sizes can be mixed in as lists with \code{width} and \code{height} (and
+optionally \code{name} / \code{className}):
+\code{list("CurrentSize", list(width = 3000, height = 1800, name = "High res"))}.
+\code{CurrentSize} exports at the current map widget size (often low
+resolution in Quarto/HTML documents). A custom size resizes the map before
+export. By default \code{keepView = TRUE}: the current view is kept (zoom
+in, same aspect ratio; the PNG may be smaller than \code{width}/\code{height}
+on one side). Use \code{keepView = FALSE} to keep the zoom level and show a
+larger area, like A4. \code{list(scale = 3, name = "3x current view")}
+multiplies the current widget size and keeps the exact view.
+A custom \code{className} and CSS background-image are optional;
+see \code{./inst/examples/easyprint.R} and
+\code{./inst/examples/easyprint_app.R}.}
 
 \item{defaultSizeTitles}{Button tooltips for the default page sizes}
 
 \item{exportOnly}{If set to \code{TRUE} the map is exported to a .png file}
 
 \item{tileLayer}{The group name of one tile layer that you can wait for to draw
-(helpful when resizing)}
+(helpful when resizing to a custom size)}
 
-\item{tileWait}{How long to wait for the tiles to draw (helpful when resizing)}
+\item{tileWait}{How long to wait for the tiles to draw (helpful when resizing).
+Custom sizes always wait at least this long so tiles can reload.}
 
 \item{filename}{Name of the file if \code{exportOnly} option is \code{TRUE}}
 

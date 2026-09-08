@@ -35,6 +35,20 @@ easyprintDependency <- function() {
 #'     position = "bottomleft",
 #'     exportOnly = TRUE
 #'   ))
+#'
+#' ## Custom pixel size (e.g. high-res PNG in a Quarto/HTML document):
+#' leaflet() %>%
+#'   addTiles() %>%
+#'   addEasyprint(options = easyprintOptions(
+#'     title = "Save map to PNG",
+#'     exportOnly = TRUE,
+#'     filename = "map",
+#'     tileWait = 1000,
+#'     sizeModes = list(
+#'       "CurrentSize",
+#'       list(scale = 3, name = "3x current view")
+#'     )
+#'   ))
 addEasyprint <- function(map, options = easyprintOptions()) {
   map$dependencies <- c(map$dependencies, easyprintDependency())
   leaflet::invokeMethod(map, NULL, "addEasyprint", options)
@@ -105,16 +119,26 @@ removeEasyprint <- function(map) {
 #' @param title Sets the text which appears as the tooltip of the print/export button
 #' @param position Positions the print button
 #' @param sizeModes Either a character vector with one of the following options:
-#'   \code{CurrentSize}, \code{A4Portrait}, \code{A4Landscape}. If you want to
-#'   include a \code{Custom} size mode you need to pass a named list, with
-#'   \code{width}, \code{height}, \code{name} and \code{className} and assign a
-#'   background-image in CSS.
-#'   See the example in \code{./inst/examples/easyprint_app.R}.
+#'   \code{CurrentSize}, \code{A4Portrait}, \code{A4Landscape}. Custom pixel
+#'   sizes can be mixed in as lists with \code{width} and \code{height} (and
+#'   optionally \code{name} / \code{className}):
+#'   \code{list("CurrentSize", list(width = 3000, height = 1800, name = "High res"))}.
+#'   \code{CurrentSize} exports at the current map widget size (often low
+#'   resolution in Quarto/HTML documents). A custom size resizes the map before
+#'   export. By default \code{keepView = TRUE}: the current view is kept (zoom
+#'   in, same aspect ratio; the PNG may be smaller than \code{width}/\code{height}
+#'   on one side). Use \code{keepView = FALSE} to keep the zoom level and show a
+#'   larger area, like A4. \code{list(scale = 3, name = "3x current view")}
+#'   multiplies the current widget size and keeps the exact view.
+#'   A custom \code{className} and CSS background-image are optional;
+#'   see \code{./inst/examples/easyprint.R} and
+#'   \code{./inst/examples/easyprint_app.R}.
 #' @param defaultSizeTitles Button tooltips for the default page sizes
 #' @param exportOnly 	If set to \code{TRUE} the map is exported to a .png file
 #' @param tileLayer The group name of one tile layer that you can wait for to draw
-#'   (helpful when resizing)
-#' @param tileWait How long to wait for the tiles to draw (helpful when resizing)
+#'   (helpful when resizing to a custom size)
+#' @param tileWait How long to wait for the tiles to draw (helpful when resizing).
+#'   Custom sizes always wait at least this long so tiles can reload.
 #' @param filename Name of the file if \code{exportOnly} option is \code{TRUE}
 #' @param hidden Set to \code{TRUE} if you don't want to display the toolbar.
 #'   Instead you can create your own buttons or fire print events programmatically.
@@ -145,9 +169,9 @@ easyprintOptions <- function(title = "Print map",
                              customWindowTitle = NULL,
                              spinnerBgColor = "#0DC5C1",
                              customSpinnerClass = "epLoader") {
-  if (inherits(sizeModes, "character")) sizeModes <- as.list(sizeModes)
   if (inherits(hideClasses, "character")) hideClasses <- as.list(hideClasses)
-  if (length(sizeModes) == 0 || (is.null(sizeModes) || all(is.na(sizeModes)) || all(sizeModes == ""))) {
+  sizeModes <- unname(normalize_size_modes(sizeModes))
+  if (length(sizeModes) == 0) {
     stop(
       "The 'sizeModes' argument cannot be empty.\nUse one of the following ",
       "options: 'A4Portrait', 'A4Landscape', 'CurrentSize' or define a 'Custom' sizeMode."
@@ -169,4 +193,57 @@ easyprintOptions <- function(title = "Print map",
     spinnerBgColor = spinnerBgColor,
     customSpinnerClass = customSpinnerClass
   ))
+}
+
+is_custom_size_mode <- function(mode) {
+  is.list(mode) && (
+    (!is.null(mode$width) && !is.null(mode$height)) || !is.null(mode$scale)
+  )
+}
+
+normalize_size_modes <- function(sizeModes) {
+  if (is.null(sizeModes) || length(sizeModes) == 0) {
+    return(list())
+  }
+  if (is.atomic(sizeModes) && all(is.na(sizeModes) | sizeModes == "")) {
+    return(list())
+  }
+  if (inherits(sizeModes, "character")) {
+    sizeModes <- as.list(sizeModes)
+  }
+  if (is_custom_size_mode(sizeModes)) {
+    sizeModes <- list(sizeModes)
+  }
+
+  Filter(function(mode) {
+    if (is.character(mode)) {
+      return(length(mode) == 1L && !is.na(mode) && nzchar(mode))
+    }
+    TRUE
+  }, lapply(sizeModes, function(mode) {
+    if (!is_custom_size_mode(mode)) {
+      return(mode)
+    }
+    if (is.null(mode$name)) {
+      mode$name <- if (!is.null(mode$tooltip)) {
+        mode$tooltip
+      } else if (!is.null(mode$scale)) {
+        paste0("Current view x", mode$scale)
+      } else {
+        paste0("Custom (", mode$width, "x", mode$height, ")")
+      }
+    }
+    if (is.null(mode$className) || !nzchar(mode$className)) {
+      mode$className <- if (!is.null(mode$scale) && (is.null(mode$width) || is.null(mode$height))) {
+        paste0("custom-scale-", gsub("[^0-9]+", "-", as.character(mode$scale)))
+      } else {
+        paste0("custom-", mode$width, "x", mode$height)
+      }
+    }
+    mode$className <- gsub("[^A-Za-z0-9_-]", "-", mode$className)
+    if (is.null(mode$keepView)) {
+      mode$keepView <- TRUE
+    }
+    mode
+  }))
 }
