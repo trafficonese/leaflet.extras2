@@ -1,3 +1,18 @@
+.lfx-sidebar-dropdown {
+  z-index: 20000 !important;
+  pointer-events: auto !important;
+}
+
+body.lfx-sidebar-ui-open .leaflet-pane,
+body.lfx-sidebar-ui-open .leaflet-control-container {
+  pointer-events: none !important;
+}
+
+body.lfx-sidebar-ui-open .leafsidebar,
+body.lfx-sidebar-ui-open .leafsidebar * {
+  pointer-events: auto !important;
+}
+
 .leafsidebar {
   position: absolute;
   top: 0;

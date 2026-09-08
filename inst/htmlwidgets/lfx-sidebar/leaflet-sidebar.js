@@ -72,6 +72,10 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
 
         this._map = map;
 
+        L.DomEvent.disableClickPropagation(this._sidebar);
+        L.DomEvent.disableScrollPropagation(this._sidebar);
+        L.DomEvent.on(this._sidebar, 'pointerdown', L.DomEvent.stopPropagation);
+
         for (i = this._tabitems.length - 1; i >= 0; i--) {
             child = this._tabitems[i];
             var sub = child.querySelector('a');
