@@ -2,6 +2,11 @@
 
 ## leaflet.extras2 (development version)
 
+- Sidebar no longer steals clicks or wheel events from Shiny inputs
+  (`selectInput` / Selectize, including Firefox). While a dropdown is
+  open the map ignores pointer events. Fixes
+  [\#78](https://github.com/trafficonese/leaflet.extras2/issues/78),
+  [\#66](https://github.com/trafficonese/leaflet.extras2/issues/66).
 - [`addWMS()`](https://trafficonese.github.io/leaflet.extras2/reference/addWMS.md)
   now hides its attribution when the layer group is hidden, matching
   [`leaflet::addWMSTiles()`](https://rstudio.github.io/leaflet/reference/map-layers.html).

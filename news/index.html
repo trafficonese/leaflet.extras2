@@ -34,7 +34,8 @@
 
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="development version" id="leafletextras2-development-version">leaflet.extras2 (development version)<a class="anchor" aria-label="anchor" href="#leafletextras2-development-version"></a></h2>
-<ul><li>
+<ul><li>Sidebar no longer steals clicks or wheel events from Shiny inputs (<code>selectInput</code> / Selectize, including Firefox). While a dropdown is open the map ignores pointer events. Fixes <a href="https://github.com/trafficonese/leaflet.extras2/issues/78" class="external-link">#78</a>, <a href="https://github.com/trafficonese/leaflet.extras2/issues/66" class="external-link">#66</a>.</li>
+<li>
 <code><a href="../reference/addWMS.html">addWMS()</a></code> now hides its attribution when the layer group is hidden, matching <code><a href="https://rstudio.github.io/leaflet/reference/map-layers.html" class="external-link">leaflet::addWMSTiles()</a></code>.</li>
 <li>
 <code>addWMS(headers = ...)</code> sends Authorization (Basic/Bearer) and other custom headers with tiles, the overlay image and GetFeatureInfo (<a href="https://github.com/trafficonese/leaflet.extras2/issues/54" class="external-link">#54</a>). The WMS must allow CORS for those headers. GetFeatureInfo no longer opens a blocked iframe on 401/403; it shows an unauthorized message. Example: <code>inst/examples/wms_geoserver_app.R</code>.</li>
