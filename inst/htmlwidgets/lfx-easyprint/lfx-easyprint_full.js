@@ -127,6 +127,10 @@ L.Control.EasyPrint = L.Control.extend({
     if (sizeMode === 'CurrentSize') {
       return this._printOpertion(sizeMode);
     }
+    var dpiMode = this._findPageSize(sizeMode);
+    if (this._isDpiScaleMode(dpiMode)) {
+      return this._printAtDpi(Number(dpiMode.scale));
+    }
     if (!this._findPageSize(sizeMode)) {
       console.error('easyPrint: could not resolve size mode', sizeMode, this.options.sizeModes);
       L.DomUtil.removeClass(this.mapContainer, 'easyprint-exporting');
@@ -166,6 +170,68 @@ L.Control.EasyPrint = L.Control.extend({
       }
     }
     return classes.filter(function (c) { return c && c !== 'CustomSize'; })[0] || '';
+  },
+
+  _isDpiScaleMode: function (pageSize) {
+    return !!(pageSize && pageSize.scale != null &&
+      (pageSize.width == null || pageSize.height == null));
+  },
+
+  _printAtDpi: function (scale) {
+    var plugin = this;
+    if (!isFinite(scale) || scale <= 0) {
+      scale = 1;
+    }
+    var w = this.originalState.pixelWidth || this._map.getSize().x;
+    var h = this.originalState.pixelHeight || this._map.getSize().y;
+    this.orientation = w >= h ? 'landscape' : 'portrait';
+    domtoimage.toPng(this.mapContainer, {
+      width: Math.round(w * scale),
+      height: Math.round(h * scale),
+      style: {
+        transform: 'scale(' + scale + ')',
+        'transform-origin': 'top left',
+        width: w + 'px',
+        height: h + 'px'
+      }
+    })
+    .then(function (dataUrl) {
+      var blob = plugin._dataURItoBlob(dataUrl);
+      if (plugin.options.exportOnly) {
+        saveAs(blob, plugin.options.filename + '.png');
+      } else {
+        plugin._sendToBrowserPrint(dataUrl, plugin.orientation);
+      }
+      plugin._restoreAfterPrint();
+      plugin._map.fire("easyPrint-finished");
+    })
+    .catch(function (error) {
+      console.error('Print operation failed', error);
+      plugin._restoreAfterPrint();
+    });
+  },
+
+  _restoreAfterPrint: function () {
+    L.DomUtil.removeClass(this.mapContainer, 'easyprint-exporting');
+    this._toggleControls(true);
+    this._toggleClasses(this.options.hideClasses, true);
+    if (this.outerContainer) {
+      if (this.originalState.widthWasAuto) {
+        this.mapContainer.style.width = 'auto';
+      } else if (this.originalState.widthWasPercentage) {
+        this.mapContainer.style.width = this.originalState.percentageWidth;
+      } else {
+        this.mapContainer.style.width = this.originalState.mapWidthStyle;
+      }
+      this.mapContainer.style.height = this.originalState.mapHeightStyle;
+      this._removeOuterContainer(this.mapContainer, this.outerContainer, this.blankDiv);
+      if (this.originalState.maxZoom !== undefined) {
+        this._map.options.maxZoom = this.originalState.maxZoom;
+      }
+      this._map.invalidateSize();
+      this._map.setView(this.originalState.center);
+      this._map.setZoom(this.originalState.zoom);
+    }
   },
 
   _findPageSize: function (sizeMode) {
@@ -303,27 +369,7 @@ L.Control.EasyPrint = L.Control.extend({
     }
 
     function restorePlugin(plugin) {
-      L.DomUtil.removeClass(plugin.mapContainer, 'easyprint-exporting');
-      plugin._toggleControls(true);
-      plugin._toggleClasses(plugin.options.hideClasses, true);
-
-      if (plugin.outerContainer) {
-        if (plugin.originalState.widthWasAuto) {
-          plugin.mapContainer.style.width = 'auto'
-        } else if (plugin.originalState.widthWasPercentage) {
-          plugin.mapContainer.style.width = plugin.originalState.percentageWidth
-        } else {
-          plugin.mapContainer.style.width = plugin.originalState.mapWidthStyle;
-        }
-        plugin.mapContainer.style.height = plugin.originalState.mapHeightStyle;
-        plugin._removeOuterContainer(plugin.mapContainer, plugin.outerContainer, plugin.blankDiv)
-        if (plugin.originalState.maxZoom !== undefined) {
-          plugin._map.options.maxZoom = plugin.originalState.maxZoom;
-        }
-        plugin._map.invalidateSize();
-        plugin._map.setView(plugin.originalState.center);
-        plugin._map.setZoom(plugin.originalState.zoom);
-      }
+      plugin._restoreAfterPrint();
     }
     var exportWidth = parseInt(widthForExport, 10) || plugin._map.getSize().x;
     var exportHeight = parseInt(plugin.mapContainer.style.height, 10) || plugin._map.getSize().y;
