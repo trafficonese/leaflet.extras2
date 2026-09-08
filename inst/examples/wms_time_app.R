@@ -13,17 +13,23 @@ ui <- fluidPage(
 
 server <- function(input, output, session) {
   output$map <- renderLeaflet({
-    leaflet() %>%
-      addTiles(group = "base") %>%
+    leaflet(options = leafletOptions(worldCopyJump = FALSE)) %>%
+      addTiles(group = "base", options = tileOptions(noWrap = TRUE)) %>%
+      setMaxBounds(-180, -85.0511, 180, 85.0511) %>%
       setView(-76, 47, 4) %>%
       addWMS(
         baseUrl = "https://gibs.earthdata.nasa.gov/wms/epsg3857/best/wms.cgi",
         layers = "MODIS_Terra_CorrectedReflectance_TrueColor",
         layerId = "modis",
         group = "MODIS",
-        options = WMSTileOptions(
-          format = "image/jpeg",
-          time = format(times[1], "%Y-%m-%d")
+        options = c(
+          WMSTileOptions(
+            tiled = TRUE,
+            noWrap = TRUE,
+            format = "image/jpeg",
+            time = format(times[1], "%Y-%m-%d")
+          ),
+          list(identify = FALSE)
         )
       ) %>%
       addLayersControl(baseGroups = "base", overlayGroups = "MODIS")
