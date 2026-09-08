@@ -2,6 +2,11 @@
 
 * `addWMS()` now hides its attribution when the layer group is hidden,
   matching `leaflet::addWMSTiles()`.
+* `addWMS(headers = ...)` sends Authorization (Basic/Bearer) and other
+  custom headers with tiles, the overlay image and GetFeatureInfo (#54).
+  The WMS must allow CORS for those headers. GetFeatureInfo no longer
+  opens a blocked iframe on 401/403; it shows an unauthorized message.
+  Example: `inst/examples/wms_geoserver_app.R`.
 * `setWMSParams()` updates WMS request parameters (e.g. `time`) on an
   existing layer via `leafletProxy()`, so Shiny apps no longer need to
   rebuild the map (#52).

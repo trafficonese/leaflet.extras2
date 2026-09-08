@@ -76,3 +76,35 @@ test_that("setWMSParams", {
   )
   expect_match(bindings, "LeafletWidget.methods.setWMSParams")
 })
+
+test_that("addWMS headers", {
+  expect_error(leaflet() %>% addWMS(
+    baseUrl = "https://example.invalid/wms",
+    layers = "x",
+    headers = c("Bearer tok")
+  ), "named")
+
+  named <- leaflet() %>%
+    addWMS(
+      baseUrl = "https://example.invalid/wms",
+      layers = "secure",
+      headers = c(Authorization = "Bearer secret-token")
+    )
+  hdrs <- named$x$calls[[length(named$x$calls)]]$args[[4]]$headers
+  expect_equal(hdrs[[1]]$header, "Authorization")
+  expect_equal(hdrs[[1]]$value, "Bearer secret-token")
+
+  listed <- leaflet() %>%
+    addWMS(
+      baseUrl = "https://example.invalid/wms",
+      layers = "secure",
+      headers = list(list(header = "Authorization", value = "Basic abc"))
+    )
+  hdrs2 <- listed$x$calls[[length(listed$x$calls)]]$args[[4]]$headers
+  expect_equal(hdrs2[[1]]$value, "Basic abc")
+
+  js <- wms_js()
+  expect_match(js, "applyXhrHeaders")
+  expect_match(js, "tileLayerHeader")
+  expect_match(js, "setRequestHeader")
+})
