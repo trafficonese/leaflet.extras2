@@ -26,9 +26,7 @@ The Shiny session (invisible).
 \description{
 Starts the spinner, waits until the browser has painted it (and Shiny
 has flushed that update), then evaluates \code{expr} and always stops
-the spinner. Use this instead of \code{startSpinner()} /
-\code{Sys.sleep()} / \code{stopSpinner()} inside
-\code{\link[leaflet]{renderLeaflet}}.
+the spinner.
 }
 \examples{
 \dontrun{
@@ -41,7 +39,7 @@ observeEvent(input$go, {
 }
 }
 \seealso{
-Other Spinner Functions: 
-\code{\link{addSpinner}()}
+Other Spinner Functions:
+\code{\link[=addSpinner]{addSpinner()}}
 }
 \concept{Spinner Functions}
