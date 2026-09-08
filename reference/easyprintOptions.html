@@ -76,12 +76,13 @@ sizes can be mixed in as lists with <code>width</code> and <code>height</code> (
 optionally <code>name</code> / <code>className</code>):
 <code>list("CurrentSize", list(width = 3000, height = 1800, name = "High res"))</code>.
 <code>CurrentSize</code> exports at the current map widget size (often low
-resolution in Quarto/HTML documents). A custom size resizes the map before
-export. By default <code>keepView = TRUE</code>: the current view is kept (zoom
-in, same aspect ratio; the PNG may be smaller than <code>width</code>/<code>height</code>
-on one side). Use <code>keepView = FALSE</code> to keep the zoom level and show a
-larger area, like A4. <code>list(scale = 3, name = "3x current view")</code>
-multiplies the current widget size and keeps the exact view.
+resolution in Quarto/HTML documents).
+<code>list(scale = 3)</code> captures the current view at 3x pixel resolution
+without changing zoom or tile labels (best for presentations).
+A custom <code>width</code>/<code>height</code> resizes the map before export.
+By default <code>keepView = TRUE</code>: the same bounds are kept by zooming
+in, so OSM/tile labels get smaller. Use <code>keepView = FALSE</code> to keep
+the zoom level and show a larger area, like A4.
 A custom <code>className</code> and CSS background-image are optional;
 see <code>./inst/examples/easyprint.R</code> and
 <code>./inst/examples/easyprint_app.R</code>.</p></dd>

@@ -41,15 +41,14 @@ easyprintOptions(
   `className`):
   `list("CurrentSize", list(width = 3000, height = 1800, name = "High res"))`.
   `CurrentSize` exports at the current map widget size (often low
-  resolution in Quarto/HTML documents). A custom size resizes the map
-  before export. By default `keepView = TRUE`: the current view is kept
-  (zoom in, same aspect ratio; the PNG may be smaller than
-  `width`/`height` on one side). Use `keepView = FALSE` to keep the zoom
-  level and show a larger area, like A4.
-  `list(scale = 3, name = "3x current view")` multiplies the current
-  widget size and keeps the exact view. A custom `className` and CSS
-  background-image are optional; see `./inst/examples/easyprint.R` and
-  `./inst/examples/easyprint_app.R`.
+  resolution in Quarto/HTML documents). `list(scale = 3)` captures the
+  current view at 3x pixel resolution without changing zoom or tile
+  labels (best for presentations). A custom `width`/`height` resizes the
+  map before export. By default `keepView = TRUE`: the same bounds are
+  kept by zooming in, so OSM/tile labels get smaller. Use
+  `keepView = FALSE` to keep the zoom level and show a larger area, like
+  A4. A custom `className` and CSS background-image are optional; see
+  `./inst/examples/easyprint.R` and `./inst/examples/easyprint_app.R`.
 
 - defaultSizeTitles:
 

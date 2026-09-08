@@ -36,12 +36,14 @@
 - [`addEasyprint()`](https://trafficonese.github.io/leaflet.extras2/reference/addEasyprint.md)
   custom export sizes no longer need extra CSS. Pass them in
   `easyprintOptions(sizeModes = ...)` as R lists, for example
-  `list(scale = 3, name = "3x current view")` or
+  `list(scale = 3, name = "3x current view")` (same zoom and labels,
+  more pixels) or
   `list(width = 3000, height = 1800, name = "High res")`. `CurrentSize`
   still exports at the widget size (often low-res in Quarto/HTML).
-  Custom sizes keep the current map view by default (`keepView = TRUE`
-  in the size-mode list). Set `keepView = FALSE` to keep the zoom level
-  and export a larger area. See `inst/examples/easyprint.R`.
+  Custom width/height sizes keep the current map view by default
+  (`keepView = TRUE` in the size-mode list). Set `keepView = FALSE` to
+  keep the zoom level and export a larger area. See
+  `inst/examples/easyprint.R`.
 
 ## leaflet.extras2 1.3.2
 
