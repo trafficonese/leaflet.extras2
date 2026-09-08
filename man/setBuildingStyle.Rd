@@ -30,9 +30,9 @@ leaflet() \%>\%
   setView(13.40, 52.51836, 15)
 }
 \seealso{
-Other OSM-Buildings Plugin: 
-\code{\link{addBuildings}()},
-\code{\link{setBuildingData}()},
-\code{\link{updateBuildingTime}()}
+Other OSM-Buildings Plugin:
+\code{\link[=addBuildings]{addBuildings()}},
+\code{\link[=setBuildingData]{setBuildingData()}},
+\code{\link[=updateBuildingTime]{updateBuildingTime()}}
 }
 \concept{OSM-Buildings Plugin}

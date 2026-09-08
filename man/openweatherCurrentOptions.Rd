@@ -36,9 +36,9 @@ A list of options for \code{addOpenweatherCurrent}
 openweatherCurrentOptions
 }
 \seealso{
-Other Openweathermap Functions: 
-\code{\link{addOpenweatherCurrent}()},
-\code{\link{addOpenweatherTiles}()},
-\code{\link{openweatherOptions}()}
+Other Openweathermap Functions:
+\code{\link[=addOpenweatherCurrent]{addOpenweatherCurrent()}},
+\code{\link[=addOpenweatherTiles]{addOpenweatherTiles()}},
+\code{\link[=openweatherOptions]{openweatherOptions()}}
 }
 \concept{Openweathermap Functions}

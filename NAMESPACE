@@ -112,12 +112,16 @@ export(updateHexbin)
 export(velocityOptions)
 import(leaflet)
 importFrom(grDevices,colorRampPalette)
-importFrom(htmltools,findDependencies)
-importFrom(htmltools,htmlDependency)
-importFrom(htmltools,tagGetAttribute)
-importFrom(htmltools,tagList)
-importFrom(htmltools,tags)
+importFrom(htmltools,
+  findDependencies,
+  htmlDependency,
+  tagGetAttribute,
+  tagList,
+  tags
+)
 importFrom(magrittr,"%>%")
-importFrom(utils,adist)
-importFrom(utils,globalVariables)
-importFrom(utils,packageVersion)
+importFrom(utils,
+  adist,
+  globalVariables,
+  packageVersion
+)

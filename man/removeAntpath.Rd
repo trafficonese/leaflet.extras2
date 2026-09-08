@@ -7,8 +7,8 @@
 removeAntpath(map, layerId = NULL)
 }
 \arguments{
-\item{map}{a map widget object, possibly created from \code{\link[leaflet]{leaflet}}()
-but more likely from \code{\link[leaflet]{leafletProxy}}()}
+\item{map}{a map widget object, possibly created from \code{\link[leaflet:leaflet]{leaflet()}}
+but more likely from \code{\link[leaflet:leafletProxy]{leafletProxy()}}}
 
 \item{layerId}{character vector; the layer id(s) of the item to remove}
 }
@@ -19,9 +19,9 @@ the new \code{map} object
 Remove one or more Antpaths from a map, identified by \code{layerId}.
 }
 \seealso{
-Other Antpath Functions: 
-\code{\link{addAntpath}()},
-\code{\link{antpathOptions}()},
-\code{\link{clearAntpath}()}
+Other Antpath Functions:
+\code{\link[=addAntpath]{addAntpath()}},
+\code{\link[=antpathOptions]{antpathOptions()}},
+\code{\link[=clearAntpath]{clearAntpath()}}
 }
 \concept{Antpath Functions}

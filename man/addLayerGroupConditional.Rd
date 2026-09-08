@@ -65,8 +65,8 @@ leaflet() \%>\%
 \seealso{
 \url{https://github.com/Solfisk/Leaflet.LayerGroup.Conditional} for more details about the plugin.
 
-Other LayerGroupConditional Plugin: 
-\code{\link{clearConditionalLayers}()},
-\code{\link{removeConditionalLayer}()}
+Other LayerGroupConditional Plugin:
+\code{\link[=clearConditionalLayers]{clearConditionalLayers()}},
+\code{\link[=removeConditionalLayer]{removeConditionalLayer()}}
 }
 \concept{LayerGroupConditional Plugin}

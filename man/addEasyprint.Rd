@@ -45,9 +45,9 @@ leaflet() \%>\%
 \url{https://github.com/rowanwins/leaflet-easyPrint}
 }
 \seealso{
-Other EasyPrint Functions: 
-\code{\link{easyprintMap}()},
-\code{\link{easyprintOptions}()},
-\code{\link{removeEasyprint}()}
+Other EasyPrint Functions:
+\code{\link[=easyprintMap]{easyprintMap()}},
+\code{\link[=easyprintOptions]{easyprintOptions()}},
+\code{\link[=removeEasyprint]{removeEasyprint()}}
 }
 \concept{EasyPrint Functions}

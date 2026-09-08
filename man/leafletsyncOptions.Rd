@@ -26,10 +26,10 @@ A list of options for \code{addLeafletsync}
 Additional list of options.
 }
 \seealso{
-Other leafletsync Functions: 
-\code{\link{addLeafletsync}()},
-\code{\link{addLeafletsyncDependency}()},
-\code{\link{isSynced}()},
-\code{\link{unsync}()}
+Other leafletsync Functions:
+\code{\link[=addLeafletsync]{addLeafletsync()}},
+\code{\link[=addLeafletsyncDependency]{addLeafletsyncDependency()}},
+\code{\link[=isSynced]{isSynced()}},
+\code{\link[=unsync]{unsync()}}
 }
 \concept{leafletsync Functions}

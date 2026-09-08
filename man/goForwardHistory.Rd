@@ -21,11 +21,11 @@ stack.
 \url{https://github.com/cscott530/leaflet-history}
 }
 \seealso{
-Other History Functions: 
-\code{\link{addHistory}()},
-\code{\link{clearFuture}()},
-\code{\link{clearHistory}()},
-\code{\link{goBackHistory}()},
-\code{\link{historyOptions}()}
+Other History Functions:
+\code{\link[=addHistory]{addHistory()}},
+\code{\link[=clearFuture]{clearFuture()}},
+\code{\link[=clearHistory]{clearHistory()}},
+\code{\link[=goBackHistory]{goBackHistory()}},
+\code{\link[=historyOptions]{historyOptions()}}
 }
 \concept{History Functions}

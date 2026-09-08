@@ -20,10 +20,10 @@ A map
 Removes the synchronization of multiple maps from a specific map.
 }
 \seealso{
-Other leafletsync Functions: 
-\code{\link{addLeafletsync}()},
-\code{\link{addLeafletsyncDependency}()},
-\code{\link{isSynced}()},
-\code{\link{leafletsyncOptions}()}
+Other leafletsync Functions:
+\code{\link[=addLeafletsync]{addLeafletsync()}},
+\code{\link[=addLeafletsyncDependency]{addLeafletsyncDependency()}},
+\code{\link[=isSynced]{isSynced()}},
+\code{\link[=leafletsyncOptions]{leafletsyncOptions()}}
 }
 \concept{leafletsync Functions}

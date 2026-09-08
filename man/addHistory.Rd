@@ -30,11 +30,11 @@ leaflet() \%>\%
 \url{https://github.com/cscott530/leaflet-history}
 }
 \seealso{
-Other History Functions: 
-\code{\link{clearFuture}()},
-\code{\link{clearHistory}()},
-\code{\link{goBackHistory}()},
-\code{\link{goForwardHistory}()},
-\code{\link{historyOptions}()}
+Other History Functions:
+\code{\link[=clearFuture]{clearFuture()}},
+\code{\link[=clearHistory]{clearHistory()}},
+\code{\link[=goBackHistory]{goBackHistory()}},
+\code{\link[=goForwardHistory]{goForwardHistory()}},
+\code{\link[=historyOptions]{historyOptions()}}
 }
 \concept{History Functions}

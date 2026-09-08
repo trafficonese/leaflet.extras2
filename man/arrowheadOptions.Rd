@@ -80,9 +80,9 @@ options inherited from
 \url{https://github.com/slutske22/leaflet-arrowheads#options}
 }
 \seealso{
-Other Arrowhead Functions: 
-\code{\link{addArrowhead}()},
-\code{\link{clearArrowhead}()},
-\code{\link{removeArrowhead}()}
+Other Arrowhead Functions:
+\code{\link[=addArrowhead]{addArrowhead()}},
+\code{\link[=clearArrowhead]{clearArrowhead()}},
+\code{\link[=removeArrowhead]{removeArrowhead()}}
 }
 \concept{Arrowhead Functions}

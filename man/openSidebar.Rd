@@ -23,11 +23,11 @@ the new \code{map} object
 Open the Sidebar by ID
 }
 \seealso{
-Other Sidebar Functions: 
-\code{\link{addSidebar}()},
-\code{\link{closeSidebar}()},
-\code{\link{removeSidebar}()},
-\code{\link{sidebar_pane}()},
-\code{\link{sidebar_tabs}()}
+Other Sidebar Functions:
+\code{\link[=addSidebar]{addSidebar()}},
+\code{\link[=closeSidebar]{closeSidebar()}},
+\code{\link[=removeSidebar]{removeSidebar()}},
+\code{\link[=sidebar_pane]{sidebar_pane()}},
+\code{\link[=sidebar_tabs]{sidebar_tabs()}}
 }
 \concept{Sidebar Functions}

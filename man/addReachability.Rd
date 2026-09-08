@@ -49,8 +49,8 @@ leaflet() \%>\%
 \url{https://github.com/traffordDataLab/leaflet.reachability}
 }
 \seealso{
-Other Reachability Functions: 
-\code{\link{reachabilityOptions}()},
-\code{\link{removeReachability}()}
+Other Reachability Functions:
+\code{\link[=reachabilityOptions]{reachabilityOptions()}},
+\code{\link[=removeReachability]{removeReachability()}}
 }
 \concept{Reachability Functions}

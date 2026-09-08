@@ -16,8 +16,8 @@ These layer groups will be conditionally displayed based on the specified \code{
 removeConditionalLayer
 }
 \seealso{
-Other LayerGroupConditional Plugin: 
-\code{\link{addLayerGroupConditional}()},
-\code{\link{clearConditionalLayers}()}
+Other LayerGroupConditional Plugin:
+\code{\link[=addLayerGroupConditional]{addLayerGroupConditional()}},
+\code{\link[=clearConditionalLayers]{clearConditionalLayers()}}
 }
 \concept{LayerGroupConditional Plugin}

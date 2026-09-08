@@ -63,8 +63,8 @@ the
 \href{https://github.com/smeijer/leaflet-geosearch/blob/main/src/SearchControl.ts#L23}{source code}
 }
 \seealso{
-Other Geosearch Functions: 
-\code{\link{addGeosearch}()},
-\code{\link{removeGeosearch}()}
+Other Geosearch Functions:
+\code{\link[=addGeosearch]{addGeosearch()}},
+\code{\link[=removeGeosearch]{removeGeosearch()}}
 }
 \concept{Geosearch Functions}

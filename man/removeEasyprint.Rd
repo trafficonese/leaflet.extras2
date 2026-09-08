@@ -16,9 +16,9 @@ A leaflet map object
 Removes the easyprint control from the map.
 }
 \seealso{
-Other EasyPrint Functions: 
-\code{\link{addEasyprint}()},
-\code{\link{easyprintMap}()},
-\code{\link{easyprintOptions}()}
+Other EasyPrint Functions:
+\code{\link[=addEasyprint]{addEasyprint()}},
+\code{\link[=easyprintMap]{easyprintMap()}},
+\code{\link[=easyprintOptions]{easyprintOptions()}}
 }
 \concept{EasyPrint Functions}

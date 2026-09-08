@@ -30,7 +30,7 @@ addArrowhead(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{lng}{a numeric vector of longitudes, or a one-sided formula of the form
 \code{~x} where \code{x} is a variable in \code{data}; by default (if not
@@ -45,12 +45,12 @@ the latitude column from \code{data})}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
-\item{stroke}{whether to draw stroke along the path (e.g. the borders of
+\item{stroke}{whether to draw stroke along the path (e.g., the borders of
 polygons or circles)}
 
 \item{color}{stroke color}
@@ -59,16 +59,14 @@ polygons or circles)}
 
 \item{opacity}{stroke opacity (or layer opacity for tile layers)}
 
-\item{fill}{whether to fill the path with color (e.g. filling on polygons or
+\item{fill}{whether to fill the path with color (e.g., filling on polygons or
 circles)}
 
 \item{fillColor}{fill color}
 
 \item{fillOpacity}{fill opacity}
 
-\item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
-pattern}}
+\item{dashArray}{a string that defines the stroke \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash pattern}}
 
 \item{smoothFactor}{how much to simplify the polyline on each zoom level
 (more means better performance and less accurate representation)}
@@ -76,14 +74,14 @@ pattern}}
 \item{noClip}{whether to disable polyline clipping}
 
 \item{popup}{a character vector of the HTML content for the popups (you are
-recommended to escape the text using \code{\link[htmltools]{htmlEscape}()}
+recommended to escape the text using \code{\link[htmltools:htmlEscape]{htmltools::htmlEscape()}}
 for security reasons)}
 
-\item{popupOptions}{A Vector of \code{\link[leaflet]{popupOptions}} to provide popups}
+\item{popupOptions}{A Vector of \code{\link[leaflet:popupOptions]{popupOptions()}} to provide popups}
 
 \item{label}{a character vector of the HTML content for the labels}
 
-\item{labelOptions}{A Vector of \code{\link[leaflet]{labelOptions}} to provide label
+\item{labelOptions}{A Vector of \code{\link[leaflet:labelOptions]{labelOptions()}} to provide label
 options for each label. Default \code{NULL}}
 
 \item{options}{A named list of options. See \code{\link{arrowheadOptions}}}
@@ -103,6 +101,14 @@ Can be used almost exactly like \code{addPolylines} but instead of
 \href{https://github.com/slutske22/leaflet-arrowheads}{leaflet-arrowheads}
 for further details.
 }
+\details{
+It is possible to style the lines and the arrowheads separately; put styling
+specifications for the lines inside \code{\link{addArrowhead}} and the
+specifications for the arrowheads inside \code{\link{arrowheadOptions}}.
+A dashArray provided for the lines will also apply to the arrowheads,
+but the latter can be overruled by specifying a separate dashArray
+for the arrowheads inside \code{\link{arrowheadOptions}}.
+}
 \examples{
 library(leaflet)
 leaflet() \%>\%
@@ -112,9 +118,9 @@ leaflet() \%>\%
 \url{https://github.com/slutske22/leaflet-arrowheads}
 }
 \seealso{
-Other Arrowhead Functions: 
-\code{\link{arrowheadOptions}()},
-\code{\link{clearArrowhead}()},
-\code{\link{removeArrowhead}()}
+Other Arrowhead Functions:
+\code{\link[=arrowheadOptions]{arrowheadOptions()}},
+\code{\link[=clearArrowhead]{clearArrowhead()}},
+\code{\link[=removeArrowhead]{removeArrowhead()}}
 }
 \concept{Arrowhead Functions}
