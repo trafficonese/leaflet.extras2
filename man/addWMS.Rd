@@ -63,6 +63,9 @@ Something like \code{'http://server/wms?cql_filter=attribute=value'}
 \note{
 The WMS attribution is shown only while the layer (or its
   \code{group}) is visible, matching \code{\link[leaflet]{addWMSTiles}}.
+  GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
+  \code{http://} WMS URLs to \code{https://} on HTTPS pages so popups
+  still work behind a reverse proxy.
 }
 \examples{
 library(leaflet)

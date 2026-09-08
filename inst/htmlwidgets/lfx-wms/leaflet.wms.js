@@ -168,7 +168,9 @@ wms.Source = L.Layer.extend({
         // Request WMS GetFeatureInfo and call callback with results
         // (split from identify() to faciliate use outside of map events)
         var params = this.getFeatureInfoParams(point, layers),
-            url = this._url + L.Util.getParamString(params, this._url);
+            url = upgradeInsecureUrl(
+                this._url + L.Util.getParamString(params, this._url)
+            );
 
         this.showWaiting();
         this.ajax(url, done);
@@ -218,7 +220,7 @@ wms.Source = L.Layer.extend({
         if (result == "error") {
             // AJAX failed, possibly due to CORS issues.
             // Try loading content in <iframe>.
-            result = "<iframe src='" + url + "' style='border:none'>";
+            result = "<iframe src='" + upgradeInsecureUrl(url) + "' style='border:none'>";
         }
         return result;
     },
@@ -498,22 +500,53 @@ wms.overlay = function(url, options) {
     return new wms.Overlay(url, options);
 };
 
-// Simple AJAX helper (since we can't assume jQuery etc. are present)
-function ajax(url, callback) {
+function upgradeInsecureUrl(url) {
+    if (typeof window !== 'undefined' &&
+        window.location &&
+        window.location.protocol === 'https:' &&
+        /^http:\/\//i.test(url)) {
+        return 'https://' + url.substring(7);
+    }
+    return url;
+}
+
+function absoluteUrl(base, loc) {
+    try {
+        return new URL(loc, base).toString();
+    } catch (err) {
+        return loc;
+    }
+}
+
+function ajax(url, callback, redirectCount) {
     var context = this,
-        request = new XMLHttpRequest();
+        request = new XMLHttpRequest(),
+        hops = redirectCount || 0;
     request.onreadystatechange = change;
     request.open('GET', url);
     request.send();
 
     function change() {
-        if (request.readyState === 4) {
-            if (request.status === 200) {
+        if (request.readyState !== 4) {
+            return;
+        }
+        var status = request.status;
+        if (status >= 200 && status < 300) {
+            callback.call(context, request.responseText);
+            return;
+        }
+        if (status >= 300 && status < 400 && hops < 5) {
+            var loc = request.getResponseHeader('Location');
+            if (loc) {
+                ajax.call(context, absoluteUrl(url, loc), callback, hops + 1);
+                return;
+            }
+            if (request.responseText) {
                 callback.call(context, request.responseText);
-            } else {
-                callback.call(context, "error");
+                return;
             }
         }
+        callback.call(context, 'error');
     }
 }
 

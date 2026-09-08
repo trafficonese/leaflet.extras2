@@ -2,7 +2,7 @@ wmsDependency <- function() {
   list(
     htmltools::htmlDependency(
       "lfx-wms",
-      version = "1.0.1",
+      version = "1.0.2",
       src = system.file("htmlwidgets/lfx-wms", package = "leaflet.extras2"),
       script = c(
         "leaflet.wms.js",
@@ -26,6 +26,9 @@ wmsDependency <- function() {
 #'
 #' @note The WMS attribution is shown only while the layer (or its
 #'   \code{group}) is visible, matching \code{\link[leaflet]{addWMSTiles}}.
+#'   GetFeatureInfo requests accept HTTP redirects (e.g. 301) and upgrade
+#'   \code{http://} WMS URLs to \code{https://} on HTTPS pages so popups
+#'   still work behind a reverse proxy.
 #'
 #' @inheritParams leaflet::addWMSTiles
 #' @param checkempty Should the returned HTML-content be checked for emptiness?

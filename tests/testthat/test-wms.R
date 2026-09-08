@@ -24,13 +24,25 @@ test_that("wms", {
   expect_equal(last$args[[4]]$attribution, "WMS-ATTRIB-TEST")
 })
 
-test_that("wms layer owns attribution in JS", {
-  js <- paste(
+wms_js <- function() {
+  paste(
     readLines(system.file("htmlwidgets/lfx-wms/leaflet.wms.js", package = "leaflet.extras2")),
     collapse = "\n"
   )
+}
+
+test_that("wms layer owns attribution in JS", {
+  js <- wms_js()
   expect_match(js, "getAttribution")
   expect_match(js, "this\\._source.options.attribution")
+})
+
+test_that("wms GetFeatureInfo accepts redirects and HTTPS upgrade", {
+  js <- wms_js()
+  expect_match(js, "upgradeInsecureUrl")
+  expect_match(js, "status >= 200 && status < 300")
+  expect_match(js, "status >= 300 && status < 400")
+  expect_match(js, "getResponseHeader\\('Location'\\)")
 })
 
 
