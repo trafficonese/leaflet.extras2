@@ -1,7 +1,7 @@
 sidebar_deps <- function(mini = FALSE) {
   list(
     htmlDependency(
-      "lfx-sidebar", "1.0.0",
+      "lfx-sidebar", "1.0.3",
       src = system.file("htmlwidgets/lfx-sidebar", package = "leaflet.extras2"),
       script = c(
         "leaflet-sidebar.js",

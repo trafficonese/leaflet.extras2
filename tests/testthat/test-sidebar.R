@@ -72,6 +72,25 @@ test_that("sidebar", {
   )
 })
 
+test_that("sidebar isolates map pointer events", {
+  js <- paste(
+    paste(readLines(system.file(
+      "htmlwidgets/lfx-sidebar/leaflet-sidebar.js",
+      package = "leaflet.extras2"
+    )), collapse = "\n"),
+    paste(readLines(system.file(
+      "htmlwidgets/lfx-sidebar/leaflet-sidebar-binding.js",
+      package = "leaflet.extras2"
+    )), collapse = "\n"),
+    sep = "\n"
+  )
+  expect_match(js, "disableClickPropagation")
+  expect_match(js, "disableScrollPropagation")
+  expect_match(js, "__lfxSidebarFix")
+  expect_match(js, "lfx-sidebar-ui-open")
+  expect_match(js, "dropdownParent")
+})
+
 test_that("sidebar-error", {
   expect_error(
     sidebar_pane(

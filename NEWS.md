@@ -1,5 +1,8 @@
 # leaflet.extras2 (development version)
 
+* Sidebar no longer steals clicks or wheel events from Shiny inputs
+  (`selectInput` / Selectize, including Firefox). While a dropdown is
+  open the map ignores pointer events. Fixes #78, #66.
 * Replaced deprecated `structure(..., .Label = )` with `levels =` in tests
   (`test-mapkeyicon.R`, `test-playback.R`) to clear the R-devel NOTE.
 * Documented Shiny mouse events for `addAntpath()`: use
