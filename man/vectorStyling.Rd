@@ -18,10 +18,10 @@ protobuf tiles. Override individual entries before passing to
 \url{https://github.com/Leaflet/Leaflet.VectorGrid}
 }
 \seealso{
-Other Vectorgrid Functions: 
-\code{\link{addProtobuf}()},
-\code{\link{addVectorgrid}()},
-\code{\link{clearVectorgrid}()},
-\code{\link{removeVectorgrid}()}
+Other Vectorgrid Functions:
+\code{\link[=addProtobuf]{addProtobuf()}},
+\code{\link[=addVectorgrid]{addVectorgrid()}},
+\code{\link[=clearVectorgrid]{clearVectorgrid()}},
+\code{\link[=removeVectorgrid]{removeVectorgrid()}}
 }
 \concept{Vectorgrid Functions}
