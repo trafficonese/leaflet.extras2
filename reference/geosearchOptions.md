@@ -1,8 +1,7 @@
 # geosearchOptions
 
 Add extra options. For a full list please visit the [plugin
-repository](https://smeijer.github.io/leaflet-geosearch/) or see the
-[source
+repository](https://leaflet-geosearch.meijer.works/) or see the [source
 code](https://github.com/smeijer/leaflet-geosearch/blob/main/src/SearchControl.ts#L23)
 
 ## Usage
