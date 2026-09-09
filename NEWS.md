@@ -1,5 +1,12 @@
 # leaflet.extras2 (development version)
 
+* Included [Leaflet.VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
+  for tiled GeoJSON (`addVectorgrid()`) and protobuf vector tiles
+  (`addProtobuf()`). `addProtobuf()` accepts `popup` and `label` as
+  **property names** (not formulas): click popup and hover tooltip.
+  Hovering point features (place/street labels) no longer crashes Leaflet
+  (`getLatLng` / `lat` undefined). Examples:
+  `inst/examples/vectorgrid_app.R` and `inst/examples/vectorgrid_pbf_app.R`.
 * Sidebar no longer steals clicks or wheel events from Shiny inputs
   (`selectInput` / Selectize, including Firefox). While a dropdown is
   open the map ignores pointer events. Fixes #78, #66.
