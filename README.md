@@ -56,6 +56,7 @@ If you need a plugin that is not already implemented create an [issue](https://g
 -   [Spin](https://github.com/makinacorpus/Leaflet.Spin)
 -   [Timeslider](https://github.com/dwilhelm89/LeafletSlider)
 -   [Tangram](https://github.com/tangrams/tangram)
+-   [VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
 -   [Velocity](https://github.com/onaci/leaflet-velocity)
 -   [WMS](https://github.com/heigeo/leaflet.wms)
 

@@ -117,6 +117,12 @@ reference:
     contents:
     - matches("Timeslider")
     - matches("timeslider")
+  - title: VectorGrid
+    contents:
+    - matches("Vectorgrid")
+    - matches("vectorgrid")
+    - addProtobuf
+    - vectorStyling
   - title: Velocity
     contents:
     - matches("Velocity")
