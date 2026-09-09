@@ -1,4 +1,4 @@
-# leaflet.extras2 (development version)
+# leaflet.extras2 1.3.3
 
 * Included [Leaflet.VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
   for tiled GeoJSON (`addVectorgrid()`) and protobuf vector tiles
