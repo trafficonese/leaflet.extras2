@@ -39,7 +39,7 @@ leaflet(data = quakes) \%>\%
   addTiles() \%>\%
   addSpinner() \%>\%
   startSpinner(options = list("lines" = 7, "length" = 20)) \%>\%
-  addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag)) \%>\%
+  addMarkers(~long, ~lat, popup = ~ as.character(mag), label = ~ as.character(mag)) \%>\%
   stopSpinner()
 
 \dontrun{
@@ -51,14 +51,19 @@ shinyApp(
   ),
   server = function(input, output, session) {
     output$leaf <- renderLeaflet({
-      leaflet() \%>\% addTiles() \%>\% addSpinner()
+      leaflet() \%>\%
+        addTiles() \%>\%
+        addSpinner()
     })
     observeEvent(input$go, {
-      spinWhile("leaf", {
-        Sys.sleep(2)
-        leafletProxy("leaf") \%>\%
-          addMarkers(data = quakes, ~long, ~lat)
-      }, options = list(lines = 7, length = 20))
+      spinWhile("leaf",
+        {
+          Sys.sleep(2)
+          leafletProxy("leaf") \%>\%
+            addMarkers(data = quakes, ~long, ~lat)
+        },
+        options = list(lines = 7, length = 20)
+      )
     })
   }
 )
