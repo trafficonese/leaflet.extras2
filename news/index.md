@@ -2,6 +2,14 @@
 
 ## leaflet.extras2 (development version)
 
+- [`spinWhile()`](https://trafficonese.github.io/leaflet.extras2/reference/spinWhile.md)
+  shows a map spinner in Shiny around server work.
+  [`startSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)/[`stopSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)
+  in one
+  [`renderLeaflet()`](https://rstudio.github.io/leaflet/reference/map-shiny.html)
+  chain cannot do that. The spinner stays visible until the work
+  finishes. Fixes
+  [\#48](https://github.com/trafficonese/leaflet.extras2/issues/48).
 - Sidebar no longer steals clicks or wheel events from Shiny inputs
   (`selectInput` / Selectize, including Firefox). While a dropdown is
   open the map ignores pointer events. Fixes

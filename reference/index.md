@@ -264,6 +264,8 @@
   [`startSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)
   [`stopSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)
   : Add Spin Plugin
+- [`spinWhile()`](https://trafficonese.github.io/leaflet.extras2/reference/spinWhile.md)
+  : Run work while a map spinner is visible (Shiny)
 
 ## Sync
 
