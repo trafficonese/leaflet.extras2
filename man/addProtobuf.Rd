@@ -20,7 +20,7 @@ addProtobuf(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{urlTemplate}{Tile URL with \code{\{z\}}, \code{\{x\}}, \code{\{y\}}.
 Use \code{\{key\}} together with \code{key} for API tokens.}
@@ -30,10 +30,10 @@ Use \code{\{key\}} together with \code{key} for API tokens.}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{key}{Optional API key substituted into \code{\{key\}} in the URL.}
 
@@ -79,10 +79,10 @@ leaflet() \%>\%
 \url{https://github.com/Leaflet/Leaflet.VectorGrid}
 }
 \seealso{
-Other Vectorgrid Functions: 
-\code{\link{addVectorgrid}()},
-\code{\link{clearVectorgrid}()},
-\code{\link{removeVectorgrid}()},
-\code{\link{vectorStyling}()}
+Other Vectorgrid Functions:
+\code{\link[=addVectorgrid]{addVectorgrid()}},
+\code{\link[=clearVectorgrid]{clearVectorgrid()}},
+\code{\link[=removeVectorgrid]{removeVectorgrid()}},
+\code{\link[=vectorStyling]{vectorStyling()}}
 }
 \concept{Vectorgrid Functions}

@@ -7,8 +7,8 @@
 clearVectorgrid(map)
 }
 \arguments{
-\item{map}{a map widget object, possibly created from \code{\link[leaflet]{leaflet}}()
-but more likely from \code{\link[leaflet]{leafletProxy}}()}
+\item{map}{a map widget object, possibly created from \code{\link[leaflet:leaflet]{leaflet()}}
+but more likely from \code{\link[leaflet:leafletProxy]{leafletProxy()}}}
 }
 \value{
 the new \code{map} object
@@ -17,10 +17,10 @@ the new \code{map} object
 Clear all VectorGrid layers
 }
 \seealso{
-Other Vectorgrid Functions: 
-\code{\link{addProtobuf}()},
-\code{\link{addVectorgrid}()},
-\code{\link{removeVectorgrid}()},
-\code{\link{vectorStyling}()}
+Other Vectorgrid Functions:
+\code{\link[=addProtobuf]{addProtobuf()}},
+\code{\link[=addVectorgrid]{addVectorgrid()}},
+\code{\link[=removeVectorgrid]{removeVectorgrid()}},
+\code{\link[=vectorStyling]{vectorStyling()}}
 }
 \concept{Vectorgrid Functions}

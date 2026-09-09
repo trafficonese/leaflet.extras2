@@ -8,6 +8,10 @@
   (`getLatLng` / `lat` undefined). Examples:
   `inst/examples/vectorgrid_app.R` and `inst/examples/vectorgrid_pbf_app.R`.
   Tests cover Spatial/GeoJSON/URL inputs and missing `sf` / `yyjsonr`.
+* `spinWhile()` shows a map spinner in Shiny around server work. 
+  `startSpinner()`/`stopSpinner()` in one `renderLeaflet()` 
+  chain cannot do that. The spinner stays visible until the
+  work finishes. Fixes #48.
 * Sidebar no longer steals clicks or wheel events from Shiny inputs
   (`selectInput` / Selectize, including Firefox). While a dropdown is
   open the map ignores pointer events. Fixes #78, #66.

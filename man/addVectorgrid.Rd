@@ -24,7 +24,7 @@ addVectorgrid(
 )
 }
 \arguments{
-\item{map}{a map widget object created from \code{\link[leaflet]{leaflet}()}}
+\item{map}{a map widget object created from \code{\link[leaflet:leaflet]{leaflet()}}}
 
 \item{data}{An \code{sf} / \code{Spatial} object, a GeoJSON object, or a
 URL returning GeoJSON / TopoJSON.}
@@ -32,10 +32,10 @@ URL returning GeoJSON / TopoJSON.}
 \item{layerId}{the layer id}
 
 \item{group}{the name of the group the newly created layers should belong to
-(for \code{\link[leaflet]{clearGroup}} and \code{\link[leaflet]{addLayersControl}} purposes).
+(for \code{\link[leaflet:clearGroup]{clearGroup()}} and \code{\link[leaflet:addLayersControl]{addLayersControl()}} purposes).
 Human-friendly group names are permitted--they need not be short,
 identifier-style names. Any number of layers and even different types of
-layers (e.g. markers and polygons) can share the same group name.}
+layers (e.g., markers and polygons) can share the same group name.}
 
 \item{featureId}{Formula or vector of unique feature ids (used for highlight
 and the Shiny click \code{id}). A formula passed as \code{layerId} is
@@ -44,7 +44,7 @@ treated as \code{featureId}.}
 \item{popup}{Formula, column name or character vector with HTML for the
 click popup.}
 
-\item{stroke}{whether to draw stroke along the path (e.g. the borders of
+\item{stroke}{whether to draw stroke along the path (e.g., the borders of
 polygons or circles)}
 
 \item{color}{stroke color}
@@ -53,16 +53,14 @@ polygons or circles)}
 
 \item{opacity}{stroke opacity (or layer opacity for tile layers)}
 
-\item{fill}{whether to fill the path with color (e.g. filling on polygons or
+\item{fill}{whether to fill the path with color (e.g., filling on polygons or
 circles)}
 
 \item{fillColor}{fill color}
 
 \item{fillOpacity}{fill opacity}
 
-\item{dashArray}{a string that defines the stroke
-\href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash
-pattern}}
+\item{dashArray}{a string that defines the stroke \href{https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute/stroke-dasharray}{dash pattern}}
 
 \item{options}{a list of extra options for tile layers, popups, paths
 (circles, rectangles, polygons, ...), or other map elements}
@@ -105,10 +103,10 @@ leaflet() \%>\%
 \url{https://github.com/Leaflet/Leaflet.VectorGrid}
 }
 \seealso{
-Other Vectorgrid Functions: 
-\code{\link{addProtobuf}()},
-\code{\link{clearVectorgrid}()},
-\code{\link{removeVectorgrid}()},
-\code{\link{vectorStyling}()}
+Other Vectorgrid Functions:
+\code{\link[=addProtobuf]{addProtobuf()}},
+\code{\link[=clearVectorgrid]{clearVectorgrid()}},
+\code{\link[=removeVectorgrid]{removeVectorgrid()}},
+\code{\link[=vectorStyling]{vectorStyling()}}
 }
 \concept{Vectorgrid Functions}
