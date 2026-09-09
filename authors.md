@@ -12,7 +12,7 @@
 ## Citation
 
 Source:
-[`DESCRIPTION`](https://github.com/trafficonese/leaflet.extras2/blob/master/DESCRIPTION)
+[`DESCRIPTION`](https://github.com/trafficonese/leaflet.extras2/blob/v1.3.3/DESCRIPTION)
 
 Sebastian G (2026). *leaflet.extras2: Extra Functionality for 'leaflet'
 Package*. R package version 1.3.3,
