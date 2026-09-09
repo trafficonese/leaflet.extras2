@@ -1,5 +1,7 @@
 # Changelog
 
+## leaflet.extras2 (development version)
+
 ## leaflet.extras2 1.3.3
 
 - Included
