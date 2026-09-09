@@ -54,6 +54,7 @@ the [FAQ](#faq) section below for details.
 - [Spin](https://github.com/makinacorpus/Leaflet.Spin)
 - [Timeslider](https://github.com/dwilhelm89/LeafletSlider)
 - [Tangram](https://github.com/tangrams/tangram)
+- [VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
 - [Velocity](https://github.com/onaci/leaflet-velocity)
 - [WMS](https://github.com/heigeo/leaflet.wms)
 
@@ -401,6 +402,19 @@ By participating in this project you agree to abide by its terms.
   : removeTimeslider
 - [`timesliderOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/timesliderOptions.md)
   : timesliderOptions
+
+## VectorGrid
+
+- [`addVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/addVectorgrid.md)
+  : Add sliced GeoJSON / TopoJSON as a VectorGrid
+- [`clearVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/clearVectorgrid.md)
+  : Clear all VectorGrid layers
+- [`removeVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/removeVectorgrid.md)
+  : Remove a VectorGrid layer
+- [`addProtobuf()`](https://trafficonese.github.io/leaflet.extras2/reference/addProtobuf.md)
+  : Add protobuf vector tiles
+- [`vectorStyling()`](https://trafficonese.github.io/leaflet.extras2/reference/vectorStyling.md)
+  : Default styles for OSM-based vector tiles
 
 ## Velocity
 

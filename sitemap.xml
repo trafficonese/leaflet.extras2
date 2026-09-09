@@ -29,12 +29,14 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addOpenweatherCurrent.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addOpenweatherTiles.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addPlayback.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addProtobuf.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addReachability.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addSidebar.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addSidebyside.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addTangram.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addTimeslider.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addVectorgrid.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addVelocity.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/addWMS.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/antpathOptions.html</loc></url>
@@ -45,6 +47,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearFuture.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearHexbin.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearHistory.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clearVectorgrid.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/closeSidebar.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/clusterchartOptions.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/context_mapmenuItems.html</loc></url>
@@ -92,6 +95,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeSidebar.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeSidebyside.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeTimeslider.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeVectorgrid.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeVelocity.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/removeallItemsContextmenu.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/setBuildingData.html</loc></url>
@@ -114,6 +118,7 @@
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/unsync.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/updateBuildingTime.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/updateHexbin.html</loc></url>
+<url><loc>https://trafficonese.github.io/leaflet.extras2/reference/vectorStyling.html</loc></url>
 <url><loc>https://trafficonese.github.io/leaflet.extras2/reference/velocityOptions.html</loc></url>
 </urlset>
 

@@ -54,6 +54,7 @@ the [FAQ](#faq) section below for details.
 - [Spin](https://github.com/makinacorpus/Leaflet.Spin)
 - [Timeslider](https://github.com/dwilhelm89/LeafletSlider)
 - [Tangram](https://github.com/tangrams/tangram)
+- [VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
 - [Velocity](https://github.com/onaci/leaflet-velocity)
 - [WMS](https://github.com/heigeo/leaflet.wms)
 

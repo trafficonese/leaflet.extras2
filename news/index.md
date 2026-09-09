@@ -2,6 +2,19 @@
 
 ## leaflet.extras2 (development version)
 
+- Included
+  [Leaflet.VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
+  for tiled GeoJSON
+  ([`addVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/addVectorgrid.md))
+  and protobuf vector tiles
+  ([`addProtobuf()`](https://trafficonese.github.io/leaflet.extras2/reference/addProtobuf.md)).
+  [`addProtobuf()`](https://trafficonese.github.io/leaflet.extras2/reference/addProtobuf.md)
+  accepts `popup` and `label` as **property names** (not formulas):
+  click popup and hover tooltip. Hovering point features (place/street
+  labels) no longer crashes Leaflet (`getLatLng` / `lat` undefined).
+  Examples: `inst/examples/vectorgrid_app.R` and
+  `inst/examples/vectorgrid_pbf_app.R`. Tests cover Spatial/GeoJSON/URL
+  inputs and missing `sf` / `yyjsonr`.
 - [`spinWhile()`](https://trafficonese.github.io/leaflet.extras2/reference/spinWhile.md)
   shows a map spinner in Shiny around server work.
   [`startSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)/[`stopSpinner()`](https://trafficonese.github.io/leaflet.extras2/reference/addSpinner.md)

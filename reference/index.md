@@ -294,6 +294,19 @@
 - [`timesliderOptions()`](https://trafficonese.github.io/leaflet.extras2/reference/timesliderOptions.md)
   : timesliderOptions
 
+## VectorGrid
+
+- [`addVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/addVectorgrid.md)
+  : Add sliced GeoJSON / TopoJSON as a VectorGrid
+- [`clearVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/clearVectorgrid.md)
+  : Clear all VectorGrid layers
+- [`removeVectorgrid()`](https://trafficonese.github.io/leaflet.extras2/reference/removeVectorgrid.md)
+  : Remove a VectorGrid layer
+- [`addProtobuf()`](https://trafficonese.github.io/leaflet.extras2/reference/addProtobuf.md)
+  : Add protobuf vector tiles
+- [`vectorStyling()`](https://trafficonese.github.io/leaflet.extras2/reference/vectorStyling.md)
+  : Default styles for OSM-based vector tiles
+
 ## Velocity
 
 - [`addVelocity()`](https://trafficonese.github.io/leaflet.extras2/reference/addVelocity.md)
