@@ -44,7 +44,7 @@ spinDependency <- function() {
 #'   addTiles() %>%
 #'   addSpinner() %>%
 #'   startSpinner(options = list("lines" = 7, "length" = 20)) %>%
-#'   addMarkers(~long, ~lat, popup = ~as.character(mag), label = ~as.character(mag)) %>%
+#'   addMarkers(~long, ~lat, popup = ~ as.character(mag), label = ~ as.character(mag)) %>%
 #'   stopSpinner()
 #'
 #' \dontrun{
@@ -56,14 +56,19 @@ spinDependency <- function() {
 #'   ),
 #'   server = function(input, output, session) {
 #'     output$leaf <- renderLeaflet({
-#'       leaflet() %>% addTiles() %>% addSpinner()
+#'       leaflet() %>%
+#'         addTiles() %>%
+#'         addSpinner()
 #'     })
 #'     observeEvent(input$go, {
-#'       spinWhile("leaf", {
-#'         Sys.sleep(2)
-#'         leafletProxy("leaf") %>%
-#'           addMarkers(data = quakes, ~long, ~lat)
-#'       }, options = list(lines = 7, length = 20))
+#'       spinWhile("leaf",
+#'         {
+#'           Sys.sleep(2)
+#'           leafletProxy("leaf") %>%
+#'             addMarkers(data = quakes, ~long, ~lat)
+#'         },
+#'         options = list(lines = 7, length = 20)
+#'       )
 #'     })
 #'   }
 #' )
@@ -91,7 +96,7 @@ stopSpinner <- function(map) {
 #'
 #' Starts the spinner, waits until the browser has painted it (and Shiny
 #' has flushed that update), then evaluates \code{expr} and always stops
-#' the spinner. 
+#' the spinner.
 #'
 #' @param mapId The \code{outputId} of the \code{leafletOutput}.
 #' @param expr Expression to evaluate after the spinner is shown.

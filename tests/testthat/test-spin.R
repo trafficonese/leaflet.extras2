@@ -66,9 +66,12 @@ test_that("spinWhile starts spinner, waits for shown, then runs expr and stops",
       shiny::testServer(
         function(input, output, session) {
           shiny::observeEvent(input$go, {
-            spinWhile("leaf", {
-              ran <<- TRUE
-            }, options = list(lines = 7))
+            spinWhile("leaf",
+              {
+                ran <<- TRUE
+              },
+              options = list(lines = 7)
+            )
           })
         },
         {
