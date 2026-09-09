@@ -1,5 +1,13 @@
 # leaflet.extras2 (development version)
 
+* Included [Leaflet.VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
+  for tiled GeoJSON (`addVectorgrid()`) and protobuf vector tiles
+  (`addProtobuf()`). `addProtobuf()` accepts `popup` and `label` as
+  **property names** (not formulas): click popup and hover tooltip.
+  Hovering point features (place/street labels) no longer crashes Leaflet
+  (`getLatLng` / `lat` undefined). Examples:
+  `inst/examples/vectorgrid_app.R` and `inst/examples/vectorgrid_pbf_app.R`.
+  Tests cover Spatial/GeoJSON/URL inputs and missing `sf` / `yyjsonr`.
 * `spinWhile()` shows a map spinner in Shiny around server work. 
   `startSpinner()`/`stopSpinner()` in one `renderLeaflet()` 
   chain cannot do that. The spinner stays visible until the
