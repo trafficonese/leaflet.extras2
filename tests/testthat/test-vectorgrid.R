@@ -58,6 +58,139 @@ test_that("vectorgrid treats formula layerId as featureId", {
   expect_null(last$args[[2]])
 })
 
+test_that("vectorgrid accepts a GeoJSON URL", {
+  url <- "https://example.com/data.geojson"
+  m <- leaflet() %>%
+    addVectorgrid(data = url, layerId = "url", color = "navy", weight = 3)
+
+  last <- m$x$calls[[length(m$x$calls)]]
+  expect_equal(last$method, "addVectorgrid")
+  expect_equal(last$args[[1]], url)
+  expect_equal(last$args[[2]], "url")
+  expect_equal(last$args[[4]]$color, "navy")
+  expect_equal(last$args[[4]]$weight, 3)
+  expect_true(last$args[[4]]$interactive)
+})
+
+test_that("vectorgrid accepts geojson/json objects", {
+  gj <- '{"type":"FeatureCollection","features":[]}'
+  class(gj) <- c("geojson", "json")
+
+  m <- leaflet() %>%
+    addVectorgrid(data = gj, layerId = "gj", fillColor = "#abc", dashArray = "4")
+
+  last <- m$x$calls[[length(m$x$calls)]]
+  expect_equal(last$args[[1]], gj)
+  expect_equal(last$args[[4]]$fillColor, "#abc")
+  expect_equal(last$args[[4]]$dashArray, "4")
+
+  raw <- '{"type":"FeatureCollection","features":[]}'
+  class(raw) <- "json"
+  m <- leaflet() %>% addVectorgrid(data = raw, opacity = 0.8)
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[1]], raw)
+  expect_equal(m$x$calls[[length(m$x$calls)]]$args[[4]]$opacity, 0.8)
+})
+
+test_that("vectorgrid converts Spatial data", {
+  skip_if_not_installed("sf")
+  skip_if_not_installed("sp")
+  skip_if_not_installed("yyjsonr")
+
+  p <- sf::st_sf(
+    name = c("a", "b"),
+    geometry = sf::st_sfc(
+      sf::st_point(c(0, 0)),
+      sf::st_point(c(1, 1))
+    ),
+    crs = 4326
+  )
+  spatial <- as(p, "Spatial")
+  expect_true(inherits(spatial, "Spatial"))
+
+  m <- leaflet() %>%
+    addVectorgrid(data = spatial, layerId = "sp", featureId = ~name, popup = ~name)
+
+  last <- m$x$calls[[length(m$x$calls)]]
+  expect_equal(last$method, "addVectorgrid")
+  expect_true(inherits(last$args[[1]], "geojson"))
+  expect_equal(last$args[[2]], "sp")
+})
+
+test_that("vectorgrid rejects unsupported data", {
+  expect_error(
+    addVectorgrid(leaflet(), data = data.frame(x = 1)),
+    "must be an sf/Spatial object, GeoJSON, or a URL"
+  )
+})
+
+test_that("vectorgrid errors when sf is missing for Spatial data", {
+  skip_if_not_installed("sf")
+  skip_if_not_installed("sp")
+
+  spatial <- as(sf::st_sf(
+    name = "a",
+    geometry = sf::st_sfc(sf::st_point(c(0, 0))),
+    crs = 4326
+  ), "Spatial")
+
+  with_mocked_bindings(
+    {
+      expect_error(
+        addVectorgrid(leaflet(), data = spatial),
+        "The package `sf` is needed to convert Spatial data"
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) FALSE,
+    .package = "base"
+  )
+})
+
+test_that("vectorgrid errors when sf is missing", {
+  skip_if_not_installed("sf")
+
+  p <- sf::st_sf(
+    name = "a",
+    geometry = sf::st_sfc(sf::st_point(c(0, 0))),
+    crs = 4326
+  )
+
+  with_mocked_bindings(
+    {
+      expect_error(
+        addVectorgrid(leaflet(), data = p),
+        "The package `sf` is needed for addVectorgrid()"
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) {
+      if (identical(package, "sf")) FALSE else TRUE
+    },
+    .package = "base"
+  )
+})
+
+test_that("vectorgrid errors when yyjsonr is missing", {
+  skip_if_not_installed("sf")
+
+  p <- sf::st_sf(
+    name = "a",
+    geometry = sf::st_sfc(sf::st_point(c(0, 0))),
+    crs = 4326
+  )
+
+  with_mocked_bindings(
+    {
+      expect_error(
+        addVectorgrid(leaflet(), data = p),
+        "The package `yyjsonr` is needed for addVectorgrid()"
+      )
+    },
+    requireNamespace = function(package, ..., quietly = FALSE) {
+      if (identical(package, "yyjsonr")) FALSE else TRUE
+    },
+    .package = "base"
+  )
+})
+
 test_that("addProtobuf", {
   m <- leaflet() %>%
     addTiles() %>%

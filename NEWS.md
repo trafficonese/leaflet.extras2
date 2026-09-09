@@ -7,6 +7,7 @@
   Hovering point features (place/street labels) no longer crashes Leaflet
   (`getLatLng` / `lat` undefined). Examples:
   `inst/examples/vectorgrid_app.R` and `inst/examples/vectorgrid_pbf_app.R`.
+  Tests cover Spatial/GeoJSON/URL inputs and missing `sf` / `yyjsonr`.
 * Sidebar no longer steals clicks or wheel events from Shiny inputs
   (`selectInput` / Selectize, including Firefox). While a dropdown is
   open the map ignores pointer events. Fixes #78, #66.
