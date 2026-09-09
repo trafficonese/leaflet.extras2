@@ -1,5 +1,9 @@
 # leaflet.extras2 (development version)
 
+* `spinWhile()` shows a map spinner in Shiny around server work. 
+  `startSpinner()`/`stopSpinner()` in one `renderLeaflet()` 
+  chain cannot do that. The spinner stays visible until the
+  work finishes. Fixes #48.
 * Sidebar no longer steals clicks or wheel events from Shiny inputs
   (`selectInput` / Selectize, including Firefox). While a dropdown is
   open the map ignores pointer events. Fixes #78, #66.
