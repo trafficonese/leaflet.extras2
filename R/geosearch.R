@@ -62,7 +62,7 @@ addGeosearch <- function(map,
 #' geosearchOptions
 #'
 #' Add extra options. For a full list please visit the
-#' \href{https://smeijer.github.io/leaflet-geosearch/}{plugin repository} or see
+#' \href{https://leaflet-geosearch.meijer.works/}{plugin repository} or see
 #' the
 #' \href{https://github.com/smeijer/leaflet-geosearch/blob/main/src/SearchControl.ts#L23}{source code}
 #'
