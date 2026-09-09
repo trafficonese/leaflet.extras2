@@ -27,8 +27,7 @@ Adds an animated loading spinning over the map.
 
 \code{startSpinner()} and \code{stopSpinner()} in the same
 \code{\link[leaflet]{leaflet}} or \code{\link[leaflet]{leafletProxy}}
-chain are sent to the browser together. A \code{Sys.sleep()} on the server
-happens \emph{before} that, so no spinner is visible. Use
+chain are sent to the browser together. Use
 \code{\link{spinWhile}} (or start the spinner, then run the work after
 \code{session$onFlushed}).
 }
@@ -71,7 +70,7 @@ shinyApp(
 \url{https://github.com/fgnass/spin.js}
 }
 \seealso{
-Other Spinner Functions: 
-\code{\link{spinWhile}()}
+Other Spinner Functions:
+\code{\link[=spinWhile]{spinWhile()}}
 }
 \concept{Spinner Functions}
