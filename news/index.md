@@ -2,7 +2,11 @@
 
 ## leaflet.extras2 (development version)
 
+- Stop importing `grDevices` in NAMESPACE and drop it from Suggests.
+
 ## leaflet.extras2 1.3.3
+
+CRAN release: 2026-09-09
 
 - Included
   [Leaflet.VectorGrid](https://github.com/Leaflet/Leaflet.VectorGrid)
