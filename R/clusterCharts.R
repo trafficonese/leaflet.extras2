@@ -162,7 +162,7 @@ addClusterCharts <- function(
       "The `categoryMap` is missing a `color` column.\n",
       "An automatic color palette will be assigned."
     )
-    categoryMap$colors <- colorRampPalette(c("#fc8d8d", "white", "lightblue"))(nrow(categoryMap))
+    categoryMap$colors <- grDevices::colorRampPalette(c("#fc8d8d", "white", "lightblue"))(nrow(categoryMap))
   }
   if (!is.null(popupFields) && is.null(popupLabels)) {
     popupLabels <- popupFields
