@@ -14,12 +14,4 @@ docs URL to https://leaflet-geosearch.meijer.works/.
 
 ## Comments
 
-This is a minor release (1.3.3) with bug fixes and a few new helpers:
-
-* `spinWhile()` keeps the map spinner visible around Shiny server work (#48).
-* Sidebar no longer steals Selectize clicks or Firefox wheel events (#78, #66).
-* `addWMS()` hides attribution with the layer group, can send custom headers
-  (#54), follows same-host HTTP→HTTPS GetFeatureInfo redirects (#14), and
-  `setWMSParams()` updates WMS parameters via `leafletProxy()` (#52).
-* `addEasyprint()` custom `sizeModes` no longer need extra CSS.
-* Tests no longer use deprecated `structure(..., .Label = )` (R-devel NOTE).
+This is a patch that removes grDevices from the Imports
