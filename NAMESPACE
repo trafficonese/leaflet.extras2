@@ -118,7 +118,6 @@ export(updateHexbin)
 export(vectorStyling)
 export(velocityOptions)
 import(leaflet)
-importFrom(grDevices,colorRampPalette)
 importFrom(htmltools,
   findDependencies,
   htmlDependency,
