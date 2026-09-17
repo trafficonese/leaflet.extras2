@@ -1,5 +1,7 @@
 # Changelog
 
+## leaflet.extras2 (development version)
+
 ## leaflet.extras2 1.3.4
 
 CRAN release: 2026-09-16
