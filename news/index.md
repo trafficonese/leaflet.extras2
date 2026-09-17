@@ -2,6 +2,8 @@
 
 ## leaflet.extras2 1.3.4
 
+CRAN release: 2026-09-16
+
 - Stop importing `grDevices` in NAMESPACE and drop it from Suggests.
 - Uptade GitHub Actions to <actions/checkout@v6>
 
