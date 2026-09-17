@@ -1,3 +1,5 @@
+# leaflet.extras2 (development version)
+
 # leaflet.extras2 1.3.4
 
 * Stop importing `grDevices` in NAMESPACE and drop it from Suggests.
